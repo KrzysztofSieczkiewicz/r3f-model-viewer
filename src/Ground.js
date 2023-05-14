@@ -1,13 +1,14 @@
 import { MeshReflectorMaterial } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { useEffect } from "react";
-import { LinearEncoding, RepeatWrapping, TextureLoader } from "three";
+import { LinearSRGBColorSpace, RepeatWrapping, TextureLoader } from "three";
 
 export function Ground() {
     const [normal, roughness] = useLoader(TextureLoader, [
-        process.env.PUBLIC_URL = "textures\rough_plasterbrick_05_normal_1k.jpg",
-        process.env.PUBLIC_URL = "textures\rough_plasterbrick_05_roughness_1k.jpg",
+        "textures/rough_plasterbrick_05_normal_1k.jpg", 
+        "textures/rough_plasterbrick_05_roughness_1k.jpg",
     ]);
+
 
     useEffect(() => {
         [normal, roughness].forEach((t) => {
@@ -16,8 +17,8 @@ export function Ground() {
             t.repeat.set(5,5);
         });
 
-        normal.encoding = LinearEncoding;
-    }, (normal, roughness));
+        normal.colorSpace = LinearSRGBColorSpace;
+    }, [normal, roughness]);
 
     return (
         <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>
@@ -44,6 +45,5 @@ export function Ground() {
                 reflectorOffset={0.2}
             />
         </mesh>
-
     )
 }

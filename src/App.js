@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
+import { Ground } from './Ground';
 
 function CarShow() {
   return (
@@ -30,6 +31,8 @@ function CarShow() {
         castShadow
         shadow-bias={-0.0001}
       />
+
+      <Ground />
     </>
   );
 }
