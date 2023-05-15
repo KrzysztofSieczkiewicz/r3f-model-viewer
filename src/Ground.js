@@ -13,8 +13,8 @@ export function Ground() {
     useEffect(() => {
         [normal, roughness].forEach((t) => {
             t.wrapS = RepeatWrapping;
-            t.WrapT = RepeatWrapping;
-            t.repeat.set(5,5);
+            t.wrapT = RepeatWrapping;
+            t.repeat.set(2, 2);
         });
 
         normal.colorSpace = LinearSRGBColorSpace;
