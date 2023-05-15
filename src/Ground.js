@@ -14,7 +14,7 @@ export function Ground() {
         [normal, roughness].forEach((t) => {
             t.wrapS = RepeatWrapping;
             t.wrapT = RepeatWrapping;
-            t.repeat.set(2, 2);
+            t.repeat.set(4, 4);
         });
 
         normal.colorSpace = LinearSRGBColorSpace;

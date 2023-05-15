@@ -5,6 +5,7 @@ import './style.css';
 import { Ground } from './Ground';
 import { Car } from './Car';
 import { Rings } from './Rings';
+import { Boxes } from './Boxes';
 
 function CarShow() {
   return (
@@ -32,7 +33,7 @@ function CarShow() {
         penumbra={0.5}
         position={[5, 5, 0]}
         castShadow
-        shadow-bias={-0.0001}
+        shadow-bias={-0.0008}
       />
       
       <spotLight
@@ -42,10 +43,11 @@ function CarShow() {
         penumbra={0.5}
         position={[-5, 5, 0]}
         castShadow
-        shadow-bias={-0.0001}
+        shadow-bias={-0.0008}
       />
 
       <Ground />
+      <Boxes />
     </>
   );
 }
