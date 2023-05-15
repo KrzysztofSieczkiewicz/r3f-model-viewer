@@ -3,6 +3,8 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
 import { Ground } from './Ground';
+import { Car } from './Car';
+import { Rings } from './Rings';
 
 function CarShow() {
   return (
@@ -33,6 +35,8 @@ function CarShow() {
       />
 
       <Ground />
+      <Car />
+      <Rings />
     </>
   );
 }

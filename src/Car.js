@@ -18,7 +18,7 @@ export function Car() {
                 object.material.envMapIntensity = 20;
             }
         });
-    }, {gltf});
+    }, ([gltf.scene]));
 
     return <primitive object={gltf.scene} />
 }
