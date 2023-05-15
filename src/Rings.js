@@ -30,7 +30,7 @@ export function Rings() {
 
     return (
         <>
-            {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((v, i) => (
+            {Array.from({ length: 14 }).map((v, i) => (
                 <mesh
                     castShadow
                     receiveShadow
