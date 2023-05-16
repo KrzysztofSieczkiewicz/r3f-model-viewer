@@ -6,6 +6,8 @@ import { Ground } from './Ground';
 import { Car } from './Car';
 import { Rings } from './Rings';
 import { Boxes } from './Boxes';
+import { Bloom, ChromaticAberration, DepthOfField, EffectComposer } from '@react-three/postprocessing'
+import { BlendFunction } from 'postprocessing'
 
 function CarShow() {
   return (
@@ -48,6 +50,23 @@ function CarShow() {
 
       <Ground />
       <Boxes />
+
+      <EffectComposer>
+          <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={400} />
+          <Bloom 
+            blendFunction={BlendFunction.ADD}
+            intensity={0.3}
+            width={300}
+            height={300}
+            kernelSize={5}
+            luminanceThreshold={0.15}
+            luminanceSmooting={0.025}
+          />
+          <ChromaticAberration 
+            blendFunction={BlendFunction.NORMAL}
+            offset={[0.0005, 0.00012]}
+          />
+      </EffectComposer>
     </>
   );
 }
