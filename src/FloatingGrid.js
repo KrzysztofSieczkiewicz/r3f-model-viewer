@@ -9,16 +9,16 @@ export function FloatingGrid() {
         diffuse.wrapS = RepeatWrapping;
         diffuse.wrapT = RepeatWrapping;
         diffuse.anisotropy = 4;
-        diffuse.repeat.set(8, 8);
+        diffuse.repeat.set(32, 32);
         diffuse.offset.set(0, 0);
 
         diffuse.colorSpace = LinearSRGBColorSpace;
     }, [diffuse]);
 
     useFrame((state, delta) => {
-        let t = -state.clock.getElapsedTime() * 0.68;
+        let t = -state.clock.getElapsedTime() * 0.7;
         diffuse.offset.set(0, t);
-      })
+    })
 
     return <>
         <mesh rotation-x={-Math.PI*0.5} position={[0, 0.425, 0]}>

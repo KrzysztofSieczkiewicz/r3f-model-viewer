@@ -20,7 +20,11 @@ export function Ground() {
         normal.colorSpace = LinearSRGBColorSpace;
     }, [normal, roughness]);
 
-
+    useFrame((state, delta) => {
+        let t = -state.clock.getElapsedTime() * 0.125;
+        roughness.offset.set(0, t);
+        normal.offset.set(0, t);
+    })
 
     return (
         <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>
