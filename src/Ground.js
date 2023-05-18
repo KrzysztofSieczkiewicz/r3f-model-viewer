@@ -1,5 +1,5 @@
 import { MeshReflectorMaterial } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 import { useEffect } from "react";
 import { LinearSRGBColorSpace, RepeatWrapping, TextureLoader } from "three";
 
@@ -19,6 +19,8 @@ export function Ground() {
 
         normal.colorSpace = LinearSRGBColorSpace;
     }, [normal, roughness]);
+
+
 
     return (
         <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>

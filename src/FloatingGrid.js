@@ -1,6 +1,6 @@
-import { useLoader } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 import { useEffect } from "react";
-import { MeshBasicMaterial, RepeatWrapping, TextureLoader } from "three";
+import { LinearSRGBColorSpace, RepeatWrapping, TextureLoader } from "three";
 
 export function FloatingGrid() {
     const diffuse = useLoader(TextureLoader, "textures/grid-texture.png");
@@ -9,16 +9,23 @@ export function FloatingGrid() {
         diffuse.wrapS = RepeatWrapping;
         diffuse.wrapT = RepeatWrapping;
         diffuse.anisotropy = 4;
-        diffuse.repeat.set(30, 30);
-        diffuse.offset.set(0.0);
-    }, [diffuse])
+        diffuse.repeat.set(8, 8);
+        diffuse.offset.set(0, 0);
+
+        diffuse.colorSpace = LinearSRGBColorSpace;
+    }, [diffuse]);
+
+    useFrame((state, delta) => {
+        let t = -state.clock.getElapsedTime() * 0.68;
+        diffuse.offset.set(0, t);
+      })
 
     return <>
-        <mesh rotation x={-Math.PI*0.5} position={[0, 0.425, 0]}>
+        <mesh rotation-x={-Math.PI*0.5} position={[0, 0.425, 0]}>
             <planeGeometry args={[35, 35]} />
-            <MeshBasicMaterial
-                color={[1,1,1]}
-                opacity={0.25}
+            <meshBasicMaterial
+                color={[1, 1, 1]}
+                opacity={0.15}
                 map={diffuse}
                 alphaMap={diffuse}
                 transparent={true}

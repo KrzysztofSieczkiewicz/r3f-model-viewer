@@ -8,6 +8,7 @@ import { Rings } from './Rings';
 import { Boxes } from './Boxes';
 import { Bloom, ChromaticAberration, DepthOfField, EffectComposer } from '@react-three/postprocessing'
 import { BlendFunction } from 'postprocessing'
+import { FloatingGrid } from './FloatingGrid';
 
 function CarShow() {
   return (
@@ -27,6 +28,9 @@ function CarShow() {
       </CubeCamera>
 
       <Rings />
+      <Boxes />
+      <FloatingGrid />
+
 
       <spotLight
         color={[1, 0.25, 0.7]}
@@ -49,7 +53,6 @@ function CarShow() {
       />
 
       <Ground />
-      <Boxes />
 
       <EffectComposer>
           <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={400} />
