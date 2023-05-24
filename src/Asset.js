@@ -4,12 +4,13 @@ import { Mesh } from "three";
 import { GLTFLoader } from "three-stdlib";
 
 export function Asset() {
-
     // REPLACE with function allowing to point to an asset from given list
     const gltf = useLoader(
         GLTFLoader,
         "models/pear/Pear2_LOD0.gltf"
     );
+
+    console.log(gltf.scene.children[0].name);
 
     useEffect(() => {
         gltf.scene.scale.set(1, 1, 1);
