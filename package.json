@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< Updated upstream
     "@react-three/drei": "^9.66.6",
     "@react-three/fiber": "^8.13.0",
     "@react-three/postprocessing": "^2.11.0",
+=======
+    "@react-three/drei": "^9.69.0",
+    "@react-three/fiber": "^8.13.0",
+    "@react-three/postprocessing": "^2.12.3",
+>>>>>>> Stashed changes
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",

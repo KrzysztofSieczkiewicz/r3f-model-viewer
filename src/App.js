@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
+<<<<<<< Updated upstream
 import { CubeCamera, Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
 import { Ground } from './Ground';
@@ -9,6 +10,13 @@ import { Boxes } from './Boxes';
 import { Bloom, ChromaticAberration, DepthOfField, EffectComposer } from '@react-three/postprocessing'
 import { BlendFunction } from 'postprocessing'
 import { FloatingGrid } from './FloatingGrid';
+=======
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import './style.css';
+import { Asset } from './Asset';
+import { Bloom, ChromaticAberration, DepthOfField, EffectComposer } from '@react-three/postprocessing'
+import { BlendFunction } from 'postprocessing'
+>>>>>>> Stashed changes
 
 function CarShow() {
   return (
@@ -18,6 +26,7 @@ function CarShow() {
 
       <color args={[0, 0, 0]} attach="background" />
 
+<<<<<<< Updated upstream
       <CubeCamera resolution={256} frames={Infinity}>
         {(texture) => (
           <>
@@ -31,6 +40,9 @@ function CarShow() {
       <Boxes />
       <FloatingGrid />
 
+=======
+      <Asset />
+>>>>>>> Stashed changes
 
       <spotLight
         color={[1, 0.25, 0.7]}
@@ -52,8 +64,11 @@ function CarShow() {
         shadow-bias={-0.0008}
       />
 
+<<<<<<< Updated upstream
       <Ground />
 
+=======
+>>>>>>> Stashed changes
       <EffectComposer>
           <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={400} />
           <Bloom 
