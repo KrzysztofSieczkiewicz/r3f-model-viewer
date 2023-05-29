@@ -4,7 +4,11 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
 import { Asset } from './Asset';
 
-function AssetShow() {
+function AssetScene() {
+  const assetsList = [];
+  const lightsList = [];
+  const effectsList = [];
+
     return (
       <>
         <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
@@ -38,4 +42,4 @@ function AssetShow() {
     );
   }
 
-  export default AssetShow;
+  export default AssetScene;

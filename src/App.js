@@ -2,14 +2,14 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 import './style.css';
-import AssetShow from './AssetShow';
+import AssetScene from './AssetScene';
 import { Sidebar } from './Sidebar';
 
 function App() {
   return (
     <Suspense fallback={null}>
       <Canvas shadows>
-        <AssetShow />
+        <AssetScene />
       </Canvas>
       <Sidebar />
     </Suspense>

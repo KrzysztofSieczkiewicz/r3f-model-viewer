@@ -1,5 +1,6 @@
 export function Sidebar() {
-    const assetsList = [];
-    const lightsList = [];
-    const effectsList = [];
+    return <>
+        <label>Add asset</label>
+        <button></button>
+    </>
 }
