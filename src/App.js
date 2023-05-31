@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import './style.css';
 import AssetScene from './AssetScene';
 import { Sidebar } from './Sidebar';
+import { BasicShadowMap } from 'three';
 
 function App() {
   return (
