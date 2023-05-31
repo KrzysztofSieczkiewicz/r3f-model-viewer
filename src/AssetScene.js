@@ -16,7 +16,7 @@ function AssetScene() {
   
         <Asset />
 
-        <Light type="spotLight" />
+        <Light />
       </>
     );
   }

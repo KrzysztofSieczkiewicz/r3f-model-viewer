@@ -1,29 +1,22 @@
 import { useRef, useState } from "react";
 
-export function Light(props) {
+export function Light() {
     const lightRef = useRef();
-    const type = props.type;
 
     const types = {
         pointLight: "pointLight",
         spotLight: "spotLight",
+        ambientLight: "ambientLight"
     }
 
-    // common
     const [castShadow, setCastShadow] = useState(true);
     const [position, setPosition] = useState([5,5,0]);
     const [color, setColor] = useState([1,1,1]);
     const [intensity, setIntensity] = useState(1);
-    //const [type, setType] = useState(pointLight);
+    const [type, setType] = useState("ambientLight");
 
-    // only for spotlight
     const [angle, setAngle] = useState(0.5);
     const [penumbra, setPenumbra] = useState(0.5);
-
-    // only for area light
-    const [width, setWidth] = useState(10);
-    const [height, setHeight] = useState(5);
-    const [target, setTarget] = useState([0,0,0]);
 
     switch(type) {
         case "pointLight":
@@ -46,6 +39,12 @@ export function Light(props) {
                 castShadow={castShadow}
                 shadow-bias={-0.0008}
             />;
+            case "ambientLight":
+        return <ambientLight
+            ref={lightRef}
+            color={color}
+            intensity={intensity}
+        />;
         default:
             return null;
     }
