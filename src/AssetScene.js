@@ -17,6 +17,9 @@ function AssetScene() {
         <Asset />
 
         <Light />
+        <Light />
+        <Light />
+        <Light />
       </>
     );
   }

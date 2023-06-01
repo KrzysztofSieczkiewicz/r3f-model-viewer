@@ -4,3 +4,12 @@ html, body, #root, canvas {
     margin: 0;
     overflow: hidden;
 }
+
+#sidebar {
+    position: absolute;
+    top: 50px;
+}
+
+#sidebar label {
+    color: aquamarine;
+}

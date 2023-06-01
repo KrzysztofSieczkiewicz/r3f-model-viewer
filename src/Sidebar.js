@@ -1,6 +1,8 @@
 export function Sidebar() {
-    return <>
+    return (
+    <div  id="sidebar" >
         <label>Add asset</label>
         <button></button>
-    </>
+    </div>
+    );
 }

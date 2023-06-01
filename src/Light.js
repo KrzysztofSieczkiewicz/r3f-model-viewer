@@ -1,13 +1,9 @@
 import { useRef, useState } from "react";
 
+
+// TODO - consider adding separate variables and hooks for each light type for better customization and control
 export function Light() {
     const lightRef = useRef();
-
-    const types = {
-        pointLight: "pointLight",
-        spotLight: "spotLight",
-        ambientLight: "ambientLight"
-    }
 
     const [castShadow, setCastShadow] = useState(true);
     const [position, setPosition] = useState([5,5,0]);
