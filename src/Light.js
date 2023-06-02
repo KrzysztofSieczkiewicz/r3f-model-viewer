@@ -1,58 +1,61 @@
-import { useEffect, useRef, useState } from "react";
-import { AssetSceneContext } from "./AssetSceneContext";
-import { useContext } from "react";
+import { useRef, useState } from "react";
 
 
 // TODO - consider adding separate variables and hooks for each light type for better customization and control
 export function Light() {
-    const lightRef = useRef();
+    //const [lights, setLights] = useState([]);
 
-    console.log(lightRef);
+    //temporary, just to create initial state
+    const light1 = {
+        ref:1,
+        position:[5,5,0],
+        color:[0,1,1],
+        intensity:1,
+        type:"spotLight"
+    }
+    const light2 = {
+        ref:2,
+        position:[5,-5,0],
+        color:[1,0,1],
+        intensity:1,
+        type:"pointLight"
+    }
+    //end of temporary
 
-    const { lightIntensity } = useContext(AssetSceneContext);
+    const lights=[light1, light2]
+    //setLights([...lights, light1, light2]);
 
+/*
     const [castShadow, setCastShadow] = useState(true);
     const [position, setPosition] = useState([5,5,0]);
     const [color, setColor] = useState([1,1,1]);
-    const [intensity, setIntensity] = useState(1);
+    const [intensity, setIntensity] = useState(lightIntensity);
     const [type, setType] = useState("ambientLight");
 
     const [angle, setAngle] = useState(0.5);
     const [penumbra, setPenumbra] = useState(0.5);
-
-    useEffect(() => {
-        setIntensity(lightIntensity);
-        console.log(lightIntensity + "...and from context: " + intensity);
-    },[lightIntensity, intensity]);
-
-    switch(type) {
-        case "pointLight":
-            return <pointLight
-                ref={lightRef}
-                position={position}
-                color={color}
-                intensity={intensity}
-                castShadow={castShadow}
-                shadow-bias={-0.0008}
-            />;
-        case "spotLight":
-            return <spotLight
-                ref={lightRef}
-                position={position}
-                color={color}
-                intensity={intensity}
-                angle={angle}
-                penumbra={penumbra}
-                castShadow={castShadow}
-                shadow-bias={-0.0008}
-            />;
-            case "ambientLight":
-        return <ambientLight
-            ref={lightRef}
-            color={color}
-            intensity={intensity}
-        />;
-        default:
-            return null;
-    }
+*/
+    return (
+        <>
+            {lights.map((light) => {
+                if (light.type === 'pointLight') {
+                return <pointLight 
+                    key={light.ref} 
+                    position={light.position}
+                    color={light.color} 
+                    intensity={light.intensity} 
+                    />;
+                } else if (light.type === 'spotLight') {
+                return <spotLight 
+                    key={light.ref} 
+                    position={light.position}
+                    color={light.color} 
+                    intensity={light.intensity}
+                    />;
+                } else {
+                return null;
+                }
+            })}
+        </>
+    );
 }

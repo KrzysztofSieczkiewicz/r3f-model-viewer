@@ -1,10 +1,7 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense } from 'react';
 
 import './style.css';
-import { AssetSceneContext } from './AssetSceneContext';
-import { Canvas } from '@react-three/fiber';
 import AssetScene from './AssetScene';
-import Sidebar from './Sidebar';
 
 
 function App() {
