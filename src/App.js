@@ -8,17 +8,10 @@ import Sidebar from './Sidebar';
 
 
 function App() {
-  const [lightIntensity, setLightIntensity] = useState(0.1);
-
   return (
     <>
       <Suspense fallback={null}>
-        <AssetSceneContext.Provider value={{lightIntensity, setLightIntensity}}>
-          <Canvas shadows>
-            <AssetScene />
-          </Canvas>
-          <Sidebar />
-        </AssetSceneContext.Provider>
+        <AssetScene />
       </Suspense>
     </>
   );

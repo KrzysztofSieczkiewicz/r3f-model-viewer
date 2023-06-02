@@ -10,7 +10,7 @@ export function Asset() {
         "models/pear/Pear2_LOD0.gltf"
     );
 
-    console.log(gltf.scene.children[0].name);
+    //console.log(gltf.scene.children[0].name);
 
     useEffect(() => {
         gltf.scene.scale.set(10, 10, 10);

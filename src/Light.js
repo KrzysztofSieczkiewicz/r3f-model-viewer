@@ -7,6 +7,8 @@ import { useContext } from "react";
 export function Light() {
     const lightRef = useRef();
 
+    console.log(lightRef);
+
     const { lightIntensity } = useContext(AssetSceneContext);
 
     const [castShadow, setCastShadow] = useState(true);
@@ -21,7 +23,7 @@ export function Light() {
     useEffect(() => {
         setIntensity(lightIntensity);
         console.log(lightIntensity + "...and from context: " + intensity);
-    },[lightIntensity]);
+    },[lightIntensity, intensity]);
 
     switch(type) {
         case "pointLight":
