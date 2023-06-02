@@ -24,4 +24,4 @@ function AssetScene() {
     );
   }
 
-  export default AssetScene;
+export default AssetScene;

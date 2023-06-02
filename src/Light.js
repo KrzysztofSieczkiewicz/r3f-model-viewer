@@ -1,9 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AssetSceneContext } from "./AssetSceneContext";
+import { useContext } from "react";
 
 
 // TODO - consider adding separate variables and hooks for each light type for better customization and control
 export function Light() {
     const lightRef = useRef();
+
+    const { lightIntensity } = useContext(AssetSceneContext);
 
     const [castShadow, setCastShadow] = useState(true);
     const [position, setPosition] = useState([5,5,0]);
@@ -13,6 +17,11 @@ export function Light() {
 
     const [angle, setAngle] = useState(0.5);
     const [penumbra, setPenumbra] = useState(0.5);
+
+    useEffect(() => {
+        setIntensity(lightIntensity);
+        console.log(lightIntensity + "...and from context: " + intensity);
+    },[lightIntensity]);
 
     switch(type) {
         case "pointLight":

@@ -13,7 +13,7 @@ export function Asset() {
     console.log(gltf.scene.children[0].name);
 
     useEffect(() => {
-        gltf.scene.scale.set(1, 1, 1);
+        gltf.scene.scale.set(10, 10, 10);
         gltf.scene.position.set(0, 0, 0);
         gltf.scene.traverse((object) => {
             if(object instanceof Mesh) {
