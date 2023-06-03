@@ -3,7 +3,7 @@ import React from 'react';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
 import { Asset } from './Asset';
-import { Light } from './Light';
+import { Light } from './components/Light';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
 

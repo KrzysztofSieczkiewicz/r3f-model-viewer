@@ -1,6 +1,3 @@
-import { useRef, useState } from "react";
-
-
 // TODO - consider adding separate variables and hooks for each light type for better customization and control
 export function Light() {
     //const [lights, setLights] = useState([]);
