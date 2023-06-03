@@ -11,14 +11,14 @@ function AssetScene() {
 
   return (
     <>
-      <Canvas shadows>
-        <color args={[0, 0, 0]} attach="background" />
-        <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
-        <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]}/>
-        <Light />
-        <Asset />
-      </Canvas>
-      <Sidebar />
+        <Canvas shadows>
+          <color args={[0, 0, 0]} attach="background" />
+          <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
+          <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]}/>
+          <Light />
+          <Asset />
+        </Canvas>
+        <Sidebar />
     </>
   );
 }

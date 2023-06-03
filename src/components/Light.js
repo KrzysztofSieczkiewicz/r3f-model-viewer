@@ -8,11 +8,13 @@ export function Light() {
         position:[5,5,0],
         color:[0,1,1],
         intensity:1,
+        angle: 0.6,
+        penumbra: 0.6,
         type:"spotLight"
     }
     const light2 = {
         ref:2,
-        position:[5,-5,0],
+        position:[-5,5,-5],
         color:[1,0,1],
         intensity:1,
         type:"pointLight"
