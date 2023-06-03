@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useRef } from "react";
+import { nanoid } from 'nanoid';
 
 function LightHelper() {
-    const [lightsList, setLightsList] = useState([]);
+    const lightsList = useRef([]);
 
     const defaultLight = {
         type: "pointLight",
@@ -12,14 +13,17 @@ function LightHelper() {
     }
 
     function addLight() {
-        setLightsList([...lightsList, defaultLight]);
+        const light = defaultLight;
+        light.id = nanoid(4);
+
+        lightsList.push(defaultLight);
     }
 
-    function removeLight() {
-
+    function removeLight(id) {
+        lightsList.current = lightsList.current.filter(light => light.id !== id);
     }
 
-    function updateLight() {
+    function updateLight(id, light) {
 
     }
 }
