@@ -7,7 +7,9 @@ import AssetScene from './AssetScene';
 function App() {
   return (
     <>
-      <AssetScene />
+      <Suspense fallback={null}>
+        <AssetScene />
+      </Suspense>
     </>
   );
 }
