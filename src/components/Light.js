@@ -5,6 +5,7 @@ export function Light() {
     const lightHelper = new LightHelper();
 
     const lightss = lightHelper.lightsList;
+    lightHelper.addLight();
     console.log(lightss);
 
     //temporary, just to create initial state

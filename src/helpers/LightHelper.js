@@ -9,22 +9,26 @@ const defaultLight = {
     penumbra: 0.6
 }
 
-function LightHelper() {
-    const [lightsList, setLightsList] = useState([defaultLight]);
+class LightHelper {
+    
+    constructor() {
+        const [lightsList, setLightsList] = useState([defaultLight]);
+    }
+    
 
-    function addLight() {
+    addLight() {
         const light = defaultLight;
         light.id = nanoid(4);
 
         setLightsList([...lightsList, light]);
     }
 
-    function removeLight(id) {
+    removeLight(id) {
         const updatedList = lightsList.current.filter(light => light.id !== id);
         setLightsList(updatedList);
     }
 
-    function updateLight(id, light) {
+    updateLight(id, light) {
 
     }
 }
