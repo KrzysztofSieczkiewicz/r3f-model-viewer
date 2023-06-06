@@ -4,7 +4,6 @@ import { Mesh } from "three";
 import { GLTFLoader } from "three-stdlib";
 
 export function Asset() {
-    // REPLACE with function allowing to point to an asset from given list
     const gltf = useLoader(
         GLTFLoader,
         "models/pear/Pear2_LOD0.gltf"

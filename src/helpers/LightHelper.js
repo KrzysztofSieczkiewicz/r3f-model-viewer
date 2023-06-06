@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 const defaultLight = {
     type: "pointLight",
@@ -9,28 +9,30 @@ const defaultLight = {
     penumbra: 0.6
 }
 
-class LightHelper {
-    
-    constructor() {
-        const [lightsList, setLightsList] = useState([defaultLight]);
-    }
-    
+export const LightHelper = () => {
+    const lightsList = useContext(lightsList);    
 
-    addLight() {
+    const addLight = () => {
         const light = defaultLight;
         light.id = nanoid(4);
 
-        setLightsList([...lightsList, light]);
+        lightsList =[...lightsList, light];
     }
 
-    removeLight(id) {
+    const removeLight = (id) => {
         const updatedList = lightsList.current.filter(light => light.id !== id);
-        setLightsList(updatedList);
+        //setLightsList(updatedList); // filter array
     }
 
-    updateLight(id, light) {
+    const updateLight = (id, light) => {
+        lightsList[id] = light;
+        console.log("Tried to update id:" + id + "With light: " + light);
+    }
 
+    return {
+        lightsList,
+        addLight,
+        removeLight,
+        updateLight
     }
 }
-
-export default LightHelper;

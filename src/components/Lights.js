@@ -1,11 +1,10 @@
-import LightHelper from '../helpers/LightHelper'
+import { LightHelper } from '../helpers/LightHelper'
 
 // TODO - consider adding separate variables and hooks for each light type for better customization and control
-export function Light() {
+export function Lights() {
     const lightHelper = new LightHelper();
 
     const lightss = lightHelper.lightsList;
-    lightHelper.addLight();
     console.log(lightss);
 
     //temporary, just to create initial state
