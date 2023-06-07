@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+import { AssetSceneContext } from '../AssetSceneContext';
 
 const defaultLight = {
     type: "pointLight",
@@ -9,30 +10,35 @@ const defaultLight = {
     penumbra: 0.6
 }
 
-export const LightHelper = () => {
-    const lightsList = useContext(lightsList);    
+let lightsList = [];
 
-    const addLight = () => {
+export class LightHelper {
+    constructor() {};
+    
+    lightsList = useContext(AssetSceneContext);
+
+    addLight = () => {
         const light = defaultLight;
         light.id = nanoid(4);
 
         lightsList =[...lightsList, light];
     }
 
-    const removeLight = (id) => {
+    removeLight = (id) => {
         const updatedList = lightsList.current.filter(light => light.id !== id);
         //setLightsList(updatedList); // filter array
     }
 
-    const updateLight = (id, light) => {
+    updateLight = (id, light) => {
         lightsList[id] = light;
         console.log("Tried to update id:" + id + "With light: " + light);
     }
-
+/*
     return {
         lightsList,
         addLight,
         removeLight,
         updateLight
     }
+    */
 }

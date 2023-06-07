@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
@@ -6,21 +6,35 @@ import { Asset } from './Asset';
 import { Lights } from './components/Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
-import { AssetSceneContext } from './AssetSceneContext';
 
 function AssetScene() {
-  const lightsList = useContext(AssetSceneContext);
+  const [lightsList, setLightsList] = useState([{
+    ref:1,
+    position:[5,5,0],
+    color:[1,1,1],
+    intensity:1,
+    angle: 0.6,
+    penumbra: 0.6,
+    type:"spotLight"
+  },
+  {
+    ref:2,
+    position:[-5,5,-5],
+    color:[1,0,1],
+    intensity:1,
+    type:"pointLight"
+  }]);
 
   return (
     <>
-        <Canvas shadows>
-          <color args={[0, 0, 0]} attach="background" />
-          <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
-          <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]}/>
-          <Lights />
-          <Asset />
-        </Canvas>
-        <Sidebar />
+      <Canvas shadows>
+        <color args={[0, 0, 0]} attach="background" />
+        <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
+        <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]}/>
+        <Lights lightsList={lightsList} setLightsList={setLightsList} />
+        <Asset />
+      </Canvas>
+      <Sidebar />
     </>
   );
 }
