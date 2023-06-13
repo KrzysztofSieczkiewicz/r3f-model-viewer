@@ -54,7 +54,6 @@ function AssetScene() {
       });
   }
 
-  //addLight(); // Resolve why addLight() results in infinite render loop
   let newLight = defaultLight;
   newLight.color = [0,1,1];
   newLight.position = [-5,5,0];
@@ -68,7 +67,7 @@ function AssetScene() {
         <Lights lightsList={lightsList}/>
         <Asset />
       </Canvas>
-      <Sidebar />
+      <Sidebar lightsList={lightsList} addLight={addLight} updateLight={updateLight}/>
     </>
   );
 }
