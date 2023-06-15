@@ -10,6 +10,6 @@ html, body, #root, canvas {
     top: 50px;
 }
 
-#sidebar label {
+#sidebar p {
     color: aquamarine;
 }

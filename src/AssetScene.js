@@ -19,7 +19,7 @@ const defaultLight = {
 
 function AssetScene() {
   const [lightsList, setLightsList] = useState([{
-    ref:1,
+    id:0,
     position:[5,5,0],
     color:[1,1,1],
     intensity:1,
@@ -28,7 +28,7 @@ function AssetScene() {
     type:"spotLight"
   },
   {
-    ref:2,
+    id:1,
     position:[-5,5,-5],
     color:[1,0,1],
     intensity:1,
@@ -37,14 +37,16 @@ function AssetScene() {
 
   // Consider moving functions for lights, assets etc to their respective helpers
   function addLight() {
-    const light = defaultLight;
-    light.id = nanoid(4);
+    let light = {...defaultLight};
+    light.id = nanoid(5);
 
     setLightsList([...lightsList, light]);
   }
 
   function removeLight(id) {
-      setLightsList(lightsList.current.filter(light => light.id !== id));
+    setLightsList((current) =>
+      current.filter((light) => light.id !== id)
+    );
   }
 
   function updateLight(id, light) {
@@ -67,7 +69,7 @@ function AssetScene() {
         <Lights lightsList={lightsList}/>
         <Asset />
       </Canvas>
-      <Sidebar lightsList={lightsList} addLight={addLight} updateLight={updateLight}/>
+      <Sidebar lightsList={lightsList} addLight={addLight} updateLight={updateLight} removeLight={removeLight} />
     </>
   );
 }
