@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
 import { Asset } from './Asset';
-import { Lights } from './components/Lights';
+import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
 

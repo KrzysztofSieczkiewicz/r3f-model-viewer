@@ -1,3 +1,5 @@
+import { LightPanel } from "./components/sidebar/LightPanel";
+
 export function Sidebar(props) {
     const lightsList = props.lightsList;
     const addLight = props.addLight;
@@ -6,15 +8,20 @@ export function Sidebar(props) {
 
     return (
         <div id="sidebar">
-            {lightsList.map((light) => {
-                return (<div key={light.id}>
-                    <p>{light.id}</p>
-                    <button onClick={() => {removeLight(light.id)}}>REMOVE</button>
-                </div>
-                )
-            })}
             <p>TEST SIDEBAR LOCATION</p>
             <button onClick={() => {addLight()}}>Add Light</button>
+            {lightsList.map((light) => {
+                return (
+                    <LightPanel light={light} removeLight={removeLight} />
+                );
+            })}
         </div>
     );
 }
+
+/*
+return (<div key={light.id}>
+                    <p>{light.id}</p>
+                    <button onClick={() => {removeLight(light.id)}}>REMOVE</button>
+        </div>)
+*/
