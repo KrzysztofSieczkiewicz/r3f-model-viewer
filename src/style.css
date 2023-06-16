@@ -5,11 +5,47 @@ html, body, #root, canvas {
     overflow: hidden;
 }
 
-#sidebar {
-    position: absolute;
-    top: 10px;
+/* -------- SIDEBAR -------- */
+:root {
+    --bg: #242526;
+    --bg-accent: #484a4d;
+    --text-color: #dadce1;
+    --nav-size: 60px;
+    --border: 1px solid #474a4d;
+    --border-radius: 8px;
+    --speed: 500ms;
 }
 
-#sidebar p {
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.sidebar {
+    height: 100%;
+    width: var(--nav-size);
+    padding: 1rem 0;
+    border-bottom: var(--border);
+    background-color: var(--bg);
+
+    position: absolute;
+    top: 0;
+}
+
+.sidebar-nav {
+    max-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.sidebar p {
     color: aquamarine;
 }

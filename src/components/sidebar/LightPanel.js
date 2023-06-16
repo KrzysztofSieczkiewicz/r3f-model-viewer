@@ -1,14 +1,24 @@
 export function LightPanel(props) {
     const removeLight = props.removeLight;
+    const light = props.light;
 
     return (
         <>
-            <p>Type: {props.light.type}</p>
-            <p>Color: {props.light.color}</p>
-            <p>Position: {props.light.position}</p>
-            <p>Intensity: {props.light.intensity}</p>
-            <button onClick={() => {removeLight(props.light.id)}}>REMOVE</button>
+            <p>Type: {light.type}</p>
+            <p>Color: {light.color}</p>
+            <p>Position: 
+                X:{light.position[0]},
+                Y:{light.position[1]},
+                Z:{light.position[2]}
+            </p>
+            <p>Intensity: {light.intensity}</p>
+            {light.type === "spotLight" &&
+                <>
+                    <p>Angle: {light.angle}</p>
+                    <p>Penumbra: {light.penumbra}</p>
+                </>
+            }
+            <button onClick={() => {removeLight(light.id)}}>REMOVE</button>
         </>
     );
-    //TODO add conditional display of another traits depending on light type
 }

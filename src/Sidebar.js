@@ -7,6 +7,15 @@ export function Sidebar(props) {
     const removeLight = props.removeLight;
 
     return (
+        <nav className="sidebar">
+            <p>TEST SIDEBAR LOCATION</p>
+            <ul className="sidebar-nav">
+                {props.children}
+            </ul>
+        </nav>
+    );
+/*
+    return (
         <div id="sidebar">
             <p>TEST SIDEBAR LOCATION</p>
             <button onClick={() => {addLight()}}>Add Light</button>
@@ -17,11 +26,5 @@ export function Sidebar(props) {
             })}
         </div>
     );
-}
-
-/*
-return (<div key={light.id}>
-                    <p>{light.id}</p>
-                    <button onClick={() => {removeLight(light.id)}}>REMOVE</button>
-        </div>)
 */
+}
