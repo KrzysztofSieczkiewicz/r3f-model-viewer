@@ -12,7 +12,7 @@ export function Sidebar(props) {
             <button onClick={() => {addLight()}}>Add Light</button>
             {lightsList.map((light) => {
                 return (
-                    <LightPanel light={light} removeLight={removeLight} />
+                    <LightPanel light={light} removeLight={removeLight} key={light.id}/>
                 );
             })}
         </div>

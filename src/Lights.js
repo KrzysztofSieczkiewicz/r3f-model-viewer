@@ -6,14 +6,14 @@ export function Lights(props) {
             {lightsList.map((light) => {
                 if (light.type === 'pointLight') {
                 return <pointLight 
-                    key={light.ref} 
+                    key={light.id} 
                     position={light.position}
                     color={light.color} 
                     intensity={light.intensity} 
                     />;
                 } else if (light.type === 'spotLight') {
                 return <spotLight 
-                    key={light.ref} 
+                    key={light.id} 
                     position={light.position}
                     color={light.color} 
                     intensity={light.intensity}
