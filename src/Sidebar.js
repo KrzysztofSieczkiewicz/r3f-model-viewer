@@ -1,3 +1,4 @@
+import { SidebarItem } from "./SidebarItem";
 import { LightPanel } from "./components/sidebar/LightPanel";
 
 export function Sidebar(props) {
@@ -10,7 +11,10 @@ export function Sidebar(props) {
         <nav className="sidebar">
             <p>TEST SIDEBAR LOCATION</p>
             <ul className="sidebar-nav">
-                {props.children}
+                <SidebarItem icon="⛷" />
+                <SidebarItem icon="⛵" />
+                <SidebarItem icon="⛱" />
+                <SidebarItem icon="⛓" />
             </ul>
         </nav>
     );
