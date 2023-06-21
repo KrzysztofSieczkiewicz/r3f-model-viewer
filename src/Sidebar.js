@@ -1,8 +1,8 @@
 import { SidebarItem } from "./SidebarItem";
-import { ReactComponent as LightIcon } from './icons/light.svg';
-import { ReactComponent as CubeIcon } from './icons/cube.svg';
-import { ReactComponent as EarthIcon } from './icons/earth.svg';
-import { ReactComponent as ImageIcon } from './icons/image.svg';
+import { ReactComponent as LightIcon } from './icons/sidebar/light.svg';
+import { ReactComponent as CubeIcon } from './icons/sidebar/cube.svg';
+import { ReactComponent as EarthIcon } from './icons/sidebar/earth.svg';
+import { ReactComponent as ImageIcon } from './icons/sidebar/image.svg';
 import { LightsMenu } from "./components/sidebar/LightsMenu";
 
 export function Sidebar(props) {
