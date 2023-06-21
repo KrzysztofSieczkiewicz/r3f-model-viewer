@@ -48,6 +48,7 @@ a {
 }
 
 .sidebar p {
+    margin: 0;
     color: aquamarine;
 }
 
@@ -111,4 +112,11 @@ a {
 .icon-left {
     height: 20px;
     width: 20px;
+}
+
+/* LIGHTS MENU */
+.dropdown-item-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }

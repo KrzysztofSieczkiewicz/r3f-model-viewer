@@ -9,12 +9,12 @@ export function LightsMenu(props) {
 
     return (
         <div className="dropdown">
-            <div class="dropdown-item light-header">
+            <div className="dropdown-item-header">
                 <SpotlightIcon className='icon-left' />
                 <p>{light.type}</p>
-                <div className="color-preview"></div>
-                <div>on/off</div>
-                <div>Show/Hide</div>
+                <p className="color-preview"></p>
+                <p>on/off</p>
+                <p>Show/Hide</p>
             </div>
         </div>
     );
