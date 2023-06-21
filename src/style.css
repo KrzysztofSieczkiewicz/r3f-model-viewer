@@ -107,3 +107,8 @@ a {
 .menu-item:hover {
     background-color: #525357;
 }
+
+.icon-left {
+    height: 20px;
+    width: 20px;
+}
