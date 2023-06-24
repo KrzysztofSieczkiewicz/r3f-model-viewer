@@ -16,7 +16,9 @@ export function Sidebar(props) {
             <p>TEST</p>
             <ul className="sidebar-nav">
                 <SidebarItem icon={<EarthIcon />} />
-                <SidebarItem icon={<CubeIcon />} />
+                <SidebarItem icon={<CubeIcon />} >
+                    <LightsMenu lightsList={lightsList} />
+                </SidebarItem>
                 <SidebarItem icon={<LightIcon />} >
                     <LightsMenu lightsList={lightsList} />
                 </SidebarItem>

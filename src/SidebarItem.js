@@ -2,15 +2,15 @@ import { useState } from "react";
 
 export function SidebarItem(props) {
 
-    const [open, setOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <li className="sidebar-item">
-            <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+            <a href="#" className="icon-button" onClick={() => setIsOpen(!isOpen)}>
                 {props.icon}
             </a>
 
-            {open && props.children}
+            {isOpen && props.children}
         </li>
     );
 }
