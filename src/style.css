@@ -116,7 +116,10 @@ a {
 
 /* LIGHTS MENU */
 .dropdown-item-header {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    display: inline-grid;
+    grid-template-columns: 2.5rem auto 2.5rem 2.5rem 2.5rem;
+    align-items: center;
+
+    width: 100%;
+    height: 2rem;
 }

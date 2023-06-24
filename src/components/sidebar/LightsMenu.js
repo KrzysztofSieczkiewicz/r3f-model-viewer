@@ -22,15 +22,15 @@ export function LightsMenu(props) {
             onClick={() => handleOpen()}>
                 <SpotlightIcon className='light-icon' />
                 <p>{light.type}</p>
-                <p className="color-preview"></p>
-                <Visible className='light-icon'/>
+                <p className="color-preview">O</p>
+                <Visible className='light-icon' />
                 <p>S/H</p>
-                {isOpen &&
+            </div>
+            {isOpen &&
                 <>
                     <div> SOME RANDOM RAMBLING</div>
                     <div> AND EVEN MORE RAMBLING </div>
                 </>}
-            </div>
         </div>
     );
 
