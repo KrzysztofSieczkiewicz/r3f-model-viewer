@@ -7,6 +7,7 @@ import { Asset } from './Asset';
 import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
+import SidebarControlsContext from './components/SidebarControlsContext.js'
 
 const defaultLight = {
   type: "pointLight",
@@ -35,7 +36,6 @@ function AssetScene() {
     type:"pointLight"
   }]);
 
-  // Consider moving functions for lights, assets etc to their respective helpers
   function addLight() {
     let light = {...defaultLight};
     light.id = nanoid(5);
@@ -65,7 +65,9 @@ function AssetScene() {
         <Lights lightsList={lightsList}/>
         <Asset />
       </Canvas>
-      <Sidebar lightsList={lightsList} addLight={addLight} updateLight={updateLight} removeLight={removeLight} />
+      <SidebarControlsContext.Provider value={{ updateLight }}>
+        <Sidebar lightsList={lightsList} addLight={addLight} removeLight={removeLight} />
+      </SidebarControlsContext.Provider>
     </>
   );
 }

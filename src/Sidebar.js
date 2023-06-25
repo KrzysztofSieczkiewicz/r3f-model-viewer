@@ -6,10 +6,8 @@ import { ReactComponent as ImageIcon } from './icons/sidebar/image.svg';
 import { LightsMenu } from "./components/sidebar/LightsMenu";
 
 export function Sidebar(props) {
-    // PASS RESPECTIVE FUNCTIONS BY CONTEXT
     const lightsList = props.lightsList;
     const addLight = props.addLight;
-    const updateLight = props.updateLight;
     const removeLight = props.removeLight;
 
     const newLight = {
@@ -28,7 +26,7 @@ export function Sidebar(props) {
             <ul className="sidebar-nav">
                 <SidebarItem icon={<EarthIcon />} />
                 <SidebarItem icon={<CubeIcon />} >
-                    <LightsMenu lightsList={lightsList} updateLight={() => updateLight()} />
+                    <LightsMenu lightsList={lightsList} updateLight={() => props.updateLight()} />
                 </SidebarItem>
                 <SidebarItem icon={<LightIcon />} >
                     <LightsMenu lightsList={lightsList} />

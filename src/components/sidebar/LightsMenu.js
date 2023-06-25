@@ -2,9 +2,12 @@ import { ReactComponent as SpotlightIcon } from '../../icons/lightTypes/spotLigh
 import { ReactComponent as PointLightIcon } from '../../icons/lightTypes/pointLight.svg';
 import { ReactComponent as Visible } from '../../icons/eye-on.svg';
 import { ReactComponent as Invisible } from '../../icons/eye-off.svg';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import SidebarControlsContext from '../SidebarControlsContext'
 
 export function LightsMenu(props) {
+    const { updateLight } = useContext(SidebarControlsContext);
+
     const lightsList = props.lightsList;
     const light = lightsList[0];
 
@@ -44,7 +47,7 @@ export function LightsMenu(props) {
                     <input 
                         className='trait'
                         value={light.intensity} 
-                        onChange={() => props.updateLight(newLight.id, newLight)}/>
+                        onChange={(e) => updateLight(light.id, {...light, intensity: e.target.value})}/>
                     <label className='trait-name'>Angle:</label>
                     <div className='trait'> {light.angle} </div>
                     <label className='trait-name'>Penumbra:</label>
