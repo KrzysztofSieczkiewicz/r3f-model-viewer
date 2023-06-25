@@ -15,6 +15,7 @@ export function LightsMenu(props) {
         console.log(isOpen);
     }
 
+    console.log(light.color)    
     /* For each light -> create header with type icon, name and circle displaying color and intensity */
     return (
         <div className="dropdown">
@@ -22,15 +23,24 @@ export function LightsMenu(props) {
             onClick={() => handleOpen()}>
                 <SpotlightIcon className='light-icon' />
                 <p>{light.type}</p>
-                <p className="color-preview">O</p>
+                <div className="color-preview" style={{backgroundColor: light.color}}/>
                 <Visible className='light-icon' />
                 <p>S/H</p>
             </div>
             {isOpen &&
-                <>
-                    <div> SOME RANDOM RAMBLING</div>
-                    <div> AND EVEN MORE RAMBLING </div>
-                </>}
+                <div className="dropdown-item-body"
+                onClick={() => handleOpen()}>
+                    <label className='trait-name'>Color:</label>
+                    <div className='trait'> {light.color} </div>
+                    <label className='trait-name'>Position:</label>
+                    <div className='trait'> {light.position} </div>
+                    <label className='trait-name'>Intensity</label>
+                    <div className='trait'> {light.intensity} </div>
+                    <label className='trait-name'>Angle:</label>
+                    <div className='trait'> {light.angle} </div>
+                    <label className='trait-name'>Penumbra:</label>
+                    <div className='trait'> {light.penumbra} </div>
+                </div>}
         </div>
     );
 
