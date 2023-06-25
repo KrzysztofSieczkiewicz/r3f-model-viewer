@@ -5,18 +5,23 @@ import { ReactComponent as Invisible } from '../../icons/eye-off.svg';
 import { useState } from 'react';
 
 export function LightsMenu(props) {
+    const updateLight = props.updateLight;
     const lightsList = props.lightsList;
     const light = lightsList[0];
 
     const [isOpen, setIsOpen] = useState(true);
 
-    function handleOpen() {
-        setIsOpen(!isOpen);
-        console.log(isOpen);
+    function handleIntensity(id, light,intensity) {
+        let newLight = {...light}
+        newLight.intensity = intensity;
+
+        updateLight(id, newLight)
     }
 
-    console.log(light.color)    
-    /* For each light -> create header with type icon, name and circle displaying color and intensity */
+    function handleOpen() {
+        setIsOpen(!isOpen);
+    }
+   
     return (
         <div className="dropdown">
             <div className="dropdown-item-header"
@@ -28,14 +33,16 @@ export function LightsMenu(props) {
                 <p>S/H</p>
             </div>
             {isOpen &&
-                <div className="dropdown-item-body"
-                onClick={() => handleOpen()}>
+                <div className="dropdown-item-body">
                     <label className='trait-name'>Color:</label>
                     <div className='trait'> {light.color} </div>
                     <label className='trait-name'>Position:</label>
                     <div className='trait'> {light.position} </div>
                     <label className='trait-name'>Intensity</label>
-                    <div className='trait'> {light.intensity} </div>
+                    <input 
+                        className='trait'
+                        value={light.intensity}
+                        onChange={() => handleIntensity()}/>
                     <label className='trait-name'>Angle:</label>
                     <div className='trait'> {light.angle} </div>
                     <label className='trait-name'>Penumbra:</label>

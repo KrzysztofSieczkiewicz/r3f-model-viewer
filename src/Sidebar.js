@@ -8,7 +8,7 @@ import { LightsMenu } from "./components/sidebar/LightsMenu";
 export function Sidebar(props) {
     const lightsList = props.lightsList;
     const addLight = props.addLight;
-    const updateLight = props.addLight;
+    const updateLight = props.updateLight;
     const removeLight = props.removeLight;
 
     return (
@@ -17,7 +17,7 @@ export function Sidebar(props) {
             <ul className="sidebar-nav">
                 <SidebarItem icon={<EarthIcon />} />
                 <SidebarItem icon={<CubeIcon />} >
-                    <LightsMenu lightsList={lightsList} />
+                    <LightsMenu lightsList={lightsList} updateLight={updateLight} />
                 </SidebarItem>
                 <SidebarItem icon={<LightIcon />} >
                     <LightsMenu lightsList={lightsList} />
