@@ -50,15 +50,11 @@ function AssetScene() {
   }
 
   function updateLight(id, light) {
-      setLightsList((lightsList) => {
-          const newLightsList = [...lightsList];
-          newLightsList[id] = light;
-      });
-  }
+    let newLightsList = [...lightsList];
+    newLightsList[id] = light;
 
-  let newLight = defaultLight;
-  newLight.color = [0,1,1];
-  newLight.position = [-5,5,0];
+    setLightsList(newLightsList);
+  }
 
   return (
     <>

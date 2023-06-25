@@ -5,21 +5,23 @@ import { ReactComponent as Invisible } from '../../icons/eye-off.svg';
 import { useState } from 'react';
 
 export function LightsMenu(props) {
-    const updateLight = props.updateLight;
     const lightsList = props.lightsList;
     const light = lightsList[0];
 
     const [isOpen, setIsOpen] = useState(true);
 
-    function handleIntensity(id, light,intensity) {
-        let newLight = {...light}
-        newLight.intensity = intensity;
-
-        updateLight(id, newLight)
-    }
-
     function handleOpen() {
         setIsOpen(!isOpen);
+    }
+
+    const newLight = {
+        id:0,
+        position:[5,5,0],
+        color: "#f53259",
+        intensity:10,
+        angle: 0.6,
+        penumbra: 0.6,
+        type:"spotLight"
     }
    
     return (
@@ -41,8 +43,8 @@ export function LightsMenu(props) {
                     <label className='trait-name'>Intensity</label>
                     <input 
                         className='trait'
-                        value={light.intensity}
-                        onChange={() => handleIntensity()}/>
+                        value={light.intensity} 
+                        onChange={() => props.updateLight(newLight.id, newLight)}/>
                     <label className='trait-name'>Angle:</label>
                     <div className='trait'> {light.angle} </div>
                     <label className='trait-name'>Penumbra:</label>
