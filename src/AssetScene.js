@@ -54,6 +54,7 @@ function AssetScene() {
     newLightsList[id] = light;
 
     setLightsList(newLightsList);
+    console.log(lightsList[0])
   }
 
   return (

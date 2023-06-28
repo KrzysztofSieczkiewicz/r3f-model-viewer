@@ -32,10 +32,6 @@ export function Sidebar(props) {
                     <LightsMenu lightsList={lightsList} />
                 </SidebarItem>
                 <SidebarItem icon={<ImageIcon />} />
-                <input 
-                        className='trait'
-                        value={lightsList[0].intensity} 
-                        onChange={() => props.updateLight(0, newLight)}/>
             </ul>
         </nav>
     );

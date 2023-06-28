@@ -4,6 +4,7 @@ import { ReactComponent as Visible } from '../../icons/eye-on.svg';
 import { ReactComponent as Invisible } from '../../icons/eye-off.svg';
 import { useContext, useState } from 'react';
 import SidebarControlsContext from '../SidebarControlsContext'
+import { Slider } from './Slider';
 
 export function LightsMenu(props) {
     const { updateLight } = useContext(SidebarControlsContext);
@@ -47,11 +48,21 @@ export function LightsMenu(props) {
                     <input 
                         className='trait'
                         value={light.intensity} 
-                        onChange={(e) => updateLight(light.id, {...light, intensity: e.target.value})}/>
+                        onChange={(e) => updateLight(light.id, {...light, intensity: e.target.value})}
+                    />
                     <label className='trait-name'>Angle:</label>
-                    <div className='trait'> {light.angle} </div>
+                    <input 
+                        className='trait'
+                        value={light.angle} 
+                        onChange={(e) => updateLight(light.id, {...light, angle: e.target.value})}
+                    />
                     <label className='trait-name'>Penumbra:</label>
-                    <div className='trait'> {light.penumbra} </div>
+                    <input 
+                        className='trait'
+                        value={light.penumbra} 
+                        onChange={(e) => updateLight(light.id, {...light, penumbra: e.target.value})}
+                    />
+                    <Slider min={-15} max={15} value={-7} step={1}/>
                 </div>}
         </div>
     );
