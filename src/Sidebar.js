@@ -4,34 +4,52 @@ import { ReactComponent as CubeIcon } from './icons/sidebar/cube.svg';
 import { ReactComponent as EarthIcon } from './icons/sidebar/earth.svg';
 import { ReactComponent as ImageIcon } from './icons/sidebar/image.svg';
 import { LightsMenu } from "./components/sidebar/LightsMenu";
+import { useState } from "react";
 
 export function Sidebar(props) {
-    const lightsList = props.lightsList;
-    const addLight = props.addLight;
-    const removeLight = props.removeLight;
 
-    const newLight = {
-        id:0,
-        position:[5,5,0],
-        color: "#f53259",
-        intensity: 1,
-        angle: 0.6,
-        penumbra: 0.6,
-        type:"spotLight"
-    }
+    const [activeItem, setActiveItem] = useState();
+
+    const handleItemClick = (item) => {
+        if (activeItem === item) {
+            setActiveItem(null);
+        } else {
+            setActiveItem(item)
+        }
+    };
+
+    const lightsList = props.lightsList;
+
+    // CURRENTLY CHILD ELEMENTS INSIDE SIDEBARITEM PREVENT ONCLICK FROM FIRING - FIX THAT
 
     return (
         <nav className="sidebar">
             <p>TEST</p>
             <ul className="sidebar-nav">
-                <SidebarItem icon={<EarthIcon />} />
+                <SidebarItem 
+                    icon={<EarthIcon />}
+                    active={activeItem === "Environment"}
+                    onClick={() => handleItemClick("Environment")}
+                />
                 <SidebarItem icon={<CubeIcon />} >
-                    <LightsMenu lightsList={lightsList} updateLight={() => props.updateLight()} />
+                    <LightsMenu 
+                        lightsList={lightsList}
+                        active={activeItem === "Objects"}
+                        onClick={() => handleItemClick("Objects")}
+                    />
                 </SidebarItem>
-                <SidebarItem icon={<LightIcon />} >
+                <SidebarItem 
+                    icon={<LightIcon />} 
+                    active={activeItem === "Lights"}
+                    onClick={() => handleItemClick("Lights")}
+                >
                     <LightsMenu lightsList={lightsList} />
                 </SidebarItem>
-                <SidebarItem icon={<ImageIcon />} />
+                <SidebarItem 
+                    icon={<ImageIcon />}
+                    active={activeItem === "Rendering"}
+                    onClick={() => handleItemClick("Rendering")}
+                />
             </ul>
         </nav>
     );

@@ -66,7 +66,7 @@ function AssetScene() {
         <Lights lightsList={lightsList}/>
         <Asset />
       </Canvas>
-      <SidebarControlsContext.Provider value={{ updateLight }}>
+      <SidebarControlsContext.Provider value={{ lightsList, updateLight }}>
         <Sidebar lightsList={lightsList} addLight={addLight} removeLight={removeLight} />
       </SidebarControlsContext.Provider>
     </>

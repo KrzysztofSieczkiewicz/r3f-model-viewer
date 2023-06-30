@@ -5,11 +5,11 @@ import { ReactComponent as Invisible } from '../../icons/eye-off.svg';
 import { useContext, useState } from 'react';
 import SidebarControlsContext from '../SidebarControlsContext'
 import { Slider } from './Slider';
+import { act } from '@react-three/fiber';
 
-export function LightsMenu(props) {
-    const { updateLight } = useContext(SidebarControlsContext);
+export function LightsMenu() {
+    const { lightsList, updateLight } = useContext(SidebarControlsContext);
 
-    const lightsList = props.lightsList;
     const light = lightsList[0];
 
     const [isOpen, setIsOpen] = useState(true);

@@ -1,16 +1,19 @@
 import { useState } from "react";
 
 export function SidebarItem(props) {
-
-    const [isOpen, setIsOpen] = useState(false);
+    const active = props.active;
 
     return (
         <li className="sidebar-item">
-            <a href="#" className="icon-button" onClick={() => setIsOpen(!isOpen)}>
+            <a 
+                href="#" 
+                className="icon-button"
+                onClick={props.onClick}
+            >
                 {props.icon}
             </a>
 
-            {isOpen && props.children}
+            {active && props.children}
         </li>
     );
 }
