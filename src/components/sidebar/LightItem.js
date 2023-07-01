@@ -15,12 +15,20 @@ export function LightItem(props) {
         }
     }
 
-    const handleItemActive = () => {
+    const handleLightActive = () => {
         // TODO: replace S/H with appropriate arrows (avoid icons for this one), consider adding className
         if(active) {
             return <p className='show-hide'>H</p>
         } else {
             return <p className='show-hide'>S</p>
+        }
+    }
+
+    const handleLightVisible = () => {
+        if(light.visible) {
+            return <Visible className='light-icon' />;
+        } else {
+            return <Invisible className='light-icon' />;
         }
     }
 
@@ -31,8 +39,8 @@ export function LightItem(props) {
                 {handleLightType()}
                 <p>{light.type}</p>
                 <div className="color-preview" style={{backgroundColor: light.color}}/>
-                <Visible className='light-icon' />
-                {handleItemActive()}
+                {handleLightVisible()}
+                {handleLightActive()}
             </div>
 
             {active && <div className="dropdown-item-body">

@@ -15,7 +15,8 @@ const defaultLight = {
   color: "white",
   intensity: 1,
   angle: 0.6,
-  penumbra: 0.6
+  penumbra: 0.6,
+  visible: true
 }
 
 function AssetScene() {
@@ -26,14 +27,16 @@ function AssetScene() {
     intensity:1,
     angle: 0.6,
     penumbra: 0.6,
-    type:"spotLight"
+    type:"spotLight",
+    visible: true
   },
   {
     id:1,
     position:[-5,5,-5],
     color:"#33dcfa",
     intensity:1,
-    type:"pointLight"
+    type:"pointLight",
+    visible: true
   }]);
 
   function addLight() {
