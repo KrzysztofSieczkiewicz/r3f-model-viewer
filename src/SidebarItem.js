@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export function SidebarItem(props) {
     const active = props.active;
 

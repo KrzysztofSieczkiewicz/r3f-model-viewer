@@ -110,7 +110,6 @@ a {
 }
 
 .dropdown-item {
-
     background-color: #313233;
     border-radius: 8px
 }
@@ -124,8 +123,6 @@ a {
     width: 100%;
     height: 2.5rem;
     padding: 0.25rem 0.5rem;
-
-    
 }
 
 .dropdown-item-header p {
@@ -144,4 +141,30 @@ a {
     fill: var(--text-color);
     height: 1.5rem;
     width: 1.5rem;
+}
+
+/* Objects traits */
+.dropdown-item-body {
+    width: 100%;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.trait {
+    display: flex;
+    width: 100%;
+    height: 1.5rem;
+}
+
+.trait-name {
+    width: 5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.trait-input {
+    width: 5rem;
+    margin: 0;
+    padding: 0;
 }
