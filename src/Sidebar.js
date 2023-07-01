@@ -5,9 +5,9 @@ import { ReactComponent as EarthIcon } from './icons/sidebar/earth.svg';
 import { ReactComponent as ImageIcon } from './icons/sidebar/image.svg';
 import { LightsMenu } from "./components/sidebar/LightsMenu";
 import { useState } from "react";
+import './components/sidebar/sidebar.css';
 
-export function Sidebar(props) {
-
+export function Sidebar() {
     const [activeItem, setActiveItem] = useState();
 
     const handleItemClick = (item) => {
@@ -18,10 +18,6 @@ export function Sidebar(props) {
         }
     };
 
-    const lightsList = props.lightsList;
-
-    // CURRENTLY CHILD ELEMENTS INSIDE SIDEBARITEM PREVENT ONCLICK FROM FIRING - FIX THAT
-
     return (
         <nav className="sidebar">
             <p>TEST</p>
@@ -31,19 +27,19 @@ export function Sidebar(props) {
                     active={activeItem === "Environment"}
                     onClick={() => handleItemClick("Environment")}
                 />
-                <SidebarItem icon={<CubeIcon />} >
-                    <LightsMenu 
-                        lightsList={lightsList}
-                        active={activeItem === "Objects"}
-                        onClick={() => handleItemClick("Objects")}
-                    />
+                <SidebarItem 
+                    icon={<CubeIcon />}
+                    active={activeItem === "Objects"}
+                    onClick={() => handleItemClick("Objects")}
+                >
+                    <LightsMenu />
                 </SidebarItem>
                 <SidebarItem 
                     icon={<LightIcon />} 
                     active={activeItem === "Lights"}
                     onClick={() => handleItemClick("Lights")}
                 >
-                    <LightsMenu lightsList={lightsList} />
+                    <LightsMenu />
                 </SidebarItem>
                 <SidebarItem 
                     icon={<ImageIcon />}
@@ -53,19 +49,4 @@ export function Sidebar(props) {
             </ul>
         </nav>
     );
-
-    //props.updateLight(0, newLight)
-/*
-    return (
-        <div id="sidebar">
-            <p>TEST SIDEBAR LOCATION</p>
-            <button onClick={() => {addLight()}}>Add Light</button>
-            {lightsList.map((light) => {
-                return (
-                    <LightPanel light={light} removeLight={removeLight} key={light.id}/>
-                );
-            })}
-        </div>
-    );
-*/
 }
