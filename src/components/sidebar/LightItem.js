@@ -9,20 +9,10 @@ import { useState } from "react";
 export function LightItem(props) {
     const { light, updateLight } = props;
 
-    const [activeItem, setActiveItem] = useState();
-
-    const handleItemClick = (item) => {
-        if (activeItem === item) {
-            setActiveItem(null);
-        } else {
-            setActiveItem(item)
-        }
-    };
-
     return (
         <div className="dropdown-item" key={light.id}>
             <div className="dropdown-item-header"
-                onClick={() => handleItemClick(light.id)}>
+                onClick={props.onClick}>
                 <SpotlightIcon className='light-icon' />
                 <p>{light.type}</p>
                 <div className="color-preview" style={{backgroundColor: light.color}}/>
@@ -30,7 +20,7 @@ export function LightItem(props) {
                 <p>S/H</p>
             </div>
 
-            {activeItem === light.id && <div className="dropdown-item-body">
+            {props.active && <div className="dropdown-item-body">
                 <div className='trait'>
                     <label className='trait-name'>Color:</label>
                     <div className='trait-input'> {light.color} </div>
