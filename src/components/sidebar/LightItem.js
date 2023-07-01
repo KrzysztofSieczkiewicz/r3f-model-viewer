@@ -4,23 +4,38 @@ import { ReactComponent as Visible } from '../../icons/eye-on.svg';
 import { ReactComponent as Invisible } from '../../icons/eye-off.svg';
 import { Slider } from './Slider';
 
-import { useState } from "react";
-
 export function LightItem(props) {
-    const { light, updateLight } = props;
+    const { active, light, updateLight } = props;
+
+    const handleLightType = () => {
+        if(light.type === 'pointLight') {
+            return <PointLightIcon className='light-icon' />;
+        } else if (light.type === 'spotLight') {
+            return <SpotlightIcon className='light-icon' />;
+        }
+    }
+
+    const handleItemActive = () => {
+        // TODO: replace S/H with appropriate arrows (avoid icons for this one), consider adding className
+        if(active) {
+            return <p className='show-hide'>H</p>
+        } else {
+            return <p className='show-hide'>S</p>
+        }
+    }
 
     return (
         <div className="dropdown-item" key={light.id}>
             <div className="dropdown-item-header"
                 onClick={props.onClick}>
-                <SpotlightIcon className='light-icon' />
+                {handleLightType()}
                 <p>{light.type}</p>
                 <div className="color-preview" style={{backgroundColor: light.color}}/>
                 <Visible className='light-icon' />
-                <p>S/H</p>
+                {handleItemActive()}
             </div>
 
-            {props.active && <div className="dropdown-item-body">
+            {active && <div className="dropdown-item-body">
                 <div className='trait'>
                     <label className='trait-name'>Color:</label>
                     <div className='trait-input'> {light.color} </div>
