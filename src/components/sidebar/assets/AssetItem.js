@@ -12,7 +12,17 @@ export function AssetItem(props) {
             return <p className='show-hide'>S</p>
         }
     }
-
+/*
+    const handleLightVisible = () => {
+        if(light.visible) {
+            return <Visible className='light-icon' />;
+        } else {
+            return <Invisible className='light-icon' />;
+        }
+    }
+*/
+    // TODO: REPLACE POINT LIGHT ICON WITH APPROPRIATE ICON FOR ASSET
+    // TODO:
     return (
         <div className="dropdown-item">
             <div className="dropdown-item-header"
