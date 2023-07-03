@@ -19,7 +19,21 @@ const defaultLight = {
   visible: true
 }
 
+const defaultAsset = {
+  id: 0,
+  nameId: "pear",
+  variant: 0,
+  position:[0,0,0],
+  scale: [10,10,10],
+  rotation: [0,0,0],
+  castShadow: true,
+  visible: true,
+  path: "models/pear/Pear2_LOD0.gltf"
+}
+
 function AssetScene() {
+
+  /* LIGHTS */
   const [lightsList, setLightsList] = useState([{
     id:0,
     position:[5,5,0],
@@ -57,7 +71,20 @@ function AssetScene() {
     newLightsList[id] = light;
 
     setLightsList(newLightsList);
-    console.log(lightsList[0])
+    console.log(lightsList[id])
+  }
+
+  /* ASSETS */
+  const [assetsList, setAssetsList] = useState(
+    [defaultAsset]
+    );
+
+  function updateAsset(id, asset) {
+    let newAssetsList = [...assetsList];
+    newAssetsList[id] = asset;
+
+    setAssetsList(newAssetsList);
+    console.log(assetsList[id]);
   }
 
   return (
@@ -69,7 +96,7 @@ function AssetScene() {
         <Lights lightsList={lightsList}/>
         <Asset />
       </Canvas>
-      <SidebarControlsContext.Provider value={{ lightsList, updateLight }}>
+      <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAsset }}>
         <Sidebar lightsList={lightsList} addLight={addLight} removeLight={removeLight} />
       </SidebarControlsContext.Provider>
     </>

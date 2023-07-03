@@ -3,9 +3,10 @@ import { ReactComponent as LightIcon } from './icons/sidebar/light.svg';
 import { ReactComponent as CubeIcon } from './icons/sidebar/cube.svg';
 import { ReactComponent as EarthIcon } from './icons/sidebar/earth.svg';
 import { ReactComponent as ImageIcon } from './icons/sidebar/image.svg';
-import { LightsMenu } from "./components/sidebar/LightsMenu";
+import { LightsMenu } from "./components/sidebar/lights/LightsMenu";
 import { useState } from "react";
 import './components/sidebar/sidebar.css';
+import { AssetsMenu } from "./components/sidebar/assets/AssetsMenu";
 
 export function Sidebar() {
     const [activeItem, setActiveItem] = useState();
@@ -32,7 +33,7 @@ export function Sidebar() {
                     active={activeItem === "Objects"}
                     onClick={() => handleItemClick("Objects")}
                 >
-                    <LightsMenu />
+                    <AssetsMenu />
                 </SidebarItem>
                 <SidebarItem 
                     icon={<LightIcon />} 

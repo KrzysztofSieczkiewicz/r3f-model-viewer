@@ -1,8 +1,8 @@
-import { ReactComponent as SpotlightIcon } from '../../icons/lightTypes/spotLight.svg';
-import { ReactComponent as PointLightIcon } from '../../icons/lightTypes/pointLight.svg';
-import { ReactComponent as Visible } from '../../icons/eye-on.svg';
-import { ReactComponent as Invisible } from '../../icons/eye-off.svg';
-import { Slider } from './Slider';
+import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
+import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
+import { ReactComponent as Visible } from '../../../icons/eye-on.svg';
+import { ReactComponent as Invisible } from '../../../icons/eye-off.svg';
+import { Slider } from '../Slider';
 
 export function LightItem(props) {
     const { active, light, updateLight } = props;
@@ -33,9 +33,10 @@ export function LightItem(props) {
     }
 
     return (
-        <div className="dropdown-item" key={light.id}>
+        <div className="dropdown-item">
             <div className="dropdown-item-header"
-                onClick={props.onClick}>
+                onClick={props.onClick}
+            >
                 {handleLightType()}
                 <p>{light.type}</p>
                 <div className="color-preview" style={{backgroundColor: light.color}}/>
