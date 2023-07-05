@@ -26,21 +26,19 @@ export function LightItem(props) {
 
     const handleLightVisible = () => {
         if(light.visible) {
-            //updateLight(light.id, {...light, visible: true});
             return (<Visible className='light-icon' 
-                onClick={() => updateLight(light.id, {...light, visible: true})}
-            />
-            );
+                onClick={(e) => {
+                    e.stopPropagation();
+                    updateLight(light.id, {...light, visible: false})
+                }}
+            />);
         } else {
-            //updateLight(light.id, {...light, visible: false});
-            return (
-                <Invisible className='light-icon' 
-                    onClick={() => {
-                        //prevent default click here
-                        updateLight(light.id, {...light, visible: false})
-                    }}
-                />
-            );
+            return (<Invisible className='light-icon' 
+                onClick={(e) => {
+                    e.stopPropagation();
+                    updateLight(light.id, {...light, visible: true})
+                }}
+            />);
         }
     }
 
