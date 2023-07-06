@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import SidebarControlsContext from '../../SidebarControlsContext'
+import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
 
 import { LightItem } from './LightItem';
 

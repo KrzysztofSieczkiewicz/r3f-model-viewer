@@ -2,7 +2,6 @@ import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotL
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { ReactComponent as Visible } from '../../../icons/eye-on.svg';
 import { ReactComponent as Invisible } from '../../../icons/eye-off.svg';
-import { Slider } from '../Slider';
 
 export function LightItem(props) {
     const { active, light, updateLight } = props;
@@ -18,9 +17,9 @@ export function LightItem(props) {
     const handleLightActive = () => {
         // TODO: replace S/H with appropriate arrows (avoid icons for this one), consider adding className
         if(active) {
-            return <p className='show-hide'>H</p>
+            return <p className='show-hide'>&#8657;</p>
         } else {
-            return <p className='show-hide'>S</p>
+            return <p className='show-hide'>&#8659;</p>
         }
     }
 

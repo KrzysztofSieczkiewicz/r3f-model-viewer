@@ -7,7 +7,7 @@ import { Asset } from './Asset';
 import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
-import SidebarControlsContext from './components/SidebarControlsContext.js'
+import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js'
 
 const defaultLight = {
   type: "pointLight",
