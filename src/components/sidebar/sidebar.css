@@ -156,6 +156,10 @@ a {
     flex-direction: column;
 }
 
+.supressed {
+    color: #484a4d;
+}
+
 .trait {
     display: flex;
     width: 100%;

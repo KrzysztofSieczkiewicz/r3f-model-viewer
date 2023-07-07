@@ -1,7 +1,5 @@
 import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import { ReactComponent as Visible } from '../../../icons/eye-on.svg';
-import { ReactComponent as Invisible } from '../../../icons/eye-off.svg';
 
 export function LightItem(props) {
     const { active, light, updateLight } = props;
@@ -25,19 +23,20 @@ export function LightItem(props) {
 
     const handleLightVisible = () => {
         if(light.visible) {
-            return (<Visible className='light-icon' 
+            return (<div className='light-icon' 
                 onClick={(e) => {
                     e.stopPropagation();
                     updateLight(light.id, {...light, visible: false})
                 }}
-            />);
+            >&#x1F441;</div>);
         } else {
-            return (<Invisible className='light-icon' 
+            // TODO: Style eye to be displayed darker (consider adding className="suppressed")
+            return (<div className='light-icon supressed' 
                 onClick={(e) => {
                     e.stopPropagation();
                     updateLight(light.id, {...light, visible: true})
                 }}
-            />);
+            >&#x1F441;</div>);
         }
     }
 

@@ -1,5 +1,4 @@
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import { ReactComponent as Visible } from '../../../icons/eye-on.svg';
 
 export function AssetItem(props) {
     const { active, asset, updateAsset } = props;
@@ -21,8 +20,7 @@ export function AssetItem(props) {
         }
     }
 */
-    // TODO: REPLACE POINT LIGHT ICON WITH APPROPRIATE ICON FOR ASSET
-    // TODO:
+
     return (
         <div className="dropdown-item">
             <div className="dropdown-item-header"
@@ -31,7 +29,7 @@ export function AssetItem(props) {
                 <PointLightIcon className='light-icon' />
                 <p>{asset.nameId}: {asset.variant}</p>
                 <div className="color-preview" style={{backgroundColor: "#FFF"}}/>
-                <Visible className='light-icon' />
+                <div>&#x1F441;</div>
                 {handleAssetActive()}
             </div>
 
