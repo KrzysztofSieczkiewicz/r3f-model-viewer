@@ -2,17 +2,24 @@ export function Trait(props) {
 
     //handle props types
     function handleTraitType() {
-        if(props.type === 'field-digit') {
+        if(props.type === 'number-input') {
             return (
-                <input className="trait-input"></input>
+                <input className="trait-input"
+                    type="number"
+                    value={props.value}
+                    min={props.min}
+                    max={props.max}
+                    step={props.step}
+                    onChange={props.handleChange}
+                />
             );
         }
     }
 
     return (
         <div className='trait'>
-            <label className='trait-name'></label>
-            <div className='trait-input'></div>
+            <label className='trait-name'>{props.name}</label>
+            {handleTraitType()}
         </div>
     );
 }

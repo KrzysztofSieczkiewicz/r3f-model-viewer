@@ -1,5 +1,6 @@
 import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
+import { Trait } from '../Trait';
 
 export function LightItem(props) {
     const { active, light, updateLight } = props;
@@ -28,7 +29,7 @@ export function LightItem(props) {
                     e.stopPropagation();
                     updateLight(light.id, {...light, visible: false})
                 }}
-            >&#x1F441;</div>);
+            >&#128065;</div>);
         } else {
             // TODO: Style eye to be displayed darker (consider adding className="suppressed")
             return (<div className='light-icon supressed' 
@@ -67,6 +68,14 @@ export function LightItem(props) {
                         className='trait-input'
                         value={light.intensity}
                         onChange={(e) => updateLight(light.id, {...light, intensity: e.target.value})}
+                    />
+                </div>
+                <div className='trait'>
+                    <Trait name="Intensity"
+                        type="number-input"
+                        value={light.intensity}
+                        handleChange={(e) => updateLight(light.id, {...light, intensity: e.target.value})}
+                        min={0} max={5} step={0.1}
                     />
                 </div>
                 <div className='trait'>
