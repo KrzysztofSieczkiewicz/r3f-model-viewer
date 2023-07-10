@@ -24,20 +24,22 @@ export function LightItem(props) {
 
     const handleLightVisible = () => {
         if(light.visible) {
-            return (<div className='light-icon' 
+            return (<i className='light-icon' 
                 onClick={(e) => {
                     e.stopPropagation();
                     updateLight(light.id, {...light, visible: false})
                 }}
-            >&#128065;</div>);
+                >&#128065;</i>
+            );
         } else {
-            // TODO: Style eye to be displayed darker (consider adding className="suppressed")
-            return (<div className='light-icon supressed' 
+            // TODO: Style eye to be displayed darker using suppressed class
+            return (<i className='light-icon supressed' 
                 onClick={(e) => {
                     e.stopPropagation();
                     updateLight(light.id, {...light, visible: true})
                 }}
-            >&#x1F441;</div>);
+                >&#x1F441;</i>
+            );
         }
     }
 
@@ -71,11 +73,10 @@ export function LightItem(props) {
                     />
                 </div>
                 <div className='trait'>
-                    <Trait name="Intensity"
-                        type="number-input"
+                    <Trait name="Intensity" type="number-input"
                         value={light.intensity}
                         handleChange={(e) => updateLight(light.id, {...light, intensity: e.target.value})}
-                        min={0} max={5} step={0.1}
+                        min={0} max={2} step={0.1}
                     />
                 </div>
                 <div className='trait'>

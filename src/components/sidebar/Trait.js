@@ -6,22 +6,22 @@ export function Trait(props) {
     const [ protectedValue, setProtectedValue ] = useState(value);
 
     function handleProtectedValue(e) {
-        // make this function to never set value over max and under min
-        // also guard value so updateLight (a.k.a. handleChange)
-        // uses only protected value
-        
-        // first suggested solution is to take input value (props.value)
-        // then prevent it from going outside of bonds
-        // then calling handleChange inside this method
-        // and finally replacing onChange call with this function
-        if (value > max) {
-            setProtectedValue(max);
-        } else if (value < min) {
-            setProtectedValue(min);
-        } else {
-            setProtectedValue(value);
+        const inputValue = e.target.value;
+
+        if (!isNaN(inputValue)) {
+            setProtectedValue(0);
         }
-        console.log("value: ", value, ", protectedValue: ", protectedValue);
+        if (inputValue > max) {
+            setProtectedValue(max);
+            console.log("Too high");
+        } else if (inputValue < min) {
+            setProtectedValue(min);
+            console.log("Too low");
+        } else {
+            setProtectedValue(inputValue);
+            console.log("All good");
+        }
+        
         props.handleChange(e);
     }
 
@@ -35,7 +35,6 @@ export function Trait(props) {
                     min={min}
                     max={max}
                     step={step}
-                    onKeyUp={e => handleProtectedValue(e)}
                     onChange={e => handleProtectedValue(e)}
                     inputMode="numeric"
                     pattern="[0-9]+"
@@ -47,7 +46,20 @@ export function Trait(props) {
     return (
         <div className='trait'>
             <label className='trait-name'>{props.name}</label>
-            {handleTraitType()}
+
+            {inputSlider()}
         </div>
     );
+
+        // TODO CREATE FIELD WITH CUSTOM SLIDER CHANGE
+        function inputSlider() {
+            return (
+                <div className="input-test">
+                    <i className="arrow left">&#60;</i>
+                    {protectedValue}
+                    <i className="arrow right">&#62;</i>
+                </div>
+            );
+        }
+    
 }
