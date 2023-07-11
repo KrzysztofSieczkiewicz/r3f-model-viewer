@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Trait(props) {
-    const { value, min, max, step } = props;
+    const { min, max, step,
+    value, handleChange} = props;
 
     const [ protectedValue, setProtectedValue ] = useState(value);
 
-    function handleProtectedValue(e) {
-        const inputValue = e.target.value;
 
+    let isDragging=false;
+    let originEvent;
+    let startingPosX;
+    let currentPosX;
+    let calculatedPosX;
+
+    function handleProtectedValue(inputValue) {
         if (!isNaN(inputValue)) {
             setProtectedValue(0);
         }
@@ -21,24 +27,21 @@ export function Trait(props) {
             setProtectedValue(inputValue);
             console.log("All good");
         }
-        
-        props.handleChange(e);
     }
 
     //handle props types
     function handleTraitType() {
         if(props.type === 'number-input') {
             return (
-                <input className="trait-input"
-                    type="number"
-                    value={protectedValue}
-                    min={min}
-                    max={max}
-                    step={step}
-                    onChange={e => handleProtectedValue(e)}
-                    inputMode="numeric"
-                    pattern="[0-9]+"
-                />
+                <></>
+            );
+        } else if(props.type === 'number-slider') {
+            return (
+                <div className="input-test" onMouseDown={handleMouseDown}>
+                    <i className="arrow left">&#60;</i>
+                    {protectedValue}
+                    <i className="arrow right">&#62;</i>
+                </div>
             );
         }
     }
@@ -46,34 +49,67 @@ export function Trait(props) {
     return (
         <div className='trait'>
             <label className='trait-name'>{props.name}</label>
-
             {inputSlider()}
         </div>
     );
 
-        // TODO CREATE FIELD WITH CUSTOM SLIDER CHANGE
-        function inputSlider() {
-            return (
-                <div className="input-test"
-                    onMouseDownCapture={e => handleClickAndDrag(e)}   
-                >
-                    <i className="arrow left">&#60;</i>
-                    {protectedValue}
-                    <i className="arrow right">&#62;</i>
-                </div>
-            );
-        }
+    // TODO CREATE FIELD WITH CUSTOM SLIDER CHANGE
+    function inputSlider() {
+        return (
+            <div className="input-test" 
+                onMouseDown={handleMouseDown}
+                value={protectedValue}
+            >
+                <i className="arrow left">&#60;</i>
+                {protectedValue}
+                <i className="arrow right">&#62;</i>
+            </div>
+        );
+    }
 
-        // DETECT CLICKING ON ELEMENT AND DRAGGING
-        function handleClickAndDrag(e) {
-            const startingPosY = e.clientX;
+    function handleMouseDown(e) {
+        isDragging = true;
+        startingPosX = e.clientX;
+        originEvent = e;
 
-            console.log(startingPosY)
-            // create event listener ?onmousemove?
-            // that way You will track mouse movement after clicking
-            // then get position from the start, calculate it with "step"
-            // and setProtectedValue
-            // maybe also add shift key listener to add more precise option
-        }
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    }
     
+
+    function handleMouseMove(e) {
+        //DEAL WITH THIS
+        if (isDragging) {
+            currentPosX = e.clientX;
+            calculatedPosX = (currentPosX - startingPosX) * 0.01;
+            console.log("startingPos: ", startingPosX,
+            "currentPos: ", currentPosX,
+            "calculatedPos: ", calculatedPosX);
+
+            const newVal = protectedValue + calculatedPosX
+
+            setProtectedValue(newVal)
+            console.log(newVal)
+            console.log("protectedValue: ", protectedValue);
+
+            /*
+            if (protectedValue > max) {
+                setProtectedValue(max);
+            } else if (protectedValue < min) {
+                setProtectedValue(min);
+            }
+
+            originEvent.target.value = protectedValue;
+            console.log(originEvent.target.value)
+            //handleChange(originEvent);
+            */
+        }
+    }
+        
+    function handleMouseUp() {
+        isDragging = false;
+
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+    }
 }

@@ -76,7 +76,7 @@ export function LightItem(props) {
                     <Trait name="Intensity" type="number-input"
                         value={light.intensity}
                         handleChange={(e) => updateLight(light.id, {...light, intensity: e.target.value})}
-                        min={0} max={2} step={0.1}
+                        min={0} max={10} step={0.1}
                     />
                 </div>
                 <div className='trait'>
