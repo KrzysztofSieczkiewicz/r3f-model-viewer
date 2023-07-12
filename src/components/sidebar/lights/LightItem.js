@@ -27,7 +27,7 @@ export function LightItem(props) {
             return (<i className='light-icon' 
                 onClick={(e) => {
                     e.stopPropagation();
-                    updateLight(light.id, {...light, visible: false})
+                    updateLight(light.id, 'visible', false)
                 }}
                 >&#128065;</i>
             );
@@ -36,7 +36,7 @@ export function LightItem(props) {
             return (<i className='light-icon supressed' 
                 onClick={(e) => {
                     e.stopPropagation();
-                    updateLight(light.id, {...light, visible: true})
+                    updateLight(light.id, 'visible', true)
                 }}
                 >&#x1F441;</i>
             );
@@ -73,10 +73,10 @@ export function LightItem(props) {
                     />
                 </div>
                 <div className='trait'>
-                    <Trait name="Intensity" type="number-input"
+                    <Trait name="Intensity" type="number-slider"
                         value={light.intensity}
                         handleChange={(handledValue) => updateLight(light.id, 'intensity', handledValue)}
-                        min={0} max={10} step={0.1}
+                        min={0} max={3} step={0.005} defaultValue={1}
                     />
                 </div>
                 <div className='trait'>

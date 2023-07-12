@@ -4,24 +4,24 @@ export function Trait(props) {
     const { min, max, step,
     value, handleChange} = props;
 
-    const [ protectedValue, setProtectedValue ] = useState(value);
-
+    const [ handledValue, setHandledValue ] = useState(value);
     const [ startingPosX, setStartingPosX ] = useState();
-
     const [isMouseDown, setIsMouseDown ] = useState(false);
 
-    function handleProtectedValue(inputValue) {
+    function handleValue(newValue) {
+        const inputValue = Math.round(newValue * 100) / 100;
+
         if (!isNaN(inputValue)) {
-            setProtectedValue(0);
+            setHandledValue(0);
         }
         if (inputValue > max) {
-            setProtectedValue(max);
+            setHandledValue(max);
             console.log("Too high");
         } else if (inputValue < min) {
-            setProtectedValue(min);
+            setHandledValue(min);
             console.log("Too low");
         } else {
-            setProtectedValue(inputValue);
+            setHandledValue(inputValue);
             console.log("All good");
         }
     }
@@ -33,73 +33,62 @@ export function Trait(props) {
 
     useEffect(() => {
         const handleMouseMove = (event) => {
-            console.log("Mouse is moving: ", event.clientX);
-            console.log(startingPosX, event.clientX)
-            let calculatedX = event.clientX - startingPosX;
-            console.log(startingPosX, event.clientX);
-            console.log("Calculated movement: ", calculatedX);
-
-            const newVal = (protectedValue + calculatedX * 0.01);
-
-            handleProtectedValue(newVal);
+            const calculatedX = event.clientX - startingPosX;
+            const newVal = handledValue + calculatedX * step;
+            
+            handleValue(newVal);
         };
 
         const handleMouseUp = () => {
             setIsMouseDown(false)
-            console.log("Mouse is up")
         };
-
-        handleChange(protectedValue);
 
         if(isMouseDown) {
             document.addEventListener('mouseup', handleMouseUp);
             document.addEventListener('mousemove', handleMouseMove);
         }
 
+        handleChange(handledValue);
+
         return () => {
-          document.removeEventListener('mouseup', handleMouseUp);
-          document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+            document.removeEventListener('mousemove', handleMouseMove);
         };
-      }, [isMouseDown]);
+    }, [isMouseDown]);
+
+    function handleResetDefault() {
+        handleValue(props.defaultValue);
+        handleChange(props.defaultValue);
+    }
+
+    
+    function handleTraitType() {
+        if(props.type === "number-slider") {
+            return (
+                <div className="input-test number-slider" 
+                    value={handledValue}
+                    onMouseDown={(e) => handleMouseDown(e)}
+                >
+                    <i className="arrow left">&#60;</i>
+                    {handledValue}
+                    <i className="arrow right">&#62;</i>
+                </div>
+            );
+        }
+    }
 
     return (
-        <div className='trait'>
-            <label className='trait-name'>{props.name}</label>
-            {inputSlider()}
+        <div className="trait">
+            <label className="trait-name">{props.name}</label>
+            {handleTraitType()}
+            <button className="reset-default-btn"
+                onClick={handleResetDefault}
+            >&#8635;</button>
         </div>
     );
-
-    // TODO CREATE FIELD WITH CUSTOM SLIDER CHANGE
-    function inputSlider() {
-        return (
-            <div className="input-test" 
-                value={protectedValue}
-                onMouseDown={(e) => handleMouseDown(e)}
-            >
-                <i className="arrow left">&#60;</i>
-                {protectedValue}
-                <i className="arrow right">&#62;</i>
-            </div>
-        );
-    }
 }
 
 /*
-    function handleProtectedValue(inputValue) {
-        if (!isNaN(inputValue)) {
-            setProtectedValue(0);
-        }
-        if (inputValue > max) {
-            setProtectedValue(max);
-            console.log("Too high");
-        } else if (inputValue < min) {
-            setProtectedValue(min);
-            console.log("Too low");
-        } else {
-            setProtectedValue(inputValue);
-            console.log("All good");
-        }
-    }
 
         //handle props types
     function handleTraitType() {
