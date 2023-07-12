@@ -66,9 +66,13 @@ function AssetScene() {
     );
   }
 
-  function updateLight(id, light) {
+  function updateLight(id, property, value) {
     let newLightsList = [...lightsList];
-    newLightsList[id] = light;
+    
+    newLightsList[id] = {
+      ...newLightsList[id],
+      [property]: value
+    }
 
     setLightsList(newLightsList);
     console.log(lightsList[id])

@@ -6,12 +6,9 @@ export function Trait(props) {
 
     const [ protectedValue, setProtectedValue ] = useState(value);
 
+    const [ startingPosX, setStartingPosX ] = useState();
 
-    let isDragging=false;
-    let originEvent;
-    let startingPosX;
-    let currentPosX;
-    let calculatedPosX;
+    const [isMouseDown, setIsMouseDown ] = useState(false);
 
     function handleProtectedValue(inputValue) {
         if (!isNaN(inputValue)) {
@@ -29,22 +26,41 @@ export function Trait(props) {
         }
     }
 
-    //handle props types
-    function handleTraitType() {
-        if(props.type === 'number-input') {
-            return (
-                <></>
-            );
-        } else if(props.type === 'number-slider') {
-            return (
-                <div className="input-test" onMouseDown={handleMouseDown}>
-                    <i className="arrow left">&#60;</i>
-                    {protectedValue}
-                    <i className="arrow right">&#62;</i>
-                </div>
-            );
+    const handleMouseDown = (e) => {
+        setStartingPosX(e.clientX);
+        setIsMouseDown(true)
+    };
+
+    useEffect(() => {
+        const handleMouseMove = (event) => {
+            console.log("Mouse is moving: ", event.clientX);
+            console.log(startingPosX, event.clientX)
+            let calculatedX = event.clientX - startingPosX;
+            console.log(startingPosX, event.clientX);
+            console.log("Calculated movement: ", calculatedX);
+
+            const newVal = (protectedValue + calculatedX * 0.01);
+
+            handleProtectedValue(newVal);
+        };
+
+        const handleMouseUp = () => {
+            setIsMouseDown(false)
+            console.log("Mouse is up")
+        };
+
+        handleChange(protectedValue);
+
+        if(isMouseDown) {
+            document.addEventListener('mouseup', handleMouseUp);
+            document.addEventListener('mousemove', handleMouseMove);
         }
-    }
+
+        return () => {
+          document.removeEventListener('mouseup', handleMouseUp);
+          document.removeEventListener('mousemove', handleMouseMove);
+        };
+      }, [isMouseDown]);
 
     return (
         <div className='trait'>
@@ -57,8 +73,8 @@ export function Trait(props) {
     function inputSlider() {
         return (
             <div className="input-test" 
-                onMouseDown={handleMouseDown}
                 value={protectedValue}
+                onMouseDown={(e) => handleMouseDown(e)}
             >
                 <i className="arrow left">&#60;</i>
                 {protectedValue}
@@ -66,50 +82,31 @@ export function Trait(props) {
             </div>
         );
     }
+}
 
-    function handleMouseDown(e) {
-        isDragging = true;
-        startingPosX = e.clientX;
-        originEvent = e;
-
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-    }
-    
-
-    function handleMouseMove(e) {
-        //DEAL WITH THIS
-        if (isDragging) {
-            currentPosX = e.clientX;
-            calculatedPosX = (currentPosX - startingPosX) * 0.01;
-            console.log("startingPos: ", startingPosX,
-            "currentPos: ", currentPosX,
-            "calculatedPos: ", calculatedPosX);
-
-            const newVal = protectedValue + calculatedPosX
-
-            setProtectedValue(newVal)
-            console.log(newVal)
-            console.log("protectedValue: ", protectedValue);
-
-            /*
-            if (protectedValue > max) {
-                setProtectedValue(max);
-            } else if (protectedValue < min) {
-                setProtectedValue(min);
-            }
-
-            originEvent.target.value = protectedValue;
-            console.log(originEvent.target.value)
-            //handleChange(originEvent);
-            */
+/*
+    function handleProtectedValue(inputValue) {
+        if (!isNaN(inputValue)) {
+            setProtectedValue(0);
+        }
+        if (inputValue > max) {
+            setProtectedValue(max);
+            console.log("Too high");
+        } else if (inputValue < min) {
+            setProtectedValue(min);
+            console.log("Too low");
+        } else {
+            setProtectedValue(inputValue);
+            console.log("All good");
         }
     }
-        
-    function handleMouseUp() {
-        isDragging = false;
 
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
+        //handle props types
+    function handleTraitType() {
+        if(props.type === 'number-input') {
+            return (
+                <></>
+            );
+        }
     }
-}
+*/
