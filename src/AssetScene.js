@@ -68,7 +68,7 @@ function AssetScene() {
 
   function updateLight(id, property, value) {
     let newLightsList = [...lightsList];
-    
+
     newLightsList[id] = {
       ...newLightsList[id],
       [property]: value

@@ -65,14 +65,6 @@ export function LightItem(props) {
                     <div className='trait-input'> {light.position} </div>
                 </div>
                 <div className='trait'>
-                    <label className='trait-name'>Intensity</label>
-                    <input
-                        className='trait-input'
-                        value={light.intensity}
-                        onChange={(e) => updateLight(light.id, {...light, intensity: e.target.value})}
-                    />
-                </div>
-                <div className='trait'>
                     <Trait name="Intensity" type="number-slider"
                         value={light.intensity}
                         handleChange={(handledValue) => updateLight(light.id, 'intensity', handledValue)}

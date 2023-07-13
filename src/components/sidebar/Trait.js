@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+
+import './trait.css';
 
 export function Trait(props) {
     const { min, max, step,
@@ -6,7 +8,7 @@ export function Trait(props) {
 
     const [ handledValue, setHandledValue ] = useState(value);
     const [ startingPosX, setStartingPosX ] = useState();
-    const [isMouseDown, setIsMouseDown ] = useState(false);
+    const [ isMouseDown, setIsMouseDown ] = useState(false);
 
     function handleValue(newValue) {
         const inputValue = Math.round(newValue * 100) / 100;
@@ -16,13 +18,10 @@ export function Trait(props) {
         }
         if (inputValue > max) {
             setHandledValue(max);
-            console.log("Too high");
         } else if (inputValue < min) {
             setHandledValue(min);
-            console.log("Too low");
         } else {
             setHandledValue(inputValue);
-            console.log("All good");
         }
     }
 
@@ -34,9 +33,8 @@ export function Trait(props) {
     useEffect(() => {
         const handleMouseMove = (event) => {
             const calculatedX = event.clientX - startingPosX;
-            const newVal = handledValue + calculatedX * step;
             
-            handleValue(newVal);
+            handleValue(handledValue + calculatedX * step);
         };
 
         const handleMouseUp = () => {
@@ -48,13 +46,17 @@ export function Trait(props) {
             document.addEventListener('mousemove', handleMouseMove);
         }
 
-        handleChange(handledValue);
-
         return () => {
             document.removeEventListener('mouseup', handleMouseUp);
             document.removeEventListener('mousemove', handleMouseMove);
         };
     }, [isMouseDown]);
+
+    useEffect(() => {
+        if (handledValue !== 0) {
+            handleChange(handledValue);
+        }
+    }, [handledValue])
 
     function handleResetDefault() {
         handleValue(props.defaultValue);
