@@ -17,9 +17,26 @@
 }
 
 .reset-default-btn {
+    margin-left: 0.5rem;
+    font-size: 1rem;
     border-radius: 50%;
+    border: none;
     background-color: transparent;
+
+    transition: background 200ms;
 }
+
+.reset-default-btn:hover {
+    background-color: var(--bg-accent);
+    color: var(--text-color-accent);
+}
+
+/* onclick here 
+.reset-default-btn {
+    background-color: var(--bg-accent);
+    color: var(--text-color-accent);
+}
+*/
 
 /* SINGLE SLIDER */
 .input-test {
