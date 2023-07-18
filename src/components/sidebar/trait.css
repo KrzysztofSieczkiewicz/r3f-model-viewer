@@ -1,3 +1,8 @@
+:root {
+    --slider-radius: 0.25rem;
+    --transition-duration: 300ms;
+}
+
 .trait {
     display: flex;
     width: 100%;
@@ -23,7 +28,7 @@
     border: none;
     background-color: transparent;
 
-    transition-duration: 300ms;
+    transition-duration: var(--transition-duration);
     cursor: pointer;
 }
 
@@ -45,14 +50,14 @@
     display: flex;
 
     background-color: var(--btn);
-    border-radius: 0.25em;
+    border-radius: var(--slider-radius);
     color: var(--text-color-accent);
 
     text-align: center;
     user-select: none;
     cursor: col-resize;
 
-    transition-duration: 300ms;
+    transition-duration: var(--transition-duration);
 }
 
 .input-slider:hover {
@@ -63,7 +68,7 @@
     background-color: var(--btn-active);
     color: var(--text-color-active);
 
-    border: 1px solid black;
+    border: 1px solid var(--slider-radius) black;
 }
 
 .slider-single {
@@ -80,9 +85,25 @@
 .slider-arrow {
     width: 10%;
     margin: auto;
+    transform: scaleY(1.35);
     user-select: none;
     font-size: 0.75rem;
     font-weight: bold;
     justify-content: center;
     vertical-align: middle;
+
+    transition-duration: var(--transition-duration);
+}
+
+.slider-arrow.right {
+    border-radius: 0 var(--slider-radius) var(--slider-radius) 0;
+}
+
+.slider-arrow.left {
+    border-radius: var(--slider-radius) 0 0 var(--slider-radius);
+}
+
+.input-slider:hover .slider-arrow {
+    --border-radius: 0 var(--slider-radius) var(--slider-radius) 0;
+    background-color: var(--btn-active);
 }
