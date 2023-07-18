@@ -67,13 +67,13 @@ export function Trait(props) {
     function handleTraitType() {
         if(props.type === "number-slider") {
             return (
-                <div className="input-test number-slider" 
+                <div className="input-slider slider-single" 
                     value={handledValue}
                     onMouseDown={(e) => handleMouseDown(e)}
                 >
-                    <i className="arrow left">&#60;</i>
-                    {handledValue}
-                    <i className="arrow right">&#62;</i>
+                    <i className="slider-arrow left">&#60;</i>
+                    <span className="slider-value">{handledValue}</span>
+                    <i className="slider-arrow right">&#62;</i>
                 </div>
             );
         }
@@ -89,15 +89,3 @@ export function Trait(props) {
         </div>
     );
 }
-
-/*
-
-        //handle props types
-    function handleTraitType() {
-        if(props.type === 'number-input') {
-            return (
-                <></>
-            );
-        }
-    }
-*/

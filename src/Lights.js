@@ -17,6 +17,8 @@ export function Lights(props) {
                     position={light.position}
                     color={light.color} 
                     intensity={light.intensity}
+                    angle={light.angle}
+                    penumbra={light.penumbra}
                     />;
                 } else {
                 return null;

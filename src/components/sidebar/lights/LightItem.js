@@ -72,19 +72,17 @@ export function LightItem(props) {
                     />
                 </div>
                 <div className='trait'>
-                    <label className='trait-name'>Angle:</label>
-                    <input
-                        className='trait-input'
+                    <Trait name="Angle" type="number-slider"
                         value={light.angle}
-                        onChange={(e) => updateLight(light.id, {...light, angle: e.target.value})}
+                        handleChange={(handledValue) => updateLight(light.id, 'angle', handledValue)}
+                        min={0} max={1} step={0.002} defaultValue={0.6}
                     />
                 </div>
                 <div className='trait'>
-                    <label className='trait-name'>Penumbra:</label>
-                    <input
-                        className='trait-input'
+                    <Trait name="Penumbra" type="number-slider"
                         value={light.penumbra}
-                        onChange={(e) => updateLight(light.id, {...light, penumbra: e.target.value})}
+                        handleChange={(handledValue) => updateLight(light.id, 'penumbra', handledValue)}
+                        min={0} max={1} step={0.002} defaultValue={0.6}
                     />
                 </div>
                 

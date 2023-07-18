@@ -1,8 +1,15 @@
 :root {
     --bg: #242526;
     --bg-accent: #484a4d;
-    --text-color: #dadce1;
-    --text-color-accent: #8f9092;
+
+    --text-color: #c6c8cc;
+    --text-color-accent: #a7a8ac;
+    --text-color-active: #ffffff;
+
+    --btn: #444546;
+    --btn-hover: #484a4d;
+    --btn-active: #636568;
+
     --nav-size: 3.5rem;
     --border: 1px solid #474a4d;
     --border-radius: 8px;

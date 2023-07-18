@@ -31,7 +31,7 @@ a {
 
 .sidebar p {
     margin: 0;
-    color: aquamarine;
+    color: var(--text-color);
 }
 
 .sidebar-item {

@@ -23,35 +23,66 @@
     border: none;
     background-color: transparent;
 
-    transition: background 200ms;
+    transition-duration: 300ms;
+    cursor: pointer;
 }
 
 .reset-default-btn:hover {
-    background-color: var(--bg-accent);
+    background-color: var(--btn-hover);
     color: var(--text-color-accent);
 }
 
-/* onclick here 
-.reset-default-btn {
-    background-color: var(--bg-accent);
+.reset-default-btn:active {
+    transform: rotate(90deg);
+    background-color: var(--btn-active);
     color: var(--text-color-accent);
 }
-*/
+
 
 /* SINGLE SLIDER */
-.input-test {
-    width: 6em;
-    height: 1.5em;
+.input-slider {
+    height: 1.25em;
+    display: flex;
 
-    background-color: #444546;
-    border: 1px solid black;
-    border-radius: 0.5em;
+    background-color: var(--btn);
+    border-radius: 0.25em;
+    color: var(--text-color-accent);
 
     text-align: center;
     user-select: none;
+    cursor: col-resize;
+
+    transition-duration: 300ms;
 }
 
-.input-test .arrow {
-    height: 100%;
+.input-slider:hover {
+    background-color: var(--btn-hover);
+}
+
+.input-slider:active {
+    background-color: var(--btn-active);
+    color: var(--text-color-active);
+
+    border: 1px solid black;
+}
+
+.slider-single {
+    width: 7em;
+}
+
+.slider-value {
+    width: 80%;
+    font-size: 0.9rem;
+    vertical-align: middle;
+    justify-content: center;
+}
+
+.slider-arrow {
+    width: 10%;
+    margin: auto;
     user-select: none;
+    font-size: 0.75rem;
+    font-weight: bold;
+    justify-content: center;
+    vertical-align: middle;
 }
