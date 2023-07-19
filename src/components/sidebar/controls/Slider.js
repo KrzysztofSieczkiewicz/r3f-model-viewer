@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import './trait.css';
+import './controls.css';
 
-export function Trait(props) {
+export function Slider(props) {
     const { min, max, step,
     value, handleChange} = props;
 
@@ -11,17 +11,15 @@ export function Trait(props) {
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
     function handleValue(newValue) {
-        const inputValue = Math.round(newValue * 100) / 100;
-
-        if (!isNaN(inputValue)) {
+        if (!isNaN(newValue)) {
             setHandledValue(0);
         }
-        if (inputValue > max) {
+        if (newValue > max) {
             setHandledValue(max);
-        } else if (inputValue < min) {
+        } else if (newValue < min) {
             setHandledValue(min);
         } else {
-            setHandledValue(inputValue);
+            setHandledValue(Math.round(newValue * 100) / 100);
         }
     }
 
@@ -63,26 +61,17 @@ export function Trait(props) {
         handleChange(props.defaultValue);
     }
 
-    
-    function handleTraitType() {
-        if(props.type === "number-slider") {
-            return (
-                <div className="input-slider slider-single" 
-                    value={handledValue}
-                    onMouseDown={(e) => handleMouseDown(e)}
-                >
-                    <i className="slider-arrow left">&#60;</i>
-                    <span className="slider-value">{handledValue}</span>
-                    <i className="slider-arrow right">&#62;</i>
-                </div>
-            );
-        }
-    }
-
     return (
         <div className="trait">
             <label className="trait-name">{props.name}</label>
-            {handleTraitType()}
+            <div className="input-slider slider-single" 
+                value={handledValue}
+                onMouseDown={(e) => handleMouseDown(e)}
+            >
+                <i className="slider-arrow left">&#60;</i>
+                <span className="slider-value">{handledValue}</span>
+                <i className="slider-arrow right">&#62;</i>
+            </div>
             <button className="reset-default-btn"
                 onClick={handleResetDefault}
             >&#8635;</button>

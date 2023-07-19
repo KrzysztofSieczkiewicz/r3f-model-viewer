@@ -1,6 +1,7 @@
 import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import { Trait } from '../Trait';
+import { Slider } from '../controls/Slider';
+import { PositionSliders } from '../controls/PositionSliders';
 
 export function LightItem(props) {
     const { active, light, updateLight } = props;
@@ -14,7 +15,6 @@ export function LightItem(props) {
     }
 
     const handleLightActive = () => {
-        // TODO: replace S/H with appropriate arrows (avoid icons for this one), consider adding className
         if(active) {
             return <p className='show-hide'>&#8657;</p>
         } else {
@@ -65,21 +65,27 @@ export function LightItem(props) {
                     <div className='trait-input'> {light.position} </div>
                 </div>
                 <div className='trait'>
-                    <Trait name="Intensity" type="number-slider"
+                    <PositionSliders name="Position"
+                        value={light.position}
+                        min={-10} max={10}
+                    />
+                </div>
+                <div className='trait'>
+                    <Slider name="Intensity"
                         value={light.intensity}
                         handleChange={(handledValue) => updateLight(light.id, 'intensity', handledValue)}
                         min={0} max={3} step={0.005} defaultValue={1}
                     />
                 </div>
                 <div className='trait'>
-                    <Trait name="Angle" type="number-slider"
+                    <Slider name="Angle"
                         value={light.angle}
                         handleChange={(handledValue) => updateLight(light.id, 'angle', handledValue)}
                         min={0} max={1} step={0.002} defaultValue={0.6}
                     />
                 </div>
                 <div className='trait'>
-                    <Trait name="Penumbra" type="number-slider"
+                    <Slider name="Penumbra"
                         value={light.penumbra}
                         handleChange={(handledValue) => updateLight(light.id, 'penumbra', handledValue)}
                         min={0} max={1} step={0.002} defaultValue={0.6}
@@ -91,5 +97,3 @@ export function LightItem(props) {
         </div>
     );
 }
-
-// <Slider min={-15} max={15} value={-7} step={1}/>
