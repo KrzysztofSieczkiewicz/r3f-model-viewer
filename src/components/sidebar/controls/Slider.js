@@ -23,7 +23,7 @@ export function Slider(props) {
         }
     }
 
-    const handleMouseDown = (e) => {
+    function handleMouseDown(e) {
         setStartingPosX(e.clientX);
         setIsMouseDown(true)
     };
@@ -61,6 +61,7 @@ export function Slider(props) {
         handleChange(props.defaultValue);
     }
 
+
     return (
         <div className="trait">
             <label className="trait-name">{props.name}</label>
@@ -73,7 +74,7 @@ export function Slider(props) {
                 <i className="slider-arrow right">&#62;</i>
             </div>
             <button className="reset-default-btn"
-                onClick={handleResetDefault}
+                onClick={() => handleResetDefault}
             >&#8635;</button>
         </div>
     );

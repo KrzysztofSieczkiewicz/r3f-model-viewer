@@ -16,14 +16,14 @@ export function PositionSliders(props) {
         }
     }
 
-    function handleCoordinateSlider() {
+    function handleCoordinateSlider(index) {
         return (
-            <div className="input-slider slider-single" 
-                value={handledPosition}
+            <div className="input-slider slider-array-three" 
+                value={handledPosition[index]}
                 onMouseDown={() => {}}
             >
                 <i className="slider-arrow left">&#60;</i>
-                <span className="slider-value">{handledPosition}</span>
+                <span className="slider-value">{handledPosition[index]}</span>
                 <i className="slider-arrow right">&#62;</i>
             </div>
         );
@@ -32,10 +32,7 @@ export function PositionSliders(props) {
     return (
         <div className="trait">
             <label className="trait-name">{props.name}</label>
-            {handleCoordinateSlider}
-            <button className="reset-default-btn"
-                onClick={() => {}}
-            >&#8635;</button>
+            {handleCoordinateSlider(0)}
         </div>
     );
 }
