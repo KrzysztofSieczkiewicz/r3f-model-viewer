@@ -77,21 +77,22 @@ export function LightItem(props) {
                         min={0} max={3} step={0.005} defaultValue={1}
                     />
                 </div>
-                <div className='trait'>
-                    <Slider name="Angle"
-                        value={light.angle}
-                        handleChange={(handledValue) => updateLight(light.id, 'angle', handledValue)}
-                        min={0} max={1} step={0.002} defaultValue={0.6}
-                    />
-                </div>
-                <div className='trait'>
-                    <Slider name="Penumbra"
-                        value={light.penumbra}
-                        handleChange={(handledValue) => updateLight(light.id, 'penumbra', handledValue)}
-                        min={0} max={1} step={0.002} defaultValue={0.6}
-                    />
-                </div>
-                
+                {light.type === "spotLight" && <>
+                    <div className='trait'>
+                        <Slider name="Angle"
+                            value={light.angle}
+                            handleChange={(handledValue) => updateLight(light.id, 'angle', handledValue)}
+                            min={0} max={1} step={0.002} defaultValue={0.6}
+                        />
+                    </div>
+                    <div className='trait'>
+                        <Slider name="Penumbra"
+                            value={light.penumbra}
+                            handleChange={(handledValue) => updateLight(light.id, 'penumbra', handledValue)}
+                            min={0} max={1} step={0.002} defaultValue={0.6}
+                        />
+                    </div>
+                </>}
             </div>}
 
         </div>
