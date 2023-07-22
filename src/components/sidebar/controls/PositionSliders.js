@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { BackSide } from "three";
 
 export function PositionSliders(props) {
     const { step, value, handleChange} = props;
 
     const [ handledPosition, setHandledPosition ] = useState(value);
+    const indicatorColors = ["red", "green", "blue"];
 
     const [ currentSlider, setCurrentSlider ] = useState();
     const [ startingPosX, setStartingPosX ] = useState();
@@ -55,8 +57,6 @@ export function PositionSliders(props) {
         }
     }, [handledPosition])
 
-    // take each value from [a,b,c]. Then, for each create a slider that updates whole val (but only for it's index)
-    // You can create common method for updating state, it'll need to accept index to know which part to update
     function handleCoordinateSlider() {
         return (
             <>
@@ -69,6 +69,7 @@ export function PositionSliders(props) {
                             handleMouseDown(e)
                         }}
                     >
+                        <div className="position-color-indicator" style={{ backgroundColor: indicatorColors[index] }}/>
                         <i className="slider-arrow left">&#60;</i>
                         <span className="slider-value">{position}</span>
                         <i className="slider-arrow right">&#62;</i>

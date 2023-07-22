@@ -48,6 +48,14 @@
 
 .slider-array-three {
     width: 3em;
+    margin-right: 5px;
+}
+
+.position-color-indicator {
+    bottom: 0;
+    height: 100%;
+    width: 0.25rem;
+    background-color: red;
 }
 
 .slider-value {

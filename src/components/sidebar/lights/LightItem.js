@@ -60,28 +60,24 @@ export function LightItem(props) {
                     <label className='trait-name'>Color:</label>
                     <div className='trait-input'> {light.color} </div>
                 </div>
-                <div className='trait'>
-                    <label className='trait-name'>Position:</label>
-                    <div className='trait-input'> {light.position} </div>
-                </div>
                 <PositionSliders name="Position"
-                    value={light.position} step={0.005}
-                    handleChange={(handledValue) => updateLight(light.id, 'position', handledValue)}
+                    value={light.position} step={0.01}
+                    handleChange={(val) => updateLight(light.id, 'position', val)}
                 />
                 <Slider name="Intensity"
                     value={light.intensity}
-                    handleChange={(handledValue) => updateLight(light.id, 'intensity', handledValue)}
+                    handleChange={(val) => updateLight(light.id, 'intensity', val)}
                     min={0} max={3} step={0.005} defaultValue={1}
                 />
                 {light.type === "spotLight" && <>
                     <Slider name="Angle"
                         value={light.angle}
-                        handleChange={(handledValue) => updateLight(light.id, 'angle', handledValue)}
+                        handleChange={(val) => updateLight(light.id, 'angle', val)}
                         min={0} max={1} step={0.002} defaultValue={0.6}
                     />
                     <Slider name="Penumbra"
                         value={light.penumbra}
-                        handleChange={(handledValue) => updateLight(light.id, 'penumbra', handledValue)}
+                        handleChange={(val) => updateLight(light.id, 'penumbra', val)}
                         min={0} max={1} step={0.002} defaultValue={0.6}
                     />
                 </>}
