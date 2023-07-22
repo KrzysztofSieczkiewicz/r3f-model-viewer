@@ -19,7 +19,7 @@ export function Slider(props) {
         } else if (newValue < min) {
             setHandledValue(min);
         } else {
-            setHandledValue(newValue);
+            setHandledValue(Math.round(newValue * 100) / 100);
         }
     }
 
@@ -60,7 +60,6 @@ export function Slider(props) {
         handleValue(props.defaultValue);
         handleChange(props.defaultValue);
     }
-
 
     return (
         <div className="trait">

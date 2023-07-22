@@ -29,7 +29,7 @@ export function PositionSliders(props) {
             const currentIndex = currentSlider.getAttribute('index');
 
             const newHandledPosition = [...handledPosition];
-            newHandledPosition[currentIndex] = (handledPosition[currentIndex] + calculatedX * step);
+            newHandledPosition[currentIndex] = Math.round((handledPosition[currentIndex] + calculatedX * step) * 100) / 100;
 
             handlePosition(newHandledPosition);
         };
