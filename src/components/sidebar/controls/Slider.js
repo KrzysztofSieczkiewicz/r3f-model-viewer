@@ -19,7 +19,7 @@ export function Slider(props) {
         } else if (newValue < min) {
             setHandledValue(min);
         } else {
-            setHandledValue(Math.round(newValue * 100) / 100);
+            setHandledValue(newValue);
         }
     }
 

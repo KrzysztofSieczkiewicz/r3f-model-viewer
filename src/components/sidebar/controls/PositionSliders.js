@@ -1,40 +1,37 @@
 import { useEffect, useState } from "react";
 
 export function PositionSliders(props) {
-    const { step,
-        value } = props;
+    const { step, value, handleChange} = props;
 
     const [ handledPosition, setHandledPosition ] = useState(value);
-    console.log(handledPosition);
+
     const [ currentSlider, setCurrentSlider ] = useState();
     const [ startingPosX, setStartingPosX ] = useState();
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
-    function handlePosition(newValue, index) {
-        const updatedArray = [...handledPosition];
-        updatedArray[index] = Math.round(newValue * 100) / 100;
-
-        if (!isNaN(newValue[index])) {
+    function handlePosition(newArray) {
+        if (newArray.some((element) => isNaN(element))) {
             setHandledPosition(0);
         } else {
-            setHandledPosition(updatedArray);
+            setHandledPosition(newArray);
         }
-
-        //console.log("Value on index: ", index, " was set to: ", updatedArray[index]);
     }
 
     const handleMouseDown = (e) => {
         setStartingPosX(e.clientX);
-        setCurrentSlider(e);
+        setCurrentSlider(e.currentTarget);
         setIsMouseDown(true);
     };
 
     useEffect(() => {
         const handleMouseMove = (event) => {
-            const calculatedX = event.clientX - currentSlider.clientX;
-            
-            handlePosition(handledPosition + calculatedX * step, currentSlider.target.dataset.key);
-            console.log(currentSlider.target.dataset.key);
+            const calculatedX = event.clientX - startingPosX;
+            const currentIndex = currentSlider.getAttribute('index');
+
+            const newHandledPosition = [...handledPosition];
+            newHandledPosition[currentIndex] = (handledPosition[currentIndex] + calculatedX * step);
+
+            handlePosition(newHandledPosition);
         };
 
         const handleMouseUp = () => {
@@ -52,6 +49,12 @@ export function PositionSliders(props) {
         };
     }, [isMouseDown]);
 
+    useEffect(() => {
+        if (handledPosition !== 0) {
+            handleChange(handledPosition);
+        }
+    }, [handledPosition])
+
     // take each value from [a,b,c]. Then, for each create a slider that updates whole val (but only for it's index)
     // You can create common method for updating state, it'll need to accept index to know which part to update
     function handleCoordinateSlider() {
@@ -61,10 +64,9 @@ export function PositionSliders(props) {
                 return (
                     <div className="input-slider slider-array-three" 
                         key={index}
-                        data-key={index}
+                        index={index}
                         onMouseDown={(e) => {
                             handleMouseDown(e)
-                            console.log(position.id)
                         }}
                     >
                         <i className="slider-arrow left">&#60;</i>

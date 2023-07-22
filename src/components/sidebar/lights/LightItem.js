@@ -64,34 +64,26 @@ export function LightItem(props) {
                     <label className='trait-name'>Position:</label>
                     <div className='trait-input'> {light.position} </div>
                 </div>
-                <div className='trait'>
-                    <PositionSliders name="Position"
-                        value={light.position}
-                        min={-10} max={10}
-                    />
-                </div>
-                <div className='trait'>
-                    <Slider name="Intensity"
-                        value={light.intensity}
-                        handleChange={(handledValue) => updateLight(light.id, 'intensity', handledValue)}
-                        min={0} max={3} step={0.005} defaultValue={1}
-                    />
-                </div>
+                <PositionSliders name="Position"
+                    value={light.position} step={0.005}
+                    handleChange={(handledValue) => updateLight(light.id, 'position', handledValue)}
+                />
+                <Slider name="Intensity"
+                    value={light.intensity}
+                    handleChange={(handledValue) => updateLight(light.id, 'intensity', handledValue)}
+                    min={0} max={3} step={0.005} defaultValue={1}
+                />
                 {light.type === "spotLight" && <>
-                    <div className='trait'>
-                        <Slider name="Angle"
-                            value={light.angle}
-                            handleChange={(handledValue) => updateLight(light.id, 'angle', handledValue)}
-                            min={0} max={1} step={0.002} defaultValue={0.6}
-                        />
-                    </div>
-                    <div className='trait'>
-                        <Slider name="Penumbra"
-                            value={light.penumbra}
-                            handleChange={(handledValue) => updateLight(light.id, 'penumbra', handledValue)}
-                            min={0} max={1} step={0.002} defaultValue={0.6}
-                        />
-                    </div>
+                    <Slider name="Angle"
+                        value={light.angle}
+                        handleChange={(handledValue) => updateLight(light.id, 'angle', handledValue)}
+                        min={0} max={1} step={0.002} defaultValue={0.6}
+                    />
+                    <Slider name="Penumbra"
+                        value={light.penumbra}
+                        handleChange={(handledValue) => updateLight(light.id, 'penumbra', handledValue)}
+                        min={0} max={1} step={0.002} defaultValue={0.6}
+                    />
                 </>}
             </div>}
 
