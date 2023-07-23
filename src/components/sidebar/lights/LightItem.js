@@ -2,6 +2,7 @@ import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotL
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { Slider } from '../controls/Slider';
 import { PositionSliders } from '../controls/PositionSliders';
+import { ColorPicker } from '../controls/ColorPicker';
 
 export function LightItem(props) {
     const { active, light, updateLight } = props;
@@ -60,6 +61,7 @@ export function LightItem(props) {
                     <label className='trait-name'>Color:</label>
                     <div className='trait-input'> {light.color} </div>
                 </div>
+                <ColorPicker name="Color" />
                 <PositionSliders name="Position"
                     value={light.position} step={0.01}
                     handleChange={(val) => updateLight(light.id, 'position', val)}
