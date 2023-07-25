@@ -61,7 +61,7 @@ export function LightItem(props) {
                     <label className='trait-name'>Color:</label>
                     <div className='trait-input'> {light.color} </div>
                 </div>
-                <ColorPicker name="Color" />
+                <ColorPicker name="Color" color={light.color}/>
                 <PositionSliders name="Position"
                     value={light.position} step={0.01}
                     handleChange={(val) => updateLight(light.id, 'position', val)}
@@ -84,7 +84,6 @@ export function LightItem(props) {
                     />
                 </>}
             </div>}
-
         </div>
     );
 }
