@@ -57,13 +57,11 @@ export function LightItem(props) {
             </div>
 
             {active && <div className="dropdown-item-body">
-                <div className='trait'>
-                    <label className='trait-name'>Color:</label>
-                    <div className='trait-input'> {light.color} </div>
-                </div>
-                <ColorPicker name="Color" color={light.color}/>
+                <ColorPicker name="Color" 
+                    value={light.color}
+                    handleChange={(val) => updateLight(light.id, 'color', val)}/>
                 <PositionSliders name="Position"
-                    value={light.position} step={0.01}
+                    value={light.position} step={0.001}
                     handleChange={(val) => updateLight(light.id, 'position', val)}
                 />
                 <Slider name="Intensity"

@@ -95,7 +95,7 @@ a {
     background-color: var(--bg);
     border: var(--border);
     border-radius: 2px 10px 10px 2px;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .dropdown-item {
