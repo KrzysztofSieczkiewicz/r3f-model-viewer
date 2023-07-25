@@ -138,6 +138,10 @@ a {
     width: 1.5rem;
 }
 
+.light-icon.suppressed {
+    color: var(--text-color-suppressed);
+}
+
 /* Objects traits */
 .dropdown-item-body {
     padding: 0.5rem 0.75rem 1rem 0.75rem;

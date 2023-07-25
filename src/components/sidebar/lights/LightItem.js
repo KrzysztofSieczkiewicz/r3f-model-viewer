@@ -34,7 +34,7 @@ export function LightItem(props) {
             );
         } else {
             // TODO: Style eye to be displayed darker using suppressed class
-            return (<i className='light-icon supressed' 
+            return (<i className='light-icon suppressed' 
                 onClick={(e) => {
                     e.stopPropagation();
                     updateLight(light.id, 'visible', true)
