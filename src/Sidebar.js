@@ -21,7 +21,6 @@ export function Sidebar() {
 
     return (
         <nav className="sidebar">
-            <p>TEST</p>
             <ul className="sidebar-nav">
                 <SidebarItem 
                     icon={<EarthIcon />}

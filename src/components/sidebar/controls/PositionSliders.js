@@ -70,9 +70,9 @@ export function PositionSliders(props) {
                         }}
                     >
                         <div className="position-color-indicator" style={{ backgroundColor: indicatorColors[index] }}/>
-                        <i className="slider-arrow left">&#60;</i>
+                        <icon className="slider-arrow left">&#60;</icon>
                         <span className="slider-value">{position}</span>
-                        <i className="slider-arrow right">&#62;</i>
+                        <icon className="slider-arrow right">&#62;</icon>
                     </div>
                 )
             })}

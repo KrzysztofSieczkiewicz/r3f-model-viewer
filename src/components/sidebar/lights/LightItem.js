@@ -9,37 +9,37 @@ export function LightItem(props) {
 
     const handleLightType = () => {
         if(light.type === 'pointLight') {
-            return <PointLightIcon className='light-icon' />;
+            return <PointLightIcon className='icon type-icon' />;
         } else if (light.type === 'spotLight') {
-            return <SpotlightIcon className='light-icon' />;
+            return <SpotlightIcon className='icon type-icon' />;
         }
     }
 
     const handleLightActive = () => {
         if(active) {
-            return <p className='show-hide'>&#8657;</p>
+            return <icon className='show-hide'>&#8657;</icon>
         } else {
-            return <p className='show-hide'>&#8659;</p>
+            return <icon className='show-hide'>&#8659;</icon>
         }
     }
 
     const handleLightVisible = () => {
         if(light.visible) {
-            return (<i className='light-icon' 
+            return (<icon className='icon visibility-icon' 
                 onClick={(e) => {
                     e.stopPropagation();
                     updateLight(light.id, 'visible', false)
                 }}
-                >&#128065;</i>
+                >&#128065;</icon>
             );
         } else {
             // TODO: Style eye to be displayed darker using suppressed class
-            return (<i className='light-icon suppressed' 
+            return (<icon className='icon visibility-icon suppressed' 
                 onClick={(e) => {
                     e.stopPropagation();
                     updateLight(light.id, 'visible', true)
                 }}
-                >&#x1F441;</i>
+                >&#x1F441;</icon>
             );
         }
     }
