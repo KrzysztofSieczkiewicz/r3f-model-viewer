@@ -8,11 +8,17 @@ export function LightItem(props) {
     const { active, light, updateLight } = props;
 
     const handleLightType = () => {
-        if(light.type === 'pointLight') {
-            return <PointLightIcon className='icon type-icon' />;
-        } else if (light.type === 'spotLight') {
-            return <SpotlightIcon className='icon type-icon' />;
-        }
+        return(<>
+            {light.type === 'pointLight' && <PointLightIcon className='icon type-icon' />}
+            {light.type === 'spotLight' && <SpotlightIcon className='icon type-icon' />}
+            <select className='light-type-dropdown' 
+                name="light type" onClick={(e) => e.stopPropagation()}
+                onChange={(e) => updateLight(light.id, 'type', e.target.value)}
+            >
+                <option value="pointLight">Point light</option>
+                <option value="spotLight">Spot light</option>
+            </select>
+        </>)
     }
 
     const handleLightActive = () => {
@@ -50,7 +56,6 @@ export function LightItem(props) {
                 onClick={props.onClick}
             >
                 {handleLightType()}
-                <p>{light.type}</p>
                 <div className="color-preview" style={{backgroundColor: light.color}}/>
                 {handleLightVisible()}
                 {handleLightActive()}
@@ -69,6 +74,7 @@ export function LightItem(props) {
                     handleChange={(val) => updateLight(light.id, 'intensity', val)}
                     min={0} max={3} step={0.005} defaultValue={1}
                 />
+                
                 {light.type === "spotLight" && <>
                     <Slider name="Angle"
                         value={light.angle}

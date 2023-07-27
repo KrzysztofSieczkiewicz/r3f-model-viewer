@@ -91,6 +91,15 @@
     padding: 0.25rem 0.5rem;
 }
 
+/* type dropdown */
+.light-type-dropdown {
+    height: 1.5em;
+    width: 75%;
+    margin-left: 0.3rem;
+    background-color: transparent;
+    border: none;
+}
+
 .dropdown-item-header .show-hide {
     color: var(--text-color);
     text-align: center;
