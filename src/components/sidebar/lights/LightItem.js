@@ -9,8 +9,8 @@ export function LightItem(props) {
 
     const handleLightType = () => {
         return(<>
-            {light.type === 'pointLight' && <PointLightIcon className='icon type-icon' />}
-            {light.type === 'spotLight' && <SpotlightIcon className='icon type-icon' />}
+            {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />}
+            {light.type === 'spotLight' && <SpotlightIcon className='type-icon header-icon'  />}
             <select className='light-type-dropdown' 
                 name="light type" onClick={(e) => e.stopPropagation()}
                 onChange={(e) => updateLight(light.id, 'type', e.target.value)}
@@ -23,15 +23,15 @@ export function LightItem(props) {
 
     const handleLightActive = () => {
         if(active) {
-            return <icon className='show-hide'>&#8657;</icon>
+            return <icon className='show-hide header-icon'>&#8657;</icon>
         } else {
-            return <icon className='show-hide'>&#8659;</icon>
+            return <icon className='show-hide header-icon'>&#8659;</icon>
         }
     }
 
     const handleLightVisible = () => {
         if(light.visible) {
-            return (<icon className='icon visibility-icon' 
+            return (<icon className='visibility-icon header-icon' 
                 onClick={(e) => {
                     e.stopPropagation();
                     updateLight(light.id, 'visible', false)
@@ -40,7 +40,7 @@ export function LightItem(props) {
             );
         } else {
             // TODO: Style eye to be displayed darker using suppressed class
-            return (<icon className='icon visibility-icon suppressed' 
+            return (<icon className='visibility-icon header-icon suppressed' 
                 onClick={(e) => {
                     e.stopPropagation();
                     updateLight(light.id, 'visible', true)

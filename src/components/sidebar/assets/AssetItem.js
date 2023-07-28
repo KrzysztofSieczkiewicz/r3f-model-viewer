@@ -16,7 +16,7 @@ export function AssetItem(props) {
             <div className="dropdown-item-header"
                 onClick={props.onClick}
             >
-                <PointLightIcon className='icon type-icon' />
+                <PointLightIcon className='type-icon header-icon' />
                 <p>{asset.nameId}: {asset.variant}</p>
                 <div className="color-preview" style={{backgroundColor: "#FFF"}}/>
                 <icon className="icon visibility-icon">&#x1F441;</icon>
