@@ -8,16 +8,7 @@ import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
 import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js'
-
-const defaultLight = {
-  type: "pointLight",
-  position:[5,5,0],
-  color: "white",
-  intensity: 1,
-  angle: 0.1,
-  penumbra: 0.6,
-  visible: true
-}
+import { defaultLight, lightTypes } from './models/LightModel';
 
 const defaultAsset = {
   id: 0,
@@ -39,7 +30,7 @@ function AssetScene() {
     position:[5,5,0],
     color: "#f53259",
     intensity:1,
-    angle: 0.6,
+    angle: 0.1,
     penumbra: 0.6,
     type:"spotLight",
     visible: true
@@ -100,8 +91,10 @@ function AssetScene() {
         <Lights lightsList={lightsList}/>
         <Asset />
       </Canvas>
-      <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAsset }}>
-        <Sidebar lightsList={lightsList} addLight={addLight} removeLight={removeLight} />
+      <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
+        assetsList, updateAsset }}
+      >
+        <Sidebar addLight={addLight} removeLight={removeLight} />
       </SidebarControlsContext.Provider>
     </>
   );

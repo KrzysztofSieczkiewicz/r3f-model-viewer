@@ -1,6 +1,6 @@
 * {
-    --dropdown-bg: rgba(42, 44, 45, 0.85);
-    --dropdown-item-bg: #313132;
+    --dropdown-bg: rgba(42, 44, 45, 0.75);
+    --dropdown-item-bg: rgba(49, 49, 50, 0.75);
     --item-header-bg: #3a3b3c;
 
     --input-height: 1.5rem;

@@ -3,9 +3,13 @@ import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/poin
 import { Slider } from '../controls/Slider';
 import { PositionSliders } from '../controls/PositionSliders';
 import { ColorPicker } from '../controls/ColorPicker';
+import { Dropdown } from '../controls/Dropdown';
+import { useContext } from 'react';
+import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
 
 export function LightItem(props) {
-    const { active, light, updateLight } = props;
+    const { active, light } = props;
+    const { updateLight, lightTypes } = useContext(SidebarControlsContext);
 
     const handleLightType = () => {
         return(<>
@@ -14,6 +18,7 @@ export function LightItem(props) {
             <select className='light-type-dropdown' 
                 name="light type" onClick={(e) => e.stopPropagation()}
                 onChange={(e) => updateLight(light.id, 'type', e.target.value)}
+                value={light.type}
             >
                 <option value="pointLight">Point light</option>
                 <option value="spotLight">Spot light</option>
@@ -39,7 +44,6 @@ export function LightItem(props) {
                 >&#128065;</icon>
             );
         } else {
-            // TODO: Style eye to be displayed darker using suppressed class
             return (<icon className='visibility-icon header-icon suppressed' 
                 onClick={(e) => {
                     e.stopPropagation();
@@ -62,6 +66,9 @@ export function LightItem(props) {
             </div>
 
             {active && <div className="dropdown-item-body">
+                <Dropdown value={light.type} list={lightTypes} 
+                    handleChange={(val) => updateLight(light.id, 'type', val)}
+                />
                 <ColorPicker name="Color" 
                     value={light.color}
                     handleChange={(val) => updateLight(light.id, 'color', val)}/>
@@ -79,7 +86,7 @@ export function LightItem(props) {
                     <Slider name="Angle"
                         value={light.angle}
                         handleChange={(val) => updateLight(light.id, 'angle', val)}
-                        min={0} max={1} step={0.002} defaultValue={0.6}
+                        min={0} max={1} step={0.002} defaultValue={0.1}
                     />
                     <Slider name="Penumbra"
                         value={light.penumbra}

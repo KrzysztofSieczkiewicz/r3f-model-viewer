@@ -4,7 +4,7 @@ import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
 import { LightItem } from './LightItem';
 
 export function LightsMenu() {
-    const { lightsList, updateLight } = useContext(SidebarControlsContext);
+    const { lightsList } = useContext(SidebarControlsContext);
    
     const [activeItem, setActiveItem] = useState();
 
@@ -22,7 +22,6 @@ export function LightsMenu() {
                 return (
                     <LightItem
                         light={light} 
-                        updateLight={updateLight} 
                         key={light.id}
                         active={activeItem === light.id}
                         onClick={() => handleItemClick(light.id)}
