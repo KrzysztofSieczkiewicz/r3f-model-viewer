@@ -46,8 +46,8 @@ export function Dropdown(props) {
             >
                 <div className="dd-header-title">{getDisplayByType(value)}</div>
                 {isOpen
-                ? <icon>&#10595;</icon>
-                : <icon>&#10597;</icon>}
+                ? <icon className="dd-header-arrow">&#10595;</icon>
+                : <icon className="dd-header-arrow">&#10597;</icon>}
             </button>
             {isOpen && (
                 <div className="dd-list">

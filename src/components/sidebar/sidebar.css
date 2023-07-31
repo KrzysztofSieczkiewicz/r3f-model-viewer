@@ -115,20 +115,6 @@
     user-select: none;
 }
 
-/* type dropdown */
-.light-type-dropdown {
-    height: var(--input-height);
-    width: 75%;
-    margin-left: 0.5rem;
-    padding: 0 0.25rem;
-
-    background-color: transparent;
-    color: var(--text-color);
-
-    border: none;
-    border-radius: 0;
-}
-
 .light-type-dropdown:hover,
 .light-type-dropdown:focus {
     appearance: none;
@@ -160,4 +146,54 @@
     padding: 0.5rem 0.75rem 0.75rem 0.75rem;
     display: flex;
     flex-direction: column;
+}
+
+/* type dropdown */
+.light-type-dropdown {
+    height: var(--input-height);
+    width: 75%;
+    margin-left: 0.5rem;
+    padding: 0 0.25rem;
+
+    background-color: transparent;
+    color: var(--text-color);
+
+    border: none;
+    border-radius: 0;
+}
+
+/* DROPDOWN DD */
+.dd-wrapper {
+    width: 7em;
+    transition: height 1.5s;
+}
+
+.dd-header {
+    height: var(--input-height);
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.dd-header-title {
+    height: 75%;
+    width: 75%;
+
+    margin: 0;
+}
+
+.dd-header-arrow {
+    position: relative;
+    --width: 25%;
+    right: 0;
+}
+
+.dd-list {
+    position: fixed;
+}
+
+.dd-list-item {
+    height: var(--input-height);
+    width: 100%;
 }
