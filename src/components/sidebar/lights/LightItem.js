@@ -15,7 +15,7 @@ export function LightItem(props) {
         return(<>
             {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />}
             {light.type === 'spotLight' && <SpotlightIcon className='type-icon header-icon'  />}
-            <select className='light-type-dropdown' 
+            <select className={'light-type-dropdown' + {active}} 
                 name="light type" onClick={(e) => e.stopPropagation()}
                 onChange={(e) => updateLight(light.id, 'type', e.target.value)}
                 value={light.type}

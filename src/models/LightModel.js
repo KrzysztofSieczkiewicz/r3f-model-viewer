@@ -1,6 +1,6 @@
     const lightTypes = [
-        {type: 'pointLight', display: "point light"},
-        {type: 'spotLight', display: "spot light"}
+        {type: 'pointLight', display: "Point light"},
+        {type: 'spotLight', display: "Spot light"}
     ];
 
     const defaultLight = {

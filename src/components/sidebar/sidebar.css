@@ -1,4 +1,12 @@
 * {
+    /* Matte */
+    --m-background: #212226;
+    --m-background-var: #283557;
+    --m-button: #e7e0e0;
+    --m-clickable: #2d4583;
+    --m-clickable-hover: #3e60c1;
+    --m-clickable-active: #5a82fc;
+
     --dropdown-bg: rgba(42, 44, 45, 0.75);
     --dropdown-item-bg: rgba(49, 49, 50, 0.75);
     --item-header-bg: #3a3b3c;
@@ -11,8 +19,10 @@
 
 .sidebar {
     width: var(--nav-size);
-    padding-top: 5rem;
-    background-color: transparent;
+    height: 100%;
+    padding-top: 3rem;
+    background-color: var(--m-background);
+    box-shadow: 0 10px 10px 5px black;
 
     position: absolute;
     top: 0;
@@ -34,7 +44,7 @@
 .sidebar-item {
     width: calc(var(--nav-size) * 1);
     height: calc(var(--nav-size) * 1);
-    margin: 0;
+    margin: 0.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,20 +63,25 @@
     justify-content: center;
 
     color: var(--text-color);
-    background-color: #484a4d;
+    background-color: transparent;
     text-decoration: none;
 
-    transition: filter 300ms;
+    transition: background-color 300ms;
 }
 
 .icon-button:hover {
-    filter: brightness(1.35);
+    background-color: var(--m-clickable-hover);
+    fill: black;
+    stroke: black;
+    --filter: brightness(1.35)
 }
 
 .icon-button svg {
+    stroke: var(--m-clickable-active);
     width: 1.5rem;
     height: 1.5rem;
 }
+
 
 /*  ---------- DROPDOWN ---------- */
 /* Dropdown Menu */
@@ -174,6 +189,8 @@
 
     display: flex;
     flex-direction: row;
+
+    background-color: transparent;
 }
 
 .dd-header-title {

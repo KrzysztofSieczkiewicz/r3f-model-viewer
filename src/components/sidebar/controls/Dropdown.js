@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-// TODO: it works for now, but it should be modified:
-// leave type/display logic to the parent, make it simpler => maybe it should only operate on display names, 
-// and map them to the type only when calling for change?
-
 export function Dropdown(props) {
     const { value, list, handleChange } = props;
 
@@ -19,7 +15,7 @@ export function Dropdown(props) {
         setIsOpen(false);
     }
 
-    function getDisplayByType(type) {
+    function getDisplayedByType(type) {
         return list.find(light => light.type === type)?.display
     }
 
@@ -44,7 +40,7 @@ export function Dropdown(props) {
                 type="button"
                 onClick={(e) => toggleList()}
             >
-                <div className="dd-header-title">{getDisplayByType(value)}</div>
+                <div className="dd-header-title">{getDisplayedByType(value)}</div>
                 {isOpen
                 ? <icon className="dd-header-arrow">&#10595;</icon>
                 : <icon className="dd-header-arrow">&#10597;</icon>}
