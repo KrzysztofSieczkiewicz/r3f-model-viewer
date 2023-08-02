@@ -38,19 +38,25 @@ export function Dropdown(props) {
             <button
                 className="dd-header"
                 type="button"
-                onClick={(e) => toggleList()}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    toggleList()
+                }}
             >
                 <div className="dd-header-title">{getDisplayedByType(value)}</div>
                 {isOpen
-                ? <icon className="dd-header-arrow">&#10595;</icon>
-                : <icon className="dd-header-arrow">&#10597;</icon>}
+                ? <icon className="dd-header-arrow">&#8657;</icon>
+                : <icon className="dd-header-arrow">&#8659;</icon>}
             </button>
             {isOpen && (
                 <div className="dd-list">
                     {list.map((item) => (
                         <button className="dd-list-item"
                             key={item.type}
-                            onClick={() => selectItem(item.type)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                selectItem(item.type);
+                            }}
                         >
                             {item.display}
                         </button>

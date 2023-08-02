@@ -5,7 +5,8 @@ export function PositionSliders(props) {
     const { step, value, handleChange} = props;
 
     const [ handledPosition, setHandledPosition ] = useState(value);
-    const indicatorColors = ["red", "green", "blue"];
+    // RED GREEN BLUE
+    const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
 
     const [ currentSlider, setCurrentSlider ] = useState();
     const [ startingPosX, setStartingPosX ] = useState();

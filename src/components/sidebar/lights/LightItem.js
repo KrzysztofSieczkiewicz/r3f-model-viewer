@@ -15,14 +15,9 @@ export function LightItem(props) {
         return(<>
             {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />}
             {light.type === 'spotLight' && <SpotlightIcon className='type-icon header-icon'  />}
-            <select className={'light-type-dropdown' + {active}} 
-                name="light type" onClick={(e) => e.stopPropagation()}
-                onChange={(e) => updateLight(light.id, 'type', e.target.value)}
-                value={light.type}
-            >
-                <option value="pointLight">Point light</option>
-                <option value="spotLight">Spot light</option>
-            </select>
+            <Dropdown value={light.type} list={lightTypes} 
+                    handleChange={(val) => updateLight(light.id, 'type', val)}
+            />
         </>)
     }
 
@@ -66,9 +61,6 @@ export function LightItem(props) {
             </div>
 
             {active && <div className="dropdown-item-body">
-                <Dropdown value={light.type} list={lightTypes} 
-                    handleChange={(val) => updateLight(light.id, 'type', val)}
-                />
                 <ColorPicker name="Color" 
                     value={light.color}
                     handleChange={(val) => updateLight(light.id, 'color', val)}/>

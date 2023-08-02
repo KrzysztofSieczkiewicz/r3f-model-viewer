@@ -23,26 +23,26 @@ export function Sidebar() {
         <nav className="sidebar">
             <ul className="sidebar-nav">
                 <SidebarItem 
-                    icon={<EarthIcon />}
+                    icon={<EarthIcon className="sidebar-icon" />}
                     active={activeItem === "Environment"}
                     onClick={() => handleItemClick("Environment")}
                 />
                 <SidebarItem 
-                    icon={<CubeIcon />}
+                    icon={<CubeIcon className="sidebar-icon" />}
                     active={activeItem === "Objects"}
                     onClick={() => handleItemClick("Objects")}
                 >
                     <AssetsMenu />
                 </SidebarItem>
                 <SidebarItem 
-                    icon={<LightIcon />} 
+                    icon={<LightIcon className="sidebar-icon" />} 
                     active={activeItem === "Lights"}
                     onClick={() => handleItemClick("Lights")}
                 >
                     <LightsMenu />
                 </SidebarItem>
                 <SidebarItem 
-                    icon={<ImageIcon />}
+                    icon={<ImageIcon className="sidebar-icon" />}
                     active={activeItem === "Rendering"}
                     onClick={() => handleItemClick("Rendering")}
                 />
