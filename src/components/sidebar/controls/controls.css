@@ -18,78 +18,9 @@
 }
 
 /* SINGLE SLIDER */
-.input-slider {
-    height: 1.25em;
-    display: flex;
 
-    background-color: var(--btn);
-    border-radius: var(--slider-radius);
-    color: var(--text-color-accent);
 
-    text-align: center;
-    user-select: none;
-    cursor: col-resize;
 
-    transition-duration: var(--transition-duration);
-}
-
-.input-slider:hover {
-    background-color: var(--btn-hover);
-}
-
-.input-slider:active {
-    background-color: var(--btn-active);
-    color: var(--text-color-active);
-
-    border: 1px solid var(--slider-radius) black;
-}
-
-.slider-single {
-    width: 7em;
-}
-
-.slider-array-three {
-    width: 3em;
-    margin-right: 5px;
-}
-
-.position-color-indicator {
-    bottom: 0;
-    height: 100%;
-    width: 0.25rem;
-    background-color: red;
-}
-
-.slider-value {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    font-size: 0.9rem;
-}
-
-.slider-arrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1em;
-    font-size: 0.9rem;
-    font-style: normal;
-
-    transition-duration: var(--transition-duration);
-}
-
-.slider-arrow.right {
-    border-radius: 0 var(--slider-radius) var(--slider-radius) 0;
-}
-
-.slider-arrow.left {
-    border-radius: var(--slider-radius) 0 0 var(--slider-radius);
-}
-
-.input-slider:hover .slider-arrow {
-    background-color: var(--btn-active);
-}
 
 
 /* "RESET TO DEFAULT" BUTTON */

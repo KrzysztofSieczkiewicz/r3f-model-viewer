@@ -50,7 +50,7 @@ export function LightItem(props) {
     }
 
     return (
-        <div className="dropdown-item">
+        <div className={`dropdown-item ${active ? "active" : ""}`}>
             <div className="dropdown-item-header"
                 onClick={props.onClick}
             >
