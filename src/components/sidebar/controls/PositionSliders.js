@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { BackSide } from "three";
 
 export function PositionSliders(props) {
     const { step, value, handleChange} = props;

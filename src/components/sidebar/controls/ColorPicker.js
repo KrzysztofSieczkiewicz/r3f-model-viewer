@@ -38,7 +38,7 @@ export function ColorPicker(props) {
         style={{backgroundColor: color}}
       />
       {active && 
-      <div ref={popupRef} className="popup" style={{ left: position }}>
+      <div ref={popupRef} className="color-popup" style={{ left: position }}>
         <HexColorPicker color={color} onChange={setColor} />
       </div>}
     </div>

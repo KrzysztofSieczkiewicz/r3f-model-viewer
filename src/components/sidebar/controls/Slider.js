@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-import './controls.css';
-
 export function Slider(props) {
     const { min, max, step,
     value, handleChange} = props;
