@@ -36,7 +36,7 @@ export function Dropdown(props) {
         <div className="dd-wrapper"
             ref={dropdownRef}>
             <button
-                className="dd-header"
+                className={`dd-header ${isOpen ? "active" : ""}`}
                 type="button"
                 onClick={(e) => {
                     e.stopPropagation();
