@@ -13,4 +13,4 @@
         visible: true
     }
 
-    export {lightTypes, defaultLight};
+    export { lightTypes, defaultLight };
