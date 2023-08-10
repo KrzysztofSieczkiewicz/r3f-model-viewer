@@ -30,28 +30,18 @@ export function LightItem(props) {
     }
 
     const handleLightVisible = () => {
-        if(light.visible) {
-            return (<icon className='visibility-icon header-icon' 
-                onClick={(e) => {
-                    e.stopPropagation();
-                    updateLight(light.id, 'visible', false)
-                }}
-                >&#128065;</icon>
-            );
-        } else {
-            return (<icon className='visibility-icon header-icon suppressed' 
-                onClick={(e) => {
-                    e.stopPropagation();
-                    updateLight(light.id, 'visible', true)
-                }}
-                >&#x1F441;</icon>
-            );
-        }
+        return (<icon className={`visibility-icon header-icon ${!light.visible ? "suppressed" : ""}`} 
+            onClick={(e) => {
+                e.stopPropagation();
+                updateLight(light.id, 'visible', !light.visible)
+            }}
+            >&#128065;</icon>
+        );
     }
 
     return (
         <div className={`dropdown-item ${active ? "active" : ""}`}>
-            <div className="dropdown-item-header"
+            <div className="dropdown-item-header light-item-header"
                 onClick={props.onClick}
             >
                 {handleLightType()}

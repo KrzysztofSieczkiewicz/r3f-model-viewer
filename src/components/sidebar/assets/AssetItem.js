@@ -1,25 +1,37 @@
+import { useContext } from 'react';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
+import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
 
 export function AssetItem(props) {
-    const { active, asset, updateAsset } = props;
+    const { active, asset } = props;
+    const { updateAsset } = useContext(SidebarControlsContext);
 
     const handleAssetActive = () => {
         if(active) {
-            return <icon className='show-hide'>&#8657;</icon>
+            return <icon className='show-hide header-icon'>&#8657;</icon>
         } else {
-            return <icon className='show-hide'>&#8659;</icon>
+            return <icon className='show-hide header-icon'>&#8659;</icon>
         }
+    }
+
+    const handleAssetVisible = () => {
+        return (<icon className={`visibility-icon header-icon ${!asset.visible ? "suppressed" : ""}`} 
+            onClick={(e) => {
+                e.stopPropagation();
+                updateAsset(asset.id, 'visible', !asset.visible)
+            }}
+            >&#128065;</icon>
+        );
     }
 
     return (
         <div className={`dropdown-item ${active ? "active" : ""}`}>
-            <div className="dropdown-item-header"
+            <div className="dropdown-item-header asset-item-header"
                 onClick={props.onClick}
             >
                 <PointLightIcon className='type-icon header-icon' />
-                <p>{asset.nameId}: {asset.variant}</p>
-                <div className="color-preview" style={{backgroundColor: "#FFF"}}/>
-                <icon className="icon visibility-icon">&#x1F441;</icon>
+                <p className='header-title'>{asset.nameId}</p>
+                {handleAssetVisible()}
                 {handleAssetActive()}
             </div>
 
