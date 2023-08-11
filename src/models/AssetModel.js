@@ -1,4 +1,6 @@
 const defaultAsset = {
+    id: nanoid(5),
+    name: "pear",
     object: "toBeReplaced",
     position:[0,0,0],
     rotation:[0,0,0],
