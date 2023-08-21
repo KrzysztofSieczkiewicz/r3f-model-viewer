@@ -9,6 +9,7 @@ import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
 import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js'
 import { defaultLight, lightTypes } from './models/LightModel';
+import { Assets } from './Assets';
 
 const defaultAsset = {
   id: 0,
@@ -89,7 +90,8 @@ function AssetScene() {
         <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
         <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]}/>
         <Lights lightsList={lightsList}/>
-        <Asset />
+
+        <Assets />
       </Canvas>
       <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
         assetsList, updateAsset }}
