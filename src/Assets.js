@@ -10,12 +10,18 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Assets(props) {
-    const { nodes, materials } = useGLTF("models/pear/Pear2_LOD0.gltf");
+    const assetsList = props.assetsList;
+
+    const assetName = 'Aset_food_fruit_S_tezbbgrra_LOD0'; // TODO: THIS HAS TO BE PASSED AS PARAMETER
+    // TODO: ALSO GLTF SHOULD BE PROVIDED BY EXTERNAL LOADING FUNCTION THAT FETCHES AVAILABLE MODELS
+
+    const { nodes } = useGLTF(assetName);
+
     return (
     <group {...props} dispose={null}>
         <mesh
-        castShadow
-        receiveShadow
+        castShadow //retrieve castShadow from asset from assetlist and provide attribute conditionally
+        receiveShadow //retrieve receiveShadow from asset from assetlist and provide attribute conditionally
         geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry}
         material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material}
         position={[0, 0.189, -0.043]}
