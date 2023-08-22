@@ -12,21 +12,30 @@ import { useGLTF } from "@react-three/drei";
 export function Assets(props) {
     const assetsList = props.assetsList;
 
-    const assetName = 'Aset_food_fruit_S_tezbbgrra_LOD0'; // TODO: THIS HAS TO BE PASSED AS PARAMETER
-    // TODO: ALSO GLTF SHOULD BE PROVIDED BY EXTERNAL LOADING FUNCTION THAT FETCHES AVAILABLE MODELS
+    const assetName = 'Aset_food_fruit_S_tezbbgrra_LOD0'; // TODO: THIS HAS TO BE PASSED AS PARAMETER7
 
-    const { nodes } = useGLTF(assetName);
+    const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
+
+    //console.log(nodes);
+    //console.log(assetsList);
+    //console.log(assetsList[0].id);
+
+    assetsList.map((asset) => {
+        console.log(asset.rotation);
+    })
+
 
     return (
-    <group {...props} dispose={null}>
-        <mesh
-        castShadow //retrieve castShadow from asset from assetlist and provide attribute conditionally
-        receiveShadow //retrieve receiveShadow from asset from assetlist and provide attribute conditionally
-        geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry}
-        material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material}
-        position={[0, 0.189, -0.043]}
-        />
-    </group>
+        <group dispose={null} key={assetsList[0].id}>
+            <mesh
+                castShadow = { assetsList[0].castShadow }
+                receiveShadow = { assetsList[0].receiveShadow }
+                geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry}
+                material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material}
+                position={assetsList[0].position}
+                rotation={assetsList[0].rotation}
+            />
+        </group>
     );
 }
 

@@ -12,15 +12,15 @@ import { defaultLight, lightTypes } from './models/LightModel';
 import { Assets } from './Assets';
 
 const defaultAsset = {
-  id: 0,
-  nameId: "pear",
-  variant: 0,
+  id: nanoid(5),
+  name: "pear",
+  object: "toBeReplaced",
   position:[0,0,0],
-  scale: [10,10,10],
-  rotation: [0,0,0],
-  castShadow: true,
+  rotation:[1,1,1],
+  scale:[1,1,1],
+  castShadow: false,
+  receiveShadow: false,
   visible: true,
-  path: "models/pear/Pear2_LOD0.gltf"
 }
 
 function AssetScene() {
@@ -71,9 +71,9 @@ function AssetScene() {
   }
 
   /* ASSETS */
-  const [assetsList, setAssetsList] = useState(
-    [defaultAsset]
-    );
+  const [assetsList, setAssetsList] = useState([
+      defaultAsset
+    ]);
 
   function updateAsset(id, asset) {
     let newAssetsList = [...assetsList];
@@ -91,7 +91,7 @@ function AssetScene() {
         <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]}/>
         <Lights lightsList={lightsList}/>
 
-        <Assets />
+        <Assets assetsList={assetsList} />
       </Canvas>
       <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
         assetsList, updateAsset }}
