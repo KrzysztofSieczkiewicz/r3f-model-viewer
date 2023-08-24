@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
-import { Asset } from './Asset';
 import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
@@ -16,7 +15,7 @@ const defaultAsset = {
   name: "pear",
   object: "toBeReplaced",
   position:[0,0,0],
-  rotation:[1,1,1],
+  rotation:[0,0,0],
   scale:[1,1,1],
   castShadow: false,
   receiveShadow: false,

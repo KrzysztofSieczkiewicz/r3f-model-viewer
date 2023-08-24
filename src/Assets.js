@@ -6,37 +6,33 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
 
 get how to recover pure geometry and material from gltf
 */
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Assets(props) {
     const assetsList = props.assetsList;
 
-    const assetName = 'Aset_food_fruit_S_tezbbgrra_LOD0'; // TODO: THIS HAS TO BE PASSED AS PARAMETER7
-
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
 
-    //console.log(nodes);
-    //console.log(assetsList);
-    //console.log(assetsList[0].id);
-
-    assetsList.map((asset) => {
-        console.log(asset.rotation);
-    })
-
-
     return (
-        <group dispose={null} key={assetsList[0].id}>
-            <mesh
-                castShadow = { assetsList[0].castShadow }
-                receiveShadow = { assetsList[0].receiveShadow }
-                geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry}
-                material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material}
-                position={assetsList[0].position}
-                rotation={assetsList[0].rotation}
-            />
-        </group>
+        assetsList.map((asset) => {
+        if(asset.visible) {
+            return ( 
+                <group dispose={null} key={asset.id}>
+                    <mesh
+                        castShadow = {asset.castShadow}
+                        receiveShadow = {asset.receiveShadow}
+                        geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
+                        material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
+                        position={asset.position}
+                        rotation={asset.rotation}
+                    />
+                </group>
+            );
+        }
+        })
     );
+    
 }
 
 useGLTF.preload("models/pear/Pear2_LOD0.gltf");
