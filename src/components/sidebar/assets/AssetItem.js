@@ -8,19 +8,19 @@ export function AssetItem(props) {
 
     const handleAssetActive = () => {
         if(active) {
-            return <icon className='show-hide header-icon'>&#8657;</icon>
+            return <span className='show-hide header-icon'>&#8657;</span>
         } else {
-            return <icon className='show-hide header-icon'>&#8659;</icon>
+            return <span className='show-hide header-icon'>&#8659;</span>
         }
     }
 
     const handleAssetVisible = () => {
-        return (<icon className={`visibility-icon header-icon ${!asset.visible ? "suppressed" : ""}`} 
+        return (<span className={`visibility-icon header-icon ${!asset.visible ? "suppressed" : ""}`} 
             onClick={(e) => {
                 e.stopPropagation();
                 updateAsset(asset.id, 'visible', !asset.visible)
             }}
-            >&#128065;</icon>
+            >&#128065;</span>
         );
     }
 

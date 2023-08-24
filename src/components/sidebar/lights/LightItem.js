@@ -23,19 +23,19 @@ export function LightItem(props) {
 
     const handleLightActive = () => {
         if(active) {
-            return <icon className='show-hide header-icon'>&#8657;</icon>
+            return <span className='show-hide header-icon'>&#8657;</span>
         } else {
-            return <icon className='show-hide header-icon'>&#8659;</icon>
+            return <span className='show-hide header-icon'>&#8659;</span>
         }
     }
 
     const handleLightVisible = () => {
-        return (<icon className={`visibility-icon header-icon ${!light.visible ? "suppressed" : ""}`} 
+        return (<span className={`visibility-icon header-icon ${!light.visible ? "suppressed" : ""}`} 
             onClick={(e) => {
                 e.stopPropagation();
                 updateLight(light.id, 'visible', !light.visible)
             }}
-            >&#128065;</icon>
+            >&#128065;</span>
         );
     }
 
@@ -58,10 +58,12 @@ export function LightItem(props) {
                     value={light.position} step={0.001}
                     handleChange={(val) => updateLight(light.id, 'position', val)}
                 />
-                <PositionSliders name="Rotation"
-                    value={light.rotation} step={0.1}
-                    handleChange={(val) => updateLight(light.id, 'rotation', val)}
-                />
+                {light.type === "spotLight" && <>
+                    <PositionSliders name="Rotation" //TODO -> create separate rotationSliders or make positionSliders more abstract
+                        value={light.rotation} step={0.1}
+                        handleChange={(val) => updateLight(light.id, 'rotation', val)}
+                    />
+                </>}
                 <Slider name="Intensity"
                     value={light.intensity}
                     handleChange={(val) => updateLight(light.id, 'intensity', val)}

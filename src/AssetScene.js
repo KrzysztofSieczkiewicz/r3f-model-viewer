@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { nanoid } from 'nanoid';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
 import { Lights } from './Lights';
@@ -19,6 +20,7 @@ function AssetScene() {
       color: "#f53259"
     },
     {...defaultLight,
+      id: nanoid(5),
       position:[-5,5,-5],
       color:"#33dcfa",
       type:"spotLight"
