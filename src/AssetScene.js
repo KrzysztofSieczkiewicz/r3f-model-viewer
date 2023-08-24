@@ -1,52 +1,32 @@
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
 import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
-import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js'
+import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js';
 import { defaultLight, lightTypes } from './models/LightModel';
+import { defaultAsset } from './models/AssetModel';
 import { Assets } from './Assets';
-
-const defaultAsset = {
-  id: nanoid(5),
-  name: "pear",
-  object: "toBeReplaced",
-  position:[0,0,0],
-  rotation:[0,0,0],
-  scale:[1,1,1],
-  castShadow: false,
-  receiveShadow: false,
-  visible: true,
-}
 
 function AssetScene() {
 
   /* LIGHTS */
-  const [lightsList, setLightsList] = useState([{
-    id:0,
-    position:[5,5,0],
-    color: "#f53259",
-    intensity:1,
-    angle: 0.1,
-    penumbra: 0.6,
-    type:"spotLight",
-    visible: true
-  },
-  {
-    id:1,
-    position:[-5,5,-5],
-    color:"#33dcfa",
-    intensity:1,
-    type:"pointLight",
-    visible: true
-  }]);
+  const [lightsList, setLightsList] = useState([
+    {...defaultLight,
+      position:[5,5,0],
+      color: "#f53259"
+    },
+    {...defaultLight,
+      position:[-5,5,-5],
+      color:"#33dcfa",
+      type:"spotLight"
+    }]);
 
+    //TODO => move functions to their respective models -> then You can create unique nanoId upon calling addLight()
   function addLight() {
     let light = {...defaultLight};
-    light.id = nanoid(5);
 
     setLightsList([...lightsList, light]);
   }

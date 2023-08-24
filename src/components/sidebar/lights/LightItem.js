@@ -58,6 +58,10 @@ export function LightItem(props) {
                     value={light.position} step={0.001}
                     handleChange={(val) => updateLight(light.id, 'position', val)}
                 />
+                <PositionSliders name="Rotation"
+                    value={light.rotation} step={0.1}
+                    handleChange={(val) => updateLight(light.id, 'rotation', val)}
+                />
                 <Slider name="Intensity"
                     value={light.intensity}
                     handleChange={(val) => updateLight(light.id, 'intensity', val)}

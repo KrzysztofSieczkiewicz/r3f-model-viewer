@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 const defaultAsset = {
     id: nanoid(5),
     name: "pear",
@@ -7,6 +9,7 @@ const defaultAsset = {
     scale:[1,1,1],
     castShadow: true,
     receiveShadow: true,
+    visible: true,
 }
 
 export { defaultAsset };
