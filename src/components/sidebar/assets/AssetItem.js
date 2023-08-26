@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
+import { PositionSliders } from '../controls/PositionSliders';
 
 export function AssetItem(props) {
     const { active, asset } = props;
@@ -40,21 +41,19 @@ export function AssetItem(props) {
                     <label className='trait-name'>Name:</label>
                     <div className='trait-input'>{asset.nameId}</div>
                 </div>
-                <div className='trait'>
-                    <label className='trait-name'>Position:</label>
-                    <div className='trait-input'>{asset.position}</div>
-                </div>
-                <div className='trait'>
-                    <label className='trait-name'>Scale:</label>
-                    <div className='trait-input'> <p>{asset.scale}</p> </div>
-                </div>
-                <div className='trait'>
-                    <label className='trait-name'>Rotation:</label>
-                    <div className='trait-input'> <p>{asset.rotation}</p> </div>
-                </div>
-                
+                <PositionSliders name="Position"
+                    value={asset.position} step={0.001}
+                    handleChange={(val) => updateAsset(asset.id, 'position', val)}
+                />
+                <PositionSliders name="Scale"
+                    value={asset.scale} step={0.001}
+                    handleChange={(val) => updateAsset(asset.scale, 'scale', val)}
+                />
+                <PositionSliders name="Rotation"
+                    value={asset.rotation} step={0.001}
+                    handleChange={(val) => updateAsset(asset.rotation, 'rotation', val)}
+                />
             </div>}
-
         </div>
     );
 }

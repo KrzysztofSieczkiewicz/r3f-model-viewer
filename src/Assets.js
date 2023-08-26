@@ -25,7 +25,8 @@ export function Assets(props) {
                         geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
                         material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
                         position={asset.position}
-                        rotation={asset.rotation}
+                        rotation={asset.rotation} // TODO: FIX THAT -> LIGHTS ARE NOT ROTATING
+                        scale={[10,10,10]} // TODO: SCALE SHOULD BE MOVED TO SCENE
                     />
                 </group>
             );

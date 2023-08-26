@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// TODO: ADD OPTION OF PROVIDING MIN/MAX VALUES -> RENAME -> USE FOR ROTATION AND SCALE AS WELL
 export function PositionSliders(props) {
     const { step, value, handleChange} = props;
 

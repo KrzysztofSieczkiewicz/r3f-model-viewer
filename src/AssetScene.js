@@ -52,7 +52,7 @@ function AssetScene() {
     let newLightsList = [...lightsList];
 
     newLightsList[id] = {
-      ...newLightsList[id],
+      ...lightsList[id],
       [property]: value
     }
 
@@ -62,12 +62,36 @@ function AssetScene() {
 
   /* ASSETS */
   const [assetsList, setAssetsList] = useState([
-      defaultAsset
-    ]);
+    {
+      id: nanoid(5),
+      name: "pear",
+      object: "toBeReplaced",
+      position:[0,0,0],
+      rotation:[0,0,0],
+      scale:[1,1,1],
+      castShadow: true,
+      receiveShadow: true,
+      visible: true,
+    },{
+      id: nanoid(5),
+      name: "pear",
+      object: "toBeReplaced",
+      position:[1,0,1],
+      rotation:[0,90,0],
+      scale:[1,1,1],
+      castShadow: true,
+      receiveShadow: true,
+      visible: true,
+    }
+  ]);
 
-  function updateAsset(id, asset) {
+  function updateAsset(id, property, value) {
     let newAssetsList = [...assetsList];
-    newAssetsList[id] = asset;
+
+    newAssetsList[id] = {
+      ...assetsList[id],
+      [property]: value
+    }
 
     setAssetsList(newAssetsList);
     console.log(assetsList[id]);
