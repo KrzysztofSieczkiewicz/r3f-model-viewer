@@ -14,17 +14,26 @@ import { Assets } from './Assets';
 function AssetScene() {
 
   /* LIGHTS */
-  const [lightsList, setLightsList] = useState([
-    {...defaultLight,
-      position:[5,5,0],
-      color: "#f53259"
-    },
-    {...defaultLight,
-      id: nanoid(5),
-      position:[-5,5,-5],
-      color:"#33dcfa",
-      type:"spotLight"
-    }]);
+  const [lightsList, setLightsList] = useState([{
+    id:0,
+    position:[5,5,0],
+    rotation:[0,0,0],
+    color: "#f53259",
+    intensity:1,
+    angle: 0.1,
+    penumbra: 0.6,
+    type:"spotLight",
+    visible: true
+  },
+  {
+    id:1,
+    position:[-5,5,-5],
+    rotation:[0,0,0],
+    color:"#33dcfa",
+    intensity:1,
+    type:"pointLight",
+    visible: true
+  }]);
 
     //TODO => move functions to their respective models -> then You can create unique nanoId upon calling addLight()
   function addLight() {

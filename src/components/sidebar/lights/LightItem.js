@@ -11,6 +11,8 @@ export function LightItem(props) {
     const { active, light } = props;
     const { updateLight, lightTypes } = useContext(SidebarControlsContext);
 
+    console.log(light);
+
     const handleLightType = () => {
         return(<>
             {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />}
@@ -60,7 +62,7 @@ export function LightItem(props) {
                 />
                 {light.type === "spotLight" && <>
                     <PositionSliders name="Rotation" //TODO -> create separate rotationSliders or make positionSliders more abstract
-                        value={light.rotation} step={0.1}
+                        value={light.rotation} step={0.01}
                         handleChange={(val) => updateLight(light.id, 'rotation', val)}
                     />
                 </>}
