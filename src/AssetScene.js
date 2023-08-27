@@ -8,7 +8,6 @@ import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
 import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js';
 import { defaultLight, lightTypes } from './models/LightModel';
-import { defaultAsset } from './models/AssetModel';
 import { Assets } from './Assets';
 
 function AssetScene() {

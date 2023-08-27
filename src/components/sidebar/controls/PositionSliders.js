@@ -62,6 +62,7 @@ export function PositionSliders(props) {
         return (
             <>
             {handledPosition.map((position, index) => {
+                console.log(handledPosition);
                 return (
                     <div className="input-slider slider-array-three" 
                         key={index}
