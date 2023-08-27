@@ -37,12 +37,8 @@ export function AssetItem(props) {
             </div>
 
             {active && <div className="dropdown-item-body">
-                <div className='trait'>
-                    <label className='trait-name'>Name:</label>
-                    <div className='trait-input'>{asset.nameId}</div>
-                </div>
                 <PositionSliders name="Position"
-                    value={asset.position} step={0.001}
+                    value={asset.position} step={0.01}
                     handleChange={(val) => updateAsset(asset.id, 'position', val)}
                 />
                 <PositionSliders name="Scale"

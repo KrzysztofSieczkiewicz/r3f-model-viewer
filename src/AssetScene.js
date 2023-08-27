@@ -15,7 +15,7 @@ function AssetScene() {
 
   /* LIGHTS */
   const [lightsList, setLightsList] = useState([{
-    id:0,
+    id:nanoid(5),
     position:[5,5,0],
     rotation:[0,0,0],
     color: "#f53259",
@@ -24,9 +24,16 @@ function AssetScene() {
     penumbra: 0.6,
     type:"spotLight",
     visible: true
-  },
-  {
-    id:1,
+  },{
+    id:nanoid(5),
+    position:[-5,5,-5],
+    rotation:[0,0,0],
+    color:"#33dcfa",
+    intensity:1,
+    type:"pointLight",
+    visible: true
+  },{
+    id:nanoid(5),
     position:[-5,5,-5],
     rotation:[0,0,0],
     color:"#33dcfa",
@@ -49,15 +56,15 @@ function AssetScene() {
   }
 
   function updateLight(id, property, value) {
-    let newLightsList = [...lightsList];
+    const newLightsList = [...lightsList];
+    const index = newLightsList.findIndex(light => light.id === id);
 
-    newLightsList[id] = {
-      ...lightsList[id],
+    newLightsList[index] = {
+      ...lightsList[index],
       [property]: value
     }
 
     setLightsList(newLightsList);
-    console.log(lightsList[id])
   }
 
   /* ASSETS */
@@ -86,15 +93,16 @@ function AssetScene() {
   ]);
 
   function updateAsset(id, property, value) {
-    let newAssetsList = [...assetsList];
+    const newAssetsList = [...assetsList];
+    const index = newAssetsList.findIndex(asset => asset.id === id);
 
-    newAssetsList[id] = {
-      ...assetsList[id],
+    newAssetsList[index] = {
+      ...assetsList[index],
       [property]: value
     }
 
     setAssetsList(newAssetsList);
-    console.log(assetsList[id]);
+    console.log(assetsList[index]);
   }
 
   return (
@@ -102,10 +110,11 @@ function AssetScene() {
       <Canvas shadows>
         <color args={[0, 0, 0]} attach="background" />
         <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
-        <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]}/>
-        <Lights lightsList={lightsList}/>
+        <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
 
+        <Lights lightsList={lightsList} />
         <Assets assetsList={assetsList} />
+
       </Canvas>
       <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
         assetsList, updateAsset }}
