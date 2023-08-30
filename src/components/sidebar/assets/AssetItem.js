@@ -7,6 +7,15 @@ export function AssetItem(props) {
     const { active, asset } = props;
     const { updateAsset } = useContext(SidebarControlsContext);
 
+    const handleAssetName = () => {
+        const assetName = asset.name;
+        const name = assetName.charAt(0).toUpperCase() + assetName.slice(1);
+        console.log("handleAssetName was triggered")
+        return (
+            <p className='header-title'>{name}</p>
+        );
+    }
+
     const handleAssetActive = () => {
         if(active) {
             return <span className='show-hide header-icon'>&#8657;</span>
@@ -31,7 +40,7 @@ export function AssetItem(props) {
                 onClick={props.onClick}
             >
                 <PointLightIcon className='type-icon header-icon' />
-                <p className='header-title'>{asset.nameId}</p>
+                {handleAssetName()}
                 {handleAssetVisible()}
                 {handleAssetActive()}
             </div>
