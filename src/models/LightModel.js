@@ -9,7 +9,7 @@ const defaultLight = {
     id: nanoid(5),
     type: "pointLight",
     position:[5,5,0],
-    rotation:[0,0,0],
+    rotation:[0,0,0], // TODO: Remove and replace by target later on
     color: "white",
     intensity: 1,
     angle: 0.1,

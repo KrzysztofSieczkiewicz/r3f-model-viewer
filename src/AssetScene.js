@@ -13,23 +13,16 @@ import { Assets } from './Assets';
 function AssetScene() {
 
   /* LIGHTS */
+  //rotation={[Math.PI * 0.25, Math.PI * 0.25, 0]}
   const [lightsList, setLightsList] = useState([{
     id:nanoid(5),
     position:[5,5,0],
-    rotation:[0,0,0],
+    rotation:[Math.PI * 0.5, Math.PI * 0.5, 0],
     color: "#f53259",
     intensity:1,
     angle: 0.1,
     penumbra: 0.6,
     type:"spotLight",
-    visible: true
-  },{
-    id:nanoid(5),
-    position:[-5,5,-5],
-    rotation:[0,0,0],
-    color:"#33dcfa",
-    intensity:1,
-    type:"pointLight",
     visible: true
   },{
     id:nanoid(5),
