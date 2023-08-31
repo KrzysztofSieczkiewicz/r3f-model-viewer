@@ -8,9 +8,7 @@ export function AssetItem(props) {
     const { updateAsset } = useContext(SidebarControlsContext);
 
     const handleAssetName = () => {
-        const assetName = asset.name;
-        const name = assetName.charAt(0).toUpperCase() + assetName.slice(1);
-        console.log("handleAssetName was triggered")
+        const name = asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
         return (
             <p className='header-title'>{name}</p>
         );
@@ -52,11 +50,11 @@ export function AssetItem(props) {
                 />
                 <PositionSliders name="Scale"
                     value={asset.scale} step={0.001}
-                    handleChange={(val) => updateAsset(asset.scale, 'scale', val)}
+                    handleChange={(val) => updateAsset(asset.id, 'scale', val)}
                 />
                 <PositionSliders name="Rotation"
                     value={asset.rotation} step={0.001}
-                    handleChange={(val) => updateAsset(asset.rotation, 'rotation', val)}
+                    handleChange={(val) => updateAsset(asset.id, 'rotation', val)}
                 />
             </div>}
         </div>
