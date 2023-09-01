@@ -8,6 +8,7 @@ export function Lights(props) {
                 return <pointLight 
                     key={light.id} 
                     position={light.position}
+                    rotation={light.rotation}
                     color={light.color} 
                     intensity={light.intensity} 
                     />;
@@ -15,6 +16,7 @@ export function Lights(props) {
                 return <spotLight 
                     key={light.id} 
                     position={light.position}
+                    rotation={light.rotation}
                     color={light.color} 
                     intensity={light.intensity}
                     angle={light.angle}

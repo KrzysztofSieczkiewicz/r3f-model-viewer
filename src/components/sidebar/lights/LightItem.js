@@ -1,7 +1,7 @@
 import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { Slider } from '../controls/Slider';
-import { PositionSliders } from '../controls/PositionSliders';
+import { SlidersArray } from '../controls/SlidersArray';
 import { ColorPicker } from '../controls/ColorPicker';
 import { Dropdown } from '../controls/Dropdown';
 import { useContext } from 'react';
@@ -10,6 +10,8 @@ import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
 export function LightItem(props) {
     const { active, light } = props;
     const { updateLight, lightTypes } = useContext(SidebarControlsContext);
+
+    console.log(light);
 
     const handleLightType = () => {
         return(<>
@@ -23,35 +25,25 @@ export function LightItem(props) {
 
     const handleLightActive = () => {
         if(active) {
-            return <icon className='show-hide header-icon'>&#8657;</icon>
+            return <span className='show-hide header-icon'>&#8657;</span>
         } else {
-            return <icon className='show-hide header-icon'>&#8659;</icon>
+            return <span className='show-hide header-icon'>&#8659;</span>
         }
     }
 
     const handleLightVisible = () => {
-        if(light.visible) {
-            return (<icon className='visibility-icon header-icon' 
-                onClick={(e) => {
-                    e.stopPropagation();
-                    updateLight(light.id, 'visible', false)
-                }}
-                >&#128065;</icon>
-            );
-        } else {
-            return (<icon className='visibility-icon header-icon suppressed' 
-                onClick={(e) => {
-                    e.stopPropagation();
-                    updateLight(light.id, 'visible', true)
-                }}
-                >&#x1F441;</icon>
-            );
-        }
+        return (<span className={`visibility-icon header-icon ${!light.visible ? "suppressed" : ""}`} 
+            onClick={(e) => {
+                e.stopPropagation();
+                updateLight(light.id, 'visible', !light.visible)
+            }}
+            >&#128065;</span>
+        );
     }
 
     return (
         <div className={`dropdown-item ${active ? "active" : ""}`}>
-            <div className="dropdown-item-header"
+            <div className="dropdown-item-header light-item-header"
                 onClick={props.onClick}
             >
                 {handleLightType()}
@@ -64,8 +56,8 @@ export function LightItem(props) {
                 <ColorPicker name="Color" 
                     value={light.color}
                     handleChange={(val) => updateLight(light.id, 'color', val)}/>
-                <PositionSliders name="Position"
-                    value={light.position} step={0.001}
+                <SlidersArray name="Position"
+                    value={light.position} step={0.01}
                     handleChange={(val) => updateLight(light.id, 'position', val)}
                 />
                 <Slider name="Intensity"

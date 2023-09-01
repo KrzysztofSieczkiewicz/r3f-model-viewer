@@ -1,52 +1,42 @@
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
 
+import { nanoid } from 'nanoid';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
-import { Asset } from './Asset';
 import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
-import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js'
+import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js';
 import { defaultLight, lightTypes } from './models/LightModel';
-
-const defaultAsset = {
-  id: 0,
-  nameId: "pear",
-  variant: 0,
-  position:[0,0,0],
-  scale: [10,10,10],
-  rotation: [0,0,0],
-  castShadow: true,
-  visible: true,
-  path: "models/pear/Pear2_LOD0.gltf"
-}
+import { Assets } from './Assets';
 
 function AssetScene() {
 
   /* LIGHTS */
+  //rotation={[Math.PI * 0.25, Math.PI * 0.25, 0]}
   const [lightsList, setLightsList] = useState([{
-    id:0,
+    id:nanoid(5),
     position:[5,5,0],
+    rotation:[Math.PI * 0.5, Math.PI * 0.5, 0],
     color: "#f53259",
     intensity:1,
     angle: 0.1,
     penumbra: 0.6,
     type:"spotLight",
     visible: true
-  },
-  {
-    id:1,
+  },{
+    id:nanoid(5),
     position:[-5,5,-5],
+    rotation:[0,0,0],
     color:"#33dcfa",
     intensity:1,
     type:"pointLight",
     visible: true
   }]);
 
+    //TODO => move functions to their respective models -> then You can create unique nanoId upon calling addLight()
   function addLight() {
     let light = {...defaultLight};
-    light.id = nanoid(5);
 
     setLightsList([...lightsList, light]);
   }
@@ -58,28 +48,53 @@ function AssetScene() {
   }
 
   function updateLight(id, property, value) {
-    let newLightsList = [...lightsList];
+    const newLightsList = [...lightsList];
+    const index = newLightsList.findIndex(light => light.id === id);
 
-    newLightsList[id] = {
-      ...newLightsList[id],
+    newLightsList[index] = {
+      ...lightsList[index],
       [property]: value
     }
 
     setLightsList(newLightsList);
-    console.log(lightsList[id])
   }
 
   /* ASSETS */
-  const [assetsList, setAssetsList] = useState(
-    [defaultAsset]
-    );
+  const [assetsList, setAssetsList] = useState([
+    {
+      id: nanoid(5),
+      name: "pear",
+      object: "toBeReplaced",
+      position:[0,0,0],
+      rotation:[0,0,0],
+      scale:[10,10,10],
+      castShadow: true,
+      receiveShadow: true,
+      visible: true,
+    },{
+      id: nanoid(5),
+      name: "pear",
+      object: "toBeReplaced",
+      position:[1,0,1],
+      rotation:[0,90,0],
+      scale:[10,10,10],
+      castShadow: true,
+      receiveShadow: true,
+      visible: true,
+    }
+  ]);
 
-  function updateAsset(id, asset) {
-    let newAssetsList = [...assetsList];
-    newAssetsList[id] = asset;
+  function updateAsset(id, property, value) {
+    const newAssetsList = [...assetsList];
+    const index = newAssetsList.findIndex(asset => asset.id === id);
+
+    newAssetsList[index] = {
+      ...assetsList[index],
+      [property]: value
+    }
 
     setAssetsList(newAssetsList);
-    console.log(assetsList[id]);
+    console.log(assetsList[index]);
   }
 
   return (
@@ -87,9 +102,11 @@ function AssetScene() {
       <Canvas shadows>
         <color args={[0, 0, 0]} attach="background" />
         <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
-        <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]}/>
-        <Lights lightsList={lightsList}/>
-        <Asset />
+        <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
+
+        <Lights lightsList={lightsList} />
+        <Assets assetsList={assetsList} />
+
       </Canvas>
       <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
         assetsList, updateAsset }}
