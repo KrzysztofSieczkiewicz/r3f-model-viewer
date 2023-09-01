@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
-import { PositionSliders } from '../controls/SlidersArray';
+import { SlidersArray } from '../controls/SlidersArray';
 
 export function AssetItem(props) {
     const { active, asset } = props;
@@ -51,11 +51,11 @@ export function AssetItem(props) {
                     handleChange={(val) => updateAsset(asset.id, 'position', val)}
                 />
                 <SlidersArray name="Scale"
-                    value={asset.scale} step={0.001}
+                    value={asset.scale} step={0.01}
                     handleChange={(val) => updateAsset(asset.id, 'scale', val)}
                 />
                 <SlidersArray name="Rotation"
-                    value={asset.rotation} step={0.001}
+                    value={asset.rotation} step={0.01}
                     handleChange={(val) => updateAsset(asset.id, 'rotation', val)}
                 />
             </div>}
