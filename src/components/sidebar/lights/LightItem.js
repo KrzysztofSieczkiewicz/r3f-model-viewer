@@ -1,7 +1,7 @@
 import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { Slider } from '../controls/Slider';
-import { PositionSliders } from '../controls/PositionSliders';
+import { PositionSliders } from '../controls/SlidersArray';
 import { ColorPicker } from '../controls/ColorPicker';
 import { Dropdown } from '../controls/Dropdown';
 import { useContext } from 'react';
@@ -56,16 +56,10 @@ export function LightItem(props) {
                 <ColorPicker name="Color" 
                     value={light.color}
                     handleChange={(val) => updateLight(light.id, 'color', val)}/>
-                <PositionSliders name="Position"
+                <SlidersArray name="Position"
                     value={light.position} step={0.001}
                     handleChange={(val) => updateLight(light.id, 'position', val)}
                 />
-                {light.type === "spotLight" && <>
-                    <PositionSliders name="Rotation" //TODO -> create separate rotationSliders or make positionSliders more abstract
-                        value={light.rotation} step={0.01}
-                        handleChange={(val) => updateLight(light.id, 'rotation', val)}
-                    />
-                </>}
                 <Slider name="Intensity"
                     value={light.intensity}
                     handleChange={(val) => updateLight(light.id, 'intensity', val)}

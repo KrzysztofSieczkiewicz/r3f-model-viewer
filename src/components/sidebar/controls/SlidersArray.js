@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
-// TODO: ADD OPTION OF PROVIDING MIN/MAX VALUES -> RENAME -> USE FOR ROTATION AND SCALE AS WELL
-export function PositionSliders(props) {
-    const { step, value, handleChange} = props;
+// TODO: CONSIDER ADDING CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
+export function SlidersArray(props) {
+    const { step, value, handleChange,
+     min, max } = props;
 
     const [ handledPosition, setHandledPosition ] = useState(value);
     // RED GREEN BLUE

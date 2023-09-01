@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
-import { PositionSliders } from '../controls/PositionSliders';
+import { PositionSliders } from '../controls/SlidersArray';
 
 export function AssetItem(props) {
     const { active, asset } = props;
@@ -32,6 +32,8 @@ export function AssetItem(props) {
         );
     }
 
+
+    // TODO: FIND NEW ICONS FOR ASSETS
     return (
         <div className={`dropdown-item ${active ? "active" : ""}`}>
             <div className="dropdown-item-header asset-item-header"
@@ -44,15 +46,15 @@ export function AssetItem(props) {
             </div>
 
             {active && <div className="dropdown-item-body">
-                <PositionSliders name="Position"
+                <SlidersArray name="Position"
                     value={asset.position} step={0.01}
                     handleChange={(val) => updateAsset(asset.id, 'position', val)}
                 />
-                <PositionSliders name="Scale"
+                <SlidersArray name="Scale"
                     value={asset.scale} step={0.001}
                     handleChange={(val) => updateAsset(asset.id, 'scale', val)}
                 />
-                <PositionSliders name="Rotation"
+                <SlidersArray name="Rotation"
                     value={asset.rotation} step={0.001}
                     handleChange={(val) => updateAsset(asset.id, 'rotation', val)}
                 />
