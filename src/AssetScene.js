@@ -9,11 +9,11 @@ import { Sidebar } from './Sidebar';
 import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js';
 import { defaultLight, lightTypes } from './models/LightModel';
 import { Assets } from './Assets';
+import { Background } from './Background';
 
 function AssetScene() {
 
   /* LIGHTS */
-  //rotation={[Math.PI * 0.25, Math.PI * 0.25, 0]}
   const [lightsList, setLightsList] = useState([{
     id:nanoid(5),
     position:[5,5,0],
@@ -100,7 +100,9 @@ function AssetScene() {
   return (
     <>
       <Canvas shadows>
-        <color args={[0, 0, 0]} attach="background" />
+
+        <Background />
+
         <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
         <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
 
@@ -108,6 +110,7 @@ function AssetScene() {
         <Assets assetsList={assetsList} />
 
       </Canvas>
+      
       <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
         assetsList, updateAsset }}
       >
