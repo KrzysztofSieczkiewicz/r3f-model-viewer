@@ -88,16 +88,18 @@ function AssetScene() {
   ]);
 
   function updateAsset(id, property, value) {
-    const newAssetsList = [...assetsList];
-    const index = newAssetsList.findIndex(asset => asset.id === id);
-
-    newAssetsList[index] = {
+    const index = assetsList.findIndex(asset => asset.id === id);
+    const newAsset = {
       ...assetsList[index],
       [property]: value
-    }
+    };
 
-    setAssetsList(newAssetsList);
-    console.log(assetsList[index]);
+    if (newAsset[property] !== assetsList[index][property]) {
+      const newAssetsList = [...assetsList];
+      newAssetsList[index] = newAsset;
+
+      setAssetsList(newAssetsList);
+    }
   }
 
   return (

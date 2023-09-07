@@ -72,9 +72,9 @@ export function SlidersArray(props) {
                         }}
                     >
                         <div className="position-color-indicator" style={{ backgroundColor: indicatorColors[index] }}/>
-                        <icon className="slider-arrow left">&#60;</icon>
+                        <span className="slider-arrow left">&#60;</span>
                         <span className="slider-value">{position}</span>
-                        <icon className="slider-arrow right">&#62;</icon>
+                        <span className="slider-arrow right">&#62;</span>
                     </div>
                 )
             })}
