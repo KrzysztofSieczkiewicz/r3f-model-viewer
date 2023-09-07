@@ -11,8 +11,6 @@ export function LightItem(props) {
     const { active, light } = props;
     const { updateLight, lightTypes } = useContext(SidebarControlsContext);
 
-    console.log(light);
-
     const handleLightType = () => {
         return(<>
             {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />}

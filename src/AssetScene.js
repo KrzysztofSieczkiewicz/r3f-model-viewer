@@ -48,15 +48,18 @@ function AssetScene() {
   }
 
   function updateLight(id, property, value) {
-    const newLightsList = [...lightsList];
-    const index = newLightsList.findIndex(light => light.id === id);
-
-    newLightsList[index] = {
+    const index = lightsList.findIndex(light => light.id === id);
+    const newLight = {
       ...lightsList[index],
       [property]: value
-    }
+    };
 
-    setLightsList(newLightsList);
+    if (newLight[property] !== lightsList[index][property]) {
+      const newLightsList = [...lightsList];
+      newLightsList[index] = newLight;
+
+      setLightsList(newLightsList);
+    }
   }
 
   /* ASSETS */
