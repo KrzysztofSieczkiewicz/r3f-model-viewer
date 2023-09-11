@@ -57,7 +57,7 @@ function AssetScene() {
     if (newLight[property] !== lightsList[index][property]) {
       const newLightsList = [...lightsList];
       newLightsList[index] = newLight;
-
+      
       setLightsList(newLightsList);
     }
   }

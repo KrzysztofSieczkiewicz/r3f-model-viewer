@@ -47,7 +47,7 @@ export function AssetItem(props) {
 
             {active && <div className="dropdown-item-body">
                 <SlidersArray name="Position"
-                    value={asset.position} step={0.01}
+                    value={asset.position} step={0.005}
                     handleChange={(val) => updateAsset(asset.id, 'position', val)}
                 />
                 <SlidersArray name="Scale"

@@ -7,6 +7,7 @@ import { LightsMenu } from "./components/sidebar/lights/LightsMenu";
 import { useState } from "react";
 import './components/sidebar/sidebar.css';
 import { AssetsMenu } from "./components/sidebar/assets/AssetsMenu";
+import { SceneMenu } from "./components/sidebar/scene/SceneMenu";
 
 export function Sidebar() {
     const [activeItem, setActiveItem] = useState();
@@ -26,7 +27,9 @@ export function Sidebar() {
                     icon={<EarthIcon className="sidebar-icon" />}
                     active={activeItem === "Environment"}
                     onClick={() => handleItemClick("Environment")}
-                />
+                >
+                    <SceneMenu />
+                </SidebarItem>
                 <SidebarItem 
                     icon={<CubeIcon className="sidebar-icon" />}
                     active={activeItem === "Objects"}
@@ -41,11 +44,12 @@ export function Sidebar() {
                 >
                     <LightsMenu />
                 </SidebarItem>
-                <SidebarItem 
+                <SidebarItem
                     icon={<ImageIcon className="sidebar-icon" />}
                     active={activeItem === "Rendering"}
                     onClick={() => handleItemClick("Rendering")}
-                />
+                >
+                </SidebarItem>
             </ul>
         </nav>
     );
