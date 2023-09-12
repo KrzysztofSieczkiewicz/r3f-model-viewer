@@ -1,6 +1,12 @@
+import { useContext } from "react";
+import { ColorPicker } from "../controls/ColorPicker";
+
+import SidebarControlsContext from '../../sidebar/SidebarControlsContext'   
+
 export function SceneMenu() {
-    //const { sceneDate } = useContext(SidebarControlsContext);
-   
+    const { scene, updateScene } = useContext(SidebarControlsContext);
+    const background = scene.background;
+
     const handleItemClick = () => {
 
     };
@@ -12,6 +18,11 @@ export function SceneMenu() {
             <p>
                 TEST MESSAGE
             </p>
+
+            <ColorPicker name="Color" 
+                    value={scene.backgroundColor}
+                    handleChange={(val) => updateScene('backgroundColor', val)}
+                    />
         </div>
     );
 }

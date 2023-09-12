@@ -9,7 +9,7 @@ import { Sidebar } from './Sidebar';
 import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js';
 import { defaultLight, lightTypes } from './models/LightModel';
 import { Assets } from './Assets';
-import { Background } from './Background';
+import { defaultScene } from './models/SceneModel';
 
 function AssetScene() {
 
@@ -102,11 +102,22 @@ function AssetScene() {
     }
   }
 
+
+  /* SCENE */
+  const [ scene, setScene ] = useState(defaultScene); 
+  
+  function updateScene(property, value) {
+    setScene({
+      ...scene,
+      [property]: value
+    });
+  }
+
   return (
     <>
-      <Canvas shadows>
-
-        <Background />
+      <Canvas shadows
+        style= {{ background: scene.backgroundColor }}
+      >
 
         <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
         <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
@@ -117,7 +128,8 @@ function AssetScene() {
       </Canvas>
       
       <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
-        assetsList, updateAsset }}
+        assetsList, updateAsset,
+        scene, updateScene }}
       >
         <Sidebar addLight={addLight} removeLight={removeLight} />
       </SidebarControlsContext.Provider>
