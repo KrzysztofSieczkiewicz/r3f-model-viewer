@@ -107,10 +107,24 @@ function AssetScene() {
   const [ scene, setScene ] = useState(defaultScene); 
   
   function updateScene(property, value) {
+    const updateNested = (obj, keys, value) => {
+      if (keys.length === 1) {
+        obj[keys[0]] = value;
+      } else {
+        const key = keys.shift();
+        updateNested(obj[key], keys, value);
+      }
+    };
+
+    const keys = property.split('.');
+    const updatedScene = { ...scene };
+    updateNested(updatedScene, keys, value);
+
     setScene({
       ...scene,
       [property]: value
     });
+    console.log(scene)
   }
 
   return (
