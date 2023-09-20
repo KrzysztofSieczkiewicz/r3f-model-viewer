@@ -2,7 +2,7 @@ const defaultScene = {
   backgroundColor: "#262626",
   ambientLight: {
     color: "#ffffff",
-    intensity: 0.2
+    intensity: 0.1
   }
 }
 
