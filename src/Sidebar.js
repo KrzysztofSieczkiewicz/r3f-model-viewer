@@ -1,4 +1,4 @@
-import { SidebarItem } from "./SidebarItem";
+import { SidebarItem } from "./components/sidebar/SidebarItem";
 import { ReactComponent as LightIcon } from './icons/sidebar/light.svg';
 import { ReactComponent as CubeIcon } from './icons/sidebar/cube.svg';
 import { ReactComponent as EarthIcon } from './icons/sidebar/earth.svg';

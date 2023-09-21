@@ -283,6 +283,11 @@
     color: var(--color-platinum);
 }
 
+/* SCENE SECTION HEADERS */
+.dropdown .scene-section {
+    color: var(--color-platinum);
+}
+
 /* LIGHT HEADER */
 .dropdown-item-header.light-item-header {
     grid-template-columns: 1fr 4fr 1fr 1fr 1fr;

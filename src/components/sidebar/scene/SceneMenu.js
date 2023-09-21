@@ -13,14 +13,14 @@ export function SceneMenu() {
     
     return (
         <div className="dropdown">
-            <section>
+            <section className="scene-section dropdown-item">
                 <p>Background</p>
                 <ColorPicker name="Color" 
                     value={scene.backgroundColor}
                     handleChange={(val) => updateScene('backgroundColor', val)}
                 />
             </section>
-            <section>
+            <section className="scene-section dropdown-item">
                 <p>Ambient light</p>
                 <ColorPicker name="Color"
                     value={scene.ambientLight.color}
