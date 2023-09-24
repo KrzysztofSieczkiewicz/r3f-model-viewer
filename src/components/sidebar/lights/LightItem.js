@@ -11,8 +11,6 @@ export function LightItem(props) {
     const { active, light } = props;
     const { updateLight, lightTypes } = useContext(SidebarControlsContext);
 
-    console.log(light);
-
     const handleLightType = () => {
         return(<>
             {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />}
@@ -53,19 +51,18 @@ export function LightItem(props) {
             </div>
 
             {active && <div className="dropdown-item-body">
-                <ColorPicker name="Color" 
-                    value={light.color}
-                    handleChange={(val) => updateLight(light.id, 'color', val)}/>
                 <SlidersArray name="Position"
                     value={light.position} step={0.01}
                     handleChange={(val) => updateLight(light.id, 'position', val)}
                 />
+                <ColorPicker name="Color" 
+                    value={light.color}
+                    handleChange={(val) => updateLight(light.id, 'color', val)}/>
                 <Slider name="Intensity"
                     value={light.intensity}
                     handleChange={(val) => updateLight(light.id, 'intensity', val)}
                     min={0} max={3} step={0.005} defaultValue={1}
                 />
-                
                 {light.type === "spotLight" && <>
                     <Slider name="Angle"
                         value={light.angle}

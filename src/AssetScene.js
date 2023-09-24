@@ -9,11 +9,11 @@ import { Sidebar } from './Sidebar';
 import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js';
 import { defaultLight, lightTypes } from './models/LightModel';
 import { Assets } from './Assets';
+import { defaultScene } from './models/SceneModel';
 
 function AssetScene() {
 
   /* LIGHTS */
-  //rotation={[Math.PI * 0.25, Math.PI * 0.25, 0]}
   const [lightsList, setLightsList] = useState([{
     id:nanoid(5),
     position:[5,5,0],
@@ -48,15 +48,18 @@ function AssetScene() {
   }
 
   function updateLight(id, property, value) {
-    const newLightsList = [...lightsList];
-    const index = newLightsList.findIndex(light => light.id === id);
-
-    newLightsList[index] = {
+    const index = lightsList.findIndex(light => light.id === id);
+    const newLight = {
       ...lightsList[index],
       [property]: value
-    }
+    };
 
-    setLightsList(newLightsList);
+    if (newLight[property] !== lightsList[index][property]) {
+      const newLightsList = [...lightsList];
+      newLightsList[index] = newLight;
+      
+      setLightsList(newLightsList);
+    }
   }
 
   /* ASSETS */
@@ -85,22 +88,52 @@ function AssetScene() {
   ]);
 
   function updateAsset(id, property, value) {
-    const newAssetsList = [...assetsList];
-    const index = newAssetsList.findIndex(asset => asset.id === id);
-
-    newAssetsList[index] = {
+    const index = assetsList.findIndex(asset => asset.id === id);
+    const newAsset = {
       ...assetsList[index],
       [property]: value
-    }
+    };
 
-    setAssetsList(newAssetsList);
-    console.log(assetsList[index]);
+    if (newAsset[property] !== assetsList[index][property]) {
+      const newAssetsList = [...assetsList];
+      newAssetsList[index] = newAsset;
+
+      setAssetsList(newAssetsList);
+    }
+  }
+
+
+  /* SCENE */
+  const [ scene, setScene ] = useState(defaultScene); 
+  
+  function updateScene(property, value) {
+    const updateNested = (obj, keys, value) => {
+      if (keys.length === 1) {
+        obj[keys[0]] = value;
+      } else {
+        const key = keys.shift();
+        updateNested(obj[key], keys, value);
+      }
+    };
+
+    const keys = property.split('.');
+    const updatedScene = { ...scene };
+    updateNested(updatedScene, keys, value);
+
+    setScene({
+      ...scene,
+      [property]: value
+    });
+    console.log(scene)
   }
 
   return (
     <>
-      <Canvas shadows>
-        <color args={[0, 0, 0]} attach="background" />
+      <Canvas shadows
+        style= {{ background: scene.backgroundColor }}
+      >
+        <ambientLight color={scene.ambientLight.color} intensity={scene.ambientLight.intensity} />
+
         <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
         <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
 
@@ -108,8 +141,10 @@ function AssetScene() {
         <Assets assetsList={assetsList} />
 
       </Canvas>
+      
       <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
-        assetsList, updateAsset }}
+        assetsList, updateAsset,
+        scene, updateScene }}
       >
         <Sidebar addLight={addLight} removeLight={removeLight} />
       </SidebarControlsContext.Provider>

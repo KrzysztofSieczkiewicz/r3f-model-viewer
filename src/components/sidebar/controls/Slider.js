@@ -66,9 +66,9 @@ export function Slider(props) {
                 value={handledValue}
                 onMouseDown={(e) => handleMouseDown(e)}
             >
-                <icon className="slider-arrow left">&#60;</icon>
+                <span className="slider-arrow left">&#60;</span>
                 <span className="slider-value">{handledValue}</span>
-                <icon className="slider-arrow right">&#62;</icon>
+                <span className="slider-arrow right">&#62;</span>
             </div>
             <button className="reset-default-btn"
                 onClick={handleResetDefault}
