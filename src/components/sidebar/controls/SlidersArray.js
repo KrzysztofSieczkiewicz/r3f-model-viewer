@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 
 // TODO: CONSIDER ADDING CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
 export function SlidersArray(props) {
-    const { step, value, handleChange,
-     min, max } = props;
+    const { step, value, handleChange } = props;
 
     const [ handledPosition, setHandledPosition ] = useState(value);
     // RED GREEN BLUE

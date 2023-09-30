@@ -6,22 +6,32 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
 
 get how to recover pure geometry and material from gltf
 */
-import React from "react";
+import { useState } from "react";
 import { useGLTF } from "@react-three/drei";
+import { EffectComposer, Outline, Select, Selection } from "@react-three/postprocessing";
 
 export function Assets(props) {
     const assetsList = props.assetsList;
 
+    const [hovered, setHovered] = useState();
+
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
 
-    // Wrap map function with <Selection> and <EffectComposer>, then wrap mesh with <Select> with enabled={active}. Don't forget
+    // Wrap map function with <Selection> and <EffectComposer>, then wrap mesh with <Select> with enabled={selected}. Don't forget
     // to put <Outline> inside <EffectComposer>. All elements should be importable from /postprocessing
+    // It may be required to add selected/hovered to synchronise behavior between sidebar and canvas
     return (
-        assetsList.map((asset) => {
+        <Selection>
+            <EffectComposer multisampling={8} autoClear={false}>
+                <Outline blur visibleEdgeColor="red" edgeStrength={100} width={500} />
+            </EffectComposer>
+        {assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
-                    <group dispose={null} key={asset.id}>
+                    <Select enabled={hovered} key={asset.id}>
                         <mesh
+                            onPointerOver={() => setHovered(true)} 
+                            onPointerOut={() => setHovered(false)}
                             castShadow = {asset.castShadow}
                             receiveShadow = {asset.receiveShadow}
                             geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
@@ -30,12 +40,13 @@ export function Assets(props) {
                             rotation={asset.rotation}
                             scale={asset.scale}
                         />
-                    </group>
+                    </Select>
                 );
             }
-        })
+        return;
+        })}
+        </Selection>
     );
-    
 }
 
 useGLTF.preload("models/pear/Pear2_LOD0.gltf");

@@ -4,7 +4,6 @@ export function SidebarItem(props) {
     return (
         <li className="sidebar-item">
             <a 
-            
                 href="#" 
                 className={`icon-button ${active ? "active" : ""}`}
                 onClick={props.onClick}

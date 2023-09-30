@@ -6,10 +6,6 @@ import { Slider } from "../controls/Slider";
 
 export function SceneMenu() {
     const { scene, updateScene } = useContext(SidebarControlsContext);
-
-    const handleItemClick = () => {
-
-    };
     
     return (
         <div className="dropdown">
