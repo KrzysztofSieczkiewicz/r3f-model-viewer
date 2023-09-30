@@ -14,23 +14,25 @@ export function Assets(props) {
 
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
 
+    // Wrap map function with <Selection> and <EffectComposer>, then wrap mesh with <Select> with enabled={active}. Don't forget
+    // to put <Outline> inside <EffectComposer>. All elements should be importable from /postprocessing
     return (
         assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
-                <group dispose={null} key={asset.id}>
-                    <mesh
-                        castShadow = {asset.castShadow}
-                        receiveShadow = {asset.receiveShadow}
-                        geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
-                        material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                        position={asset.position}
-                        rotation={asset.rotation}
-                        scale={asset.scale}
-                    />
-                </group>
-            );
-        }
+                    <group dispose={null} key={asset.id}>
+                        <mesh
+                            castShadow = {asset.castShadow}
+                            receiveShadow = {asset.receiveShadow}
+                            geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
+                            material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
+                            position={asset.position}
+                            rotation={asset.rotation}
+                            scale={asset.scale}
+                        />
+                    </group>
+                );
+            }
         })
     );
     
