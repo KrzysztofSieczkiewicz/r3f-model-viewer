@@ -13,7 +13,7 @@ import { EffectComposer, Outline, Select, Selection } from "@react-three/postpro
 export function Assets(props) {
     const assetsList = props.assetsList;
 
-    const [hovered, setHovered] = useState();
+    const [highlighted, setHighlighted] = useState(false);
 
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
 
@@ -28,10 +28,10 @@ export function Assets(props) {
         {assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
-                    <Select enabled={hovered} key={asset.id}>
+                    <Select enabled={highlighted} key={asset.id}>
                         <mesh
-                            onPointerOver={() => setHovered(true)} 
-                            onPointerOut={() => setHovered(false)}
+                            onPointerOver={() => setHighlighted(true)} 
+                            onPointerOut={() => setHighlighted(false)}
                             castShadow = {asset.castShadow}
                             receiveShadow = {asset.receiveShadow}
                             geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
