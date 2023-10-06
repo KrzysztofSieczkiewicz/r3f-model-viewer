@@ -21,31 +21,35 @@ export function Assets(props) {
     // to put <Outline> inside <EffectComposer>. All elements should be importable from /postprocessing
     // It may be required to add selected/hovered to synchronise behavior between sidebar and canvas
     return (
-        <Selection>
-            <EffectComposer multisampling={8} autoClear={false}>
-                <Outline blur visibleEdgeColor="red" edgeStrength={100} width={500} />
-            </EffectComposer>
-        {assetsList.map((asset) => {
+        assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
-                    <Select enabled={highlighted} key={asset.id}>
-                        <mesh
-                            onPointerOver={() => setHighlighted(true)} 
-                            onPointerOut={() => setHighlighted(false)}
-                            castShadow = {asset.castShadow}
-                            receiveShadow = {asset.receiveShadow}
-                            geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
-                            material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                            position={asset.position}
-                            rotation={asset.rotation}
-                            scale={asset.scale}
-                        />
-                    </Select>
-                );
-            }
+                <Select enabled key={asset.id}>
+                    <mesh
+                        onPointerOver={() => {
+                            setHighlighted(true)
+                            console.log("Pointer moved over the mesh")
+                        }} 
+                        onPointerOut={() => {
+                            setHighlighted(false)
+                            console.log("Pointer removed from mesh")
+                        }}
+                        onClick={() => {
+                            console.log("Handle clicking on object - toggle selection")
+                        }}
+                        castShadow = {asset.castShadow}
+                        receiveShadow = {asset.receiveShadow}
+                        geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
+                        material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
+                        position={asset.position}
+                        rotation={asset.rotation}
+                        scale={asset.scale}
+                    />
+                </Select>
+            );
+        }
         return;
-        })}
-        </Selection>
+        })
     );
 }
 

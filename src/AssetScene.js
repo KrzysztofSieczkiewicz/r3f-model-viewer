@@ -11,6 +11,10 @@ import { defaultLight, lightTypes } from './models/LightModel';
 import { Assets } from './Assets';
 import { defaultScene } from './models/SceneModel';
 
+import { Select, Selection } from "@react-three/postprocessing";
+import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';
+import { BlendFunction } from 'postprocessing';
+
 function AssetScene() {
 
   /* LIGHTS */
@@ -127,6 +131,14 @@ function AssetScene() {
     console.log(scene)
   }
 
+  // SELECTION
+  const [ selected, setSelected ] = useState(null);
+
+  function handleSelected(selectedObject) {
+    // Recognize what type of object was selected
+    //
+  }
+
   return (
     <>
       <Canvas shadows
@@ -137,8 +149,35 @@ function AssetScene() {
         <OrbitControls target={[0, 0.32, 0]} maxPolarAngle={1.45} />
         <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
 
-        <Lights lightsList={lightsList} />
-        <Assets assetsList={assetsList} />
+        <Selection>
+          <Lights lightsList={lightsList} />
+          <Assets assetsList={assetsList} />
+
+          <Select enabled={true}>
+                    <mesh onPointerOver={() => console.log("test on")} onPointerOut={() => console.log("test off")}>
+                        <boxGeometry />
+                        <meshStandardMaterial color="orange" />
+                    </mesh>
+          </Select>
+        </Selection>
+
+        <EffectComposer multisampling={8} autoClear={false}>
+          <Outline blur visibleEdgeColor="red" edgeStrength={100} />
+          <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={400} />
+          <Bloom 
+            blendFunction={BlendFunction.ADD}
+            intensity={0.3}
+            width={300}
+            height={300}
+            kernelSize={5}
+            luminanceThreshold={0.15}
+            luminanceSmooting={0.025}
+          />
+          <ChromaticAberration 
+            blendFunction={BlendFunction.NORMAL}
+            offset={[0.0005, 0.00012]}
+          />
+        </EffectComposer>
 
       </Canvas>
       
