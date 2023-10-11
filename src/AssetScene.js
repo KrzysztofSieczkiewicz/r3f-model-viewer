@@ -135,6 +135,7 @@ function AssetScene() {
   const [ selected, setSelected ] = useState(null);
 
   function handleSelected(selectedObject) {
+    console.log(selectedObject);
     // Recognize what type of object was selected
     //
   }
@@ -151,7 +152,7 @@ function AssetScene() {
 
         <Selection>
           <Lights lightsList={lightsList} />
-          <Assets assetsList={assetsList} />
+          <Assets assetsList={assetsList} handleSelected={handleSelected} />
 
           <Select enabled={true}>
                     <mesh onPointerOver={() => console.log("test on")} onPointerOut={() => console.log("test off")}>
@@ -183,7 +184,8 @@ function AssetScene() {
       
       <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
         assetsList, updateAsset,
-        scene, updateScene }}
+        scene, updateScene
+      }}
       >
         <Sidebar addLight={addLight} removeLight={removeLight} />
       </SidebarControlsContext.Provider>

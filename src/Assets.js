@@ -6,14 +6,12 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
 
 get how to recover pure geometry and material from gltf
 */
-import { useState } from "react";
 import { useGLTF } from "@react-three/drei";
-import { EffectComposer, Outline, Select, Selection } from "@react-three/postprocessing";
+import { Select } from "@react-three/postprocessing";
 
 export function Assets(props) {
-    const assetsList = props.assetsList;
+    const { assetsList, handleSelected } = props;
 
-    const [highlighted, setHighlighted] = useState(false);
 
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
 
@@ -27,14 +25,13 @@ export function Assets(props) {
                 <Select enabled key={asset.id}>
                     <mesh
                         onPointerOver={() => {
-                            setHighlighted(true)
                             console.log("Pointer moved over the mesh")
                         }} 
                         onPointerOut={() => {
-                            setHighlighted(false)
                             console.log("Pointer removed from mesh")
                         }}
                         onClick={() => {
+                            handleSelected(); // find a way to get reference to the object being clicked
                             console.log("Handle clicking on object - toggle selection")
                         }}
                         castShadow = {asset.castShadow}
