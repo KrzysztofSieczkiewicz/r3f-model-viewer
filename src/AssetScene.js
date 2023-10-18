@@ -134,7 +134,9 @@ function AssetScene() {
   // SELECTION
   const [ selected, setSelected ] = useState(null);
 
+  // should I store selected object id or set single object property to selected
   function handleSelected(selectedObject) {
+    setSelected(selectedObject);
     console.log(selectedObject);
     // Recognize what type of object was selected
     //

@@ -15,25 +15,22 @@ export function Assets(props) {
 
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
 
-    // Wrap map function with <Selection> and <EffectComposer>, then wrap mesh with <Select> with enabled={selected}. Don't forget
-    // to put <Outline> inside <EffectComposer>. All elements should be importable from /postprocessing
-    // It may be required to add selected/hovered to synchronise behavior between sidebar and canvas
     return (
         assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
-                <Select enabled key={asset.id}>
                     <mesh
                         onPointerOver={() => {
-                            console.log("Pointer moved over the mesh")
+                            //console.log("Pointer moved over the mesh")
                         }} 
                         onPointerOut={() => {
-                            console.log("Pointer removed from mesh")
+                            //console.log("Pointer removed from mesh")
                         }}
-                        onClick={() => {
-                            handleSelected(); // find a way to get reference to the object being clicked
-                            console.log("Handle clicking on object - toggle selection")
+                        onClick={(e) => {
+                            handleSelected(e.intersections[0].object.assetID);
                         }}
+                        key={asset.id}
+                        assetID={asset.id}
                         castShadow = {asset.castShadow}
                         receiveShadow = {asset.receiveShadow}
                         geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
@@ -42,7 +39,6 @@ export function Assets(props) {
                         rotation={asset.rotation}
                         scale={asset.scale}
                     />
-                </Select>
             );
         }
         return;
