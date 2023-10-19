@@ -138,45 +138,36 @@ function AssetScene() {
   }
 
   // SELECTION
-  const [ selected, setSelected ] = useState(null);
+  const [ selectedID, setSelectedID ] = useState(null);
 
   // TODO: refactor that - readability is a struggle here (well, especially here)
-  function handleSelected(selectedObject) {
-    if(selectedObject === selected || 
-       selectedObject === undefined) {
-      const index = assetsList.findIndex(asset => asset.id === selectedObject);
-      const asset = assetsList[index];
+  function handleSelected(newID) {
+    const prevIndex = assetsList.findIndex(asset => asset.id === selectedID);
+    const index = assetsList.findIndex(asset => asset.id === newID);
+    const asset = assetsList[index];
 
-      if (asset.isSelected) { // UNSELECT
+    if(newID === selectedID || 
+       newID === undefined) {
+
+      if (asset?.isSelected) { // UNSELECT
         const {isSelected, ...rest} = asset;
         updateAsset(index, rest);
-        setSelected(selectedObject);
+        setSelectedID(null);
       }
-      else {
-        const newAssetsList = [...assetsList];
-        newAssetsList[index] = {...asset, isSelected: true};
-        setAssetsList(newAssetsList);
+      else { // SELECT
+        updateAsset(index, {...asset, isSelected: true});
+        setSelectedID(newID);
       }
-
-      console.log(assetsList[index]);
-      console.log(selectedObject === selected)
     }
     else {
-      const prevIndex = assetsList.findIndex(asset => asset.id === selected);
-      const index = assetsList.findIndex(asset => asset.id === selectedObject);
-      const asset = assetsList[index];
       // UNSELECT CURRENT
       const {isSelected, ...rest} = asset;
       updateAsset(prevIndex, rest);
 
       // SELECT NEW
-      const newAssetsList = [...assetsList];
-      newAssetsList[index] = {...asset, isSelected: true};
-      setAssetsList(newAssetsList);
+      updateAsset(index, {...asset, isSelected: true});
+      setSelectedID(newID);
     }
-
-    setSelected(selectedObject);
-    console.log(selectedObject);
   }
 
   return (
@@ -192,13 +183,6 @@ function AssetScene() {
         <Selection>
           <Lights lightsList={lightsList} />
           <Assets assetsList={assetsList} handleSelected={handleSelected} />
-
-          <Select enabled={true}>
-                    <mesh onPointerOver={() => console.log("test on")} onPointerOut={() => console.log("test off")}>
-                        <boxGeometry />
-                        <meshStandardMaterial color="orange" />
-                    </mesh>
-          </Select>
         </Selection>
 
         <EffectComposer multisampling={8} autoClear={false}>
