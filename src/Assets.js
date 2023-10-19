@@ -7,7 +7,6 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
 get how to recover pure geometry and material from gltf
 */
 import { useGLTF } from "@react-three/drei";
-import { Select } from "@react-three/postprocessing";
 
 export function Assets(props) {
     const { assetsList, handleSelected } = props;

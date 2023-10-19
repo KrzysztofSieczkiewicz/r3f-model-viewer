@@ -134,12 +134,28 @@ function AssetScene() {
   // SELECTION
   const [ selected, setSelected ] = useState(null);
 
-  // should I store selected object id or set single object property to selected
+  // how to differentiate between lights and assets?
+  // You need to know what object is selected but lights and assets are in different- lists (cameras might be in another one as well)
+  // 1. create common list?
+  // 2. create separate list mapping ids to object types
+  // 3. search each list one after another
   function handleSelected(selectedObject) {
+    if(selectedObject === selected) {
+      // replace that by just adding/removing an attribute?
+      updateAsset(selected, 'selected', false);
+      updateAsset(selectedObject, 'selected', true);
+      
+      // UNSELECT CURRENT - delete selected tag?
+    }
+    if(selectedObject === undefined) {
+      // UNSELECT CURRENT - merge this with previous condition
+    }
+    else {
+      // UNSELECT CURRENT + SELECT selectedObject
+    }
+
     setSelected(selectedObject);
     console.log(selectedObject);
-    // Recognize what type of object was selected
-    //
   }
 
   return (
