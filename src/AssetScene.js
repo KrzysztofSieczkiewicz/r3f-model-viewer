@@ -106,6 +106,12 @@ function AssetScene() {
     }
   }
 
+  function updateAsset(index, asset) {
+    const newAssetsList = [...assetsList];
+    newAssetsList[index] = asset;
+    setAssetsList(newAssetsList);
+  }
+
 
   /* SCENE */
   const [ scene, setScene ] = useState(defaultScene); 
@@ -134,24 +140,39 @@ function AssetScene() {
   // SELECTION
   const [ selected, setSelected ] = useState(null);
 
-  // how to differentiate between lights and assets?
-  // You need to know what object is selected but lights and assets are in different- lists (cameras might be in another one as well)
-  // 1. create common list?
-  // 2. create separate list mapping ids to object types
-  // 3. search each list one after another
+  // TODO: refactor that - readability is a struggle here (well, especially here)
   function handleSelected(selectedObject) {
-    if(selectedObject === selected) {
-      // replace that by just adding/removing an attribute?
-      updateAsset(selected, 'selected', false);
-      updateAsset(selectedObject, 'selected', true);
-      
-      // UNSELECT CURRENT - delete selected tag?
-    }
-    if(selectedObject === undefined) {
-      // UNSELECT CURRENT - merge this with previous condition
+    if(selectedObject === selected || 
+       selectedObject === undefined) {
+      const index = assetsList.findIndex(asset => asset.id === selectedObject);
+      const asset = assetsList[index];
+
+      if (asset.isSelected) { // UNSELECT
+        const {isSelected, ...rest} = asset;
+        updateAsset(index, rest);
+        setSelected(selectedObject);
+      }
+      else {
+        const newAssetsList = [...assetsList];
+        newAssetsList[index] = {...asset, isSelected: true};
+        setAssetsList(newAssetsList);
+      }
+
+      console.log(assetsList[index]);
+      console.log(selectedObject === selected)
     }
     else {
-      // UNSELECT CURRENT + SELECT selectedObject
+      const prevIndex = assetsList.findIndex(asset => asset.id === selected);
+      const index = assetsList.findIndex(asset => asset.id === selectedObject);
+      const asset = assetsList[index];
+      // UNSELECT CURRENT
+      const {isSelected, ...rest} = asset;
+      updateAsset(prevIndex, rest);
+
+      // SELECT NEW
+      const newAssetsList = [...assetsList];
+      newAssetsList[index] = {...asset, isSelected: true};
+      setAssetsList(newAssetsList);
     }
 
     setSelected(selectedObject);
