@@ -6,11 +6,15 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
 
 get how to recover pure geometry and material from gltf
 */
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useHelper } from "@react-three/drei";
+import { useRef } from "react";
+import { BoxHelper } from "three";
 
 export function Assets(props) {
     const { assetsList, handleSelected } = props;
 
+    const meshRef = useRef();
+    useHelper(meshRef, BoxHelper, 'cyan');
 
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
 
@@ -18,26 +22,28 @@ export function Assets(props) {
         assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
-                    <mesh
-                        onPointerOver={() => {
-                            //console.log("Pointer moved over the mesh")
-                        }} 
-                        onPointerOut={() => {
-                            //console.log("Pointer removed from mesh")
-                        }}
-                        onClick={(e) => {
-                            handleSelected(e.intersections[0].object.assetID);
-                        }}
-                        key={asset.id}
-                        assetID={asset.id}
-                        castShadow = {asset.castShadow}
-                        receiveShadow = {asset.receiveShadow}
-                        geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
-                        material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                        position={asset.position}
-                        rotation={asset.rotation}
-                        scale={asset.scale}
-                    />
+                <mesh
+                    onPointerOver={() => {
+                        //console.log("Pointer moved over the mesh")
+                    }} 
+                    onPointerOut={() => {
+                        //console.log("Pointer removed from mesh")
+                    }}
+                    onClick={(e) => {
+                        handleSelected(e.intersections[0].object.assetID);
+                        //console.log(asset);
+                        //console.log(e.target)
+                    }}
+                    key={asset.id}
+                    assetID={asset.id}
+                    castShadow = {asset.castShadow}
+                    receiveShadow = {asset.receiveShadow}
+                    geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
+                    material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
+                    position={asset.position}
+                    rotation={asset.rotation}
+                    scale={asset.scale}
+                />
             );
         }
         return;
