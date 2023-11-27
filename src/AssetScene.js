@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { nanoid } from 'nanoid';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
@@ -11,11 +11,16 @@ import { defaultLight, lightTypes } from './models/LightModel';
 import { Assets } from './Assets';
 import { defaultScene } from './models/SceneModel';
 
-import { Select, Selection } from "@react-three/postprocessing";
+import { Selection } from "@react-three/postprocessing";
 import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
 
 function AssetScene() {
+
+  //TODO: create a common list of all objects (lights/assets/cameras?) that stores their type, and id.
+  // when some list is updated, common list should be refreshed using useEffect().
+  // When any object is selected in the canvas it should be selected both for viewport and sidebar?
+  // Does this make any sense?
 
   /* LIGHTS */
   const [lightsList, setLightsList] = useState([{
@@ -91,7 +96,8 @@ function AssetScene() {
     }
   ]);
 
-  function updateAsset(id, property, value) {
+  // replace with updateAssetById => no point in separating properties when it's just creating new asset later on
+  function updateAssetProperty(id, property, value) {
     const index = assetsList.findIndex(asset => asset.id === id);
     const newAsset = {
       ...assetsList[index],
@@ -106,6 +112,7 @@ function AssetScene() {
     }
   }
 
+  // replace with updateAssetOnIndex()
   function updateAsset(index, asset) {
     const newAssetsList = [...assetsList];
     newAssetsList[index] = asset;
@@ -140,7 +147,6 @@ function AssetScene() {
   // SELECTION
   const [ selectedID, setSelectedID ] = useState(null);
 
-  // TODO: refactor that - readability is a struggle here (well, especially here)
   function handleSelected(newID) {
     const prevIndex = assetsList.findIndex(asset => asset.id === selectedID);
     const index = assetsList.findIndex(asset => asset.id === newID);
@@ -148,15 +154,11 @@ function AssetScene() {
 
     if(newID === selectedID || 
        newID === undefined) {
-
       if (asset?.isSelected) { // UNSELECT
         const {isSelected, ...rest} = asset;
         updateAsset(index, rest);
         setSelectedID(null);
-      }
-      else { // SELECT
-        updateAsset(index, {...asset, isSelected: true});
-        setSelectedID(newID);
+        //console.log("I unselected current selection: " + newID);
       }
     }
     else {
@@ -169,6 +171,11 @@ function AssetScene() {
       setSelectedID(newID);
     }
   }
+
+  // TODO: JUST FOR LOGGING PURPOSES
+  useEffect(() => {
+    console.log("Currently selected id:  " + selectedID);
+}, [selectedID]);
 
   return (
     <>
@@ -206,7 +213,7 @@ function AssetScene() {
       </Canvas>
       
       <SidebarControlsContext.Provider value={{ lightsList, updateLight, lightTypes, 
-        assetsList, updateAsset,
+        assetsList, updateAssetProperty,
         scene, updateScene
       }}
       >

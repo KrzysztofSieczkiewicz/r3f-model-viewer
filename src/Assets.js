@@ -7,14 +7,24 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
 get how to recover pure geometry and material from gltf
 */
 import { useGLTF, useHelper } from "@react-three/drei";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { BoxHelper } from "three";
 
 export function Assets(props) {
     const { assetsList, handleSelected } = props;
 
     const meshRef = useRef();
-    useHelper(meshRef, BoxHelper, 'cyan');
+    useHelper(meshRef, BoxHelper, 'cyan')
+
+    useEffect(() => {
+        assetsList.map((asset) => {
+            if (asset.isSelected)
+            {
+                asset.ref=meshRef;
+            }
+            else asset.ref=null;
+        });
+    });
 
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
 
@@ -30,6 +40,8 @@ export function Assets(props) {
                         //console.log("Pointer removed from mesh")
                     }}
                     onClick={(e) => {
+                        console.log(asset.isSelected)
+                        console.log(asset.ref)
                         handleSelected(e.intersections[0].object.assetID);
                         //console.log(asset);
                         //console.log(e.target)
