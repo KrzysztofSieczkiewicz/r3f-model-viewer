@@ -43,7 +43,7 @@ function AssetScene() {
     visible: true
   }]);
 
-    //TODO => move functions to their respective models -> then You can create unique nanoId upon calling addLight()
+    //TODO => move functions to their respective models -> then You can create unique nanoId by calling addLight()
   function addLight() {
     let light = {...defaultLight};
 

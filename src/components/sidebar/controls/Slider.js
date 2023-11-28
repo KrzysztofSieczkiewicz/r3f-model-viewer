@@ -21,6 +21,10 @@ export function Slider(props) {
         }
     }
 
+    const handleStepChange = (direction) => {
+        handleValue(handledValue + (step * direction * 10));
+    }
+
     const handleMouseDown = (e) => {
         setStartingPosX(e.clientX);
         setIsMouseDown(true)
@@ -66,9 +70,13 @@ export function Slider(props) {
                 value={handledValue}
                 onMouseDown={(e) => handleMouseDown(e)}
             >
-                <span className="slider-arrow left">&#60;</span>
+                <span className="slider-arrow left"
+                onClick={() => handleStepChange(-1)} > &#60; </span>
+
                 <span className="slider-value">{handledValue}</span>
-                <span className="slider-arrow right">&#62;</span>
+
+                <span className="slider-arrow right"
+                onClick={() => handleStepChange(1)} > &#62; </span>
             </div>
             <button className="reset-default-btn"
                 onClick={handleResetDefault}

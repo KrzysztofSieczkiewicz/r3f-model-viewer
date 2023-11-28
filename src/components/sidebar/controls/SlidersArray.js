@@ -12,7 +12,7 @@ export function SlidersArray(props) {
     const [ startingPosX, setStartingPosX ] = useState();
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
-    function handlePosition(newArray) {
+    function handleArrayValues(newArray) {
         if (newArray.some((element) => isNaN(element))) {
             setHandledPosition(0);
         } else {
@@ -33,8 +33,8 @@ export function SlidersArray(props) {
 
             const newHandledPosition = [...handledPosition];
             newHandledPosition[currentIndex] = Math.round((handledPosition[currentIndex] + calculatedX * step) * 100) / 100;
-
-            handlePosition(newHandledPosition);
+            
+            handleArrayValues(newHandledPosition);
         };
 
         const handleMouseUp = () => {
