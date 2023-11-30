@@ -21,9 +21,41 @@ function AssetScene() {
   // when some list is updated, common list should be refreshed using useEffect().
   // When any object is selected in the canvas it should be selected both for viewport and sidebar?
   // Does this make any sense?
+  // ALTERNATIVELY: only a list of selected objects, add objectType property to the other lists to communicate with that
+  const [ objectsList, setObjectsList ] = useState([
+    {
+      id: "cośtam1",
+      type: "light",
+      isSelected: false,
+    },
+    {
+      id: "cośtam2",
+      type: "asset",
+      isSelected: false,
+    },
+    {
+      id: "cośtam3",
+      type: "camera",
+      isSelected: false,
+    },
+  ]);
+
+  function updateObjects(objectsList) {
+    /*
+    Iterate through list and get only isSelected:true
+    for each type, update their respective lists?
+
+    Or -> make this only a list of currently selected objects
+    If single object is selected, display full context menu 
+    (eg. position, rotation, scale for object;
+      position, intensity, color for light)
+    If multiple types are selected, display only position
+    */
+  }
 
   /* LIGHTS */
-  const [lightsList, setLightsList] = useState([{
+  const [lightsList, setLightsList] = useState([
+    {
     id:nanoid(5),
     position:[5,5,0],
     rotation:[Math.PI * 0.5, Math.PI * 0.5, 0],

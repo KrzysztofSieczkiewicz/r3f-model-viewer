@@ -6,6 +6,8 @@ import { Slider } from "../controls/Slider";
 
 export function SceneMenu() {
     const { scene, updateScene } = useContext(SidebarControlsContext);
+
+    // Todo: for ambientLight color picker add option to match the light to the background
     
     return (
         <div className="dropdown">

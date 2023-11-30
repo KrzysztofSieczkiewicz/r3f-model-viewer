@@ -32,7 +32,6 @@ export function AssetItem(props) {
         );
     }
 
-
     // TODO: FIND NEW ICONS FOR ASSETS
     return (
         <div className={`dropdown-item ${active ? "active" : ""}`}>

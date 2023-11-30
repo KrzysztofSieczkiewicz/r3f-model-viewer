@@ -63,6 +63,9 @@ export function Slider(props) {
         handleChange(props.defaultValue);
     }
 
+    // TODO: add doubleclick to set value numerically
+    // maybe wrap <span> in <div> with onDoubleClick that will return <input> instead?
+    // and detect outside click or return etc. to return to <span>
     return (
         <div className="trait">
             <label className="trait-name">{props.name}</label>
@@ -73,7 +76,9 @@ export function Slider(props) {
                 <span className="slider-arrow left"
                 onClick={() => handleStepChange(-1)} > &#60; </span>
 
-                <span className="slider-value">{handledValue}</span>
+                <span className="slider-value"
+                onDoubleClick={() => console.log("DoubleClicked")}
+                >{handledValue}</span>
 
                 <span className="slider-arrow right"
                 onClick={() => handleStepChange(1)} > &#62; </span>
