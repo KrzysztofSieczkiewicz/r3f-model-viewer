@@ -28,11 +28,12 @@ export function Assets(props) {
 
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf");
 
+    // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
     return (
         assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
-                <TransformControls >
+                <PivotControls >
                     <mesh
                         onPointerOver={() => {
                             //console.log("Pointer moved over the mesh")
@@ -57,7 +58,7 @@ export function Assets(props) {
                         rotation={asset.rotation}
                         scale={asset.scale}
                     />
-                </TransformControls >
+                </PivotControls >
             );
         }
         return;
