@@ -4,14 +4,14 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
     <Decal position={[0, 0.04, 0.15]} rotation={[0, 0, 0]} scale={0.15} map={texture} map-anisotropy={16} />
 </mesh>
 
-get how to recover pure geometry and material from gltf
+get how to recover pure geometry and material from gltf file to allow for modifying materials
 */
-import { useGLTF, useHelper } from "@react-three/drei";
+import { PivotControls, TransformControls, useGLTF, useHelper } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { BoxHelper } from "three";
 
 export function Assets(props) {
-    const { assetsList, handleSelected } = props;
+    const { assetsList, updateSelected } = props;
 
     const meshRef = useRef();
     useHelper(meshRef, BoxHelper, 'cyan')
@@ -32,30 +32,32 @@ export function Assets(props) {
         assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
-                <mesh
-                    onPointerOver={() => {
-                        //console.log("Pointer moved over the mesh")
-                    }} 
-                    onPointerOut={() => {
-                        //console.log("Pointer removed from mesh")
-                    }}
-                    onClick={(e) => {
-                        console.log(asset.isSelected)
-                        console.log(asset.ref)
-                        handleSelected(e.intersections[0].object.assetID);
-                        //console.log(asset);
-                        //console.log(e.target)
-                    }}
-                    key={asset.id}
-                    assetID={asset.id}
-                    castShadow = {asset.castShadow}
-                    receiveShadow = {asset.receiveShadow}
-                    geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
-                    material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                    position={asset.position}
-                    rotation={asset.rotation}
-                    scale={asset.scale}
-                />
+                <TransformControls >
+                    <mesh
+                        onPointerOver={() => {
+                            //console.log("Pointer moved over the mesh")
+                        }} 
+                        onPointerOut={() => {
+                            //console.log("Pointer removed from mesh")
+                        }}
+                        onClick={(e) => {
+                            console.log(asset.isSelected)
+                            console.log(asset.ref)
+                            updateSelected(e.intersections[0].object.assetID);
+                            //console.log(asset);
+                            //console.log(e.target)
+                        }}
+                        key={asset.id}
+                        assetID={asset.id}
+                        castShadow = {asset.castShadow}
+                        receiveShadow = {asset.receiveShadow}
+                        geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
+                        material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
+                        position={asset.position}
+                        rotation={asset.rotation}
+                        scale={asset.scale}
+                    />
+                </TransformControls >
             );
         }
         return;

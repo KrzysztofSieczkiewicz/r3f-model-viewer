@@ -22,35 +22,14 @@ function AssetScene() {
   // When any object is selected in the canvas it should be selected both for viewport and sidebar?
   // Does this make any sense?
   // ALTERNATIVELY: only a list of selected objects, add objectType property to the other lists to communicate with that
-  const [ objectsList, setObjectsList ] = useState([
-    {
-      id: "cośtam1",
-      type: "light",
-      isSelected: false,
-    },
-    {
-      id: "cośtam2",
-      type: "asset",
-      isSelected: false,
-    },
-    {
-      id: "cośtam3",
-      type: "camera",
-      isSelected: false,
-    },
-  ]);
+  const [ selectedList, setSelectedList ] = useState([]);
 
-  function updateObjects(objectsList) {
-    /*
-    Iterate through list and get only isSelected:true
-    for each type, update their respective lists?
+  function updateSelected(objectId) {
+    setSelectedList(objectId);
+    // SET PROVIDED OBJECT ID AS THE ONLY SELECTED OBJECT
+    console.log(objectId);
+    // IF SHIFT KEY WAS PRESSED, ADD IT TO THE LIST INSTEAD
 
-    Or -> make this only a list of currently selected objects
-    If single object is selected, display full context menu 
-    (eg. position, rotation, scale for object;
-      position, intensity, color for light)
-    If multiple types are selected, display only position
-    */
   }
 
   /* LIGHTS */
@@ -190,7 +169,7 @@ function AssetScene() {
         const {isSelected, ...rest} = asset;
         updateAsset(index, rest);
         setSelectedID(null);
-        //console.log("I unselected current selection: " + newID);
+        //console.log("I unsnpelected current selection: " + newID);
       }
     }
     else {
@@ -221,26 +200,8 @@ function AssetScene() {
 
         <Selection>
           <Lights lightsList={lightsList} />
-          <Assets assetsList={assetsList} handleSelected={handleSelected} />
-        </Selection>
-
-        <EffectComposer multisampling={8} autoClear={false}>
-          <Outline blur visibleEdgeColor="red" edgeStrength={100} />
-          <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={400} />
-          <Bloom 
-            blendFunction={BlendFunction.ADD}
-            intensity={0.3}
-            width={300}
-            height={300}
-            kernelSize={5}
-            luminanceThreshold={0.15}
-            luminanceSmooting={0.025}
-          />
-          <ChromaticAberration 
-            blendFunction={BlendFunction.NORMAL}
-            offset={[0.0005, 0.00012]}
-          />
-        </EffectComposer>
+          <Assets assetsList={assetsList} updateSelected={updateSelected} />
+        </Selection>        
 
       </Canvas>
       
@@ -256,3 +217,24 @@ function AssetScene() {
 }
 
 export default AssetScene;
+
+/*
+<EffectComposer multisampling={8} autoClear={false}>
+          <Outline blur visibleEdgeColor="red" edgeStrength={100} />
+          <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={400} />
+          <Bloom 
+            blendFunction={BlendFunction.ADD}
+            intensity={0}
+            width={300}
+            height={300}
+            kernelSize={5}
+            luminanceThreshold={0.15}
+            luminanceSmooting={0.025}
+          />
+          <ChromaticAberration 
+            blendFunction={BlendFunction.NORMAL}
+            intensity={0}
+            offset={[0.0005, 0.00012]}
+          />
+        </EffectComposer>
+*/
