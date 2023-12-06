@@ -7,7 +7,7 @@ import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
 import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js';
-import { defaultLight, lightTypes } from './models/LightModel';
+import { defaultLight, lightTypes } from './models/LightModel.js';
 import { Assets } from './Assets';
 import { defaultScene } from './models/SceneModel';
 
@@ -16,12 +16,15 @@ import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } fro
 import { BlendFunction } from 'postprocessing';
 
 function AssetScene() {
-
   //TODO: create a common list of all objects (lights/assets/cameras?) that stores their type, and id.
   // when some list is updated, common list should be refreshed using useEffect().
   // When any object is selected in the canvas it should be selected both for viewport and sidebar?
   // Does this make any sense?
   // ALTERNATIVELY: only a list of selected objects, add objectType property to the other lists to communicate with that
+
+
+  // TODO: move all useStates to the top,
+  // move functions to separate files
   const [ selectedList, setSelectedList ] = useState([]);
 
   function updateSelected(objectId) {
@@ -29,7 +32,6 @@ function AssetScene() {
     // SET PROVIDED OBJECT ID AS THE ONLY SELECTED OBJECT
     console.log(objectId);
     // IF SHIFT KEY WAS PRESSED, ADD IT TO THE LIST INSTEAD
-
   }
 
   /* LIGHTS */
@@ -190,7 +192,8 @@ function AssetScene() {
 
   return (
     <>
-      <Canvas shadows
+      <Canvas 
+        shadows
         style= {{ background: scene.backgroundColor }}
       >
         <ambientLight color={scene.ambientLight.color} intensity={scene.ambientLight.intensity} />
