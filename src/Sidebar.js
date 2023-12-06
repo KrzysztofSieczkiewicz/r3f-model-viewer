@@ -10,6 +10,9 @@ import { AssetsMenu } from "./components/sidebar/assets/AssetsMenu";
 import { SceneMenu } from "./components/sidebar/scene/SceneMenu";
 
 export function Sidebar() {
+    //TODO: modify this to remove separate (...)Menu objects.
+    // separate states to "ActiveMenu" and "ActiveItem"
+    // won't be that big and will clear unnecessary classes
     const [activeItem, setActiveItem] = useState();
 
     const handleItemClick = (item) => {
