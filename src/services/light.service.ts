@@ -1,8 +1,7 @@
 import { nanoid } from 'nanoid';
-
-import { LightWrapper } from "../interfaces/light.model";
 import { Euler, PointLight, Vector3 } from "three";
 
+import { LightWrapper } from "../interfaces/light.model";
 
 export class LightService {
     createDefault(): LightWrapper {
