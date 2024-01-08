@@ -3,7 +3,7 @@ import { Euler, PointLight, Vector3 } from "three";
 
 import { LightWrapper } from "../interfaces/light.model";
 
-export class LightService {
+export class LightsService {
     static createDefault(): LightWrapper {
         return {
             id: nanoid(5),
@@ -19,7 +19,7 @@ export class LightService {
     }
 
     static addLight(lightsArray: LightWrapper[]): LightWrapper[] {
-        const newLight = LightService.createDefault();
+        const newLight = LightsService.createDefault();
     
         lightsArray.push(newLight)
     
