@@ -9,6 +9,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { SidebarControlsContext } from './components/sidebar/SidebarControlsContext';
 import { AssetWrapper } from './interfaces/asset.model';
+import Lights from './Lights';
 
 
 function AssetScene() {

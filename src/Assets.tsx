@@ -12,45 +12,40 @@ interface AssetsArray {
 }
 
 // TODO: Replace by parametrized asset handling
+type NodeType = {
+        geometry: THREE.Geometry;
+    material: THREE.Material;
+   };
+   
 type GLTFResult = GLTFRes & {
     nodes: {
         [key: string]: THREE.Object3D;
     };
  };
 const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf") as unknown as GLTFResult;
+
 /* --------- */
 
 const Assets = ({ assetsList }: AssetsArray) => (
     <>
         {
-            assetsList
-                .map((asset) => {
-                    if(asset.visible) {
-                        return 
-                        <PivotControls >
-                            <mesh
-                                onPointerOver={() => {
-                                    //console.log("Pointer moved over the mesh")
-                                }} 
-                                onPointerOut={() => {
-                                    //console.log("Pointer removed from mesh")
-                                }}
-                                onClick={(e) => {
-                                    // TODO: ADD SELECTION HANDLING HERE OR CLEAR
-                                }}
-                                key={asset.id}
-                                castShadow = {asset.castShadow}
-                                receiveShadow = {asset.receiveShadow}
-                                geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
-                                material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                                position={asset.position}
-                                rotation={asset.rotation}
-                                scale={asset.scale}
-                            />
-                        </PivotControls >
-                    }
-                })
-                .filter(x => x)
+            assetsList.map((asset) => {
+                if(asset.visible) {
+                    return <PivotControls >
+                        <mesh
+                            key={asset.id}
+                            castShadow = {asset.castShadow}
+                            receiveShadow = {asset.receiveShadow}
+                            geometry={nodes.a} // TODO: Still to be parametrized
+                            material={nodes.material} // TODO: As above
+                            position={asset.position}
+                            rotation={asset.rotation}
+                            scale={asset.scale}
+                        />
+                    </PivotControls >
+                }
+            })
+            .filter(x => x)
         }
     </>
 );
