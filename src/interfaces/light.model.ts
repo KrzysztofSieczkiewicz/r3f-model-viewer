@@ -8,6 +8,8 @@ export interface LightWrapper {
     intensity: number,
     angle?: number,
     penumbra?: number,
-    type: typeof THREE.PointLight | typeof THREE.SpotLight,
+    type: LightType,
     visible: boolean,
 }
+
+export type LightType = typeof THREE.PointLight | typeof THREE.SpotLight

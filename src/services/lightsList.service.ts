@@ -1,8 +1,10 @@
+// TODO: CLEAR TO REMOVE
+
 import { LightWrapper } from "../interfaces/light.model";
 import { LightService } from "./light.service";
 
 const addLight = (lightsArray: LightWrapper[]): LightWrapper[] => {
-    const newLight = new LightService().createDefault();
+    const newLight = LightService.createDefault();
 
     lightsArray.push(newLight)
 
