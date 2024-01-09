@@ -1,10 +1,10 @@
 import React from "react";
-import THREE, { Euler, Vector3 } from "three";
+import THREE from "three";
 import { AssetWrapper } from "./interfaces/asset.model";
 import { PivotControls } from "@react-three/drei/web/pivotControls";
-import { useGLTF } from "@react-three/drei";
-import { GLTF as GLTFRes } from "three-stdlib";
-import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+
+import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useLoader } from "@react-three/fiber";
 
 
 interface AssetsArray {
@@ -13,17 +13,16 @@ interface AssetsArray {
 
 // TODO: Replace by parametrized asset handling
 type NodeType = {
-        geometry: THREE.Geometry;
+    geometry: THREE.BufferGeometry;
     material: THREE.Material;
-   };
-   
-type GLTFResult = GLTFRes & {
-    nodes: {
-        [key: string]: THREE.Object3D;
-    };
- };
-const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf") as unknown as GLTFResult;
+};
+type NodesType = Record<string, NodeType>;
+type GLTFResult = GLTF & {
+    nodes: NodesType;
+};
 
+const gltf = useLoader(GLTFLoader, "models/pear/Pear2_LOD0.gltf") as unknown as GLTFResult;
+const nodes = gltf.nodes as unknown as NodesType;
 /* --------- */
 
 const Assets = ({ assetsList }: AssetsArray) => (
@@ -31,19 +30,20 @@ const Assets = ({ assetsList }: AssetsArray) => (
         {
             assetsList.map((asset) => {
                 if(asset.visible) {
-                    return <PivotControls >
+                    return (
+                    <PivotControls >
                         <mesh
                             key={asset.id}
                             castShadow = {asset.castShadow}
                             receiveShadow = {asset.receiveShadow}
-                            geometry={nodes.a} // TODO: Still to be parametrized
-                            material={nodes.material} // TODO: As above
+                            geometry={nodes["Aset_food_fruit_S_tezbbgrra_LOD0"].geometry} // TODO: Still to be parametrized
+                            material={nodes["Aset_food_fruit_S_tezbbgrra_LOD0"].material} // TODO: As above
                             position={asset.position}
                             rotation={asset.rotation}
                             scale={asset.scale}
                         />
                     </PivotControls >
-                }
+                );}
             })
             .filter(x => x)
         }

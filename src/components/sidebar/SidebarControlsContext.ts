@@ -8,10 +8,23 @@ type SidebarControlsContextType = {
     updateLight: () => LightWrapper[],
 
     assetList: AssetWrapper[],
-    updateAssetProperty: () => AssetWrapper[],
+    updateAsset: () => AssetWrapper[],
 
-    scene: SceneWrapper,
+    scene: SceneWrapper | undefined, // remove undefined later on
     updateScene: () => void,
 }
 
-export const SidebarControlsContext = createContext<SidebarControlsContextType | undefined>(undefined);
+export const SidebarControlsContext = createContext<SidebarControlsContextType>({
+    lightsList: [],
+    updateLight: () => [],
+    assetList: [],
+    updateAsset: () => [],
+    scene: {
+        backgroundColor: "#262626",
+        ambientLight: {
+            color: "#ffffff",
+            intensity: 0.1
+        }
+    },
+    updateScene: () => {},
+   });

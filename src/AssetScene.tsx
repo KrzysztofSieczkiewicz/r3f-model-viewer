@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { LightsService } from './services/lights.service';
+import { AssetsService } from './services/assets.service';
 import { LightWrapper } from './interfaces/light.model';
 
 import { nanoid } from 'nanoid';
@@ -10,6 +11,7 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { SidebarControlsContext } from './components/sidebar/SidebarControlsContext';
 import { AssetWrapper } from './interfaces/asset.model';
 import Lights from './Lights';
+import Assets from './Assets';
 
 
 function AssetScene() {
@@ -66,21 +68,18 @@ function AssetScene() {
     <>
       <Canvas 
         shadows
-        style= {{ background: scene.backgroundColor }}
       >
-        <ambientLight color={scene.ambientLight.color} intensity={scene.ambientLight.intensity} />
-
         <OrbitControls makeDefault target={[0, 0.32, 0]} maxPolarAngle={1.45} />
         <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
 
         <Lights lightsList={lightsList} />
-        <Assets assetsList={assetsList} updateSelected={updateSelected} />
+        <Assets assetsList={assetsList} />
 
       </Canvas>
       
       <SidebarControlsContext.Provider value={{ 
         lightsList, LightsService.updateLight, 
-        assetsList, updateAssetProperty,
+        assetsList, AssetsService.updateAssetProperty,
         scene, updateScene
       }}>
         <Sidebar/>
