@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
-import { LightsService } from './services/lights.service';
-import { AssetsService } from './services/assets.service';
-import { LightWrapper } from './interfaces/light.model';
+import { useState } from 'react';
 
 import { nanoid } from 'nanoid';
 import THREE, { Euler, Vector3 } from 'three';
@@ -10,12 +6,13 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { SidebarControlsContext } from './components/sidebar/SidebarControlsContext';
 import { AssetWrapper } from './interfaces/asset.model';
+import { LightWrapper } from './interfaces/light.model';
 import Lights from './Lights';
 import Assets from './Assets';
 
 
 function AssetScene() {
-  /* LIGHTS */
+
   const [lightsList, setLightsList] = useState<LightWrapper[]>([
     {
       id: nanoid(5),
@@ -37,9 +34,8 @@ function AssetScene() {
       type: THREE.PointLight,
       visible: true
     }
-]);
+  ]);
 
-  /* ASSETS */
   const [assetsList, setAssetsList] = useState<AssetWrapper[]>([
     {
       id: nanoid(5),
@@ -78,9 +74,8 @@ function AssetScene() {
       </Canvas>
       
       <SidebarControlsContext.Provider value={{ 
-        lightsList, LightsService.updateLight, 
-        assetsList, AssetsService.updateAssetProperty,
-        scene, updateScene
+        lightsList, setLightsList, 
+        assetsList, setAssetsList,
       }}>
         <Sidebar/>
       </SidebarControlsContext.Provider>

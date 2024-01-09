@@ -26,7 +26,7 @@ export class LightsService {
         return lightsArray;
     }
     
-    static updateLight(lightsArray: LightWrapper[], id: string, light:LightWrapper): LightWrapper[] {
+    static updateLight(lightsArray: LightWrapper[], id: string, light: LightWrapper): LightWrapper[] {
         const index = lightsArray.findIndex(light => light.id === id);
     
         lightsArray[index] = light;
