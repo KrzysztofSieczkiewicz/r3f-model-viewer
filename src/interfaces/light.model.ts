@@ -13,3 +13,12 @@ export interface LightWrapper {
 }
 
 export type LightType = typeof THREE.PointLight | typeof THREE.SpotLight
+
+type LightTypeName = {
+    type: LightType;
+    display: string;
+};
+export const LightTypesNames: LightTypeName[] = [
+{ type: THREE.PointLight, display: 'Point Light' },
+{ type: THREE.PointLight, display: 'Spot Light' },
+];

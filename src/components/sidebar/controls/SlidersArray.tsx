@@ -1,4 +1,4 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import { useState, useEffect, MouseEvent } from "react";
 
 interface SliderArray {
     name: string,
@@ -10,7 +10,6 @@ interface SliderArray {
 export function SlidersArray( {name, step, value, handleChange}: SliderArray) {
 
     const [ handledValue, setHandledValue ] = useState<number[]>(value);
-
     const [ currentSlider, setCurrentSlider ] = useState<HTMLDivElement | null>();
     const [ startingPosX, setStartingPosX ] = useState<number>(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
@@ -34,11 +33,11 @@ export function SlidersArray( {name, step, value, handleChange}: SliderArray) {
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
             const calculatedX = e.clientX - startingPosX;
-            const currentIndex = currentSlider?.getAttribute('data-index');
+            const currentIndex = Number(currentSlider?.getAttribute('data-index'));
             const newHandledPosition = [...handledValue];
 
             if (currentIndex !== null && currentIndex !== undefined) {
-                newHandledPosition[Number(currentIndex)] = Math.round((handledValue[Number(currentIndex)] + calculatedX * step) * 100) / 100;
+                newHandledPosition[currentIndex] = Math.round((handledValue[currentIndex] + calculatedX * step) * 100) / 100;
                 handleArrayValues(newHandledPosition);
             }
         };

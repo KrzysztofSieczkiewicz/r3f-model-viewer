@@ -3,7 +3,6 @@ import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
 
 import { AssetItem } from "./AssetItem";
 
-//TODO: THIS AND LightsMenu.js can be merged into common class by just providing assets- or lightsList as prop an just iterating through
 export function AssetsMenu() {
     const { assetsList } = useContext(SidebarControlsContext);
    
