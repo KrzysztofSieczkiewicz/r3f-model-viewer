@@ -6,8 +6,8 @@ export interface LightWrapper {
     rotation: Euler | undefined,
     color: string,
     intensity: number,
-    angle?: number,
-    penumbra?: number,
+    angle: number,
+    penumbra: number,
     type: LightType,
     visible: boolean,
 }

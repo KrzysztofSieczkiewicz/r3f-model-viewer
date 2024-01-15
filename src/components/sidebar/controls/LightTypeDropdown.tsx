@@ -2,12 +2,12 @@ import { useEffect, useRef, useState, MouseEvent } from 'react';
 import { LightType, LightTypesNames } from '../../../interfaces/light.model';
 import THREE from "three";
 
-interface Dropdown {
+interface LightTypeDropdown {
     selected: LightType,
     handleChange: (type:LightType) => void
 }
 
-const Dropdown = ( {selected, handleChange}:Dropdown ) => {
+const LightTypeDropdown = ( {selected, handleChange}:LightTypeDropdown ) => {
 
     const [ isOpen, setIsOpen ] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -69,3 +69,5 @@ const Dropdown = ( {selected, handleChange}:Dropdown ) => {
         </div>
     )
 }
+
+export default LightTypeDropdown;
