@@ -20,3 +20,5 @@ const SidebarItem = ({ active, icon, children, onClick } : SidebarItem) => (
         {active && children}
     </li>
 )
+
+export default SidebarItem;

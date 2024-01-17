@@ -1,44 +1,45 @@
-import { useEffect, useRef, useState } from "react";
+import { MouseEvent, RefObject, useEffect, useRef, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
 interface ColorPicker {
-  name: string
+  name: string,
+  value: string,
   handleChange: (color: string) => void
 }
 
-export function ColorPicker(props) {
-  const [ color, setColor ] = useState(props.value);
+export function ColorPicker( {name, value, handleChange }: ColorPicker ) {
+
+  const [ color, setColor ] = useState<string>(value);
+  const [ active, setActive ] = useState<boolean>(false);
+  const [ position, setPosition ] = useState<number>();
+
+  const popupRef: RefObject<HTMLElement> = useRef(null);
 
   useEffect(() => {
-    props.handleChange(color);
+    handleChange(color);
   }, [color])
-
-  const popupRef = useRef();
-
-  const [ active, setActive ] = useState(false);
-  const [ position, setPosition ] = useState([]);
-
-  function toggleColorPicker(e) {
+  
+  function toggleColorPicker(e: MouseEvent<HTMLDivElement>) {
     setPosition(e.clientX - 25);
     setActive(!active);
   }
 
   useEffect(() => {
-    function handleClickOutside(e) {
-      if (active && popupRef.current && !popupRef.current.contains(e.target)) {
+    function handleClickOutside(e: MouseEvent<HTMLDivElement>) {
+      if (active && popupRef.current && !popupRef.current.contains(e.target as Node)) {
         setActive(false);
       }
     }
   
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside as unknown as EventListener);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside as unknown as EventListener);
     };
   }, [popupRef, active]);
 
   return (
     <div className="trait">
-      <label className="trait-name">{props.name}</label>
+      <label className="trait-name">{name}</label>
       <div className="color-picker-preview" onMouseDown={(e) => toggleColorPicker(e)}
         style={{backgroundColor: color}}
       />

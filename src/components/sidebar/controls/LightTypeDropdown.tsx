@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, MouseEvent } from 'react';
 import { LightType, LightTypesNames } from '../../../interfaces/light.model';
-import THREE from "three";
 
 interface LightTypeDropdown {
     selected: LightType,

@@ -9,11 +9,23 @@ type SidebarControlsContextType = {
 
     assetsList: AssetWrapper[],
     setAssetsList: Dispatch<React.SetStateAction<AssetWrapper[]>>,
+
+    scene: SceneWrapper,
+    setScene: Dispatch<React.SetStateAction<SceneWrapper>>,
 }
 
+// TODO: handle default here
 export const SidebarControlsContext = createContext<SidebarControlsContextType>({
     lightsList: [],
     setLightsList: () => [],
     assetsList: [],
     setAssetsList: () => [],
+    scene: {
+        backgroundColor: '',
+        ambientLight: {
+            color: '',
+            intensity: 0,
+        },
+    },
+    setScene: () => {},
    });

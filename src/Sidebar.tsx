@@ -1,4 +1,4 @@
-import { SidebarItem } from "./components/sidebar/SidebarItem";
+import SidebarItem from "./components/sidebar/SidebarItem";
 import { ReactComponent as LightIcon } from './icons/sidebar/light.svg';
 import { ReactComponent as CubeIcon } from './icons/sidebar/cube.svg';
 import { ReactComponent as EarthIcon } from './icons/sidebar/earth.svg';
@@ -44,12 +44,14 @@ const Sidebar = () => {
                 >
                     <LightsMenu />
                 </SidebarItem>
+                {/*
                 <SidebarItem
                     icon={<ImageIcon className="sidebar-icon" />}
                     active={activeItem === "Rendering"}
                     onClick={() => handleItemClick("Rendering")}
                 >
                 </SidebarItem>
+                */}
             </ul>
         </nav>
     );

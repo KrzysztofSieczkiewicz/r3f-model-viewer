@@ -6,6 +6,7 @@ import LightTypeDropdown from "../controls/LightTypeDropdown";
 import { LightsService } from "../../../services/lights.service";
 import { SlidersArray } from "../controls/SlidersArray";
 import Slider from "../controls/Slider";
+import { ColorPicker } from "../controls/ColorPicker";
 
 interface LightItem {
     active: boolean,

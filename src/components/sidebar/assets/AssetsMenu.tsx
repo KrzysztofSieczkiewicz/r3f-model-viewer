@@ -6,11 +6,11 @@ import AssetItem from "./AssetItem";
 export function AssetsMenu() {
     const { assetsList } = useContext(SidebarControlsContext);
    
-    const [activeItemId, setActiveItem] = useState<string | null>();
+    const [activeItemID, setActiveItemID] = useState<string | null>();
 
-    const handleItemClick = (clickedItemId :string) => {
-        setActiveItem( 
-            activeItemId === clickedItemId ? null : clickedItemId 
+    const handleItemClick = (clickedItemID :string) => {
+        setActiveItemID( 
+            activeItemID === clickedItemID ? null : clickedItemID 
             );
     };
     
@@ -21,7 +21,7 @@ export function AssetsMenu() {
                     <AssetItem
                         asset={asset} 
                         key={asset.id}
-                        active={activeItemId === asset.id}
+                        active={activeItemID === asset.id}
                         onClick={() => handleItemClick(asset.id)}
                     />
                 );

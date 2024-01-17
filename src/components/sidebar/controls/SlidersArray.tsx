@@ -6,7 +6,7 @@ interface SliderArray {
     value: number[],
     handleChange: (value: number[]) => void
 }
-// TODO: CONSIDER MOVING CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE -> Blenderwise
+
 export function SlidersArray( {name, step, value, handleChange}: SliderArray) {
 
     const [ handledValue, setHandledValue ] = useState<number[]>(value);
