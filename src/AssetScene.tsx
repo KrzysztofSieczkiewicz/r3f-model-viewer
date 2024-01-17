@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { nanoid } from 'nanoid';
-import THREE, { Euler, Vector3 } from 'three';
+import { Euler, PointLight, SpotLight, Vector3 } from 'three';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { SidebarControlsContext } from './components/sidebar/SidebarControlsContext';
@@ -9,6 +9,8 @@ import { AssetWrapper } from './interfaces/asset.model';
 import { LightWrapper } from './interfaces/light.model';
 import Lights from './Lights';
 import Assets from './Assets';
+import { SceneWrapper } from './interfaces/scene.model';
+import Sidebar from './Sidebar';
 
 
 function AssetScene() {
@@ -22,7 +24,7 @@ function AssetScene() {
       intensity: 1,
       angle: 0.1,
       penumbra: 0.6,
-      type: THREE.SpotLight,
+      type: SpotLight,
       visible: true
     },
     {
@@ -31,7 +33,9 @@ function AssetScene() {
       rotation: new Euler(0, 0, 0),
       color: "#33dcfa",
       intensity: 1,
-      type: THREE.PointLight,
+      angle: 0.1,
+      penumbra: 0.6,
+      type: PointLight,
       visible: true
     }
   ]);
@@ -60,6 +64,14 @@ function AssetScene() {
     }
   ]);
 
+  const [scene, setScene] = useState<SceneWrapper>({
+    backgroundColor: "#262626",
+      ambientLight: {
+          color: "#ffffff",
+          intensity: 0.1
+      }
+  })
+
   return (
     <>
       <Canvas 
@@ -76,6 +88,7 @@ function AssetScene() {
       <SidebarControlsContext.Provider value={{ 
         lightsList, setLightsList, 
         assetsList, setAssetsList,
+        scene, setScene
       }}>
         <Sidebar/>
       </SidebarControlsContext.Provider>

@@ -1,4 +1,4 @@
-import THREE, { Euler, Vector3 } from "three";
+import { Euler, PointLight, SpotLight, Vector3 } from "three";
 
 export interface LightWrapper {
     id: string,
@@ -12,13 +12,13 @@ export interface LightWrapper {
     visible: boolean,
 }
 
-export type LightType = typeof THREE.PointLight | typeof THREE.SpotLight
+export type LightType = typeof PointLight | typeof SpotLight
 
 type LightTypeName = {
     type: LightType;
     display: string;
 };
 export const LightTypesNames: LightTypeName[] = [
-{ type: THREE.PointLight, display: 'Point Light' },
-{ type: THREE.PointLight, display: 'Spot Light' },
+{ type: PointLight, display: 'Point Light' },
+{ type: PointLight, display: 'Spot Light' },
 ];

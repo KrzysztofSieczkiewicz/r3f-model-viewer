@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { LightType, LightWrapper } from "../../../interfaces/light.model";
 import { SidebarControlsContext } from "../SidebarControlsContext";
-import THREE, { Vector3 } from "three";
+import { PointLight, SpotLight, Vector3 } from "three";
 import LightTypeDropdown from "../controls/LightTypeDropdown";
 import { LightsService } from "../../../services/lights.service";
 import { SlidersArray } from "../controls/SlidersArray";
@@ -19,8 +19,8 @@ export function LightItem( {active, light} :LightItem) {
 
     const handleLightType = () => {
         return(<>
-            {light.type === THREE.PointLight && <PointLightIcon className='type-icon header-icon' />}
-            {light.type === THREE.SpotLight && <SpotlightIcon className='type-icon header-icon'  />}
+            {light.type === PointLight && {/*<PointLightIcon className='type-icon header-icon' />*/} }
+            {light.type === SpotLight && {/*<SpotlightIcon className='type-icon header-icon'  />*/} }
             <LightTypeDropdown selected={light.type}
                     handleChange={(val: LightType) => setLightsList( LightsService.updateLight(lightsList, light.id, {...light, type: val}) )}
             />
@@ -71,7 +71,7 @@ export function LightItem( {active, light} :LightItem) {
                     handleChange={(val: number) => setLightsList( LightsService.updateLight(lightsList, light.id, {...light, intensity: val}) ) }
                     min={0} max={3} step={0.005} defaultValue={1}
                 />
-                {light.type === THREE.SpotLight && <>
+                {light.type === SpotLight && <>
                     <Slider name="Angle"
                         value={light.angle}
                         handleChange={(val: number) => setLightsList( LightsService.updateLight(lightsList, light.id, {...light, angle: val}) ) }

@@ -1,5 +1,4 @@
-import React from "react";
-import THREE, { Euler, Vector3 } from "three";
+import { PointLight, SpotLight } from "three";
 import { LightWrapper } from "./interfaces/light.model";
 
 interface LightsArray {
@@ -12,7 +11,7 @@ const Lights = ({ lightsList }: LightsArray) => (
             lightsList
                 .map((light) => {
                     const { type } = light;
-                    if (type === THREE.PointLight && light.visible) {
+                    if (type === PointLight && light.visible) {
                         return <pointLight
                             key={light.id}
                             position={light.position}
@@ -22,7 +21,7 @@ const Lights = ({ lightsList }: LightsArray) => (
                         />;
                     }
 
-                    if (light.type === THREE.SpotLight && light.visible) {
+                    if (light.type === SpotLight && light.visible) {
                         return <spotLight
                             key={light.id}
                             position={light.position}

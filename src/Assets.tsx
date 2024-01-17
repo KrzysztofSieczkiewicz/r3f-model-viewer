@@ -21,11 +21,15 @@ type GLTFResult = GLTF & {
     nodes: NodesType;
 };
 
-const gltf = useLoader(GLTFLoader, "models/pear/Pear2_LOD0.gltf") as unknown as GLTFResult;
-const nodes = gltf.nodes as unknown as NodesType;
+//const gltf = useLoader(GLTFLoader, "models/pear/Pear2_LOD0.gltf") as unknown as GLTFResult;
+//const nodes = gltf.nodes as unknown as NodesType;
 /* --------- */
 
-const Assets = ({ assetsList }: AssetsArray) => (
+const Assets = ({ assetsList }: AssetsArray) => {
+    const gltf = useLoader(GLTFLoader, "models/pear/Pear2_LOD0.gltf") as unknown as GLTFResult;
+    const nodes = gltf.nodes as unknown as NodesType;
+    
+    return (
     <>
         {
             assetsList.map((asset) => {
@@ -48,6 +52,6 @@ const Assets = ({ assetsList }: AssetsArray) => (
             .filter(x => x)
         }
     </>
-);
-
+    )
+};
 export default Assets;
