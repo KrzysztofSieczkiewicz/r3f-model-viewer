@@ -38,7 +38,7 @@ const Sidebar = () => {
                     <AssetsMenu />
                 </SidebarItem>
                 <SidebarItem 
-                    //icon={<LightIcon className="sidebar-icon" />} 
+                    /*icon={<LightIcon className="sidebar-icon" />}*/
                     active={activeItem === "Lights"}
                     onClick={() => handleItemClick("Lights")}
                 >

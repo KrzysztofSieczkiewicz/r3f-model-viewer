@@ -8,7 +8,7 @@ interface SidebarItem {
 }
 
 const SidebarItem = ({ active, children, onClick } : SidebarItem) => (
-    <li className="sidebar-item">\
+    <li className="sidebar-item">
         <a 
             href="#" 
             className={`icon-button ${active ? "active" : ""}`}
