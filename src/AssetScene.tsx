@@ -76,6 +76,7 @@ function AssetScene() {
     <>
       <Canvas 
         shadows
+        style= {{ background: scene.backgroundColor }}
       >
         <OrbitControls makeDefault target={[0, 0.32, 0]} maxPolarAngle={1.45} />
         <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />

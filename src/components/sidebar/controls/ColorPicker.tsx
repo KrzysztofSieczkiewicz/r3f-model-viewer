@@ -1,4 +1,4 @@
-import { MouseEvent, RefObject, useEffect, useRef, useState } from "react";
+import { MouseEvent, RefObject, createRef, useEffect, useRef, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
 interface ColorPicker {
@@ -13,7 +13,7 @@ export function ColorPicker( {name, value, handleChange }: ColorPicker ) {
   const [ active, setActive ] = useState<boolean>(false);
   const [ position, setPosition ] = useState<number>();
 
-  const popupRef: RefObject<HTMLElement> = useRef(null);
+  const popupRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
     handleChange(color);
@@ -44,7 +44,7 @@ export function ColorPicker( {name, value, handleChange }: ColorPicker ) {
         style={{backgroundColor: color}}
       />
       {active && 
-      <div data-ref={popupRef} className="color-popup" style={{ left: position }}>
+      <div ref={popupRef} className="color-popup" style={{ left: position }}>
         <HexColorPicker color={color} onChange={setColor} />
       </div>}
     </div>
