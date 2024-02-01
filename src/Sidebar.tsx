@@ -1,11 +1,12 @@
+
+import React, { useState } from 'react';
 import SidebarItem from "./components/sidebar/SidebarItem";
 //import { ReactComponent as LightIcon } from './icons/sidebar/light.svg';
 //import { ReactComponent as CubeIcon } from './icons/sidebar/cube.svg';
 //import { ReactComponent as EarthIcon } from './icons/sidebar/earth.svg';
 //import { ReactComponent as ImageIcon } from './icons/sidebar/image.svg';
 import { LightsMenu } from "./components/sidebar/lights/LightsMenu";
-import { useState } from "react";
-import './components/sidebar/sidebar.css';
+import styles from "./components/sidebar/Sidebar.module.css";
 import { AssetsMenu } from "./components/sidebar/assets/AssetsMenu";
 import { SceneMenu } from "./components/sidebar/scene/SceneMenu";
 
@@ -21,8 +22,8 @@ const Sidebar = () => {
     };
 
     return (
-        <nav className="sidebar">
-            <ul className="sidebar-nav">
+        <nav className={styles.sidebar}>
+            <ul className={styles.sidebarNav}>
                 <SidebarItem 
                     //icon={<EarthIcon className="sidebar-icon" />}
                     active={activeItem === "Environment"}

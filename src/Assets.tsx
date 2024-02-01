@@ -17,7 +17,7 @@ type NodeType = {
     material: THREE.Material;
 };
 type NodesType = Record<string, NodeType>;
-type GLTFResult = GLTF & {
+type GLTFResult = {
     nodes: NodesType;
 };
 

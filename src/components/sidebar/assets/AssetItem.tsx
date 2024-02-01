@@ -6,6 +6,7 @@ import { SlidersArray } from "../controls/SlidersArray";
 import { AssetsService } from "../../../services/assets.service";
 import { Vector3 } from "three/src/math/Vector3";
 import { Euler } from "three/src/math/Euler";
+import styles from "./../Sidebar.module.css";
 
 interface AssetItem {
     active: boolean,
@@ -21,15 +22,15 @@ const AssetItem = ({ active, asset, onClick }: AssetItem) => {
     const handleAssetName = () => {
         const name = asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
         return (
-            <p className='header-title'>{name}</p>
+            <p className={styles.headerTitle}>{name}</p>
         );
     }
     
     const handleAssetActive = () => {
         if(active) {
-            return <span className='show-hide header-icon'>&#8657;</span>
+            return <span className='showHide headerIcon'>&#8657;</span>
         } else {
-            return <span className='show-hide header-icon'>&#8659;</span>
+            return <span className='showHide headerIcon'>&#8659;</span>
         }
     }
     

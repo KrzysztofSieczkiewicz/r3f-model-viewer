@@ -1,4 +1,6 @@
 import React from "react"
+import styles from "./Sidebar.module.css";
+
 
 interface SidebarItem {
     active: boolean,
@@ -8,10 +10,10 @@ interface SidebarItem {
 }
 
 const SidebarItem = ({ active, children, onClick } : SidebarItem) => (
-    <li className="sidebar-item">
+    <li className={styles.sidebarItem}>
         <a 
             href="#" 
-            className={`icon-button ${active ? "active" : ""}`}
+            className={`${styles.iconButton} ${active ? styles.active : ""}`}
             onClick={onClick}
         >
             {/*icon*/}
