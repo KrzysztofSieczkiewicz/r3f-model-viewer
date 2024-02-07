@@ -7,6 +7,7 @@ import SidebarItem from "./components/sidebar/SidebarItem";
 //import { ReactComponent as ImageIcon } from './icons/sidebar/image.svg';
 import { LightsMenu } from "./components/sidebar/lights/LightsMenu";
 import styles from "./components/sidebar/Sidebar.module.css";
+import { StyledSidebar, StyledNavList } from './components/sidebar/Sidebar.styles';
 import { AssetsMenu } from "./components/sidebar/assets/AssetsMenu";
 import { SceneMenu } from "./components/sidebar/scene/SceneMenu";
 
@@ -22,8 +23,8 @@ const Sidebar = () => {
     };
 
     return (
-        <nav className={styles.sidebar}>
-            <ul className={styles.sidebarNav}>
+        <StyledSidebar>
+            <StyledNavList>
                 <SidebarItem 
                     //icon={<EarthIcon className="sidebar-icon" />}
                     active={activeItem === "Environment"}
@@ -53,8 +54,8 @@ const Sidebar = () => {
                 >
                 </SidebarItem>
                 */}
-            </ul>
-        </nav>
+            </StyledNavList>
+        </StyledSidebar>
     );
 }
 
