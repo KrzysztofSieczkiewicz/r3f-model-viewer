@@ -1,5 +1,6 @@
-import { MouseEvent, RefObject, createRef, useEffect, useRef, useState } from "react";
+import { MouseEvent, createRef, useEffect, useState } from "react";
 import { HexColorPicker } from "react-colorful";
+import { StyledAttributeContained, StyledAttributeName, StyledColorPreview, StyledPickerPopup } from './Controls.styles';
 
 interface ColorPicker {
   name: string,
@@ -38,15 +39,16 @@ export function ColorPicker( {name, value, handleChange }: ColorPicker ) {
   }, [popupRef, active]);
 
   return (
-    <div className="trait">
-      <label className="trait-name">{name}</label>
-      <div className="color-picker-preview" onMouseDown={(e) => toggleColorPicker(e)}
+    <StyledAttributeContained>
+      <StyledAttributeName>{name}</StyledAttributeName>
+      <StyledColorPreview onMouseDown={(e) => toggleColorPicker(e)}
         style={{backgroundColor: color}}
       />
-      {active && 
-      <div ref={popupRef} className="color-popup" style={{ left: position }}>
+      {active && (
+      <StyledPickerPopup ref={popupRef} style={{ left: position }}>
         <HexColorPicker color={color} onChange={setColor} />
-      </div>}
-    </div>
+      </StyledPickerPopup>
+      )}
+    </StyledAttributeContained>
   );
 }
