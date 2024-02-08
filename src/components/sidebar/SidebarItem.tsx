@@ -1,26 +1,25 @@
 import React from "react"
-import styles from "./Sidebar.module.css";
+import { StyledIconButton, StyledSidebarItem } from "./Sidebar.styles"
 
 
 interface SidebarItem {
     active: boolean,
-    //icon: React.ReactElement
+    icon: React.ReactElement
     children: React.ReactNode
     onClick: () => void,
 }
 
-const SidebarItem = ({ active, children, onClick } : SidebarItem) => (
-    <li className={styles.sidebarItem}>
-        <a 
-            href="#" 
-            className={`${styles.iconButton} ${active ? styles.active : ""}`}
+const SidebarItem = ({ active, icon, children, onClick } : SidebarItem) => (
+    <StyledSidebarItem>
+        <StyledIconButton
+            href="#"
+            className={active ? 'active' : ''}
             onClick={onClick}
         >
-            {/*icon*/}
-        </a>
-
+            {icon}
+        </StyledIconButton>   
         {active && children}
-    </li>
+    </StyledSidebarItem>
 )
 
 export default SidebarItem;

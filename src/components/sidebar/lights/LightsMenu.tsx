@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { SidebarControlsContext } from '../SidebarControlsContext';
 import { LightItem } from './LightItem';
+import { StyledDropdown } from "../Sidebar.styles"
 
 export function LightsMenu() {
     const { lightsList } = useContext(SidebarControlsContext);
@@ -14,7 +15,7 @@ export function LightsMenu() {
     };
     
     return (
-        <div className="dropdown">
+        <StyledDropdown>
             {lightsList.map((light) => {
                 return (
                     <LightItem
@@ -25,6 +26,6 @@ export function LightsMenu() {
                     />
                 );
             })}
-        </div>
+        </StyledDropdown>
     );
 }

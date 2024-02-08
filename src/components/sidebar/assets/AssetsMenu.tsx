@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 
 import { SidebarControlsContext } from "../SidebarControlsContext";
+import { StyledDropdown } from "../Sidebar.styles"
 import AssetItem from "./AssetItem";
 
 export function AssetsMenu() {
@@ -15,7 +16,7 @@ export function AssetsMenu() {
     };
     
     return (
-        <div className="dropdown">
+        <StyledDropdown>
             {assetsList.map((asset) => {
                 return (
                     <AssetItem
@@ -26,6 +27,6 @@ export function AssetsMenu() {
                     />
                 );
             })}
-        </div>
+        </StyledDropdown>
     );
 }
