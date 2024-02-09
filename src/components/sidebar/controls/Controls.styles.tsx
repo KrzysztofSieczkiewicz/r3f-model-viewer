@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_CELTIC_BLUE, COLOR_PLATINUM, COLOR_RESIN_BLACK, COLOR_RESIN_BRIGHTER, SLIDER_RADIUS, TRANSITION_DURATION } from '../Sidebar.styles';
+import { COLOR_CELTIC_BLUE, COLOR_DARK_GLASSS, COLOR_PLATINUM, COLOR_RESIN_BLACK, COLOR_RESIN_BRIGHT, COLOR_RESIN_BRIGHTER, SLIDER_RADIUS, TRANSITION_DURATION } from '../Sidebar.styles';
 
 /*  ---------- GENERAL ---------- */
 export const StyledAttributeContainer = styled.div`
@@ -42,7 +42,6 @@ export const StyledResetDefaultButton = styled.button`
     }
 `;
 
-
 /*  ------- COLOR PICKERS ------- */
 interface StyledPickerPopupProps {
     ref: React.RefObject<HTMLDivElement>;
@@ -66,7 +65,6 @@ export const SyledDDWrapper = styled.div`
 
     vertical-align: middle;
 `;
-
 export const StyledDDButton = styled.button`
     display: flex;
     justify-content: space-between;
@@ -87,3 +85,45 @@ export const StyledDDButton = styled.button`
         border:  1px solid ${COLOR_PLATINUM};
     }
 `;
+export const StyledDDDisplayedName = styled.div`
+    align-self: flex-start;
+    margin: auto 0;
+    text-align: start;
+
+    user-select: none;
+`;
+export const StyledDDArrow = styled.span`
+    align-self: flex-end;
+    margin: auto 0;
+
+    user-select: none;
+`;
+export const StyledDDList = styled.div`
+    box-sizing: border-box;
+    position: fixed;
+
+    width: 7rem;
+    border: 1px solid ${COLOR_DARK_GLASSS};
+    background-color: none;
+    z-index: 1;
+`;
+export const StyledDDListItem = styled.button`
+    width: 100%;
+    height: 1.75rem;
+    margin: 0;
+    text-align: start;
+
+    color: var(--color-grey);
+    border: none;
+    background-color: ${COLOR_RESIN_BRIGHT};
+
+    user-select: none;
+    transition: filter ${TRANSITION_DURATION};
+
+    &:hover{
+        filter: brightness(1.75);
+        color: ${COLOR_PLATINUM};
+    }
+`;
+
+/*  ---------- SLIDERS ---------- */

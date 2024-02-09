@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState, MouseEvent } from 'react';
+import React, { useEffect, useRef, useState, MouseEvent } from 'react';
 import { LightType, LightTypesNames } from '../../../interfaces/light.model';
-import { StyledDDButton, SyledDDWrapper } from './Controls.styles';
-import { StyledDropdownArrow, StyledDropdownDisplayedName, StyledDropdownList, StyledDropdownListItem } from '../Sidebar.styles';
+import { StyledDDButton, StyledDDArrow, StyledDDDisplayedName, StyledDDList, StyledDDListItem, SyledDDWrapper } from './Controls.styles';
 
 interface LightTypeDropdown {
     selected: LightType,
@@ -47,25 +46,25 @@ const LightTypeDropdown = ( {selected, handleChange}:LightTypeDropdown ) => {
                     setIsOpen(!isOpen)
                 }}
             >
-                <StyledDropdownDisplayedName>{getDisplayName()}</StyledDropdownDisplayedName>
+                <StyledDDDisplayedName>{getDisplayName()}</StyledDDDisplayedName>
                 {isOpen
-                ? <StyledDropdownArrow>&#8657;</StyledDropdownArrow>
-                : <StyledDropdownArrow>&#8659;</StyledDropdownArrow>}
+                ? <StyledDDArrow>&#8657;</StyledDDArrow>
+                : <StyledDDArrow>&#8659;</StyledDDArrow>}
             </StyledDDButton>
             {isOpen && (
-                <StyledDropdownList>
+                <StyledDDList>
                     {LightTypesNames.map((lightType) => (
-                        <StyledDropdownListItem
+                        <StyledDDListItem
                             key={lightType.display}
-                            onClick={(e) => {
+                            onClick={(e: { stopPropagation: () => void; }) => {
                                 e.stopPropagation();
                                 selectItem(lightType.type);
                             }}
                         >
                             {lightType.display}
-                        </StyledDropdownListItem>
+                        </StyledDDListItem>
                     ))}
-                </StyledDropdownList>
+                </StyledDDList>
             )}
         </SyledDDWrapper>
     )

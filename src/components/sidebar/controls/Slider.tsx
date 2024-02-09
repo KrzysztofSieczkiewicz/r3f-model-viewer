@@ -1,5 +1,5 @@
 import { useState, useEffect, MouseEvent } from "react";
-import { StyledAttributeContainer, StyledAttributeName } from "./Controls.styles";
+import { StyledAttributeContainer, StyledAttributeName, StyledResetDefaultButton } from "./Controls.styles";
 
 interface Slider {
     name: string
@@ -90,9 +90,7 @@ const Slider = ( {name, min, max, step, value, defaultValue, handleChange}: Slid
                 <span className="slider-arrow right"
                 onClick={() => handleStepChange(1)} > &#62; </span>
             </div>
-            <button className="reset-default-btn"
-                onClick={handleResetDefault}
-            >&#8635;</button>
+            <StyledResetDefaultButton onClick={handleResetDefault}>&#8635;</StyledResetDefaultButton>
         </StyledAttributeContainer>
     );
 }
