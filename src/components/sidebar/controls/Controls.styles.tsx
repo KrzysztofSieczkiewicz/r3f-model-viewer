@@ -2,14 +2,13 @@ import styled from 'styled-components';
 import { COLOR_CELTIC_BLUE, COLOR_PLATINUM, COLOR_RESIN_BLACK, COLOR_RESIN_BRIGHTER, SLIDER_RADIUS, TRANSITION_DURATION } from '../Sidebar.styles';
 
 /*  ---------- GENERAL ---------- */
-export const StyledAttributeContained = styled.div`
+export const StyledAttributeContainer = styled.div`
     display: flex;
     width: 100%;
     height: 2rem;
 
     align-items: center;
 `;
-
 export const StyledAttributeName = styled.label`
     width: 5rem;
     margin: 0 0.75rem 0 0;
@@ -17,6 +16,30 @@ export const StyledAttributeName = styled.label`
 
     font-size: 0.9rem;
     user-select: none;
+`;
+export const StyledResetDefaultButton = styled.button`
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+
+    transition-duration: ${TRANSITION_DURATION};
+    cursor: pointer;
+    user-select: none;
+
+    &.active {
+        transform: rotate(90deg);
+        background-color: ${COLOR_CELTIC_BLUE};
+        color: ${COLOR_PLATINUM};
+    }
+
+    &:hover {
+        background-color: ${COLOR_PLATINUM};
+        color: ${COLOR_RESIN_BLACK};
+    }
 `;
 
 

@@ -110,7 +110,6 @@ export const StyledDropdown = styled.div`
 
     background-color: ${COLOR_DARK_GLASSS};
 `;
-
 export const StyledDropdownSection = styled.section`
     background-color: ${COLOR_RESIN_BRIGHTER};
     border: 1px solid black;
@@ -122,7 +121,6 @@ export const StyledDropdownSection = styled.section`
         border: 0.5px solid ${COLOR_CELTIC_BLUE};
     }
 `;
-
 export const StyledDropdownSectionHeader = styled.h3`
     box-sizing: border-box;
     display: inline-grid;
@@ -134,4 +132,44 @@ export const StyledDropdownSectionHeader = styled.h3`
     padding: 0.25rem 0.5rem;
 
     background-color: ${COLOR_RESIN_BRIGHT};
+`;
+export const StyledDropdownDisplayedName = styled.div`
+    align-self: flex-start;
+    margin: auto 0;
+    text-align: start;
+
+    user-select: none;
+`;
+export const StyledDropdownArrow = styled.span`
+    align-self: flex-end;
+    margin: auto 0;
+
+    user-select: none;
+`;
+export const StyledDropdownList = styled.div`
+    box-sizing: border-box;
+    position: fixed;
+
+    width: 7rem;
+    border: 1px solid ${COLOR_DARK_GLASSS};
+    background-color: none;
+    z-index: 1;
+`;
+export const StyledDropdownListItem = styled.button`
+    width: 100%;
+    height: 1.75rem;
+    margin: 0;
+    text-align: start;
+
+    color: var(--color-grey);
+    border: none;
+    background-color: ${COLOR_RESIN_BRIGHT};
+
+    user-select: none;
+    transition: filter ${TRANSITION_DURATION};
+
+    &:hover{
+        filter: brightness(1.75);
+        color: ${COLOR_PLATINUM};
+    }
 `;

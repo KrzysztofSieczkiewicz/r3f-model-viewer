@@ -1,6 +1,6 @@
 import { MouseEvent, createRef, useEffect, useState } from "react";
 import { HexColorPicker } from "react-colorful";
-import { StyledAttributeContained, StyledAttributeName, StyledColorPreview, StyledPickerPopup } from './Controls.styles';
+import { StyledAttributeContainer, StyledAttributeName, StyledColorPreview, StyledPickerPopup } from './Controls.styles';
 
 interface ColorPicker {
   name: string,
@@ -39,7 +39,7 @@ export function ColorPicker( {name, value, handleChange }: ColorPicker ) {
   }, [popupRef, active]);
 
   return (
-    <StyledAttributeContained>
+    <StyledAttributeContainer>
       <StyledAttributeName>{name}</StyledAttributeName>
       <StyledColorPreview onMouseDown={(e) => toggleColorPicker(e)}
         style={{backgroundColor: color}}
@@ -49,6 +49,6 @@ export function ColorPicker( {name, value, handleChange }: ColorPicker ) {
         <HexColorPicker color={color} onChange={setColor} />
       </StyledPickerPopup>
       )}
-    </StyledAttributeContained>
+    </StyledAttributeContainer>
   );
 }

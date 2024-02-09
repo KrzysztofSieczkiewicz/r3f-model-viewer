@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, MouseEvent } from 'react';
 import { LightType, LightTypesNames } from '../../../interfaces/light.model';
 import { StyledDDButton, SyledDDWrapper } from './Controls.styles';
+import { StyledDropdownArrow, StyledDropdownDisplayedName, StyledDropdownList, StyledDropdownListItem } from '../Sidebar.styles';
 
 interface LightTypeDropdown {
     selected: LightType,
@@ -46,15 +47,15 @@ const LightTypeDropdown = ( {selected, handleChange}:LightTypeDropdown ) => {
                     setIsOpen(!isOpen)
                 }}
             >
-                <div className="dd-header-title">{getDisplayName()}</div>
+                <StyledDropdownDisplayedName>{getDisplayName()}</StyledDropdownDisplayedName>
                 {isOpen
-                ? <span className="dd-header-arrow">&#8657;</span>
-                : <span className="dd-header-arrow">&#8659;</span>}
+                ? <StyledDropdownArrow>&#8657;</StyledDropdownArrow>
+                : <StyledDropdownArrow>&#8659;</StyledDropdownArrow>}
             </StyledDDButton>
             {isOpen && (
-                <div className="dd-list">
+                <StyledDropdownList>
                     {LightTypesNames.map((lightType) => (
-                        <button className="dd-list-item"
+                        <StyledDropdownListItem
                             key={lightType.display}
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -62,9 +63,9 @@ const LightTypeDropdown = ( {selected, handleChange}:LightTypeDropdown ) => {
                             }}
                         >
                             {lightType.display}
-                        </button>
+                        </StyledDropdownListItem>
                     ))}
-                </div>
+                </StyledDropdownList>
             )}
         </SyledDDWrapper>
     )

@@ -1,4 +1,5 @@
 import { useState, useEffect, MouseEvent } from "react";
+import { StyledAttributeContainer, StyledAttributeName } from "./Controls.styles";
 
 interface Slider {
     name: string
@@ -74,8 +75,8 @@ const Slider = ( {name, min, max, step, value, defaultValue, handleChange}: Slid
     // maybe wrap <span> in <div> with onDoubleClick that will return <input> instead?
     // and detect outside click or return etc. to return to <span>
     return (
-        <div className="trait">
-            <label className="trait-name">{name}</label>
+        <StyledAttributeContainer>
+            <StyledAttributeName>{name}</StyledAttributeName>
             <div className="input-slider slider-single" 
                 onMouseDown={(e) => handleMouseDown(e)}
             >
@@ -92,7 +93,7 @@ const Slider = ( {name, min, max, step, value, defaultValue, handleChange}: Slid
             <button className="reset-default-btn"
                 onClick={handleResetDefault}
             >&#8635;</button>
-        </div>
+        </StyledAttributeContainer>
     );
 }
 
