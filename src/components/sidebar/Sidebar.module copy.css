@@ -38,33 +38,6 @@
     border-radius: 50%;
 }
 
-.dropdown-item-header .visibility-icon {
-    height: 1.5rem;
-    width: 1.5rem;
-    line-height: 1.5rem;
-    margin: auto;
-
-    border-radius: 50%;
-    color: var(--color-platinum);
-    background-color: var(--color-celtic-blue);
-    border: 1px solid var(--color-resin-black);
-
-    transition: color var(--transition-duration);
-    background-color: var(--transition-duration);
-}
-
-.dropdown-item-header .visibility-icon:hover,
-.dropdown-item-header .visibility-icon.suppressed:hover {
-    color: var(--color-resin-black);
-    background-color: var(--color-platinum);
-}
-
-.dropdown-item-header .visibility-icon.suppressed {
-    color: var(--color-grey-dark);
-    background-color: var(--color-resin-bright);
-    border: 1px solid var(--color-grey-dark);
-}
-
 .dropdown-item-body {
     padding: 0.5rem 0.75rem 0.75rem 0.75rem;
     display: flex;

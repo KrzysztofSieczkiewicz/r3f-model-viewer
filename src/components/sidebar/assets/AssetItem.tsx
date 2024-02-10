@@ -6,7 +6,7 @@ import { SlidersArray } from "../controls/SlidersArray";
 import { AssetsService } from "../../../services/assets.service";
 import { Vector3 } from "three/src/math/Vector3";
 import { Euler } from "three/src/math/Euler";
-import { StyledDropdownSectionHeader, StyledShowHideButton, StyledToggleVisibleButton } from "../Sidebar.styles";
+import { StyledDropdownSectionBody, StyledDropdownSectionHeader, StyledShowHideButton, StyledToggleVisibleButton } from "../Sidebar.styles";
 
 interface AssetItem {
     active: boolean,
@@ -59,7 +59,7 @@ const AssetItem = ({ active, asset, onClick }: AssetItem) => {
             {handleAssetActive()}
         </div>
 
-        {active && <div className="dropdown-item-body">
+        {active && <StyledDropdownSectionBody>
             <SlidersArray name="Position"
                 value={asset.position ? asset.position.toArray().map(Number) : []} step={0.005}
                 handleChange={(val) => setAssetsList( AssetsService.updateAsset(assetsList, asset.id, { ...asset, position: new Vector3(...val) }) ) }
@@ -72,7 +72,7 @@ const AssetItem = ({ active, asset, onClick }: AssetItem) => {
                 value={asset.rotation ? asset.rotation.toArray().map(Number) : []} step={0.01}
                 handleChange={(val) => setAssetsList( AssetsService.updateAsset( assetsList, asset.id, { ...asset, rotation: new Euler(...val) }) ) }
             />
-        </div>}
+        </StyledDropdownSectionBody>}
     </div>
     );
 }

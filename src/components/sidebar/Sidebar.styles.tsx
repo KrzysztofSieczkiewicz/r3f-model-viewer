@@ -121,6 +121,13 @@ export const StyledDropdownSection = styled.section`
         border: 0.5px solid ${COLOR_CELTIC_BLUE};
     }
 `;
+export const StyledDropdownSectionBody = styled.div`
+    padding: 0.5rem 0.75rem 0.75rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+
+    color: ${COLOR_PLATINUM};
+`;
 
 // TODO: RENAME THIS AND THE REST OF 'DROPDOWNs' TO SUBMENU?
 export const StyledDropdownSectionHeader = styled.h3`
