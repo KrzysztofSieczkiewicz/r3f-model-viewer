@@ -19,26 +19,31 @@ export class AssetsService {
     }
 
     static addAsset (assetsArray: AssetWrapper[]): AssetWrapper[] {
+        const updatedArray = [...assetsArray];
         const newAsset = new AssetsService().createDefault();
     
-        assetsArray.push(newAsset)
+        updatedArray.push(newAsset)
     
-        return assetsArray;
+        return updatedArray;
     }
 
     static updateAsset(assetsArray: AssetWrapper[], id: string, asset:AssetWrapper): AssetWrapper[] {
-        const index = assetsArray.findIndex(asset => asset.id === id);
+        const updatedArray = [...assetsArray];
+        const index = updatedArray.findIndex(a => a.id === id);
     
-        assetsArray[index] = asset;
-    
-        return assetsArray;
+        if (index !== -1) {
+            updatedArray[index] = asset;
+        }
+
+        return updatedArray;
     }
 
     static deleteAsset (assetsArray: AssetWrapper[], id: string): AssetWrapper[] {
-        const index = assetsArray.findIndex(asset => asset.id === id);
+        const updatedArray = [...assetsArray];
+        const index = updatedArray.findIndex(asset => asset.id === id);
     
-        assetsArray.splice(index, 1);
+        updatedArray.splice(index, 1);
     
-        return assetsArray;
+        return updatedArray;
     }
 }

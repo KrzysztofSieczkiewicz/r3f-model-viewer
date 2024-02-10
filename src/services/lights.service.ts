@@ -19,27 +19,30 @@ export class LightsService {
     }
 
     static addLight(lightsArray: LightWrapper[]): LightWrapper[] {
+        const updatedArray = [...lightsArray];
         const newLight = LightsService.createDefault();
     
-        lightsArray.push(newLight)
+        updatedArray.push(newLight)
     
-        return lightsArray;
+        return updatedArray;
     }
     
     static updateLight(lightsArray: LightWrapper[], id: string, light: LightWrapper): LightWrapper[] {
-        const index = lightsArray.findIndex(light => light.id === id);
+        const updatedArray = [...lightsArray];
+        const index = updatedArray.findIndex(light => light.id === id);
     
-        lightsArray[index] = light;
+        updatedArray[index] = light;
     
-        return lightsArray;
+        return updatedArray;
     }
     
     static deleteLight(lightsArray: LightWrapper[], id: string): LightWrapper[] {
-        const index = lightsArray.findIndex(light => light.id === id);
+        const updatedArray = [...lightsArray];
+        const index = updatedArray.findIndex(light => light.id === id);
     
-        lightsArray.splice(index, 1);
+        updatedArray.splice(index, 1);
     
-        return lightsArray;
+        return updatedArray;
     }
     
 }
