@@ -57,7 +57,7 @@ export const StyledSidebarItem = styled.li`
 `;
 
 export const StyledIconButton = styled.a`
---button-size: calc(${NAV_SIZE} *  0.75);
+    --button-size: calc(${NAV_SIZE} *  0.75);
     width: var(--button-size);
     height: var(--button-size);
     padding:  0;
@@ -121,6 +121,8 @@ export const StyledDropdownSection = styled.section`
         border: 0.5px solid ${COLOR_CELTIC_BLUE};
     }
 `;
+
+// TODO: RENAME THIS AND THE REST OF 'DROPDOWNs' TO SUBMENU?
 export const StyledDropdownSectionHeader = styled.h3`
     box-sizing: border-box;
     display: inline-grid;
@@ -132,4 +134,57 @@ export const StyledDropdownSectionHeader = styled.h3`
     padding: 0.25rem 0.5rem;
 
     background-color: ${COLOR_RESIN_BRIGHT};
+`;
+
+
+/*  ------ ICONS AND BUTTONS ------ */
+export const StyledShowHideButton = styled.span`
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    margin: 0 auto;
+    height: 1.5rem;
+    width: 1.5rem;
+
+    font-size: 1.15rem;
+    border-radius: 50%;
+
+    color: ${COLOR_PLATINUM};
+    user-select: none;
+`;
+
+export const StyledToggleVisibleButton = styled.span`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+
+    height: 1.5rem;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    margin: auto;
+
+    border-radius: 50%;
+    color: ${COLOR_PLATINUM};
+    background-color: ${COLOR_CELTIC_BLUE};
+    border: 1px solid ${COLOR_RESIN_BLACK};
+
+    transition: color ${TRANSITION_DURATION};
+    background-color: ${TRANSITION_DURATION};
+
+    ${StyledDropdownSectionHeader} &:hover,
+    ${StyledDropdownSectionHeader} &.suppressed:hover {
+        color: ${COLOR_RESIN_BLACK};
+        background-color: ${COLOR_PLATINUM};
+    }
+
+    ${StyledDropdownSectionHeader} &.suppressed {
+        color: ${COLOR_GREY_DARK};
+        background-color: ${COLOR_RESIN_BRIGHT};
+        border: 1px solid ${COLOR_GREY_DARK};
+    }
 `;

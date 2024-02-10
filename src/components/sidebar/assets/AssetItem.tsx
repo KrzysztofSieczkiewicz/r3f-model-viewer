@@ -6,6 +6,7 @@ import { SlidersArray } from "../controls/SlidersArray";
 import { AssetsService } from "../../../services/assets.service";
 import { Vector3 } from "three/src/math/Vector3";
 import { Euler } from "three/src/math/Euler";
+import { StyledDropdownSectionHeader, StyledShowHideButton, StyledToggleVisibleButton } from "../Sidebar.styles";
 
 interface AssetItem {
     active: boolean,
@@ -21,28 +22,29 @@ const AssetItem = ({ active, asset, onClick }: AssetItem) => {
     const handleAssetName = () => {
         const name = asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
         return (
-            <p className='header-title'>{name}</p>
+            <StyledDropdownSectionHeader>{name}</StyledDropdownSectionHeader>
         );
     }
     
     const handleAssetActive = () => {
         if(active) {
-            return <span className='show-hide header-icon'>&#8657;</span>
+            return <StyledShowHideButton>&#8657;</StyledShowHideButton>
         } else {
-            return <span className='show-hide header-icon'>&#8659;</span>
+            return <StyledShowHideButton>&#8659;</StyledShowHideButton>
         }
     }
     
     const handleAssetVisible = () => {
-        return (<span className={`visibility-icon header-icon ${!asset.visible ? "suppressed" : ""}`} 
-            onClick={(e) => {
-                e.stopPropagation();
-                setAssetsList(
-                    AssetsService.updateAsset( assetsList, asset.id, { ...asset, visible: !asset.visible } )
-                );
-                
-            }}
-            >&#128065;</span>
+        return (
+            <StyledToggleVisibleButton 
+                className={!asset.visible ? "suppressed" : ""}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setAssetsList( AssetsService.updateAsset( assetsList, asset.id, { ...asset, visible: !asset.visible } ));
+                }}
+            >
+                &#128065;
+            </StyledToggleVisibleButton>
         );
     }
 
