@@ -1,5 +1,5 @@
-import { useState, useEffect, MouseEvent } from "react";
-import { StyledAttributeContainer, StyledAttributeName, StyledResetDefaultButton } from "./Controls.styles";
+import React, { useState, useEffect, MouseEvent } from "react";
+import { StyledSliderArrow, StyledAttributeContainer, StyledAttributeName, StyledInputSlider, StyledResetDefaultButton, StyledSliderValue } from "./Controls.styles";
 
 interface Slider {
     name: string
@@ -77,19 +77,22 @@ const Slider = ( {name, min, max, step, value, defaultValue, handleChange}: Slid
     return (
         <StyledAttributeContainer>
             <StyledAttributeName>{name}</StyledAttributeName>
-            <div className="input-slider slider-single" 
+            <StyledInputSlider className="single" 
                 onMouseDown={(e) => handleMouseDown(e)}
             >
-                <span className="slider-arrow left"
-                onClick={() => handleStepChange(-1)} > &#60; </span>
+                <StyledSliderArrow className="left" onClick={() => handleStepChange(-1)}>
+                     &#60; 
+                </StyledSliderArrow>
 
-                <span className="slider-value"
-                onDoubleClick={() => console.log("DoubleClicked")}
-                >{handledValue}</span>
+                <StyledSliderValue onDoubleClick={() => console.log("DoubleClicked")}>
+                    {handledValue}
+                </StyledSliderValue>
 
-                <span className="slider-arrow right"
-                onClick={() => handleStepChange(1)} > &#62; </span>
-            </div>
+                <StyledSliderArrow className="right" onClick={() => handleStepChange(1)}>
+                     &#62; 
+                </StyledSliderArrow>
+
+            </StyledInputSlider>
             <StyledResetDefaultButton onClick={handleResetDefault}>&#8635;</StyledResetDefaultButton>
         </StyledAttributeContainer>
     );

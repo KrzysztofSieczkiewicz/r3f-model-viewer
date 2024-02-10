@@ -1,4 +1,5 @@
 import { useState, useEffect, MouseEvent } from "react";
+import { StyledAxisColor, StyledInputSlider, StyledSliderArrow, StyledSliderValue } from "./Controls.styles";
 
 interface SliderArray {
     name: string,
@@ -68,18 +69,18 @@ export function SlidersArray( {name, step, value, handleChange}: SliderArray) {
             <>
             {handledValue.map((position, index) => {
                 return (
-                    <div className="input-slider slider-array-three" 
+                    <StyledInputSlider className="array-three" 
                         key={index}
                         data-index={index}
                         onMouseDown={(e) => {
                             handleMouseDown(e)
                         }}
                     >
-                        <div className="position-color-indicator" style={{ backgroundColor: indicatorColors[index] }}/>
-                        <span className="slider-arrow left">&#60;</span>
-                        <span className="slider-value">{position}</span>
-                        <span className="slider-arrow right">&#62;</span>
-                    </div>
+                        <StyledAxisColor style={{ backgroundColor: indicatorColors[index] }}/>
+                        <StyledSliderArrow className="left">&#60;</StyledSliderArrow>
+                        <StyledSliderValue>{position}</StyledSliderValue>
+                        <StyledSliderArrow className="right">&#62;</StyledSliderArrow>
+                    </StyledInputSlider>
                 )
             })}
             </>

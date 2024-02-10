@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_CELTIC_BLUE, COLOR_DARK_GLASSS, COLOR_PLATINUM, COLOR_RESIN_BLACK, COLOR_RESIN_BRIGHT, COLOR_RESIN_BRIGHTER, SLIDER_RADIUS, TRANSITION_DURATION } from '../Sidebar.styles';
+import { COLOR_CELTIC_BLUE, COLOR_DARK_GLASSS, COLOR_GREY, COLOR_PLATINUM, COLOR_RESIN_BLACK, COLOR_RESIN_BRIGHT, COLOR_RESIN_BRIGHTER, SLIDER_RADIUS, TRANSITION_DURATION } from '../Sidebar.styles';
 
 /*  ---------- GENERAL ---------- */
 export const StyledAttributeContainer = styled.div`
@@ -127,3 +127,81 @@ export const StyledDDListItem = styled.button`
 `;
 
 /*  ---------- SLIDERS ---------- */
+export const StyledInputSlider = styled.div`
+    height: 1.25em;
+    display: flex;
+
+    background-color: ${COLOR_RESIN_BLACK};
+    border-radius: ${SLIDER_RADIUS};
+    color: ${COLOR_GREY};
+
+    text-align: center;
+    user-select: none;
+    cursor: col-resize;
+
+    transition-duration: ${TRANSITION_DURATION};
+
+    &:hover {
+        color: ${COLOR_RESIN_BLACK};
+        background-color: ${COLOR_PLATINUM};
+    }
+
+    &.active {
+        --filter: brightness(1.35);
+        background-color: ${COLOR_CELTIC_BLUE};
+        color: ${COLOR_PLATINUM};
+    }
+
+    &.single {
+        width: 7em;
+    }
+
+    &.array-three {
+        width: 3.5em;
+        margin-right: 5px;
+    }
+`;
+
+export const StyledSliderArrow = styled.span`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width:  1em;
+    font-size:  0.9rem;
+    font-style: normal;
+    color: ${COLOR_GREY};
+    background-color: ${COLOR_RESIN_BRIGHT};
+    transition-duration: ${TRANSITION_DURATION};
+
+    &.right {
+        border-radius: 0 ${SLIDER_RADIUS} ${SLIDER_RADIUS} 0;
+    }
+
+    &.left {
+        border-radius: ${SLIDER_RADIUS}  0  0 ${SLIDER_RADIUS};
+    }
+
+    .input-slider:hover & {
+        background-color: ${COLOR_PLATINUM};
+        color: ${COLOR_RESIN_BLACK};
+    }
+
+    .input-slider:active & {
+        background-color: ${COLOR_CELTIC_BLUE};
+        color: ${COLOR_PLATINUM};
+    }
+`;
+
+export const StyledSliderValue = styled.span`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 0.9rem;
+`;
+
+export const StyledAxisColor = styled.div`
+    bottom: 0;
+    height: 100%;
+    width: 0.25rem;
+`;
