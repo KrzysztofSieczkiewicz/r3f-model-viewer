@@ -181,12 +181,12 @@ export const StyledSliderArrow = styled.span`
         border-radius: ${SLIDER_RADIUS}  0  0 ${SLIDER_RADIUS};
     }
 
-    .input-slider:hover & {
+    ${StyledInputSlider}:hover & {
         background-color: ${COLOR_PLATINUM};
         color: ${COLOR_RESIN_BLACK};
     }
 
-    .input-slider:active & {
+    ${StyledInputSlider}:active & {
         background-color: ${COLOR_CELTIC_BLUE};
         color: ${COLOR_PLATINUM};
     }
