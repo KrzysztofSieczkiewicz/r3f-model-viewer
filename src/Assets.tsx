@@ -28,15 +28,16 @@ type GLTFResult = {
 const Assets = ({ assetsList }: AssetsArray) => {
     const gltf = useLoader(GLTFLoader, "models/pear/Pear2_LOD0.gltf") as unknown as GLTFResult;
     const nodes = gltf.nodes as unknown as NodesType;
-    
+
     return (
     <>
         {
             assetsList.map((asset) => {
                 if(asset.visible) {
                     return (
-                    <PivotControls key={asset.id}>
+                    //<PivotControls key={asset.id}>
                         <mesh
+                            key={asset.id}
                             castShadow = {asset.castShadow}
                             receiveShadow = {asset.receiveShadow}
                             geometry={nodes["Aset_food_fruit_S_tezbbgrra_LOD0"].geometry} // TODO: Still to be parametrized
@@ -45,7 +46,7 @@ const Assets = ({ assetsList }: AssetsArray) => {
                             rotation={asset.rotation}
                             scale={asset.scale}
                         />
-                    </PivotControls >
+                    //</PivotControls >
                 );}
             })
             .filter(x => x)

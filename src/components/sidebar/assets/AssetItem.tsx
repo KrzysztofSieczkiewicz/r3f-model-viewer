@@ -65,17 +65,15 @@ const AssetItem = ({ active, asset, handleItemClick }: AssetItem) => {
         {active && <StyledDropdownSectionBody>
             <SlidersArray name="Position"
                 value={asset.position ? asset.position.toArray().map(Number) : []} step={0.005}
-                handleChange={(val) => setAssetsList( AssetsService.updateAsset(assetsList, asset.id, { ...asset, position: new Vector3(val) } ) ) } // { ...asset, position: new Vector3(...val) }
+                handleChange={(val) => setAssetsList( AssetsService.updateAsset( assetsList, asset.id, { ...asset, position: new Vector3(...val) } ) ) } // { ...asset, position: new Vector3(...val) }
             />
             <SlidersArray name="Scale"
                 value={asset.scale ? asset.scale.toArray().map(Number) : []} step={0.01}
-                handleChange={(val) => {
-                    setAssetsList( AssetsService.updateAsset( assetsList, asset.id, asset) ) 
-                } } // { ...asset, scale: new Vector3(...val) }
+                handleChange={(val) => setAssetsList( AssetsService.updateAsset( assetsList, asset.id, { ...asset, scale: new Vector3(...val) } ) ) } // { ...asset, scale: new Vector3(...val) }
             />
             <SlidersArray name="Rotation"
                 value={asset.rotation ? [asset.rotation.x, asset.rotation.y, asset.rotation.z] : []} step={0.01}
-                handleChange={(val) => setAssetsList( AssetsService.updateAsset( assetsList, asset.id, asset ) ) } //{ ...asset, rotation: new Euler(...val) }
+                handleChange={(val) => setAssetsList( AssetsService.updateAsset( assetsList, asset.id, { ...asset, rotation: new Euler(...val) } ) ) } //{ ...asset, rotation: new Euler(...val) }
             />
         </StyledDropdownSectionBody>}
     </div>

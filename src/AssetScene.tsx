@@ -11,6 +11,7 @@ import Lights from './Lights';
 import Assets from './Assets';
 import { SceneWrapper } from './interfaces/scene.model';
 import Sidebar from './Sidebar';
+import { AssetsService } from './services/assets.service';
 
 
 function AssetScene() {
@@ -40,8 +41,33 @@ function AssetScene() {
     }
   ]);
 
+  console.log("CREATED BY ASSETS SERVICE")
+  console.log(AssetsService.createDefault())
+  console.log("CREATED MANUALLY")
+  console.log({
+    id: nanoid(5),
+    name: "pear",
+    object: "toBeReplaced",
+    position: new Vector3(0,0,0),
+    rotation: new Euler(0,0,0),
+    scale: new Vector3(10,10,10),
+    castShadow: true,
+    receiveShadow: true,
+    visible: true,
+  })
+
   const [assetsList, setAssetsList] = useState<AssetWrapper[]>([
     {
+      id: nanoid(5),
+      name: "pear",
+      object: "toBeReplaced",
+      position: new Vector3(1,1,1),
+      rotation: new Euler(0,0,0),
+      scale: new Vector3(10,10,10),
+      castShadow: true,
+      receiveShadow: true,
+      visible: true,
+    },{
       id: nanoid(5),
       name: "pear",
       object: "toBeReplaced",
