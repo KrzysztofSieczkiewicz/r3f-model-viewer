@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 //import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from "../../../interfaces/asset.model";
 import { SidebarControlsContext } from "../SidebarControlsContext";
@@ -11,12 +11,12 @@ import { StyledDropdownSectionBody, StyledDropdownSectionHeader, StyledShowHideB
 interface AssetItem {
     active: boolean,
     asset: AssetWrapper,
-    onClick: (id :string) => void
+    handleItemClick: (id :string) => void
 }
 
 // TODO: REINSTATE PointLightIcon
 
-const AssetItem = ({ active, asset, onClick }: AssetItem) => {
+const AssetItem = ({ active, asset, handleItemClick }: AssetItem) => {
     const { assetsList, setAssetsList } = useContext(SidebarControlsContext);
 
     const handleAssetName = () => {
@@ -40,7 +40,7 @@ const AssetItem = ({ active, asset, onClick }: AssetItem) => {
                 className={!asset.visible ? "suppressed" : ""}
                 onClick={(e) => {
                     e.stopPropagation();
-                    setAssetsList( AssetsService.updateAsset( assetsList, asset.id, { ...asset, visible: !asset.visible } ));
+                    setAssetsList( AssetsService.updateAsset( assetsList, asset.id, { ...asset, visible: (!asset.visible) } ));
                 }}
             >
                 &#128065;
@@ -48,10 +48,13 @@ const AssetItem = ({ active, asset, onClick }: AssetItem) => {
         );
     }
 
+    useEffect(()=> {
+    })
+
     return(
     <div>
         <div className="dropdown-item-header asset-item-header"
-                /*onClick={onClick}*/ // TODO: REINSTATE THIS IF NECESSARY
+                onClick={() => handleItemClick(asset.id) }
         >
             {/*<PointLightIcon className='type-icon header-icon' /> */}
             {handleAssetName()}
@@ -62,15 +65,17 @@ const AssetItem = ({ active, asset, onClick }: AssetItem) => {
         {active && <StyledDropdownSectionBody>
             <SlidersArray name="Position"
                 value={asset.position ? asset.position.toArray().map(Number) : []} step={0.005}
-                handleChange={(val) => setAssetsList( AssetsService.updateAsset(assetsList, asset.id, { ...asset, position: new Vector3(...val) }) ) }
+                handleChange={(val) => setAssetsList( AssetsService.updateAsset(assetsList, asset.id, { ...asset, position: new Vector3(val) } ) ) } // { ...asset, position: new Vector3(...val) }
             />
             <SlidersArray name="Scale"
                 value={asset.scale ? asset.scale.toArray().map(Number) : []} step={0.01}
-                handleChange={(val) => setAssetsList( AssetsService.updateAsset( assetsList, asset.id, { ...asset, scale: new Vector3(...val) }) ) }
+                handleChange={(val) => {
+                    setAssetsList( AssetsService.updateAsset( assetsList, asset.id, asset) ) 
+                } } // { ...asset, scale: new Vector3(...val) }
             />
             <SlidersArray name="Rotation"
-                value={asset.rotation ? asset.rotation.toArray().map(Number) : []} step={0.01}
-                handleChange={(val) => setAssetsList( AssetsService.updateAsset( assetsList, asset.id, { ...asset, rotation: new Euler(...val) }) ) }
+                value={asset.rotation ? [asset.rotation.x, asset.rotation.y, asset.rotation.z] : []} step={0.01}
+                handleChange={(val) => setAssetsList( AssetsService.updateAsset( assetsList, asset.id, asset ) ) } //{ ...asset, rotation: new Euler(...val) }
             />
         </StyledDropdownSectionBody>}
     </div>

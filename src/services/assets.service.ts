@@ -29,7 +29,7 @@ export class AssetsService {
 
     static updateAsset(assetsArray: AssetWrapper[], id: string, asset:AssetWrapper): AssetWrapper[] {
         const updatedArray = [...assetsArray];
-        const index = updatedArray.findIndex(a => a.id === id);
+        const index = updatedArray.findIndex(asset => asset.id === id);
     
         if (index !== -1) {
             updatedArray[index] = asset;

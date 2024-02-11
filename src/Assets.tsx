@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import THREE from "three";
 import { AssetWrapper } from "./interfaces/asset.model";
 import { PivotControls } from "@react-three/drei/web/pivotControls";
@@ -35,9 +35,8 @@ const Assets = ({ assetsList }: AssetsArray) => {
             assetsList.map((asset) => {
                 if(asset.visible) {
                     return (
-                    <PivotControls >
+                    <PivotControls key={asset.id}>
                         <mesh
-                            key={asset.id}
                             castShadow = {asset.castShadow}
                             receiveShadow = {asset.receiveShadow}
                             geometry={nodes["Aset_food_fruit_S_tezbbgrra_LOD0"].geometry} // TODO: Still to be parametrized
