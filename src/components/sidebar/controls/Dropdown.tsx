@@ -1,27 +1,39 @@
+import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-export function Dropdown(props) {
+type Props = {
+    value: string,
+    list: Light[],
+    handleChange: (item: string) => void
+}
+
+type Light = {
+    type: string,
+    display: string
+}
+
+export function Dropdown(props: Props) {
     const { value, list, handleChange } = props;
 
     const [ isOpen, setIsOpen ] = useState(false);
-    const dropdownRef = useRef();
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     function toggleList() {
-        setIsOpen(!isOpen);
+        setIsOpen(!isOpen); 
     }
 
-    function selectItem(item) {
+    function selectItem(item: string) {
         handleChange(item);
         setIsOpen(false);
     }
 
-    function getDisplayedByType(type) {
-        return list.find(light => light.type === type)?.display
+    function getDisplayedByType(type: string) {
+        return list.find((light: Light) =>  light.type === type)?.display
     }
 
     useEffect(() => {
-        function handleClickOutside(e) {
-          if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        function handleClickOutside(e: MouseEvent) {
+          if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
             setIsOpen(false);
           }
         }
@@ -50,7 +62,7 @@ export function Dropdown(props) {
             </button>
             {isOpen && (
                 <div className="dd-list">
-                    {list.map((item) => (
+                    {list.map((item: Light) => (
                         <button className="dd-list-item"
                             key={item.type}
                             onClick={(e) => {

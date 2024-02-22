@@ -27,7 +27,7 @@ function AssetScene() {
   function updateSelected(objectId) {
     setSelectedList(objectId);
     // SET PROVIDED OBJECT ID AS THE ONLY SELECTED OBJECT
-    console.log(objectId);
+    //console.log(objectId);
     // IF SHIFT KEY WAS PRESSED, ADD IT TO THE LIST INSTEAD
 
   }
@@ -152,7 +152,7 @@ function AssetScene() {
       ...scene,
       [property]: value
     });
-    console.log(scene)
+    //console.log(scene)
   }
 
   // SELECTION
@@ -182,11 +182,6 @@ function AssetScene() {
       setSelectedID(newID);
     }
   }
-
-  // TODO: JUST FOR LOGGING PURPOSES
-  useEffect(() => {
-    console.log("Currently selected id:  " + selectedID);
-}, [selectedID]);
 
   return (
     <>

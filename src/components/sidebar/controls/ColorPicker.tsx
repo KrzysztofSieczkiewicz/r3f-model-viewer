@@ -1,26 +1,34 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
-export function ColorPicker(props) {
+type Props = {
+  name: string,
+  value: string,
+  handleChange: (color: string) => void,
+
+}
+
+export const ColorPicker = (props :Props) :JSX.Element => {
   const [ color, setColor ] = useState(props.value);
 
   useEffect(() => {
     props.handleChange(color);
   }, [color])
 
-  const popupRef = useRef();
+  const popupRef = useRef<HTMLDivElement | null>(null);
 
   const [ active, setActive ] = useState(false);
-  const [ position, setPosition ] = useState([]);
+  const [ position, setPosition ] = useState(0);
 
-  function toggleColorPicker(e) {
+  function toggleColorPicker(e: React.MouseEvent<HTMLDivElement>) {
     setPosition(e.clientX - 25);
     setActive(!active);
   }
 
   useEffect(() => {
-    function handleClickOutside(e) {
-      if (active && popupRef.current && !popupRef.current.contains(e.target)) {
+    function handleClickOutside(e :MouseEvent) {
+      if (active && popupRef.current && !popupRef.current.contains(e.target as Node)) {
         setActive(false);
       }
     }
