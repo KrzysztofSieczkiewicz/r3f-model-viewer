@@ -1,14 +1,23 @@
+import React from "react";
 import { useEffect, useState } from "react";
 
-export function Slider(props) {
-    const { min, max, step,
-    value, handleChange} = props;
+type Props = {
+    name: string,
+    min: number,
+    max: number,
+    step: number,
+    value: number,
+    defaultValue: number,
+    handleChange: (handledValue: number) => void
+}
+
+export function Slider({ name, min, max, step, value, defaultValue, handleChange}: Props) {
 
     const [ handledValue, setHandledValue ] = useState(value);
-    const [ startingPosX, setStartingPosX ] = useState();
+    const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
-    function handleValue(newValue) {
+    function handleValue(newValue: number) {
         if (!isNaN(newValue)) {
             setHandledValue(0);
         }
@@ -21,17 +30,17 @@ export function Slider(props) {
         }
     }
 
-    const handleStepChange = (direction) => {
+    const handleStepChange = (direction: number) => {
         handleValue(handledValue + (step * direction * 10));
     }
 
-    const handleMouseDown = (e) => {
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         setStartingPosX(e.clientX);
         setIsMouseDown(true)
     };
 
     useEffect(() => {
-        const handleMouseMove = (event) => {
+        const handleMouseMove = (event: MouseEvent) => {
             const calculatedX = event.clientX - startingPosX;
             
             handleValue(handledValue + calculatedX * step);
@@ -59,8 +68,8 @@ export function Slider(props) {
     }, [handledValue])
 
     function handleResetDefault() {
-        handleValue(props.defaultValue);
-        handleChange(props.defaultValue);
+        handleValue(defaultValue);
+        handleChange(defaultValue);
     }
 
     // TODO: add doubleclick to set value numerically
@@ -68,9 +77,8 @@ export function Slider(props) {
     // and detect outside click or return etc. to return to <span>
     return (
         <div className="trait">
-            <label className="trait-name">{props.name}</label>
+            <label className="trait-name">{name}</label>
             <div className="input-slider slider-single" 
-                value={handledValue}
                 onMouseDown={(e) => handleMouseDown(e)}
             >
                 <span className="slider-arrow left"
