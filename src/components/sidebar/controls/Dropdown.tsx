@@ -12,7 +12,7 @@ type Light = {
     display: string
 }
 
-export function Dropdown(props: Props) {
+export const Dropdown = (props: Props): JSX.Element => {
     const { value, list, handleChange } = props;
 
     const [ isOpen, setIsOpen ] = useState(false);

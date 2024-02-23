@@ -11,7 +11,8 @@ type Props = {
     handleChange: (handledValue: number) => void
 }
 
-export function Slider({ name, min, max, step, value, defaultValue, handleChange}: Props) {
+export const Slider = (props: Props) => {
+    const { name, min, max, step, value, defaultValue, handleChange} = props;
 
     const [ handledValue, setHandledValue ] = useState(value);
     const [ startingPosX, setStartingPosX ] = useState(0);
