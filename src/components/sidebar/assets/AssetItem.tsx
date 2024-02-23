@@ -1,10 +1,33 @@
 import { useContext } from 'react';
-import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
+// TODO: JAK DODAĆ IKONĘ
+//import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
+import SidebarControlsContext from '../SidebarControlsContext'
 import { SlidersArray } from '../controls/SlidersArray';
+import React from 'react';
 
-export function AssetItem(props) {
-    const { active, asset } = props;
+type Props = {
+    active: boolean,
+    asset: {
+        id: string,
+        object: string,
+        name: string,
+        position: number[],
+        rotation: number[],
+        scale: number[],
+        ref: HTMLDivElement | null,
+
+        castShadow: boolean,
+        receiveShadow: boolean,
+        visible: boolean,
+    },
+    onClick: () => void
+}
+
+export const AssetItem = (props: Props) => {
+    const { active, asset, onClick } = props;
+
+    console.log({asset})
+
     const { updateAssetProperty } = useContext(SidebarControlsContext);
 
     const handleAssetName = () => {
@@ -36,9 +59,9 @@ export function AssetItem(props) {
     return (
         <div className={`dropdown-item ${active ? "active" : ""}`}>
             <div className="dropdown-item-header asset-item-header"
-                onClick={props.onClick}
+                onClick={onClick}
             >
-                <PointLightIcon className='type-icon header-icon' />
+                {/* <PointLightIcon className='type-icon header-icon' /> */}
                 {handleAssetName()}
                 {handleAssetVisible()}
                 {handleAssetActive()}
@@ -47,15 +70,15 @@ export function AssetItem(props) {
             {active && <div className="dropdown-item-body">
                 <SlidersArray name="Position"
                     value={asset.position} step={0.005}
-                    handleChange={(val) => updateAssetProperty(asset.id, 'position', val)}
+                    handleChange={(val: number) => updateAssetProperty(asset.id, 'position', val)}
                 />
                 <SlidersArray name="Scale"
                     value={asset.scale} step={0.01}
-                    handleChange={(val) => updateAssetProperty(asset.id, 'scale', val)}
+                    handleChange={(val: number) => updateAssetProperty(asset.id, 'scale', val)}
                 />
                 <SlidersArray name="Rotation"
                     value={asset.rotation} step={0.01}
-                    handleChange={(val) => updateAssetProperty(asset.id, 'rotation', val)}
+                    handleChange={(val: number) => updateAssetProperty(asset.id, 'rotation', val)}
                 />
             </div>}
         </div>
