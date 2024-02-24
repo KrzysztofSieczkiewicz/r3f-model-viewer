@@ -1,30 +1,42 @@
 import { useContext, useState } from 'react';
-import SidebarControlsContext from '../../sidebar/SidebarControlsContext'
+import SidebarControlsContext from '../SidebarControlsContext'
 
 import { LightItem } from './LightItem';
+import React from 'react';
+
+type Light = {
+    id: string,
+    position: number[],
+    color: string,
+    intensity: number,
+    angle: number,
+    penumbra: number,
+    visible: boolean,
+    type: string,
+}
 
 //TODO: THIS AND Assets.js can be merged into common class by just providing assets- or lightsList as prop an just iterating through
-export function LightsMenu() {
+export const LightsMenu = () => {
     const { lightsList } = useContext(SidebarControlsContext);
    
-    const [activeItem, setActiveItem] = useState();
+    const [activeId, setActiveItem] = useState<string | null>(null);
 
-    const handleItemClick = (item) => {
-        if (activeItem === item) {
+    const handleItemClick = (id: string) => {
+        if (activeId === id) {
             setActiveItem(null);
         } else {
-            setActiveItem(item)
+            setActiveItem(id)
         }
     };
     
     return (
         <div className="dropdown">
-            {lightsList.map((light) => {
+            {lightsList.map((light: Light) => {
                 return (
                     <LightItem
                         light={light} 
                         key={light.id}
-                        active={activeItem === light.id}
+                        active={activeId === light.id}
                         onClick={() => handleItemClick(light.id)}
                     />
                 );
