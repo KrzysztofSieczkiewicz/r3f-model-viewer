@@ -18,7 +18,7 @@ type Asset = {
 }
 
 //TODO: THIS AND LightsMenu.js can be merged into common class by just providing assets- or lightsList as prop an just iterating through
-export function AssetsMenu() {
+export const AssetsMenu = () => {
     const { assetsList } = useContext(SidebarControlsContext);
    
     const [activeId, setActiveId] = useState<string | null>("");

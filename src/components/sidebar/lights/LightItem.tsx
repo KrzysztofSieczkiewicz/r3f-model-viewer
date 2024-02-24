@@ -26,8 +26,6 @@ type Props = |{
 export const LightItem = (props: Props) => {
     const { active, light, onClick } = props;
 
-    console.log({light});
-
     const { updateLight, lightTypes } = useContext(SidebarControlsContext);
 
     const handleLightType = () => {

@@ -25,8 +25,6 @@ type Props = {
 export const AssetItem = (props: Props) => {
     const { active, asset, onClick } = props;
 
-    console.log({asset})
-
     const { updateAssetProperty } = useContext(SidebarControlsContext);
 
     const handleAssetName = () => {
