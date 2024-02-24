@@ -33,7 +33,9 @@ export function Assets(props) {
         assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
-                <PivotControls >
+                <PivotControls
+                    key={asset.id} 
+                >
                     <mesh
                         onPointerOver={() => {
                             //console.log("Pointer moved over the mesh")
