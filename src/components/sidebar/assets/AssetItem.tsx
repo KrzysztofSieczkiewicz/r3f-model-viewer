@@ -15,7 +15,6 @@ type Props = {
         rotation: number[],
         scale: number[],
         ref: HTMLDivElement | null,
-
         castShadow: boolean,
         receiveShadow: boolean,
         visible: boolean,
