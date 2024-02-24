@@ -60,6 +60,7 @@ export const AssetItem = (props: Props) => {
             <div className="dropdown-item-header asset-item-header"
                 onClick={onClick}
             >
+                <div className='type-icon header-icon' />
                 {/* <PointLightIcon className='type-icon header-icon' /> */}
                 {handleAssetName()}
                 {handleAssetVisible()}
