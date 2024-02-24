@@ -18,6 +18,7 @@ type Props = {
         castShadow: boolean,
         receiveShadow: boolean,
         visible: boolean,
+        isSelected: boolean,
     },
     onClick: () => void
 }

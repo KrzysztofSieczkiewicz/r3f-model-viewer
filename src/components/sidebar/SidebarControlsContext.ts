@@ -35,6 +35,7 @@ type Asset = {
     castShadow: boolean,
     receiveShadow: boolean,
     visible: boolean,
+    isSelected: boolean,
 }
 
 type Scene = {
