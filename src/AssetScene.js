@@ -6,7 +6,7 @@ import './style.css';
 import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
-import SidebarControlsContext from './components/sidebar/SidebarControlsContext.js';
+import SidebarControlsContext from './components/sidebar/SidebarControlsContext.ts';
 import { defaultLight, lightTypes } from './models/LightModel';
 import { Assets } from './Assets';
 import { defaultScene } from './models/SceneModel';
