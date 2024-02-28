@@ -1,40 +1,43 @@
-import { useEffect, useState } from "react";
+import React from "react";
+import { ReactNode, useEffect, useState } from "react";
+
+type Props = {
+    name: string,
+    step: number,
+    value: number[],
+    handleChange: (position: number[]) => void,
+}
 
 // TODO: CONSIDER ADDING CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
-export function SlidersArray(props) {
-    const { step, value, handleChange } = props;
+export const SlidersArray = (props: Props) => {
+    const { name, step, value, handleChange } = props;
 
-    const [ handledPosition, setHandledPosition ] = useState(value);
+    const [ handledPosition, setHandledPosition ] = useState<number[]>(value);
     // RED GREEN BLUE
     const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
 
-    const [ currentSlider, setCurrentSlider ] = useState();
-    const [ startingPosX, setStartingPosX ] = useState();
+    const [ currentSlider, setCurrentSlider ] = useState<HTMLDivElement | null>(null);
+    const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
-    function handleArrayValues(newArray) {
-        if (newArray.some((element) => isNaN(element))) {
-            setHandledPosition(0);
-        } else {
-            setHandledPosition(newArray);
-        }
-    }
-
-    const handleMouseDown = (e) => {
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        console.log({currentTarget: e.currentTarget})
         setStartingPosX(e.clientX);
         setCurrentSlider(e.currentTarget);
         setIsMouseDown(true);
     };
 
     useEffect(() => {
-        const handleMouseMove = (event) => {
+        const handleMouseMove = (event: MouseEvent) => {
             const calculatedX = event.clientX - startingPosX;
-            const currentIndex = currentSlider.getAttribute('index');
-
+            const currentIndex = currentSlider?.getAttribute('data-index');
+            if (!currentIndex) {
+                return;
+            }
             const newHandledPosition = [...handledPosition];
-            newHandledPosition[currentIndex] = Math.round((handledPosition[currentIndex] + calculatedX * step) * 100) / 100;
+            newHandledPosition[Number(currentIndex)] = Math.round((handledPosition[Number(currentIndex)] + calculatedX * step) * 100) / 100;
             
-            handleArrayValues(newHandledPosition);
+            setHandledPosition(newHandledPosition);
         };
 
         const handleMouseUp = () => {
@@ -53,19 +56,17 @@ export function SlidersArray(props) {
     }, [isMouseDown]);
 
     useEffect(() => {
-        if (handledPosition !== 0) {
-            handleChange(handledPosition);
-        }
+        handleChange(handledPosition);
     }, [handledPosition])
 
     function handleCoordinateSlider() {
         return (
             <>
-            {handledPosition.map((position, index) => {
+            {handledPosition.map((position: number, index: number) => {
                 return (
                     <div className="input-slider slider-array-three" 
                         key={index}
-                        index={index}
+                        data-index={index}
                         onMouseDown={(e) => {
                             handleMouseDown(e)
                         }}
@@ -83,7 +84,7 @@ export function SlidersArray(props) {
 
     return (
         <div className="trait">
-            <label className="trait-name">{props.name}</label>
+            <label className="trait-name">{name}</label>
             {handleCoordinateSlider()}
         </div>
     );

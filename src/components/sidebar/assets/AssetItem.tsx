@@ -69,15 +69,15 @@ export const AssetItem = (props: Props) => {
             {active && <div className="dropdown-item-body">
                 <SlidersArray name="Position"
                     value={asset.position} step={0.005}
-                    handleChange={(val: number) => updateAssetProperty(asset.id, 'position', val)}
+                    handleChange={(val: number[]) => updateAssetProperty(asset.id, 'position', val)}
                 />
                 <SlidersArray name="Scale"
                     value={asset.scale} step={0.01}
-                    handleChange={(val: number) => updateAssetProperty(asset.id, 'scale', val)}
+                    handleChange={(val: number[]) => updateAssetProperty(asset.id, 'scale', val)}
                 />
                 <SlidersArray name="Rotation"
                     value={asset.rotation} step={0.01}
-                    handleChange={(val: number) => updateAssetProperty(asset.id, 'rotation', val)}
+                    handleChange={(val: number[]) => updateAssetProperty(asset.id, 'rotation', val)}
                 />
             </div>}
         </div>

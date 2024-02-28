@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { ColorPicker } from "../controls/ColorPicker";
 
-import SidebarControlsContext from '../../sidebar/SidebarControlsContext'   
+import SidebarControlsContext from '../SidebarControlsContext'   
 import { Slider } from "../controls/Slider";
+import React from "react";
 
 export function SceneMenu() {
     const { scene, updateScene } = useContext(SidebarControlsContext);
