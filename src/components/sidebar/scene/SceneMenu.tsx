@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { ColorPicker } from "../controls/ColorPicker";
 
-import SidebarControlsContext from '../SidebarControlsContext'   
+import { useSidebarControlsContext } from '../SidebarControlsContext'   
 import { Slider } from "../controls/Slider";
 import React from "react";
 
 export function SceneMenu() {
-    const { scene, updateScene } = useContext(SidebarControlsContext);
+    const { scene, updateScene } = useSidebarControlsContext();
 
     // Todo: for ambientLight color picker add option to match the light to the background
     

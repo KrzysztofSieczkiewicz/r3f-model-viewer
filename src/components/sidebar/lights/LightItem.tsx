@@ -5,7 +5,7 @@ import { SlidersArray } from '../controls/SlidersArray';
 import { ColorPicker } from '../controls/ColorPicker';
 import { Dropdown } from '../controls/Dropdown';
 import { useContext } from 'react';
-import SidebarControlsContext from '../SidebarControlsContext'
+import { useSidebarControlsContext } from '../SidebarControlsContext'
 import React from 'react';
 
 type Props = |{
@@ -26,7 +26,7 @@ type Props = |{
 export const LightItem = (props: Props) => {
     const { active, light, onClick } = props;
 
-    const { updateLight, lightTypes } = useContext(SidebarControlsContext);
+    const { updateLight } = useSidebarControlsContext();
 
     const handleLightType = () => {
         return(<>
@@ -34,7 +34,7 @@ export const LightItem = (props: Props) => {
             {light.type === 'spotLight' && <div className='type-icon header-icon'  />}
             {/* {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />} */}
             {/* {light.type === 'spotLight' && <SpotlightIcon className='type-icon header-icon'  />} */}
-            <Dropdown value={light.type} list={lightTypes} 
+            <Dropdown value={light.type} list={[]} 
                     handleChange={(val) => updateLight(light.id, 'type', val)}
             />
         </>)

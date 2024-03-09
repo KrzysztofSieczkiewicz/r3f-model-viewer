@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
-import SidebarControlsContext from '../SidebarControlsContext'
 
 import { LightItem } from './LightItem';
 import React from 'react';
+import { useSidebarControlsContext } from '../SidebarControlsContext';
 
 type Light = {
     id: string,
@@ -17,7 +17,7 @@ type Light = {
 
 //TODO: THIS AND Assets.js can be merged into common class by just providing assets- or lightsList as prop an just iterating through
 export const LightsMenu = () => {
-    const { lightsList } = useContext(SidebarControlsContext);
+    const { lightsList } = useSidebarControlsContext();
    
     const [activeId, setActiveItem] = useState<string | null>(null);
 

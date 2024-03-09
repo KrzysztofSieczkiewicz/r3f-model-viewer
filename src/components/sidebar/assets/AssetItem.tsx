@@ -1,7 +1,6 @@
 import { useContext } from 'react';
-// TODO: JAK DODAĆ IKONĘ
-//import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import SidebarControlsContext from '../SidebarControlsContext'
+import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
+import { useSidebarControlsContext } from '../SidebarControlsContext'
 import { SlidersArray } from '../controls/SlidersArray';
 import React from 'react';
 
@@ -26,7 +25,7 @@ type Props = {
 export const AssetItem = (props: Props) => {
     const { active, asset, onClick } = props;
 
-    const { updateAssetProperty } = useContext(SidebarControlsContext);
+    const { updateAssetProperty } = useSidebarControlsContext();
 
     const handleAssetName = () => {
         const name = asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
@@ -53,14 +52,12 @@ export const AssetItem = (props: Props) => {
         );
     }
 
-    // TODO: FIND NEW ICONS FOR ASSETS
     return (
         <div className={`dropdown-item ${active ? "active" : ""}`}>
             <div className="dropdown-item-header asset-item-header"
                 onClick={onClick}
             >
-                <div className='type-icon header-icon' />
-                {/* <PointLightIcon className='type-icon header-icon' /> */}
+                <PointLightIcon className='type-icon header-icon' />
                 {handleAssetName()}
                 {handleAssetVisible()}
                 {handleAssetActive()}
