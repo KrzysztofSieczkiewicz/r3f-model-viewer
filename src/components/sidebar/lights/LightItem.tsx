@@ -1,10 +1,9 @@
-//import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
-//import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
+import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
+import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { Slider } from '../controls/Slider';
 import { SlidersArray } from '../controls/SlidersArray';
 import { ColorPicker } from '../controls/ColorPicker';
 import { Dropdown } from '../controls/Dropdown';
-import { useContext } from 'react';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 import React from 'react';
 
@@ -30,11 +29,9 @@ export const LightItem = (props: Props) => {
 
     const handleLightType = () => {
         return(<>
-            {light.type === 'pointLight' && <div className='type-icon header-icon' />}
-            {light.type === 'spotLight' && <div className='type-icon header-icon'  />}
-            {/* {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />} */}
-            {/* {light.type === 'spotLight' && <SpotlightIcon className='type-icon header-icon'  />} */}
-            <Dropdown value={light.type} list={[]} 
+            {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />}
+            {light.type === 'spotLight' && <SpotlightIcon className='type-icon header-icon'  />}
+            <Dropdown value={light.type} list={[{type: "pointLight", display: "Point light"}, {type: "spotLight", display: "Spot light"}]} 
                     handleChange={(val) => updateLight(light.id, 'type', val)}
             />
         </>)

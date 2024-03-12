@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 import { SlidersArray } from '../controls/SlidersArray';
