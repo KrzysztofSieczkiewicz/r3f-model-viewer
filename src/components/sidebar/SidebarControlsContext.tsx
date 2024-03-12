@@ -139,6 +139,8 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
     }
 
     /* SCENE */
+
+    // TODO: zapytać na korkach
   const [ scene, setScene ] = useState(defaultScene); 
   
   const updateScene = (property: string, value: any) => {

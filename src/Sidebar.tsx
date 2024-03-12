@@ -8,13 +8,14 @@ import { useState } from "react";
 import './components/sidebar/sidebar.css';
 import { AssetsMenu } from "./components/sidebar/assets/AssetsMenu";
 import { SceneMenu } from "./components/sidebar/scene/SceneMenu";
+import React from "react";
 
-export function Sidebar() {
-    const [activeItem, setActiveItem] = useState();
+export const Sidebar = () => {
+    const [activeItem, setActiveItem] = useState<string>("");
 
-    const handleItemClick = (item) => {
+    const handleItemClick = (item: string) => {
         if (activeItem === item) {
-            setActiveItem(null);
+            setActiveItem("");
         } else {
             setActiveItem(item)
         }
@@ -47,7 +48,8 @@ export function Sidebar() {
                 <SidebarItem
                     icon={<ImageIcon className="sidebar-icon" />}
                     active={activeItem === "Rendering"}
-                    onClick={() => handleItemClick("Rendering")}
+                    onClick={() => handleItemClick("Rendering")} 
+                    children={undefined}
                 >
                 </SidebarItem>
             </ul>
