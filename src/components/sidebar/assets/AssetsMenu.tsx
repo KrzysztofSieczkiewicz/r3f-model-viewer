@@ -22,11 +22,11 @@ type Asset = {
 export const AssetsMenu = () => {
     const { assetsList } = useSidebarControlsContext();
    
-    const [activeId, setActiveId] = useState<string | null>("");
+    const [activeId, setActiveId] = useState<string>("");
 
     const handleItemClick = (id: string) => {
         if (activeId === id) {
-            setActiveId(null);
+            setActiveId("");
         } else {
             setActiveId(id)
         }

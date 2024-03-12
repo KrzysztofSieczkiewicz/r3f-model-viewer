@@ -21,7 +21,6 @@ export const SlidersArray = (props: Props) => {
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-        console.log({currentTarget: e.currentTarget})
         setStartingPosX(e.clientX);
         setCurrentSlider(e.currentTarget);
         setIsMouseDown(true);

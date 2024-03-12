@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { MutableRefObject, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 import { nanoid } from 'nanoid';
 
@@ -13,7 +13,6 @@ type SidebarControlsContext =  {
     scene: Scene, 
     updateScene: (property:string, value:any) => void
 }
-
 
 type Light = {
     id: string,
