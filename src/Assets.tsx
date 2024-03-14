@@ -6,10 +6,10 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
 
 get how to recover pure geometry and material from gltf file to allow for modifying materials
 */
-import { PivotControls, TransformControls, useGLTF, useHelper } from "@react-three/drei";
-import React, { MutableRefObject } from "react";
+import { PivotControls, useGLTF, useHelper } from "@react-three/drei";
+import React from "react";
 import { useEffect, useRef } from "react";
-import { BoxHelper, Euler, Vector3 } from "three";
+import { BoxHelper } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type Props = {
