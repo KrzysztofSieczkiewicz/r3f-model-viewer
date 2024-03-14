@@ -1,141 +1,79 @@
-import React, { MutableRefObject, useContext } from "react";
+import React, { useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
-import { nanoid } from 'nanoid';
 
-import { defaultScene } from '../../models/SceneModel';
+import { SceneWrapper, defaultScene } from '../../models/Scene';
+import { AssetWrapper, INIT_ASSET_LIST } from "../../models/Asset";
+import { INIT_LIGHTS_LIST, LightWrapper } from "../../models/Light";
 
 
 type SidebarControlsContext =  {
-    lightsList: Light[], 
-    updateLight: (id:string, property: keyof Light, value:any) => void, 
-    assetsList: Asset[], 
-    updateAssetProperty: (id:string, property: keyof Asset, value:any) => void,
-    scene: Scene, 
-    updateScene: (property:string, value:any) => void
+    lightsList: LightWrapper[], 
+    updateLight: (id:string, property: keyof LightWrapper, value:any) => void, 
+    assetsList: AssetWrapper[], 
+    updateAssetProperty: (id:string, property: keyof AssetWrapper, value:any) => void,
+    scene: SceneWrapper, 
+    updateScene: (property:string, value:any) => void,
+    updateObject: (list: any[], id: string, property: keyof any, value: any) => void
 }
-
-type Light = {
-    id: string,
-    position: number[],
-    rotation: number[],
-    color: string,
-    intensity: number,
-    angle: number,
-    penumbra: number,
-    visible: boolean,
-    type: string,
-}
-
-type Asset = {
-    id: string,
-    object: string,
-    name: string,
-    position: number[],
-    rotation: number[],
-    scale: number[],
-    ref: HTMLDivElement | null,
-    castShadow: boolean,
-    receiveShadow: boolean,
-    visible: boolean,
-    isSelected: boolean,
-}
-
-type Scene = {
-    backgroundColor: string,
-    ambientLight: {
-      color: string,
-      intensity: number
-    }
-  }
 
 export const SidebarControlsContext = createContext<SidebarControlsContext | null>( null );
 
 export const SidebarControlsContextProvider = (props: {children: ReactNode}): JSX.Element => {
 
-    /* LIGHTS */
-    const [lightsList, setLightsList] = useState<Light[]>([
-        {
-        id:nanoid(5),
-        position:[5,5,0],
-        rotation:[Math.PI * 0.5, Math.PI * 0.5, 0],
-        color: "#f53259",
-        intensity:1,
-        angle: 0.1,
-        penumbra: 0.6,
-        type:"spotLight",
-        visible: true
-      },{
-        id:nanoid(5),
-        position:[-5,5,-5],
-        rotation:[0,0,0],
-        color:"#33dcfa",
-        intensity:1,
-        angle: 0.1,
-        penumbra: 0.6,
-        type:"pointLight",
-        visible: true
-      }
-    ]);
 
-    const updateLight = (id: string, property: keyof Light, value: number) => {
-    const index = lightsList.findIndex(light => light.id === id);
-    const newLight: any = {
-        ...lightsList[index],
-        [property]: value
-    };
-
-    if (newLight[property] !== (lightsList as any)[index][property]) {
-        const newLightsList = [...lightsList];
-        newLightsList[index] = newLight;
-        
-        setLightsList(newLightsList);
-    }
-    }
 
     /* ASSETS */
-    const [assetsList, setAssetsList] = useState([
-        {
-        id: nanoid(5),
-        name: "pear",
-        object: "toBeReplaced",
-        position:[0,0,0],
-        rotation:[0,0,0],
-        scale:[10,10,10],
-        ref: null,
-        isSelected: false,
-        castShadow: true,
-        receiveShadow: true,
-        visible: true,
-        },{
-        id: nanoid(5),
-        name: "pear",
-        object: "toBeReplaced",
-        position:[1,0,1],
-        rotation:[0,90,0],
-        scale:[10,10,10],
-        ref: null,
-        isSelected: false,
-        castShadow: true,
-        receiveShadow: true,
-        visible: true,
-        }
-    ]);
+    const [assetsList, setAssetsList] = useState<AssetWrapper[]>(INIT_ASSET_LIST);
 
+        /* LIGHTS */
+        const [lightsList, setLightsList] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
+
+    const updateLight = (id: string, property: keyof LightWrapper, value: number) => {
+      const index = lightsList.findIndex(light => light.id === id);
+      const newLight: any = {
+          ...lightsList[index],
+          [property]: value
+      };
+
+      if (newLight[property] !== (lightsList as any)[index][property]) {
+          const newLightsList = [...lightsList];
+          newLightsList[index] = newLight;
+
+          console.log({newLightsList})
+          
+          setLightsList(newLightsList);
+      }
+    }
     // replace with updateAssetById => no point in separating properties when it's just creating new asset later on
-    const updateAssetProperty = (id: string, property: keyof Asset, value: any) => {
+    const updateAssetProperty = (id: string, property: keyof AssetWrapper, value: any) => {
         const index = assetsList.findIndex(asset => asset.id === id);
-        const newAsset: Asset = {
+        const newAsset = {
             ...assetsList[index],
             [property]: value
         };
 
-        if (newAsset[property] !== (assetsList as any)[index][property]) {
+        if (newAsset[property] !== (assetsList)[index][property]) {
             const newAssetsList = [...assetsList];
             (newAssetsList[index] as any) = newAsset;
 
             setAssetsList(newAssetsList);
         }
     }
+
+    const updateObject = (list: any[], id: string, property: keyof any, value: any) => {
+      const index = list.findIndex(object => object.id === id);
+      const newObject: any = {
+          ...list[index],
+          [property]: value
+      };
+
+      if (newObject[property] !== (list as any)[index][property]) {
+          const newList = [...list];
+          (newList[index] as any) = newObject;
+
+          setAssetsList(newList);
+      }
+  }
 
     /* SCENE */
 
@@ -163,7 +101,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
   }
 
     return (
-        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, scene, updateScene }} >
+        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, scene, updateScene, updateObject }} >
             {props.children}
         </SidebarControlsContext.Provider>
     );

@@ -4,15 +4,15 @@ import { ReactNode, useEffect, useState } from "react";
 type Props = {
     name: string,
     step: number,
-    value: number[],
-    handleChange: (position: number[]) => void,
+    value: [number,number,number],
+    handleChange: (array: [number,number,number]) => void,
 }
 
 // TODO: CONSIDER ADDING CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
 export const SlidersArray = (props: Props) => {
     const { name, step, value, handleChange } = props;
 
-    const [ handledPosition, setHandledPosition ] = useState<number[]>(value);
+    const [ handledPosition, setHandledPosition ] = useState<[number,number,number]>(value);
     // RED GREEN BLUE
     const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
 
@@ -33,7 +33,7 @@ export const SlidersArray = (props: Props) => {
             if (!currentIndex) {
                 return;
             }
-            const newHandledPosition = [...handledPosition];
+            const newHandledPosition = [...handledPosition] as [number,number,number];
             newHandledPosition[Number(currentIndex)] = Math.round((handledPosition[Number(currentIndex)] + calculatedX * step) * 100) / 100;
             
             setHandledPosition(newHandledPosition);

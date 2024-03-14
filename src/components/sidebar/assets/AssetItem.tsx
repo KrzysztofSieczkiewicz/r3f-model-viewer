@@ -1,23 +1,12 @@
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
+import { AssetWrapper } from '../../../models/Asset';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 import { SlidersArray } from '../controls/SlidersArray';
 import React from 'react';
 
 type Props = {
     active: boolean,
-    asset: {
-        id: string,
-        object: string,
-        name: string,
-        position: number[],
-        rotation: number[],
-        scale: number[],
-        ref: HTMLDivElement | null,
-        castShadow: boolean,
-        receiveShadow: boolean,
-        visible: boolean,
-        isSelected: boolean,
-    },
+    asset: AssetWrapper
     onClick: () => void
 }
 
@@ -65,15 +54,15 @@ export const AssetItem = (props: Props) => {
             {active && <div className="dropdown-item-body">
                 <SlidersArray name="Position"
                     value={asset.position} step={0.005}
-                    handleChange={(val: number[]) => updateAssetProperty(asset.id, 'position', val)}
+                    handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'position', val)}
                 />
                 <SlidersArray name="Scale"
                     value={asset.scale} step={0.01}
-                    handleChange={(val: number[]) => updateAssetProperty(asset.id, 'scale', val)}
+                    handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'scale', val)}
                 />
                 <SlidersArray name="Rotation"
                     value={asset.rotation} step={0.01}
-                    handleChange={(val: number[]) => updateAssetProperty(asset.id, 'rotation', val)}
+                    handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'rotation', val)}
                 />
             </div>}
         </div>

@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 
-import { nanoid } from 'nanoid';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
 import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
-import { SidebarControlsContext, SidebarControlsContextProvider, useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
-import { defaultLight, lightTypes } from './models/LightModel';
+import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
 import { Assets } from './Assets';
-import { defaultScene } from './models/SceneModel';
 
 import { Selection } from "@react-three/postprocessing";
 // import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';

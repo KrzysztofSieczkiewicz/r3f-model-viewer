@@ -3,20 +3,7 @@ import { useSidebarControlsContext } from '../SidebarControlsContext'
 
 import { AssetItem } from "./AssetItem";
 import React from "react";
-
-type Asset = {
-    id: string,
-    object: string,
-    name: string,
-    position: number[],
-    rotation: number[],
-    scale: number[],
-    ref: HTMLDivElement | null,
-    castShadow: boolean,
-    receiveShadow: boolean,
-    visible: boolean,
-    isSelected: boolean,
-}
+import { AssetWrapper } from "../../../models/Asset";
 
 //TODO: THIS AND LightsMenu.js can be merged into common class by just providing assets- or lightsList as prop an just iterating through
 export const AssetsMenu = () => {
@@ -34,7 +21,7 @@ export const AssetsMenu = () => {
     
     return (
         <div className="dropdown">
-            {assetsList.map((asset: Asset) => {
+            {assetsList.map((asset: AssetWrapper) => {
                 return (
                     <AssetItem
                         asset={asset} 

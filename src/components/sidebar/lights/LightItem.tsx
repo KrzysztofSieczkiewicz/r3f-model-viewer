@@ -6,26 +6,18 @@ import { ColorPicker } from '../controls/ColorPicker';
 import { Dropdown } from '../controls/Dropdown';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 import React from 'react';
+import { LightWrapper } from '../../../models/Light';
 
 type Props = |{
     active: boolean,
     onClick: () => void,
-    light: {
-        id: string,
-        position: number[],
-        color: string,
-        intensity: number,
-        angle: number,
-        penumbra: number,
-        visible: boolean,
-        type: string,
-    }
+    light: LightWrapper
 }
 
 export const LightItem = (props: Props) => {
     const { active, light, onClick } = props;
 
-    const { updateLight } = useSidebarControlsContext();
+    const { lightsList, updateLight, updateObject } = useSidebarControlsContext();
 
     const handleLightType = () => {
         return(<>
@@ -69,11 +61,11 @@ export const LightItem = (props: Props) => {
             {active && <div className="dropdown-item-body">
                 <SlidersArray name="Position"
                     value={light.position} step={0.01}
-                    handleChange={(val: number[]) => updateLight(light.id, 'position', val)}
+                    handleChange={(val: [number,number,number]) => updateLight(light.id, 'position', val)}
                 />
                 <ColorPicker name="Color" 
                     value={light.color}
-                    handleChange={(val: string) => updateLight(light.id, 'color', val)}/>
+                    handleChange={(val: string) => updateObject(lightsList, light.id, 'color', val)}/>
                 <Slider name="Intensity"
                     value={light.intensity}
                     handleChange={(val: number) => updateLight(light.id, 'intensity', val)}

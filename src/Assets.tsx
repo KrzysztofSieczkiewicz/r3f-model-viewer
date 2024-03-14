@@ -21,9 +21,9 @@ type AssetsWrapper = {
     id: string,
     object: string,
     name: string,
-    position: number[],
-    rotation: number[],
-    scale: number[],
+    position: [number,number,number],
+    rotation: [number,number,number],
+    scale: [number,number,number],
     ref: HTMLDivElement | null,
     castShadow: boolean,
     receiveShadow: boolean,
@@ -78,9 +78,9 @@ export const Assets = (props: Props) => {
                         receiveShadow = {asset.receiveShadow}
                         geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
                         material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                        position={new Vector3(...asset.position)}
-                        rotation={new Euler(...asset.rotation)}
-                        scale={new Vector3(...asset.scale)}
+                        position={asset.position}
+                        rotation={asset.rotation}
+                        scale={asset.scale}
                     />
                 </PivotControls >
             );

@@ -1,23 +1,8 @@
 import React from "react";
-import { Euler } from "three/src/math/Euler";
-import { Vector3 } from "three/src/math/Vector3";
+import { LightWrapper } from "./models/Light";
 
-
-// TODO: ASK DURING TUTORING
 type Props = {
     lightsList: LightWrapper[]
-}
-
-type LightWrapper = {
-    id: string,
-    position: number[],
-    rotation: number[],
-    color: string,
-    intensity: number,
-    angle: number,
-    penumbra: number,
-    visible: boolean,
-    type: string,
 }
 
 export const Lights = (props: Props) => {
@@ -29,16 +14,16 @@ export const Lights = (props: Props) => {
                 if (light.type === 'pointLight' && light.visible) {
                 return <pointLight 
                     key={light.id} 
-                    position={new Vector3(...light.position)}
-                    rotation={new Euler(...light.rotation)}
+                    position={light.position}
+                    rotation={light.rotation}
                     color={light.color} 
                     intensity={light.intensity} 
                     />;
                 } else if (light.type === 'spotLight' && light.visible) {
                 return <spotLight 
                     key={light.id} 
-                    position={new Vector3(...light.position)}
-                    rotation={new Euler(...light.rotation)}
+                    position={light.position}
+                    rotation={light.rotation}
                     color={light.color} 
                     intensity={light.intensity}
                     angle={light.angle}
