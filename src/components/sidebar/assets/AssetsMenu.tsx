@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 
 import { AssetItem } from "./AssetItem";

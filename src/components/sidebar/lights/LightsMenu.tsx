@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import { LightItem } from './LightItem';
 import React from 'react';

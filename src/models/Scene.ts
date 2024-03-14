@@ -6,7 +6,7 @@ export type SceneWrapper = {
   }
 }
 
-const defaultScene = {
+const INITIAL_SCENE_SETTINGS = {
   backgroundColor: "#262626",
   ambientLight: {
     color: "#ffffff",
@@ -14,4 +14,4 @@ const defaultScene = {
   }
 }
 
-export { defaultScene };
+export { INITIAL_SCENE_SETTINGS };
