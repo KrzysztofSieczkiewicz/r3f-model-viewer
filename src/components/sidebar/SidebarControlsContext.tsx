@@ -60,21 +60,6 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         }
     }
 
-    const updateObject = (list: any[], id: string, property: keyof any, value: any) => {
-      const index = list.findIndex(object => object.id === id);
-      const newObject: any = {
-          ...list[index],
-          [property]: value
-      };
-
-      if (newObject[property] !== (list as any)[index][property]) {
-          const newList = [...list];
-          (newList[index] as any) = newObject;
-
-          setAssetsList(newList);
-      }
-    }
-  
     const updateScene = (property: string, value: any) => {
       const updateNested = (obj: any, keys: any, value: any) => {
         if (keys.length === 1) {
@@ -94,6 +79,23 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         [property]: value
       });
     }
+
+    // TODO: Replace functions above with single update function
+    const updateObject = (list: any[], id: string, property: keyof any, value: any) => {
+      const index = list.findIndex(object => object.id === id);
+      const newObject: any = {
+          ...list[index],
+          [property]: value
+      };
+
+      if (newObject[property] !== (list as any)[index][property]) {
+          const newList = [...list];
+          (newList[index] as any) = newObject;
+
+          setAssetsList(newList);
+      }
+    }
+
 
     return (
         <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, scene, updateScene, updateObject }} >
