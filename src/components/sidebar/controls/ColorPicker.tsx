@@ -35,7 +35,6 @@ export const ColorPicker = ( {name, value, handleChange} :Props) :JSX.Element =>
     }
   }
 
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
