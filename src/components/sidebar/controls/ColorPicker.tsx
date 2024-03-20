@@ -21,7 +21,6 @@ export const ColorPicker = ( {name, value, handleChange} :Props) :JSX.Element =>
     handleChange(color);
   }, [color])
 
-
   // OPEN AND HIDE COLOR PALETTE
   const toggleColorPicker = (e: React.MouseEvent<HTMLDivElement>) => {
     setPosition(e.clientX - 25);

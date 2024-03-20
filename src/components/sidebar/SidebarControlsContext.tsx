@@ -38,8 +38,6 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
       if (newLight[property] !== (lightsList)[index][property]) {
           const newLightsList = [...lightsList];
           newLightsList[index] = newLight;
-
-          console.log({newLightsList})
           
           setLightsList(newLightsList);
       }
