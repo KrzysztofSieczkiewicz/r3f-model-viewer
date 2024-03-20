@@ -5,8 +5,7 @@ import {AssetScene} from './AssetScene';
 import { SidebarControlsContextProvider } from './components/sidebar/SidebarControlsContext';
 
 
-
-function App() {
+export const App = (): JSX.Element => {
   return (
     <>
       <SidebarControlsContextProvider>
@@ -15,8 +14,5 @@ function App() {
         </Suspense>
       </SidebarControlsContextProvider>
     </>
-  
   );
 }
-
-export default App;

@@ -1,5 +1,6 @@
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from '../../../models/Asset';
+import { VisibilityEyeButton } from '../../hubComponents/VisibilityEyeButton';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 import { SlidersArray } from '../controls/SlidersArray';
 import React from 'react';
@@ -16,29 +17,13 @@ export const AssetItem = (props: Props) => {
     const { updateAssetProperty } = useSidebarControlsContext();
 
     const handleAssetName = () => {
-        const name = asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
-        return (
-            <p className='header-title'>{name}</p>
-        );
+        return asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
     }
 
     const handleAssetActive = () => {
-        if(active) {
-            return <span className='show-hide header-icon'>&#8657;</span>
-        } else {
-            return <span className='show-hide header-icon'>&#8659;</span>
-        }
+        return active ? "&#8657;" : "&#8659;"
     }
 
-    const handleAssetVisible = () => {
-        return (<span className={`visibility-icon header-icon ${!asset.visible ? "suppressed" : ""}`} 
-            onClick={(e) => {
-                e.stopPropagation();
-                updateAssetProperty(asset.id, 'visible', !asset.visible)
-            }}
-            >&#128065;</span>
-        );
-    }
 
     return (
         <div className={`dropdown-item ${active ? "active" : ""}`}>
@@ -46,9 +31,9 @@ export const AssetItem = (props: Props) => {
                 onClick={onClick}
             >
                 <PointLightIcon className='type-icon header-icon' />
-                {handleAssetName()}
-                {handleAssetVisible()}
-                {handleAssetActive()}
+                <p className='header-title'>{ handleAssetName() }</p>
+                <VisibilityEyeButton asset={asset} updateProperty={updateAssetProperty} />
+                <span className='show-hide header-icon'>{handleAssetActive()}</span>
             </div>
 
             {active && <div className="dropdown-item-body">

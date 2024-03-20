@@ -7,9 +7,9 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
 get how to recover pure geometry and material from gltf file to allow for modifying materials
 */
 import { PivotControls, useGLTF, useHelper } from "@react-three/drei";
-import React from "react";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { BoxHelper } from "three";
+import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type Props = {
@@ -53,7 +53,7 @@ export const Assets = (props: Props) => {
         });
     });
 
-    const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as GLTFResult;
+    const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
     return (
