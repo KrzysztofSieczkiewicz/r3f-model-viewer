@@ -1,20 +1,18 @@
 import React from "react";
-import { AssetWrapper } from "../../models/Asset";
-import { LightWrapper } from "../../models/Light";
+import { EditableWrapper } from "../sidebar/SidebarControlsContext";
 
 // TODO: SKOPIUJ
-type EditableWrapper = AssetWrapper | LightWrapper
 type Props = {
-    asset: EditableWrapper,
+    object: EditableWrapper,
     updateProperty: (id:string, property: keyof EditableWrapper, value:any) => void
 }
 
-export const VisibilityEyeButton = ({asset, updateProperty} :Props): JSX.Element => {
+export const VisibilityEyeButton = ({object, updateProperty} :Props): JSX.Element => {
     return (
-        <span className={`visibility-icon header-icon ${!asset.visible ? "suppressed" : ""}`} 
+        <span className={`visibility-icon header-icon ${!object.visible ? "suppressed" : ""}`} 
             onClick={(e) => {
                 e.stopPropagation();
-                updateProperty(asset.id, 'visible', !asset.visible)
+                updateProperty(object.id, 'visible', !object.visible)
             }}
         >&#128065;</span>
     );

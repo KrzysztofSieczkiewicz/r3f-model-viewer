@@ -5,6 +5,7 @@ import { INITIAL_SCENE_SETTINGS, SceneWrapper } from '../../models/Scene';
 import { AssetWrapper, INIT_ASSET_LIST } from "../../models/Asset";
 import { INIT_LIGHTS_LIST, LightWrapper } from "../../models/Light";
 
+export type EditableWrapper = AssetWrapper | LightWrapper
 
 type SidebarControlsContext =  {
     lightsList: LightWrapper[], 
@@ -16,7 +17,7 @@ type SidebarControlsContext =  {
     scene: SceneWrapper, 
     updateScene: (property:string, value:any) => void,
     
-    updateObject: (list: any[], id: string, property: keyof any, value: any) => void
+    updateObject: (list: EditableWrapper[], id: string, property: keyof EditableWrapper, value: any) => void
 }
 
 export const SidebarControlsContext = createContext<SidebarControlsContext | null>( null );
@@ -57,6 +58,21 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
             setAssetsList(newAssetsList);
         }
     }
+    // TODO: Replace functions above with single update function
+    const updateObject = (list: any[], id: string, property: keyof any, value: any) => {
+      const index = list.findIndex(object => object.id === id);
+      const newObject: any = {
+          ...list[index],
+          [property]: value
+      };
+
+      if (newObject[property] !== (list as any)[index][property]) {
+          const newList = [...list];
+          (newList[index] as any) = newObject;
+
+          setAssetsList(newList);
+      }
+    }
 
     const updateScene = (property: string, value: any) => {
       const updateNested = (obj: any, keys: any, value: any) => {
@@ -76,22 +92,6 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         ...scene,
         [property]: value
       });
-    }
-
-    // TODO: Replace functions above with single update function
-    const updateObject = (list: any[], id: string, property: keyof any, value: any) => {
-      const index = list.findIndex(object => object.id === id);
-      const newObject: any = {
-          ...list[index],
-          [property]: value
-      };
-
-      if (newObject[property] !== (list as any)[index][property]) {
-          const newList = [...list];
-          (newList[index] as any) = newObject;
-
-          setAssetsList(newList);
-      }
     }
 
 
