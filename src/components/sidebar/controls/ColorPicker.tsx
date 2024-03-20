@@ -6,34 +6,39 @@ type Props = {
   name: string,
   value: string,
   handleChange: (color: string) => void,
-
 }
 
-export const ColorPicker = (props :Props) :JSX.Element => {
-  const [ color, setColor ] = useState(props.value);
+export const ColorPicker = ( {name, value, handleChange} :Props) :JSX.Element => {
 
-  useEffect(() => {
-    props.handleChange(color);
-  }, [color])
+  const [ active, setActive ] = useState(false);
+  const [ color, setColor ] = useState(value);
+  const [ position, setPosition ] = useState(0);
 
   const popupRef = useRef<HTMLDivElement | null>(null);
 
-  const [ active, setActive ] = useState(false);
-  const [ position, setPosition ] = useState(0);
+  // UPDATE COLOR EACH TIME COLOR PICKER CHANGES
+  useEffect(() => {
+    handleChange(color);
+  }, [color])
 
-  function toggleColorPicker(e: React.MouseEvent<HTMLDivElement>) {
+
+  // OPEN AND HIDE COLOR PALETTE
+  const toggleColorPicker = (e: React.MouseEvent<HTMLDivElement>) => {
     setPosition(e.clientX - 25);
-    setActive(!active);
+    setActive(active => !active);
   }
 
-  useEffect(() => {
-    function handleClickOutside(e :MouseEvent) {
-      if (active && popupRef.current && !popupRef.current.contains(e.target as Node)) {
-        setActive(false);
-      }
+  // DETECT IF CLICKED OUTSIDE AND CLOSE COLOR PALETTE
+  const handleClickOutside = (e :MouseEvent) => {
+    if (active && popupRef.current && !popupRef.current.contains(e.target as Node)) {
+      setActive(false);
     }
-  
+  }
+
+
+  useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -41,7 +46,7 @@ export const ColorPicker = (props :Props) :JSX.Element => {
 
   return (
     <div className="trait">
-      <label className="trait-name">{props.name}</label>
+      <label className="trait-name">{name}</label>
       <div className="color-picker-preview" onMouseDown={(e) => toggleColorPicker(e)}
         style={{backgroundColor: color}}
       />
