@@ -36,7 +36,7 @@ export const LightItem = (props: Props) => {
                 />
                 <div className="color-preview" style={{backgroundColor: light.color}}/>
                 <VisibilityEyeButton object={light} updateProperty={updateLight} />
-                {handleIsActive()}
+                <span className='show-hide header-icon'>{ handleIsActive() }</span>
             </div>
 
             {active && <div className="dropdown-item-body">

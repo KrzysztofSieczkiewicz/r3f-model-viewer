@@ -5,11 +5,11 @@ import { AssetItem } from "./AssetItem";
 import React from "react";
 import { AssetWrapper } from "../../../models/Asset";
 
-//TODO: THIS AND LightsMenu.js can be merged into common class by just providing assets- or lightsList as prop an just iterating through
+
 export const AssetsMenu = () => {
     const { assetsList } = useSidebarControlsContext();
    
-    const [activeId, setActiveId] = useState<string>("");
+    const [activeId, setActiveId] = useState("");
 
     const handleItemClick = (id: string) => {
         if (activeId === id) {

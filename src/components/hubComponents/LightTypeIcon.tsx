@@ -13,7 +13,6 @@ export const LightTypeIcon = ( {light} :Props ) => {
     <>
         {light.type === 'pointLight' && <PointLightIcon className='type-icon header-icon' />}
         {light.type === 'spotLight' && <SpotlightIcon className='type-icon header-icon'  />}
-        
     </>
     );
 }
