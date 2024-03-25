@@ -2,24 +2,24 @@ import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 type Props = {
-    value: string,
-    list: Light[],
+    selected: string,
+    selectionList: SelectionList[],
     handleChange: (item: string) => void
 }
 
-type Light = {
+type SelectionList = {
     type: string,
     display: string
 }
 
 export const Dropdown = (props: Props): JSX.Element => {
-    const { value, list, handleChange } = props;
+    const { selected: value, selectionList: list, handleChange } = props;
 
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    function toggleList() {
-        setIsOpen(!isOpen); 
+    function getDisplayedByType(type: string) {
+        return list.find((light) =>  light.type === type)?.display
     }
 
     function selectItem(item: string) {
@@ -27,8 +27,8 @@ export const Dropdown = (props: Props): JSX.Element => {
         setIsOpen(false);
     }
 
-    function getDisplayedByType(type: string) {
-        return list.find((light: Light) =>  light.type === type)?.display
+    function toggleList() {
+        setIsOpen(!isOpen); 
     }
 
     function handleClickOutside(e: MouseEvent) {
@@ -63,7 +63,7 @@ export const Dropdown = (props: Props): JSX.Element => {
             </button>
             {isOpen && (
                 <div className="dd-list">
-                    {list.map((item: Light) => (
+                    {list.map((item) => (
                         <button className="dd-list-item"
                             key={item.type}
                             onClick={(e) => {

@@ -1,12 +1,12 @@
-import { Slider } from '../controls/Slider';
-import { SlidersArray } from '../controls/SlidersArray';
-import { ColorPicker } from '../controls/ColorPicker';
-import { Dropdown } from '../controls/Dropdown';
+import { Slider } from '../commonComponents/Slider';
+import { SlidersArray } from '../commonComponents/SlidersArray';
+import { ColorPicker } from '../commonComponents/ColorPicker';
+import { Dropdown } from '../commonComponents/Dropdown';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 import React from 'react';
-import { LightWrapper } from '../../../models/Light';
-import { VisibilityEyeButton } from '../../hubComponents/VisibilityEyeButton';
-import { LightTypeIcon } from '../../hubComponents/LightTypeIcon';
+import { LIGHT_TYPES, LightWrapper } from '../../../models/Light';
+import { VisibilityEyeButton } from '../commonComponents/VisibilityEyeButton';
+import { LightTypeIcon } from '../commonComponents/LightTypeIcon';
 
 type Props = |{
     active: boolean,
@@ -30,8 +30,8 @@ export const LightItem = (props: Props) => {
             >
                 <LightTypeIcon light = {light} />
                 <Dropdown 
-                    value={light.type} 
-                    list={[{type: "pointLight", display: "Point light"}, {type: "spotLight", display: "Spot light"}]} 
+                    selected={light.type} 
+                    selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
                     handleChange={(val) => updateLight(light.id, 'type', val)}
                 />
                 <div className="color-preview" style={{backgroundColor: light.color}}/>
@@ -52,7 +52,7 @@ export const LightItem = (props: Props) => {
                     handleChange={(val: number) => updateLight(light.id, 'intensity', val)}
                     min={0} max={3} step={0.005} defaultValue={1}
                 />
-                {light.type === "spotLight" && <>
+                {light.type === LIGHT_TYPES.spotLight && <>
                     <Slider name="Angle"
                         value={light.angle}
                         handleChange={(val) => updateLight(light.id, 'angle', val)}

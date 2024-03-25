@@ -8,9 +8,14 @@ export type LightWrapper = {
     intensity: number,
     angle: number,
     penumbra: number,
+    type: LIGHT_TYPES,
     visible: boolean,
-    type: string,
 }
+
+export enum LIGHT_TYPES {
+  pointLight =  "Point light",
+  spotLight = "Spot light"
+};
 
 const INIT_LIGHTS_LIST: LightWrapper[] = [
     {
@@ -21,7 +26,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       intensity:1,
       angle: 0.1,
       penumbra: 0.6,
-      type:"spotLight",
+      type: LIGHT_TYPES.pointLight,
       visible: true
     },{
       id:nanoid(5),
@@ -31,15 +36,10 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       intensity:1,
       angle: 0.1,
       penumbra: 0.6,
-      type:"pointLight",
+      type: LIGHT_TYPES.spotLight,
       visible: true
     }
   ]
-
-const lightTypes = [
-    {type: 'pointLight', display: "Point light"},
-    {type: 'spotLight', display: "Spot light"}
-];
 
 const defaultLight = {
     id: nanoid(5),
@@ -53,4 +53,4 @@ const defaultLight = {
     visible: true
 }
 
-export { INIT_LIGHTS_LIST, lightTypes, defaultLight };
+export { INIT_LIGHTS_LIST, defaultLight };

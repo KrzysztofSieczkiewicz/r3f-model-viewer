@@ -1,8 +1,8 @@
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from '../../../models/Asset';
-import { VisibilityEyeButton } from '../../hubComponents/VisibilityEyeButton';
+import { VisibilityEyeButton } from '../commonComponents/VisibilityEyeButton';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
-import { SlidersArray } from '../controls/SlidersArray';
+import { SlidersArray } from '../commonComponents/SlidersArray';
 import React from 'react';
 
 type Props = {

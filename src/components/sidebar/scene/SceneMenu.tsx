@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { ColorPicker } from "../controls/ColorPicker";
+import { ColorPicker } from "../commonComponents/ColorPicker";
 
 import { useSidebarControlsContext } from '../SidebarControlsContext'   
-import { Slider } from "../controls/Slider";
+import { Slider } from "../commonComponents/Slider";
 import React from "react";
 
 export function SceneMenu() {

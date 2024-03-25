@@ -12,7 +12,7 @@ type Props = {
 export const SlidersArray = (props: Props) => {
     const { name, step, value, handleChange } = props;
 
-    const [ handledPosition, setHandledPosition ] = useState<[number,number,number]>(value);
+    const [ handledValue, setHandledValue ] = useState<[number,number,number]>(value);
     // RED GREEN BLUE
     const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
 
@@ -32,10 +32,10 @@ export const SlidersArray = (props: Props) => {
         if (!currentIndex) {
             return;
         }
-        const newHandledPosition = [...handledPosition] as [number,number,number];
-        newHandledPosition[Number(currentIndex)] = Math.round((handledPosition[Number(currentIndex)] + calculatedX * step) * 100) / 100;
+        const newHandledValue = [...handledValue] as [number,number,number];
+        newHandledValue[Number(currentIndex)] = Math.round((handledValue[Number(currentIndex)] + calculatedX * step) * 100) / 100;
         
-        setHandledPosition(newHandledPosition);
+        setHandledValue(newHandledValue);
     };
 
     const handleMouseUp = () => {
@@ -55,13 +55,13 @@ export const SlidersArray = (props: Props) => {
     }, [isMouseDown]);
 
     useEffect(() => {
-        handleChange(handledPosition);
-    }, [handledPosition])
+        handleChange(handledValue);
+    }, [handledValue])
 
     function handleCoordinateSlider() {
         return (
             <>
-            {handledPosition.map((position: number, index: number) => {
+            {handledValue.map((value: number, index: number) => {
                 return (
                     <div className="input-slider slider-array-three" 
                         key={index}
@@ -72,7 +72,7 @@ export const SlidersArray = (props: Props) => {
                     >
                         <div className="position-color-indicator" style={{ backgroundColor: indicatorColors[index] }}/>
                         <span className="slider-arrow left">&#60;</span>
-                        <span className="slider-value">{position}</span>
+                        <span className="slider-value">{value}</span>
                         <span className="slider-arrow right">&#62;</span>
                     </div>
                 )

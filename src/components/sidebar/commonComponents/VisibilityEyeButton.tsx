@@ -1,5 +1,5 @@
 import React from "react";
-import { EditableWrapper } from "../sidebar/SidebarControlsContext";
+import { EditableWrapper } from "../SidebarControlsContext";
 
 // TODO: SKOPIUJ
 type Props = {

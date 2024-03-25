@@ -1,5 +1,5 @@
 import React from "react";
-import { LightWrapper } from "./models/Light";
+import { LIGHT_TYPES, LightWrapper } from "./models/Light";
 
 type Props = {
     lightsList: LightWrapper[]
@@ -11,7 +11,7 @@ export const Lights = (props: Props) => {
     return (
         <>
             {lightsList.map((light) => {
-                if (light.type === 'pointLight' && light.visible) {
+                if (light.type === LIGHT_TYPES.pointLight && light.visible) {
                 return <pointLight 
                     key={light.id} 
                     position={light.position}
@@ -19,7 +19,7 @@ export const Lights = (props: Props) => {
                     color={light.color} 
                     intensity={light.intensity} 
                     />;
-                } else if (light.type === 'spotLight' && light.visible) {
+                } else if (light.type === LIGHT_TYPES.spotLight && light.visible) {
                 return <spotLight 
                     key={light.id} 
                     position={light.position}
