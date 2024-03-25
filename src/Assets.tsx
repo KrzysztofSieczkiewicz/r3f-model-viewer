@@ -28,7 +28,7 @@ export const Assets = (props: Props) => {
 
     const meshRef = useRef<HTMLDivElement>(null);
     useHelper(meshRef as any, BoxHelper, 'cyan')
-
+    
     useEffect(() => {
         assetsList.map((asset: AssetWrapper) => {
             if (asset.isSelected)
@@ -43,11 +43,17 @@ export const Assets = (props: Props) => {
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
     // TODO: Replace position property to move whole node instead of only mesh
+
+    // TODO: [TUTORING] HOW TO GET REF FOR EACH ASSET IN THE ASSETSLIST
+    // APPARENTLY ATTRIBUTES SHOULD BY SET USING REF.CURRENT INSTEAD OF CURRENT SOLUTION
     return (
         assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
                 <PivotControls
+                    visible={true}
+                    offset={[0,0,0]}
+                    depthTest={false}
                     key={asset.id} 
                 >
                     <mesh
