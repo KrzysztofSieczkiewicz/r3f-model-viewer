@@ -31,12 +31,13 @@ export const Dropdown = (props: Props): JSX.Element => {
         return list.find((light: Light) =>  light.type === type)?.display
     }
 
-    useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-          if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-            setIsOpen(false);
-          }
+    function handleClickOutside(e: MouseEvent) {
+        if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+          setIsOpen(false);
         }
+      }
+
+    useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {

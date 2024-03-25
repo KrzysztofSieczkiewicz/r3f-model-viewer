@@ -40,17 +40,17 @@ export const Slider = (props: Props) => {
         setIsMouseDown(true)
     };
 
+    const handleMouseMove = (event: MouseEvent) => {
+        const calculatedX = event.clientX - startingPosX;
+        
+        handleValue(handledValue + calculatedX * step);
+    };
+
+    const handleMouseUp = () => {
+        setIsMouseDown(false)
+    };
+
     useEffect(() => {
-        const handleMouseMove = (event: MouseEvent) => {
-            const calculatedX = event.clientX - startingPosX;
-            
-            handleValue(handledValue + calculatedX * step);
-        };
-
-        const handleMouseUp = () => {
-            setIsMouseDown(false)
-        };
-
         if(isMouseDown) {
             document.addEventListener('mouseup', handleMouseUp);
             document.addEventListener('mousemove', handleMouseMove);

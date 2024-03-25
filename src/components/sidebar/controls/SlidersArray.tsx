@@ -26,24 +26,24 @@ export const SlidersArray = (props: Props) => {
         setIsMouseDown(true);
     };
 
+    const handleMouseMove = (event: MouseEvent) => {
+        const calculatedX = event.clientX - startingPosX;
+        const currentIndex = currentSlider?.getAttribute('data-index');
+        if (!currentIndex) {
+            return;
+        }
+        const newHandledPosition = [...handledPosition] as [number,number,number];
+        newHandledPosition[Number(currentIndex)] = Math.round((handledPosition[Number(currentIndex)] + calculatedX * step) * 100) / 100;
+        
+        setHandledPosition(newHandledPosition);
+    };
+
+    const handleMouseUp = () => {
+        setIsMouseDown(false)
+    };
+    
     useEffect(() => {
-        const handleMouseMove = (event: MouseEvent) => {
-            const calculatedX = event.clientX - startingPosX;
-            const currentIndex = currentSlider?.getAttribute('data-index');
-            if (!currentIndex) {
-                return;
-            }
-            const newHandledPosition = [...handledPosition] as [number,number,number];
-            newHandledPosition[Number(currentIndex)] = Math.round((handledPosition[Number(currentIndex)] + calculatedX * step) * 100) / 100;
-            
-            setHandledPosition(newHandledPosition);
-        };
-
-        const handleMouseUp = () => {
-            setIsMouseDown(false)
-        };
-
-        if(isMouseDown) {
+               if(isMouseDown) {
             document.addEventListener('mouseup', handleMouseUp);
             document.addEventListener('mousemove', handleMouseMove);
         }
