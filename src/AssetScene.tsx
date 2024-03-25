@@ -16,45 +16,6 @@ export const AssetScene = () => {
 
   const { scene, lightsList, assetsList } = useSidebarControlsContext();
 
-  const [ selectedList, setSelectedList ] = useState([]);
-
-  function updateSelected(objectId: any) {
-    setSelectedList(objectId);
-    // SET PROVIDED OBJECT ID AS THE ONLY SELECTED OBJECT
-    //console.log(objectId);
-    // IF SHIFT KEY WAS PRESSED, ADD IT TO THE LIST INSTEAD
-
-  }
-
-/*
-  // SELECTION
-  const [ selectedID, setSelectedID ] = useState(null);
-
-  function handleSelected(newID) {
-    const prevIndex = assetsList.findIndex(asset => asset.id === selectedID);
-    const index = assetsList.findIndex(asset => asset.id === newID);
-    const asset = assetsList[index];
-
-    if(newID === selectedID || 
-       newID === undefined) {
-      if (asset?.isSelected) { // UNSELECT
-        const {isSelected, ...rest} = asset;
-        updateAsset(index, rest);
-        setSelectedID(null);
-        //console.log("I unsnpelected current selection: " + newID);
-      }
-    }
-    else {
-      // UNSELECT CURRENT
-      const {isSelected, ...rest} = asset;
-      updateAsset(prevIndex, rest);
-
-      // SELECT NEW
-      updateAsset(index, {...asset, isSelected: true});
-      setSelectedID(newID);
-    }
-  }
-*/
   return (
     <>
       <Canvas shadows
@@ -67,7 +28,7 @@ export const AssetScene = () => {
 
         <Selection>
           <Lights lightsList={lightsList} />
-          <Assets assetsList={assetsList} updateSelected={updateSelected} />
+          <Assets assetsList={assetsList}/>
         </Selection>        
 
       </Canvas>

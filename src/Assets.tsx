@@ -11,24 +11,10 @@ import React, { useEffect, useRef } from "react";
 import { BoxHelper } from "three";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { AssetWrapper } from "./models/Asset";
 
 type Props = {
-    assetsList: AssetsWrapper[],
-    updateSelected: (objectId: string) => void
-}
-
-type AssetsWrapper = {
-    id: string,
-    object: string,
-    name: string,
-    position: [number,number,number],
-    rotation: [number,number,number],
-    scale: [number,number,number],
-    ref: HTMLDivElement | null,
-    castShadow: boolean,
-    receiveShadow: boolean,
-    visible: boolean,
-    isSelected: boolean,
+    assetsList: AssetWrapper[]
 }
 
 type GLTFResult = GLTF & {
@@ -38,13 +24,13 @@ type GLTFResult = GLTF & {
   };
 
 export const Assets = (props: Props) => {
-    const { assetsList, updateSelected } = props;
+    const { assetsList } = props;
 
     const meshRef = useRef<HTMLDivElement>(null);
     useHelper(meshRef as any, BoxHelper, 'cyan')
 
     useEffect(() => {
-        assetsList.map((asset: AssetsWrapper) => {
+        assetsList.map((asset: AssetWrapper) => {
             if (asset.isSelected)
             {
                 asset.ref = meshRef.current;
@@ -56,6 +42,7 @@ export const Assets = (props: Props) => {
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
+    // TODO: Replace position property to move whole node instead of only mesh
     return (
         assetsList.map((asset) => {
         if(asset.visible) {
