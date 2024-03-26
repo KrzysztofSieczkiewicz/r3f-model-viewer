@@ -8,10 +8,11 @@ get how to recover pure geometry and material from gltf file to allow for modify
 */
 import { PivotControls, useGLTF, useHelper } from "@react-three/drei";
 import React, { useEffect, useRef } from "react";
-import { BoxHelper } from "three";
+import { BoxHelper, BufferGeometry, Group, Mesh, Object3DEventMap } from "three";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { AssetWrapper } from "./models/Asset";
+import { useSidebarControlsContext } from "./components/sidebar/SidebarControlsContext";
 
 type Props = {
     assetsList: AssetWrapper[]
@@ -23,63 +24,73 @@ type GLTFResult = GLTF & {
     };
   };
 
-export const Assets = (props: Props) => {
-    const { assetsList } = props;
+export const Assets = ({ assetsList }: Props) => {
+    const { updateAssetProperty } = useSidebarControlsContext();
 
-    const meshRef = useRef<HTMLDivElement>(null);
+    const meshRef = useRef<Mesh>(null);
+    const controlsRef = useRef<Group<Object3DEventMap>>(null)
     useHelper(meshRef as any, BoxHelper, 'cyan')
     
-    useEffect(() => {
-        assetsList.map((asset: AssetWrapper) => {
-            if (asset.isSelected)
-            {
-                asset.ref = meshRef.current;
-            }
-            else asset.ref = null;
-        });
-    });
+    // useEffect(() => {
+    //     assetsList.map((asset: AssetWrapper) => {
+    //         if (asset.isSelected)
+    //         {
+    //             asset.ref = meshRef.current;
+    //         }
+    //         else asset.ref = null;
+    //     });
+    // });
+
+    
 
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
+
+    const asset = assetsList[0]
+
+    const handleDrag = () => {
+        const position = meshRef.current?.getWorldPosition(new THREE.Vector3);
+        updateAssetProperty(asset.id, 'position', position)
+    }
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
 
     // TODO: [TUTORING] HOW TO GET REF FOR EACH ASSET IN THE ASSETSLIST
     // APPARENTLY ATTRIBUTES SHOULD BY SET USING e.g. ref.current.position = ... INSTEAD OF CURRENT SOLUTION
     // BUT MIGHT REQUIRE FURTHER CHECK
-    return (
-        assetsList.map((asset) => {
-        if(asset.visible) {
-            return ( 
-                <PivotControls
-                    visible={true}
-                    depthTest={false}
-                    key={asset.id} 
-                >
-                    <mesh
-                        onPointerOver={() => {
-                            //console.log("Pointer moved over the mesh")
-                        }} 
-                        onPointerOut={() => {
-                            //console.log("Pointer removed from mesh")
-                        }}
-                        onClick={(e) => {
-                            //updateSelected(e.intersections[0].object.assetID);
-                        }}
-                        key={asset.id}
-                        castShadow = {asset.castShadow}
-                        receiveShadow = {asset.receiveShadow}
-                        geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
-                        material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                        position={asset.position}
-                        rotation={asset.rotation}
-                        scale={asset.scale}
-                    />
-                </PivotControls >
-            );
-        }
-        return;
-        })
-    );
+    
+    if(asset.visible) {
+        return ( 
+            <PivotControls
+                onDrag={ () => { handleDrag() }}
+                ref={controlsRef}
+                visible={true}
+                depthTest={false}
+                key={asset.id} 
+            >
+                <mesh
+                    ref={meshRef}
+                    onPointerOver={() => {
+                        //console.log("Pointer moved over the mesh")
+                    }} 
+                    onPointerOut={() => {
+                        //console.log("Pointer removed from mesh")
+                    }}
+                    onClick={(e) => {
+                        //updateSelected(e.intersections[0].object.assetID);
+                    }}
+                    key={asset.id}
+                    castShadow = {asset.castShadow}
+                    receiveShadow = {asset.receiveShadow}
+                    geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
+                    material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
+                    position={asset.position}
+                    rotation={asset.rotation}
+                    scale={asset.scale}
+                />
+            </PivotControls >
+        );
+    }
+
 }
 
 useGLTF.preload("models/pear/Pear2_LOD0.gltf");
