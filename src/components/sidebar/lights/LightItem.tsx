@@ -44,7 +44,7 @@ export const LightItem = ({ active, light, onClick }: Props) => {
                     handleChange={(val: [number,number,number]) => updateLight(light.id, 'position', val)}
                 />
                 <ColorPicker name="Color" 
-                    value={light.color}
+                    currentColor={light.color}
                     handleChange={(val: string) => updateLight(light.id, 'color', val)}/>
                 <Slider name="Intensity"
                     value={light.intensity}

@@ -30,7 +30,7 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
         return active ? String.fromCharCode(8657) : String.fromCharCode(8659);
     }
 
-    // TODO: Dlaczego nie działa?
+    // TODO: [TUTORING] Dlaczego nie działa?
     const RenderSlidersArray = ( {displayName, propertyName, propertyValue, step}: SlidersArrayProps): JSX.Element => {
         return (
             <SlidersArray name= {displayName}
@@ -39,7 +39,6 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
             />
         );
     }
-
 
     return (
         <div className={`dropdown-item ${active ? "active" : ""}`}>

@@ -15,14 +15,14 @@ export const SceneMenu = () => {
             <section className="scene-section dropdown-item">
                 <h3 className="scene-section-header">Background</h3>
                 <ColorPicker name="Color" 
-                    value={scene.backgroundColor}
+                    currentColor={scene.backgroundColor}
                     handleChange={(val) => updateScene('backgroundColor', val)}
                 />
             </section>
             <section className="scene-section dropdown-item">
                 <h3 className="scene-section-header">Ambient light</h3>
                 <ColorPicker name="Color"
-                    value={scene.ambientLight.color}
+                    currentColor={scene.ambientLight.color}
                     handleChange={(val) => updateScene('ambientLight.color', val)}
                 />
                 <Slider name="Intensity"

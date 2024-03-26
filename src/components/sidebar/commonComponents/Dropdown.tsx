@@ -18,12 +18,12 @@ export const Dropdown = (props: Props): JSX.Element => {
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    const getDisplayedByType = (type: string) => {
+    const getDisplayNameByType = (type: string) => {
         return list.find((light) =>  light.type === type)?.display
     }
 
-    const selectItem = (item: string) => {
-        handleChange(item);
+    const selectOption = (option: string) => {
+        handleChange(option);
         setIsOpen(false);
     }
 
@@ -56,7 +56,7 @@ export const Dropdown = (props: Props): JSX.Element => {
                     toggleList()
                 }}
             >
-                <div className="dd-header-title">{getDisplayedByType(value)}</div>
+                <div className="dd-header-title">{getDisplayNameByType(value)}</div>
                 {isOpen
                 ? <span className="dd-header-arrow">&#8657;</span>
                 : <span className="dd-header-arrow">&#8659;</span>}
@@ -68,7 +68,7 @@ export const Dropdown = (props: Props): JSX.Element => {
                             key={item.type}
                             onClick={(e) => {
                                 e.stopPropagation();
-                                selectItem(item.type);
+                                selectOption(item.type);
                             }}
                         >
                             {item.display}
