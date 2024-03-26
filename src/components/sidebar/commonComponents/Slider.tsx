@@ -18,7 +18,7 @@ export const Slider = (props: Props) => {
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
-    function handleValue(newValue: number) {
+    const handleValue = (newValue: number) => {
         if (!isNaN(newValue)) {
             setHandledValue(0);
         }
@@ -68,7 +68,7 @@ export const Slider = (props: Props) => {
         }
     }, [handledValue])
 
-    function handleResetDefault() {
+    const handleResetDefault = () => {
         handleValue(defaultValue);
         handleChange(defaultValue);
     }

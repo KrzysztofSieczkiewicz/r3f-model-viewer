@@ -58,7 +58,7 @@ export const SlidersArray = (props: Props) => {
         handleChange(handledValue);
     }, [handledValue])
 
-    function handleCoordinateSlider() {
+    const handleCoordinateSlider = () => {
         return (
             <>
             {handledValue.map((value: number, index: number) => {

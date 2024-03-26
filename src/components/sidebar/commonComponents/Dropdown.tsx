@@ -18,20 +18,20 @@ export const Dropdown = (props: Props): JSX.Element => {
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    function getDisplayedByType(type: string) {
+    const getDisplayedByType = (type: string) => {
         return list.find((light) =>  light.type === type)?.display
     }
 
-    function selectItem(item: string) {
+    const selectItem = (item: string) => {
         handleChange(item);
         setIsOpen(false);
     }
 
-    function toggleList() {
+    const toggleList = () => {
         setIsOpen(!isOpen); 
     }
 
-    function handleClickOutside(e: MouseEvent) {
+    const handleClickOutside = (e: MouseEvent) => {
         if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
           setIsOpen(false);
         }
