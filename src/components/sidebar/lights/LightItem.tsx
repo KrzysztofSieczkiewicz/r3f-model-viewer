@@ -14,10 +14,9 @@ type Props = |{
     light: LightWrapper
 }
 
-export const LightItem = (props: Props) => {
-    const { active, light, onClick } = props;
+export const LightItem = ({ active, light, onClick }: Props) => {
 
-    const { lightsList, updateLight, updateObject } = useSidebarControlsContext();
+    const { updateLight } = useSidebarControlsContext();
 
     const handleIsActive = () => {
         return active ? String.fromCharCode(8657) : String.fromCharCode(8659);

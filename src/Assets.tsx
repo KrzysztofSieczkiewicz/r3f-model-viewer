@@ -42,17 +42,16 @@ export const Assets = (props: Props) => {
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
-    // TODO: Replace position property to move whole node instead of only mesh
 
     // TODO: [TUTORING] HOW TO GET REF FOR EACH ASSET IN THE ASSETSLIST
-    // APPARENTLY ATTRIBUTES SHOULD BY SET USING REF.CURRENT INSTEAD OF CURRENT SOLUTION
+    // APPARENTLY ATTRIBUTES SHOULD BY SET USING e.g. ref.current.position = ... INSTEAD OF CURRENT SOLUTION
+    // BUT MIGHT REQUIRE FURTHER CHECK
     return (
         assetsList.map((asset) => {
         if(asset.visible) {
             return ( 
                 <PivotControls
                     visible={true}
-                    offset={[0,0,0]}
                     depthTest={false}
                     key={asset.id} 
                 >
