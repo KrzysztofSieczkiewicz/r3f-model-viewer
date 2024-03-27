@@ -48,8 +48,16 @@ export const Assets = ({ assetsList }: Props) => {
     const asset = assetsList[0]
 
     const handleDrag = () => {
-        const position = meshRef.current?.getWorldPosition(new THREE.Vector3);
-        updateAssetProperty(asset.id, 'position', position)
+        const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3);
+        const assetPosition = meshRef.current?.getWorldPosition(new THREE.Vector3)
+        updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
+        console.log('Controls position: ')
+        console.log(controlsPosition)
+        console.log('Mesh position: ')
+        console.log(assetPosition)
+        console.log("Asset position")
+        console.log(asset.position)
+
     }
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
@@ -68,6 +76,7 @@ export const Assets = ({ assetsList }: Props) => {
                 key={asset.id} 
             >
                 <mesh
+                    matrixWorldAutoUpdate={true}
                     ref={meshRef}
                     onPointerOver={() => {
                         //console.log("Pointer moved over the mesh")
@@ -83,7 +92,7 @@ export const Assets = ({ assetsList }: Props) => {
                     receiveShadow = {asset.receiveShadow}
                     geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
                     material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                    position={asset.position}
+                    //position={asset.position}
                     rotation={asset.rotation}
                     scale={asset.scale}
                 />
