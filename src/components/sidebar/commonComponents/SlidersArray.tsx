@@ -33,10 +33,15 @@ export const SlidersArray = (props: Props) => {
             return;
         }
         const newHandledValue = [...handledValue] as [number,number,number];
-        newHandledValue[Number(currentIndex)] = Math.round((handledValue[Number(currentIndex)] + calculatedX * step) * 100) / 100;
-        
+        newHandledValue[Number(currentIndex)] = handledValue[Number(currentIndex)] + calculatedX * step;
+        console.log({newHandledValue})
+
         setHandledValue(newHandledValue);
     };
+
+    const roundNumber = (number: number) => {
+        return Math.round((number) * 100) / 100;
+    }
 
     const handleMouseUp = () => {
         setIsMouseDown(false)
@@ -72,7 +77,7 @@ export const SlidersArray = (props: Props) => {
                     >
                         <div className="position-color-indicator" style={{ backgroundColor: indicatorColors[index] }}/>
                         <span className="slider-arrow left">&#60;</span>
-                        <span className="slider-value">{value}</span>
+                        <span className="slider-value">{roundNumber(value)}</span>
                         <span className="slider-arrow right">&#62;</span>
                     </div>
                 )

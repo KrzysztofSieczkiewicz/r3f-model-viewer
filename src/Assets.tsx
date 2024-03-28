@@ -47,18 +47,15 @@ export const Assets = ({ assetsList }: Props) => {
 
     const asset = assetsList[0]
 
-    const handleDrag = () => {
+    const handleControlsDrag = () => {
         const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3);
         const assetPosition = meshRef.current?.getWorldPosition(new THREE.Vector3)
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
-        console.log('Controls position: ')
-        console.log(controlsPosition)
-        console.log('Mesh position: ')
-        console.log(assetPosition)
-        console.log("Asset position")
-        console.log(asset.position)
-
     }
+
+    useEffect( () => {
+        updateAssetProperty(asset.id, 'position', asset.position)
+    }, [asset.position])
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
 
@@ -69,7 +66,7 @@ export const Assets = ({ assetsList }: Props) => {
     if(asset.visible) {
         return ( 
             <PivotControls
-                onDrag={ () => { handleDrag() }}
+                onDrag={ () => { handleControlsDrag() }}
                 ref={controlsRef}
                 visible={true}
                 depthTest={false}
