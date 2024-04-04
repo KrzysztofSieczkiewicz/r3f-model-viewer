@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import { ColorPicker } from "../controls/ColorPicker";
+import { ColorPicker } from "../commonComponents/ColorPicker";
 
-import SidebarControlsContext from '../../sidebar/SidebarControlsContext'   
-import { Slider } from "../controls/Slider";
+import { useSidebarControlsContext } from '../SidebarControlsContext'   
+import { Slider } from "../commonComponents/Slider";
+import React from "react";
 
-export function SceneMenu() {
-    const { scene, updateScene } = useContext(SidebarControlsContext);
+export const SceneMenu = () => {
+    const { scene, updateScene } = useSidebarControlsContext();
 
     const handleItemClick = () => {
 
@@ -16,14 +17,14 @@ export function SceneMenu() {
             <section className="scene-section dropdown-item">
                 <h3 className="scene-section-header">Background</h3>
                 <ColorPicker name="Color" 
-                    value={scene.backgroundColor}
+                    currentColor={scene.backgroundColor}
                     handleChange={(val) => updateScene('backgroundColor', val)}
                 />
             </section>
             <section className="scene-section dropdown-item">
                 <h3 className="scene-section-header">Ambient light</h3>
                 <ColorPicker name="Color"
-                    value={scene.ambientLight.color}
+                    currentColor={scene.ambientLight.color}
                     handleChange={(val) => updateScene('ambientLight.color', val)}
                 />
                 <Slider name="Intensity"

@@ -1,30 +1,43 @@
+import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-export function Dropdown(props) {
-    const { value, list, handleChange } = props;
+type Props = {
+    selected: string,
+    selectionList: SelectionList[],
+    handleChange: (item: string) => void
+}
+
+type SelectionList = {
+    type: string,
+    display: string
+}
+
+export const Dropdown = (props: Props): JSX.Element => {
+    const { selected: value, selectionList: list, handleChange } = props;
 
     const [ isOpen, setIsOpen ] = useState(false);
-    const dropdownRef = useRef();
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    function toggleList() {
-        setIsOpen(!isOpen);
+    const getDisplayNameByType = (type: string) => {
+        return list.find((light) =>  light.type === type)?.display
     }
 
-    function selectItem(item) {
-        handleChange(item);
+    const selectOption = (option: string) => {
+        handleChange(option);
         setIsOpen(false);
     }
 
-    function getDisplayedByType(type) {
-        return list.find(light => light.type === type)?.display
+    const toggleList = () => {
+        setIsOpen(!isOpen); 
     }
 
-    useEffect(() => {
-        function handleClickOutside(e) {
-          if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-            setIsOpen(false);
-          }
+    const handleClickOutside = (e: MouseEvent) => {
+        if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+          setIsOpen(false);
         }
+      }
+
+    useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
@@ -43,7 +56,7 @@ export function Dropdown(props) {
                     toggleList()
                 }}
             >
-                <div className="dd-header-title">{getDisplayedByType(value)}</div>
+                <div className="dd-header-title">{getDisplayNameByType(value)}</div>
                 {isOpen
                 ? <span className="dd-header-arrow">&#8657;</span>
                 : <span className="dd-header-arrow">&#8659;</span>}
@@ -55,7 +68,7 @@ export function Dropdown(props) {
                             key={item.type}
                             onClick={(e) => {
                                 e.stopPropagation();
-                                selectItem(item.type);
+                                selectOption(item.type);
                             }}
                         >
                             {item.display}
