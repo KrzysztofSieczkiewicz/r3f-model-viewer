@@ -54,6 +54,7 @@ export const Assets = ({ assetsList }: Props) => {
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
         updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
     }
+    // TODO: CHECK STORE
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
 

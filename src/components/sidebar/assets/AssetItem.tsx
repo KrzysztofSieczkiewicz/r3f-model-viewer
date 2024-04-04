@@ -30,12 +30,14 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
         return active ? String.fromCharCode(8657) : String.fromCharCode(8659);
     }
 
-    // TODO: [TUTORING] Dlaczego nie działa?
-    const RenderSlidersArray = ( {displayName, propertyName, propertyValue, step}: SlidersArrayProps): JSX.Element => {
+    const renderSlidersArray = ( props: SlidersArrayProps): JSX.Element => {
+        //const {displayName, propertyName, propertyValue, step} = props;
         return (
-            <SlidersArray name= {displayName}
-                    value={propertyValue} step={step}
-                    handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, propertyName, val)}
+            <SlidersArray 
+                name={props.displayName}
+                value={props.propertyValue}
+                step={props.step}
+                handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, props.propertyName, val)}
             />
         );
     }
@@ -52,38 +54,10 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
             </div>
 
             {active && <div className="dropdown-item-body">
-                <RenderSlidersArray 
-                    displayName='Position' 
-                    propertyName='position' 
-                    propertyValue={asset.position} 
-                    step={0.005}
-                />
-                <SlidersArray 
-                    name="Position"
-                    value={asset.position} 
-                    step={0.005}
-                    handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'position', val)}
-                />
-                <RenderSlidersArray 
-                    displayName='Rotation' 
-                    propertyName='rotation' 
-                    propertyValue={asset.rotation} 
-                    step={0.01}
-                />
-                <SlidersArray name="Rotation"
-                    value={asset.rotation} step={0.01}
-                    handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'rotation', val)}
-                />
-                <RenderSlidersArray 
-                    displayName='Scale' 
-                    propertyName='scale'
-                    propertyValue={asset.scale} 
-                    step={0.01}
-                />
-                <SlidersArray name="Scale"
-                    value={asset.scale} step={0.01}
-                    handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'scale', val)}
-                />
+                {renderSlidersArray({displayName: 'Position', propertyName:'position', propertyValue: asset.position, step: 0.005})}
+                {renderSlidersArray({displayName: 'Rotation', propertyName:'rotation', propertyValue: asset.rotation, step: 0.01})}
+                {renderSlidersArray({displayName: 'Scale', propertyName:'scale', propertyValue: asset.scale, step: 0.01})}
+
             </div>}
         </div>
     );
