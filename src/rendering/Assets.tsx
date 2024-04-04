@@ -50,15 +50,9 @@ export const Assets = ({ assetsList }: Props) => {
         const controlsRotation = controlsRef.current?.getWorldQuaternion(new THREE.Quaternion)
         const assetPosition = meshRef.current?.getWorldPosition(new THREE.Vector3)
 
-        console.log([controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
-
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
         updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
     }
-
-    useEffect( () => {
-        console.log(asset.position)
-    }, [asset.position])
 
     // TODO: CHECK STORE
 
