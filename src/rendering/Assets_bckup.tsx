@@ -4,7 +4,7 @@ THIS SHOULD GET LIST OF PROPERTIES FROM ASSET, then return
     <Decal position={[0, 0.04, 0.15]} rotation={[0, 0, 0]} scale={0.15} map={texture} map-anisotropy={16} />
 </mesh>
 
-get how to recover pure geometry and material from gltf file to allow for modifying materials
+get how to recover pure geometry and material from gltf
 */
 import { PivotControls, useGLTF, useHelper } from "@react-three/drei";
 import React, { useEffect, useRef } from "react";
@@ -38,9 +38,8 @@ export const Assets = (props: Props) => {
             else asset.ref = null;
         });
     });
-
+    
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
-
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
 
     // TODO: [TUTORING] HOW TO GET REF FOR EACH ASSET IN THE ASSETSLIST
@@ -49,23 +48,9 @@ export const Assets = (props: Props) => {
     return (
         assetsList.map((asset) => {
         if(asset.visible) {
-            return ( 
-                <PivotControls
-                    visible={true}
-                    depthTest={false}
-                    key={asset.id} 
-                >
+            return (
+                <group dispose={null} key={asset.id}>
                     <mesh
-                        onPointerOver={() => {
-                            //console.log("Pointer moved over the mesh")
-                        }} 
-                        onPointerOut={() => {
-                            //console.log("Pointer removed from mesh")
-                        }}
-                        onClick={(e) => {
-                            //updateSelected(e.intersections[0].object.assetID);
-                        }}
-                        key={asset.id}
                         castShadow = {asset.castShadow}
                         receiveShadow = {asset.receiveShadow}
                         geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
@@ -74,12 +59,12 @@ export const Assets = (props: Props) => {
                         rotation={asset.rotation}
                         scale={asset.scale}
                     />
-                </PivotControls >
+                </group>
             );
         }
-        return;
         })
     );
+    
 }
 
 useGLTF.preload("models/pear/Pear2_LOD0.gltf");

@@ -8,7 +8,9 @@ import React from "react";
 export const SceneMenu = () => {
     const { scene, updateScene } = useSidebarControlsContext();
 
-    // Todo: for ambientLight color picker add option to match the light to the background
+    const handleItemClick = () => {
+
+    };
     
     return (
         <div className="dropdown">
