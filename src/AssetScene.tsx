@@ -6,7 +6,7 @@ import { Lights } from './Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
 import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
-import { Assets } from './Assets';
+import { Assets } from './rendering/Assets';
 
 import { Selection } from "@react-three/postprocessing";
 // import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';

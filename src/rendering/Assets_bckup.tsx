@@ -11,7 +11,7 @@ import React, { useEffect, useRef } from "react";
 import { BoxHelper } from "three";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { AssetWrapper } from "./models/Asset";
+import { AssetWrapper } from "../models/Asset";
 
 type Props = {
     assetsList: AssetWrapper[]

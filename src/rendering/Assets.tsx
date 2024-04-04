@@ -11,8 +11,8 @@ import React, { useEffect, useRef } from "react";
 import { BoxHelper, BufferGeometry, Group, Mesh, Object3DEventMap } from "three";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { AssetWrapper } from "./models/Asset";
-import { useSidebarControlsContext } from "./components/sidebar/SidebarControlsContext";
+import { AssetWrapper } from "../models/Asset";
+import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
 
 type Props = {
     assetsList: AssetWrapper[]
@@ -41,8 +41,6 @@ export const Assets = ({ assetsList }: Props) => {
     //     });
     // });
 
-    
-
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
     const asset = assetsList[0]
@@ -51,9 +49,17 @@ export const Assets = ({ assetsList }: Props) => {
         const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3);
         const controlsRotation = controlsRef.current?.getWorldQuaternion(new THREE.Quaternion)
         const assetPosition = meshRef.current?.getWorldPosition(new THREE.Vector3)
+
+        console.log([controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
+
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
         updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
     }
+
+    useEffect( () => {
+        console.log(asset.position)
+    }, [asset.position])
+
     // TODO: CHECK STORE
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
