@@ -12,13 +12,18 @@ type Props = {
 export const SlidersArray = (props: Props) => {
     const { name, step, value, handleChange } = props;
 
-    const [ handledValue, setHandledValue ] = useState<[number,number,number]>(value);
+    const [ localValue, setLocalValue ] = useState<[number,number,number]>(value);
     // RED GREEN BLUE
     const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
 
     const [ currentSlider, setCurrentSlider ] = useState<HTMLDivElement | null>(null);
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
+
+    // ROUND DISPLAYED VALUE
+    const roundDisplayed = (number: number) => {
+        return Math.round((number) * 100) / 100;
+    }
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         setStartingPosX(e.clientX);
@@ -32,23 +37,18 @@ export const SlidersArray = (props: Props) => {
         if (!currentIndex) {
             return;
         }
-        const newHandledValue = [...handledValue] as [number,number,number];
-        newHandledValue[Number(currentIndex)] = handledValue[Number(currentIndex)] + calculatedX * step;
-        console.log({newHandledValue})
+        const newValue = [...localValue] as [number,number,number];
+        newValue[Number(currentIndex)] = localValue[Number(currentIndex)] + calculatedX * step;
 
-        setHandledValue(newHandledValue);
+        handleChange(newValue);
     };
-
-    const roundNumber = (number: number) => {
-        return Math.round((number) * 100) / 100;
-    }
 
     const handleMouseUp = () => {
         setIsMouseDown(false)
     };
     
     useEffect(() => {
-               if(isMouseDown) {
+        if(isMouseDown) {
             document.addEventListener('mouseup', handleMouseUp);
             document.addEventListener('mousemove', handleMouseMove);
         }
@@ -59,14 +59,15 @@ export const SlidersArray = (props: Props) => {
         };
     }, [isMouseDown]);
 
+    // UPDATE THE VALUE IF PROVIDED VALUE WAS CHANGED BY ANOTHER CONTROL
     useEffect(() => {
-        handleChange(handledValue);
-    }, [handledValue])
+        setLocalValue(value);
+    }, [value]);
 
     const handleCoordinateSlider = () => {
         return (
             <>
-            {handledValue.map((value: number, index: number) => {
+            {localValue.map((value: number, index: number) => {
                 return (
                     <div className="input-slider slider-array-three" 
                         key={index}
@@ -77,7 +78,7 @@ export const SlidersArray = (props: Props) => {
                     >
                         <div className="position-color-indicator" style={{ backgroundColor: indicatorColors[index] }}/>
                         <span className="slider-arrow left">&#60;</span>
-                        <span className="slider-value">{roundNumber(value)}</span>
+                        <span className="slider-value">{roundDisplayed(value)}</span>
                         <span className="slider-arrow right">&#62;</span>
                     </div>
                 )
