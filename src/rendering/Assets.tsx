@@ -50,9 +50,22 @@ export const Assets = ({ assetsList }: Props) => {
         const controlsRotation = controlsRef.current?.getWorldQuaternion(new THREE.Quaternion)
         const assetPosition = meshRef.current?.getWorldPosition(new THREE.Vector3)
 
+        console.log("CONTROLS POSTIION")
+        console.log([controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
+
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
-        updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
+        //updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
+
+        
     }
+        
+    useEffect( () => {
+        console.log("I'M TRYING TO UPDATE")
+        console.log(new THREE.Vector3(asset.position[0], asset.position[1], asset.position[2]))
+
+        controlsRef.current?.matrixWorld.setPosition(new THREE.Vector3(asset.position[0], asset.position[1], asset.position[2]))
+
+    }, [asset])
 
     // TODO: CHECK STORE
 
@@ -88,7 +101,7 @@ export const Assets = ({ assetsList }: Props) => {
                     receiveShadow = {asset.receiveShadow}
                     geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
                     material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                    position={asset.position}
+                    //position={asset.position}
                     rotation={asset.rotation}
                     scale={asset.scale}
                 />

@@ -53,6 +53,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
             const newAssetsList = [...assetsList];
             (newAssetsList[index]) = newAsset;
 
+            console.log(newAsset.position)
             setAssetsList(newAssetsList);
         }
     }
