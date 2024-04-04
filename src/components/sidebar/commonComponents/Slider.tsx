@@ -14,25 +14,23 @@ type Props = {
 export const Slider = (props: Props) => {
     const { name, min, max, step, value, defaultValue, handleChange} = props;
 
-    const [ handledValue, setHandledValue ] = useState(value);
+    const [ localValue, setLocalValue ] = useState(value);
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
-    const handleValue = (newValue: number) => {
-        if (!isNaN(newValue)) {
-            setHandledValue(0);
-        }
+    const handleInput = (newValue: number) => {
         if (newValue > max) {
-            setHandledValue(max);
+            handleChange(max);
         } else if (newValue < min) {
-            setHandledValue(min);
+            handleChange(min);
         } else {
-            setHandledValue(Math.round(newValue * 100) / 100);
+            handleChange(newValue);
         }
     }
 
-    const handleStepChange = (direction: number) => {
-        handleValue(handledValue + (step * direction * 10));
+    // ROUND DISPLAYED VALUE
+    const roundDisplayed = (number: number) => {
+        return Math.round((number) * 100) / 100;
     }
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -43,7 +41,7 @@ export const Slider = (props: Props) => {
     const handleMouseMove = (event: MouseEvent) => {
         const calculatedX = event.clientX - startingPosX;
         
-        handleValue(handledValue + calculatedX * step);
+        handleInput(localValue + calculatedX * step);
     };
 
     const handleMouseUp = () => {
@@ -55,21 +53,20 @@ export const Slider = (props: Props) => {
             document.addEventListener('mouseup', handleMouseUp);
             document.addEventListener('mousemove', handleMouseMove);
         }
-
         return () => {
             document.removeEventListener('mouseup', handleMouseUp);
             document.removeEventListener('mousemove', handleMouseMove);
         };
     }, [isMouseDown]);
 
+    // UPDATE THE VALUE IF PROVIDED VALUE WAS CHANGED BY ANOTHER CONTROL
     useEffect(() => {
-        if (handledValue !== 0) {
-            handleChange(handledValue);
-        }
-    }, [handledValue])
+        setLocalValue(value);
+    }, [value]);
 
+    // RESET VALUE TO DEFAULT
     const handleResetDefault = () => {
-        handleValue(defaultValue);
+        handleInput(defaultValue);
         handleChange(defaultValue);
     }
 
@@ -83,14 +80,14 @@ export const Slider = (props: Props) => {
                 onMouseDown={(e) => handleMouseDown(e)}
             >
                 <span className="slider-arrow left"
-                onClick={() => handleStepChange(-1)} > &#60; </span>
+                onClick={() => handleInput(localValue - step)} > &#60; </span>
 
                 <span className="slider-value"
                 onDoubleClick={() => console.log("DoubleClicked")}
-                >{handledValue}</span>
+                >{roundDisplayed(value)}</span>
 
                 <span className="slider-arrow right"
-                onClick={() => handleStepChange(1)} > &#62; </span>
+                onClick={() => handleInput(localValue + step)} > &#62; </span>
             </div>
             <button className="reset-default-btn"
                 onClick={handleResetDefault}
