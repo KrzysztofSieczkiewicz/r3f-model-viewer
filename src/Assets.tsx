@@ -49,13 +49,11 @@ export const Assets = ({ assetsList }: Props) => {
 
     const handleControlsDrag = () => {
         const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3);
+        const controlsRotation = controlsRef.current?.getWorldQuaternion(new THREE.Quaternion)
         const assetPosition = meshRef.current?.getWorldPosition(new THREE.Vector3)
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
+        updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
     }
-
-    useEffect( () => {
-        updateAssetProperty(asset.id, 'position', asset.position)
-    }, [asset.position])
 
     // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
 
@@ -89,7 +87,7 @@ export const Assets = ({ assetsList }: Props) => {
                     receiveShadow = {asset.receiveShadow}
                     geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
                     material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                    //position={asset.position}
+                    position={asset.position}
                     rotation={asset.rotation}
                     scale={asset.scale}
                 />

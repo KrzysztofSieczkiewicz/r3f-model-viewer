@@ -64,13 +64,25 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
                     step={0.005}
                     handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'position', val)}
                 />
-                <SlidersArray name="Scale"
-                    value={asset.scale} step={0.01}
-                    handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'scale', val)}
+                <RenderSlidersArray 
+                    displayName='Rotation' 
+                    propertyName='rotation' 
+                    propertyValue={asset.rotation} 
+                    step={0.01}
                 />
                 <SlidersArray name="Rotation"
                     value={asset.rotation} step={0.01}
                     handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'rotation', val)}
+                />
+                <RenderSlidersArray 
+                    displayName='Scale' 
+                    propertyName='scale'
+                    propertyValue={asset.scale} 
+                    step={0.01}
+                />
+                <SlidersArray name="Scale"
+                    value={asset.scale} step={0.01}
+                    handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, 'scale', val)}
                 />
             </div>}
         </div>
