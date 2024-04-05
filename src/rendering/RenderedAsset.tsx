@@ -9,7 +9,8 @@ import { useSidebarControlsContext } from "../components/sidebar/SidebarControls
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type Props = {
-    asset: AssetWrapper
+    asset: AssetWrapper,
+    isSelected: boolean,
 }
 
 type GLTFResult = GLTF & {
@@ -19,13 +20,16 @@ type GLTFResult = GLTF & {
   };
 
 // TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
-export const RenderedAsset = ( {asset}: Props) => {
-    const { updateAssetProperty } = useSidebarControlsContext();
+export const RenderedAsset = ( {asset, isSelected}: Props) => {
+    const { updateAssetProperty, updateSelected } = useSidebarControlsContext();
 
-    const meshRef = useRef<Mesh>(null);
+    let meshRef = useRef<Mesh>(null);
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
 
+    // TODO: NOW I HAVE MY 'isSelected'. HOW TO CONDITIONALLY PROVIDE REF TO THE HELPER?
     useHelper(meshRef as any, BoxHelper, 'cyan')
+    
+    
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
 
@@ -48,10 +52,8 @@ export const RenderedAsset = ( {asset}: Props) => {
 
     const handleDragEnd = () => {
         const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3);
-        console.log([controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
 
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
-        console.log(asset.position);
     }
         
     useEffect( () => {
@@ -71,6 +73,7 @@ export const RenderedAsset = ( {asset}: Props) => {
                 position={asset.position}
         >
             <PivotControls
+                offset={[0,0,0]}
                 onDrag={ () => { handleControlsDrag() }}
                 onDragEnd={ () => { handleDragEnd() }}
                 ref={controlsRef}
@@ -86,8 +89,9 @@ export const RenderedAsset = ( {asset}: Props) => {
                 onPointerOut={() => {
                     //console.log("Pointer removed from mesh")
                 }}
-                onClick={(e) => {
-                    //updateSelected(e.intersections[0].object.assetID);
+                onClick={() => {
+                    updateSelected(asset.id);
+                    console.log(isSelected)
                 }} 
                 castShadow = {asset.castShadow}
                 receiveShadow = {asset.receiveShadow}

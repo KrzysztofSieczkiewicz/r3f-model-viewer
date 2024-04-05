@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { INITIAL_SCENE_SETTINGS, SceneWrapper } from '../../models/Scene';
@@ -9,10 +9,13 @@ export type EditableWrapper = AssetWrapper | LightWrapper
 
 type SidebarControlsContext =  {
     lightsList: LightWrapper[], 
-    updateLight: (id:string, property: keyof LightWrapper, value:any) => void, 
+    updateLight: (id:string, property:keyof LightWrapper, value:any) => void, 
 
     assetsList: AssetWrapper[], 
-    updateAssetProperty: (id:string, property: keyof AssetWrapper, value:any) => void,
+    updateAssetProperty: (id:string, property:keyof AssetWrapper, value:any) => void,
+
+    selectedList: string[],
+    updateSelected: (objectId:string) => void,
 
     scene: SceneWrapper, 
     updateScene: (property:string, value:any) => void,
@@ -24,6 +27,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
 
     const [ assetsList, setAssetsList ] = useState<AssetWrapper[]>(INIT_ASSET_LIST);
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
+    const [ selectedList, setSelectedList ] = useState<string[]>([]);
     const [ scene, setScene ] = useState<SceneWrapper>(INITIAL_SCENE_SETTINGS); 
 
 
@@ -57,7 +61,6 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         }
     }
 
-
     const updateScene = (property: string, value: any) => {
       const updateNested = (obj: any, keys: any, value: any) => {
         if (keys.length === 1) {
@@ -78,9 +81,26 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
       });
     }
 
+    // TODO: INTRODUCE MORE SENSIBLE SELECTION LOGIC
+    const updateSelected = (objectId: string) => {
+      if ( selectedList.includes(objectId) ) {
+        const newSelectedList = selectedList;
+        newSelectedList.splice( selectedList.indexOf(objectId) ,1);
+        setSelectedList(newSelectedList);
+
+        console.log("OBJECT " + objectId +  " WAS REMOVED FROM THE LIST")
+      } 
+      else {
+        const newSelectedList = selectedList;
+        newSelectedList.push(objectId);
+        setSelectedList(newSelectedList);
+
+        console.log("OBJECT " + objectId +  " WAS ADDED TO THE LIST")
+      }
+    }
 
     return (
-        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, scene, updateScene }} >
+        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, scene, updateScene, selectedList, updateSelected }} >
             {props.children}
         </SidebarControlsContext.Provider>
     );

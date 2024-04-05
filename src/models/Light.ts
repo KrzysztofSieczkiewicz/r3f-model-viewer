@@ -12,8 +12,7 @@ export type LightWrapper = {
     visible: boolean,
 }
 
-// TODO: REPLACE ALL USES WITH ENUM/OBJECT HANDLING
-type LightOption = "Point light" | "Spot light" | "ASD"
+type LightOption = "Point light" | "Spot light"
 export enum LIGHT_TYPES {
   pointLight =  "Point light",
   spotLight = "Spot light"
