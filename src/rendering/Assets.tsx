@@ -13,7 +13,10 @@ export const Assets = ({ assetsList }: Props) => {
         assetsList.map((asset) => {
             if(asset.visible) {
                 return (
-                    <RenderedAsset asset={asset} />
+                    <RenderedAsset 
+                        asset={asset} 
+                        key={asset.id} 
+                    />
                 );
             }
         })
