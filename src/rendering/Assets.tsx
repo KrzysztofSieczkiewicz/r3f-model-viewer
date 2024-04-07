@@ -10,12 +10,6 @@ type Props = {
 
 export const Assets = ({ assetsList }: Props) => {
     const { selectedList } = useSidebarControlsContext();
-
-    // TODO: PROVIDE A WORKING WAY TO DETERMINE IF OBJECT IS SELECTED
-    useEffect(() => {
-        console.log(selectedList)
-        console.log(selectedList.includes(assetsList[0].id))
-    }, [selectedList])
         
     return (
         assetsList.map((asset) => {

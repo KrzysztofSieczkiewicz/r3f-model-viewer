@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { useGLTF, useHelper } from "@react-three/drei";
 import { PivotControls } from "@react-three/drei/web/pivotControls";
-import { useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { BoxHelper, Group, Mesh, Object3DEventMap } from "three/src/Three";
 import { AssetWrapper } from "../models/Asset";
 import React from "react";
@@ -19,40 +19,26 @@ type GLTFResult = GLTF & {
     };
   };
 
-// TODO: Consider PivotControls vs TransformControls (or maybe add a way to toggle them)
 export const RenderedAsset = ( {asset, isSelected}: Props) => {
     const { updateAssetProperty, updateSelected } = useSidebarControlsContext();
+
+    const [ isHovered, setIsHovered ] = useState(false);
 
     let meshRef = useRef<Mesh>(null);
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
 
-    // TODO: NOW I HAVE MY 'isSelected'. HOW TO CONDITIONALLY PROVIDE REF TO THE HELPER?
-    useHelper(meshRef as any, BoxHelper, 'cyan')
-    
+    // TODO [TUTORING]: IS THIS HOOK A VALID APPROACH?
+    useBoxHelper(isSelected, isHovered, meshRef);
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
-
     const handleControlsDrag = () => {
         const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3);
-        //const controlsRotation = controlsRef.current?.getWorldQuaternion(new THREE.Quaternion)
-
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
-        //updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])        
-    }
-
-    const handleAssetSelected = () => {
-        // TRIGGER PROPER SELECT FUNCTION (PROBABLY PASSED VIA SidebarControlsContext)
-        // IF ASSET IS SELECTED, DISPLAY THE BoxHelper
-    }
-
-    const handleAssetHovered = () => {
-        // DISPLAY SUBTLE BoxHelper
     }
 
     const handleDragEnd = () => {
         const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3);
-
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
     }
         
@@ -64,9 +50,7 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
     if(!asset.visible) return;
 
     // TODO [TUTORING]: WHEN CONTROLS ARE DRAGGED DYNAMICALLY AND MOUSE BUTTON IS RELEASED CONTROLS MOVE A BIT FURTHER THAT THE MODEL ITSELF
-    // IT'LL JUMP BACK INTO POSITION WHEN ANOTHER DRAG IS INITIATED
-    // BUT EVEN onDragEnd CANNOT FIX THAT
-    // HOW TO KEEP TRACK OF THAT?
+    // IT'LL JUMP BACK INTO POSITION WHEN ANOTHER DRAG IS INITIATED AND EVEN onDragEnd CANNOT FIX THAT
     return (
         <group
                 key={asset.id} 
@@ -84,10 +68,10 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
                 matrixWorldAutoUpdate={true}
                 ref={meshRef}
                 onPointerOver={() => {
-                    //console.log("Pointer moved over the mesh")
+                    setIsHovered(true);
                 }}
                 onPointerOut={() => {
-                    //console.log("Pointer removed from mesh")
+                    setIsHovered(false);
                 }}
                 onClick={() => {
                     updateSelected(asset.id);
@@ -106,3 +90,31 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
 }
 
 useGLTF.preload("models/pear/Pear2_LOD0.gltf");
+
+
+
+
+const useBoxHelper = (isSelected: boolean, isHovered: boolean, meshRef: RefObject<Mesh>) => {
+    const [isDisplayed, setIsDisplayed] = useState(false);
+    const [color, setColor] = useState('');
+   
+    useEffect(() => {
+       if (!isSelected && !isHovered) {
+         setIsDisplayed(false);
+       }
+       if (isSelected && !isHovered) {
+         setIsDisplayed(true);
+         setColor("cyan");
+       }
+       if (!isSelected && isHovered) {
+         setIsDisplayed(true);
+         setColor("aquamarin");
+       }
+       if (isSelected && isHovered) {
+         setIsDisplayed(true);
+         setColor("cyan");
+       }
+    }, [isSelected, isHovered]);
+   
+    useHelper(isDisplayed && meshRef as any, BoxHelper, color);
+   };
