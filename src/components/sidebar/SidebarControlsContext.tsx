@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { INITIAL_SCENE_SETTINGS, SceneWrapper } from '../../models/Scene';

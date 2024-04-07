@@ -27,43 +27,54 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
     let meshRef = useRef<Mesh>(null);
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
 
-    // TODO [TUTORING]: IS THIS HOOK A VALID APPROACH?
+    // TODO [TUTORING]: IS THIS HOOK A VALID APPROACH AND IS IT CORRECTLY USED?
     useBoxHelper(isSelected, isHovered, meshRef);
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
     const handleControlsDrag = () => {
-        const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3);
-        updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
+        const initialControlsPosition = asset.position;
+        const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3());
+
+        const isTransformed = 
+            initialControlsPosition[0] !== controlsPosition?.x ||
+            initialControlsPosition[1] !== controlsPosition?.y ||
+            initialControlsPosition[2] !== controlsPosition?.z
+
+        if (isTransformed) {
+            updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
+        } else {
+            const controlsRotation = controlsRef.current?.getWorldQuaternion(new THREE.Quaternion);
+            updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
+        }
     }
 
     const handleDragEnd = () => {
-        const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3);
+        const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3());
         updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
     }
-        
-    useEffect( () => {
-        controlsRef.current?.position.set(...asset.position)
-        controlsRef.current?.matrixWorld.setPosition(new THREE.Vector3(...asset.position))
-    }, [asset.position])
 
     if(!asset.visible) return;
 
-    // TODO [TUTORING]: WHEN CONTROLS ARE DRAGGED DYNAMICALLY AND MOUSE BUTTON IS RELEASED CONTROLS MOVE A BIT FURTHER THAT THE MODEL ITSELF
+    // TODO [TUTORING]: WHEN CONTROLS ARE DRAGGED DYNAMICALLY AND MOUSE BUTTON IS RELEASED CONTROLS MOVE A BIT FURTHER THAT THE MODEL
     // IT'LL JUMP BACK INTO POSITION WHEN ANOTHER DRAG IS INITIATED AND EVEN onDragEnd CANNOT FIX THAT
+    // ROTATION DISPLAYS THE SAME BEHAVIOR (THOUGH IT'S HARDER TO SPOT ATM)
     return (
         <group
-                key={asset.id} 
-                position={asset.position}
+            key={asset.id} 
+            position={asset.position}
+            rotation={asset.rotation}
         >
-            <PivotControls
-                offset={[0,0,0]}
-                onDrag={ () => { handleControlsDrag() }}
-                onDragEnd={ () => { handleDragEnd() }}
-                ref={controlsRef}
-                visible={true}
-                depthTest={false}
-            />
+            {isSelected && 
+                <PivotControls
+                    offset={[0,0,0]}
+                    onDrag={ () => { handleControlsDrag() }}
+                    //onDragEnd={ () => {  }}
+                    ref={controlsRef}
+                    visible={true}
+                    depthTest={false}
+                /> 
+            }
             <mesh
                 matrixWorldAutoUpdate={true}
                 ref={meshRef}
@@ -75,7 +86,6 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
                 }}
                 onClick={() => {
                     updateSelected(asset.id);
-                    console.log(isSelected)
                 }} 
                 castShadow = {asset.castShadow}
                 receiveShadow = {asset.receiveShadow}
@@ -93,26 +103,24 @@ useGLTF.preload("models/pear/Pear2_LOD0.gltf");
 
 
 
-
+// TODO: CONSIDER REPLACING WITH EdgesGeometry or simple highlight instead of Bounding Box
+// https://github.com/pmndrs/drei
 const useBoxHelper = (isSelected: boolean, isHovered: boolean, meshRef: RefObject<Mesh>) => {
     const [isDisplayed, setIsDisplayed] = useState(false);
     const [color, setColor] = useState('');
    
     useEffect(() => {
        if (!isSelected && !isHovered) {
-         setIsDisplayed(false);
-       }
-       if (isSelected && !isHovered) {
-         setIsDisplayed(true);
-         setColor("cyan");
-       }
-       if (!isSelected && isHovered) {
-         setIsDisplayed(true);
-         setColor("aquamarin");
-       }
-       if (isSelected && isHovered) {
-         setIsDisplayed(true);
-         setColor("cyan");
+            setIsDisplayed(false);
+       } else if (isSelected && !isHovered) {
+            setIsDisplayed(true);
+            setColor("#00BFFF");
+       } else if (!isSelected && isHovered) {
+            setIsDisplayed(true);
+            setColor("#E0FFFF");
+       } else if (isSelected && isHovered) {
+            setIsDisplayed(true);
+            setColor("#00FFFF");
        }
     }, [isSelected, isHovered]);
    
