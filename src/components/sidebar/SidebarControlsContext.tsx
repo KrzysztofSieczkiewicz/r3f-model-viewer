@@ -87,16 +87,10 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         const newSelectedList = [...selectedList];
         newSelectedList.splice( selectedList.indexOf(objectId) ,1);
         setSelectedList(newSelectedList);
-
-        //console.log("OBJECT " + objectId +  " WAS REMOVED FROM THE LIST");
-        //console.log(newSelectedList);
       }
       else {
         const newSelectedList = [...selectedList, objectId];
         setSelectedList(newSelectedList);
-
-        //console.log("OBJECT " + objectId +  " WAS ADDED TO THE LIST");
-        //console.log(newSelectedList);
       }
     }
 

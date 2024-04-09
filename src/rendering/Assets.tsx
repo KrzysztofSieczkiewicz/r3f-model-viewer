@@ -16,8 +16,8 @@ export const Assets = ({ assetsList }: Props) => {
             if(asset.visible) {
                 return (
                     <RenderedAsset 
-                        asset={asset} 
-                        key={asset.id} 
+                        key={asset.id}
+                        asset={asset}
                         isSelected={selectedList.includes(asset.id)}
                     />
                 );

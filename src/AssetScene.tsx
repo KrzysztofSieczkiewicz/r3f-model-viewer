@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
-import { Lights } from './Lights';
+import { Lights } from './rendering/Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './Sidebar';
 import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
