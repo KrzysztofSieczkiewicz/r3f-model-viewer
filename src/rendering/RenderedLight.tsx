@@ -1,4 +1,4 @@
-import React, { Ref, useRef } from "react";
+import React, { Ref, RefObject, useRef, useState } from "react";
 import { LIGHT_TYPES, LightWrapper } from "../models/Light"
 import { Sphere, useHelper } from "@react-three/drei";
 import { DirectionalLightHelper, Light, PointLight, SpotLight } from "three";
@@ -14,12 +14,14 @@ export const RenderedLight = ( {light, isSelected}: Props) => {
 
     // TODO: ADD WORKING LOGIC => USE INTENSITY, ETC TO DICTATE HOW BIG PLACEHOLDER/HELPER SHOULD BE
     const handleLightRadius = () => {
-        const radiusBase = 0.5
+        const radiusBase = 0.5;
+        const intensityFactor = (light.intensity+1) * 0.5;
 
-        return 0.5;
+        return radiusBase * intensityFactor;
     }
 
-    // TODO: ADD HELPER FOR A LIGHT THAT HAS A DIRECTION (LEAVE UNCHANGED FOR POINT LIGHT)
+    // TODO [TUTORING]: ADD HELPER FOR A LIGHT THAT HAS A DIRECTION (LEAVE UNCHANGED FOR POINT LIGHT)
+    // HOW TO HANDLE THESE REF ISSUES (OR SOMEHOW INFINITE RERENDERING LOOPS)
     //useHelper(lightRef as any, DirectionalLightHelper, 1, "red");
 
 
@@ -33,13 +35,14 @@ export const RenderedLight = ( {light, isSelected}: Props) => {
         >
             <Sphere
             //radius, widthSegments, heightSegments
-                args={[handleLightRadius(), 8, 4]} 
+                args={[handleLightRadius(), 8, 4]}
             >
-                <meshNormalMaterial wireframe />
+                <meshBasicMaterial color={light.color} wireframe />
             </Sphere>
+
             {light.type === LIGHT_TYPES.pointLight && 
             <pointLight
-                ref={lightRef as Ref<PointLight>}           // TODO [TUTORING]: IS THIS TYPE OF ref casting OK?
+                ref={lightRef as Ref<PointLight>}           // TODO [TUTORING]: IS THIS TYPE OF REF CASTING OK?
                 color={light.color} 
                 intensity={light.intensity} 
             />}

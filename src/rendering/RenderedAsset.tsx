@@ -32,6 +32,7 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
+    // TODO: CONSIDER REPLACING THIS WITH useFrame() hook => WHEN CONTROLS ARE DRAGGED, TRIGGER useFrame to update
     const handleControlsDrag = () => {
         const initialControlsPosition = asset.position;
         const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3());
