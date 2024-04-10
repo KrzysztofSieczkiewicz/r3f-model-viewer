@@ -51,11 +51,16 @@ export const LightItem = ({ active, light, onClick }: Props) => {
                     handleChange={(val: number) => updateLight(light.id, 'intensity', val)}
                     min={0} max={3} step={0.005} defaultValue={1}
                 />
+                <Slider name="Distance"
+                    value={light.distance}
+                    handleChange={(val) => updateLight(light.id, 'distance', val)}
+                    min={0} max={100} step={0.1} defaultValue={10}
+                />
                 {light.type === LIGHT_TYPES.spotLight && <>
                     <Slider name="Angle"
                         value={light.angle}
                         handleChange={(val) => updateLight(light.id, 'angle', val)}
-                        min={0} max={1} step={0.002} defaultValue={0.1}
+                        min={0} max={1} step={0.002} defaultValue={0.3}
                     />
                     <Slider name="Penumbra"
                         value={light.penumbra}

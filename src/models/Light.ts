@@ -8,6 +8,7 @@ export type LightWrapper = {
     intensity: number,
     angle: number,
     penumbra: number,
+    distance: number,
     type: LightOption,
     visible: boolean,
 }
@@ -25,8 +26,9 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       rotation:[0, 0, 0],
       color: "#f53259",
       intensity:1,
-      angle: 0.1,
+      angle: 0.3,
       penumbra: 0.6,
+      distance: 10,
       type: LIGHT_TYPES.pointLight,
       visible: true
     },{
@@ -35,8 +37,9 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       rotation:[0,0,0],
       color:"#33dcfa",
       intensity:1,
-      angle: 0.15,
+      angle: 0.3,
       penumbra: 0.6,
+      distance: 10,
       type: LIGHT_TYPES.spotLight,
       visible: true
     }

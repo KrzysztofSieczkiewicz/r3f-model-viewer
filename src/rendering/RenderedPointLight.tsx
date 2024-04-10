@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { LightWrapper } from "../models/Light"
-import { useHelper } from "@react-three/drei";
+import { Sphere, useHelper } from "@react-three/drei";
 import { PointLight, PointLightHelper } from "three";
 
 type Props = {
@@ -10,6 +10,8 @@ type Props = {
 
 export const RenderedPointLight = ( {light, isSelected}: Props) => {
 
+    const [isHovered, setIsHovered] = useState(false);
+    
     let lightRef = useRef<PointLight>(null);
 
     // TODO: ADD WORKING LOGIC => USE INTENSITY, ETC TO DICTATE HOW BIG PLACEHOLDER/HELPER SHOULD BE
@@ -23,13 +25,25 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
     useHelper(lightRef as any, PointLightHelper, handleLightRadius(), light.color);
 
     return (
-        <pointLight
-            key={light.id} 
+        <group
             position={light.position}
-            rotation={[0,0,0]}
-            ref={lightRef}
-            color={light.color} 
-            intensity={light.intensity}
-        />
+        >
+            <Sphere
+                visible={false}
+                position={[0,0,0]}
+                args={[0.5, 4,2]}
+                onPointerOver={ () => setIsHovered(true) }
+                onPointerOut={ () => setIsHovered(false) }
+            />
+            <pointLight
+                key={light.id} 
+                position={[0,0,0]}
+                rotation={[0,0,0]}
+                ref={lightRef}
+                color={light.color} 
+                intensity={light.intensity}
+                distance={light.distance}
+            />
+        </group>
     );
 }
