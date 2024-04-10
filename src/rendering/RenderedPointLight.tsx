@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { LightWrapper } from "../models/Light"
 import { Sphere, useHelper } from "@react-three/drei";
 import { PointLight, PointLightHelper } from "three";
+import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
 
 type Props = {
     light: LightWrapper,
@@ -9,6 +10,7 @@ type Props = {
 }
 
 export const RenderedPointLight = ( {light, isSelected}: Props) => {
+    const { updateSelected } = useSidebarControlsContext();
 
     const [isHovered, setIsHovered] = useState(false);
     
@@ -24,6 +26,7 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
 
     useHelper(lightRef as any, PointLightHelper, handleLightRadius(), light.color);
 
+
     return (
         <group
             position={light.position}
@@ -34,6 +37,7 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
                 args={[0.5, 4,2]}
                 onPointerOver={ () => setIsHovered(true) }
                 onPointerOut={ () => setIsHovered(false) }
+                onClick={() => updateSelected(light.id) } 
             />
             <pointLight
                 key={light.id} 

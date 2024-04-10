@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { LightWrapper } from "../models/Light"
 import { Sphere, useHelper } from "@react-three/drei";
 import { PointLightHelper, SpotLight, SpotLightHelper } from "three";
+import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
 
 type Props = {
     light: LightWrapper,
@@ -9,6 +10,7 @@ type Props = {
 }
 
 export const RenderedSpotLight = ( {light, isSelected}: Props) => {
+    const { updateSelected } = useSidebarControlsContext();
 
     const [isHovered, setIsHovered] = useState(false);
 
@@ -26,6 +28,7 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
                 args={[0.5, 4,2]}
                 onPointerOver={ () => setIsHovered(true) }
                 onPointerOut={ () => setIsHovered(false) }
+                onClick={() => updateSelected(light.id) } 
             />
             <spotLight // TODO: ADD TARGET HANDLING
                 key={light.id} 

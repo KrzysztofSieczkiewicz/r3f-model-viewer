@@ -7,14 +7,14 @@ import { INIT_LIGHTS_LIST, LightWrapper } from "../../models/Light";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
-type SidebarControlsContext =  {
+type SidebarControlsContext = {
     lightsList: LightWrapper[], 
     updateLight: (id:string, property:keyof LightWrapper, value:any) => void, 
 
     assetsList: AssetWrapper[], 
     updateAssetProperty: (id:string, property:keyof AssetWrapper, value:any) => void,
 
-    selectedList: string[],
+    selectedId: string,
     updateSelected: (objectId:string) => void,
 
     scene: SceneWrapper, 
@@ -27,7 +27,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
 
     const [ assetsList, setAssetsList ] = useState<AssetWrapper[]>(INIT_ASSET_LIST);
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
-    const [ selectedList, setSelectedList ] = useState<string[]>([]);
+    const [ selectedId, setSelectedId ] = useState<string>("");
     const [ scene, setScene ] = useState<SceneWrapper>(INITIAL_SCENE_SETTINGS); 
 
 
@@ -83,19 +83,16 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
 
     // TODO: INTRODUCE MORE SENSIBLE SELECTION LOGIC
     const updateSelected = (objectId: string) => {
-      if ( selectedList.includes(objectId) ) {
-        const newSelectedList = [...selectedList];
-        newSelectedList.splice( selectedList.indexOf(objectId) ,1);
-        setSelectedList(newSelectedList);
+      if ( selectedId === objectId ) {
+        setSelectedId("");
       }
       else {
-        const newSelectedList = [...selectedList, objectId];
-        setSelectedList(newSelectedList);
+        setSelectedId(objectId);
       }
     }
 
     return (
-        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, scene, updateScene, selectedList, updateSelected }} >
+        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, scene, updateScene, selectedId, updateSelected }} >
             {props.children}
         </SidebarControlsContext.Provider>
     );

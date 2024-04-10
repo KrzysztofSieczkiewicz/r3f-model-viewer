@@ -1,5 +1,5 @@
 import { useGLTF } from "@react-three/drei";
-import React, { useEffect } from "react";
+import React from "react";
 import { AssetWrapper } from "../models/Asset";
 import { RenderedAsset } from "./RenderedAsset";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const Assets = ({ assetsList }: Props) => {
-    const { selectedList } = useSidebarControlsContext();
+    const { selectedId } = useSidebarControlsContext();
         
     return (
         assetsList.map((asset) => {
@@ -18,7 +18,7 @@ export const Assets = ({ assetsList }: Props) => {
                     <RenderedAsset 
                         key={asset.id}
                         asset={asset}
-                        isSelected={selectedList.includes(asset.id)}
+                        isSelected={selectedId === asset.id}
                     />
                 );
             }
