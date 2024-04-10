@@ -1,8 +1,7 @@
-import React, { Ref, RefObject, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { LightWrapper } from "../models/Light"
-import { Cone, Polyhedron, Sphere, useHelper } from "@react-three/drei";
-import { BoxHelper, Camera, Color, DirectionalLightHelper, Light, LightShadow, PointLightHelper, SpotLight, SpotLightHelper, Vector3 } from "three";
-import { useThree } from "@react-three/fiber";
+import { Sphere, useHelper } from "@react-three/drei";
+import { PointLightHelper, SpotLight, SpotLightHelper } from "three";
 
 type Props = {
     light: LightWrapper,
@@ -13,19 +12,14 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
 
     const [isHovered, setIsHovered] = useState(false);
 
-    let lightRef = useRef<SpotLight>(null);
+    const lightRef = useRef<SpotLight>(null);
 
     // TODO: RELPACE HELPER WITH 3D WIREFRAME (PROBABLY NEED TO MODEL MYSELF)
-    useHelper(lightRef as any, SpotLightHelper, light.color);
-
-    // TODO: ADD TARGET HANDLING
-    //lightRef.current?.lookAt(new Vector3(0,0,0))
+    useHelper(lightRef as any, PointLightHelper, 0.25, light.color);
+    useHelper((isSelected||isHovered) && lightRef as any, SpotLightHelper, light.color);
 
     return (
-        <group
-            position={light.position}
-            rotation={light.rotation}
-        >
+        <group position={light.position} >
             <Sphere
                 visible={false}
                 position={[0,0,0]}
@@ -33,15 +27,15 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
                 onPointerOver={ () => setIsHovered(true) }
                 onPointerOut={ () => setIsHovered(false) }
             />
-            <spotLight
+            <spotLight // TODO: ADD TARGET HANDLING
                 key={light.id} 
                 position={[0,0,0]}
-                distance={light.distance} // TODO: REPLACE THIS ONE BY CALCULATING DISTANCE TO THE TARGET
+                distance={light.distance}
                 ref={lightRef}
-                color={light.color} 
+                color={light.color}
                 intensity={light.intensity}
                 angle={light.angle}
-                penumbra={light.penumbra}  
+                penumbra={light.penumbra}
             />
         </group>
     );

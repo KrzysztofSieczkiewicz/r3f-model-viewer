@@ -45,16 +45,10 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
         if (isTransformed) {
             updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
         } else {
-            const controlsRotation = controlsRef.current?.getWorldQuaternion(new THREE.Quaternion);
+            const controlsRotation = controlsRef.current?.getWorldQuaternion(new THREE.Quaternion());
             updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
         }
     }
-
-    const handleDragEnd = () => {
-        const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3());
-        updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
-    }
-
     if(!asset.visible) return;
 
     // TODO [TUTORING]: WHEN CONTROLS ARE DRAGGED DYNAMICALLY AND MOUSE BUTTON IS RELEASED CONTROLS MOVE A BIT FURTHER THAT THE MODEL
