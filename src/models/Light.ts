@@ -21,8 +21,8 @@ export enum LIGHT_TYPES {
 const INIT_LIGHTS_LIST: LightWrapper[] = [
     {
       id:nanoid(5),
-      position:[5,5,0],
-      rotation:[Math.PI * 0.5, Math.PI * 0.5, 0],
+      position:[3,0.5,0],
+      rotation:[0, 0, 0],
       color: "#f53259",
       intensity:1,
       angle: 0.1,
@@ -31,11 +31,11 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       visible: true
     },{
       id:nanoid(5),
-      position:[-5,5,-5],
+      position:[-1,2.25,-1],
       rotation:[0,0,0],
       color:"#33dcfa",
       intensity:1,
-      angle: 0.1,
+      angle: 0.15,
       penumbra: 0.6,
       type: LIGHT_TYPES.spotLight,
       visible: true
