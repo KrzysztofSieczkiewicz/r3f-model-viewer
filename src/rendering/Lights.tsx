@@ -1,7 +1,6 @@
 import React from "react";
-import { LIGHT_TYPES, LightWrapper } from "../models/Light";
+import { LightWrapper } from "../models/Light";
 import { RenderedLight } from "./RenderedLight";
-import { RenderedPointLight } from "./RenderedPointLight";
 
 type Props = {
     lightsList: LightWrapper[]
@@ -9,6 +8,8 @@ type Props = {
 
 export const Lights = (props: Props) => {
     const lightsList = props.lightsList;
+
+    // TODO: ADD isSelected HANDLING
 
     return (
         lightsList.map((light) => {

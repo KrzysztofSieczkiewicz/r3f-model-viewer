@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { LightWrapper } from "../models/Light"
 import { useHelper } from "@react-three/drei";
-import { PointLight, PointLightHelper, Vector3 } from "three";
+import { PointLight, PointLightHelper } from "three";
 
 type Props = {
     light: LightWrapper,
