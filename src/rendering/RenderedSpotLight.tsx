@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import { LightWrapper } from "../models/Light"
-import { Sphere, useHelper } from "@react-three/drei";
+import { Billboard, Sphere, useHelper } from "@react-three/drei";
 import { PointLightHelper, SpotLight, SpotLightHelper } from "three";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
+import { LightTypeBillboard } from "../components/canvas/LightTypeBillboard";
 
 type Props = {
     light: LightWrapper,
@@ -16,10 +17,11 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
 
     const lightRef = useRef<SpotLight>(null);
 
-    // TODO: RELPACE HELPER WITH 3D WIREFRAME (PROBABLY NEED TO MODEL MYSELF)
-    useHelper(lightRef as any, PointLightHelper, 0.25, light.color);
+    // TODO: HANDLE THIS HELPER WITH PROPER SELECT/HOVER LOGIC (ALSO CHANGE COLORS TO CONSTANT WHEN BILLBOARDS WILL BE COLOURED)
+    //useHelper(lightRef as any, PointLightHelper, 0.25, light.color);
     useHelper((isSelected||isHovered) && lightRef as any, SpotLightHelper, light.color);
 
+    // TODO: ADD TRANSFORM CONTROLS WHEN SELECTED
     return (
         <group position={light.position} >
             <Sphere
@@ -30,6 +32,7 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
                 onPointerOut={ () => setIsHovered(false) }
                 onClick={() => updateSelected(light.id) } 
             />
+            <LightTypeBillboard lightType={light.type} />
             <spotLight // TODO: ADD TARGET HANDLING
                 key={light.id} 
                 position={[0,0,0]}

@@ -13,7 +13,7 @@ export type LightWrapper = {
     visible: boolean,
 }
 
-type LightOption = "Point light" | "Spot light"
+export type LightOption = "Point light" | "Spot light"
 export enum LIGHT_TYPES {
   pointLight =  "Point light",
   spotLight = "Spot light"

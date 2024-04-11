@@ -1,8 +1,11 @@
+import pointLightBillboard from '../icons/lightTypes/pointLight.png';
+
 import React, { useRef, useState } from "react";
 import { LightWrapper } from "../models/Light"
-import { Sphere, useHelper } from "@react-three/drei";
+import { Sphere, useHelper, useTexture } from "@react-three/drei";
 import { PointLight, PointLightHelper } from "three";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
+import { LightTypeBillboard } from '../components/canvas/LightTypeBillboard';
 
 type Props = {
     light: LightWrapper,
@@ -24,9 +27,10 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
         return radiusBase * intensityFactor;
     }
 
-    useHelper(lightRef as any, PointLightHelper, handleLightRadius(), light.color);
+    //useHelper(lightRef as any, PointLightHelper, handleLightRadius(), light.color);
 
-
+    // TODO: ADD BOX HELPER WHEN HOVERED?
+    // TODO: ADD TRANSFORM CONTROLS WHEN SELECTED
     return (
         <group
             position={light.position}
@@ -39,6 +43,7 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
                 onPointerOut={ () => setIsHovered(false) }
                 onClick={() => updateSelected(light.id) } 
             />
+            <LightTypeBillboard lightType={light.type} />
             <pointLight
                 key={light.id} 
                 position={[0,0,0]}
