@@ -25,9 +25,9 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
 
     const [ isHovered, setIsHovered ] = useState(false);
 
-    const [ controlsPosition, setControlsPosition ] = useState([0,0,0])
-    const [ controlsScale, setControlsScale ] = useState([0,0,0])
-    const [ controlsRotation, setControlsRotation ] = useState([0,0,0])
+    const [ controlsPosition, setControlsPosition ] = useState(asset.position)
+    const [ controlsScale, setControlsScale ] = useState(asset.scale)
+    const [ controlsRotation, setControlsRotation ] = useState(asset.rotation)
 
     const [ isOutline, setIsOutline ] = useState(false);
     const [ outlineColor, setOutlineColor ] = useState("white")
