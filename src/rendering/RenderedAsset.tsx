@@ -7,6 +7,7 @@ import { AssetWrapper } from "../models/Asset";
 import React from "react";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { useFrame } from "@react-three/fiber";
 
 type Props = {
     asset: AssetWrapper,
@@ -24,34 +25,39 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
 
     const [ isHovered, setIsHovered ] = useState(false);
 
+    const [ controlsPosition, setControlsPosition ] = useState([0,0,0])
+    const [ controlsScale, setControlsScale ] = useState([0,0,0])
+    const [ controlsRotation, setControlsRotation ] = useState([0,0,0])
+
     const [ isOutline, setIsOutline ] = useState(false);
     const [ outlineColor, setOutlineColor ] = useState("white")
 
+    const meshRef = useRef<Mesh>(null);
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
-    // TODO: CONSIDER REPLACING THIS WITH useFrame() hook => WHEN CONTROLS ARE DRAGGED, TRIGGER useFrame to update
-    const handleControlsDrag = () => {
-        const initialControlsPosition = asset.position;
-        const controlsPosition = controlsRef.current?.getWorldPosition(new THREE.Vector3());
+    // ALLOW CONTROLS TO SET TRANSFORMATION MATRIX
+    const handleControls = (local: THREE.Matrix4) => {
+        const position = new THREE.Vector3();
+        const scale = new THREE.Vector3();
+        const quaternion = new THREE.Quaternion();
 
-        const isTransformed = 
-            initialControlsPosition[0] !== controlsPosition?.x ||
-            initialControlsPosition[1] !== controlsPosition?.y ||
-            initialControlsPosition[2] !== controlsPosition?.z
+        local.decompose(position, quaternion, scale);
+        const rotation = new THREE.Euler().setFromQuaternion(quaternion);
 
-        if (isTransformed) {
-            updateAssetProperty(asset.id, 'position', [controlsPosition?.x, controlsPosition?.y, controlsPosition?.z])
-        } else {
-            const controlsRotation = controlsRef.current?.getWorldQuaternion(new THREE.Quaternion());
-            updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
-        }
-    }
+        setControlsPosition([position.x, position.y, position.z]);
+        setControlsRotation([rotation.x, rotation.y, rotation.z]);
+        setControlsScale([scale.x, scale.y, scale.z]);
+    };
 
-    // TODO: MOVE COLORS TO SOME COMMON FILE TO BE SHARED ACROSS ALL COMPONENTS
-    // TODO: ANY WAY TO SPEED THIS UP?
+    // ON EACH MATRIX CHANGE, UPDATE OBJECT
     useEffect( () => {
+        updateAssetProperty(asset.id, 'position', [controlsPosition[0], controlsPosition[1], controlsPosition[2]])
+    }, [controlsPosition])
+
+    
+    useEffect( () => {// TODO: MOVE COLORS TO SOME COMMON FILE TO BE SHARED ACROSS ALL COMPONENTS
         if (!isSelected && !isHovered) {
             setIsOutline(false);
         } else if (isSelected && !isHovered) {
@@ -70,26 +76,22 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
     
     if(!asset.visible) return;
 
-    // TODO [TUTORING]: WHEN CONTROLS ARE DRAGGED DYNAMICALLY AND MOUSE BUTTON IS RELEASED CONTROLS MOVE A BIT FURTHER THAT THE MODEL
-    // IT'LL JUMP BACK INTO POSITION WHEN ANOTHER DRAG IS INITIATED AND EVEN onDragEnd CANNOT FIX THAT
-    // ROTATION DISPLAYS THE SAME BEHAVIOR (THOUGH IT'S HARDER TO SPOT ATM)
+    // TODO [TUTORING]: SOMEHOW I NEED TO MANAGE FEEDBACK LOOP:
+    // PivotControls should respect asset.position (and adhere to it when it's modified externally e.g. by a sliders)
+    // But it also has to be able to set it
+    // Current solutions seems to be working, but it ignores initial asset.position
     return (
-        <group
-            key={asset.id} 
-            position={asset.position}
-            rotation={asset.rotation}
-        >
-            {isSelected && 
-                <PivotControls
-                    offset={[0,0,0]}
-                    onDrag={ () => { handleControlsDrag() }}
-                    //onDragEnd={ () => {  }}
-                    ref={controlsRef}
-                    visible={true}
-                    depthTest={false}
-                /> 
-            }
+        <group>
+            <PivotControls
+                ref={controlsRef}
+                offset={[0,0,0]}
+                scale={1}
+                //autoTransform={false}
+                onDrag={ (local) => { handleControls(local) }}
+                visible={isSelected}
+                depthTest={false} />
             <mesh
+                ref={meshRef}
                 matrixWorldAutoUpdate={true}
                 onPointerOver={() => {
                     setIsHovered(true);
@@ -104,11 +106,19 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
                 receiveShadow = {asset.receiveShadow}
                 geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
                 material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                position={[0,0,0]}
+                position={asset.position}
                 rotation={asset.rotation}
                 scale={asset.scale}
             >
-                {isOutline && <Outlines thickness={0.0025} color={outlineColor} screenspace={false} opacity={1} transparent={false} angle={0} />}
+                {isOutline && 
+                <Outlines 
+                    thickness={0.0025} 
+                    color={outlineColor} 
+                    screenspace={false} 
+                    opacity={1} 
+                    transparent={false} 
+                    angle={0} 
+                />}
             </mesh>
         </group>
     );
