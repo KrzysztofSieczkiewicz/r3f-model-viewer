@@ -108,7 +108,7 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
                 rotation={asset.rotation}
                 scale={asset.scale}
             >
-                {isOutline && <Outlines thickness={0.0025} color={outlineColor} screenspace={false} opacity={1} transparent={false} angle={90} />}
+                {isOutline && <Outlines thickness={0.0025} color={outlineColor} screenspace={false} opacity={1} transparent={false} angle={0} />}
             </mesh>
         </group>
     );
