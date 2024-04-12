@@ -1,9 +1,10 @@
 import pointLightBillboard from '../../icons/lightTypes/pointLight.svg';
 import spotLightBillboard from '../../icons/lightTypes/spotLight.svg';
 
-import React from 'react';
-import { Billboard, Sphere, useTexture } from "@react-three/drei";
+import React, { useRef, useState } from 'react';
+import { Billboard, Outlines, Sphere, useHelper, useTexture } from "@react-three/drei";
 import { LIGHT_TYPES, LightOption } from '../../models/Light';
+import { BoxHelper, Mesh } from 'three';
 
 type Props = {
     lightType: LightOption
@@ -14,6 +15,10 @@ type Props = {
 }
 
 export const LightTypeBillboard = ( {lightType, onPointerOver, onPointerOut, onClick}: Props) => {
+
+    const [isHovered, setIsHovered] = useState<boolean>(false)
+
+    const selectionSphere = useRef<Mesh>(null)
 
     // HANDLE DISPLAYED IMAGE TYPE -> TODO: CONSIDER MOVING TO A SEPARATE HOOK
     let image = "";
@@ -27,8 +32,10 @@ export const LightTypeBillboard = ( {lightType, onPointerOver, onPointerOut, onC
     }
     const texture = useTexture(image);
 
-    //
+    // TODO: REPLACE IMAGES WITH 2D MESH, WILL ALLOW TO IMPLEMENT OUTLINES FOR SELECTION AND NEAT DYNAMIC COLOR CHANGING
 
+    //useHelper((isSelected||isHovered) && lightRef as any, PointLightHelper, 0.25, light.color);
+    useHelper(isHovered && selectionSphere as any, BoxHelper, "white");
 
     return (
     <>
@@ -46,12 +53,19 @@ export const LightTypeBillboard = ( {lightType, onPointerOver, onPointerOut, onC
             </mesh>
         </Billboard>
         <Sphere
+            ref={selectionSphere}
             visible={false}
             position={[0,0,0]}
-            args={[0.5, 4,2]}
-            onPointerOver={ () => onPointerOver() }
-            onPointerOut={ () => onPointerOut() }
-            onClick={() => onClick() } 
+            args={[0.35, 4,2]}
+            onPointerOver={ () => {
+                onPointerOver();
+                setIsHovered(true)
+            }}
+            onPointerOut={ () => {
+                onPointerOut();
+                setIsHovered(false)
+            }}
+            onClick={() => onClick() }
         />
     </>
     );

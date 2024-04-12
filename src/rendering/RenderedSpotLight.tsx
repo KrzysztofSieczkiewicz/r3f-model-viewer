@@ -18,7 +18,7 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
     const lightRef = useRef<SpotLight>(null);
 
     // TODO: HANDLE THIS HELPER WITH PROPER SELECT/HOVER LOGIC
-    useHelper((isSelected||isHovered) && lightRef as any, PointLightHelper, 0.25, light.color);
+    //useHelper((isSelected||isHovered) && lightRef as any, PointLightHelper, 0.25, light.color);
     useHelper((isSelected||isHovered) && lightRef as any, SpotLightHelper, light.color);
 
     // TODO: ADD TRANSFORM CONTROLS WHEN SELECTED

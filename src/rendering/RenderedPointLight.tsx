@@ -27,7 +27,7 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
         return radiusBase * intensityFactor;
     }
 
-    useHelper((isSelected||isHovered) && lightRef as any, PointLightHelper, handleLightRadius(), light.color);
+    //useHelper((isSelected||isHovered) && lightRef as any, PointLightHelper, handleLightRadius(), light.color);
 
     // TODO: ADD BOX HELPER WHEN HOVERED?
     // TODO: MOVE CONTROLS TO SEPARATE COMPONENT
