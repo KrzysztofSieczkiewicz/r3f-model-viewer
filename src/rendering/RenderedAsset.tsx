@@ -120,4 +120,4 @@ const useBoxHelper = (isSelected: boolean, isHovered: boolean, meshRef: RefObjec
     }, [isSelected, isHovered]);
    
     useHelper(isDisplayed && meshRef as any, BoxHelper, color);
-   };
+};

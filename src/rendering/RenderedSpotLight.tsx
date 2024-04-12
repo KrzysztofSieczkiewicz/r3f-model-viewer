@@ -17,22 +17,18 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
 
     const lightRef = useRef<SpotLight>(null);
 
-    // TODO: HANDLE THIS HELPER WITH PROPER SELECT/HOVER LOGIC (ALSO CHANGE COLORS TO CONSTANT WHEN BILLBOARDS WILL BE COLOURED)
-    //useHelper(lightRef as any, PointLightHelper, 0.25, light.color);
+    // TODO: HANDLE THIS HELPER WITH PROPER SELECT/HOVER LOGIC
+    useHelper((isSelected||isHovered) && lightRef as any, PointLightHelper, 0.25, light.color);
     useHelper((isSelected||isHovered) && lightRef as any, SpotLightHelper, light.color);
 
     // TODO: ADD TRANSFORM CONTROLS WHEN SELECTED
     return (
         <group position={light.position} >
-            <Sphere
-                visible={false}
-                position={[0,0,0]}
-                args={[0.5, 4,2]}
+            <LightTypeBillboard 
+                lightType={light.type} 
                 onPointerOver={ () => setIsHovered(true) }
                 onPointerOut={ () => setIsHovered(false) }
-                onClick={() => updateSelected(light.id) } 
-            />
-            <LightTypeBillboard lightType={light.type} />
+                onClick={() => updateSelected(light.id) } />
             <spotLight // TODO: ADD TARGET HANDLING
                 key={light.id} 
                 position={[0,0,0]}
