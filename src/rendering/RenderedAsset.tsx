@@ -1,8 +1,8 @@
 import * as THREE from "three";
-import { useGLTF, useHelper } from "@react-three/drei";
+import { Outlines, useGLTF, useHelper } from "@react-three/drei";
 import { PivotControls } from "@react-three/drei/web/pivotControls";
-import { RefObject, useEffect, useRef, useState } from "react";
-import { BoxHelper, Group, Mesh, Object3DEventMap } from "three/src/Three";
+import { useEffect, useRef, useState } from "react";
+import { Group, Mesh, Object3DEventMap } from "three/src/Three";
 import { AssetWrapper } from "../models/Asset";
 import React from "react";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
@@ -24,11 +24,10 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
 
     const [ isHovered, setIsHovered ] = useState(false);
 
-    let meshRef = useRef<Mesh>(null);
-    const controlsRef = useRef<Group<Object3DEventMap>>(null)
+    const [ isOutline, setIsOutline ] = useState(false);
+    const [ outlineColor, setOutlineColor ] = useState("white")
 
-    // TODO [TUTORING]: IS THIS HOOK A VALID APPROACH AND IS IT CORRECTLY USED?
-    useBoxHelper(isSelected, isHovered, meshRef);
+    const controlsRef = useRef<Group<Object3DEventMap>>(null)
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
@@ -49,6 +48,26 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
             updateAssetProperty(asset.id, 'rotation', [controlsRotation?.x, controlsRotation?.y, controlsRotation?.z])
         }
     }
+
+    // TODO: MOVE COLORS TO SOME COMMON FILE TO BE SHARED ACROSS ALL COMPONENTS
+    // TODO: ANY WAY TO SPEED THIS UP?
+    useEffect( () => {
+        if (!isSelected && !isHovered) {
+            setIsOutline(false);
+        } else if (isSelected && !isHovered) {
+            setIsOutline(true);
+            setOutlineColor("#00BFFF");
+        } else if (!isSelected && isHovered) {
+            setIsOutline(true);
+            setOutlineColor("#E0FFFF");
+        } else if (isSelected && isHovered) {
+            setIsOutline(true);
+            setOutlineColor("#00FFFF");
+        }
+     }, [isHovered, isSelected])
+
+    
+    
     if(!asset.visible) return;
 
     // TODO [TUTORING]: WHEN CONTROLS ARE DRAGGED DYNAMICALLY AND MOUSE BUTTON IS RELEASED CONTROLS MOVE A BIT FURTHER THAT THE MODEL
@@ -72,7 +91,6 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
             }
             <mesh
                 matrixWorldAutoUpdate={true}
-                ref={meshRef}
                 onPointerOver={() => {
                     setIsHovered(true);
                 }}
@@ -89,35 +107,11 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
                 position={[0,0,0]}
                 rotation={asset.rotation}
                 scale={asset.scale}
-            />
+            >
+                {isOutline && <Outlines thickness={0.0025} color={outlineColor} screenspace={false} opacity={1} transparent={false} angle={90} />}
+            </mesh>
         </group>
     );
 }
 
 useGLTF.preload("models/pear/Pear2_LOD0.gltf");
-
-
-
-// TODO: CONSIDER REPLACING WITH EdgesGeometry or simple highlight instead of Bounding Box
-// https://github.com/pmndrs/drei
-const useBoxHelper = (isSelected: boolean, isHovered: boolean, meshRef: RefObject<Mesh>) => {
-    const [isDisplayed, setIsDisplayed] = useState(false);
-    const [color, setColor] = useState('');
-   
-    useEffect(() => {
-       if (!isSelected && !isHovered) {
-            setIsDisplayed(false);
-       } else if (isSelected && !isHovered) {
-            setIsDisplayed(true);
-            setColor("#00BFFF");
-       } else if (!isSelected && isHovered) {
-            setIsDisplayed(true);
-            setColor("#E0FFFF");
-       } else if (isSelected && isHovered) {
-            setIsDisplayed(true);
-            setColor("#00FFFF");
-       }
-    }, [isSelected, isHovered]);
-   
-    useHelper(isDisplayed && meshRef as any, BoxHelper, color);
-};
