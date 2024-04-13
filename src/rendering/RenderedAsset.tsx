@@ -1,13 +1,11 @@
 import * as THREE from "three";
-import { Outlines, useGLTF, useHelper } from "@react-three/drei";
+import { Outlines, useGLTF } from "@react-three/drei";
 import { PivotControls } from "@react-three/drei/web/pivotControls";
-import { useEffect, useRef, useState } from "react";
-import { Group, Mesh, Object3DEventMap } from "three/src/Three";
+import { useEffect, useState } from "react";
 import { AssetWrapper } from "../models/Asset";
 import React from "react";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { useFrame } from "@react-three/fiber";
 
 type Props = {
     asset: AssetWrapper,
@@ -31,8 +29,7 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
-    // ALLOW CONTROLS TO SET TRANSFORMATION MATRIX
-    const handleControls = (local: THREE.Matrix4) => {
+    const handleControlsDrag = (local: THREE.Matrix4) => {
         const position = new THREE.Vector3();
         const scale = new THREE.Vector3();
         const quaternion = new THREE.Quaternion();
@@ -63,17 +60,19 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
     
     if(!asset.visible) return;
 
-    // TODO [TUTORING]: SOMEHOW I NEED TO MANAGE FEEDBACK LOOP:
-    // PivotControls should respect asset.position (and adhere to it when it's modified externally e.g. by a sliders)
-    // But it also has to be able to set it
-    // Current solutions seems to be working, but it ignores initial asset.position
+    // TODO: UNIFY ROTATION UNITS, EVERYTHING IS USING DIFFERENT SYSTEM
+
+    // TODO [TUTORING]: SENSIBLE WAY TO HAVE PIVOTCONTROLS SEPARATE FROM MESH? MORE ABOUT PROPER STATE MANAGEMENT THAT TECHNICAL PROPS
+    // remember to use fixed={} flag to allow detachment. You can also use useFrame() to move PivotControls to the mesh at all times,
+    // not sure about rotation tho
+    // WOULD THIS ALLOW TO MOVE PIVOTCONTROLS TO SEPARATE COMPONENT WITH LESS ISSUES?
     return (
         <group>
             <PivotControls
                 anchor={[0,0,0]}
-                rotation={asset.rotation}
+                //rotation={asset.rotation}
                 scale={1}
-                onDrag={ (local) => { handleControls(local) }}
+                onDrag={ (local) => { handleControlsDrag(local) }}
                 disableAxes={!isSelected}
                 disableRotations={!isSelected}
                 disableSliders={!isSelected}
