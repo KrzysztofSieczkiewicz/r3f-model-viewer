@@ -1,12 +1,11 @@
 import * as THREE from "three";
 import { Outlines, useGLTF } from "@react-three/drei";
 import { PivotControls } from "@react-three/drei/web/pivotControls";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AssetWrapper } from "../models/Asset";
 import React from "react";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { Group, Mesh, Object3DEventMap } from "three";
 
 type Props = {
     asset: AssetWrapper,
@@ -22,42 +21,18 @@ type GLTFResult = GLTF & {
 export const RenderedAsset = ( {asset, isSelected}: Props) => {
     const { updateAssetProperty, updateSelected } = useSidebarControlsContext();
 
-    const [ position, setPosition ] = useState(asset.position);
-
     const [ isHovered, setIsHovered ] = useState(false);
 
     const [ isOutline, setIsOutline ] = useState(false);
     const [ outlineColor, setOutlineColor ] = useState("white")
 
-    const meshRef = useRef<Mesh>(null);	
-    const controlsRef = useRef<Group<Object3DEventMap>>(null)
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
-
-    // ON COMPONEN LOAD => SET POSITION CONTROLS TO MATCH ASSET POSITION
-    useEffect(() => {
-        const initialMatrix = new THREE.Matrix4();
-
-        const initialControlsPosition = new THREE.Vector3(...asset.position);
-        //initialMatrix.setPosition(initialControlsPosition);
-        //controlsRef.current?.applyMatrix4(initialMatrix);
-
-        const initialRotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(...asset.rotation));
-        //initialMatrix.makeRotationFromEuler(initialRotation);
-        //controlsRef.current?.applyMatrix4(initialMatrix);
-
-        initialMatrix.compose(initialControlsPosition, initialRotation, new THREE.Vector3(1,1,1))
-        controlsRef.current?.applyMatrix4(initialMatrix);
-
-    }, []);
 
     const handleControlsDrag = (local: THREE.Matrix4) => {
         const position = new THREE.Vector3();
         const scale = new THREE.Vector3();
         const quaternion = new THREE.Quaternion();
-
-        // HANDLE POSITION BY SETTING MATRIX4
-        //local.copyPosition(new THREE.Matrix4().setPosition(new THREE.Vector3(...asset.position)));
 
         local.decompose(position, quaternion, scale);
         const rotation = new THREE.Euler().setFromQuaternion(quaternion);
@@ -95,16 +70,14 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
         <group>
             <PivotControls
             // REPLACE THIS WITH SEPARATE CONTROLS FOR DIFFERENT ACTIONS, EACH HAS JUST TO MANAGE SINGLE STATE/UPDATE
-                //anchor={[0,0,0]}
-                ref={controlsRef}
-                fixed={false}
+                anchor={[0,0,0]}
                 //rotation={asset.rotation}
                 scale={1}
                 onDrag={ (local) => { handleControlsDrag(local) }}
-                disableAxes={false}
+                disableAxes={true}
                 disableRotations={false}
-                disableSliders={false}
-                depthTest={false} />
+                disableSliders={true}
+                depthTest={false} >
 
                 <mesh
                     matrixWorldAutoUpdate={true}
@@ -131,6 +104,8 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
                     />}
 
                 </mesh>
+
+            </PivotControls>
         </group>
     );
 }
