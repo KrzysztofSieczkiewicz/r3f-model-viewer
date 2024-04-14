@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';

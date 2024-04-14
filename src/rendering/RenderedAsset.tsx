@@ -1,14 +1,11 @@
 import * as THREE from "three";
 import { Outlines, useGLTF } from "@react-three/drei";
-import { PivotControls } from "@react-three/drei/web/pivotControls";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AssetWrapper } from "../models/Asset";
 import React from "react";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { Group, Mesh, Object3DEventMap } from "three";
 import { PositionControls } from "../components/canvas/PositionControls";
-import { LightWrapper } from "../models/Light";
 
 type Props = {
     asset: AssetWrapper,
@@ -59,7 +56,7 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
         <group>
             {isSelected && <PositionControls
                 object={asset}
-                handleChange={(newAsset) => { updateAsset(newAsset as AssetWrapper) }} // TODO: PROVIDE updateAsset function
+                handleChange={(newAsset) => { updateAsset(newAsset as AssetWrapper) }}
             />}
 
             <mesh

@@ -1,7 +1,6 @@
 import React from "react";
 import { EditableWrapper } from "../SidebarControlsContext";
 
-// TODO: SKOPIUJ
 type Props = {
     object: EditableWrapper,
     updateProperty: (id:string, property: keyof EditableWrapper, value:any) => void

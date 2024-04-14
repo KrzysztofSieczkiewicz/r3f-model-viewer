@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { LightWrapper } from "../models/Light"
 import { useHelper } from "@react-three/drei";
 import { SpotLight, SpotLightHelper } from "three";
