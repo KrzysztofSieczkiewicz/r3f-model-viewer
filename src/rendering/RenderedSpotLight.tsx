@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 import { LightWrapper } from "../models/Light"
-import { Billboard, Sphere, useHelper } from "@react-three/drei";
-import { PointLightHelper, SpotLight, SpotLightHelper } from "three";
+import { useHelper } from "@react-three/drei";
+import { SpotLight, SpotLightHelper } from "three";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
 import { LightTypeBillboard } from "../components/canvas/LightTypeBillboard";
+import { PositionControls } from "../components/canvas/PositionControls";
 
 type Props = {
     light: LightWrapper,
@@ -11,34 +12,34 @@ type Props = {
 }
 
 export const RenderedSpotLight = ( {light, isSelected}: Props) => {
-    const { updateSelected } = useSidebarControlsContext();
-
-    const [isHovered, setIsHovered] = useState(false);
+    const { updateLight, updateSelected } = useSidebarControlsContext();
 
     const lightRef = useRef<SpotLight>(null);
 
-    // TODO: HANDLE THIS HELPER WITH PROPER SELECT/HOVER LOGIC
-    //useHelper((isSelected||isHovered) && lightRef as any, PointLightHelper, 0.25, light.color);
-    useHelper((isSelected||isHovered) && lightRef as any, SpotLightHelper, light.color);
+    useHelper((isSelected) && lightRef as any, SpotLightHelper, light.color);
 
-    // TODO: ADD TRANSFORM CONTROLS WHEN SELECTED
     return (
-        <group position={light.position} >
-            <LightTypeBillboard 
-                lightType={light.type} 
-                onPointerOver={ () => setIsHovered(true) }
-                onPointerOut={ () => setIsHovered(false) }
-                onClick={() => updateSelected(light.id) } />
+        <group>
+            {isSelected && 
+                <PositionControls
+                object={light}
+                handleChange={(newLight) => { updateLight(newLight as LightWrapper) }}
+                />
+            }
             <spotLight // TODO: ADD TARGET HANDLING
                 key={light.id} 
-                position={[0,0,0]}
+                position={light.position}
                 distance={light.distance}
                 ref={lightRef}
                 color={light.color}
                 intensity={light.intensity}
                 angle={light.angle}
                 penumbra={light.penumbra}
-            />
+            >
+                <LightTypeBillboard 
+                    lightType={light.type}
+                    onClick={() => updateSelected(light.id) } />
+            </spotLight>
         </group>
     );
 }

@@ -12,6 +12,9 @@ import { Selection } from "@react-three/postprocessing";
 // import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';
 // import { BlendFunction } from 'postprocessing';
 
+// TODO [TUTORING]: IS THIS WHOLE SOLUTION TOO useState reliant?
+// Wouldn't it run smoother if most of the interactions altered refs?
+// RN it seems like most of any interactions require multiple setState per second to trigger
 export const AssetScene = () => {
 
   const { scene, lightsList, assetsList } = useSidebarControlsContext();

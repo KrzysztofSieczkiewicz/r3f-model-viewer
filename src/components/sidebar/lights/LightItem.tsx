@@ -16,7 +16,7 @@ type Props = |{
 
 export const LightItem = ({ active, light, onClick }: Props) => {
 
-    const { updateLight } = useSidebarControlsContext();
+    const { updateLightProperty } = useSidebarControlsContext();
 
     const handleIsActive = () => {
         return active ? String.fromCharCode(8657) : String.fromCharCode(8659);
@@ -31,40 +31,40 @@ export const LightItem = ({ active, light, onClick }: Props) => {
                 <Dropdown 
                     selected={light.type} 
                     selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
-                    handleChange={(val) => updateLight(light.id, 'type', val)}
+                    handleChange={(val) => updateLightProperty(light.id, 'type', val)}
                 />
                 <div className="color-preview" style={{backgroundColor: light.color}}/>
-                <VisibilityEyeButton object={light} updateProperty={updateLight} />
+                <VisibilityEyeButton object={light} updateProperty={updateLightProperty} />
                 <span className='show-hide header-icon'>{ handleIsActive() }</span>
             </div>
 
             {active && <div className="dropdown-item-body">
                 <SlidersArray name="Position"
                     value={light.position} step={0.01}
-                    handleChange={(val: [number,number,number]) => updateLight(light.id, 'position', val)}
+                    handleChange={(val: [number,number,number]) => updateLightProperty(light.id, 'position', val)}
                 />
                 <ColorPicker name="Color" 
                     currentColor={light.color}
-                    handleChange={(val: string) => updateLight(light.id, 'color', val)}/>
+                    handleChange={(val: string) => updateLightProperty(light.id, 'color', val)}/>
                 <Slider name="Intensity"
                     value={light.intensity}
-                    handleChange={(val: number) => updateLight(light.id, 'intensity', val)}
+                    handleChange={(val: number) => updateLightProperty(light.id, 'intensity', val)}
                     min={0} max={3} step={0.005} defaultValue={1}
                 />
                 <Slider name="Distance"
                     value={light.distance}
-                    handleChange={(val) => updateLight(light.id, 'distance', val)}
+                    handleChange={(val) => updateLightProperty(light.id, 'distance', val)}
                     min={0} max={100} step={0.1} defaultValue={10}
                 />
                 {light.type === LIGHT_TYPES.spotLight && <>
                     <Slider name="Angle"
                         value={light.angle}
-                        handleChange={(val) => updateLight(light.id, 'angle', val)}
+                        handleChange={(val) => updateLightProperty(light.id, 'angle', val)}
                         min={0} max={1} step={0.002} defaultValue={0.3}
                     />
                     <Slider name="Penumbra"
                         value={light.penumbra}
-                        handleChange={(val) => updateLight(light.id, 'penumbra', val)}
+                        handleChange={(val) => updateLightProperty(light.id, 'penumbra', val)}
                         min={0} max={1} step={0.002} defaultValue={0.6}
                     />
                 </>}

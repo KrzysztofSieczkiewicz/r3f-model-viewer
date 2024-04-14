@@ -8,13 +8,10 @@ import { BoxHelper, Mesh } from 'three';
 
 type Props = {
     lightType: LightOption
-
-    onPointerOver: () => void
-    onPointerOut: () => void
     onClick: () => void
 }
 
-export const LightTypeBillboard = ( {lightType, onPointerOver, onPointerOut, onClick}: Props) => {
+export const LightTypeBillboard = ( {lightType, onClick}: Props) => {
 
     const [isHovered, setIsHovered] = useState<boolean>(false)
 
@@ -43,7 +40,7 @@ export const LightTypeBillboard = ( {lightType, onPointerOver, onPointerOut, onC
             follow={true}
             position={[0, 0, 0]} >
             <mesh>
-                <planeBufferGeometry 
+                <planeGeometry 
                     attach="geometry" 
                     args={[0.75, 0.75]} />
                 <meshBasicMaterial
@@ -58,11 +55,9 @@ export const LightTypeBillboard = ( {lightType, onPointerOver, onPointerOut, onC
             position={[0,0,0]}
             args={[0.35, 4,2]}
             onPointerOver={ () => {
-                onPointerOver();
                 setIsHovered(true)
             }}
             onPointerOut={ () => {
-                onPointerOut();
                 setIsHovered(false)
             }}
             onClick={() => onClick() }

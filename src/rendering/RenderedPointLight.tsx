@@ -1,11 +1,9 @@
-import pointLightBillboard from '../icons/lightTypes/pointLight.png';
-
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { LightWrapper } from "../models/Light"
-import { PivotControls, Sphere, useHelper } from "@react-three/drei";
-import { PointLight, PointLightHelper } from "three";
+import { PointLight } from "three";
 import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
 import { LightTypeBillboard } from '../components/canvas/LightTypeBillboard';
+import { PositionControls } from '../components/canvas/PositionControls';
 
 type Props = {
     light: LightWrapper,
@@ -13,52 +11,31 @@ type Props = {
 }
 
 export const RenderedPointLight = ( {light, isSelected}: Props) => {
-    const { updateSelected } = useSidebarControlsContext();
-
-    const [isHovered, setIsHovered] = useState(false);
+    const { updateLight, updateSelected } = useSidebarControlsContext();
     
     let lightRef = useRef<PointLight>(null);
 
-    // TODO: ADD WORKING LOGIC => USE INTENSITY, ETC TO DICTATE HOW BIG PLACEHOLDER/HELPER SHOULD BE
-    const handleLightRadius = () => {
-        const radiusBase = 0.75;
-        const intensityFactor = (light.intensity + 1) * 0.5;
-
-        return radiusBase * intensityFactor;
-    }
-
-    //useHelper((isSelected||isHovered) && lightRef as any, PointLightHelper, handleLightRadius(), light.color);
-
-    // TODO: ADD BOX HELPER WHEN HOVERED?
-    // TODO: MOVE CONTROLS TO SEPARATE COMPONENT
     return (
-        <group
-            position={light.position}
-        >
+        <group>
             {isSelected && 
-                <PivotControls // TODO; HANDLE DRAGGING LOGIC
-                    offset={[0,0,0]}
-                    //onDrag={ () => { handleControlsDrag() }}
-                    //onDragEnd={ () => {  }}
-                    //ref={controlsRef}
-                    visible={true}
-                    depthTest={false}
+                <PositionControls
+                object={light}
+                handleChange={(newLight) => { updateLight(newLight as LightWrapper) }}
                 />
             }
-            <LightTypeBillboard 
-                lightType={light.type} 
-                onPointerOver={ () => setIsHovered(true) }
-                onPointerOut={ () => setIsHovered(false) }
-                onClick={() => updateSelected(light.id) } />
             <pointLight
                 key={light.id} 
-                position={[0,0,0]}
+                position={light.position}
                 rotation={[0,0,0]}
                 ref={lightRef}
                 color={light.color} 
                 intensity={light.intensity}
                 distance={light.distance}
-            />
+            >
+                <LightTypeBillboard 
+                    lightType={light.type} 
+                    onClick={() => updateSelected(light.id) } />
+            </pointLight>
         </group>
     );
 }

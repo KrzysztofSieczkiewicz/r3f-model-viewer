@@ -8,6 +8,7 @@ import { useSidebarControlsContext } from "../components/sidebar/SidebarControls
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { Group, Mesh, Object3DEventMap } from "three";
 import { PositionControls } from "../components/canvas/PositionControls";
+import { LightWrapper } from "../models/Light";
 
 type Props = {
     asset: AssetWrapper,
@@ -54,8 +55,8 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
     return (
         <group>
             {isSelected && <PositionControls
-                asset={asset}
-                handleChange={(newAsset: AssetWrapper) => { updateAsset(newAsset) }} // TODO: PROVIDE updateAsset function
+                object={asset}
+                handleChange={(newAsset) => { updateAsset(newAsset as AssetWrapper) }} // TODO: PROVIDE updateAsset function
             />}
 
             <mesh

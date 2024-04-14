@@ -3,13 +3,14 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Euler, Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
 import { AssetWrapper } from "../../models/Asset";
+import { LightWrapper } from "../../models/Light";
 
 type Props = {
-    asset: AssetWrapper,
-    handleChange: (newAsset: AssetWrapper) => void
+    object: AssetWrapper | LightWrapper,
+    handleChange: (newObject: AssetWrapper | LightWrapper) => void
 }
 
-export const PositionControls = ( {asset, handleChange}: Props) => {
+export const PositionControls = ( {object: asset, handleChange}: Props) => {
     const [ localPosition, setLocalPosition ] = useState<[number, number, number]>(asset.position);
     const [ localRotation, setLocalRotation ] = useState<[number, number, number]>(asset.rotation);
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
