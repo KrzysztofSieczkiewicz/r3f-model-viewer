@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { ColorPicker } from "../commonComponents/ColorPicker";
 
 import { useSidebarControlsContext } from '../SidebarControlsContext'   
@@ -7,10 +6,6 @@ import React from "react";
 
 export const SceneMenu = () => {
     const { scene, updateScene } = useSidebarControlsContext();
-
-    const handleItemClick = () => {
-
-    };
     
     return (
         <div className="dropdown">

@@ -7,12 +7,17 @@ import { INIT_LIGHTS_LIST, LightWrapper } from "../../models/Light";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
-type SidebarControlsContext =  {
+type SidebarControlsContext = {
     lightsList: LightWrapper[], 
-    updateLight: (id:string, property: keyof LightWrapper, value:any) => void, 
+    updateLightProperty: (id:string, property:keyof LightWrapper, value:any) => void,
+    updateLight: (newLight: LightWrapper) => void,
 
     assetsList: AssetWrapper[], 
-    updateAssetProperty: (id:string, property: keyof AssetWrapper, value:any) => void,
+    updateAssetProperty: (id:string, property:keyof AssetWrapper, value:any) => void,
+    updateAsset: (newAsset: AssetWrapper) => void,
+
+    selectedId: string,
+    updateSelected: (objectId:string) => void,
 
     scene: SceneWrapper, 
     updateScene: (property:string, value:any) => void,
@@ -24,10 +29,11 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
 
     const [ assetsList, setAssetsList ] = useState<AssetWrapper[]>(INIT_ASSET_LIST);
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
+    const [ selectedId, setSelectedId ] = useState<string>("");
     const [ scene, setScene ] = useState<SceneWrapper>(INITIAL_SCENE_SETTINGS); 
 
 
-    const updateLight = (id: string, property: keyof LightWrapper, value: number) => {
+    const updateLightProperty = (id: string, property: keyof LightWrapper, value: number) => {
       const index = lightsList.findIndex(light => light.id === id);
       const newLight: LightWrapper = {
           ...lightsList[index],
@@ -40,6 +46,15 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
           
           setLightsList(newLightsList);
       }
+    }
+
+    const updateLight = (newLight: LightWrapper) => {
+      const index = lightsList.findIndex(asset => asset.id === newLight.id);
+
+      const newLightsList = [...lightsList];
+      newLightsList[index] = newLight;
+
+      setLightsList(newLightsList);
     }
 
     const updateAssetProperty = (id: string, property: keyof AssetWrapper, value: any) => {
@@ -57,6 +72,17 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         }
     }
 
+    // TODO [TUTORING]: IS THERE ANY POINT IN SEPARATE updateAsset/updateAssetProperty methods?
+    // Initially updateAssetProperty allowed not to provide whole asset to the controlling component (like sliders),
+    // but some components (e.g. PositionControls) update few things at once?
+    const updateAsset = (newAsset: AssetWrapper) => {
+      const index = assetsList.findIndex(asset => asset.id === newAsset.id);
+
+      const newAssetsList = [...assetsList];
+      newAssetsList[index] = newAsset;
+
+      setAssetsList(newAssetsList);
+    }
 
     const updateScene = (property: string, value: any) => {
       const updateNested = (obj: any, keys: any, value: any) => {
@@ -78,9 +104,18 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
       });
     }
 
+    // TODO: INTRODUCE MORE SENSIBLE SELECTION LOGIC
+    const updateSelected = (objectId: string) => {
+      if ( selectedId === objectId ) {
+        setSelectedId("");
+      }
+      else {
+        setSelectedId(objectId);
+      }
+    }
 
     return (
-        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, scene, updateScene }} >
+        <SidebarControlsContext.Provider value={{ lightsList, updateLightProperty, updateLight, assetsList, updateAssetProperty, updateAsset, scene, updateScene, selectedId, updateSelected }} >
             {props.children}
         </SidebarControlsContext.Provider>
     );

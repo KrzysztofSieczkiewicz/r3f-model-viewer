@@ -31,7 +31,6 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
     }
 
     const renderSlidersArray = ( props: SlidersArrayProps): JSX.Element => {
-        //const {displayName, propertyName, propertyValue, step} = props;
         return (
             <SlidersArray 
                 name={props.displayName}
