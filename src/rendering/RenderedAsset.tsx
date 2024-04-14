@@ -21,6 +21,9 @@ type GLTFResult = GLTF & {
     };
   };
 
+  // TODO: TRY TO REPLACE MOST OF THESE METHODS WITH useFrame
+  // using useRef move the object controls
+  // using useFrame update the object position to match the controls
 export const RenderedAsset = ( {asset, isSelected}: Props) => {
     const { updateAsset, updateSelected } = useSidebarControlsContext();
 
