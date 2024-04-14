@@ -13,6 +13,7 @@ type SidebarControlsContext = {
 
     assetsList: AssetWrapper[], 
     updateAssetProperty: (id:string, property:keyof AssetWrapper, value:any) => void,
+    updateAsset: (newAsset: AssetWrapper) => void,
 
     selectedId: string,
     updateSelected: (objectId:string) => void,
@@ -61,6 +62,18 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         }
     }
 
+    // TODO [TUTORING]: IS THERE ANY POINT IN SEPARATE updateAsset/updateAssetProperty methods?
+    // Initially updateAssetProperty allowed not to provide whole asset to the controlling component (like sliders),
+    // but some components (e.g. PositionControls) update few things at once?
+    const updateAsset = (newAsset: AssetWrapper) => {
+      const index = assetsList.findIndex(asset => asset.id === newAsset.id);
+
+      const newAssetsList = [...assetsList];
+      newAssetsList[index] = newAsset;
+
+      setAssetsList(newAssetsList);
+  }
+
     const updateScene = (property: string, value: any) => {
       const updateNested = (obj: any, keys: any, value: any) => {
         if (keys.length === 1) {
@@ -92,7 +105,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
     }
 
     return (
-        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, scene, updateScene, selectedId, updateSelected }} >
+        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAssetProperty, updateAsset, scene, updateScene, selectedId, updateSelected }} >
             {props.children}
         </SidebarControlsContext.Provider>
     );

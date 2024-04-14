@@ -12,13 +12,6 @@ import { Selection } from "@react-three/postprocessing";
 // import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';
 // import { BlendFunction } from 'postprocessing';
 
-// TODO [TUTORING]: npm update results in
-/*
-C:\Kristoff\Programming\r3f-model-viewer>npm update
-npm WARN ERESOLVE overriding peer dependency
-npm ERR! code ERESOLVE
-npm ERR! ERESOLVE could not resolve
-*/
 export const AssetScene = () => {
 
   const { scene, lightsList, assetsList } = useSidebarControlsContext();

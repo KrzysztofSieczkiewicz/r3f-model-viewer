@@ -61,11 +61,6 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
     if(!asset.visible) return;
 
     // TODO: UNIFY ROTATION UNITS, EVERYTHING IS USING DIFFERENT SYSTEM
-
-    // TODO [TUTORING]: SENSIBLE WAY TO HAVE PIVOTCONTROLS SEPARATE FROM MESH? MORE ABOUT PROPER STATE MANAGEMENT THAT TECHNICAL PROPS
-    // remember to use fixed={} flag to allow detachment. You can also use useFrame() to move PivotControls to the mesh at all times,
-    // not sure about rotation tho
-    // WOULD THIS ALLOW TO MOVE PIVOTCONTROLS TO SEPARATE COMPONENT WITH LESS ISSUES?
     return (
         <group>
             <PivotControls
