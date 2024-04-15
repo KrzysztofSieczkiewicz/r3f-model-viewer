@@ -9,15 +9,15 @@ export const SceneMenu = () => {
     
     return (
         <div className="dropdown">
-            <section className="scene-section dropdown-item">
-                <h3 className="scene-section-header">Background</h3>
+            <section className="dropdown-section dropdown-item">
+                <h3 className="section-header">Background</h3>
                 <ColorPicker name="Color" 
                     currentColor={scene.backgroundColor}
                     handleChange={(val) => updateScene('backgroundColor', val)}
                 />
             </section>
-            <section className="scene-section dropdown-item">
-                <h3 className="scene-section-header">Ambient light</h3>
+            <section className="dropdown-section dropdown-item">
+                <h3 className="section-header">Ambient light</h3>
                 <ColorPicker name="Color"
                     currentColor={scene.ambientLight.color}
                     handleChange={(val) => updateScene('ambientLight.color', val)}

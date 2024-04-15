@@ -21,16 +21,25 @@ export const AssetsMenu = () => {
     
     return (
         <div className="dropdown">
-            {assetsList.map((asset: AssetWrapper) => {
-                return (
-                    <AssetItem
-                        asset={asset} 
-                        key={asset.id}
-                        active={activeId === asset.id}
-                        onClick={() => handleItemClick(asset.id)}
-                    />
-                );
-            })}
+            <section className="dropdown-section dropdown-item">
+                <h3 className="section-header">Add/Remove</h3>
+                <p> this section should contain methods to add new assets</p>
+            </section>
+            <section className="dropdown-section dropdown-item">
+                <h3 className="section-header">Assets</h3>
+
+                {assetsList.map((asset: AssetWrapper) => {
+                    return (
+                        <AssetItem
+                            asset={asset} 
+                            key={asset.id}
+                            active={activeId === asset.id}
+                            onClick={() => handleItemClick(asset.id)}
+                        />
+                    );
+                })}
+
+            </section>
         </div>
     );
 }

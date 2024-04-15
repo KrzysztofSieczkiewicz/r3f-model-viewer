@@ -9,6 +9,7 @@ import './components/sidebar/sidebar.css';
 import { AssetsMenu } from "./components/sidebar/assets/AssetsMenu";
 import { SceneMenu } from "./components/sidebar/scene/SceneMenu";
 import React from "react";
+import { PostProcessingMenu } from "./components/sidebar/postProcessing/PostProcessingMenu";
 
 export const Sidebar = () => {
     const [activeItem, setActiveItem] = useState<string>("");
@@ -48,9 +49,9 @@ export const Sidebar = () => {
                 <SidebarItem
                     icon={<ImageIcon className="sidebar-icon" />}
                     active={activeItem === "Rendering"}
-                    onClick={() => handleItemClick("Rendering")} 
-                    children={undefined}
+                    onClick={() => handleItemClick("Rendering")}
                 >
+                    <PostProcessingMenu />
                 </SidebarItem>
             </ul>
         </nav>

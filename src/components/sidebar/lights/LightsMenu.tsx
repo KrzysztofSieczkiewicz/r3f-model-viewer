@@ -21,16 +21,26 @@ export const LightsMenu = () => {
     
     return (
         <div className="dropdown">
-            {lightsList.map((light: LightWrapper) => {
-                return (
-                    <LightItem
-                        light={light} 
-                        key={light.id}
-                        active={activeId === light.id}
-                        onClick={() => handleItemClick(light.id)}
-                    />
-                );
-            })}
+            <section className="dropdown-section dropdown-item">
+                <h3 className="section-header">Add/Remove</h3>
+                <p> this section should contain methods to add new lights</p>
+            </section>
+            <section className="dropdown-section dropdown-item">
+                <h3 className="section-header">Lights</h3>
+                
+                {lightsList.map((light: LightWrapper) => {
+                    return (
+                        <LightItem
+                            light={light} 
+                            key={light.id}
+                            active={activeId === light.id}
+                            onClick={() => handleItemClick(light.id)}
+                        />
+                    );
+                })}
+
+            </section>
+            
         </div>
     );
 }
