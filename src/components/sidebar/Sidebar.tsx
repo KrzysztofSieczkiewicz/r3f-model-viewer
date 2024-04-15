@@ -1,15 +1,15 @@
-import { SidebarItem } from "./components/sidebar/SidebarItem";
-import { ReactComponent as LightIcon } from './icons/sidebar/light.svg';
-import { ReactComponent as CubeIcon } from './icons/sidebar/cube.svg';
-import { ReactComponent as EarthIcon } from './icons/sidebar/earth.svg';
-import { ReactComponent as ImageIcon } from './icons/sidebar/image.svg';
-import { LightsMenu } from "./components/sidebar/lights/LightsMenu";
+import { SidebarItem } from "./SidebarItem";
+import { ReactComponent as LightIcon } from './../../icons/sidebar/light.svg';
+import { ReactComponent as CubeIcon } from './../../icons/sidebar/cube.svg';
+import { ReactComponent as EarthIcon } from './../../icons/sidebar/earth.svg';
+import { ReactComponent as ImageIcon } from './../../icons/sidebar/image.svg';
+import { LightsMenu } from "./lights/LightsMenu";
 import { useState } from "react";
-import './components/sidebar/sidebar.css';
-import { AssetsMenu } from "./components/sidebar/assets/AssetsMenu";
-import { SceneMenu } from "./components/sidebar/scene/SceneMenu";
+import './sidebar.css';
+import { AssetsMenu } from "./assets/AssetsMenu";
+import { SceneMenu } from "./scene/SceneMenu";
 import React from "react";
-import { PostProcessingMenu } from "./components/sidebar/postProcessing/PostProcessingMenu";
+import { PostProcessingMenu } from "./postProcessing/PostProcessingMenu";
 
 export const Sidebar = () => {
     const [activeItem, setActiveItem] = useState<string>("");

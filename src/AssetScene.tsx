@@ -4,7 +4,7 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
 import { Lights } from './rendering/Lights';
 import { Canvas } from '@react-three/fiber';
-import { Sidebar } from './Sidebar';
+import { Sidebar } from './components/sidebar/Sidebar';
 import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
 import { Assets } from './rendering/Assets';
 
