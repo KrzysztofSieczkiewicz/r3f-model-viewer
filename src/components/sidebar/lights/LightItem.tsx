@@ -1,12 +1,12 @@
-import { Slider } from '../commonComponents/Slider';
-import { SlidersArray } from '../commonComponents/SlidersArray';
-import { ColorPicker } from '../commonComponents/ColorPicker';
-import { Dropdown } from '../commonComponents/Dropdown';
+import { Slider } from '../common/Slider';
+import { SlidersArray } from '../common/SlidersArray';
+import { ColorPicker } from '../common/ColorPicker';
+import { Dropdown } from '../common/Dropdown';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 import React from 'react';
 import { LIGHT_TYPES, LightWrapper } from '../../../models/Light';
-import { VisibilityEyeButton } from '../commonComponents/VisibilityEyeButton';
-import { LightTypeIcon } from '../commonComponents/LightTypeIcon';
+import { VisibilityEyeButton } from '../common/VisibilityEyeButton';
+import { LightTypeIcon } from '../common/LightTypeIcon';
 
 type Props = |{
     active: boolean,

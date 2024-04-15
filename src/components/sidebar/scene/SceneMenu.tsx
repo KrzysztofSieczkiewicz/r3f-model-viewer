@@ -1,7 +1,7 @@
-import { ColorPicker } from "../commonComponents/ColorPicker";
+import { ColorPicker } from "../common/ColorPicker";
 
 import { useSidebarControlsContext } from '../SidebarControlsContext'   
-import { Slider } from "../commonComponents/Slider";
+import { Slider } from "../common/Slider";
 import React from "react";
 
 export const SceneMenu = () => {
