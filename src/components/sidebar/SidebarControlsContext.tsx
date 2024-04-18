@@ -4,6 +4,7 @@ import { ReactNode, createContext, useState } from "react";
 import { INITIAL_SCENE_SETTINGS, SceneWrapper } from '../../models/Scene';
 import { AssetWrapper, INIT_ASSET_LIST } from "../../models/Asset";
 import { INIT_LIGHTS_LIST, LightWrapper } from "../../models/Light";
+import { EffectWrapper, INIT_EFFECTS_LIST } from "../../models/Effect";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
@@ -15,6 +16,9 @@ type SidebarControlsContext = {
     assetsList: AssetWrapper[], 
     updateAssetProperty: (id:string, property:keyof AssetWrapper, value:any) => void,
     updateAsset: (newAsset: AssetWrapper) => void,
+
+    effectsList: EffectWrapper[],
+    updateEffectProperty: (id:string, property:keyof EffectWrapper, value:any) => void,
 
     selectedId: string,
     updateSelected: (objectId:string) => void,
@@ -29,6 +33,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
 
     const [ assetsList, setAssetsList ] = useState<AssetWrapper[]>(INIT_ASSET_LIST);
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
+    const [ effectsList, setEffectsList ] = useState<EffectWrapper[]>(INIT_EFFECTS_LIST)
     const [ selectedId, setSelectedId ] = useState<string>("");
     const [ scene, setScene ] = useState<SceneWrapper>(INITIAL_SCENE_SETTINGS); 
 
@@ -84,6 +89,21 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
       setAssetsList(newAssetsList);
     }
 
+    const updateEffectProperty = (id: string, property: keyof EffectWrapper, value: any) => {
+      const index = effectsList.findIndex(effect => effect.id === id);
+        const newEffect: EffectWrapper = {
+            ...effectsList[index],
+            [property]: value
+        };
+
+        if (newEffect[property] !== (effectsList)[index][property]) {
+            const newEffectsList = [...effectsList];
+            (newEffectsList[index]) = newEffect;
+
+            setEffectsList(newEffectsList);
+        }
+    }
+
     const updateScene = (property: string, value: any) => {
       const updateNested = (obj: any, keys: any, value: any) => {
         if (keys.length === 1) {
@@ -104,7 +124,6 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
       });
     }
 
-    // TODO: INTRODUCE MORE SENSIBLE SELECTION LOGIC
     const updateSelected = (objectId: string) => {
       if ( selectedId === objectId ) {
         setSelectedId("");
@@ -115,7 +134,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
     }
 
     return (
-        <SidebarControlsContext.Provider value={{ lightsList, updateLightProperty, updateLight, assetsList, updateAssetProperty, updateAsset, scene, updateScene, selectedId, updateSelected }} >
+        <SidebarControlsContext.Provider value={{ lightsList, updateLightProperty, updateLight, assetsList, updateAssetProperty, updateAsset, effectsList, updateEffectProperty, scene, updateScene, selectedId, updateSelected }} >
             {props.children}
         </SidebarControlsContext.Provider>
     );

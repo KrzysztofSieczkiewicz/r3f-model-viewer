@@ -18,6 +18,7 @@ type SlidersArrayProps = {
     step: number,
 }
 
+// TODO [TUTORING]: SHOULD I WRAP FUNCTIONS PASSED TO THE CHILDREN WITH useMemo()/useCallback()?
 export const AssetItem = ( {active, asset, onClick}: Props) => {
 
     const { updateAssetProperty } = useSidebarControlsContext();

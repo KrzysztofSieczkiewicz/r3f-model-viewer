@@ -7,10 +7,8 @@ import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
 import { Assets } from './rendering/Assets';
-import { BlendFunction } from 'postprocessing';
-
-
-import { Bloom, DepthOfField, EffectComposer, Outline, Selection } from "@react-three/postprocessing";
+import { Selection } from "@react-three/postprocessing";
+import { Effects } from './rendering/Effects';
 // import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';
 // import { BlendFunction } from 'postprocessing';
 
@@ -19,7 +17,7 @@ import { Bloom, DepthOfField, EffectComposer, Outline, Selection } from "@react-
 // RN it seems like most of any interactions require multiple setState per second to trigger
 export const AssetScene = () => {
 
-  const { scene, lightsList, assetsList } = useSidebarControlsContext();
+  const { scene, lightsList, assetsList, effectsList } = useSidebarControlsContext();
 
   return (
     <>
@@ -33,20 +31,10 @@ export const AssetScene = () => {
 
         <Selection>
           <Lights lightsList={lightsList} />
-          <Assets assetsList={assetsList}/>
+          <Assets assetsList={assetsList} />
         </Selection>
 
-        <EffectComposer multisampling={8} autoClear={false}>
-        <Bloom 
-                blendFunction={BlendFunction.ADD}
-                intensity={1}
-                width={300}
-                height={300}
-                kernelSize={5}
-                luminanceThreshold={0.15}
-                luminanceSmoothing={0.025}
-              />
-        </EffectComposer>     
+        <Effects effectsList={effectsList} />
 
       </Canvas>
       

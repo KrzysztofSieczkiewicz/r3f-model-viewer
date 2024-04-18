@@ -9,7 +9,7 @@ import './sidebar.css';
 import { AssetsMenu } from "./assets/AssetsMenu";
 import { SceneMenu } from "./scene/SceneMenu";
 import React from "react";
-import { PostProcessingMenu } from "./postProcessing/PostProcessingMenu";
+import { EffectsMenu } from "./effects/EffectsMenu";
 
 export const Sidebar = () => {
     const [activeItem, setActiveItem] = useState<string>("");
@@ -51,7 +51,7 @@ export const Sidebar = () => {
                     active={activeItem === "Rendering"}
                     onClick={() => handleItemClick("Rendering")}
                 >
-                    <PostProcessingMenu />
+                    <EffectsMenu />
                 </SidebarItem>
             </ul>
         </nav>
