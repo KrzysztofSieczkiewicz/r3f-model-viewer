@@ -43,6 +43,16 @@ export const EffectItem = ( {active, effect, onClick}: Props) => {
                     min={0} max={5} step={0.005} 
                     value={effect.intensity} defaultValue={1} 
                     handleChange={(value) => { updateEffectProperty(effect.id, 'intensity', value) }} />
+                <Slider 
+                    name={'Threshold'} 
+                    min={0} max={1} step={0.0005} 
+                    value={effect.luminanceThreshold} defaultValue={0.15} 
+                    handleChange={(value) => { updateEffectProperty(effect.id, 'luminanceThreshold', value) }} />
+                <Slider 
+                    name={'Smoothing'} 
+                    min={0} max={1} step={0.0005} 
+                    value={effect.luminanceSmoothing} defaultValue={0.025} 
+                    handleChange={(value) => { updateEffectProperty(effect.id, 'luminanceSmoothing', value) }} />
 
             </div>}
         </div>

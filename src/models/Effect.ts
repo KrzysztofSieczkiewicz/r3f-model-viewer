@@ -13,9 +13,6 @@ export type EffectWrapper = {
 
     blendfunction: BlendFunction,
     intensity: number,
-    width: number,
-    height: number,
-    kernelSize: number,
     luminanceThreshold: number,
     luminanceSmoothing: number
 };
@@ -27,18 +24,15 @@ type EffectType =
 
 
 export const INIT_EFFECTS_LIST: EffectWrapper[] = [
-        {
-            id:nanoid(5),
-            type: Bloom,
-            name: 'Bloom',
-            enabled: true,
+    {
+        id:nanoid(5),
+        type: Bloom,
+        name: 'Bloom',
+        enabled: true,
 
-            blendfunction: BlendFunction.ADD,
-            intensity: 1,
-            width: 300,
-            height: 300,
-            kernelSize: 5,
-            luminanceThreshold: 0.15,
-            luminanceSmoothing: 0.025
-        }
-      ]
+        blendfunction: BlendFunction.ADD,
+        intensity: 1,
+        luminanceThreshold: 0.15,
+        luminanceSmoothing: 0.025
+    }
+]

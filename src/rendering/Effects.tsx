@@ -18,11 +18,11 @@ export const Effects = ({ effectsList }: Props) => {
                         <Bloom 
                             blendFunction={BlendFunction.ADD}
                             intensity={effect.intensity}
-                            width={300}
-                            height={300}
-                            kernelSize={5}
-                            luminanceThreshold={0.15}
-                            luminanceSmoothing={0.025}
+                            width={1000} // TODO: MOVE THIS TO GLOBAL CONSTANT RELATED TO RENDERING
+                            height={1000} // TODO: MOVE THIS TO GLOBAL CONSTANT RELATED TO RENDERING
+                            kernelSize={5} // TODO: MOVE THIS TO GLOBAL CONSTANT RELATED TO RENDERING
+                            luminanceThreshold={effect.luminanceThreshold}
+                            luminanceSmoothing={effect.luminanceSmoothing}
                         />
                     </EffectComposer> 
                 );
