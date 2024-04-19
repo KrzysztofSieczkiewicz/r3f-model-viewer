@@ -1,5 +1,5 @@
 import React from "react";
-import { LIGHT_TYPES, LightWrapper } from "../models/Light";
+import { LIGHT_TYPES, LightWrapper } from "../../models/Light";
 import { RenderedPointLight } from "./RenderedPointLight";
 import { RenderedSpotLight } from "./RenderedSpotLight";
 

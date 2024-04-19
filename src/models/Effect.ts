@@ -11,13 +11,19 @@ export type EffectWrapper = {
     name: string,
     enabled: boolean
 
-    blendfunction: BlendFunction,
+    // BLOOM
+    blendFunction: BlendFunction,
     intensity: number,
     luminanceThreshold: number,
     luminanceSmoothing: number
+
+    // DEPTH OF FIELD
+    focusDistance: number
+    focalLength: number
+    bokehScale: number
 };
 
-type EffectType = 
+export type EffectType = 
     typeof Bloom | 
     typeof ChromaticAberration |
     typeof DepthOfField;
@@ -30,9 +36,28 @@ export const INIT_EFFECTS_LIST: EffectWrapper[] = [
         name: 'Bloom',
         enabled: true,
 
-        blendfunction: BlendFunction.ADD,
+        blendFunction: BlendFunction.ADD,
         intensity: 1,
         luminanceThreshold: 0.15,
-        luminanceSmoothing: 0.025
+        luminanceSmoothing: 0.025,
+
+        focusDistance: 0.0035,
+        focalLength: 0.01,
+        bokehScale: 3,
+    },
+    {
+        id:nanoid(5),
+        type: DepthOfField,
+        name: 'Depth of Field',
+        enabled: true,
+
+        blendFunction: BlendFunction.NORMAL,
+        intensity: 1,
+        luminanceThreshold: 0.15,
+        luminanceSmoothing: 0.025,
+
+        focusDistance: 0.0035,
+        focalLength: 0.01,
+        bokehScale: 3,
     }
 ]

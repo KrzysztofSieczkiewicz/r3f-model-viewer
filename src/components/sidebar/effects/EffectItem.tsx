@@ -1,11 +1,9 @@
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import { AssetWrapper } from '../../../models/Asset';
-import { VisibilityEyeButton } from '../common/VisibilityEyeButton';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
-import { SlidersArray } from '../common/SlidersArray';
 import React from 'react';
 import { EffectWrapper } from '../../../models/Effect';
 import { Slider } from '../common/Slider';
+import { Bloom, ChromaticAberration, DepthOfField } from '@react-three/postprocessing';
 
 type Props = {
     active: boolean,
@@ -38,22 +36,40 @@ export const EffectItem = ( {active, effect, onClick}: Props) => {
             </div>
 
             {active && <div className="dropdown-item-body">
-                <Slider 
-                    name={'Intensity'} 
-                    min={0} max={5} step={0.005} 
-                    value={effect.intensity} defaultValue={1} 
-                    handleChange={(value) => { updateEffectProperty(effect.id, 'intensity', value) }} />
-                <Slider 
-                    name={'Threshold'} 
-                    min={0} max={1} step={0.0005} 
-                    value={effect.luminanceThreshold} defaultValue={0.15} 
-                    handleChange={(value) => { updateEffectProperty(effect.id, 'luminanceThreshold', value) }} />
-                <Slider 
-                    name={'Smoothing'} 
-                    min={0} max={1} step={0.0005} 
-                    value={effect.luminanceSmoothing} defaultValue={0.025} 
-                    handleChange={(value) => { updateEffectProperty(effect.id, 'luminanceSmoothing', value) }} />
-
+                {effect.type === Bloom && <>
+                    <Slider 
+                        name={'Intensity'} 
+                        min={0} max={5} step={0.005} 
+                        value={effect.intensity} defaultValue={1} 
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'intensity', value) }} />
+                    <Slider 
+                        name={'Threshold'} 
+                        min={0} max={1} step={0.0005} 
+                        value={effect.luminanceThreshold} defaultValue={0.15} 
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'luminanceThreshold', value) }} />
+                    <Slider 
+                        name={'Smoothing'} 
+                        min={0} max={1} step={0.0005} 
+                        value={effect.luminanceSmoothing} defaultValue={0.025} 
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'luminanceSmoothing', value) }} />
+                </>}
+                {effect.type === DepthOfField && <>
+                    <Slider 
+                        name={'Focus distance'} 
+                        min={0} max={50} step={0.005} 
+                        value={effect.focusDistance} defaultValue={1} 
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'focusDistance', value) }} />
+                    <Slider 
+                        name={'Focal length'} 
+                        min={0} max={50} step={0.005} 
+                        value={effect.focalLength} defaultValue={1} 
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'focalLength', value) }} />
+                    <Slider 
+                        name={'Bokeh scale'} 
+                        min={0} max={5} step={0.005} 
+                        value={effect.bokehScale} defaultValue={1} 
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'bokehScale', value) }} />
+                </>}
             </div>}
         </div>
     );

@@ -2,13 +2,16 @@ import React from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
-import { Lights } from './rendering/Lights';
+import { Lights } from './rendering/lights/Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
-import { Assets } from './rendering/Assets';
-import { Selection } from "@react-three/postprocessing";
-import { Effects } from './rendering/Effects';
+import { Assets } from './rendering/assets/Assets';
+import { ChromaticAberration, EffectComposer, Selection } from "@react-three/postprocessing";
+import { Effects } from './rendering/effects/Effects';
+import { BlendFunction } from 'postprocessing';
+import { Vector2 } from 'three';
+
 // import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';
 // import { BlendFunction } from 'postprocessing';
 
