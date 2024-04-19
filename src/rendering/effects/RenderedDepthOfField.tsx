@@ -6,13 +6,17 @@ type Props = {
     effect: EffectWrapper
 }
 
+// TODO: FIND CORRECT VALUES FOR DEFAULT AND HANDLING
+// TODO: MAYBE SOME HELPERS TO DISPLAY?
 export const RenderedDepthOfField = ( { effect }: Props) => {
 
     return (
         <DepthOfField 
-            focusDistance={0.0035} 
-            focalLength={0.01} 
-            bokehScale={3} 
+            focusDistance={effect.focusDistance} 
+            focalLength={effect.focalLength} 
+            bokehScale={effect.bokehScale}
+            width={480}
+            height={480}
         /> 
     );
 }
