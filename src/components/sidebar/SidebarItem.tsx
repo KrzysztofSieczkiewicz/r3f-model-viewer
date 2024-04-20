@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import styles from './Sidebar.module.css';
 
 type Props = {
     icon: ReactNode;
@@ -11,10 +12,10 @@ export const SidebarItem = (props: Props) => {
     const { icon, children, active, onClick } = props;
 
     return (
-        <li className="sidebar-item">
+        <li className={styles.sidebarItem} >
             <a
                 href="#" 
-                className={`icon-button ${active ? "active" : ""}`}
+                className={active ? `${styles.iconButton} ${styles.active}` : styles.iconButton}
                 onClick={onClick}
             >
                 {icon}

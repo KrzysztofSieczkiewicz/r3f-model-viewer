@@ -1,25 +1,15 @@
 import React from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import './style.css';
 import { Lights } from './rendering/lights/Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
 import { Assets } from './rendering/assets/Assets';
-import { ChromaticAberration, EffectComposer, Selection } from "@react-three/postprocessing";
+import { Selection } from "@react-three/postprocessing";
 import { Effects } from './rendering/effects/Effects';
-import { BlendFunction } from 'postprocessing';
-import { Vector2 } from 'three';
 
-// import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';
-// import { BlendFunction } from 'postprocessing';
-
-// TODO [TUTORING]: IS THIS WHOLE SOLUTION TOO useState reliant?
-// Wouldn't it run smoother if most of the interactions altered refs?
-// RN it seems like most of any interactions require multiple setState per second to trigger
 export const AssetScene = () => {
-
   const { scene, lightsList, assetsList, effectsList } = useSidebarControlsContext();
 
   return (
@@ -46,24 +36,3 @@ export const AssetScene = () => {
     </>
   );
 }
-
-/*
-<EffectComposer multisampling={8} autoClear={false}>
-          <Outline blur visibleEdgeColor="red" edgeStrength={100} />
-          <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={400} />
-          <Bloom 
-            blendFunction={BlendFunction.ADD}
-            intensity={0}
-            width={300}
-            height={300}
-            kernelSize={5}
-            luminanceThreshold={0.15}
-            luminanceSmooting={0.025}
-          />
-          <ChromaticAberration 
-            blendFunction={BlendFunction.NORMAL}
-            intensity={0}
-            offset={[0.0005, 0.00012]}
-          />
-        </EffectComposer>
-*/

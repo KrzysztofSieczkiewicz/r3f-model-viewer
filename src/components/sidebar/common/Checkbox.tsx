@@ -20,15 +20,17 @@ export const Checkbox = ( {name, value, handleChange}: Props) => {
 
 
     return (
-        <div className="trait">{name}
-            <label className="trait-name">
-                <input 
+        <div className="trait">
+            <label className="trait-name">{name}</label>
+            <div className="checkbox-container">
+                <input
+                    className="checkbox-input"
                     type="checkbox" 
                     checked={isChecked}
                     onChange={(e) => handleInput(e)}
                 />
-                <span className="checkmark" />
-            </label>
+                <span className="checkbox-checkmark" />
+            </div>
         </div>
     );
 }

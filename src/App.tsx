@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-import './style.css';
+import './App.module.css';
 import {AssetScene} from './AssetScene';
 import { SidebarControlsContextProvider } from './components/sidebar/SidebarControlsContext';
 

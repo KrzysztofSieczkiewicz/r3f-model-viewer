@@ -1,8 +1,9 @@
+import React from "react";
 import { useState } from "react";
+import styles from './Assets.module.css'
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 
 import { AssetItem } from "./AssetItem";
-import React from "react";
 import { AssetWrapper } from "../../../models/Asset";
 
 
@@ -20,7 +21,7 @@ export const AssetsMenu = () => {
     };
     
     return (
-        <div className="dropdown">
+        <div className={styles.menu}>
             <section className="dropdown-section dropdown-item">
                 <h3 className="section-header">Add/Remove</h3>
                 <p> this section should contain methods to add new assets</p>
