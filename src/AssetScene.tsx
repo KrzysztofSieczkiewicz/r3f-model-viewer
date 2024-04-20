@@ -26,6 +26,7 @@ export const AssetScene = () => {
     <>
       <Canvas shadows
         style= {{ background: scene.backgroundColor }}
+        frameloop="demand"
       >
         <ambientLight color={scene.ambientLight.color} intensity={scene.ambientLight.intensity} />
 
