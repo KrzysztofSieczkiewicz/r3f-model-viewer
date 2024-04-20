@@ -1,7 +1,7 @@
 import React from "react";
-import { LightWrapper } from "../models/Light";
+import { LightWrapper } from "../../models/Light";
 import { RenderedLight } from "./RenderedLight";
-import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
+import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
 
 type Props = {
     lightsList: LightWrapper[]

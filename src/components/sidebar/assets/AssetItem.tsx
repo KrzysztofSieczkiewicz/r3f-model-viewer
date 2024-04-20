@@ -1,8 +1,8 @@
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from '../../../models/Asset';
-import { VisibilityEyeButton } from '../commonComponents/VisibilityEyeButton';
+import { VisibilityEyeButton } from '../common/VisibilityEyeButton';
 import { useSidebarControlsContext } from '../SidebarControlsContext'
-import { SlidersArray } from '../commonComponents/SlidersArray';
+import { SlidersArray } from '../common/SlidersArray';
 import React from 'react';
 
 type Props = {
@@ -18,6 +18,7 @@ type SlidersArrayProps = {
     step: number,
 }
 
+// TODO [TUTORING]: SHOULD I WRAP FUNCTIONS PASSED TO THE CHILDREN WITH useMemo()/useCallback()?
 export const AssetItem = ( {active, asset, onClick}: Props) => {
 
     const { updateAssetProperty } = useSidebarControlsContext();

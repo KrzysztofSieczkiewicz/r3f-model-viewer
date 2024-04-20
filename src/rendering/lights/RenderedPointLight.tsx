@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import { LightWrapper } from "../models/Light"
+import { LightWrapper } from "../../models/Light"
 import { PointLight } from "three";
-import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
-import { LightTypeBillboard } from '../components/canvas/LightTypeBillboard';
-import { PositionControls } from '../components/canvas/PositionControls';
+import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
+import { LightTypeBillboard } from '../../components/canvas/LightTypeBillboard';
+import { PositionControls } from '../../components/canvas/PositionControls';
 
 type Props = {
     light: LightWrapper,

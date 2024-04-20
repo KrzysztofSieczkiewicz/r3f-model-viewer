@@ -283,19 +283,20 @@
     color: var(--color-platinum);
 }
 
-/* SCENE SECTION HEADERS */
-.dropdown .scene-section {
-    padding: 0.25rem 0 0.75rem 1rem;
-
-    background-color: var(--color-resin-bright);
-    color: var(--color-platinum);
-}
-
-.scene-section-header {
+/* COMMON SECTION STYLE */
+.section-header {
     margin: 12px 0;
 
     font-size: 1rem;
     font-weight: 400;
+}
+
+/* SECTION HEADERS */
+.dropdown .dropdown-section {
+    padding: 0.25rem 0 0.75rem 1rem;
+
+    background-color: var(--color-resin-bright);
+    color: var(--color-platinum);
 }
 
 /* LIGHT HEADER */

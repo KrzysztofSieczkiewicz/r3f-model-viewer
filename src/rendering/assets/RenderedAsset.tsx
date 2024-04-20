@@ -1,11 +1,11 @@
 import * as THREE from "three";
 import { Outlines, useGLTF } from "@react-three/drei";
 import { useEffect, useState } from "react";
-import { AssetWrapper } from "../models/Asset";
+import { AssetWrapper } from "../../models/Asset";
 import React from "react";
-import { useSidebarControlsContext } from "../components/sidebar/SidebarControlsContext";
+import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { PositionControls } from "../components/canvas/PositionControls";
+import { PositionControls } from "../../components/canvas/PositionControls";
 
 type Props = {
     asset: AssetWrapper,

@@ -2,13 +2,16 @@ import React from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import './style.css';
-import { Lights } from './rendering/Lights';
+import { Lights } from './rendering/lights/Lights';
 import { Canvas } from '@react-three/fiber';
-import { Sidebar } from './Sidebar';
+import { Sidebar } from './components/sidebar/Sidebar';
 import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
-import { Assets } from './rendering/Assets';
+import { Assets } from './rendering/assets/Assets';
+import { ChromaticAberration, EffectComposer, Selection } from "@react-three/postprocessing";
+import { Effects } from './rendering/effects/Effects';
+import { BlendFunction } from 'postprocessing';
+import { Vector2 } from 'three';
 
-import { Selection } from "@react-three/postprocessing";
 // import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';
 // import { BlendFunction } from 'postprocessing';
 
@@ -17,7 +20,7 @@ import { Selection } from "@react-three/postprocessing";
 // RN it seems like most of any interactions require multiple setState per second to trigger
 export const AssetScene = () => {
 
-  const { scene, lightsList, assetsList } = useSidebarControlsContext();
+  const { scene, lightsList, assetsList, effectsList } = useSidebarControlsContext();
 
   return (
     <>
@@ -31,8 +34,10 @@ export const AssetScene = () => {
 
         <Selection>
           <Lights lightsList={lightsList} />
-          <Assets assetsList={assetsList}/>
-        </Selection>        
+          <Assets assetsList={assetsList} />
+        </Selection>
+
+        <Effects effectsList={effectsList} />
 
       </Canvas>
       
