@@ -4,6 +4,7 @@ import React from 'react';
 import { EffectWrapper } from '../../../models/Effect';
 import { Slider } from '../common/Slider';
 import { Bloom, ChromaticAberration, DepthOfField, Glitch } from '@react-three/postprocessing';
+import { Checkbox } from '../common/Checkbox';
 
 type Props = {
     active: boolean,
@@ -37,6 +38,11 @@ export const EffectItem = ( {active, effect, onClick}: Props) => {
 
             {active && <div className="dropdown-item-body">
                 {effect.type === Bloom && <>
+                    <Checkbox
+                        name={'Active'}
+                        value={effect.enabled}
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'enabled', value)}}
+                    />
                     <Slider 
                         name={'Intensity'} 
                         min={0} max={5} step={0.005} 
@@ -54,6 +60,11 @@ export const EffectItem = ( {active, effect, onClick}: Props) => {
                         handleChange={(value) => { updateEffectProperty(effect.id, 'luminanceSmoothing', value) }} />
                 </>}
                 {effect.type === DepthOfField && <>
+                    <Checkbox
+                        name={'Active'}
+                        value={effect.enabled}
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'enabled', value)}}
+                    />
                     <Slider 
                         name={'Focus distance'} 
                         min={0} max={50} step={0.005} 
@@ -71,6 +82,11 @@ export const EffectItem = ( {active, effect, onClick}: Props) => {
                         handleChange={(value) => { updateEffectProperty(effect.id, 'bokehScale', value) }} />
                 </>}
                 {effect.type === Glitch && <>
+                    <Checkbox
+                        name={'Active'}
+                        value={effect.enabled}
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'enabled', value)}}
+                    />
                     <Slider 
                         name={'Ratio'} 
                         min={0} max={50} step={0.005} 
