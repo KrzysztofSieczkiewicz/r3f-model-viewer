@@ -1,8 +1,9 @@
-import { Bloom, DepthOfField, EffectComposer } from '@react-three/postprocessing';
+import { Bloom, DepthOfField, EffectComposer, Glitch } from '@react-three/postprocessing';
 import React from 'react';
 import { EffectWrapper } from '../../models/Effect';
-import { RenderedBloomEffect } from './RenderedBloomEffect';
+import { RenderedBloom } from './RenderedBloom';
 import { RenderedDepthOfField } from './RenderedDepthOfField';
+import { RenderedGlitch } from './RenderedGlitch';
 
 type Props = {
     effectsList: EffectWrapper[]
@@ -13,10 +14,13 @@ export const Effects = ({ effectsList }: Props) => {
     const handleEffectType = (effect: EffectWrapper) => {
         switch (effect.type) {
             case Bloom:
-                return <RenderedBloomEffect effect={effect} />
+                return <RenderedBloom effect={effect} />
 
             case DepthOfField:
                 return <RenderedDepthOfField effect={effect} />
+
+            case Glitch:
+                return <RenderedGlitch effect={effect} />
 
             default:
                 return <></>

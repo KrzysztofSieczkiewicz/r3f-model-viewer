@@ -3,7 +3,7 @@ import { useSidebarControlsContext } from '../SidebarControlsContext'
 import React from 'react';
 import { EffectWrapper } from '../../../models/Effect';
 import { Slider } from '../common/Slider';
-import { Bloom, ChromaticAberration, DepthOfField } from '@react-three/postprocessing';
+import { Bloom, ChromaticAberration, DepthOfField, Glitch } from '@react-three/postprocessing';
 
 type Props = {
     active: boolean,
@@ -69,6 +69,13 @@ export const EffectItem = ( {active, effect, onClick}: Props) => {
                         min={0} max={5} step={0.005} 
                         value={effect.bokehScale} defaultValue={1} 
                         handleChange={(value) => { updateEffectProperty(effect.id, 'bokehScale', value) }} />
+                </>}
+                {effect.type === Glitch && <>
+                    <Slider 
+                        name={'Ratio'} 
+                        min={0} max={50} step={0.005} 
+                        value={effect.ratio} defaultValue={1} 
+                        handleChange={(value) => { updateEffectProperty(effect.id, 'ratio', value) }} />
                 </>}
             </div>}
         </div>
