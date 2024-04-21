@@ -1,7 +1,8 @@
-import { useState } from 'react';
-
 import React from 'react';
+import { useState } from 'react';
 import { useSidebarControlsContext } from '../SidebarControlsContext';
+import styles from './../Sidebar.module.css';
+
 import { EffectItem } from './EffectItem';
 
 
@@ -14,14 +15,14 @@ export const EffectsMenu = () => {
         if (activeId === id) {
             setActiveItem("");
         } else {
-            setActiveItem(id)
+            setActiveItem(id);
         }
     };
     
     return (
-        <div className="dropdown">
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Effects</h3>
+        <div className={styles.menu}>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Effects</h3>
                 {effectsList.map((effect) => {
                     return (
                         <EffectItem

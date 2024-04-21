@@ -73,3 +73,32 @@
 .iconButton.active .sidebarIcon {
     fill: var(--color-platinum);
 }
+
+.menu {
+    position: absolute;
+    left: 3.5rem;
+    transform: translateY(50%);
+    overflow: visible;
+
+    width: 300px;
+    padding: 0 0.4rem;
+
+    background-color: var(--color-dark-glass);
+}
+
+.menuSection {
+    color: var(--color-platinum);
+    background-color: var(--color-resin-bright);
+    border: 1px solid black;
+
+    margin: 0.5rem 0;
+    padding: 0.35rem;
+    transition: border var(--transition-duration);
+}
+
+.sectionHeader {
+    margin: 0.25rem 0 0.75rem 0.25rem;
+
+    font-size: 1rem;
+    font-weight: 400;
+}

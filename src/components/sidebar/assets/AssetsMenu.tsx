@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import styles from './Assets.module.css'
 import { useSidebarControlsContext } from '../SidebarControlsContext'
+import styles from './../Sidebar.module.css'
 
 import { AssetItem } from "./AssetItem";
 import { AssetWrapper } from "../../../models/Asset";
@@ -16,7 +16,7 @@ export const AssetsMenu = () => {
         if (activeId === id) {
             setActiveId("");
         } else {
-            setActiveId(id)
+            setActiveId(id);
         }
     };
     
