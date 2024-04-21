@@ -22,12 +22,12 @@ export const AssetsMenu = () => {
     
     return (
         <div className={styles.menu}>
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Add/Remove</h3>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Add/Remove</h3>
                 <p> this section should contain methods to add new assets</p>
             </section>
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Assets</h3>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Assets</h3>
 
                 {assetsList.map((asset: AssetWrapper) => {
                     return (

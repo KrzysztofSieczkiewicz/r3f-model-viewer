@@ -1,9 +1,12 @@
+import React from 'react';
+import styles from './Assets.module.css'
+import { useSidebarControlsContext } from '../SidebarControlsContext'
+
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from '../../../models/Asset';
 import { VisibilityEyeButton } from '../common/VisibilityEyeButton';
-import { useSidebarControlsContext } from '../SidebarControlsContext'
 import { SlidersArray } from '../common/SlidersArray';
-import React from 'react';
+
 
 type Props = {
     active: boolean,
@@ -43,17 +46,17 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
     }
 
     return (
-        <div className={`dropdown-item ${active ? "active" : ""}`}>
-            <div className="dropdown-item-header asset-item-header"
+        <div className={active ? `${styles.assetContainer} ${styles.active}` : styles.assetContainer}>
+            <div className={styles.assetHeader}
                 onClick={onClick}
             >
-                <PointLightIcon className='type-icon header-icon' />
-                <p className='header-title'>{ handleAssetName() }</p>
+                <PointLightIcon className={styles.assetIcon} />
+                <p className={styles.assetName}>{ handleAssetName() }</p>
                 <VisibilityEyeButton object={asset} updateProperty={updateAssetProperty} />
-                <span className='show-hide header-icon'>{ handleIsActive() }</span>
+                <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
 
-            {active && <div className="dropdown-item-body">
+            {active && <div className={styles.assetBody}>
                 {renderSlidersArray({displayName: 'Position', propertyName:'position', propertyValue: asset.position, step: 0.005})}
                 {renderSlidersArray({displayName: 'Rotation', propertyName:'rotation', propertyValue: asset.rotation, step: 0.01})}
                 {renderSlidersArray({displayName: 'Scale', propertyName:'scale', propertyValue: asset.scale, step: 0.01})}
