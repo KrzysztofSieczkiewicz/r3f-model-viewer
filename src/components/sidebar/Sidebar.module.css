@@ -1,4 +1,5 @@
-/*  ---------- SIDEBAR ---------- */
+@import '../../App.module.css';
+
 .sidebar {
     width: var(--nav-size);
     height: 100%;
