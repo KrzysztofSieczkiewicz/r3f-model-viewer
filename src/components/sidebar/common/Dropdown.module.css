@@ -1,0 +1,74 @@
+@import '../../../App.module.css';
+
+.container {
+    width: 80%;
+    height: 1.75rem;
+    margin: 0 auto;
+
+    vertical-align: middle;
+}
+
+.body {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 7rem;
+    border: 1px solid var(--color-resin-black);
+
+    color: var(--color-platinum);
+    background-color: var(--color-resin-brighter);
+
+    transition: border var(--transition-duration);
+}
+
+.body:hover {
+    border: 1px solid var(--color-platinum);
+}
+
+.body.active {
+    border: 1px solid var(--color-celtic-blue);
+}
+
+.value {
+    align-self: flex-start;
+    margin: auto 0;
+    text-align: start;
+
+    user-select: none;
+}
+
+.arrow {
+    align-self: flex-end;
+    margin: auto 0;
+
+    user-select: none;
+}
+
+.optionsList {
+    box-sizing: border-box;
+    position: fixed;
+
+    width: 7rem;
+    border: 1px solid var(--color-dark-glass);
+    background-color: none;
+    z-index: 1;
+}
+
+.option {
+    width: 100%;
+    height: 1.75rem;
+    margin: 0;
+    text-align: start;
+
+    color: var(--color-grey);
+    border: none;
+    background-color: var(--color-resin-bright);
+
+    user-select: none;
+    transition: filter var(--transition-duration);
+}
+
+.option:hover {
+    filter: brightness(1.75);
+    color: var(--color-platinum);
+}

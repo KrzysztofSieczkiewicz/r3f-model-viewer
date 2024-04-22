@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
+import styles from './Dropdown.module.css';
 
 type Props = {
     selected: string,
@@ -46,25 +47,25 @@ export const Dropdown = (props: Props): JSX.Element => {
       }, [isOpen]);
 
     return (
-        <div className="dd-wrapper"
+        <div className={styles.container}
             ref={dropdownRef}>
             <button
-                className={`dd-header ${isOpen ? "active" : ""}`}
+                className={isOpen ? `${styles.body} ${styles.active}` : styles.body}
                 type="button"
                 onClick={(e) => {
                     e.stopPropagation();
                     toggleList()
                 }}
             >
-                <div className="dd-header-title">{getDisplayNameByType(value)}</div>
+                <div className={styles.value}>{getDisplayNameByType(value)}</div>
                 {isOpen
-                ? <span className="dd-header-arrow">&#8657;</span>
-                : <span className="dd-header-arrow">&#8659;</span>}
+                ? <span className={styles.arrow}>&#8657;</span>
+                : <span className={styles.arrow}>&#8659;</span>}
             </button>
             {isOpen && (
-                <div className="dd-list">
+                <div className={styles.optionsList}>
                     {list.map((item) => (
-                        <button className="dd-list-item"
+                        <button className={styles.option}
                             key={item.type}
                             onClick={(e) => {
                                 e.stopPropagation();
