@@ -1,5 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import styles from './SlidersArray.module.css';
+import commonStyles from '../Sidebar.module.css';
 
 type Props = {
     name: string,
@@ -64,33 +66,25 @@ export const SlidersArray = (props: Props) => {
         setLocalValue(value);
     }, [value]);
 
-    const handleCoordinateSlider = () => {
-        return (
-            <>
+    return (
+        <div className={commonStyles.traitContainer}>
+            <label className={commonStyles.traitName}>{name}</label>
             {localValue.map((value: number, index: number) => {
                 return (
-                    <div className="input-slider slider-array-three" 
+                    <div className={styles.slider} 
                         key={index}
                         data-index={index}
                         onMouseDown={(e) => {
                             handleMouseDown(e)
                         }}
                     >
-                        <div className="position-color-indicator" style={{ backgroundColor: indicatorColors[index] }}/>
-                        <span className="slider-arrow left">&#60;</span>
-                        <span className="slider-value">{roundDisplayed(value)}</span>
-                        <span className="slider-arrow right">&#62;</span>
+                        <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[index] }}/>
+                        <span className={`${styles.arrow} ${styles.left}`}>&#60;</span>
+                        <span className={styles.value}>{roundDisplayed(value)}</span>
+                        <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
                     </div>
                 )
             })}
-            </>
-        );
-    }
-
-    return (
-        <div className="trait">
-            <label className="trait-name">{name}</label>
-            {handleCoordinateSlider()}
         </div>
     );
 }
