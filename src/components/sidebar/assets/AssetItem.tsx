@@ -4,7 +4,7 @@ import { useSidebarControlsContext } from '../SidebarControlsContext'
 
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from '../../../models/Asset';
-import { VisibilityEyeButton } from '../common/VisibilityEyeButton';
+import { VisibilityButton } from '../common/VisibilityButton';
 import { SlidersArray } from '../common/SlidersArray';
 
 
@@ -52,7 +52,7 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
             >
                 <PointLightIcon className={styles.assetIcon} />
                 <p className={styles.assetName}>{ handleAssetName() }</p>
-                <VisibilityEyeButton object={asset} updateProperty={updateAssetProperty} />
+                <VisibilityButton object={asset} updateProperty={updateAssetProperty} />
                 <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
 

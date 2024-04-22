@@ -6,7 +6,7 @@ import { Slider } from '../common/Slider';
 import { SlidersArray } from '../common/SlidersArray';
 import { ColorPicker } from '../common/ColorPicker';
 import { Dropdown } from '../common/Dropdown';
-import { VisibilityEyeButton } from '../common/VisibilityEyeButton';
+import { VisibilityButton } from '../common/VisibilityButton';
 import { LIGHT_TYPES, LightWrapper } from '../../../models/Light';
 import { LightTypeIcon } from './LightTypeIcon';
 
@@ -36,7 +36,7 @@ export const LightItem = ({ active, light, onClick }: Props) => {
                     handleChange={(val) => updateLightProperty(light.id, 'type', val)}
                 />
                 <div className={styles.colorPreview} style={{backgroundColor: light.color}}/>
-                <VisibilityEyeButton object={light} updateProperty={updateLightProperty} />
+                <VisibilityButton object={light} updateProperty={updateLightProperty} />
                 <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
 

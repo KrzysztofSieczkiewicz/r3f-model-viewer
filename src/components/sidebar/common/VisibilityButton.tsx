@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './VisibilityButton.module.css';
 import { EditableWrapper } from "../SidebarControlsContext";
 
 type Props = {
@@ -6,13 +7,14 @@ type Props = {
     updateProperty: (id:string, property: keyof EditableWrapper, value:any) => void
 }
 
-export const VisibilityEyeButton = ({object, updateProperty} :Props): JSX.Element => {
+export const VisibilityButton = ({object, updateProperty} :Props): JSX.Element => {
     return (
-        <span className={`visibility-icon header-icon ${!object.visible ? "suppressed" : ""}`} 
+        <button
+            className={object.visible ? styles.button : `${styles.button} ${styles.suppressed}`}
             onClick={(e) => {
                 e.stopPropagation();
                 updateProperty(object.id, 'visible', !object.visible)
             }}
-        >&#128065;</span>
+        >&#128065;</button>
     );
 }
