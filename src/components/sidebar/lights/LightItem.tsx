@@ -1,12 +1,14 @@
+import React from 'react';
+import { useSidebarControlsContext } from '../SidebarControlsContext';
+import styles from './Lights.module.css';
+
 import { Slider } from '../common/Slider';
 import { SlidersArray } from '../common/SlidersArray';
 import { ColorPicker } from '../common/ColorPicker';
 import { Dropdown } from '../common/Dropdown';
-import { useSidebarControlsContext } from '../SidebarControlsContext'
-import React from 'react';
-import { LIGHT_TYPES, LightWrapper } from '../../../models/Light';
 import { VisibilityEyeButton } from '../common/VisibilityEyeButton';
-import { LightTypeIcon } from '../common/LightTypeIcon';
+import { LIGHT_TYPES, LightWrapper } from '../../../models/Light';
+import { LightTypeIcon } from './LightTypeIcon';
 
 type Props = |{
     active: boolean,
@@ -23,8 +25,8 @@ export const LightItem = ({ active, light, onClick }: Props) => {
     }
 
     return (
-        <div className={`dropdown-item ${active ? "active" : ""}`}>
-            <div className="dropdown-item-header light-item-header"
+        <div className={active ? `${styles.lightContainer} ${styles.active}` : styles.lightContainer}>
+            <div className={styles.lightHeader}
                 onClick={onClick}
             >
                 <LightTypeIcon light = {light} />
@@ -33,12 +35,12 @@ export const LightItem = ({ active, light, onClick }: Props) => {
                     selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
                     handleChange={(val) => updateLightProperty(light.id, 'type', val)}
                 />
-                <div className="color-preview" style={{backgroundColor: light.color}}/>
+                <div className={styles.colorPreview} style={{backgroundColor: light.color}}/>
                 <VisibilityEyeButton object={light} updateProperty={updateLightProperty} />
-                <span className='show-hide header-icon'>{ handleIsActive() }</span>
+                <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
 
-            {active && <div className="dropdown-item-body">
+            {active && <div className={styles.lightBody}>
                 <SlidersArray name="Position"
                     value={light.position} step={0.01}
                     handleChange={(val: [number,number,number]) => updateLightProperty(light.id, 'position', val)}
