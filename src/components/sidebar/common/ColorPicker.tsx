@@ -1,5 +1,8 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
+import styles from './ColorPicker.module.css';
+import commonStyles from '../Sidebar.module.css';
+
 import { HexColorPicker } from "react-colorful";
 
 type Props = {
@@ -43,13 +46,13 @@ export const ColorPicker = ( {name, currentColor, handleChange} :Props) :JSX.Ele
   }, [popupRef, isColorPickerOpen]);
 
   return (
-    <div className="trait">
-      <label className="trait-name">{name}</label>
-      <div className="color-picker-preview" onMouseDown={(e) => toggleColorPicker(e)}
+    <div className={commonStyles.traitContainer}>
+      <label className={commonStyles.traitName}>{name}</label>
+      <div className={styles.colorPreview} onMouseDown={(e) => toggleColorPicker(e)}
         style={{backgroundColor: color}}
       />
       {isColorPickerOpen && 
-      <div ref={popupRef} className="color-popup" style={{ left: position }}>
+      <div ref={popupRef} className={styles.popup} style={{ left: position }}>
         <HexColorPicker color={color} onChange={setColor} />
       </div>}
     </div>

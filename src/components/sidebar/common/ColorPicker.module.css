@@ -1,0 +1,14 @@
+@import '../../../App.module.css';
+
+.popup {
+    position: fixed;
+}
+
+.colorPreview {
+    height: 1.25rem;
+    width: 3rem;
+    border-radius: var(--slider-radius);
+
+    user-select: none;
+    cursor: pointer;
+}
