@@ -1,10 +1,14 @@
-import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import { useSidebarControlsContext } from '../SidebarControlsContext'
 import React from 'react';
+import styles from './Effects.module.css'
+import { useSidebarControlsContext } from '../SidebarControlsContext'
+
+import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
+
 import { EffectWrapper } from '../../../models/Effect';
 import { Slider } from '../common/Slider';
-import { Bloom, ChromaticAberration, DepthOfField, Glitch } from '@react-three/postprocessing';
 import { Checkbox } from '../common/Checkbox';
+import { Bloom, DepthOfField, Glitch } from '@react-three/postprocessing';
+
 
 type Props = {
     active: boolean,
@@ -26,17 +30,16 @@ export const EffectItem = ( {active, effect, onClick}: Props) => {
     }
 
     return (
-        <div className={`dropdown-item ${active ? "active" : ""}`}>
-            <div className="dropdown-item-header asset-item-header"
+        <div className={active ? `${styles.effectContainer} ${styles.active}` : styles.effectContainer}>
+            <div className={styles.effectHeader}
                 onClick={onClick}
             >
-                <PointLightIcon className='type-icon header-icon' />
-                <p className='header-title'>{ handleEffectName() }</p>
-                <div/>
-                <span className='show-hide header-icon'>{ handleIsActive() }</span>
+                <PointLightIcon className={styles.effectIcon} />
+                <p className={styles.effectName}>{ handleEffectName() }</p>
+                <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
 
-            {active && <div className="dropdown-item-body">
+            {active && <div className={styles.effectBody}>
                 {effect.type === Bloom && <>
                     <Checkbox
                         name={'Active'}

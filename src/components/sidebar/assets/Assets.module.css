@@ -9,6 +9,10 @@
     transition: border var(--transition-duration);
 }
 
+.assetContainer:hover {
+    border: 0.5px solid var(--color-platinum);
+}
+
 .assetContainer.active {
     border: 0.5px solid var(--color-celtic-blue);
 }

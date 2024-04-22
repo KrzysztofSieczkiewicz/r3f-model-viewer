@@ -7,7 +7,7 @@ import { ReactComponent as LightIcon } from './../../icons/sidebar/light.svg';
 import { ReactComponent as CubeIcon } from './../../icons/sidebar/cube.svg';
 import { ReactComponent as EarthIcon } from './../../icons/sidebar/earth.svg';
 import { ReactComponent as ImageIcon } from './../../icons/sidebar/image.svg';
-import { SidebarItem } from "./SidebarItem";
+import { SidebarItem as SidebarMenuItem } from "./SidebarMenuItem";
 import { AssetsMenu } from "./assets/AssetsMenu";
 import { EffectsMenu } from "./effects/EffectsMenu";
 import { LightsMenu } from "./lights/LightsMenu";
@@ -28,34 +28,34 @@ export const Sidebar = () => {
     return (
         <nav className={styles.sidebar}>
             <ul className={styles.sidebarNav}>
-                <SidebarItem 
+                <SidebarMenuItem 
                     icon={<EarthIcon className={styles.sidebarIcon} />}
                     active={activeItem === "Environment"}
                     onClick={() => handleItemClick("Environment")}
                 >
                     <SceneMenu />
-                </SidebarItem>
-                <SidebarItem 
+                </SidebarMenuItem>
+                <SidebarMenuItem 
                     icon={<CubeIcon className={styles.sidebarIcon} />}
                     active={activeItem === "Objects"}
                     onClick={() => handleItemClick("Objects")}
                 >
                     <AssetsMenu />
-                </SidebarItem>
-                <SidebarItem 
+                </SidebarMenuItem>
+                <SidebarMenuItem 
                     icon={<LightIcon className={styles.sidebarIcon} />} 
                     active={activeItem === "Lights"}
                     onClick={() => handleItemClick("Lights")}
                 >
                     <LightsMenu />
-                </SidebarItem>
-                <SidebarItem
+                </SidebarMenuItem>
+                <SidebarMenuItem
                     icon={<ImageIcon className={styles.sidebarIcon} />}
                     active={activeItem === "Rendering"}
                     onClick={() => handleItemClick("Rendering")}
                 >
                     <EffectsMenu />
-                </SidebarItem>
+                </SidebarMenuItem>
             </ul>
         </nav>
     );
