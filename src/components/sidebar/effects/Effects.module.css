@@ -29,7 +29,7 @@
 
     grid-template-columns: 1fr 6fr 1fr;
 
-    background-color: var(--color-resin-bright);
+    background-color: var(--color-resin-brighter);
 }
 
 .effectIcon {
