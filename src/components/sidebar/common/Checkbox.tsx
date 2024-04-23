@@ -1,4 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
+import commonStyles from '../Sidebar.module.css';
+import styles from './Checkbox.module.css';
+
 
 type Props = {
     name: string,
@@ -20,11 +23,11 @@ export const Checkbox = ( {name, value, handleChange}: Props) => {
 
 
     return (
-        <div className="trait">
-            <label className="trait-name">{name}</label>
+        <div className={commonStyles.traitContainer}>
+            <label className={commonStyles.traitName}>{name}</label>
             <div className="checkbox-container">
                 <input
-                    className="checkbox-input"
+                    className={isChecked ? `${styles.checkbox} ${styles.checked}` : styles.checkbox}
                     type="checkbox" 
                     checked={isChecked}
                     onChange={(e) => handleInput(e)}
