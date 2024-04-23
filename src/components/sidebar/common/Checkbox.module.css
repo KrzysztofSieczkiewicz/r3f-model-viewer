@@ -21,6 +21,7 @@
 }
 .checkbox:hover {
     filter: brightness(125%);
+    box-shadow: 0 0 0.5rem var(--color-grey-dark);
 }
 
 .checked {

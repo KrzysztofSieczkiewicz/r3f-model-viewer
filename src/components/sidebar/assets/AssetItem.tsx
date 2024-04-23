@@ -6,6 +6,8 @@ import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/poin
 import { AssetWrapper } from '../../../models/Asset';
 import { VisibilityButton } from '../common/VisibilityButton';
 import { SlidersArray } from '../common/SlidersArray';
+import { PositionSliders } from '../common/PositionSliders';
+import { RotationSliders } from '../common/RotationSliders';
 
 
 type Props = {
@@ -36,7 +38,18 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
 
     const renderSlidersArray = ( props: SlidersArrayProps): JSX.Element => {
         return (
-            <SlidersArray 
+            <PositionSliders 
+                name={props.displayName}
+                value={props.propertyValue}
+                step={props.step}
+                handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, props.propertyName, val)}
+            />
+        );
+    }
+
+    const renderRotationSlidersArray = ( props: SlidersArrayProps): JSX.Element => {
+        return (
+            <RotationSliders 
                 name={props.displayName}
                 value={props.propertyValue}
                 step={props.step}
@@ -58,7 +71,7 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
 
             {active && <div className={styles.assetBody}>
                 {renderSlidersArray({displayName: 'Position', propertyName:'position', propertyValue: asset.position, step: 0.005})}
-                {renderSlidersArray({displayName: 'Rotation', propertyName:'rotation', propertyValue: asset.rotation, step: 0.01})}
+                {renderRotationSlidersArray({displayName: 'Rotation', propertyName:'rotation', propertyValue: asset.rotation, step: 0.01})}
                 {renderSlidersArray({displayName: 'Scale', propertyName:'scale', propertyValue: asset.scale, step: 0.01})}
 
             </div>}
