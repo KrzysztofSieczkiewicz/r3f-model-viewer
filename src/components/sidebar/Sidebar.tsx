@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import styles from './Sidebar.module.css';
-import './sidebar.css' // TODO: REMOVE THAT AFTER CLEARING PLAIN CSS FROM CHILD COMPONENTS
 
 import { ReactComponent as LightIcon } from './../../icons/sidebar/light.svg';
 import { ReactComponent as CubeIcon } from './../../icons/sidebar/cube.svg';

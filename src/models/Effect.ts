@@ -43,7 +43,7 @@ export const INIT_EFFECTS_LIST: EffectWrapper[] = [
         id:nanoid(5),
         type: Bloom,
         name: 'Bloom',
-        enabled: true,
+        enabled: false,
 
         blendFunction: BlendFunction.ADD,
         intensity: 1,
@@ -64,7 +64,7 @@ export const INIT_EFFECTS_LIST: EffectWrapper[] = [
         id:nanoid(5),
         type: DepthOfField,
         name: 'Depth of Field',
-        enabled: true,
+        enabled: false,
 
         blendFunction: BlendFunction.NORMAL,
         intensity: 1,
@@ -85,7 +85,7 @@ export const INIT_EFFECTS_LIST: EffectWrapper[] = [
         id:nanoid(5),
         type: Glitch,
         name: 'Glitch',
-        enabled: true,
+        enabled: false,
 
         blendFunction: BlendFunction.NORMAL,
         intensity: 1,

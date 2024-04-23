@@ -1,23 +1,24 @@
-import { ColorPicker } from "../common/ColorPicker";
-
-import { useSidebarControlsContext } from '../SidebarControlsContext'   
-import { Slider } from "../common/Slider";
 import React from "react";
+import styles from './../Sidebar.module.css'
+
+import { useSidebarControlsContext } from '../SidebarControlsContext'
+import { ColorPicker } from "../common/ColorPicker";
+import { Slider } from "../common/Slider";
 
 export const SceneMenu = () => {
     const { scene, updateScene } = useSidebarControlsContext();
     
     return (
-        <div className="dropdown">
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Background</h3>
+        <div className={styles.menu}>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Background</h3>
                 <ColorPicker name="Color" 
                     currentColor={scene.backgroundColor}
                     handleChange={(val) => updateScene('backgroundColor', val)}
                 />
             </section>
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Ambient light</h3>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Ambient light</h3>
                 <ColorPicker name="Color"
                     currentColor={scene.ambientLight.color}
                     handleChange={(val) => updateScene('ambientLight.color', val)}
