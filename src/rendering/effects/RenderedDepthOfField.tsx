@@ -8,6 +8,7 @@ type Props = {
 
 export const RenderedDepthOfField = ( { effect }: Props) => {
 
+    if (!effect.enabled) return; 
     return (
         <DepthOfField 
             focusDistance={effect.focusDistance} 
@@ -15,6 +16,6 @@ export const RenderedDepthOfField = ( { effect }: Props) => {
             bokehScale={effect.bokehScale}
             width={1000}
             height={1000}
-        /> 
+        />
     );
 }

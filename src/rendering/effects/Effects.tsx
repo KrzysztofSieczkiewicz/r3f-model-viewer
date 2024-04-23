@@ -14,13 +14,13 @@ export const Effects = ({ effectsList }: Props) => {
     const handleEffectType = (effect: EffectWrapper) => {
         switch (effect.type) {
             case Bloom:
-                return <RenderedBloom effect={effect} />
+                return <RenderedBloom effect={effect} key={effect.id} />
 
             case DepthOfField:
-                return <RenderedDepthOfField effect={effect} />
+                return <RenderedDepthOfField effect={effect} key={effect.id} />
 
             case Glitch:
-                return <RenderedGlitch effect={effect} />
+                return <RenderedGlitch effect={effect} key={effect.id} />
 
             default:
                 return <></>
