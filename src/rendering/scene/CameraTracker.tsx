@@ -35,7 +35,6 @@ export const CameraTracker = ( { cameraRef }: Props ) => {
   //       console.log("USE FRAME IS TRIGGERED")
   // }  }, [cameraRef.current?.rotation])
 
-  // // TODO [TUTORING]: IF I SET SCENE PROPERTY, ELEMENTS ARE GETTING RERENDERED (TRIGGERING USEFRAME AND IN TURN TRIGGERING USEEFFECT AGAIN)
   // useEffect( () => {
   //   updateScene('viewCameraRotation', cameraRotation)
   //   console.log("CAMERA UPDATED")

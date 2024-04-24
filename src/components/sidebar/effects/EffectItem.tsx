@@ -16,7 +16,6 @@ type Props = {
     onClick: () => void
 }
 
-// TODO [TUTORING]: SHOULD I WRAP FUNCTIONS PASSED TO THE CHILDREN WITH useMemo()/useCallback()?
 export const EffectItem = ( {active, effect, onClick}: Props) => {
 
     const { updateEffectProperty } = useSidebarControlsContext();

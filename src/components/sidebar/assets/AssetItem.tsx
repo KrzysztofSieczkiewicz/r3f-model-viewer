@@ -23,7 +23,6 @@ type SlidersArrayProps = {
     step: number,
 }
 
-// TODO [TUTORING]: SHOULD I WRAP FUNCTIONS PASSED TO THE CHILDREN WITH useMemo()/useCallback()?
 export const AssetItem = ( {active, asset, onClick}: Props) => {
 
     const { updateAsset } = useSidebarControlsContext();
@@ -36,7 +35,7 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
         return active ? String.fromCharCode(8657) : String.fromCharCode(8659);
     }
 
-    const renderSlidersArray = ( props: SlidersArrayProps): JSX.Element => {
+    const renderPositionSliders = ( props: SlidersArrayProps): JSX.Element => {
         return (
             <PositionSliders 
                 name={props.displayName}
@@ -47,7 +46,18 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
         );
     }
 
-    const renderRotationSlidersArray = ( props: SlidersArrayProps): JSX.Element => {
+    const renderRotationSliders = ( props: SlidersArrayProps): JSX.Element => {
+        return (
+            <RotationSliders 
+                name={props.displayName}
+                value={props.propertyValue}
+                step={props.step}
+                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), rotation: val} )}
+            />
+        );
+    }
+
+    const renderScaleSliders = ( props: SlidersArrayProps): JSX.Element => {
         return (
             <RotationSliders 
                 name={props.displayName}
@@ -73,9 +83,9 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
             </div>
 
             {active && <div className={styles.assetBody}>
-                {renderSlidersArray({displayName: 'Position', propertyName:'position', propertyValue: asset.position, step: 0.005})}
-                {renderRotationSlidersArray({displayName: 'Rotation', propertyName:'rotation', propertyValue: asset.rotation, step: 0.01})}
-                {renderSlidersArray({displayName: 'Scale', propertyName:'scale', propertyValue: asset.scale, step: 0.01})}
+                {renderPositionSliders({displayName: 'Position', propertyName:'position', propertyValue: asset.position, step: 0.005})}
+                {renderRotationSliders({displayName: 'Rotation', propertyName:'rotation', propertyValue: asset.rotation, step: 0.01})}
+                {renderScaleSliders({displayName: 'Scale', propertyName:'scale', propertyValue: asset.scale, step: 0.01})}
 
             </div>}
         </div>

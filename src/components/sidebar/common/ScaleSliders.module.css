@@ -1,0 +1,77 @@
+@import '../../../App.module.css';
+
+.slider {
+    height: 1.25rem;
+    width: 3.5rem;
+    margin-right: 0.5rem;
+    display: flex;
+    resize: none;
+
+    background-color: var(--color-resin-black);
+    border-radius: var(--slider-radius);
+    color: var(--color-grey);
+
+    text-align: center;
+    user-select: none;
+    cursor: col-resize;
+
+    transition-duration: var(--transition-duration);
+}
+.slider:hover {
+    color: var(--color-resin-black);
+    background-color: var(--color-platinum);
+}
+.slider:active {
+    --filter: brightness(1.35);
+    background-color: var(--color-celtic-blue);
+    color: var(--color-platinum);
+}
+
+.axisColorIndicator {
+    bottom: 0;
+    height: 100%;
+    width: 0.15rem;
+}
+
+.arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.5rem;
+    font-size: 0.9rem;
+    font-style: normal;
+    
+    color: var(--color-grey);
+    background-color: var(--color-resin-brighter);
+
+    transition-duration: var(--transition-duration);
+}
+
+.arrow.right {
+    border-radius: 0 var(--slider-radius) var(--slider-radius) 0;
+}
+
+.slider:hover .arrow {
+    background-color: var(--color-platinum);
+    color: var(--color-resin-black);
+}
+.slider:active .arrow {
+    background-color: var(--color-celtic-blue);
+    color: var(--color-platinum);
+}
+
+.value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    max-width: 100%;
+    margin: auto;
+    font-size: 0.8rem;
+}
+
+.lockAxes {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0 0.25rem;
+}
