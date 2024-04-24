@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import styles from './Dropdown.module.css';
+import styles from './LightTypeDropdown.module.css';
 import { LIGHT_TYPES } from '../../../models/Light';
 
 type Props = {
@@ -14,7 +14,7 @@ type SelectionList = {
     display: string
 }
 
-export const Dropdown = (props: Props): JSX.Element => {
+export const LightTypeDropdown = (props: Props): JSX.Element => {
     const { selected: value, selectionList: list, handleChange } = props;
 
     const [ isOpen, setIsOpen ] = useState(false);

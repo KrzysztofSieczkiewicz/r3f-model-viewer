@@ -5,7 +5,7 @@ import styles from './Lights.module.css';
 import { Slider } from '../common/Slider';
 import { SlidersArray } from '../common/SlidersArray';
 import { ColorPicker } from '../common/ColorPicker';
-import { Dropdown } from '../common/Dropdown';
+import { LightTypeDropdown } from './LightTypeDropdown';
 import { VisibilityButton } from '../common/VisibilityButton';
 import { LIGHT_TYPES, LightWrapper } from '../../../models/Light';
 import { LightTypeIcon } from './LightTypeIcon';
@@ -30,7 +30,7 @@ export const LightItem = ({ active, light, onClick }: Props) => {
                 onClick={onClick}
             >
                 <LightTypeIcon light = {light} />
-                <Dropdown 
+                <LightTypeDropdown 
                     selected={light.type} 
                     selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
                     handleChange={(val: LIGHT_TYPES) => updateLight( {...structuredClone(light), type: val} )} 
