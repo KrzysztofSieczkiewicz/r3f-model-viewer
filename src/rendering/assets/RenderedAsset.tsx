@@ -25,7 +25,6 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
     const { updateAsset, updateSelected } = useSidebarControlsContext();
 
     const [ isHovered, setIsHovered ] = useState(false);
-
     const [ isOutline, setIsOutline ] = useState(false);
     const [ outlineColor, setOutlineColor ] = useState("white")
 
@@ -56,7 +55,7 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
         <group>
             {isSelected && <PositionControls
                 object={asset}
-                handleChange={(newAsset) => { updateAsset(newAsset as AssetWrapper) }}
+                handleChange={(newAsset) => updateAsset(newAsset as AssetWrapper)}
             />}
 
             <mesh

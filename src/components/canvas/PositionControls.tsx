@@ -10,16 +10,23 @@ type Props = {
     handleChange: (newObject: AssetWrapper | LightWrapper) => void
 }
 
+type Transformation = {
+    position: [number, number, number],
+    rotation: [number, number, number]
+}
+
 export const PositionControls = ( {object: asset, handleChange}: Props) => {
-    const [ localPosition, setLocalPosition ] = useState<[number, number, number]>(asset.position);
-    const [ localRotation, setLocalRotation ] = useState<[number, number, number]>(asset.rotation);
+    const [ transformation, setTransformation ] = useState<Transformation>({
+        position: asset.position, 
+        rotation: asset.rotation
+    });
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
 
     // Allign controls to the object on init
     useEffect(() => {
         const initialMatrix = new Matrix4();
-        const initialControlsPosition = new Vector3(...localPosition);
-        const initialControlsRotation = new Quaternion().setFromEuler(new Euler(...localRotation));
+        const initialControlsPosition = new Vector3(...transformation.position);
+        const initialControlsRotation = new Quaternion().setFromEuler(new Euler(...transformation.rotation));
 
         initialMatrix.compose(initialControlsPosition, initialControlsRotation, new Vector3(1,1,1))
 
@@ -34,19 +41,20 @@ export const PositionControls = ( {object: asset, handleChange}: Props) => {
         local.decompose(controlsPosition, constrolsQuaternion, new Vector3());
         const controlsRotation = new Euler().setFromQuaternion(constrolsQuaternion);
 
-        // TODO [TUTORING]: IS THERE A WAY TO DO THIS EFFICIENTLY WITHOUT TRIGGERING RERENDERING FOR THE VALUE THAT IS NOT BEING SET?
-        setLocalPosition([controlsPosition.x, controlsPosition.y, controlsPosition.z]);
-        setLocalRotation([controlsRotation.x, controlsRotation.y, controlsRotation.z]);
+        setTransformation({
+            position: [controlsPosition.x, controlsPosition.y, controlsPosition.z], 
+            rotation:[controlsRotation.x, controlsRotation.y, controlsRotation.z]
+        });
     };
 
     // Update attached object on local changes
     useEffect(() => {
         const newAsset = structuredClone(asset);
-        newAsset.position = localPosition;
-        newAsset.rotation = localRotation;
+        newAsset.position = transformation.position;
+        newAsset.rotation = transformation.rotation;
 
         handleChange(newAsset);
-    }, [localPosition, localRotation]);
+    }, [transformation]);
 
     // Update controls when values are changed externally
     useEffect(() => {

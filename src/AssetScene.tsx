@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { memo, useRef } from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Lights } from './rendering/lights/Lights';
@@ -9,12 +9,15 @@ import { Assets } from './rendering/assets/Assets';
 import { Selection } from "@react-three/postprocessing";
 import { Effects } from './rendering/effects/Effects';
 import { PerspectiveCamera as PerspectiveCameraType} from 'three/src/Three';
-import { CameraTracker } from './rendering/cameras/CameraTracker';
+import { CameraTracker } from './rendering/scene/CameraTracker';
+import { AmbientLight } from './rendering/scene/AmbientLight';
 
 export const AssetScene = () => {
-  const { scene, lightsList, assetsList, effectsList } = useSidebarControlsContext();
+  const { scene, } = useSidebarControlsContext();
 
   const cameraRef = useRef<PerspectiveCameraType>(null);
+
+  console.log({cameraRef: cameraRef.current?.rotation})
 
   return (
     <>
@@ -22,7 +25,8 @@ export const AssetScene = () => {
         style= {{ background: scene.backgroundColor }}
         frameloop="demand"
       >
-        <ambientLight color={scene.ambientLight.color} intensity={scene.ambientLight.intensity} />
+
+        <AmbientLight />
 
         <OrbitControls makeDefault target={[0, 0.32, 0]} maxPolarAngle={1.45} />
         <PerspectiveCamera makeDefault ref={cameraRef} fov={50} position={[3, 2, 5]} />
@@ -30,11 +34,11 @@ export const AssetScene = () => {
 
 
         <Selection>
-          <Lights lightsList={lightsList} />
-          <Assets assetsList={assetsList} />
+          <Lights />
+          <Assets />
         </Selection>
 
-        <Effects effectsList={effectsList} />
+        <Effects />
 
       </Canvas>
       

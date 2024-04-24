@@ -77,17 +77,17 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         }
     }, [] );
 
-    // TODO [TUTORING]: IS THERE ANY POINT IN SEPARATE updateAsset/updateAssetProperty methods?
+    // TODO [TUTORED]: IS THERE ANY POINT IN SEPARATE updateAsset/updateAssetProperty methods? ===> KEEP updateAsset only
     // Initially updateAssetProperty allowed not to provide whole asset to the controlling component (like sliders),
     // but some components (e.g. PositionControls) update few things at once?
-    const updateAsset = (newAsset: AssetWrapper) => {
+    const updateAsset = useCallback( (newAsset: AssetWrapper) => {
       const index = assetsList.findIndex(asset => asset.id === newAsset.id);
 
       const newAssetsList = [...assetsList];
       newAssetsList[index] = newAsset;
 
       setAssetsList(newAssetsList);
-    }
+    }, [] )
 
     const updateEffectProperty = (id: string, property: keyof EffectWrapper, value: any) => {
       const index = effectsList.findIndex(effect => effect.id === id);
@@ -105,7 +105,6 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
     }
 
     const updateScene = useCallback( (property: string, value: any) => {
-   
       const updateNested = (obj: any, keys: any, value: any) => {
         if (keys.length === 1) {
           obj[keys[0]] = value;

@@ -1,14 +1,9 @@
 import React from "react";
-import { LightWrapper } from "../../models/Light";
 import { RenderedLight } from "./RenderedLight";
 import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
 
-type Props = {
-    lightsList: LightWrapper[]
-}
-
-export const Lights = ({lightsList}: Props) => {    
-    const { selectedId } = useSidebarControlsContext();
+export const Lights = () => {    
+    const { lightsList, selectedId } = useSidebarControlsContext();
 
     // TODO: ADD isSelected HANDLING
 

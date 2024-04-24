@@ -1,15 +1,14 @@
-import { Bloom, DepthOfField, EffectComposer, Glitch } from '@react-three/postprocessing';
 import React from 'react';
-import { EffectWrapper } from '../../models/Effect';
+import { useSidebarControlsContext } from '../../components/sidebar/SidebarControlsContext';
+import { Bloom, DepthOfField, EffectComposer, Glitch } from '@react-three/postprocessing';
 import { RenderedBloom } from './RenderedBloom';
 import { RenderedDepthOfField } from './RenderedDepthOfField';
 import { RenderedGlitch } from './RenderedGlitch';
+import { EffectWrapper } from '../../models/Effect';
 
-type Props = {
-    effectsList: EffectWrapper[]
-}
 
-export const Effects = ({ effectsList }: Props) => {
+export const Effects = () => {
+    const { effectsList } = useSidebarControlsContext();
 
     const handleEffectType = (effect: EffectWrapper) => {
         switch (effect.type) {
