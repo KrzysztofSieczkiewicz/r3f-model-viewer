@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import styles from './PositionSliders.module.css';
+import styles from './RotationSliders.module.css';
 import commonStyles from '../Sidebar.module.css';
 
 type Props = {
@@ -15,7 +15,7 @@ export const RotationSliders = (props: Props) => {
     const { name, step, value, handleChange } = props;
 
     const [ localValue, setLocalValue ] = useState<[number,number,number]>(value);
-    // RED GREEN BLUE
+    // RED GREEN BLUE - TODO: MOVE THIS TO GLOBAL CONSTANTS
     const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
 
     const [ currentSlider, setCurrentSlider ] = useState<HTMLDivElement | null>(null);
@@ -85,6 +85,7 @@ export const RotationSliders = (props: Props) => {
                     </div>
                 )
             })}
+            <button className={styles.followCamera} />
         </div>
     );
 }
