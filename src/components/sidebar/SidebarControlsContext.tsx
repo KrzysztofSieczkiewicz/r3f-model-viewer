@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { INITIAL_SCENE_SETTINGS, SceneWrapper } from '../../models/Scene';
@@ -10,11 +10,9 @@ export type EditableWrapper = AssetWrapper | LightWrapper
 
 type SidebarControlsContext = {
     lightsList: LightWrapper[], 
-    updateLightProperty: (id:string, property:keyof LightWrapper, value:any) => void,
     updateLight: (newLight: LightWrapper) => void,
 
     assetsList: AssetWrapper[], 
-    updateAssetProperty: (id:string, property:keyof AssetWrapper, value:any) => void,
     updateAsset: (newAsset: AssetWrapper) => void,
 
     effectsList: EffectWrapper[],
@@ -37,22 +35,6 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
     const [ selectedId, setSelectedId ] = useState<string>("");
     const [ scene, setScene ] = useState<SceneWrapper>(INITIAL_SCENE_SETTINGS); 
 
-
-    const updateLightProperty = (id: string, property: keyof LightWrapper, value: number) => {
-      const index = lightsList.findIndex(light => light.id === id);
-      const newLight: LightWrapper = {
-          ...lightsList[index],
-          [property]: value
-      };
-
-      if (newLight[property] !== (lightsList)[index][property]) {
-          const newLightsList = [...lightsList];
-          newLightsList[index] = newLight;
-          
-          setLightsList(newLightsList);
-      }
-    }
-
     const updateLight = (newLight: LightWrapper) => {
       const index = lightsList.findIndex(asset => asset.id === newLight.id);
 
@@ -60,34 +42,16 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
       newLightsList[index] = newLight;
 
       setLightsList(newLightsList);
-    }
+    };
 
-    const updateAssetProperty = useCallback( (id: string, property: keyof AssetWrapper, value: any) => {
-        const index = assetsList.findIndex(asset => asset.id === id);
-        const newAsset: AssetWrapper = {
-            ...assetsList[index],
-            [property]: value
-        };
-
-        if (newAsset[property] !== (assetsList)[index][property]) {
-            const newAssetsList = [...assetsList];
-            (newAssetsList[index]) = newAsset;
-
-            setAssetsList(newAssetsList);
-        }
-    }, [] );
-
-    // TODO [TUTORED]: IS THERE ANY POINT IN SEPARATE updateAsset/updateAssetProperty methods? ===> KEEP updateAsset only
-    // Initially updateAssetProperty allowed not to provide whole asset to the controlling component (like sliders),
-    // but some components (e.g. PositionControls) update few things at once?
-    const updateAsset = useCallback( (newAsset: AssetWrapper) => {
+    const updateAsset = (newAsset: AssetWrapper) => {
       const index = assetsList.findIndex(asset => asset.id === newAsset.id);
 
       const newAssetsList = [...assetsList];
       newAssetsList[index] = newAsset;
 
       setAssetsList(newAssetsList);
-    }, [] )
+    };
 
     const updateEffectProperty = (id: string, property: keyof EffectWrapper, value: any) => {
       const index = effectsList.findIndex(effect => effect.id === id);
@@ -104,7 +68,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         }
     }
 
-    const updateScene = useCallback( (property: string, value: any) => {
+    const updateScene = (property: string, value: any) => {
       const updateNested = (obj: any, keys: any, value: any) => {
         if (keys.length === 1) {
           obj[keys[0]] = value;
@@ -122,7 +86,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         ...scene,
         [property]: value
       });
-    }, [] );
+    };
 
     const updateSelected = (objectId: string) => {
       if ( selectedId === objectId ) {
@@ -134,7 +98,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
     }
 
     return (
-        <SidebarControlsContext.Provider value={{ lightsList, updateLightProperty, updateLight, assetsList, updateAssetProperty, updateAsset, effectsList, updateEffectProperty, scene, updateScene, selectedId, updateSelected }} >
+        <SidebarControlsContext.Provider value={{ lightsList, updateLight, assetsList, updateAsset, effectsList, updateEffectProperty, scene, updateScene, selectedId, updateSelected }} >
             {props.children}
         </SidebarControlsContext.Provider>
     );

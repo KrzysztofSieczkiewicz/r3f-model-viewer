@@ -14,15 +14,9 @@ type Props = {
 export const ColorPicker = ( {name, currentColor, handleChange} :Props) :JSX.Element => {
 
   const [ isColorPickerOpen, setIsColorPickerOpen ] = useState(false);
-  const [ color, setColor ] = useState(currentColor);
   const [ position, setPosition ] = useState(0);
 
   const popupRef = useRef<HTMLDivElement | null>(null);
-
-  // UPDATE COLOR EACH TIME COLOR PICKER CHANGES
-  useEffect(() => {
-    handleChange(color);
-  }, [color])
 
   // OPEN AND HIDE COLOR PALETTE
   const toggleColorPicker = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -49,11 +43,11 @@ export const ColorPicker = ( {name, currentColor, handleChange} :Props) :JSX.Ele
     <div className={commonStyles.traitContainer}>
       <label className={commonStyles.traitName}>{name}</label>
       <div className={styles.colorPreview} onMouseDown={(e) => toggleColorPicker(e)}
-        style={{backgroundColor: color}}
+        style={{backgroundColor: currentColor}}
       />
       {isColorPickerOpen && 
       <div ref={popupRef} className={styles.popup} style={{ left: position }}>
-        <HexColorPicker color={color} onChange={setColor} />
+        <HexColorPicker color={currentColor} onChange={handleChange} />
       </div>}
     </div>
   );

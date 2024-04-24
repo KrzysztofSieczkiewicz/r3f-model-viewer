@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styles from './Assets.module.css'
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 
@@ -26,7 +26,7 @@ type SlidersArrayProps = {
 // TODO [TUTORING]: SHOULD I WRAP FUNCTIONS PASSED TO THE CHILDREN WITH useMemo()/useCallback()?
 export const AssetItem = ( {active, asset, onClick}: Props) => {
 
-    const { updateAssetProperty } = useSidebarControlsContext();
+    const { updateAsset } = useSidebarControlsContext();
 
     const handleAssetName = () => {
         return asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
@@ -42,20 +42,18 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
                 name={props.displayName}
                 value={props.propertyValue}
                 step={props.step}
-                handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, props.propertyName, val)}
+                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), position: val} )}
             />
         );
     }
 
-    // TODO [TUTORING]: IF ANYTHING MODIFIES THIS ASSET (EVEN IF NOT ROTATION RELATED) THIS IS RERENDERED
-    // ANY USE FOR useCallback or useMemo?
     const renderRotationSlidersArray = ( props: SlidersArrayProps): JSX.Element => {
         return (
             <RotationSliders 
                 name={props.displayName}
                 value={props.propertyValue}
                 step={props.step}
-                handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, props.propertyName, val)}
+                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), rotation: val} )}
             />
         );
     }
@@ -67,7 +65,10 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
             >
                 <PointLightIcon className={styles.assetIcon} />
                 <p className={styles.assetName}>{ handleAssetName() }</p>
-                <VisibilityButton object={asset} updateProperty={updateAssetProperty} />
+                <VisibilityButton 
+                    object={asset} 
+                    updateObject={ (val: boolean) => updateAsset( {...structuredClone(asset), visible: val} )} 
+                />
                 <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
 

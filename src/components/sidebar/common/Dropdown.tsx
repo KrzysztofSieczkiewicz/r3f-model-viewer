@@ -1,15 +1,16 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styles from './Dropdown.module.css';
+import { LIGHT_TYPES } from '../../../models/Light';
 
 type Props = {
     selected: string,
     selectionList: SelectionList[],
-    handleChange: (item: string) => void
+    handleChange: (item: LIGHT_TYPES) => void
 }
 
 type SelectionList = {
-    type: string,
+    type: LIGHT_TYPES,
     display: string
 }
 
@@ -23,7 +24,7 @@ export const Dropdown = (props: Props): JSX.Element => {
         return list.find((light) =>  light.type === type)?.display
     }
 
-    const selectOption = (option: string) => {
+    const selectOption = (option: LIGHT_TYPES) => {
         handleChange(option);
         setIsOpen(false);
     }
