@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styles from './Assets.module.css'
 import { useSidebarControlsContext } from '../SidebarControlsContext'
 
@@ -47,6 +47,8 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
         );
     }
 
+    // TODO [TUTORING]: IF ANYTHING MODIFIES THIS ASSET (EVEN IF NOT ROTATION RELATED) THIS IS RERENDERED
+    // ANY USE FOR useCallback or useMemo?
     const renderRotationSlidersArray = ( props: SlidersArrayProps): JSX.Element => {
         return (
             <RotationSliders 

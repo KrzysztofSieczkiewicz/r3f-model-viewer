@@ -9,7 +9,6 @@ type Props = {
   cameraRef: RefObject<PerspectiveCameraType>
 }
 
-// TODO [TUTORING]: WHATS A PROPER PLACE FOR THIS? IT'S NEITHER UI, NOR RENDERING
 export const CameraTracker = ( { cameraRef }: Props ) => {
   const { scene, updateScene } = useSidebarControlsContext();
 

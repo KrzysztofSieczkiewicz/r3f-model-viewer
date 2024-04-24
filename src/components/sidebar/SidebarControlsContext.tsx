@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { INITIAL_SCENE_SETTINGS, SceneWrapper } from '../../models/Scene';
@@ -62,7 +62,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
       setLightsList(newLightsList);
     }
 
-    const updateAssetProperty = (id: string, property: keyof AssetWrapper, value: any) => {
+    const updateAssetProperty = useCallback( (id: string, property: keyof AssetWrapper, value: any) => {
         const index = assetsList.findIndex(asset => asset.id === id);
         const newAsset: AssetWrapper = {
             ...assetsList[index],
@@ -75,7 +75,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
 
             setAssetsList(newAssetsList);
         }
-    }
+    }, [] );
 
     // TODO [TUTORING]: IS THERE ANY POINT IN SEPARATE updateAsset/updateAssetProperty methods?
     // Initially updateAssetProperty allowed not to provide whole asset to the controlling component (like sliders),
@@ -104,7 +104,8 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         }
     }
 
-    const updateScene = (property: string, value: any) => {
+    const updateScene = useCallback( (property: string, value: any) => {
+   
       const updateNested = (obj: any, keys: any, value: any) => {
         if (keys.length === 1) {
           obj[keys[0]] = value;
@@ -112,7 +113,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
           const key = keys.shift();
           updateNested(obj[key], keys, value);
         }
-      };
+      }
 
       const keys = property.split('.');
       const updatedScene = { ...scene };
@@ -122,7 +123,7 @@ export const SidebarControlsContextProvider = (props: {children: ReactNode}): JS
         ...scene,
         [property]: value
       });
-    }
+    }, [] );
 
     const updateSelected = (objectId: string) => {
       if ( selectedId === objectId ) {
