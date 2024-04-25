@@ -1,8 +1,11 @@
 import React, { useRef } from "react";
-import { LightWrapper } from "../../models/Light"
+import { useSceneObjectsContext } from "../../components/sidebar/SceneObjectsContext";
+import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
+
 import { useHelper } from "@react-three/drei";
 import { SpotLight, SpotLightHelper } from "three";
-import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
+
+import { LightWrapper } from "../../models/Light"
 import { LightTypeBillboard } from "../../components/canvas/LightTypeBillboard";
 import { PositionControls } from "../../components/canvas/PositionControls";
 
@@ -12,7 +15,8 @@ type Props = {
 }
 
 export const RenderedSpotLight = ( {light, isSelected}: Props) => {
-    const { updateLight, updateSelected } = useSidebarControlsContext();
+    const { updateLight } = useSceneObjectsContext();
+    const { updateSelected } = useSidebarControlsContext();
 
     const lightRef = useRef<SpotLight>(null);
 

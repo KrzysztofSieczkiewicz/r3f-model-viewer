@@ -7,11 +7,11 @@ import { LightWrapper, INIT_LIGHTS_LIST } from "../../models/Light";
 export type EditableWrapper = AssetWrapper | LightWrapper
 
 type SceneObjectsContext = {
-    lightsList: LightWrapper[], 
-    updateLight: (newLight: LightWrapper) => void,
-
     assetsList: AssetWrapper[], 
     updateAsset: (newAsset: AssetWrapper) => void,
+
+    lightsList: LightWrapper[], 
+    updateLight: (newLight: LightWrapper) => void,
 }
 
 export const SceneObjectsContext = createContext<SceneObjectsContext | null>( null );
@@ -22,21 +22,21 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
 
     const updateLight = useCallback((newLight: LightWrapper) => {
-      const index = lightsList.findIndex(asset => asset.id === newLight.id);
+        const index = lightsList.findIndex(asset => asset.id === newLight.id);
 
-      const newLightsList = [...lightsList];
-      newLightsList[index] = newLight;
+        const newLightsList = [...lightsList];
+        newLightsList[index] = newLight;
 
-      setLightsList(newLightsList);
+        setLightsList(newLightsList);
     }, []);
 
     const updateAsset = useCallback((newAsset: AssetWrapper) => {
-      const index = assetsList.findIndex(asset => asset.id === newAsset.id);
+        const index = assetsList.findIndex(asset => asset.id === newAsset.id);
 
-      const newAssetsList = [...assetsList];
-      newAssetsList[index] = newAsset;
+        const newAssetsList = [...assetsList];
+        newAssetsList[index] = newAsset;
 
-      setAssetsList(newAssetsList);
+        setAssetsList(newAssetsList);
     }, []);
 
     return (

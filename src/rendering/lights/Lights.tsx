@@ -1,9 +1,12 @@
 import React from "react";
 import { RenderedLight } from "./RenderedLight";
 import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
+import { useSceneObjectsContext } from "../../components/sidebar/SceneObjectsContext";
 
 export const Lights = () => {    
-    const { lightsList, selectedId } = useSidebarControlsContext();
+    const { lightsList } = useSceneObjectsContext();
+    const { selectedId } = useSidebarControlsContext();
+
 
     // TODO: ADD isSelected HANDLING
 

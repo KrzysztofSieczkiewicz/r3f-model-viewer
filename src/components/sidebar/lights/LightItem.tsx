@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSidebarControlsContext } from '../SidebarControlsContext';
 import styles from './Lights.module.css';
 
 import { Slider } from '../common/Slider';
@@ -13,11 +12,11 @@ import { LightTypeIcon } from './LightTypeIcon';
 type Props = |{
     active: boolean,
     onClick: () => void,
-    light: LightWrapper
+    light: LightWrapper,
+    updateLight: (light: LightWrapper) => void,
 }
 
-export const LightItem = ({ active, light, onClick }: Props) => {
-    const { updateLight } = useSidebarControlsContext();
+export const LightItem = ({ active, onClick, light, updateLight }: Props) => {
 
     const handleIsActive = () => {
         return active ? String.fromCharCode(8657) : String.fromCharCode(8659);

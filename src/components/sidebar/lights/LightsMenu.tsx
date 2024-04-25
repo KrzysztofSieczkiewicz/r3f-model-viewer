@@ -1,14 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 import styles from '../Sidebar.module.css';
-import { useSidebarControlsContext } from '../SidebarControlsContext';
+import { useSceneObjectsContext } from '../SceneObjectsContext';
 
 import { LightItem } from './LightItem';
 import { LightWrapper } from '../../../models/Light';
 
 
 export const LightsMenu = () => {
-    const { lightsList } = useSidebarControlsContext();
+    const { lightsList, updateLight } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
 
@@ -32,7 +32,8 @@ export const LightsMenu = () => {
                 {lightsList.map((light: LightWrapper) => {
                     return (
                         <LightItem
-                            light={light} 
+                            light={light}
+                            updateLight={ (light: LightWrapper) => updateLight(light)}
                             key={light.id}
                             active={activeId === light.id}
                             onClick={() => handleItemClick(light.id)}

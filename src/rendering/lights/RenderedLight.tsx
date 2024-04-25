@@ -5,7 +5,7 @@ import { RenderedSpotLight } from "./RenderedSpotLight";
 
 type Props = {
     light: LightWrapper,
-    isSelected: boolean
+    isSelected: boolean,
 }
 
 export const RenderedLight = ( {light, isSelected}: Props) => {

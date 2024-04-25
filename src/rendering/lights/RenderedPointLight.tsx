@@ -1,9 +1,13 @@
 import React, { useRef } from "react";
-import { LightWrapper } from "../../models/Light"
-import { PointLight } from "three";
+import { useSceneObjectsContext } from "../../components/sidebar/SceneObjectsContext";
 import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
+
+import { PointLight } from "three";
+
+import { LightWrapper } from "../../models/Light"
 import { LightTypeBillboard } from '../../components/canvas/LightTypeBillboard';
 import { PositionControls } from '../../components/canvas/PositionControls';
+
 
 type Props = {
     light: LightWrapper,
@@ -11,7 +15,8 @@ type Props = {
 }
 
 export const RenderedPointLight = ( {light, isSelected}: Props) => {
-    const { updateLight, updateSelected } = useSidebarControlsContext();
+    const { updateLight } = useSceneObjectsContext();
+    const { updateSelected } = useSidebarControlsContext();
     
     let lightRef = useRef<PointLight>(null);
 
