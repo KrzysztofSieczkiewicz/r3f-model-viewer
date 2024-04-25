@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Outlines, useGLTF } from "@react-three/drei";
+import { Outlines, PivotControls, useGLTF } from "@react-three/drei";
 import { useEffect, useState } from "react";
 import { AssetWrapper } from "../../models/Asset";
 import React from "react";
@@ -23,7 +23,7 @@ type GLTFResult = GLTF & {
   // using useFrame update the object position to match the controls
 export const RenderedAsset = ( {asset, isSelected}: Props) => {
     const { updateAsset, updateSelected } = useSidebarControlsContext();
-    
+
     const [ isHovered, setIsHovered ] = useState(false);
     const [ isOutline, setIsOutline ] = useState(false);
     const [ outlineColor, setOutlineColor ] = useState("white")
@@ -52,11 +52,15 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
 
     // TODO: UNIFY ROTATION UNITS, EVERYTHING IS USING DIFFERENT SYSTEM
     return (
+        <PivotControls
+                scale={1}
+                depthTest={false}>
         <group>
-            {isSelected && <PositionControls
+            {/* {isSelected && <PositionControls
                 object={asset}
                 handleChange={(newAsset) => updateAsset(newAsset as AssetWrapper)}
-            />}
+            />} */}
+            
 
             <mesh
                 matrixWorldAutoUpdate={true}
@@ -84,6 +88,7 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
 
             </mesh>
         </group>
+        </PivotControls>
     );
 }
 

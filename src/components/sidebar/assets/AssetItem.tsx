@@ -8,6 +8,7 @@ import { VisibilityButton } from '../common/VisibilityButton';
 import { PositionSliders } from '../common/PositionSliders';
 import { RotationSliders } from '../common/RotationSliders';
 import { ScaleSliders } from '../common/ScaleSliders';
+import { useSceneObjectsContext } from '../SceneObjectsContext';
 
 
 type Props = {
@@ -24,7 +25,7 @@ type SlidersArrayProps = {
 }
 
 export const AssetItem = ( {active, asset, onClick}: Props) => {
-    const { updateAsset } = useSidebarControlsContext();
+    const { updateAsset } = useSceneObjectsContext();
 
     const handleAssetName = () => {
         return asset.name.charAt(0).toUpperCase() + asset.name.slice(1);

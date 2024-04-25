@@ -5,10 +5,11 @@ import styles from './../Sidebar.module.css'
 
 import { AssetItem } from "./AssetItem";
 import { AssetWrapper } from "../../../models/Asset";
+import { useSceneObjectsContext } from "../SceneObjectsContext";
 
 
 export const AssetsMenu = () => {
-    const { assetsList } = useSidebarControlsContext();
+    const { assetsList } = useSceneObjectsContext();
    
     const [activeId, setActiveId] = useState("");
 
