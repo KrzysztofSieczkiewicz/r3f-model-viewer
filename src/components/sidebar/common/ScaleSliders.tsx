@@ -80,7 +80,7 @@ export const ScaleSliders = (props: Props) => {
                     >
                         <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[index] }}/>
                         <span className={styles.arrow} />
-                        <span className={styles.value}>{roundDisplayed(value)}&deg;</span>
+                        <span className={styles.value}>{roundDisplayed(value)}</span>
                         <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
                     </div>
                 )

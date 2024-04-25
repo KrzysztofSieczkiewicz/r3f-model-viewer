@@ -23,7 +23,7 @@ type GLTFResult = GLTF & {
   // using useFrame update the object position to match the controls
 export const RenderedAsset = ( {asset, isSelected}: Props) => {
     const { updateAsset, updateSelected } = useSidebarControlsContext();
-
+    
     const [ isHovered, setIsHovered ] = useState(false);
     const [ isOutline, setIsOutline ] = useState(false);
     const [ outlineColor, setOutlineColor ] = useState("white")

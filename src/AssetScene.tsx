@@ -13,7 +13,7 @@ import { CameraTracker } from './rendering/scene/CameraTracker';
 import { AmbientLight } from './rendering/scene/AmbientLight';
 
 export const AssetScene = () => {
-  const { scene, } = useSidebarControlsContext();
+  const { scene } = useSidebarControlsContext();
 
   const cameraRef = useRef<PerspectiveCameraType>(null);
 

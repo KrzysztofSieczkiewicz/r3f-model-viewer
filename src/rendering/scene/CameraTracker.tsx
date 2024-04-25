@@ -10,15 +10,15 @@ type Props = {
 }
 
 export const CameraTracker = ( { cameraRef }: Props ) => {
-  const { scene, updateScene } = useSidebarControlsContext();
+  // const { scene, updateScene } = useSidebarControlsContext();
 
-  const [ cameraRotation, setCameraRotation ] = useState(scene.viewCameraRotation)
+  // const [ cameraRotation, setCameraRotation ] = useState(scene.viewCameraRotation)
 
   
   // useFrame( () => {
   //   if(cameraRef.current) {
   //     const rotation = cameraRef.current.rotation;
-  //     updateScene('viewCameraRotation', [rotation.x, rotation.y, rotation.z])
+  //     //updateScene('viewCameraRotation', [rotation.x, rotation.y, rotation.z])
   //     //setCameraRotation([rotation.x, rotation.y, rotation.z])
   //     //console.log({cameraRotation})
   //   }
@@ -26,13 +26,12 @@ export const CameraTracker = ( { cameraRef }: Props ) => {
   //   console.log(scene.viewCameraRotation)
   // })
 
-  // console.log({cameraRef: cameraRef.current})
 
   // useEffect( () => {
   //   if(cameraRef.current) {
   //       const rotation = cameraRef.current.rotation;
-  //       setCameraRotation([rotation.x, rotation.y, rotation.z])
-  //       console.log("USE FRAME IS TRIGGERED")
+  //       setCameraRotation([rotation.x, rotation.y, rotation.z]);
+  //       console.log("USE FRAME IS TRIGGERED");
   // }  }, [cameraRef.current?.rotation])
 
   // useEffect( () => {

@@ -17,7 +17,6 @@ type Props = |{
 }
 
 export const LightItem = ({ active, light, onClick }: Props) => {
-
     const { updateLight } = useSidebarControlsContext();
 
     const handleIsActive = () => {

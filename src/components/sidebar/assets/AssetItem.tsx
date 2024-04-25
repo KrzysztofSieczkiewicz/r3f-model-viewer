@@ -5,9 +5,9 @@ import { useSidebarControlsContext } from '../SidebarControlsContext'
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from '../../../models/Asset';
 import { VisibilityButton } from '../common/VisibilityButton';
-import { SlidersArray } from '../common/SlidersArray';
 import { PositionSliders } from '../common/PositionSliders';
 import { RotationSliders } from '../common/RotationSliders';
+import { ScaleSliders } from '../common/ScaleSliders';
 
 
 type Props = {
@@ -24,7 +24,6 @@ type SlidersArrayProps = {
 }
 
 export const AssetItem = ( {active, asset, onClick}: Props) => {
-
     const { updateAsset } = useSidebarControlsContext();
 
     const handleAssetName = () => {
@@ -59,11 +58,11 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
 
     const renderScaleSliders = ( props: SlidersArrayProps): JSX.Element => {
         return (
-            <RotationSliders 
+            <ScaleSliders 
                 name={props.displayName}
                 value={props.propertyValue}
                 step={props.step}
-                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), rotation: val} )}
+                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), scale: val} )}
             />
         );
     }

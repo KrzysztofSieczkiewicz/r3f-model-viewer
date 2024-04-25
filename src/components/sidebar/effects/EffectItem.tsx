@@ -17,7 +17,6 @@ type Props = {
 }
 
 export const EffectItem = ( {active, effect, onClick}: Props) => {
-
     const { updateEffectProperty } = useSidebarControlsContext();
 
     const handleEffectName = () => {
@@ -43,7 +42,7 @@ export const EffectItem = ( {active, effect, onClick}: Props) => {
                     <Checkbox
                         name={'Active'}
                         value={effect.enabled}
-                        handleChange={(value) => { updateEffectProperty(effect.id, 'enabled', value)}}
+                        handleChange={(value) => {updateEffectProperty(effect.id, 'enabled', value)}}
                     />
                     <Slider 
                         name={'Intensity'} 
