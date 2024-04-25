@@ -2,21 +2,25 @@ import { useGLTF } from "@react-three/drei";
 import React from "react";
 import { RenderedAsset } from "./RenderedAsset";
 import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
+import { useSceneObjectsContext } from "../../components/sidebar/SceneObjectsContext";
+import { AssetWrapper } from "../../models/Asset";
 
 export const Assets = () => {
-    const { assetsList, selectedId } = useSidebarControlsContext();
+    const { assetsList, updateAsset } = useSceneObjectsContext();
+    const { selectedId, updateSelected } = useSidebarControlsContext();
         
     return (
         assetsList.map((asset) => {
-            if(asset.visible) {
-                return (
-                    <RenderedAsset 
-                        key={asset.id}
-                        asset={asset}
-                        isSelected={selectedId === asset.id}
-                    />
-                );
-            } else return null;
+            if(!asset.visible) return;
+            return (
+                <RenderedAsset 
+                    key={asset.id}
+                    asset={asset}
+                    updateAsset={(asset: AssetWrapper) => updateAsset(asset)}
+                    isSelected={selectedId === asset.id}
+                    updateSelected={(id: string) => updateSelected(id)}
+                />
+            );
         })
     );
 

@@ -1,15 +1,18 @@
 import * as THREE from "three";
-import { Outlines, PivotControls, useGLTF } from "@react-three/drei";
-import { useEffect, useState } from "react";
+import { Outlines, useGLTF } from "@react-three/drei";
+import { memo, useEffect, useState } from "react";
 import { AssetWrapper } from "../../models/Asset";
 import React from "react";
 import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { PositionControls } from "../../components/canvas/PositionControls";
+import { useSceneObjectsContext } from "../../components/sidebar/SceneObjectsContext";
 
 type Props = {
     asset: AssetWrapper,
+    updateAsset: (asset: AssetWrapper) => void,
     isSelected: boolean,
+    updateSelected: (id: string) => void,
 }
 
 type GLTFResult = GLTF & {
@@ -18,18 +21,15 @@ type GLTFResult = GLTF & {
     };
   };
 
-  // TODO: TRY TO REPLACE MOST OF THESE METHODS WITH useFrame
-  // using useRef move the object controls
-  // using useFrame update the object position to match the controls
-export const RenderedAsset = ( {asset, isSelected}: Props) => {
-    const { updateAsset, updateSelected } = useSidebarControlsContext();
 
+export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelected}: Props) => {
     const [ isHovered, setIsHovered ] = useState(false);
     const [ isOutline, setIsOutline ] = useState(false);
     const [ outlineColor, setOutlineColor ] = useState("white")
-
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
+
+    console.log(asset.id + " was rerendered")
 
     useEffect( () => {// TODO: MOVE COLORS TO SOME COMMON FILE TO BE SHARED ACROSS ALL COMPONENTS
         if (!isSelected && !isHovered) {
@@ -52,16 +52,12 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
 
     // TODO: UNIFY ROTATION UNITS, EVERYTHING IS USING DIFFERENT SYSTEM
     return (
-        <PivotControls
-                scale={1}
-                depthTest={false}>
         <group>
-            {/* {isSelected && <PositionControls
+            {isSelected && <PositionControls
                 object={asset}
                 handleChange={(newAsset) => updateAsset(newAsset as AssetWrapper)}
-            />} */}
+            />}
             
-
             <mesh
                 matrixWorldAutoUpdate={true}
                 onPointerOver={() => setIsHovered(true) }
@@ -88,8 +84,8 @@ export const RenderedAsset = ( {asset, isSelected}: Props) => {
 
             </mesh>
         </group>
-        </PivotControls>
     );
-}
+});
+
 
 useGLTF.preload("models/pear/Pear2_LOD0.gltf");
