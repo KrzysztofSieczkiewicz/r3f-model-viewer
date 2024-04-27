@@ -1,13 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { useSidebarControlsContext } from '../SidebarControlsContext';
+import { useEffectsContext } from '../EffectsContext';
 import styles from './../Sidebar.module.css';
 
 import { EffectItem } from './EffectItem';
 
 
+
 export const EffectsMenu = () => {
-    const { effectsList } = useSidebarControlsContext();
+    const { effectsList, updateEffect } = useEffectsContext();
    
     const [activeId, setActiveItem] = useState("");
 
@@ -26,8 +27,9 @@ export const EffectsMenu = () => {
                 {effectsList.map((effect) => {
                     return (
                         <EffectItem
-                            effect={effect} 
                             key={effect.id}
+                            effect={effect}
+                            updateEffect={(newEffect) => updateEffect(newEffect)}
                             active={activeId === effect.id}
                             onClick={() => handleItemClick(effect.id)}
                         />

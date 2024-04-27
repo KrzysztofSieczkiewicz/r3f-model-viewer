@@ -31,12 +31,12 @@ export const LightItem = ({ active, onClick, light, updateLight }: Props) => {
                 <LightTypeDropdown 
                     selected={light.type} 
                     selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
-                    handleChange={(val: LIGHT_TYPES) => updateLight( {...structuredClone(light), type: val} )} 
+                    handleChange={(val) => updateLight( {...structuredClone(light), type: val} )} 
                 />
                 <div className={styles.colorPreview} style={{backgroundColor: light.color}}/>
                 <VisibilityButton 
                     object={light}
-                    updateObject={ (val: boolean) => updateLight( {...structuredClone(light), visible: val} )} 
+                    updateObject={ (val) => updateLight( {...structuredClone(light), visible: val} )} 
                 />
                 <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
@@ -44,14 +44,14 @@ export const LightItem = ({ active, onClick, light, updateLight }: Props) => {
             {active && <div className={styles.lightBody}>
                 <SlidersArray name="Position"
                     value={light.position} step={0.01}
-                    handleChange={(val: [number,number,number]) => updateLight( {...structuredClone(light), position: val} )} 
+                    handleChange={(val) => updateLight( {...structuredClone(light), position: val} )} 
                 />
                 <ColorPicker name="Color" 
                     currentColor={light.color}
-                    handleChange={(val: string) => updateLight( {...structuredClone(light), color: val} )}  />
+                    handleChange={(val) => updateLight( {...structuredClone(light), color: val} )}  />
                 <Slider name="Intensity"
                     value={light.intensity}
-                    handleChange={(val: number) => updateLight( {...structuredClone(light), intensity: val} )} 
+                    handleChange={(val) => updateLight( {...structuredClone(light), intensity: val} )} 
                     min={0} max={3} step={0.005} defaultValue={1}
                 />
                 <Slider name="Distance"
