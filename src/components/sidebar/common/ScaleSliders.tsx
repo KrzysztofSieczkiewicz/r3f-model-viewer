@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import styles from './ScaleSliders.module.css';
 import commonStyles from '../Sidebar.module.css';
+import { normalizeArrayByIndex, roundNumber } from "../../../utils/mathUtil";
 
 type Props = {
     name: string,
@@ -22,10 +23,7 @@ export const ScaleSliders = (props: Props) => {
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
-    // ROUND DISPLAYED VALUE
-    const roundDisplayed = (number: number) => {
-        return Math.round((number) * 100) / 100;
-    }
+    const [ axesLocked, setAxesLocked ] = useState(true);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         setStartingPosX(e.clientX);
@@ -34,14 +32,25 @@ export const ScaleSliders = (props: Props) => {
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-        const calculatedX = event.clientX - startingPosX;
-        const currentIndex = currentSlider?.getAttribute('data-index');
-        if (!currentIndex) {
-            return;
-        }
-        const newValue = [...localValue] as [number,number,number];
-        newValue[Number(currentIndex)] = localValue[Number(currentIndex)] + calculatedX * step;
+        if (!currentSlider) return;
 
+        const calculatedMouseMovement = (event.clientX - startingPosX) * step;
+        const currentSliderIndex = Number(currentSlider.getAttribute('data-index'));
+        
+        // SCALE UNIFORMLY
+        if (axesLocked) {
+            const scales = normalizeArrayByIndex(localValue, currentSliderIndex);
+            const newValue = localValue.map( (value, index) => {
+                return value + (calculatedMouseMovement * scales[index]);
+            }) as [number, number, number]
+            
+            handleChange(newValue);
+            return
+        }
+
+        // SINGLE VALUE CHANGE
+        const newValue = [...localValue] as [number,number,number]
+        newValue[currentSliderIndex] = localValue[currentSliderIndex] + calculatedMouseMovement;
         handleChange(newValue);
     };
 
@@ -80,12 +89,12 @@ export const ScaleSliders = (props: Props) => {
                     >
                         <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[index] }}/>
                         <span className={styles.arrow} />
-                        <span className={styles.value}>{roundDisplayed(value)}</span>
+                        <span className={styles.value}>{roundNumber(value, 2)}</span>
                         <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
                     </div>
                 )
             })}
-            <button className={styles.lockAxes} />
+            <button className={styles.lockAxes} onClick={() => setAxesLocked(!axesLocked)}/>
         </div>
     );
 }

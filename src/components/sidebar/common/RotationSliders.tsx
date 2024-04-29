@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import styles from './RotationSliders.module.css';
 import commonStyles from '../Sidebar.module.css';
+import { roundNumber } from "../../../utils/mathUtil";
 
 type Props = {
     name: string,
@@ -21,11 +22,6 @@ export const RotationSliders = (props: Props) => {
     const [ currentSlider, setCurrentSlider ] = useState<HTMLDivElement | null>(null);
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
-
-    // ROUND DISPLAYED VALUE
-    const roundDisplayed = (number: number) => {
-        return Math.round((number) * 100) / 100;
-    }
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         setStartingPosX(e.clientX);
@@ -80,7 +76,7 @@ export const RotationSliders = (props: Props) => {
                     >
                         <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[index] }}/>
                         <span className={styles.arrow}>&#60;</span>
-                        <span className={styles.value}>{roundDisplayed(value)}&deg;</span>
+                        <span className={styles.value}>{roundNumber(value, 2)}&deg;</span>
                         <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
                     </div>
                 )

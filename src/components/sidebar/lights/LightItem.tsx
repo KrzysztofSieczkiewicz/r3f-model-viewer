@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Lights.module.css';
 
 import { Slider } from '../common/Slider';
-import { SlidersArray } from '../common/SlidersArray';
+import { PositionSliders } from '../common/PositionSliders';
 import { ColorPicker } from '../common/ColorPicker';
 import { LightTypeDropdown } from './LightTypeDropdown';
 import { VisibilityButton } from '../common/VisibilityButton';
@@ -42,7 +42,7 @@ export const LightItem = ({ active, onClick, light, updateLight }: Props) => {
             </div>
 
             {active && <div className={styles.lightBody}>
-                <SlidersArray name="Position"
+                <PositionSliders name="Position"
                     value={light.position} step={0.01}
                     handleChange={(val) => updateLight( {...structuredClone(light), position: val} )} 
                 />
