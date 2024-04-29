@@ -24,6 +24,7 @@ type SlidersArrayProps = {
     step: number,
 }
 
+// TODO: MOVE THE asset OBJECT UP, AND SEPARATE VALUES SO THE ATTRIBUTES WONT RERENDER EACH OTHER
 export const AssetItem = ( {active, asset, onClick}: Props) => {
     const { updateAsset } = useSceneObjectsContext();
 

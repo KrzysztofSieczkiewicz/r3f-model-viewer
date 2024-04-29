@@ -5,10 +5,9 @@ export const roundNumber = (number: number, precision: number) => {
 }
 
 
-export const normalizeArrayByIndex = (numbers: number[], index: number) => {
-    const min = numbers[index];
+export const normalizeArrayByIndex = (numbers: number[], value: number) => {
     const normalized = numbers.map( (number) => {
-        return number = number/min
+        return number = number/value
     });
 
     return normalized;

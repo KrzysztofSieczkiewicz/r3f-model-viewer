@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from './ScaleSliders.module.css';
 import commonStyles from '../Sidebar.module.css';
 import { normalizeArrayByIndex, roundNumber } from "../../../utils/mathUtil";
+import { AxisLockButton } from "./AxisLockButton";
 
 type Props = {
     name: string,
@@ -39,15 +40,14 @@ export const ScaleSliders = (props: Props) => {
         
         // SCALE UNIFORMLY
         if (axesLocked) {
-            const scales = normalizeArrayByIndex(localValue, currentSliderIndex);
+            const scales = normalizeArrayByIndex(localValue, localValue[currentSliderIndex]);
             const newValue = localValue.map( (value, index) => {
                 return value + (calculatedMouseMovement * scales[index]);
             }) as [number, number, number]
             
             handleChange(newValue);
-            return
+            return;
         }
-
         // SINGLE VALUE CHANGE
         const newValue = [...localValue] as [number,number,number]
         newValue[currentSliderIndex] = localValue[currentSliderIndex] + calculatedMouseMovement;
@@ -55,22 +55,21 @@ export const ScaleSliders = (props: Props) => {
     };
 
     const handleMouseUp = () => {
-        setIsMouseDown(false)
+        setIsMouseDown(false);
     };
     
     useEffect(() => {
         if(isMouseDown) {
             document.addEventListener('mouseup', handleMouseUp);
             document.addEventListener('mousemove', handleMouseMove);
-        }
-
+        };
         return () => {
             document.removeEventListener('mouseup', handleMouseUp);
             document.removeEventListener('mousemove', handleMouseMove);
         };
     }, [isMouseDown]);
 
-    // UPDATE THE VALUE IF PROVIDED VALUE WAS CHANGED BY ANOTHER CONTROL
+    // UPDATE LOCAL VALUE IF PROVIDED VALUE WAS CHANGED BY ANOTHER CONTROL
     useEffect(() => {
         setLocalValue(value);
     }, [value]);
@@ -83,18 +82,16 @@ export const ScaleSliders = (props: Props) => {
                     <div className={styles.slider} 
                         key={index}
                         data-index={index}
-                        onMouseDown={(e) => {
-                            handleMouseDown(e)
-                        }}
+                        onMouseDown={(e) =>  handleMouseDown(e) }
                     >
                         <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[index] }}/>
                         <span className={styles.arrow} />
                         <span className={styles.value}>{roundNumber(value, 2)}</span>
                         <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
                     </div>
-                )
+                );
             })}
-            <button className={styles.lockAxes} onClick={() => setAxesLocked(!axesLocked)}/>
+            <AxisLockButton />
         </div>
     );
 }
