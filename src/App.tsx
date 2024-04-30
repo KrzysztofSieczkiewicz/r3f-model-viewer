@@ -9,15 +9,15 @@ import { EffectsContextProvider } from './components/sidebar/EffectsContext';
 export const App = (): JSX.Element => {
   return (
     <>
-      <SceneObjectsContextProvider>
       <EffectsContextProvider>
       <SidebarControlsContextProvider>
+      <SceneObjectsContextProvider>
         <Suspense fallback={null}>
           <AssetScene />
         </Suspense>
+      </SceneObjectsContextProvider>
       </SidebarControlsContextProvider>
       </EffectsContextProvider>
-      </SceneObjectsContextProvider>
     </>
   );
 }
