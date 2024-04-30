@@ -24,7 +24,7 @@ export const ScaleSliders = (props: Props) => {
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
-    const [ axesLocked, setAxesLocked ] = useState(true);
+    const [ axesLocked, setAxesLocked ] = useState(false);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         setStartingPosX(e.clientX);
@@ -91,7 +91,7 @@ export const ScaleSliders = (props: Props) => {
                     </div>
                 );
             })}
-            <AxisLockButton />
+            <AxisLockButton locked={axesLocked} setLocked={(val) => setAxesLocked(val)} />
         </div>
     );
 }
