@@ -6,6 +6,37 @@ import { nanoid } from 'nanoid';
 // TODO [TUTORING]: HOW TO MAINTAIN A SINGLE MODEL FOR A GROUP OF VERY DIFFERENT TYPES?
 // THEY SIGNIFICANTLY VARY IN TERMS OF THE FIELDS CONTAINED
 
+/* START */
+type CommonEffect = {
+    id: string,
+    type: EffectType,
+    name: string,
+    enabled: boolean,
+}
+
+export type BloomEffect = {
+    blendFunction: BlendFunction,
+    intensity: number,
+    luminanceThreshold: number,
+    luminanceSmoothing: number
+} & CommonEffect;
+
+export type DepthOfFieldEffect = {
+    focusDistance: number
+    focalLength: number
+    bokehScale: number
+} & CommonEffect;
+
+export type GlitchEffect = {
+    delay: [number, number],
+    duration: [number, number],
+    strength: number
+}
+
+export type EffectWrappers = BloomEffect | DepthOfFieldEffect | GlitchEffect;
+/* END */
+
+
 export type EffectWrapper = {
     id: string,
     type: EffectType,
