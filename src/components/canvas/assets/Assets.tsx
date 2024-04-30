@@ -1,9 +1,9 @@
 import { useGLTF } from "@react-three/drei";
 import React from "react";
 import { RenderedAsset } from "./RenderedAsset";
-import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
-import { useSceneObjectsContext } from "../../components/sidebar/SceneObjectsContext";
-import { AssetWrapper } from "../../models/Asset";
+import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
+import { AssetWrapper } from "../../../models/Asset";
 
 export const Assets = () => {
     const { assetsList, updateAsset } = useSceneObjectsContext();

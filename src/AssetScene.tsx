@@ -1,16 +1,16 @@
 import React, { memo, useRef } from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { Lights } from './rendering/lights/Lights';
+import { Lights } from './components/canvas/lights/Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './components/sidebar/Sidebar';
-import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
-import { Assets } from './rendering/assets/Assets';
+import { useSidebarControlsContext } from './components/contexts/SidebarControlsContext';
+import { Assets } from './components/canvas/assets/Assets';
 import { Selection } from "@react-three/postprocessing";
-import { Effects } from './rendering/effects/Effects';
+import { Effects } from './components/canvas/effects/Effects';
 import { PerspectiveCamera as PerspectiveCameraType} from 'three/src/Three';
-import { CameraTracker } from './rendering/scene/CameraTracker';
-import { AmbientLight } from './rendering/scene/AmbientLight';
+import { CameraTracker } from './components/canvas/scene/CameraTracker';
+import { AmbientLight } from './components/canvas/scene/AmbientLight';
 
 export const AssetScene = () => {
   const { scene } = useSidebarControlsContext();

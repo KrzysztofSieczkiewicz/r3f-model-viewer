@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useEffectsContext } from '../EffectsContext';
+import { useEffectsContext } from '../../contexts/EffectsContext';
 import styles from './../Sidebar.module.css';
 
 import { EffectItem } from './EffectItem';

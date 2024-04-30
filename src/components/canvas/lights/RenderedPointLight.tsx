@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
-import { useSceneObjectsContext } from "../../components/sidebar/SceneObjectsContext";
-import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
+import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 
 import { PointLight } from "three";
 
-import { LightWrapper } from "../../models/Light"
-import { LightTypeBillboard } from '../../components/canvas/LightTypeBillboard';
-import { PositionControls } from '../../components/canvas/PositionControls';
+import { LightWrapper } from "../../../models/Light"
+import { LightTypeBillboard } from './LightTypeBillboard';
+import { PositionControls } from '../PositionControls';
 
 
 type Props = {

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './../Sidebar.module.css'
 
-import { useSidebarControlsContext } from '../SidebarControlsContext'
+import { useSidebarControlsContext } from '../../contexts/SidebarControlsContext'
 import { ColorPicker } from "../common/ColorPicker";
 import { Slider } from "../common/Slider";
 

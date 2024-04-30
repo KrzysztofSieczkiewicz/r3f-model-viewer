@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { useSidebarControlsContext } from '../SidebarControlsContext'
+import { useSidebarControlsContext } from '../../contexts/SidebarControlsContext'
 import styles from './../Sidebar.module.css'
 
 import { AssetItem } from "./AssetItem";
 import { AssetWrapper } from "../../../models/Asset";
-import { useSceneObjectsContext } from "../SceneObjectsContext";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 
 export const AssetsMenu = () => {

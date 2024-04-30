@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import styles from '../Sidebar.module.css';
-import { useSceneObjectsContext } from '../SceneObjectsContext';
+import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 
 import { LightItem } from './LightItem';
 import { LightWrapper } from '../../../models/Light';

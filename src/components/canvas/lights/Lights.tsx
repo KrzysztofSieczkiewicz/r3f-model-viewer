@@ -1,7 +1,7 @@
 import React from "react";
 import { RenderedLight } from "./RenderedLight";
-import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
-import { useSceneObjectsContext } from "../../components/sidebar/SceneObjectsContext";
+import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 export const Lights = () => {    
     const { lightsList } = useSceneObjectsContext();

@@ -3,8 +3,8 @@ import { Bloom, DepthOfField, EffectComposer, Glitch } from '@react-three/postpr
 import { RenderedBloom } from './RenderedBloom';
 import { RenderedDepthOfField } from './RenderedDepthOfField';
 import { RenderedGlitch } from './RenderedGlitch';
-import { EffectWrapper } from '../../models/Effect';
-import { useEffectsContext } from '../../components/sidebar/EffectsContext';
+import { EffectWrapper } from '../../../models/Effect';
+import { useEffectsContext } from '../../contexts/EffectsContext';
 
 
 export const Effects = () => {

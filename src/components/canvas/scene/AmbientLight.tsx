@@ -1,5 +1,5 @@
 import React from "react";
-import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
+import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 
 export const AmbientLight = () => {
     const { scene } = useSidebarControlsContext();

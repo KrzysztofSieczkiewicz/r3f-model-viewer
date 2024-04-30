@@ -1,6 +1,6 @@
 import { Bloom } from '@react-three/postprocessing';
 import React from 'react';
-import { EffectWrapper } from '../../models/Effect';
+import { EffectWrapper } from '../../../models/Effect';
 
 type Props = {
     effect: EffectWrapper

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './VisibilityButton.module.css';
-import { EditableWrapper } from "../SceneObjectsContext";
+import { EditableWrapper } from "../../contexts/SceneObjectsContext";
 
 type Props = {
     object: EditableWrapper,

@@ -1,9 +1,9 @@
-import pointLightBillboard from '../../icons/lightTypes/pointLight.svg';
-import spotLightBillboard from '../../icons/lightTypes/spotLight.svg';
+import pointLightBillboard from '../../../icons/lightTypes/pointLight.svg';
+import spotLightBillboard from '../../../icons/lightTypes/spotLight.svg';
 
 import React, { useRef, useState } from 'react';
 import { Billboard, Sphere, useHelper, useTexture } from "@react-three/drei";
-import { LIGHT_TYPES, LightOption } from '../../models/Light';
+import { LIGHT_TYPES, LightOption } from '../../../models/Light';
 import { BoxHelper, Mesh } from 'three';
 
 type Props = {

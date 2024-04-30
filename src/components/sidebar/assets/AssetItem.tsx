@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Assets.module.css'
-import { useSidebarControlsContext } from '../SidebarControlsContext'
+import { useSidebarControlsContext } from '../../contexts/SidebarControlsContext'
 
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from '../../../models/Asset';
@@ -8,7 +8,7 @@ import { VisibilityButton } from '../common/VisibilityButton';
 import { PositionSliders } from '../common/PositionSliders';
 import { RotationSliders } from '../common/RotationSliders';
 import { ScaleSliders } from '../common/ScaleSliders';
-import { useSceneObjectsContext } from '../SceneObjectsContext';
+import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 
 
 type Props = {

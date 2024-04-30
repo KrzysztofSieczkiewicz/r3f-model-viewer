@@ -1,5 +1,5 @@
 import React from 'react';
-import { EffectWrapper } from '../../models/Effect';
+import { EffectWrapper } from '../../../models/Effect';
 import { Glitch } from '@react-three/postprocessing';
 import { Vector2 } from 'three';
 

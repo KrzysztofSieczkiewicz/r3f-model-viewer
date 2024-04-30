@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import React, { memo, useEffect } from "react";
 import { RefObject, useState } from "react";
 import { PerspectiveCamera as PerspectiveCameraType} from 'three/src/Three';
-import { useSidebarControlsContext } from "../../components/sidebar/SidebarControlsContext";
+import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 
 type Props = {
   cameraRef: RefObject<PerspectiveCameraType>
