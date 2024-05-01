@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styles from './ScaleSliders.module.css';
 import commonStyles from '../Sidebar.module.css';
 import { normalizeArrayByIndex, roundNumber } from "../../../utils/mathUtil";
-import { AxisLockButton } from "./AxisLockButton";
+import { AxesLockButton } from "./AxesLockButton";
 
 type Props = {
     name: string,
@@ -91,7 +91,7 @@ export const ScaleSliders = (props: Props) => {
                     </div>
                 );
             })}
-            <AxisLockButton locked={axesLocked} setLocked={(val) => setAxesLocked(val)} />
+            <AxesLockButton locked={axesLocked} setLocked={(val) => setAxesLocked(val)} />
         </div>
     );
 }
