@@ -1,43 +1,22 @@
-import { PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { memo, useEffect } from "react";
-import { RefObject, useState } from "react";
+import React from "react";
+import { RefObject } from "react";
 import { PerspectiveCamera as PerspectiveCameraType} from 'three/src/Three';
-import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
+import { useSceneContext } from "../../contexts/SceneContext";
 
 type Props = {
   cameraRef: RefObject<PerspectiveCameraType>
 }
 
 export const CameraTracker = ( { cameraRef }: Props ) => {
-  // const { scene, updateScene } = useSidebarControlsContext();
-
-  // const [ cameraRotation, setCameraRotation ] = useState(scene.viewCameraRotation)
-
+  const [ scene, setScene ] = useSceneContext();
   
-  // useFrame( () => {
-  //   if(cameraRef.current) {
-  //     const rotation = cameraRef.current.rotation;
-  //     //updateScene('viewCameraRotation', [rotation.x, rotation.y, rotation.z])
-  //     //setCameraRotation([rotation.x, rotation.y, rotation.z])
-  //     //console.log({cameraRotation})
-  //   }
+  useFrame( () => {
+    if(!cameraRef.current) return;
+    
+    const rotation = cameraRef.current.rotation;
+    //setScene({...scene, viewCameraRotation: [rotation.x, rotation.y, rotation.z]})
+  })
 
-  //   console.log(scene.viewCameraRotation)
-  // })
-
-
-  // useEffect( () => {
-  //   if(cameraRef.current) {
-  //       const rotation = cameraRef.current.rotation;
-  //       setCameraRotation([rotation.x, rotation.y, rotation.z]);
-  //       console.log("USE FRAME IS TRIGGERED");
-  // }  }, [cameraRef.current?.rotation])
-
-  // useEffect( () => {
-  //   updateScene('viewCameraRotation', cameraRotation)
-  //   console.log("CAMERA UPDATED")
-  // }, [cameraRotation])
-
-  return <PerspectiveCamera fov={50} position={[3, 2, 5]} />
+  return <group />
 }

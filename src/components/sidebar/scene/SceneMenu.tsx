@@ -1,12 +1,12 @@
 import React from "react";
 import styles from './../Sidebar.module.css'
 
-import { useSidebarControlsContext } from '../../contexts/SidebarControlsContext'
 import { ColorPicker } from "../common/ColorPicker";
 import { Slider } from "../common/Slider";
+import { useSceneContext } from "../../contexts/SceneContext";
 
 export const SceneMenu = () => {
-    const { scene, updateScene } = useSidebarControlsContext();
+    const [ scene, setScene ] = useSceneContext();
     
     return (
         <div className={styles.menu}>
@@ -14,18 +14,18 @@ export const SceneMenu = () => {
                 <h3 className={styles.sectionHeader}>Background</h3>
                 <ColorPicker name="Color" 
                     currentColor={scene.backgroundColor}
-                    handleChange={(val) => updateScene('backgroundColor', val)}
+                    handleChange={(val) => setScene({...scene, backgroundColor: val}) }
                 />
             </section>
             <section className={styles.menuSection}>
                 <h3 className={styles.sectionHeader}>Ambient light</h3>
                 <ColorPicker name="Color"
-                    currentColor={scene.ambientLight.color}
-                    handleChange={(val) => updateScene('ambientLight.color', val)}
+                    currentColor={scene.ambientColor}
+                    handleChange={(val) =>  setScene({...scene, ambientColor: val}) }
                 />
                 <Slider name="Intensity"
-                    value={scene.ambientLight.intensity}
-                    handleChange={(val) => updateScene('ambientLight.intensity', val)}
+                    value={scene.ambientIntensity}
+                    handleChange={(val) =>  setScene({...scene, ambientIntensity: val}) }
                     min={0} max={3} step={0.001} defaultValue={0.1}
                 />
             </section>

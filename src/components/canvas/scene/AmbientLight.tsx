@@ -1,13 +1,13 @@
 import React from "react";
-import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
+import { useSceneContext } from "../../contexts/SceneContext";
 
 export const AmbientLight = () => {
-    const { scene } = useSidebarControlsContext();
+    const [ scene ] = useSceneContext();
 
     return (
         <ambientLight 
-            color={scene.ambientLight.color} 
-            intensity={scene.ambientLight.intensity} 
+            color={scene.ambientColor} 
+            intensity={scene.ambientIntensity} 
         />
     );
 }
