@@ -10,10 +10,10 @@ import { Effects } from './components/canvas/effects/Effects';
 import { PerspectiveCamera as PerspectiveCameraType} from 'three/src/Three';
 import { CameraTracker } from './components/canvas/scene/CameraTracker';
 import { AmbientLight } from './components/canvas/scene/AmbientLight';
-import { useSceneContext } from './components/contexts/SceneContext';
+import { useSceneValue } from './components/contexts/SceneContext';
 
 export const AssetScene = () => {
-  const [ scene ] = useSceneContext();
+  const [ backgroundColor ] = useSceneValue((scene) => scene['backgroundColor']);
 
   const cameraRef = useRef<PerspectiveCameraType>(null);
 
@@ -22,7 +22,7 @@ export const AssetScene = () => {
   return (
     <>
       <Canvas shadows
-        style= {{ background: scene.backgroundColor }}
+        style= {{ background: backgroundColor }}
         frameloop="demand"
       >
 

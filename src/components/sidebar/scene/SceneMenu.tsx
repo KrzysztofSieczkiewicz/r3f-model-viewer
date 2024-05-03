@@ -3,10 +3,10 @@ import styles from './../Sidebar.module.css'
 
 import { ColorPicker } from "../common/ColorPicker";
 import { Slider } from "../common/Slider";
-import { useSceneContext } from "../../contexts/SceneContext";
+import { useScene } from "../../contexts/SceneContext";
 
 export const SceneMenu = () => {
-    const [ scene, setScene ] = useSceneContext();
+    const [ scene, setScene ] = useScene();
     
     return (
         <div className={styles.menu}>

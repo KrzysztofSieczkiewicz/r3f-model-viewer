@@ -1,13 +1,14 @@
 import React from "react";
-import { useSceneContext } from "../../contexts/SceneContext";
+import { useSceneValue } from "../../contexts/SceneContext";
 
 export const AmbientLight = () => {
-    const [ scene ] = useSceneContext();
+    const [ ambientColor ] = useSceneValue((scene) => scene['ambientColor']);
+    const [ ambientIntensity ] = useSceneValue((scene) => scene['ambientIntensity']);
 
     return (
         <ambientLight 
-            color={scene.ambientColor} 
-            intensity={scene.ambientIntensity} 
+            color={ambientColor} 
+            intensity={ambientIntensity} 
         />
     );
 }

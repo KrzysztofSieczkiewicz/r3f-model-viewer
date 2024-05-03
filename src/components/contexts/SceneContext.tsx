@@ -63,14 +63,22 @@ export const SceneContextProvider = (props: {children: ReactNode}): JSX.Element 
     );
 }
 
-export const useSceneContext = (): [SceneWrapper, (value: Partial<SceneWrapper>) => void] => {
+export const useScene = (): [SceneWrapper, (value: Partial<SceneWrapper>) => void] => {
   const scene = useContext(SceneContext);
 
   if (scene === null) {
       throw new Error("useSceneContext must be used within a SceneContextProvider")
   }
-
   const state = useSyncExternalStore(scene.subscribe, scene.get);
+  return [state, scene.set];
+}
 
+export const useSceneValue = (selector: (scene: SceneWrapper) => any): [any, (value: Partial<SceneWrapper>) => void] => {
+  const scene = useContext(SceneContext);
+
+  if (scene === null) {
+      throw new Error("useSceneContext must be used within a SceneContextProvider")
+  }
+  const state = useSyncExternalStore(scene.subscribe, () => selector(scene.get()));
   return [state, scene.set];
 }
