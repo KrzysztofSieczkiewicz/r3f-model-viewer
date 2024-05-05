@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from './RotationSliders.module.css';
 import commonStyles from '../Sidebar.module.css';
 import { roundNumber } from "../../../utils/mathUtil";
+import { FollowCameraButton } from "./FollowCameraButton";
 
 type Props = {
     name: string,
@@ -81,7 +82,7 @@ export const RotationSliders = (props: Props) => {
                     </div>
                 )
             })}
-            <button className={styles.followCamera} />
+            <FollowCameraButton />
         </div>
     );
 }

@@ -63,7 +63,7 @@ export const SceneContextProvider = (props: {children: ReactNode}): JSX.Element 
     );
 }
 
-export const useScene = (): [SceneWrapper, (value: Partial<SceneWrapper>) => void] => {
+export function useScene(): [SceneWrapper, (value: Partial<SceneWrapper>) => void] {
   const scene = useContext(SceneContext);
 
   if (scene === null) {
@@ -73,7 +73,7 @@ export const useScene = (): [SceneWrapper, (value: Partial<SceneWrapper>) => voi
   return [state, scene.set];
 }
 
-export const useSceneValue = (selector: (scene: SceneWrapper) => any): [any, (value: Partial<SceneWrapper>) => void] => {
+export function useSceneValue<SelectorOutput>(selector: (scene: SceneWrapper) => SelectorOutput): [SelectorOutput, (value: Partial<SceneWrapper>) => void] {
   const scene = useContext(SceneContext);
 
   if (scene === null) {

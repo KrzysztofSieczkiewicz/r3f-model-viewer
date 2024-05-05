@@ -15,7 +15,7 @@ export const CameraTracker = ( { cameraRef }: Props ) => {
     if(!cameraRef.current) return;
     
     const rotation = cameraRef.current.rotation;
-    setScene({...scene, viewCameraRotation: [rotation.x, rotation.y, rotation.z]});
+    setScene({viewCameraRotation: [rotation.x, rotation.y, rotation.z]});
   })
 
   return <group />
