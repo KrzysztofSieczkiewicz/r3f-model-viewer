@@ -28,7 +28,7 @@ export const AssetScene = () => {
 
         <AmbientLight />
 
-        <OrbitControls makeDefault target={[0, 0.32, 0]} maxPolarAngle={1.45} />
+        <OrbitControls makeDefault target={[0, 0.32, 0]} maxPolarAngle={1.45} enableDamping={false} />
         <PerspectiveCamera makeDefault ref={cameraRef} fov={50} position={[3, 2, 5]} />
         <CameraTracker cameraRef={cameraRef} />
 

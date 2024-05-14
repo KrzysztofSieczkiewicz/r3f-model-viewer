@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import styles from './RotationSliders.module.css';
 import commonStyles from '../Sidebar.module.css';
-import { roundNumber } from "../../../utils/mathUtil";
+import { radianToDeg, roundNumber } from "../../../utils/mathUtil";
 import { FollowCameraButton } from "./FollowCameraButton";
 
 type Props = {
@@ -19,6 +19,8 @@ export const RotationSliders = (props: Props) => {
     const [ localValue, setLocalValue ] = useState<[number,number,number]>(value);
     // RED GREEN BLUE - TODO: MOVE THIS TO GLOBAL CONSTANTS
     const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
+
+    const [ cameraRotationDelta, setCameraRotationDelta ] = useState<[number, number, number]>([0, 0, 0]);
 
     const [ currentSlider, setCurrentSlider ] = useState<HTMLDivElement | null>(null);
     const [ startingPosX, setStartingPosX ] = useState(0);
@@ -63,6 +65,21 @@ export const RotationSliders = (props: Props) => {
         setLocalValue(value);
     }, [value]);
 
+    // UPDATE VALUE WHEN USING CAMERA TRACKER
+    useEffect(() => {
+        const newRotation = [
+            value[0] + cameraRotationDelta[0],
+            value[1] + cameraRotationDelta[1],
+            value[2] + cameraRotationDelta[2]
+        ] as [number, number, number];
+
+        console.log(newRotation)
+
+        handleChange(newRotation);
+        // TODO: GET CAMERA ROTATION CHANGE AND CONVERT TO DEGREES
+        //console.log(cameraRotation)
+    }, [cameraRotationDelta])
+
     return (
         <div className={commonStyles.traitContainer}>
             <label className={commonStyles.traitName}>{name}</label>
@@ -82,7 +99,7 @@ export const RotationSliders = (props: Props) => {
                     </div>
                 )
             })}
-            <FollowCameraButton />
+            <FollowCameraButton handleUpdate={setCameraRotationDelta}/>
         </div>
     );
 }
