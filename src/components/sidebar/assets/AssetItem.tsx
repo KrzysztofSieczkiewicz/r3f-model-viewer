@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Assets.module.css'
-import { useSidebarControlsContext } from '../../contexts/SidebarControlsContext'
 
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from '../../../models/Asset';

@@ -24,20 +24,18 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     const updateLight = useCallback((newLight: LightWrapper) => {
         const index = lightsList.findIndex(asset => asset.id === newLight.id);
 
-        const newLightsList = [...lightsList];
-        newLightsList[index] = newLight;
+        const newLightsList = lightsList.map((light, i) => i===index ? newLight : light)
 
         setLightsList(newLightsList);
-    }, []);
+    }, [lightsList]);
 
     const updateAsset = useCallback((newAsset: AssetWrapper) => {
         const index = assetsList.findIndex(asset => asset.id === newAsset.id);
 
-        const newAssetsList = [...assetsList];
-        newAssetsList[index] = newAsset;
+        const newAssetsList = assetsList.map((asset, i) => i === index ? newAsset : asset);
 
         setAssetsList(newAssetsList);
-    }, []);
+    }, [assetsList]);
 
     return (
         <SceneObjectsContext.Provider value={{ lightsList, updateLight, assetsList, updateAsset }} >

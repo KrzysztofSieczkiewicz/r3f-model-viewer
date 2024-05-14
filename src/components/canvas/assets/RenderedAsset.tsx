@@ -3,7 +3,6 @@ import { Outlines, useGLTF } from "@react-three/drei";
 import { memo, useEffect, useState } from "react";
 import { AssetWrapper } from "../../../models/Asset";
 import React from "react";
-import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { PositionControls } from "../PositionControls";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
@@ -46,7 +45,7 @@ export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelec
         }
      }, [isHovered, isSelected])
 
-    
+
     
     if(!asset.visible) return;
 
