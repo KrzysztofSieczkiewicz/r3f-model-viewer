@@ -85,7 +85,7 @@ export const ScaleSliders = (props: Props) => {
                         onMouseDown={(e) =>  handleMouseDown(e) }
                     >
                         <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[index] }}/>
-                        <span className={styles.arrow} />
+                        <span className={styles.arrow}>&#60;</span>
                         <span className={styles.value}>{roundNumber(value, 2)}</span>
                         <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
                     </div>
