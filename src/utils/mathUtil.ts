@@ -11,10 +11,6 @@ export const normalizeArrayByIndex = (numbers: number[], value: number) => {
     return normalized;
 }
 
-export const radianToDeg = (radian: [number, number, number]): [number, number, number] => {
-    return [
-        radian[0] / Math.PI * 180,
-        radian[1] / Math.PI * 180,
-        radian[2] / Math.PI * 180,
-    ]
+export const radianToDeg = (radian: number) => {
+    return radian / Math.PI * 180;
 }

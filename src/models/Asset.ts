@@ -32,7 +32,7 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
     name: "pear",
     object: "toBeReplaced",
     position:[1,0,1],
-    rotation:[0,90,0],
+    rotation:[0,Math.PI,0],
     scale:[10,10,10],
     ref: null,
     isSelected: false,

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import styles from './RotationSliders.module.css';
 import commonStyles from '../Sidebar.module.css';
 import { radianToDeg, roundNumber } from "../../../utils/mathUtil";
-import { FollowCameraButton } from "./FollowCameraButton";
 
 type Props = {
     name: string,
@@ -19,8 +18,6 @@ export const RotationSliders = (props: Props) => {
     const [ localValue, setLocalValue ] = useState<[number,number,number]>(value);
     // RED GREEN BLUE - TODO: MOVE THIS TO GLOBAL CONSTANTS
     const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
-
-    const [ cameraRotationDelta, setCameraRotationDelta ] = useState<[number, number, number]>([0, 0, 0]);
 
     const [ currentSlider, setCurrentSlider ] = useState<HTMLDivElement | null>(null);
     const [ startingPosX, setStartingPosX ] = useState(0);
@@ -65,21 +62,6 @@ export const RotationSliders = (props: Props) => {
         setLocalValue(value);
     }, [value]);
 
-    // UPDATE VALUE WHEN USING CAMERA TRACKER
-    useEffect(() => {
-        const newRotation = [
-            value[0] + cameraRotationDelta[0],
-            value[1] + cameraRotationDelta[1],
-            value[2] + cameraRotationDelta[2]
-        ] as [number, number, number];
-
-        console.log(newRotation)
-
-        handleChange(newRotation);
-        // TODO: GET CAMERA ROTATION CHANGE AND CONVERT TO DEGREES
-        //console.log(cameraRotation)
-    }, [cameraRotationDelta])
-
     return (
         <div className={commonStyles.traitContainer}>
             <label className={commonStyles.traitName}>{name}</label>
@@ -94,12 +76,11 @@ export const RotationSliders = (props: Props) => {
                     >
                         <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[index] }}/>
                         <span className={styles.arrow}>&#60;</span>
-                        <span className={styles.value}>{roundNumber(value, 2)}&deg;</span>
+                        <span className={styles.value}>{roundNumber(radianToDeg(value), 1)}&deg;</span>
                         <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
                     </div>
                 )
             })}
-            <FollowCameraButton handleUpdate={setCameraRotationDelta}/>
         </div>
     );
 }
