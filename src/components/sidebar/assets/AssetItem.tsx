@@ -9,81 +9,57 @@ import { RotationSliders } from '../common/RotationSliders';
 import { ScaleSliders } from '../common/ScaleSliders';
 
 type Props = {
-    active: boolean,
-    asset: AssetWrapper,
+    id: string,
+    isActive: boolean,
+    isVisible: boolean,
+    name: string,
+    position: [number, number, number],
+    rotation: [number, number, number],
+    scale: [number, number, number],
+
     onClick: () => void,
-    updateAsset: (newAsset: AssetWrapper) => void
+    updateAsset: (id: string, change: Partial<AssetWrapper>) => void
 }
 
-type SlidersArrayProps = {
-    displayName: string,
-    propertyName: keyof AssetWrapper
-    propertyValue: [number, number, number],
-    step: number,
-}
-
-export const AssetItem = ( {active, asset, onClick, updateAsset}: Props) => {
-
-    const handleAssetName = () => {
-        return asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
-    }
+export const AssetItem = ( {id, isActive, isVisible, name,  position, rotation, scale, onClick, updateAsset}: Props) => {
 
     const handleIsActive = () => {
-        return active ? String.fromCharCode(8657) : String.fromCharCode(8659);
-    }
-
-    const renderPositionSliders = ( props: SlidersArrayProps): JSX.Element => {
-        return (
-            <PositionSliders 
-                name={props.displayName}
-                value={props.propertyValue}
-                step={props.step}
-                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), position: val} )}
-            />
-        );
-    }
-
-    const renderRotationSliders = ( props: SlidersArrayProps): JSX.Element => {
-        return (
-            <RotationSliders 
-                name={props.displayName}
-                value={props.propertyValue}
-                step={props.step}
-                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), rotation: val} )}
-            />
-        );
-    }
-
-    const renderScaleSliders = ( props: SlidersArrayProps): JSX.Element => {
-        return (
-            <ScaleSliders 
-                name={props.displayName}
-                value={props.propertyValue}
-                step={props.step}
-                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), scale: val} )}
-            />
-        );
+        return isActive ? String.fromCharCode(8657) : String.fromCharCode(8659);
     }
 
     return (
-        <div className={active ? `${styles.assetContainer} ${styles.active}` : styles.assetContainer}>
+        <div className={isActive ? `${styles.assetContainer} ${styles.active}` : styles.assetContainer}>
             <div className={styles.assetHeader}
                 onClick={onClick}
             >
                 <PointLightIcon className={styles.assetIcon} />
-                <p className={styles.assetName}>{ handleAssetName() }</p>
+                <p className={styles.assetName}>{name}</p>
                 <VisibilityButton 
-                    object={asset} 
-                    updateObject={ (val: boolean) => updateAsset( {...structuredClone(asset), visible: val} )} 
+                    isVisible={isVisible} 
+                    updateObject={ (val: boolean) => updateAsset( id, {visible: val} )} 
                 />
                 <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
 
-            {active && <div className={styles.assetBody}>
-                {renderPositionSliders({displayName: 'Position', propertyName:'position', propertyValue: asset.position, step: 0.005})}
-                {renderRotationSliders({displayName: 'Rotation', propertyName:'rotation', propertyValue: asset.rotation, step: 0.01})}
-                {renderScaleSliders({displayName: 'Scale', propertyName:'scale', propertyValue: asset.scale, step: 0.01})}
-
+            {isActive && <div className={styles.assetBody}>
+                <PositionSliders 
+                    name="Position"
+                    value={position}
+                    step={0.005}
+                    handleChange={(val) => updateAsset( id, {position: val} )}
+                />
+                <RotationSliders 
+                    name="Rotation"
+                    value={rotation}
+                    step={0.01}
+                    handleChange={(val) => updateAsset( id, {rotation: val} )}
+                />
+                <ScaleSliders 
+                    name="Scale"
+                    value={scale}
+                    step={0.01}
+                    handleChange={(val) => updateAsset( id, {scale: val} )}
+                />
             </div>}
         </div>
     );

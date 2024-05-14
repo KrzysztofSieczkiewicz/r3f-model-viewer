@@ -8,7 +8,7 @@ export type EditableWrapper = AssetWrapper | LightWrapper
 
 type SceneObjectsContext = {
     assetsList: AssetWrapper[], 
-    updateAsset: (newAsset: AssetWrapper) => void,
+    updateAsset: (assedID: string, change: Partial<AssetWrapper>) => void,
 
     lightsList: LightWrapper[], 
     updateLight: (newLight: LightWrapper) => void,
@@ -29,11 +29,13 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setLightsList(newLightsList);
     }, [lightsList]);
 
-    const updateAsset = useCallback((newAsset: AssetWrapper) => {
-        const index = assetsList.findIndex(asset => asset.id === newAsset.id);
+    const updateAsset= useCallback((id: string, change: Partial<AssetWrapper>) => {
+        const index = assetsList.findIndex(asset => asset.id === id);
+        if (index === -1) return;
 
-        const newAssetsList = assetsList.map((asset, i) => i === index ? newAsset : asset);
-
+        const updatedAsset = { ...assetsList[index], ...change };
+        const newAssetsList = assetsList.map( (asset, i) => i===index ? updatedAsset: asset)
+        
         setAssetsList(newAssetsList);
     }, [assetsList]);
 

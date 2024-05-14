@@ -35,7 +35,7 @@ export const LightItem = ({ active, onClick, light, updateLight }: Props) => {
                 />
                 <div className={styles.colorPreview} style={{backgroundColor: light.color}}/>
                 <VisibilityButton 
-                    object={light}
+                    isVisible={light.visible}
                     updateObject={ (val) => updateLight( {...structuredClone(light), visible: val} )} 
                 />
                 <span className={styles.extendIcon}>{ handleIsActive() }</span>

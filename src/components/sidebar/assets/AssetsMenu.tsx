@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import styles from './../Sidebar.module.css'
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { AssetItem } from "./AssetItem";
 import { AssetWrapper } from "../../../models/Asset";
-import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
+
 
 export const AssetsMenu = () => {
     const { assetsList, updateAsset } = useSceneObjectsContext();
@@ -31,11 +32,17 @@ export const AssetsMenu = () => {
                 {assetsList.map((asset: AssetWrapper) => {
                     return (
                         <AssetItem
-                            asset={asset} 
                             key={asset.id}
-                            active={activeId === asset.id}
+                            id={asset.id}
+                            isActive={activeId === asset.id}
+                            isVisible={asset.visible}
+                            name={asset.name}
+                            position={asset.position}
+                            rotation={asset.rotation}
+                            scale={asset.scale}
+
                             onClick={() => handleMenuItemClick(asset.id)}
-                            updateAsset={(newAsset:AssetWrapper) => updateAsset(newAsset)}
+                            updateAsset={(id: string, change: Partial<AssetWrapper>) => updateAsset(id, change)}
                         />
                     );
                 })}
