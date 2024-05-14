@@ -1,30 +1,31 @@
-import { ColorPicker } from "../common/ColorPicker";
-
-import { useSidebarControlsContext } from '../SidebarControlsContext'   
-import { Slider } from "../common/Slider";
 import React from "react";
+import styles from './../Sidebar.module.css'
+
+import { ColorPicker } from "../common/ColorPicker";
+import { Slider } from "../common/Slider";
+import { useScene } from "../../contexts/SceneContext";
 
 export const SceneMenu = () => {
-    const { scene, updateScene } = useSidebarControlsContext();
+    const [ scene, setScene ] = useScene();
     
     return (
-        <div className="dropdown">
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Background</h3>
+        <div className={styles.menu}>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Background</h3>
                 <ColorPicker name="Color" 
                     currentColor={scene.backgroundColor}
-                    handleChange={(val) => updateScene('backgroundColor', val)}
+                    handleChange={(val) => setScene({backgroundColor: val}) }
                 />
             </section>
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Ambient light</h3>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Ambient light</h3>
                 <ColorPicker name="Color"
-                    currentColor={scene.ambientLight.color}
-                    handleChange={(val) => updateScene('ambientLight.color', val)}
+                    currentColor={scene.ambientColor}
+                    handleChange={(val) =>  setScene({ambientColor: val}) }
                 />
                 <Slider name="Intensity"
-                    value={scene.ambientLight.intensity}
-                    handleChange={(val) => updateScene('ambientLight.intensity', val)}
+                    value={scene.ambientIntensity}
+                    handleChange={(val) =>  setScene({ambientIntensity: val}) }
                     min={0} max={3} step={0.001} defaultValue={0.1}
                 />
             </section>

@@ -1,32 +1,32 @@
+import React from "react";
 import { useState } from "react";
-import { useSidebarControlsContext } from '../SidebarControlsContext'
+import styles from './../Sidebar.module.css'
 
 import { AssetItem } from "./AssetItem";
-import React from "react";
 import { AssetWrapper } from "../../../models/Asset";
-
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 export const AssetsMenu = () => {
-    const { assetsList } = useSidebarControlsContext();
+    const { assetsList, updateAsset } = useSceneObjectsContext();
    
     const [activeId, setActiveId] = useState("");
 
-    const handleItemClick = (id: string) => {
+    const handleMenuItemClick = (id: string) => {
         if (activeId === id) {
             setActiveId("");
         } else {
-            setActiveId(id)
+            setActiveId(id);
         }
     };
     
     return (
-        <div className="dropdown">
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Add/Remove</h3>
+        <div className={styles.menu}>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Add/Remove</h3>
                 <p> this section should contain methods to add new assets</p>
             </section>
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Assets</h3>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Assets</h3>
 
                 {assetsList.map((asset: AssetWrapper) => {
                     return (
@@ -34,7 +34,8 @@ export const AssetsMenu = () => {
                             asset={asset} 
                             key={asset.id}
                             active={activeId === asset.id}
-                            onClick={() => handleItemClick(asset.id)}
+                            onClick={() => handleMenuItemClick(asset.id)}
+                            updateAsset={(newAsset:AssetWrapper) => updateAsset(newAsset)}
                         />
                     );
                 })}

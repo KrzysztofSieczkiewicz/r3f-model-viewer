@@ -1,0 +1,32 @@
+:global(*) {
+    --color-resin-black: #212226;
+    --color-resin-bright: #2a2b30;
+    --color-resin-brighter: #35363a;
+    --color-dark-glass: #1c1d22b0;
+
+    --color-platinum: #e7e0e0;
+    --color-grey: #b3aeae;
+    --color-grey-dark: #83888b;
+
+    --color-sea-green: #018E42;
+    --color-celtic-blue: #276FBF;
+    --color-imperial-red: #F03A47;
+
+    --nav-size: 3.5rem;
+    --input-height: 1.5rem;
+    --slider-radius: 0.25rem;
+    
+    --transition-duration: 300ms;
+}
+
+:root {
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body, #root, canvas {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}

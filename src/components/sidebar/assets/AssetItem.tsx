@@ -1,14 +1,18 @@
+import React from 'react';
+import styles from './Assets.module.css'
+
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { AssetWrapper } from '../../../models/Asset';
-import { VisibilityEyeButton } from '../common/VisibilityEyeButton';
-import { useSidebarControlsContext } from '../SidebarControlsContext'
-import { SlidersArray } from '../common/SlidersArray';
-import React from 'react';
+import { VisibilityButton } from '../common/VisibilityButton';
+import { PositionSliders } from '../common/PositionSliders';
+import { RotationSliders } from '../common/RotationSliders';
+import { ScaleSliders } from '../common/ScaleSliders';
 
 type Props = {
     active: boolean,
-    asset: AssetWrapper
-    onClick: () => void
+    asset: AssetWrapper,
+    onClick: () => void,
+    updateAsset: (newAsset: AssetWrapper) => void
 }
 
 type SlidersArrayProps = {
@@ -18,10 +22,7 @@ type SlidersArrayProps = {
     step: number,
 }
 
-// TODO [TUTORING]: SHOULD I WRAP FUNCTIONS PASSED TO THE CHILDREN WITH useMemo()/useCallback()?
-export const AssetItem = ( {active, asset, onClick}: Props) => {
-
-    const { updateAssetProperty } = useSidebarControlsContext();
+export const AssetItem = ( {active, asset, onClick, updateAsset}: Props) => {
 
     const handleAssetName = () => {
         return asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
@@ -31,32 +32,57 @@ export const AssetItem = ( {active, asset, onClick}: Props) => {
         return active ? String.fromCharCode(8657) : String.fromCharCode(8659);
     }
 
-    const renderSlidersArray = ( props: SlidersArrayProps): JSX.Element => {
+    const renderPositionSliders = ( props: SlidersArrayProps): JSX.Element => {
         return (
-            <SlidersArray 
+            <PositionSliders 
                 name={props.displayName}
                 value={props.propertyValue}
                 step={props.step}
-                handleChange={(val: [number,number,number]) => updateAssetProperty(asset.id, props.propertyName, val)}
+                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), position: val} )}
+            />
+        );
+    }
+
+    const renderRotationSliders = ( props: SlidersArrayProps): JSX.Element => {
+        return (
+            <RotationSliders 
+                name={props.displayName}
+                value={props.propertyValue}
+                step={props.step}
+                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), rotation: val} )}
+            />
+        );
+    }
+
+    const renderScaleSliders = ( props: SlidersArrayProps): JSX.Element => {
+        return (
+            <ScaleSliders 
+                name={props.displayName}
+                value={props.propertyValue}
+                step={props.step}
+                handleChange={(val: [number,number,number]) => updateAsset( {...structuredClone(asset), scale: val} )}
             />
         );
     }
 
     return (
-        <div className={`dropdown-item ${active ? "active" : ""}`}>
-            <div className="dropdown-item-header asset-item-header"
+        <div className={active ? `${styles.assetContainer} ${styles.active}` : styles.assetContainer}>
+            <div className={styles.assetHeader}
                 onClick={onClick}
             >
-                <PointLightIcon className='type-icon header-icon' />
-                <p className='header-title'>{ handleAssetName() }</p>
-                <VisibilityEyeButton object={asset} updateProperty={updateAssetProperty} />
-                <span className='show-hide header-icon'>{ handleIsActive() }</span>
+                <PointLightIcon className={styles.assetIcon} />
+                <p className={styles.assetName}>{ handleAssetName() }</p>
+                <VisibilityButton 
+                    object={asset} 
+                    updateObject={ (val: boolean) => updateAsset( {...structuredClone(asset), visible: val} )} 
+                />
+                <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
 
-            {active && <div className="dropdown-item-body">
-                {renderSlidersArray({displayName: 'Position', propertyName:'position', propertyValue: asset.position, step: 0.005})}
-                {renderSlidersArray({displayName: 'Rotation', propertyName:'rotation', propertyValue: asset.rotation, step: 0.01})}
-                {renderSlidersArray({displayName: 'Scale', propertyName:'scale', propertyValue: asset.scale, step: 0.01})}
+            {active && <div className={styles.assetBody}>
+                {renderPositionSliders({displayName: 'Position', propertyName:'position', propertyValue: asset.position, step: 0.005})}
+                {renderRotationSliders({displayName: 'Rotation', propertyName:'rotation', propertyValue: asset.rotation, step: 0.01})}
+                {renderScaleSliders({displayName: 'Scale', propertyName:'scale', propertyValue: asset.scale, step: 0.01})}
 
             </div>}
         </div>

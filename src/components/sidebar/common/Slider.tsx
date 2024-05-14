@@ -1,5 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import styles from './Silder.module.css';
+import commonStyles from '../Sidebar.module.css';
 
 type Props = {
     name: string,
@@ -74,22 +76,22 @@ export const Slider = (props: Props) => {
     // maybe wrap <span> in <div> with onDoubleClick that will return <input> instead?
     // and detect outside click or return etc. to return to <span>
     return (
-        <div className="trait">
-            <label className="trait-name">{name}</label>
-            <div className="input-slider slider-single" 
+        <div className={commonStyles.traitContainer}>
+            <label className={commonStyles.traitName}>{name}</label>
+            <div className={styles.slider} 
                 onMouseDown={(e) => handleMouseDown(e)}
             >
-                <span className="slider-arrow left"
+                <span className={`${styles.arrow} ${styles.left}`}
                 onClick={() => handleInput(localValue - step)} > &#60; </span>
 
-                <span className="slider-value"
+                <span className={styles.value}
                 onDoubleClick={() => console.log("DoubleClicked")}
                 >{roundDisplayed(value)}</span>
 
-                <span className="slider-arrow right"
+                <span className={`${styles.arrow} ${styles.right}`}
                 onClick={() => handleInput(localValue + step)} > &#62; </span>
             </div>
-            <button className="reset-default-btn"
+            <button className={styles.resetButton}
                 onClick={handleResetDefault}
             >&#8635;</button>
         </div>

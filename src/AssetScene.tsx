@@ -1,43 +1,42 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import './style.css';
-import { Lights } from './rendering/lights/Lights';
+import { Lights } from './components/canvas/lights/Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './components/sidebar/Sidebar';
-import { useSidebarControlsContext } from './components/sidebar/SidebarControlsContext';
-import { Assets } from './rendering/assets/Assets';
-import { ChromaticAberration, EffectComposer, Selection } from "@react-three/postprocessing";
-import { Effects } from './rendering/effects/Effects';
-import { BlendFunction } from 'postprocessing';
-import { Vector2 } from 'three';
+import { Assets } from './components/canvas/assets/Assets';
+import { Selection } from "@react-three/postprocessing";
+import { Effects } from './components/canvas/effects/Effects';
+import { PerspectiveCamera as PerspectiveCameraType} from 'three/src/Three';
+import { CameraTracker } from './components/canvas/scene/CameraTracker';
+import { AmbientLight } from './components/canvas/scene/AmbientLight';
+import { useSceneValue } from './components/contexts/SceneContext';
 
-// import { Bloom, ChromaticAberration, DepthOfField, EffectComposer, Outline } from '@react-three/postprocessing';
-// import { BlendFunction } from 'postprocessing';
-
-// TODO [TUTORING]: IS THIS WHOLE SOLUTION TOO useState reliant?
-// Wouldn't it run smoother if most of the interactions altered refs?
-// RN it seems like most of any interactions require multiple setState per second to trigger
 export const AssetScene = () => {
+  const [ backgroundColor ] = useSceneValue((scene) => scene['backgroundColor']);
 
-  const { scene, lightsList, assetsList, effectsList } = useSidebarControlsContext();
+  const cameraRef = useRef<PerspectiveCameraType>(null);
 
   return (
     <>
       <Canvas shadows
-        style= {{ background: scene.backgroundColor }}
+        style= {{ background: backgroundColor }}
+        frameloop="demand"
       >
-        <ambientLight color={scene.ambientLight.color} intensity={scene.ambientLight.intensity} />
 
-        <OrbitControls makeDefault target={[0, 0.32, 0]} maxPolarAngle={1.45} />
-        <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
+        <AmbientLight />
+
+        <OrbitControls makeDefault target={[0, 0.32, 0]} maxPolarAngle={1.45} enableDamping={false} />
+        <PerspectiveCamera makeDefault ref={cameraRef} fov={50} position={[3, 2, 5]} />
+        <CameraTracker cameraRef={cameraRef} />
+
 
         <Selection>
-          <Lights lightsList={lightsList} />
-          <Assets assetsList={assetsList} />
+          <Lights />
+          <Assets />
         </Selection>
 
-        <Effects effectsList={effectsList} />
+        <Effects />
 
       </Canvas>
       
@@ -45,24 +44,3 @@ export const AssetScene = () => {
     </>
   );
 }
-
-/*
-<EffectComposer multisampling={8} autoClear={false}>
-          <Outline blur visibleEdgeColor="red" edgeStrength={100} />
-          <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={400} />
-          <Bloom 
-            blendFunction={BlendFunction.ADD}
-            intensity={0}
-            width={300}
-            height={300}
-            kernelSize={5}
-            luminanceThreshold={0.15}
-            luminanceSmooting={0.025}
-          />
-          <ChromaticAberration 
-            blendFunction={BlendFunction.NORMAL}
-            intensity={0}
-            offset={[0.0005, 0.00012]}
-          />
-        </EffectComposer>
-*/

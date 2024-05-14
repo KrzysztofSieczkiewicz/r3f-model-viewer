@@ -1,5 +1,8 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
+import styles from './ColorPicker.module.css';
+import commonStyles from '../Sidebar.module.css';
+
 import { HexColorPicker } from "react-colorful";
 
 type Props = {
@@ -11,15 +14,9 @@ type Props = {
 export const ColorPicker = ( {name, currentColor, handleChange} :Props) :JSX.Element => {
 
   const [ isColorPickerOpen, setIsColorPickerOpen ] = useState(false);
-  const [ color, setColor ] = useState(currentColor);
   const [ position, setPosition ] = useState(0);
 
   const popupRef = useRef<HTMLDivElement | null>(null);
-
-  // UPDATE COLOR EACH TIME COLOR PICKER CHANGES
-  useEffect(() => {
-    handleChange(color);
-  }, [color])
 
   // OPEN AND HIDE COLOR PALETTE
   const toggleColorPicker = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -43,14 +40,14 @@ export const ColorPicker = ( {name, currentColor, handleChange} :Props) :JSX.Ele
   }, [popupRef, isColorPickerOpen]);
 
   return (
-    <div className="trait">
-      <label className="trait-name">{name}</label>
-      <div className="color-picker-preview" onMouseDown={(e) => toggleColorPicker(e)}
-        style={{backgroundColor: color}}
+    <div className={commonStyles.traitContainer}>
+      <label className={commonStyles.traitName}>{name}</label>
+      <div className={styles.colorPreview} onMouseDown={(e) => toggleColorPicker(e)}
+        style={{backgroundColor: currentColor}}
       />
       {isColorPickerOpen && 
-      <div ref={popupRef} className="color-popup" style={{ left: position }}>
-        <HexColorPicker color={color} onChange={setColor} />
+      <div ref={popupRef} className={styles.popup} style={{ left: position }}>
+        <HexColorPicker color={currentColor} onChange={handleChange} />
       </div>}
     </div>
   );

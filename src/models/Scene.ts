@@ -3,7 +3,8 @@ export type SceneWrapper = {
   ambientLight: {
     color: string,
     intensity: number
-  }
+  },
+  viewCameraRotation: [number,number,number],
 }
 
 const INITIAL_SCENE_SETTINGS = {
@@ -11,7 +12,8 @@ const INITIAL_SCENE_SETTINGS = {
   ambientLight: {
     color: "#ffffff",
     intensity: 0.1
-  }
+  },
+  viewCameraRotation: [0, 0, 0] as [number,number,number],
 }
 
 export { INITIAL_SCENE_SETTINGS };

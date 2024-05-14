@@ -1,13 +1,14 @@
+import React from 'react';
 import { useState } from 'react';
+import styles from '../Sidebar.module.css';
+import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 
 import { LightItem } from './LightItem';
-import React from 'react';
-import { useSidebarControlsContext } from '../SidebarControlsContext';
 import { LightWrapper } from '../../../models/Light';
 
 
 export const LightsMenu = () => {
-    const { lightsList } = useSidebarControlsContext();
+    const { lightsList, updateLight } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
 
@@ -20,18 +21,19 @@ export const LightsMenu = () => {
     };
     
     return (
-        <div className="dropdown">
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Add/Remove</h3>
+        <div className={styles.menu}>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Add/Remove</h3>
                 <p> this section should contain methods to add new lights</p>
             </section>
-            <section className="dropdown-section dropdown-item">
-                <h3 className="section-header">Lights</h3>
+            <section className={styles.menuSection}>
+                <h3 className={styles.sectionHeader}>Lights</h3>
                 
                 {lightsList.map((light: LightWrapper) => {
                     return (
                         <LightItem
-                            light={light} 
+                            light={light}
+                            updateLight={ (light: LightWrapper) => updateLight(light)}
                             key={light.id}
                             active={activeId === light.id}
                             onClick={() => handleItemClick(light.id)}
