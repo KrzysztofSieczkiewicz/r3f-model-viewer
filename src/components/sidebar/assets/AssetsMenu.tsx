@@ -1,19 +1,17 @@
 import React from "react";
 import { useState } from "react";
-import { useSidebarControlsContext } from '../../contexts/SidebarControlsContext'
 import styles from './../Sidebar.module.css'
 
 import { AssetItem } from "./AssetItem";
 import { AssetWrapper } from "../../../models/Asset";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
-
 export const AssetsMenu = () => {
-    const { assetsList } = useSceneObjectsContext();
+    const { assetsList, updateAsset } = useSceneObjectsContext();
    
     const [activeId, setActiveId] = useState("");
 
-    const handleItemClick = (id: string) => {
+    const handleMenuItemClick = (id: string) => {
         if (activeId === id) {
             setActiveId("");
         } else {
@@ -36,7 +34,8 @@ export const AssetsMenu = () => {
                             asset={asset} 
                             key={asset.id}
                             active={activeId === asset.id}
-                            onClick={() => handleItemClick(asset.id)}
+                            onClick={() => handleMenuItemClick(asset.id)}
+                            updateAsset={(newAsset:AssetWrapper) => updateAsset(newAsset)}
                         />
                     );
                 })}

@@ -17,8 +17,6 @@ export const AssetScene = () => {
 
   const cameraRef = useRef<PerspectiveCameraType>(null);
 
-  console.log({cameraRef: cameraRef.current?.rotation})
-
   return (
     <>
       <Canvas shadows

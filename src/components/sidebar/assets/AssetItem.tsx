@@ -7,13 +7,12 @@ import { VisibilityButton } from '../common/VisibilityButton';
 import { PositionSliders } from '../common/PositionSliders';
 import { RotationSliders } from '../common/RotationSliders';
 import { ScaleSliders } from '../common/ScaleSliders';
-import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
-
 
 type Props = {
     active: boolean,
-    asset: AssetWrapper
-    onClick: () => void
+    asset: AssetWrapper,
+    onClick: () => void,
+    updateAsset: (newAsset: AssetWrapper) => void
 }
 
 type SlidersArrayProps = {
@@ -23,9 +22,7 @@ type SlidersArrayProps = {
     step: number,
 }
 
-// TODO: MOVE THE asset OBJECT UP, AND SEPARATE VALUES SO THE ATTRIBUTES WONT RERENDER EACH OTHER
-export const AssetItem = ( {active, asset, onClick}: Props) => {
-    const { updateAsset } = useSceneObjectsContext();
+export const AssetItem = ( {active, asset, onClick, updateAsset}: Props) => {
 
     const handleAssetName = () => {
         return asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
