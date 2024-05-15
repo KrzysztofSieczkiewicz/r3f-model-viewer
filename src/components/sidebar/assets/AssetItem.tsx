@@ -9,7 +9,6 @@ import { RotationSliders } from '../common/RotationSliders';
 import { ScaleSliders } from '../common/ScaleSliders';
 
 type Props = {
-    id: string,
     isActive: boolean,
     isVisible: boolean,
     name: string,
@@ -18,10 +17,11 @@ type Props = {
     scale: [number, number, number],
 
     onClick: () => void,
-    updateAsset: (id: string, change: Partial<AssetWrapper>) => void
+    updateAsset: (change: Partial<AssetWrapper>) => void,
+    deleteAsset: () => void
 }
 
-export const AssetItem = ( {id, isActive, isVisible, name,  position, rotation, scale, onClick, updateAsset}: Props) => {
+export const AssetItem = ( {isActive, isVisible, name,  position, rotation, scale, onClick, updateAsset, deleteAsset}: Props) => {
 
     const handleIsActive = () => {
         return isActive ? String.fromCharCode(8657) : String.fromCharCode(8659);
@@ -36,29 +36,32 @@ export const AssetItem = ( {id, isActive, isVisible, name,  position, rotation, 
                 <p className={styles.assetName}>{name}</p>
                 <VisibilityButton 
                     isVisible={isVisible} 
-                    updateObject={ (val: boolean) => updateAsset( id, {visible: val} )} 
+                    updateObject={ (val: boolean) => updateAsset( {visible: val} )} 
                 />
                 <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
 
             {isActive && <div className={styles.assetBody}>
+
+                <button onClick={deleteAsset}>DELETE</button>
+
                 <PositionSliders 
                     name="Position"
                     value={position}
                     step={0.005}
-                    handleChange={(val) => updateAsset( id, {position: val} )}
+                    handleChange={(val) => updateAsset( {position: val} )}
                 />
                 <RotationSliders 
                     name="Rotation"
                     value={rotation}
                     step={0.01}
-                    handleChange={(val) => updateAsset( id, {rotation: val} )}
+                    handleChange={(val) => updateAsset( {rotation: val} )}
                 />
                 <ScaleSliders 
                     name="Scale"
                     value={scale}
                     step={0.01}
-                    handleChange={(val) => updateAsset( id, {scale: val} )}
+                    handleChange={(val) => updateAsset( {scale: val} )}
                 />
             </div>}
         </div>

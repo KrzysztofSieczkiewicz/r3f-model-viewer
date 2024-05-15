@@ -6,7 +6,6 @@ type Props = {
     updateObject: (isVisible: boolean) => void
 }
 
-// TODO: change updateObject to callback function to avoid passing object reference.
 export const VisibilityButton = ({isVisible, updateObject} :Props): JSX.Element => {
     return (
         <button

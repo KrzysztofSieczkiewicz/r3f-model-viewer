@@ -8,7 +8,7 @@ import { AssetWrapper } from "../../../models/Asset";
 
 
 export const AssetsMenu = () => {
-    const { assetsList, updateAsset } = useSceneObjectsContext();
+    const { assetsList, updateAsset, deleteAsset } = useSceneObjectsContext();
    
     const [activeId, setActiveId] = useState("");
 
@@ -33,7 +33,6 @@ export const AssetsMenu = () => {
                     return (
                         <AssetItem
                             key={asset.id}
-                            id={asset.id}
                             isActive={activeId === asset.id}
                             isVisible={asset.visible}
                             name={asset.name}
@@ -42,7 +41,8 @@ export const AssetsMenu = () => {
                             scale={asset.scale}
 
                             onClick={() => handleMenuItemClick(asset.id)}
-                            updateAsset={(id: string, change: Partial<AssetWrapper>) => updateAsset(id, change)}
+                            updateAsset={(change: Partial<AssetWrapper>) => updateAsset(asset.id, change)}
+                            deleteAsset={() => deleteAsset(asset.id)}
                         />
                     );
                 })}
