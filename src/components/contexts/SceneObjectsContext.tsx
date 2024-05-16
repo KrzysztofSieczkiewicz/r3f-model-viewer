@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { AssetWrapper, INIT_ASSET_LIST } from "../../models/Asset";
+import { AssetWrapper, INIT_ASSET_LIST, defaultAsset } from "../../models/Asset";
 import { LightWrapper, INIT_LIGHTS_LIST } from "../../models/Light";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
@@ -10,6 +10,7 @@ type SceneObjectsContext = {
     assetsList: AssetWrapper[], 
     updateAsset: (id: string, change: Partial<AssetWrapper>) => void,
     deleteAsset: (id: string) => void,
+    addAsset: () => void,
 
     lightsList: LightWrapper[], 
     updateLight: (newLight: LightWrapper) => void,
@@ -42,17 +43,25 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsList(newAssetsList);
     }, [assetsList]);
 
-    
-    const deleteAsset = useCallback((id: string) => {
+    const deleteAsset = (id: string) => {
 
         const filteredAssets = assetsList.filter( (asset) => asset.id !== id );
 
         setAssetsList(filteredAssets);
-    }, [assetsList])
+    };
+
+    // TODO: REPLACE "defaultAsset" WITH PROPER ASSET IMPORT LOGIC 
+    // (ESP WITH CREATING NEW ID EACH TIME)
+    const addAsset = () => {
+
+        const extendedAssetsList = [...assetsList, defaultAsset];
+
+        setAssetsList(extendedAssetsList);
+    };
 
 
     return (
-        <SceneObjectsContext.Provider value={{ lightsList, updateLight, assetsList, updateAsset, deleteAsset }} >
+        <SceneObjectsContext.Provider value={{ lightsList, updateLight, assetsList, updateAsset, deleteAsset, addAsset }} >
             {props.children}
         </SceneObjectsContext.Provider>
     );

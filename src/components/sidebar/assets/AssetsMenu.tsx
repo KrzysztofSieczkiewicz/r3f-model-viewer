@@ -8,7 +8,7 @@ import { AssetWrapper } from "../../../models/Asset";
 
 
 export const AssetsMenu = () => {
-    const { assetsList, updateAsset, deleteAsset } = useSceneObjectsContext();
+    const { assetsList, updateAsset, deleteAsset, addAsset } = useSceneObjectsContext();
    
     const [activeId, setActiveId] = useState("");
 
@@ -25,6 +25,7 @@ export const AssetsMenu = () => {
             <section className={styles.menuSection}>
                 <h3 className={styles.sectionHeader}>Add/Remove</h3>
                 <p> this section should contain methods to add new assets</p>
+                <button onClick={() => {addAsset()}}> ADD NEW </button>
             </section>
             <section className={styles.menuSection}>
                 <h3 className={styles.sectionHeader}>Assets</h3>

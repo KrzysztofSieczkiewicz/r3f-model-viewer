@@ -42,13 +42,15 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
     }
 ]
 
-const defaultAsset = {
+const defaultAsset: AssetWrapper = {
     id: nanoid(5),
     name: "pear",
     object: "toBeReplaced",
-    position:[0,0,0],
+    position:[0.25,0.5,0.75],
     rotation:[0,0,0],
-    scale:[1,1,1],
+    scale:[10,10,10],
+    ref: null,
+    isSelected: false,
     castShadow: true,
     receiveShadow: true,
     visible: true,
