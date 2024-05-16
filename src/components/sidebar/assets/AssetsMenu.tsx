@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styles from './../Sidebar.module.css'
+import assetStyles from './Assets.module.css'
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { AssetItem } from "./AssetItem";
@@ -20,12 +21,11 @@ export const AssetsMenu = () => {
         }
     };
     
+    // TODO: FINISH STYLING
     return (
         <div className={styles.menu}>
             <section className={styles.menuSection}>
-                <h3 className={styles.sectionHeader}>Add/Remove</h3>
-                <p> this section should contain methods to add new assets</p>
-                <button onClick={() => {addAsset()}}> ADD NEW </button>
+                <button className={assetStyles.addButton} onClick={() => {addAsset()}}> ADD NEW </button>
             </section>
             <section className={styles.menuSection}>
                 <h3 className={styles.sectionHeader}>Assets</h3>

@@ -87,12 +87,14 @@
 }
 
 .menuSection {
+    margin: 0.5rem 2%;
+    padding: 0.35rem;
+    width: 95%;
+    
     color: var(--color-platinum);
     background-color: var(--color-resin-bright);
     border: 1px solid black;
 
-    margin: 0.5rem 0;
-    padding: 0.35rem;
     transition: border var(--transition-duration);
 }
 
