@@ -7,6 +7,7 @@ import { VisibilityButton } from '../common/VisibilityButton';
 import { PositionSliders } from '../common/PositionSliders';
 import { RotationSliders } from '../common/RotationSliders';
 import { ScaleSliders } from '../common/ScaleSliders';
+import { DeleteItemButton } from '../common/DeleteItemButton';
 
 type Props = {
     isActive: boolean,
@@ -43,7 +44,9 @@ export const AssetItem = ( {isActive, isVisible, name,  position, rotation, scal
 
             {isActive && <div className={styles.assetBody}>
 
-                <button onClick={deleteAsset}>DELETE</button>
+                <span className={styles.deleteButtonContainer}>
+                    <DeleteItemButton deleteObject={() => deleteAsset()}/>
+                </span>
 
                 <PositionSliders 
                     name="Position"

@@ -1,0 +1,22 @@
+@import '../../../App.module.css';
+
+.button {
+    background-color: transparent;
+
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 0;
+
+    border: none;
+
+}
+
+.icon {
+    height: 90%;
+    width: 90%;
+
+    margin: auto;
+
+    fill: var(--color-imperial-red);
+    filter: brightness(0.75);
+}
