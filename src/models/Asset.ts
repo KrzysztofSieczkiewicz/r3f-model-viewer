@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { newId } from '../utils/generalUtil';
 
 export type AssetWrapper = {
     id: string,
@@ -16,7 +17,7 @@ export type AssetWrapper = {
 
 const INIT_ASSET_LIST: AssetWrapper[] = [
     {
-    id: nanoid(5),
+    id: newId(),
     name: "pear",
     object: "toBeReplaced",
     position:[0,0,0],
@@ -28,7 +29,7 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
     receiveShadow: true,
     visible: true,
     },{
-    id: nanoid(5),
+    id: newId(),
     name: "pear",
     object: "toBeReplaced",
     position:[1,0,1],
@@ -43,7 +44,7 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
 ]
 
 const defaultAsset: AssetWrapper = {
-    id: nanoid(5),
+    id: newId(),
     name: "pear",
     object: "toBeReplaced",
     position:[0.25,0.5,0.75],
