@@ -15,10 +15,10 @@ type Transformation = {
     rotation: [number, number, number]
 }
 
-export const PositionControls = ( {object: asset, handleChange}: Props) => {
+export const PositionControls = ( {object: object, handleChange}: Props) => {
     const [ transformation, setTransformation ] = useState<Transformation>({
-        position: asset.position, 
-        rotation: asset.rotation
+        position: object.position, 
+        rotation: object.rotation
     });
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
 
@@ -59,10 +59,10 @@ export const PositionControls = ( {object: asset, handleChange}: Props) => {
     useEffect(() => {
         if (!controlsRef.current) return;
 
-        controlsRef.current.position.set(...asset.position);
-        controlsRef.current.rotation.setFromQuaternion(new Quaternion().setFromEuler(new Euler(...asset.rotation)));
+        controlsRef.current.position.set(...object.position);
+        controlsRef.current.rotation.setFromQuaternion(new Quaternion().setFromEuler(new Euler(...object.rotation)));
         controlsRef.current.updateMatrix();
-    }, [asset.position, asset.rotation]);
+    }, [object.position, object.rotation]);
 
 
     return (

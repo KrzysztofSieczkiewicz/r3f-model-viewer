@@ -13,7 +13,7 @@ import { DeleteItemButton } from '../common/DeleteItemButton';
 type Props = |{
     isActive: boolean,
     type: LightOption,
-    position: [number, number, number]
+    position: [number, number, number],
     color: string,
     isVisible: boolean,
     intensity: number,

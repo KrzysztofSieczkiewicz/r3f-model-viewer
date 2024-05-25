@@ -31,7 +31,6 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
             <pointLight
                 key={light.id} 
                 position={light.position}
-                rotation={[0,0,0]}
                 ref={lightRef}
                 color={light.color} 
                 intensity={light.intensity}
