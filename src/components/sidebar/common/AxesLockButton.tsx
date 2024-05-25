@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './AxesLockButton.module.css';
-import { ReactComponent as LockLocked } from './../../../icons/sidebar/lock_locked.svg';
-import { ReactComponent as LockUnlocked } from './../../../icons/sidebar/lock_unlocked.svg';
+import { ReactComponent as LockedIcon } from './../../../icons/sidebar/lock_locked.svg';
+import { ReactComponent as UnlockedIcon } from './../../../icons/sidebar/lock_unlocked.svg';
 
 type Props = {
     locked: boolean,
@@ -10,8 +10,8 @@ type Props = {
 export const AxesLockButton = ( {locked, setLocked}: Props) => {
 
     const handleIcon = () => {
-        if (locked) return <LockLocked className={styles.icon} />
-        return <LockUnlocked className={styles.icon} />
+        if (locked) return <LockedIcon className={styles.icon} />
+        return <UnlockedIcon className={styles.icon} />
     }
 
     return (

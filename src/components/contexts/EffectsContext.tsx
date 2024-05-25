@@ -21,7 +21,7 @@ export const EffectsContextProvider = (props: {children: ReactNode}): JSX.Elemen
       newEffectsList[index] = newEffect;
 
       setEffectsList(newEffectsList);
-  }, []);
+  }, [effectsList]);
 
     return (
         <EffectsContext.Provider value={{ effectsList, updateEffect }} >

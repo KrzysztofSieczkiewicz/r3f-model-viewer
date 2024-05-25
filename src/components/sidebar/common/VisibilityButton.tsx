@@ -1,20 +1,18 @@
 import React from "react";
 import styles from './VisibilityButton.module.css';
-import { EditableWrapper } from "../../contexts/SceneObjectsContext";
 
 type Props = {
-    object: EditableWrapper,
+    isVisible: boolean
     updateObject: (isVisible: boolean) => void
 }
 
-// TODO: change updateObject to callback function to avoid passing object reference.
-export const VisibilityButton = ({object, updateObject} :Props): JSX.Element => {
+export const VisibilityButton = ({isVisible, updateObject} :Props): JSX.Element => {
     return (
         <button
-            className={object.visible ? styles.button : `${styles.button} ${styles.suppressed}`}
+            className={isVisible ? styles.button : `${styles.button} ${styles.suppressed}`}
             onClick={(e) => {
                 e.stopPropagation();
-                updateObject(!object.visible)
+                updateObject(!isVisible)
             }}
         >&#128065;</button>
     );

@@ -5,11 +5,10 @@ import { AssetWrapper } from "../../../models/Asset";
 import React from "react";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { PositionControls } from "../PositionControls";
-import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 type Props = {
     asset: AssetWrapper,
-    updateAsset: (asset: AssetWrapper) => void,
+    updateAsset: (id: string, change: Partial<AssetWrapper>) => void,
     isSelected: boolean,
     updateSelected: (id: string) => void,
 }
@@ -54,7 +53,7 @@ export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelec
         <group>
             {isSelected && <PositionControls
                 object={asset}
-                handleChange={(newAsset) => updateAsset(newAsset as AssetWrapper)}
+                handleChange={(newAsset) => updateAsset(asset.id, {...newAsset})}
             />}
             
             <mesh
