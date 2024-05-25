@@ -7,7 +7,7 @@ import { LightWrapper } from "../../models/Light";
 
 type Props = {
     object: AssetWrapper | LightWrapper,
-    handleChange: (newObject: AssetWrapper | LightWrapper) => void
+    handleChange: (change: Partial<AssetWrapper | LightWrapper>) => void
 }
 
 type Transformation = {
@@ -49,11 +49,10 @@ export const PositionControls = ( {object: asset, handleChange}: Props) => {
 
     // Update attached object on local changes
     useEffect(() => {
-        const newAsset = structuredClone(asset);
-        newAsset.position = transformation.position;
-        newAsset.rotation = transformation.rotation;
-
-        handleChange(newAsset);
+        handleChange({
+            position: transformation.position, 
+            rotation: transformation.rotation
+        });
     }, [transformation]);
 
     // Update controls when values are changed externally

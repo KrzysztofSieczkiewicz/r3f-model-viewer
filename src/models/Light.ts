@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+import { newId } from '../utils/idUtil';
 
 export type LightWrapper = {
     id: string,
@@ -21,7 +21,7 @@ export enum LIGHT_TYPES {
 
 const INIT_LIGHTS_LIST: LightWrapper[] = [
     {
-      id:nanoid(5),
+      id:newId(),
       position:[3,0.5,0],
       rotation:[0, 0, 0],
       color: "#f53259",
@@ -32,7 +32,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       type: LIGHT_TYPES.pointLight,
       visible: true
     },{
-      id:nanoid(5),
+      id:newId(),
       position:[-1,2.25,-1],
       rotation:[0,0,0],
       color:"#33dcfa",
@@ -46,14 +46,15 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
   ]
 
 const defaultLight = {
-    id: nanoid(5),
-    type: "pointLight",
-    position:[5,5,0],
-    rotation:[0,0,0], // TODO: Remove and replace by target later on
+    id:newId(),
+    position:[2,1,1],
+    rotation:[0,0,0],
     color: "white",
-    intensity: 1,
-    angle: 0.1,
+    intensity:1,
+    angle: 0.3,
     penumbra: 0.6,
+    distance: 10,
+    type: LIGHT_TYPES.pointLight,
     visible: true
 }
 

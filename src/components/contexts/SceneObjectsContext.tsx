@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { AssetWrapper, INIT_ASSET_LIST, defaultAsset } from "../../models/Asset";
-import { LightWrapper, INIT_LIGHTS_LIST } from "../../models/Light";
+import { LightWrapper, INIT_LIGHTS_LIST, defaultLight } from "../../models/Light";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
@@ -13,7 +13,9 @@ type SceneObjectsContext = {
     addAsset: () => void,
 
     lightsList: LightWrapper[], 
-    updateLight: (newLight: LightWrapper) => void,
+    updateLight: (id: string, change: Partial<LightWrapper>) => void,
+    deleteLight: (id: string) => void,
+    addLight: () => void,
 }
 
 export const SceneObjectsContext = createContext<SceneObjectsContext | null>( null );
@@ -24,12 +26,24 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
 
 
-    const updateLight = useCallback((newLight: LightWrapper) => {
-        const index = lightsList.findIndex(asset => asset.id === newLight.id);
+    const updateLight = useCallback((id: string, change: Partial<LightWrapper>) => {
+        const index = lightsList.findIndex(light => light.id === id);
+        if (index === -1) return;
 
-        const newLightsList = lightsList.map((light, i) => i===index ? newLight : light);
-
+        const updatedLight = { ...lightsList[index], ...change };
+        const newLightsList = lightsList.map( (light, i) => i===index ? updatedLight : light);
+        
         setLightsList(newLightsList);
+    }, [lightsList]);
+
+    const deleteLight = useCallback((id: string) => {
+        const filteredLights = lightsList.filter( (asset) => asset.id !== id );
+        setLightsList(filteredLights);
+    }, [lightsList]);
+
+    const addLight = useCallback(() => {
+        const extendedLights = [...lightsList, defaultLight] as LightWrapper[];
+        setLightsList(extendedLights);
     }, [lightsList]);
 
 
@@ -44,24 +58,20 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     }, [assetsList]);
 
     const deleteAsset = (id: string) => {
-
         const filteredAssets = assetsList.filter( (asset) => asset.id !== id );
-
         setAssetsList(filteredAssets);
     };
 
     // TODO: REPLACE "defaultAsset" WITH PROPER ASSET IMPORT LOGIC 
     // (ESP WITH CREATING NEW ID EACH TIME)
     const addAsset = () => {
-
-        const extendedAssetsList = [...assetsList, defaultAsset];
-
+        const extendedAssetsList = [...assetsList, defaultAsset] as AssetWrapper[];
         setAssetsList(extendedAssetsList);
     };
 
 
     return (
-        <SceneObjectsContext.Provider value={{ lightsList, updateLight, assetsList, updateAsset, deleteAsset, addAsset }} >
+        <SceneObjectsContext.Provider value={{ lightsList, updateLight, deleteLight, addLight, assetsList, updateAsset, deleteAsset, addAsset }} >
             {props.children}
         </SceneObjectsContext.Provider>
     );

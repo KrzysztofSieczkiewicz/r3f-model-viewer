@@ -27,7 +27,7 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
             {isSelected && 
                 <PositionControls
                 object={light}
-                handleChange={(newLight) => { updateLight(newLight as LightWrapper) }}
+                handleChange={(change: Partial<LightWrapper>) => { updateLight(light.id, change) }}
                 />
             }
             <spotLight // TODO: ADD TARGET HANDLING

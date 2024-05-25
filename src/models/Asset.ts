@@ -1,5 +1,4 @@
-import { nanoid } from 'nanoid';
-import { newId } from '../utils/generalUtil';
+import { newId } from '../utils/idUtil';
 
 export type AssetWrapper = {
     id: string,
