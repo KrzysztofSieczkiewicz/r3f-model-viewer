@@ -3,11 +3,11 @@ import spotLightBillboard from '../../../icons/lightTypes/spotLight.svg';
 
 import React, { useRef, useState } from 'react';
 import { Billboard, Sphere, useHelper, useTexture } from "@react-three/drei";
-import { LIGHT_TYPES, LightOptions } from '../../../models/Light';
+import { LIGHT_TYPES, LightTypes } from '../../../models/Light';
 import { BoxHelper, Mesh } from 'three';
 
 type Props = {
-    lightType: LightOptions
+    lightType: LightTypes
     onClick: () => void
 }
 

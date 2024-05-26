@@ -1,25 +1,25 @@
 import { PivotControls } from "@react-three/drei";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import { Euler, Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
-import { LightWrapper } from "../../../models/Light";
+import { Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
+import { LightProperties, LightWrapper } from "../../../models/Light";
 
 type Props = {
     light: LightWrapper,
-    handleChange: (change: Partial<LightWrapper>) => void
+    handleChange: (change: Partial<LightProperties>) => void
 }
 
 
 export const LightsGizmo = ( {light, handleChange}: Props) => {
 
-    const [ handledPosition, setHandledPosition ] = useState(light.position);
+    const [ handledPosition, setHandledPosition ] = useState(light.properties.position);
 
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
 
     // Allign controls to the object on init
     useEffect(() => {
         const initialMatrix = new Matrix4();
-        const initialControlsPosition = new Vector3(...light.position);
+        const initialControlsPosition = new Vector3(...light.properties.position);
 
         initialMatrix.compose(initialControlsPosition, new Quaternion(0,0,0), new Vector3(1,1,1))
 
@@ -45,9 +45,9 @@ export const LightsGizmo = ( {light, handleChange}: Props) => {
     useEffect(() => {
         if (!controlsRef.current) return;
 
-        controlsRef.current.position.set(...light.position);
+        controlsRef.current.position.set(...light.properties.position);
         controlsRef.current.updateMatrix();
-    }, [light.position]);
+    }, [light.properties.position]);
 
 
     return (

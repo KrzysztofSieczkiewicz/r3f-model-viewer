@@ -12,7 +12,7 @@ export const Lights = () => {
 
     return (
         lightsList.map((light) => {
-            if (!light.visible) return;
+            if (!light.properties.isVisible) return;
             return (
                 <RenderedLight
                     key={light.id} 

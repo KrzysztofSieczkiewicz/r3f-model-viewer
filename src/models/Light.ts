@@ -4,78 +4,70 @@ export enum LIGHT_TYPES {
   pointLight =  "Point light",
   spotLight = "Spot light"
 };
-
-export type LightOptions = 
+export type LightTypes = 
   LIGHT_TYPES.pointLight | 
   LIGHT_TYPES.spotLight;
 
-type CommonLight = {
-  id: string,
-  visible: boolean,
+
+type BaseLightProperties = {
+  isVisible: boolean,
   position: [number,number,number],
   color: string,
   intensity: number,
   distance: number,
 }
 
-type PointLight = {} & CommonLight;
+export type PointLightProperties = BaseLightProperties & {};
 
-type SpotLight = {
-  angle: number,
-  penumbra: number,
-} & CommonLight
-
-  
-export type LightWrapper = {
-  // COMMON
-  id: string,
-  type: LightOptions,
-  visible: boolean,
-  position: [number,number,number],
-  color: string,
-  intensity: number,
-  distance: number,
-
-  // SPOTLIGHT
+export type SpotLightProperties = BaseLightProperties & {
   angle: number,
   penumbra: number,
 }
+
+export type LightProperties = PointLightProperties | SpotLightProperties;
+
+export type LightWrapper = 
+  { type: LIGHT_TYPES.pointLight, id: string, properties: PointLightProperties } | 
+  { type: LIGHT_TYPES.spotLight, id: string, properties: SpotLightProperties }
+;
 
 const INIT_LIGHTS_LIST: LightWrapper[] = [
   {
-    id:newId(),
     type: LIGHT_TYPES.pointLight,
-    visible: true,
-    position:[3,0.5,0],
-    distance: 10,
-    color: "#f53259",
-    intensity:1,
-    angle: 0.3,
-    penumbra: 0.6,
-  },{
     id:newId(),
+    properties: {
+      isVisible: true,
+      position:[3,0.5,0],
+      distance: 10,
+      color: "#f53259",
+      intensity:1,
+    }
+  },{
     type: LIGHT_TYPES.spotLight,
-    visible: true,
-    position:[-1,2.25,-1],
-    distance: 10,
-    color:"#33dcfa",
-    intensity:1,
-    angle: 0.3,
-    penumbra: 0.6,
+    id:newId(),
+    properties: {
+      isVisible: true,
+      position:[-1,2.25,-1],
+      distance: 10,
+      color:"#33dcfa",
+      intensity:1,
+      angle: 0.3,
+      penumbra: 0.6,
+    }
   }
 ]
 
-const defaultLight = {
-  id:newId(),
+const defaultLight: LightWrapper = {
   type: LIGHT_TYPES.pointLight,
-  visible: true,
-  position:[2,1,1],
-  distance: 10,
-  color: "white",
-  intensity:1,
-  angle: 0.3,
-  penumbra: 0.6,
-  target: [0,0,0]
+  id:newId(),
+  properties: {
+    isVisible: true,
+    position:[2,1,1],
+    distance: 10,
+    color: "white",
+    intensity:1,
+  }
+  
 }
 
 export { INIT_LIGHTS_LIST, defaultLight };

@@ -6,27 +6,21 @@ import { PositionSliders } from '../common/PositionSliders';
 import { ColorPicker } from '../common/ColorPicker';
 import { LightTypeDropdown } from './LightTypeDropdown';
 import { VisibilityButton } from '../common/VisibilityButton';
-import { LIGHT_TYPES, LightOptions, LightWrapper } from '../../../models/Light';
+import { LIGHT_TYPES, LightProperties, LightWrapper } from '../../../models/Light';
 import { LightTypeIcon } from './LightTypeIcon';
 import { DeleteItemButton } from '../common/DeleteItemButton';
 
 type Props = |{
     isActive: boolean,
-    type: LightOptions,
-    position: [number, number, number],
-    color: string,
-    isVisible: boolean,
-    intensity: number,
-    distance: number,
-    angle: number,
-    penumbra: number,
+    light: LightWrapper
 
     onClick: () => void,
-    updateLight: (change: Partial<LightWrapper>) => void,
+    updateLight: (change: Partial<LightProperties>) => void,
     deleteLight: () => void
 }
 
-export const LightItem = ({ isActive, type, position, color, isVisible, intensity, distance, angle, penumbra, onClick, updateLight, deleteLight }: Props) => {
+export const LightItem = ({ isActive, light, onClick, updateLight, deleteLight }: Props) => {
+    const { position, color, isVisible, intensity, distance } = light.properties;
 
     const handleIsActive = () => {
         return isActive ? String.fromCharCode(8657) : String.fromCharCode(8659);
@@ -37,16 +31,16 @@ export const LightItem = ({ isActive, type, position, color, isVisible, intensit
             <div className={styles.lightHeader}
                 onClick={onClick}
             >
-                <LightTypeIcon type={type} />
+                <LightTypeIcon type={light.type} />
                 <LightTypeDropdown 
-                    selected={type} 
+                    selected={light.type} 
                     selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
-                    handleChange={(val) => updateLight( {type: val} )} 
+                    handleChange={(val) => console.log("IMPLEMENT TYPE MODIFICATION!!!")} 
                 />
                 <div className={styles.colorPreview} style={{backgroundColor: color}}/>
                 <VisibilityButton 
                     isVisible={isVisible}
-                    updateObject={ (val) => updateLight( {visible: val} )} 
+                    updateObject={ (val) => updateLight( {isVisible: val} )} 
                 />
                 <span className={styles.extendIcon}>{ handleIsActive() }</span>
             </div>
@@ -74,14 +68,14 @@ export const LightItem = ({ isActive, type, position, color, isVisible, intensit
                     handleChange={(val) => updateLight( {distance: val} )} 
                     min={0} max={100} step={0.1} defaultValue={10}
                 />
-                {type === LIGHT_TYPES.spotLight && <>
+                {light.type === LIGHT_TYPES.spotLight && <>
                     <Slider name="Angle"
-                        value={angle}
+                        value={light.properties.angle}
                         handleChange={(val) => updateLight( {angle: val} )} 
                         min={0} max={1} step={0.002} defaultValue={0.3}
                     />
                     <Slider name="Penumbra"
-                        value={penumbra}
+                        value={light.properties.penumbra}
                         handleChange={(val) => updateLight( {penumbra: val} )} 
                         min={0} max={1} step={0.002} defaultValue={0.6}
                     />

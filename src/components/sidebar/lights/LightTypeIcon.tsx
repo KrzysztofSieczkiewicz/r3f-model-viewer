@@ -1,12 +1,12 @@
 import React from "react";
 import styles from './Lights.module.css';
-import { LIGHT_TYPES, LightOptions, } from "../../../models/Light"
+import { LIGHT_TYPES, LightTypes, } from "../../../models/Light"
 
 import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 
 type Props = {
-    type: LightOptions
+    type: LightTypes
 }
 
 export const LightTypeIcon = ( {type} :Props ) => {

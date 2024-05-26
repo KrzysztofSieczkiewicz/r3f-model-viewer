@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { AssetWrapper, INIT_ASSET_LIST, defaultAsset } from "../../models/Asset";
-import { LightWrapper, INIT_LIGHTS_LIST, defaultLight } from "../../models/Light";
+import { LightWrapper, INIT_LIGHTS_LIST, defaultLight, LightProperties } from "../../models/Light";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
@@ -13,7 +13,7 @@ type SceneObjectsContext = {
     addAsset: () => void,
 
     lightsList: LightWrapper[], 
-    updateLight: (id: string, change: Partial<LightWrapper>) => void,
+    updateLightProperties: (id: string, change: Partial<LightProperties>) => void,
     deleteLight: (id: string) => void,
     addLight: () => void,
 }
@@ -25,14 +25,19 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     const [ assetsList, setAssetsList ] = useState<AssetWrapper[]>(INIT_ASSET_LIST);
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
 
+    const changeLightType = useCallback((id: string, change: Partial<LightProperties>) => {
+        // TODO: FINISH THIS METHOD
+        // IT SHOULD TAKE DEFAULT VALUES IF ANYTHING IS MISSING
+    }, [lightsList]);
 
-    const updateLight = useCallback((id: string, change: Partial<LightWrapper>) => {
+    const updateLightProperties = useCallback((id: string, change: Partial<LightProperties>) => {
         const index = lightsList.findIndex(light => light.id === id);
         if (index === -1) return;
 
-        const updatedLight = { ...lightsList[index], ...change };
+        const updatedLight = { ...lightsList[index] };
+        updatedLight.properties = { ...lightsList[index].properties, ...change }
+
         const newLightsList = lightsList.map( (light, i) => i===index ? updatedLight : light);
-        
         setLightsList(newLightsList);
     }, [lightsList]);
 
@@ -71,7 +76,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
 
 
     return (
-        <SceneObjectsContext.Provider value={{ lightsList, updateLight, deleteLight, addLight, assetsList, updateAsset, deleteAsset, addAsset }} >
+        <SceneObjectsContext.Provider value={{ lightsList, updateLightProperties, deleteLight, addLight, assetsList, updateAsset, deleteAsset, addAsset }} >
             {props.children}
         </SceneObjectsContext.Provider>
     );
