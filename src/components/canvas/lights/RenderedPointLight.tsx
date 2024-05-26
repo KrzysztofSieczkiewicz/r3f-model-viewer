@@ -6,7 +6,7 @@ import { PointLight } from "three";
 
 import { LightWrapper } from "../../../models/Light"
 import { LightTypeBillboard } from './LightTypeBillboard';
-import { PositionControls } from '../PositionControls';
+import { LightsGizmo } from "./LightsGizmo";
 
 
 type Props = {
@@ -23,9 +23,9 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
     return (
         <group>
             {isSelected && 
-                <PositionControls
-                object={light}
-                handleChange={(change: Partial<LightWrapper>) => { updateLight(light.id, change) }}
+                <LightsGizmo
+                    light={light}
+                    handleChange={(change: Partial<LightWrapper>) => { updateLight(light.id, change) }}
                 />
             }
             <pointLight

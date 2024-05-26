@@ -6,13 +6,13 @@ import { PositionSliders } from '../common/PositionSliders';
 import { ColorPicker } from '../common/ColorPicker';
 import { LightTypeDropdown } from './LightTypeDropdown';
 import { VisibilityButton } from '../common/VisibilityButton';
-import { LIGHT_TYPES, LightOption, LightWrapper } from '../../../models/Light';
+import { LIGHT_TYPES, LightOptions, LightWrapper } from '../../../models/Light';
 import { LightTypeIcon } from './LightTypeIcon';
 import { DeleteItemButton } from '../common/DeleteItemButton';
 
 type Props = |{
     isActive: boolean,
-    type: LightOption,
+    type: LightOptions,
     position: [number, number, number],
     color: string,
     isVisible: boolean,

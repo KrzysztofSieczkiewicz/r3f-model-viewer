@@ -7,7 +7,7 @@ import { SpotLight, SpotLightHelper } from "three";
 
 import { LightWrapper } from "../../../models/Light"
 import { LightTypeBillboard } from "./LightTypeBillboard";
-import { PositionControls } from "../PositionControls";
+import { LightsGizmo } from "./LightsGizmo";
 
 type Props = {
     light: LightWrapper,
@@ -25,9 +25,9 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
     return (
         <group>
             {isSelected && 
-                <PositionControls
-                object={light}
-                handleChange={(change: Partial<LightWrapper>) => { updateLight(light.id, change) }}
+                <LightsGizmo
+                    light={light}
+                    handleChange={(change: Partial<LightWrapper>) => { updateLight(light.id, change) }}
                 />
             }
             <spotLight // TODO: ADD TARGET HANDLING

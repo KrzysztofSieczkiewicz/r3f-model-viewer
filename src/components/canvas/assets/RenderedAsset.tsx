@@ -4,7 +4,7 @@ import { memo, useEffect, useState } from "react";
 import { AssetWrapper } from "../../../models/Asset";
 import React from "react";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { PositionControls } from "../PositionControls";
+import { AssetsGizmo } from "./AssetsGizmo";
 
 type Props = {
     asset: AssetWrapper,
@@ -51,10 +51,12 @@ export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelec
     // TODO: UNIFY ROTATION UNITS, EVERYTHING IS USING DIFFERENT SYSTEM
     return (
         <group>
-            {isSelected && <PositionControls
-                object={asset}
-                handleChange={(newAsset) => updateAsset(asset.id, {...newAsset})}
-            />}
+            {isSelected && 
+                <AssetsGizmo
+                    asset={asset}
+                    handleChange={(newAsset) => updateAsset(asset.id, {...newAsset})}
+                />
+            }
             
             <mesh
                 matrixWorldAutoUpdate={true}

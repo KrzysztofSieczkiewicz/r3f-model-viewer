@@ -1,9 +1,19 @@
 import { newId } from '../utils/idUtil';
 
+export enum LIGHT_TYPES {
+  pointLight =  "Point light",
+  spotLight = "Spot light"
+};
+
+export type LightOptions = 
+  LIGHT_TYPES.pointLight | 
+  LIGHT_TYPES.spotLight;
+
+
 export type LightWrapper = {
   // COMMON
   id: string,
-  type: LightOption,
+  type: LightOptions,
   visible: boolean,
   position: [number,number,number],
   rotation: [number,number,number],
@@ -14,14 +24,11 @@ export type LightWrapper = {
   // SPOTLIGHT
   angle: number,
   penumbra: number,
-    
 }
 
-export type LightOption = "Point light" | "Spot light"
-export enum LIGHT_TYPES {
-  pointLight =  "Point light",
-  spotLight = "Spot light"
-};
+
+
+
 
 const INIT_LIGHTS_LIST: LightWrapper[] = [
   {
