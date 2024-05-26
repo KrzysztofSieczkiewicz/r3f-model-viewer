@@ -31,7 +31,7 @@ export type GlitchEffect = {
     delay: [number, number],
     duration: [number, number],
     strength: number
-}
+} & CommonEffect
 
 export type EffectWrappers = BloomEffect | DepthOfFieldEffect | GlitchEffect;
 /* END */

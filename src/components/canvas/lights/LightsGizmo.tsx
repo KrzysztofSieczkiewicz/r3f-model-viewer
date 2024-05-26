@@ -46,9 +46,8 @@ export const LightsGizmo = ( {light, handleChange}: Props) => {
         if (!controlsRef.current) return;
 
         controlsRef.current.position.set(...light.position);
-        controlsRef.current.rotation.setFromQuaternion(new Quaternion().setFromEuler(new Euler(...light.rotation)));
         controlsRef.current.updateMatrix();
-    }, [light.position, light.rotation]);
+    }, [light.position]);
 
 
     return (
