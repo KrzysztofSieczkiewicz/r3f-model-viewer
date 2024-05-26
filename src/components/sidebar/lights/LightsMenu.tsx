@@ -5,15 +5,15 @@ import lightStyles from './Lights.module.css'
 import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 
 import { LightItem } from './LightItem';
-import { LightProperties, LightTypes, LightWrapper } from '../../../models/Light';
+import { LightWrapper } from '../../../models/Light';
 
 
 export const LightsMenu = () => {
-    const { lightsList, changeLightType, updateLightProperties, deleteLight, addLight } = useSceneObjectsContext();
+    const { lightsList, addLight } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
 
-    const handleItemClick = (id: string) => {
+    const toggleItemExtension = (id: string) => {
         if (activeId === id) {
             setActiveItem("");
         } else {
@@ -36,7 +36,7 @@ export const LightsMenu = () => {
                             isActive={activeId === light.id}
                             light={light}
 
-                            onClick={() => handleItemClick(light.id)}
+                            toggleExtend={() => toggleItemExtension(light.id)}
                         />
                     );
                 })}
