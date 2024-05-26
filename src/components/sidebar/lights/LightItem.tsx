@@ -6,7 +6,7 @@ import { PositionSliders } from '../common/PositionSliders';
 import { ColorPicker } from '../common/ColorPicker';
 import { LightTypeDropdown } from './LightTypeDropdown';
 import { VisibilityButton } from '../common/VisibilityButton';
-import { LIGHT_TYPES, LightProperties, LightWrapper } from '../../../models/Light';
+import { LIGHT_TYPES, LightProperties, LightTypes, LightWrapper } from '../../../models/Light';
 import { LightTypeIcon } from './LightTypeIcon';
 import { DeleteItemButton } from '../common/DeleteItemButton';
 
@@ -15,11 +15,12 @@ type Props = |{
     light: LightWrapper
 
     onClick: () => void,
+    changeLightType: (type: LightTypes) => void,
     updateLight: (change: Partial<LightProperties>) => void,
     deleteLight: () => void
 }
 
-export const LightItem = ({ isActive, light, onClick, updateLight, deleteLight }: Props) => {
+export const LightItem = ({ isActive, light, onClick, changeLightType, updateLight, deleteLight }: Props) => {
     const { position, color, isVisible, intensity, distance } = light.properties;
 
     const handleIsActive = () => {
@@ -35,7 +36,7 @@ export const LightItem = ({ isActive, light, onClick, updateLight, deleteLight }
                 <LightTypeDropdown 
                     selected={light.type} 
                     selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
-                    handleChange={(val) => console.log("IMPLEMENT TYPE MODIFICATION!!!")} 
+                    handleChange={(val) => changeLightType(val)} 
                 />
                 <div className={styles.colorPreview} style={{backgroundColor: color}}/>
                 <VisibilityButton 

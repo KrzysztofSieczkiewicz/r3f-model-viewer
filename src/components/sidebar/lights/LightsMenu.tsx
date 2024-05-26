@@ -5,11 +5,11 @@ import lightStyles from './Lights.module.css'
 import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 
 import { LightItem } from './LightItem';
-import { LightProperties, LightWrapper } from '../../../models/Light';
+import { LightProperties, LightTypes, LightWrapper } from '../../../models/Light';
 
 
 export const LightsMenu = () => {
-    const { lightsList, updateLightProperties: updateLight, deleteLight, addLight } = useSceneObjectsContext();
+    const { lightsList, changeLightType, updateLightProperties, deleteLight, addLight } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
 
@@ -37,7 +37,8 @@ export const LightsMenu = () => {
                             light={light}
 
                             onClick={() => handleItemClick(light.id)}
-                            updateLight={ (change: Partial<LightProperties>) => updateLight(light.id, change)}
+                            changeLightType={ (type: LightTypes) => changeLightType(light.id, type)}
+                            updateLight={ (change: Partial<LightProperties>) => updateLightProperties(light.id, change)}
                             deleteLight={ () => deleteLight(light.id)}
                         />
                     );

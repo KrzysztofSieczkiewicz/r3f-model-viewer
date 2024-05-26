@@ -67,7 +67,32 @@ const defaultLight: LightWrapper = {
     color: "white",
     intensity:1,
   }
-  
 }
 
-export { INIT_LIGHTS_LIST, defaultLight };
+const DEFAULT_POINTLIGHT: LightWrapper = {
+  type: LIGHT_TYPES.pointLight,
+  id: newId(),
+  properties: {
+    isVisible: true,
+    position:[2,1,1],
+    distance: 10,
+    color: "white",
+    intensity:1,
+  }
+}
+
+const DEFAULT_SPOTLIGHT: LightWrapper = {
+  type: LIGHT_TYPES.spotLight,
+  id: newId(),
+  properties: {
+    isVisible: true,
+    position:[2,1,1],
+    distance: 10,
+    color: "white",
+    intensity:1,
+    angle: 0.6,
+    penumbra: 0.6,
+  }
+}
+
+export { INIT_LIGHTS_LIST, defaultLight, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT };
