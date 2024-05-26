@@ -1,4 +1,4 @@
-import { newId } from '../utils/idUtil';
+import { generateNewID } from '../utils/idUtil';
 
 export enum LIGHT_TYPES {
   pointLight =  "Point light",
@@ -34,7 +34,7 @@ export type LightWrapper =
 const INIT_LIGHTS_LIST: LightWrapper[] = [
   {
     type: LIGHT_TYPES.pointLight,
-    id:newId(),
+    id:generateNewID(),
     properties: {
       isVisible: true,
       position:[3,0.5,0],
@@ -44,7 +44,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
     }
   },{
     type: LIGHT_TYPES.spotLight,
-    id:newId(),
+    id:generateNewID(),
     properties: {
       isVisible: true,
       position:[-1,2.25,-1],
@@ -57,21 +57,9 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
   }
 ]
 
-const defaultLight: LightWrapper = {
-  type: LIGHT_TYPES.pointLight,
-  id:newId(),
-  properties: {
-    isVisible: true,
-    position:[2,1,1],
-    distance: 10,
-    color: "white",
-    intensity:1,
-  }
-}
-
 const DEFAULT_POINTLIGHT: LightWrapper = {
   type: LIGHT_TYPES.pointLight,
-  id: newId(),
+  id: generateNewID(),
   properties: {
     isVisible: true,
     position:[2,1,1],
@@ -83,7 +71,7 @@ const DEFAULT_POINTLIGHT: LightWrapper = {
 
 const DEFAULT_SPOTLIGHT: LightWrapper = {
   type: LIGHT_TYPES.spotLight,
-  id: newId(),
+  id: generateNewID(),
   properties: {
     isVisible: true,
     position:[2,1,1],
@@ -95,4 +83,4 @@ const DEFAULT_SPOTLIGHT: LightWrapper = {
   }
 }
 
-export { INIT_LIGHTS_LIST, defaultLight, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT };
+export { INIT_LIGHTS_LIST, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT };

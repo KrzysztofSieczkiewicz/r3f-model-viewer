@@ -11,7 +11,7 @@ export const Assets = () => {
         
     return (
         assetsList.map((asset) => {
-            if(!asset.visible) return;
+            if(!asset.visible) return <></>;
             return (
                 <RenderedAsset 
                     key={asset.id}

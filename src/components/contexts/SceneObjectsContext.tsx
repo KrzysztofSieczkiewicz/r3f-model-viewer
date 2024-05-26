@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { AssetWrapper, INIT_ASSET_LIST, defaultAsset } from "../../models/Asset";
-import { LightWrapper, INIT_LIGHTS_LIST, defaultLight, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
+import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
@@ -65,7 +65,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     }, [lightsList]);
 
     const addLight = useCallback(() => {
-        const extendedLights = [...lightsList, defaultLight] as LightWrapper[];
+        const extendedLights = [...lightsList, DEFAULT_POINTLIGHT] as LightWrapper[];
         setLightsList(extendedLights);
     }, [lightsList]);
 

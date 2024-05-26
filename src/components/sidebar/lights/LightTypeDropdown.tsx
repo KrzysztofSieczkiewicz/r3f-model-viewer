@@ -4,7 +4,7 @@ import styles from './LightTypeDropdown.module.css';
 import { LIGHT_TYPES } from '../../../models/Light';
 
 type Props = {
-    selected: string,
+    current: string,
     selectionList: SelectionList[],
     handleChange: (item: LIGHT_TYPES) => void
 }
@@ -15,7 +15,7 @@ type SelectionList = {
 }
 
 export const LightTypeDropdown = (props: Props): JSX.Element => {
-    const { selected: value, selectionList: list, handleChange } = props;
+    const { current, selectionList: list, handleChange } = props;
 
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -58,7 +58,7 @@ export const LightTypeDropdown = (props: Props): JSX.Element => {
                     toggleList()
                 }}
             >
-                <div className={styles.value}>{getDisplayNameByType(value)}</div>
+                <div className={styles.value}>{getDisplayNameByType(current)}</div>
                 {isOpen
                 ? <span className={styles.arrow}>&#8657;</span>
                 : <span className={styles.arrow}>&#8659;</span>}

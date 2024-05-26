@@ -12,7 +12,7 @@ import { DeleteItemButton } from '../common/DeleteItemButton';
 
 type Props = |{
     isActive: boolean,
-    light: LightWrapper
+    light: LightWrapper,
 
     onClick: () => void,
     changeLightType: (type: LightTypes) => void,
@@ -34,7 +34,7 @@ export const LightItem = ({ isActive, light, onClick, changeLightType, updateLig
             >
                 <LightTypeIcon type={light.type} />
                 <LightTypeDropdown 
-                    selected={light.type} 
+                    current={light.type} 
                     selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
                     handleChange={(val) => changeLightType(val)} 
                 />
