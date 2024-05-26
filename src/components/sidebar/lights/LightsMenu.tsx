@@ -39,13 +39,11 @@ export const LightsMenu = () => {
                             onClick={() => handleItemClick(light.id)}
                             changeLightType={ (type: LightTypes) => changeLightType(light.id, type)}
                             updateLight={ (change: Partial<LightProperties>) => updateLightProperties(light.id, change)}
-                            deleteLight={ () => deleteLight(light.id)}
                         />
                     );
                 })}
 
             </section>
-            
         </div>
     );
 }
