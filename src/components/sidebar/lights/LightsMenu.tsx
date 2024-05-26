@@ -37,8 +37,6 @@ export const LightsMenu = () => {
                             light={light}
 
                             onClick={() => handleItemClick(light.id)}
-                            changeLightType={ (type: LightTypes) => changeLightType(light.id, type)}
-                            updateLight={ (change: Partial<LightProperties>) => updateLightProperties(light.id, change)}
                         />
                     );
                 })}
