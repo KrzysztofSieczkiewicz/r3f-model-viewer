@@ -1,5 +1,4 @@
-import { nanoid } from 'nanoid';
-import { newId } from '../utils/generalUtil';
+import { generateNewID } from '../utils/idUtil';
 
 export type AssetWrapper = {
     id: string,
@@ -17,7 +16,7 @@ export type AssetWrapper = {
 
 const INIT_ASSET_LIST: AssetWrapper[] = [
     {
-    id: newId(),
+    id: generateNewID(),
     name: "pear",
     object: "toBeReplaced",
     position:[0,0,0],
@@ -29,7 +28,7 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
     receiveShadow: true,
     visible: true,
     },{
-    id: newId(),
+    id: generateNewID(),
     name: "pear",
     object: "toBeReplaced",
     position:[1,0,1],
@@ -44,7 +43,7 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
 ]
 
 const defaultAsset: AssetWrapper = {
-    id: newId(),
+    id: generateNewID(),
     name: "pear",
     object: "toBeReplaced",
     position:[0.25,0.5,0.75],

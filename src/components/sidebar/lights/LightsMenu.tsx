@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import styles from '../Sidebar.module.css';
+import lightStyles from './Lights.module.css'
 import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 
 import { LightItem } from './LightItem';
@@ -8,11 +9,11 @@ import { LightWrapper } from '../../../models/Light';
 
 
 export const LightsMenu = () => {
-    const { lightsList, updateLight } = useSceneObjectsContext();
+    const { lightsList, addLight } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
 
-    const handleItemClick = (id: string) => {
+    const toggleItemExtension = (id: string) => {
         if (activeId === id) {
             setActiveItem("");
         } else {
@@ -23,8 +24,7 @@ export const LightsMenu = () => {
     return (
         <div className={styles.menu}>
             <section className={styles.menuSection}>
-                <h3 className={styles.sectionHeader}>Add/Remove</h3>
-                <p> this section should contain methods to add new lights</p>
+                <button className={lightStyles.addButton} onClick={() => {addLight()}}> ADD NEW </button>
             </section>
             <section className={styles.menuSection}>
                 <h3 className={styles.sectionHeader}>Lights</h3>
@@ -32,17 +32,16 @@ export const LightsMenu = () => {
                 {lightsList.map((light: LightWrapper) => {
                     return (
                         <LightItem
-                            light={light}
-                            updateLight={ (light: LightWrapper) => updateLight(light)}
                             key={light.id}
-                            active={activeId === light.id}
-                            onClick={() => handleItemClick(light.id)}
+                            isActive={activeId === light.id}
+                            light={light}
+
+                            toggleExtend={() => toggleItemExtension(light.id)}
                         />
                     );
                 })}
 
             </section>
-            
         </div>
     );
 }

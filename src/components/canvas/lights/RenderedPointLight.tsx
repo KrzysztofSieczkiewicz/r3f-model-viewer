@@ -4,9 +4,9 @@ import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext
 
 import { PointLight } from "three";
 
-import { LightWrapper } from "../../../models/Light"
+import { LightProperties, LightWrapper, PointLightProperties } from "../../../models/Light"
 import { LightTypeBillboard } from './LightTypeBillboard';
-import { PositionControls } from '../PositionControls';
+import { LightsGizmo } from "./LightsGizmo";
 
 
 type Props = {
@@ -15,30 +15,31 @@ type Props = {
 }
 
 export const RenderedPointLight = ( {light, isSelected}: Props) => {
-    const { updateLight } = useSceneObjectsContext();
+    const { updateLightProperties: updateLight } = useSceneObjectsContext();
     const { updateSelected } = useSidebarControlsContext();
+
+    const { color, position, distance, intensity } = light.properties as PointLightProperties;
     
     let lightRef = useRef<PointLight>(null);
 
     return (
         <group>
             {isSelected && 
-                <PositionControls
-                object={light}
-                handleChange={(newLight) => { updateLight(newLight as LightWrapper) }}
+                <LightsGizmo
+                    position={position}
+                    handleChange={(change: Partial<LightProperties>) => { updateLight(light.id, change) }}
                 />
             }
             <pointLight
                 key={light.id} 
-                position={light.position}
-                rotation={[0,0,0]}
+                position={position}
                 ref={lightRef}
-                color={light.color} 
-                intensity={light.intensity}
-                distance={light.distance}
+                color={color} 
+                intensity={intensity}
+                distance={distance}
             >
                 <LightTypeBillboard 
-                    lightType={light.type} 
+                    type={light.type} 
                     onClick={() => updateSelected(light.id) } />
             </pointLight>
         </group>

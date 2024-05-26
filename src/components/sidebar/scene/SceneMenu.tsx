@@ -4,6 +4,7 @@ import styles from './../Sidebar.module.css'
 import { ColorPicker } from "../common/ColorPicker";
 import { Slider } from "../common/Slider";
 import { useScene } from "../../contexts/SceneContext";
+import { Checkbox } from "../common/Checkbox";
 
 export const SceneMenu = () => {
     const [ scene, setScene ] = useScene();
@@ -19,6 +20,10 @@ export const SceneMenu = () => {
             </section>
             <section className={styles.menuSection}>
                 <h3 className={styles.sectionHeader}>Ambient light</h3>
+                <Checkbox
+                        name={'Active'}
+                        value={scene.isAmbientActive}
+                        handleChange={(val) => setScene( {isAmbientActive: val} )} />
                 <ColorPicker name="Color"
                     currentColor={scene.ambientColor}
                     handleChange={(val) =>  setScene({ambientColor: val}) }

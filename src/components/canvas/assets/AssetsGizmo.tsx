@@ -2,12 +2,11 @@ import { PivotControls } from "@react-three/drei";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Euler, Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
-import { AssetWrapper } from "../../models/Asset";
-import { LightWrapper } from "../../models/Light";
+import { AssetWrapper } from "../../../models/Asset";
 
 type Props = {
-    object: AssetWrapper | LightWrapper,
-    handleChange: (newObject: AssetWrapper | LightWrapper) => void
+    asset: AssetWrapper,
+    handleChange: (change: Partial<AssetWrapper>) => void
 }
 
 type Transformation = {
@@ -15,7 +14,7 @@ type Transformation = {
     rotation: [number, number, number]
 }
 
-export const PositionControls = ( {object: asset, handleChange}: Props) => {
+export const AssetsGizmo = ( {asset, handleChange}: Props) => {
     const [ transformation, setTransformation ] = useState<Transformation>({
         position: asset.position, 
         rotation: asset.rotation
@@ -49,11 +48,10 @@ export const PositionControls = ( {object: asset, handleChange}: Props) => {
 
     // Update attached object on local changes
     useEffect(() => {
-        const newAsset = structuredClone(asset);
-        newAsset.position = transformation.position;
-        newAsset.rotation = transformation.rotation;
-
-        handleChange(newAsset);
+        handleChange({
+            position: transformation.position, 
+            rotation: transformation.rotation
+        });
     }, [transformation]);
 
     // Update controls when values are changed externally

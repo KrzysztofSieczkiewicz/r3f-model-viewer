@@ -3,15 +3,15 @@ import spotLightBillboard from '../../../icons/lightTypes/spotLight.svg';
 
 import React, { useRef, useState } from 'react';
 import { Billboard, Sphere, useHelper, useTexture } from "@react-three/drei";
-import { LIGHT_TYPES, LightOption } from '../../../models/Light';
+import { LIGHT_TYPES, LightTypes } from '../../../models/Light';
 import { BoxHelper, Mesh } from 'three';
 
 type Props = {
-    lightType: LightOption
+    type: LightTypes
     onClick: () => void
 }
 
-export const LightTypeBillboard = ( {lightType, onClick}: Props) => {
+export const LightTypeBillboard = ( {type, onClick}: Props) => {
 
     const [isHovered, setIsHovered] = useState<boolean>(false)
 
@@ -19,7 +19,7 @@ export const LightTypeBillboard = ( {lightType, onClick}: Props) => {
 
     // HANDLE DISPLAYED IMAGE TYPE -> TODO: CONSIDER MOVING TO A SEPARATE HOOK
     let image = "";
-    switch (lightType) {
+    switch (type) {
         case LIGHT_TYPES.pointLight:
             image = pointLightBillboard
             break;

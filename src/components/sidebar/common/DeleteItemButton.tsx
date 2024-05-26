@@ -8,12 +8,13 @@ type Props = {
 
 export const DeleteItemButton = ({deleteObject} :Props): JSX.Element => {
     return (
-        <button
-            className={styles.button}
-            onClick={(e) => {
-                e.stopPropagation();
-                deleteObject();
-            }}
-        ><DeleteIcon className={styles.icon}/></button>
+        <span className={styles.container}>
+            <button
+                className={styles.button}
+                onClick={() =>  deleteObject() } 
+            >
+                <DeleteIcon className={styles.icon}/>
+            </button>
+        </span>
     );
 }

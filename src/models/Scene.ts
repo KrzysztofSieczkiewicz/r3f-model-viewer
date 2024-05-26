@@ -1,18 +1,18 @@
 export type SceneWrapper = {
+  selectedObjectId: string,
   backgroundColor: string,
-  ambientLight: {
-    color: string,
-    intensity: number
-  },
+  isAmbientActive: boolean
+  ambientColor: string,
+  ambientIntensity: number,
   viewCameraRotation: [number,number,number],
 }
 
 const INITIAL_SCENE_SETTINGS = {
+  selectedObjectId: "",
   backgroundColor: "#262626",
-  ambientLight: {
-    color: "#ffffff",
-    intensity: 0.1
-  },
+  isAmbientActive: true,
+  ambientColor: "#ffffff",
+  ambientIntensity: 0.1,
   viewCameraRotation: [0, 0, 0] as [number,number,number],
 }
 

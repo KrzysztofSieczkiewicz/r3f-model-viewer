@@ -35,6 +35,7 @@ export const AssetsMenu = () => {
                         <AssetItem
                             key={asset.id}
                             isActive={activeId === asset.id}
+                            
                             isVisible={asset.visible}
                             name={asset.name}
                             position={asset.position}

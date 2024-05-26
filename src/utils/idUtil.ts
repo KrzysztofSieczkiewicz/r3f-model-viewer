@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
 
-export const newId = () => {
+export function generateNewID() {
     return nanoid(7)
 }

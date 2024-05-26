@@ -5,9 +5,9 @@ import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext
 import { useHelper } from "@react-three/drei";
 import { SpotLight, SpotLightHelper } from "three";
 
-import { LightWrapper } from "../../../models/Light"
+import { LightProperties, LightWrapper, SpotLightProperties } from "../../../models/Light"
 import { LightTypeBillboard } from "./LightTypeBillboard";
-import { PositionControls } from "../PositionControls";
+import { LightsGizmo } from "./LightsGizmo";
 
 type Props = {
     light: LightWrapper,
@@ -15,33 +15,35 @@ type Props = {
 }
 
 export const RenderedSpotLight = ( {light, isSelected}: Props) => {
-    const { updateLight } = useSceneObjectsContext();
+    const { updateLightProperties: updateLight } = useSceneObjectsContext();
     const { updateSelected } = useSidebarControlsContext();
 
     const lightRef = useRef<SpotLight>(null);
 
-    useHelper((isSelected) && lightRef as any, SpotLightHelper, light.color);
+    const { color, position, distance, intensity, angle, penumbra } = light.properties as SpotLightProperties;
+
+    useHelper((isSelected) && lightRef as any, SpotLightHelper, color);
 
     return (
         <group>
             {isSelected && 
-                <PositionControls
-                object={light}
-                handleChange={(newLight) => { updateLight(newLight as LightWrapper) }}
+                <LightsGizmo
+                    position={position}
+                    handleChange={(change: Partial<LightProperties>) => { updateLight(light.id, change) }}
                 />
             }
             <spotLight // TODO: ADD TARGET HANDLING
                 key={light.id} 
-                position={light.position}
-                distance={light.distance}
+                position={position}
+                distance={distance}
                 ref={lightRef}
-                color={light.color}
-                intensity={light.intensity}
-                angle={light.angle}
-                penumbra={light.penumbra}
+                color={color}
+                intensity={intensity}
+                angle={angle}
+                penumbra={penumbra}
             >
                 <LightTypeBillboard 
-                    lightType={light.type}
+                    type={light.type}
                     onClick={() => updateSelected(light.id) } />
             </spotLight>
         </group>

@@ -10,7 +10,7 @@ type Props = {
 
 export const RenderedLight = ( {light, isSelected}: Props) => {
 
-    if(!light.visible) return;
+    if(!light.properties.isVisible) return;
 
     if(light.type === LIGHT_TYPES.pointLight) {
         return (

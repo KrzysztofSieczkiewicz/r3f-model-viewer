@@ -1,23 +1,6 @@
 import React, { useCallback, useContext, useRef, useSyncExternalStore } from "react";
 import { ReactNode, createContext } from "react";
-
-/* START EXPORT */
-const INITIAL_SCENE = {
-  selectedObjectId: "",
-  backgroundColor: "#262626",
-  ambientColor: "#ffffff",
-  ambientIntensity: 0.1,
-  viewCameraRotation: [0, 0, 0] as [number,number,number],
-}
-
-export type SceneWrapper = {
-  selectedObjectId: string,
-  backgroundColor: string,
-  ambientColor: string,
-  ambientIntensity: number,
-  viewCameraRotation: [number,number,number],
-}
-/* END EXPORT */
+import { INITIAL_SCENE_SETTINGS, SceneWrapper } from "../../models/Scene";
 
 function useSceneData(): {
   get: () => SceneWrapper;
@@ -26,7 +9,7 @@ function useSceneData(): {
 } {
 
   const scene = useRef({
-    ...INITIAL_SCENE
+    ...INITIAL_SCENE_SETTINGS
   });
   const subscribers = useRef(new Set<()=>void>());
   

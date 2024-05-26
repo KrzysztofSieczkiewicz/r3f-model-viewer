@@ -1,77 +1,47 @@
 import React from 'react';
 import styles from './Lights.module.css';
 
-import { Slider } from '../common/Slider';
-import { PositionSliders } from '../common/PositionSliders';
-import { ColorPicker } from '../common/ColorPicker';
-import { LightTypeDropdown } from './LightTypeDropdown';
-import { VisibilityButton } from '../common/VisibilityButton';
 import { LIGHT_TYPES, LightWrapper } from '../../../models/Light';
-import { LightTypeIcon } from './LightTypeIcon';
+import { PointLightControls } from './controlsTypes/PointLightControls';
+import { SpotLightControls } from './controlsTypes/SpotLightControls';
+import { DeleteItemButton } from '../common/DeleteItemButton';
+import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
+import { LightItemHeader } from './LightItemHeader';
 
-type Props = |{
-    active: boolean,
-    onClick: () => void,
+type Props = {
+    isActive: boolean,
     light: LightWrapper,
-    updateLight: (light: LightWrapper) => void,
+
+    toggleExtend: () => void,
 }
 
-export const LightItem = ({ active, onClick, light, updateLight }: Props) => {
+export const LightItem = ({ isActive, light, toggleExtend }: Props) => {
+    const { deleteLight, } = useSceneObjectsContext();
 
-    const handleIsActive = () => {
-        return active ? String.fromCharCode(8657) : String.fromCharCode(8659);
+    const renderLightHeader = () => {
+        return <LightItemHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
+    }
+
+    const renderLightControls = () => {
+        switch(light.type) {
+            case LIGHT_TYPES.pointLight:
+                return <PointLightControls id={light.id} properties={light.properties} />
+            case LIGHT_TYPES.spotLight:
+                return <SpotLightControls id={light.id} properties={light.properties} />
+        }
     }
 
     return (
-        <div className={active ? `${styles.lightContainer} ${styles.active}` : styles.lightContainer}>
-            <div className={styles.lightHeader}
-                onClick={onClick}
-            >
-                <LightTypeIcon light = {light} />
-                <LightTypeDropdown 
-                    selected={light.type} 
-                    selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
-                    handleChange={(val) => updateLight( {...structuredClone(light), type: val} )} 
-                />
-                <div className={styles.colorPreview} style={{backgroundColor: light.color}}/>
-                <VisibilityButton 
-                    isVisible={light.visible}
-                    updateObject={ (val) => updateLight( {...structuredClone(light), visible: val} )} 
-                />
-                <span className={styles.extendIcon}>{ handleIsActive() }</span>
-            </div>
+        <div className={isActive ? `${styles.lightContainer} ${styles.active}` : styles.lightContainer}>
+            
+            {renderLightHeader()}
 
-            {active && <div className={styles.lightBody}>
-                <PositionSliders name="Position"
-                    value={light.position} step={0.01}
-                    handleChange={(val) => updateLight( {...structuredClone(light), position: val} )} 
-                />
-                <ColorPicker name="Color" 
-                    currentColor={light.color}
-                    handleChange={(val) => updateLight( {...structuredClone(light), color: val} )}  />
-                <Slider name="Intensity"
-                    value={light.intensity}
-                    handleChange={(val) => updateLight( {...structuredClone(light), intensity: val} )} 
-                    min={0} max={3} step={0.005} defaultValue={1}
-                />
-                <Slider name="Distance"
-                    value={light.distance}
-                    handleChange={(val) => updateLight( {...structuredClone(light), distance: val} )} 
-                    min={0} max={100} step={0.1} defaultValue={10}
-                />
-                {light.type === LIGHT_TYPES.spotLight && <>
-                    <Slider name="Angle"
-                        value={light.angle}
-                        handleChange={(val) => updateLight( {...structuredClone(light), angle: val} )} 
-                        min={0} max={1} step={0.002} defaultValue={0.3}
-                    />
-                    <Slider name="Penumbra"
-                        value={light.penumbra}
-                        handleChange={(val) => updateLight( {...structuredClone(light), penumbra: val} )} 
-                        min={0} max={1} step={0.002} defaultValue={0.6}
-                    />
-                </>}
-            </div>}
+            {isActive &&
+            <div className={styles.lightBody}>
+                <DeleteItemButton deleteObject={() => deleteLight(light.id)}/>
+                {renderLightControls()}
+            </div>
+            }
         </div>
     );
 }
