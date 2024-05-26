@@ -28,7 +28,7 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
         <group>
             {isSelected && 
                 <LightsGizmo
-                    light={light}
+                    position={position}
                     handleChange={(change: Partial<LightProperties>) => { updateLight(light.id, change) }}
                 />
             }
@@ -43,7 +43,7 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
                 penumbra={penumbra}
             >
                 <LightTypeBillboard 
-                    lightType={light.type}
+                    type={light.type}
                     onClick={() => updateSelected(light.id) } />
             </spotLight>
         </group>

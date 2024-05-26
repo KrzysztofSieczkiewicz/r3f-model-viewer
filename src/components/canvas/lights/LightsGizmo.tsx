@@ -5,21 +5,21 @@ import { Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
 import { LightProperties, LightWrapper } from "../../../models/Light";
 
 type Props = {
-    light: LightWrapper,
+    position: [number, number, number],
     handleChange: (change: Partial<LightProperties>) => void
 }
 
 
-export const LightsGizmo = ( {light, handleChange}: Props) => {
+export const LightsGizmo = ( {position, handleChange}: Props) => {
 
-    const [ handledPosition, setHandledPosition ] = useState(light.properties.position);
+    const [ handledPosition, setHandledPosition ] = useState(position);
 
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
 
     // Allign controls to the object on init
     useEffect(() => {
         const initialMatrix = new Matrix4();
-        const initialControlsPosition = new Vector3(...light.properties.position);
+        const initialControlsPosition = new Vector3(...position);
 
         initialMatrix.compose(initialControlsPosition, new Quaternion(0,0,0), new Vector3(1,1,1))
 
@@ -45,9 +45,9 @@ export const LightsGizmo = ( {light, handleChange}: Props) => {
     useEffect(() => {
         if (!controlsRef.current) return;
 
-        controlsRef.current.position.set(...light.properties.position);
+        controlsRef.current.position.set(...position);
         controlsRef.current.updateMatrix();
-    }, [light.properties.position]);
+    }, [position]);
 
 
     return (

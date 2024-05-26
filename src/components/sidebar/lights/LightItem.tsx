@@ -8,7 +8,7 @@ import { DeleteItemButton } from '../common/DeleteItemButton';
 import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 import { LightItemHeader } from './LightItemHeader';
 
-type Props = |{
+type Props = {
     isActive: boolean,
     light: LightWrapper,
 
@@ -19,13 +19,7 @@ export const LightItem = ({ isActive, light, toggleExtend }: Props) => {
     const { deleteLight, } = useSceneObjectsContext();
 
     const renderLightHeader = () => {
-        return (
-            <LightItemHeader
-                isActive={isActive}
-                light={light}
-                toggleExtend={() => toggleExtend()}
-            />
-        );
+        return <LightItemHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
     }
 
     const renderLightControls = () => {
