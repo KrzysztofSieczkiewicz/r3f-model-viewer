@@ -16,7 +16,7 @@ type SceneObjectsContext = {
     changeLightType: (id: string, type: LightTypes) => void,
     updateLightProperties: (id: string, change: Partial<LightProperties>) => void,
     deleteLight: (id: string) => void,
-    addLight: () => void,
+    addLight: (light: LightWrapper) => void,
 }
 
 export const SceneObjectsContext = createContext<SceneObjectsContext | null>( null );
@@ -64,8 +64,8 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setLightsList(filteredLights);
     }, [lightsList]);
 
-    const addLight = useCallback(() => {
-        const extendedLights = [...lightsList, DEFAULT_POINTLIGHT] as LightWrapper[];
+    const addLight = useCallback((light: LightWrapper) => {
+        const extendedLights = [...lightsList, light] as LightWrapper[];
         setLightsList(extendedLights);
     }, [lightsList]);
 

@@ -1,0 +1,36 @@
+@import '../../../App.module.css';
+
+.mainButton {
+    display: block;
+    width: 75%;
+    height: 1.5rem;
+    margin: 0.5rem auto;
+
+    border: 1px solid black;
+
+    color: var(--color-platinum);
+    background-color: var(--color-resin-brighter);
+
+    cursor: pointer;
+}
+
+.list {
+    position: absolute;
+    top: 3rem;
+    left: 4.25rem;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+
+    width: 10rem;
+    padding: 0;
+}
+
+.listElement {
+    width: 100%;
+    height: 1.25rem;
+}
+
+.lightButton {
+    width: 100%;
+}
