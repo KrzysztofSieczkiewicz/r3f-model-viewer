@@ -1,11 +1,11 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { EffectWrapper, INIT_EFFECTS_LIST } from "../../models/Effect";
+import { EffectProperties, EffectTypes, EffectWrapper, INIT_EFFECTS_LIST } from "../../models/Effect";
 
 type EffectsContext = {
     effectsList: EffectWrapper[],
-    updateEffect: (effect: EffectWrapper) => void;
+    updateEffectProperties: (type: EffectTypes, change: Partial<EffectProperties>) => void;
 }
 
 export const EffectsContext = createContext<EffectsContext | null>( null );
@@ -14,17 +14,21 @@ export const EffectsContextProvider = (props: {children: ReactNode}): JSX.Elemen
 
     const [ effectsList, setEffectsList ] = useState<EffectWrapper[]>(INIT_EFFECTS_LIST)
 
-    const updateEffect = useCallback((newEffect: EffectWrapper) => {
-      const index = effectsList.findIndex(effect => newEffect.id === effect.id);
 
-      const newEffectsList = [...effectsList];
-      newEffectsList[index] = newEffect;
+    const updateEffectProperties = useCallback((type: EffectTypes, change: Partial<EffectProperties>) => {
+        const index = effectsList.findIndex(effect => effect.type === type);
+        if(index === -1) return;
 
-      setEffectsList(newEffectsList);
-  }, [effectsList]);
+        const newEffect = { ...effectsList[index] };
+        newEffect.properties = { ...effectsList[index].properties, ...change };
+
+        const newEffectsList = effectsList.map( (effect, i) => i==index ? newEffect : effect);
+        setEffectsList(newEffectsList);
+    }, [effectsList]);  
+
 
     return (
-        <EffectsContext.Provider value={{ effectsList, updateEffect }} >
+        <EffectsContext.Provider value={{ effectsList, updateEffectProperties }} >
             {props.children}
         </EffectsContext.Provider>
     );

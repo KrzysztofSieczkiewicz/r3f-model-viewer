@@ -1,21 +1,22 @@
 import React from 'react';
-import { EffectWrapper } from '../../../models/Effect';
+import { GlitchProperties } from '../../../models/Effect';
 import { Glitch } from '@react-three/postprocessing';
 import { Vector2 } from 'three';
 
 type Props = {
-    effect: EffectWrapper
+    properties: GlitchProperties
 }
 
-export const RenderedGlitch = ( { effect }: Props) => {
+export const RenderedGlitch = ( { properties }: Props) => {
 
+    if (!properties.enabled) return; 
     return (
         <Glitch 
-            mode={effect.glitchMode}
-            duration={new Vector2(...effect.duration)}
-            delay={new Vector2(...effect.delay)}
-            strength={new Vector2(...effect.strength)}
-            active={effect.enabled}
+            mode={properties.glitchMode}
+            duration={new Vector2(...properties.duration)}
+            delay={new Vector2(...properties.delay)}
+            strength={new Vector2(...properties.strength)}
+            active={properties.enabled}
         />
     );
 }

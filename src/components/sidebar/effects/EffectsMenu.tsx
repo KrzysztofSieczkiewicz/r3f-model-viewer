@@ -8,7 +8,7 @@ import { EffectItem } from './EffectItem';
 
 
 export const EffectsMenu = () => {
-    const { effectsList, updateEffect } = useEffectsContext();
+    const { effectsList } = useEffectsContext();
    
     const [activeId, setActiveItem] = useState("");
 
@@ -27,11 +27,10 @@ export const EffectsMenu = () => {
                 {effectsList.map((effect) => {
                     return (
                         <EffectItem
-                            key={effect.id}
+                            key={effect.type}
                             effect={effect}
-                            updateEffect={(newEffect) => updateEffect(newEffect)}
-                            active={activeId === effect.id}
-                            onClick={() => handleItemClick(effect.id)}
+                            active={activeId === effect.type}
+                            onClick={() => handleItemClick(effect.type)}
                         />
                     );
                 })}

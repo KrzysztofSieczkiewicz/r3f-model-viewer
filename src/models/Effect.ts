@@ -1,273 +1,110 @@
-import { Bloom, DepthOfField, Glitch } from '@react-three/postprocessing';
 import { BlendFunction, GlitchMode } from 'postprocessing';
 
-import { nanoid } from 'nanoid';
+// TODO: ADD BarrelDistortion and Halo
+export enum EFFECT_TYPES {
+    bloom = "Bloom",
+    depthOfField = "Depth of Field",
+    glitch =  "Glitch",
+};
+export type EffectTypes = 
+    EFFECT_TYPES.bloom | 
+    EFFECT_TYPES.depthOfField |
+    EFFECT_TYPES.glitch
+;
 
-// TODO [TUTORING]: HOW TO MAINTAIN A SINGLE MODEL FOR A GROUP OF VERY DIFFERENT TYPES?
-// THEY SIGNIFICANTLY VARY IN TERMS OF THE FIELDS CONTAINED
 
-/* START */
-type CommonEffect = {
-    id: string,
-    type: EffectType,
-    name: string,
+type CommonProperties = {
     enabled: boolean,
 }
 
-export type BloomEffect = {
+export type BloomProperties = {
     blendFunction: BlendFunction,
     intensity: number,
     luminanceThreshold: number,
     luminanceSmoothing: number
-} & CommonEffect;
+} & CommonProperties;
 
-export type DepthOfFieldEffect = {
+export type DepthOfFieldProperties = {
     focusDistance: number
     focalLength: number
     bokehScale: number
-} & CommonEffect;
+} & CommonProperties;
 
-export type GlitchEffect = {
-    delay: [number, number],
-    duration: [number, number],
-    strength: number
-} & CommonEffect
-
-export type EffectWrappers = BloomEffect | DepthOfFieldEffect | GlitchEffect;
-/* END */
-
-
-export type EffectWrapper = {
-    id: string,
-    type: EffectType,
-    name: string,
-    enabled: boolean
-
-    // BLOOM
-    blendFunction: BlendFunction,
-    intensity: number,
-    luminanceThreshold: number,
-    luminanceSmoothing: number
-
-    // DEPTH OF FIELD
-    focusDistance: number
-    focalLength: number
-    bokehScale: number
-
-    // GLITCH
-    delay: [number, number],
-    duration: [number, number],
-    strength: [number, number],
+export type GlitchProperties = {
     glitchMode: GlitchMode
-    ratio: number
-};
+    delay: [number, number],
+    duration: [number, number],
+    strength: [number, number]
+} & CommonProperties
 
-export type EffectType = 
-    typeof Bloom | 
-    typeof DepthOfField |
-    typeof Glitch;
-    // TODO: ADD BarrelDistortion and Halo
+export type EffectProperties = BloomProperties | DepthOfFieldProperties | GlitchProperties;
 
+export type EffectWrapper = 
+  { type: EFFECT_TYPES.bloom, properties: BloomProperties } | 
+  { type: EFFECT_TYPES.depthOfField, properties: DepthOfFieldProperties } |
+  { type: EFFECT_TYPES.glitch, properties: GlitchProperties }
+;
 
 export const INIT_EFFECTS_LIST: EffectWrapper[] = [
     {
-        id:nanoid(5),
-        type: Bloom,
-        name: 'Bloom',
-        enabled: false,
+        type: EFFECT_TYPES.bloom,
+        properties: {
+            enabled: true,
+            blendFunction: BlendFunction.ADD,
+            intensity: 1,
+            luminanceThreshold: 0.15,
+            luminanceSmoothing: 0.025,
+        }
+    },
+    {
+        type: EFFECT_TYPES.depthOfField,
+        properties: {
+            enabled: false,
+            focusDistance: 0.0035,
+            focalLength: 0.01,
+            bokehScale: 3,
+        }
+    },
+    {
+        type: EFFECT_TYPES.glitch,
+        properties: {
+            glitchMode: GlitchMode.CONSTANT_MILD,
+            enabled: false,
+            delay: [1.5, 3.5],
+            duration: [0.6, 1.0],
+            strength: [0.1, 0.1],
+        }
+    }
+]
 
+const DEFAULT_BLOOM_EFFECT: EffectWrapper = {
+    type: EFFECT_TYPES.bloom,
+    properties: {
+        enabled: true,
         blendFunction: BlendFunction.ADD,
         intensity: 1,
         luminanceThreshold: 0.15,
         luminanceSmoothing: 0.025,
+    }
+}
 
-        focusDistance: 0.0035,
-        focalLength: 0.01,
-        bokehScale: 3,
-
-        delay: [1.5, 3.5],
-        duration: [0.6, 1.0],
-        strength: [0.3, 1.0],
-        glitchMode: GlitchMode.CONSTANT_MILD,
-        ratio: 0.85
-    },
-    {
-        id:nanoid(5),
-        type: DepthOfField,
-        name: 'Depth of Field',
+const DEFAULT_DOF_EFFECT: EffectWrapper = {
+    type: EFFECT_TYPES.depthOfField,
+    properties: {
         enabled: false,
-
-        blendFunction: BlendFunction.NORMAL,
-        intensity: 1,
-        luminanceThreshold: 0.15,
-        luminanceSmoothing: 0.025,
-
         focusDistance: 0.0035,
         focalLength: 0.01,
         bokehScale: 3,
+    }
+}
 
-        delay: [1.5, 3.5],
-        duration: [0.6, 1.0],
-        strength: [0.3, 1.0],
+const DEFAULT_GLITCH_EFFECT: EffectWrapper = {
+    type: EFFECT_TYPES.glitch,
+    properties: {
         glitchMode: GlitchMode.CONSTANT_MILD,
-        ratio: 0.85
-    },
-    {
-        id:nanoid(5),
-        type: Glitch,
-        name: 'Glitch',
         enabled: false,
-
-        blendFunction: BlendFunction.NORMAL,
-        intensity: 1,
-        luminanceThreshold: 0.15,
-        luminanceSmoothing: 0.025,
-
-        focusDistance: 0.0035,
-        focalLength: 0.01,
-        bokehScale: 3,
-
         delay: [1.5, 3.5],
         duration: [0.6, 1.0],
         strength: [0.1, 0.1],
-        glitchMode: GlitchMode.CONSTANT_MILD,
-        ratio: 0
     }
-]
-
-// import { Bloom, DepthOfField, Glitch } from '@react-three/postprocessing';
-// import { BlendFunction, GlitchMode } from 'postprocessing';
-
-// import { nanoid } from 'nanoid';
-
-// // TODO [TUTORING]: HOW TO MAINTAIN A SINGLE MODEL FOR A GROUP OF VERY DIFFERENT TYPES?
-// // THEY SIGNIFICANTLY VARY IN TERMS OF THE FIELDS CONTAINED
-
-// export type CommonEffect = {
-//     id: string,
-//     type: EffectType,
-//     name: string,
-//     enabled: boolean,
-// }
-
-// export type BloomEffect = {
-//     blendFunction: BlendFunction,
-//     intensity: number,
-//     luminanceThreshold: number,
-//     luminanceSmoothing: number,
-// } & CommonEffect
-
-// export type DepthOfFieldEffect= {
-//     focusDistance: number,
-//     focalLength: number,
-//     bokehScale: number,
-// } & CommonEffect
-
-// export type GlitchEffect = {
-//     delay: [number, number],
-//     duration: [number, number],
-//     strength: [number, number],
-//     glitchMode: GlitchMode
-//     ratio: number
-// } & CommonEffect
-
-// export type GlitchE = {
-//     type: typeof Glitch,
-//     properties: GlitchEffect,
-// }
-// export type BloomE = {
-//     type: typeof Bloom,
-//     properties: BloomEffect,
-// }
-// export type DepthOfFieldE = {
-//     type: typeof DepthOfField,
-//     properties: DepthOfFieldEffect,
-// }
-
-// export type EffectWrapper = GlitchE | BloomE | DepthOfFieldE
-
-// export type EffectType = 
-//     typeof Bloom | 
-//     typeof DepthOfField |
-//     typeof Glitch;
-//     // TODO: ADD BarrelDistortion and Halo
-
-// export const INIT_EFFECTS_LIST: EffectWrapper[] = [
-//     {
-//         type: Bloom,
-//         properties: {
-//             id:nanoid(5),
-//             type: Bloom,
-//             name: 'Bloom',
-//             enabled: false,
-//             blendFunction: BlendFunction.ADD,
-//             intensity: 1,
-//             luminanceThreshold: 0.15,
-//             luminanceSmoothing: 0.025,
-//         }
-//     }
-// export const INIT_EFFECTS_LIST: EffectWrapper[] = [
-//     {
-//         id:nanoid(5),
-//         type: Bloom,
-//         name: 'Bloom',
-//         enabled: false,
-
-//         blendFunction: BlendFunction.ADD,
-//         intensity: 1,
-//         luminanceThreshold: 0.15,
-//         luminanceSmoothing: 0.025,
-
-//         focusDistance: 0.0035,
-//         focalLength: 0.01,
-//         bokehScale: 3,
-
-//         delay: [1.5, 3.5],
-//         duration: [0.6, 1.0],
-//         strength: [0.3, 1.0],
-//         glitchMode: GlitchMode.CONSTANT_MILD,
-//         ratio: 0.85
-//     },
-//     {
-//         id:nanoid(5),
-//         type: DepthOfField,
-//         name: 'Depth of Field',
-//         enabled: false,
-
-//         blendFunction: BlendFunction.NORMAL,
-//         intensity: 1,
-//         luminanceThreshold: 0.15,
-//         luminanceSmoothing: 0.025,
-
-//         focusDistance: 0.0035,
-//         focalLength: 0.01,
-//         bokehScale: 3,
-
-//         delay: [1.5, 3.5],
-//         duration: [0.6, 1.0],
-//         strength: [0.3, 1.0],
-//         glitchMode: GlitchMode.CONSTANT_MILD,
-//         ratio: 0.85
-//     },
-//     {
-//         id:nanoid(5),
-//         type: Glitch,
-//         name: 'Glitch',
-//         enabled: false,
-
-//         blendFunction: BlendFunction.NORMAL,
-//         intensity: 1,
-//         luminanceThreshold: 0.15,
-//         luminanceSmoothing: 0.025,
-
-//         focusDistance: 0.0035,
-//         focalLength: 0.01,
-//         bokehScale: 3,
-
-//         delay: [1.5, 3.5],
-//         duration: [0.6, 1.0],
-//         strength: [0.1, 0.1],
-//         glitchMode: GlitchMode.CONSTANT_MILD,
-//         ratio: 0
-//     }
-// ]
+}

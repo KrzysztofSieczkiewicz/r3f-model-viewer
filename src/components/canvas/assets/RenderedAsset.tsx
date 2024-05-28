@@ -63,8 +63,8 @@ export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelec
                 onPointerOver={() => setIsHovered(true) }
                 onPointerOut={() => setIsHovered(false) }
                 onClick={() => updateSelected(asset.id) } 
-                castShadow = {asset.castShadow}
-                receiveShadow = {asset.receiveShadow}
+                castShadow={asset.castShadow}
+                receiveShadow={asset.receiveShadow}
                 geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
                 material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
                 position={asset.position}
