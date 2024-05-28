@@ -108,3 +108,5 @@ const DEFAULT_GLITCH_EFFECT: EffectWrapper = {
         strength: [0.1, 0.1],
     }
 }
+
+export { DEFAULT_BLOOM_EFFECT, DEFAULT_DOF_EFFECT, DEFAULT_GLITCH_EFFECT };
