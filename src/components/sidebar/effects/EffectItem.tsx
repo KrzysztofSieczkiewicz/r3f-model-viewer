@@ -1,28 +1,23 @@
 import React from 'react';
 import styles from './Effects.module.css'
 
-import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-
 import { EFFECT_TYPES, EffectWrapper } from '../../../models/Effect';
 import { BloomControls } from './controlsTypes/BloomControls';
 import { DepthOfFieldControls } from './controlsTypes/DepthOfFieldControls';
 import { GlitchControls } from './controlsTypes/GlitchControls';
+import { EffectItemHeader } from './EffectItemHeader';
 
 
 type Props = {
     active: boolean,
     effect: EffectWrapper
-    onClick: () => void
+    toggleExtend: () => void
 }
 
-export const EffectItem = ( {active, effect, onClick}: Props) => {
+export const EffectItem = ( {active, effect, toggleExtend}: Props) => {
 
-    const handleEffectName = () => {
-        return effect.type.charAt(0).toUpperCase() + effect.type.slice(1);
-    }
-
-    const handleIsActive = () => {
-        return active ? String.fromCharCode(8657) : String.fromCharCode(8659);
+    const renderEffectHeader = () => {
+        return <EffectItemHeader effect={effect} isActive={active} toggleExtend={() => toggleExtend()} />
     }
 
     const renderEffectControls = () => {
@@ -38,13 +33,7 @@ export const EffectItem = ( {active, effect, onClick}: Props) => {
 
     return (
         <div className={active ? `${styles.effectContainer} ${styles.active}` : styles.effectContainer}>
-            <div className={styles.effectHeader}
-                onClick={onClick}
-            >
-                <PointLightIcon className={styles.effectIcon} />
-                <p className={styles.effectName}>{ handleEffectName() }</p>
-                <span className={styles.extendIcon}>{ handleIsActive() }</span>
-            </div>
+            {renderEffectHeader()}
             {active && renderEffectControls()}
         </div>
     );

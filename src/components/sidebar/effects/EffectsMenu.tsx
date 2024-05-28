@@ -4,6 +4,7 @@ import { useEffectsContext } from '../../contexts/EffectsContext';
 import styles from './../Sidebar.module.css';
 
 import { EffectItem } from './EffectItem';
+import { EffectTypes } from '../../../models/Effect';
 
 
 
@@ -12,11 +13,11 @@ export const EffectsMenu = () => {
    
     const [activeId, setActiveItem] = useState("");
 
-    const handleItemClick = (id: string) => {
-        if (activeId === id) {
+    const handleItemClick = (type: EffectTypes) => {
+        if (activeId === type) {
             setActiveItem("");
         } else {
-            setActiveItem(id);
+            setActiveItem(type);
         }
     };
     
@@ -30,7 +31,7 @@ export const EffectsMenu = () => {
                             key={effect.type}
                             effect={effect}
                             active={activeId === effect.type}
-                            onClick={() => handleItemClick(effect.type)}
+                            toggleExtend={() => handleItemClick(effect.type)}
                         />
                     );
                 })}
