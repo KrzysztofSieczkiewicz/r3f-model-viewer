@@ -16,7 +16,7 @@ type SceneObjectsContext = {
     changeLightType: (id: string, type: LightTypes) => void,
     updateLightProperties: (id: string, change: Partial<LightProperties>) => void,
     deleteLight: (id: string) => void,
-    addLight: () => void,
+    addLight: (light: LightWrapper) => void,
 }
 
 export const SceneObjectsContext = createContext<SceneObjectsContext | null>( null );
@@ -25,6 +25,11 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
 
     const [ assetsList, setAssetsList ] = useState<AssetWrapper[]>(INIT_ASSET_LIST);
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
+
+    const addLight = useCallback((light: LightWrapper) => {
+        const extendedLights = [...lightsList, light] as LightWrapper[];
+        setLightsList(extendedLights);
+    }, [lightsList]);
 
     const changeLightType = useCallback((id: string, type: LightTypes) => {
         const index = lightsList.findIndex(light => light.id === id);
@@ -60,15 +65,22 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     }, [lightsList]);
 
     const deleteLight = useCallback((id: string) => {
-        const filteredLights = lightsList.filter( (asset) => asset.id !== id );
+        const index = lightsList.findIndex(light => light.id === id);
+        if (index === -1) return;
+
+        const filteredLights = lightsList.filter( (light) => light.id !== id );
         setLightsList(filteredLights);
     }, [lightsList]);
 
-    const addLight = useCallback(() => {
-        const extendedLights = [...lightsList, DEFAULT_POINTLIGHT] as LightWrapper[];
-        setLightsList(extendedLights);
-    }, [lightsList]);
+    
 
+
+    // TODO: REPLACE "defaultAsset" WITH PROPER ASSET IMPORT LOGIC 
+    // (ESP WITH CREATING NEW ID EACH TIME)
+    const addAsset = () => {
+        const extendedAssetsList = [...assetsList, defaultAsset] as AssetWrapper[];
+        setAssetsList(extendedAssetsList);
+    };
 
     const updateAsset = useCallback((id: string, change: Partial<AssetWrapper>) => {
         const index = assetsList.findIndex(asset => asset.id === id);
@@ -85,14 +97,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsList(filteredAssets);
     };
 
-    // TODO: REPLACE "defaultAsset" WITH PROPER ASSET IMPORT LOGIC 
-    // (ESP WITH CREATING NEW ID EACH TIME)
-    const addAsset = () => {
-        const extendedAssetsList = [...assetsList, defaultAsset] as AssetWrapper[];
-        setAssetsList(extendedAssetsList);
-    };
-
-
+    
     return (
         <SceneObjectsContext.Provider value={{ lightsList, changeLightType, updateLightProperties, deleteLight, addLight, assetsList, updateAsset, deleteAsset, addAsset }} >
             {props.children}

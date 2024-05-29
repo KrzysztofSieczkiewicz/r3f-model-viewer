@@ -1,96 +1,40 @@
 import React from 'react';
 import styles from './Effects.module.css'
 
-import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-
-import { EffectWrapper } from '../../../models/Effect';
-import { Slider } from '../common/Slider';
-import { Checkbox } from '../common/Checkbox';
-import { Bloom, DepthOfField, Glitch } from '@react-three/postprocessing';
+import { EFFECT_TYPES, EffectWrapper } from '../../../models/Effect';
+import { BloomControls } from './controlsTypes/BloomControls';
+import { DepthOfFieldControls } from './controlsTypes/DepthOfFieldControls';
+import { GlitchControls } from './controlsTypes/GlitchControls';
+import { EffectItemHeader } from './EffectItemHeader';
 
 
 type Props = {
     active: boolean,
     effect: EffectWrapper
-    onClick: () => void
-    updateEffect: (effect: EffectWrapper) => void
+    toggleExtend: () => void
 }
 
-export const EffectItem = ( {active, effect, onClick, updateEffect}: Props) => {
+export const EffectItem = ( {active, effect, toggleExtend}: Props) => {
 
-    const handleEffectName = () => {
-        return effect.name.charAt(0).toUpperCase() + effect.name.slice(1);
+    const renderEffectHeader = () => {
+        return <EffectItemHeader effect={effect} isActive={active} toggleExtend={() => toggleExtend()} />
     }
 
-    const handleIsActive = () => {
-        return active ? String.fromCharCode(8657) : String.fromCharCode(8659);
+    const renderEffectControls = () => {
+        switch(effect.type) {
+            case EFFECT_TYPES.bloom:
+                return <BloomControls properties={effect.properties} />;
+            case EFFECT_TYPES.depthOfField:
+                return <DepthOfFieldControls properties={effect.properties} />;
+            case EFFECT_TYPES.glitch:
+                return <GlitchControls properties={effect.properties} />;
+        }
     }
 
     return (
         <div className={active ? `${styles.effectContainer} ${styles.active}` : styles.effectContainer}>
-            <div className={styles.effectHeader}
-                onClick={onClick}
-            >
-                <PointLightIcon className={styles.effectIcon} />
-                <p className={styles.effectName}>{ handleEffectName() }</p>
-                <span className={styles.extendIcon}>{ handleIsActive() }</span>
-            </div>
-
-            {active && <div className={styles.effectBody}>
-                {effect.type === Bloom && <>
-                    <Checkbox
-                        name={'Active'}
-                        value={effect.enabled}
-                        handleChange={(value) => updateEffect( {...effect, enabled: value} )} />
-                    <Slider 
-                        name={'Intensity'} 
-                        min={0} max={5} step={0.005} 
-                        value={effect.intensity} defaultValue={1} 
-                        handleChange={(value) => updateEffect( {...effect, intensity: value} )} />
-                    <Slider 
-                        name={'Threshold'} 
-                        min={0} max={1} step={0.0005} 
-                        value={effect.luminanceThreshold} defaultValue={0.15} 
-                        handleChange={(value) => updateEffect( {...effect, luminanceThreshold: value} )} />
-                    <Slider 
-                        name={'Smoothing'} 
-                        min={0} max={1} step={0.0005} 
-                        value={effect.luminanceSmoothing} defaultValue={0.025} 
-                        handleChange={(value) => updateEffect( {...effect, luminanceSmoothing: value} )} />
-                </>}
-                {effect.type === DepthOfField && <>
-                    <Checkbox
-                        name={'Active'}
-                        value={effect.enabled}
-                        handleChange={(value) => updateEffect( {...effect, enabled: value} )} />
-                    <Slider 
-                        name={'Focus distance'} 
-                        min={0} max={50} step={0.005} 
-                        value={effect.focusDistance} defaultValue={1} 
-                        handleChange={(value) => updateEffect( {...effect, focusDistance: value} )} />
-                    <Slider 
-                        name={'Focal length'} 
-                        min={0} max={50} step={0.005} 
-                        value={effect.focalLength} defaultValue={1} 
-                        handleChange={(value) => updateEffect( {...effect, focalLength: value} )} />
-                    <Slider 
-                        name={'Bokeh scale'} 
-                        min={0} max={5} step={0.005} 
-                        value={effect.bokehScale} defaultValue={1} 
-                        handleChange={(value) => updateEffect( {...effect, bokehScale: value} )} />
-                </>}
-                {effect.type === Glitch && <>
-                    <Checkbox
-                        name={'Active'}
-                        value={effect.enabled}
-                        handleChange={(value) => updateEffect( {...effect, enabled: value} )} />
-                    <Slider 
-                        name={'Ratio'} 
-                        min={0} max={50} step={0.005} 
-                        value={effect.ratio} defaultValue={1} 
-                        handleChange={(value) => updateEffect( {...effect, ratio: value} )} />
-                </>}
-            </div>}
+            {renderEffectHeader()}
+            {active && renderEffectControls()}
         </div>
     );
 }

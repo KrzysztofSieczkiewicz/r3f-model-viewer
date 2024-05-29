@@ -1,0 +1,49 @@
+@import '../../../App.module.css';
+
+* {
+    --button-height: 1.75rem;
+}
+
+.buttonContainer {
+    position: relative;
+    width: 10rem;
+    height: var(--button-height);
+}
+.mainButton {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid black;
+
+    color: var(--color-platinum);
+    background-color: var(--color-resin-brighter);
+
+    cursor: pointer;
+}
+
+.list {
+    position: absolute;
+    top: var(--button-height);
+    --left: 3rem;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+
+    width: 10rem;
+    padding: 0;
+}
+
+.listElement {
+    width: 100%;
+    height: 1.5rem;
+}
+
+.lightButton {
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
+}

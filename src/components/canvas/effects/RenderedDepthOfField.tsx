@@ -1,19 +1,19 @@
 import { DepthOfField } from '@react-three/postprocessing';
 import React from 'react';
-import { EffectWrapper } from '../../../models/Effect';
+import { DepthOfFieldProperties } from '../../../models/Effect';
 
 type Props = {
-    effect: EffectWrapper
+    properties: DepthOfFieldProperties
 }
 
-export const RenderedDepthOfField = ( { effect }: Props) => {
+export const RenderedDepthOfField = ( { properties }: Props) => {
 
-    if (!effect.enabled) return; 
+    if (!properties.enabled) return; 
     return (
         <DepthOfField 
-            focusDistance={effect.focusDistance} 
-            focalLength={effect.focalLength} 
-            bokehScale={effect.bokehScale}
+            focusDistance={properties.focusDistance} 
+            focalLength={properties.focalLength} 
+            bokehScale={properties.bokehScale}
             width={1000}
             height={1000}
         />

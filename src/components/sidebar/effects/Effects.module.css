@@ -27,7 +27,7 @@
     height: 2.5rem;
     padding: 0.4rem 0.25rem 0.5rem 0.25rem;
 
-    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-columns: 1fr 5fr 1fr 1fr;
 
     background-color: var(--color-resin-brighter);
 }

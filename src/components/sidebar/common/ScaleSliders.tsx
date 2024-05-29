@@ -58,6 +58,7 @@ export const ScaleSliders = (props: Props) => {
         setIsMouseDown(false);
     };
     
+    // TODO: WONT iF(!isMouseDown) return; BE BETTER?
     useEffect(() => {
         if(isMouseDown) {
             document.addEventListener('mouseup', handleMouseUp);
