@@ -4,14 +4,9 @@ import { BlendFunction, GlitchMode } from 'postprocessing';
 export enum EFFECT_TYPES {
     bloom = "Bloom",
     depthOfField = "Depth of Field",
-    glitch =  "Glitch",
+    glitch = "Glitch",
 };
-export type EffectTypes = 
-    EFFECT_TYPES.bloom | 
-    EFFECT_TYPES.depthOfField |
-    EFFECT_TYPES.glitch
-;
-
+export type EffectTypes = typeof EFFECT_TYPES[keyof typeof EFFECT_TYPES];
 
 type CommonProperties = {
     enabled: boolean,
@@ -46,35 +41,7 @@ export type EffectWrapper =
 ;
 
 export const INIT_EFFECTS_LIST: EffectWrapper[] = [
-    {
-        type: EFFECT_TYPES.bloom,
-        properties: {
-            enabled: true,
-            blendFunction: BlendFunction.ADD,
-            intensity: 1,
-            luminanceThreshold: 0.15,
-            luminanceSmoothing: 0.025,
-        }
-    },
-    {
-        type: EFFECT_TYPES.depthOfField,
-        properties: {
-            enabled: false,
-            focusDistance: 0.0035,
-            focalLength: 0.01,
-            bokehScale: 3,
-        }
-    },
-    {
-        type: EFFECT_TYPES.glitch,
-        properties: {
-            glitchMode: GlitchMode.CONSTANT_MILD,
-            enabled: false,
-            delay: [1.5, 3.5],
-            duration: [0.6, 1.0],
-            strength: [0.1, 0.1],
-        }
-    }
+    
 ]
 
 const DEFAULT_BLOOM_EFFECT: EffectWrapper = {
@@ -91,7 +58,7 @@ const DEFAULT_BLOOM_EFFECT: EffectWrapper = {
 const DEFAULT_DOF_EFFECT: EffectWrapper = {
     type: EFFECT_TYPES.depthOfField,
     properties: {
-        enabled: false,
+        enabled: true,
         focusDistance: 0.0035,
         focalLength: 0.01,
         bokehScale: 3,
@@ -102,7 +69,7 @@ const DEFAULT_GLITCH_EFFECT: EffectWrapper = {
     type: EFFECT_TYPES.glitch,
     properties: {
         glitchMode: GlitchMode.CONSTANT_MILD,
-        enabled: false,
+        enabled: true,
         delay: [1.5, 3.5],
         duration: [0.6, 1.0],
         strength: [0.1, 0.1],

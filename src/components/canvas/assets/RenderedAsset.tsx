@@ -27,8 +27,6 @@ export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelec
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
-    //console.log(asset.id + " was rerendered")
-
     useEffect( () => {// TODO: MOVE COLORS TO SOME COMMON FILE TO BE SHARED ACROSS ALL COMPONENTS
         if (!isSelected && !isHovered) {
             setIsOutline(false);

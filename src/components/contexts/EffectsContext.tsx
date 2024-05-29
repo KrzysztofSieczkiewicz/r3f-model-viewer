@@ -43,7 +43,7 @@ export const EffectsContextProvider = (props: {children: ReactNode}): JSX.Elemen
         const newEffect = { ...effectsList[index] };
         newEffect.properties = { ...effectsList[index].properties, ...change };
 
-        const newEffectsList = effectsList.map( (effect, i) => i==index ? newEffect : effect);
+        const newEffectsList = effectsList.map( (effect, i) => i===index ? newEffect : effect);
         setEffectsList(newEffectsList);
     }, [effectsList]);
 
