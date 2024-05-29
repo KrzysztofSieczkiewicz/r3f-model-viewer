@@ -25,15 +25,15 @@ export const Effects = () => {
                 return <></>
         }
     }
-        
-    if(!effectsList.some) return;
+
+    const activeEffects = effectsList.filter(effect => effect.properties.enabled);
+    if (!activeEffects.length) return;
     return (
         <EffectComposer multisampling={8} autoClear={false}>
             <>
                 {effectsList.map((effect: EffectWrapper) => {
                     return handleEffectType(effect); 
                 })}
-                <Bloom intensity={0} />
             </>
         </EffectComposer> 
     );
