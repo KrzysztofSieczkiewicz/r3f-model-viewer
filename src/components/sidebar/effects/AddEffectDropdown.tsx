@@ -18,15 +18,13 @@ export const AddEffectDropdown = () => {
     const [ isActive, setIsActive ] = useState(false);
 
     const { availableEffects, addEffect } = useEffects();
-    
 
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const listRef = useRef<HTMLUListElement | null>(null);
 
     const handleClickOutside = (e :MouseEvent) => {
         if(!isActive) return;
-        if(!buttonRef.current) return;
-        if(buttonRef.current.contains(e.target as Node)) return;
+        if(buttonRef.current?.contains(e.target as Node)) return;
         if(listRef.current?.contains(e.target as Node)) return;
         
         setIsActive(false);

@@ -5,18 +5,20 @@ import { BloomProperties, EFFECT_TYPES } from "../../../../models/Effect";
 import { Checkbox } from "../../common/Checkbox";
 import { Slider } from "../../common/Slider";
 import { useEffectsContext } from "../../../contexts/EffectsContext";
+import { DeleteItemButton } from "../../common/DeleteItemButton";
 
 type Props = {
     properties: BloomProperties,
 }
 
 export const BloomControls = ( {properties}: Props ) => {
-    const { updateEffectProperties } = useEffectsContext(); 
+    const { updateEffectProperties, deleteEffect } = useEffectsContext(); 
 
     const type = EFFECT_TYPES.bloom;
 
     return (
         <div className={styles.effectBody}>
+            <DeleteItemButton deleteObject={() => deleteEffect(type)}/>
             <Checkbox
                 name={'Active'}
                 value={properties.enabled}
