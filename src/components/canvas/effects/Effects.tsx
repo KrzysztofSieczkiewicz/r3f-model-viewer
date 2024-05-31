@@ -30,11 +30,9 @@ export const Effects = () => {
     if (!activeEffects.length) return;
     return (
         <EffectComposer multisampling={8} autoClear={false}>
-            <>
-                {effectsList.map((effect: EffectWrapper) => {
-                    return handleEffectType(effect); 
-                })}
-            </>
+            {effectsList.map((effect: EffectWrapper) => {
+                return handleEffectType(effect); 
+            })}
         </EffectComposer> 
     );
 
