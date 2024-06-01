@@ -1,22 +1,21 @@
 import React from "react";
 
 import { CAMERA_TYPES, CameraWrapper } from "../../../models/Camera";
+import { RenderedPerspectiveCamera } from "./RenderedPerspectiveCamera";
+import { RenderedOrtographicCamera } from "./RenderedOrtographicCamera";
 
 export const Cameras = () => {
 
     const handleCameraType = (camera: CameraWrapper)  => {
         switch(camera.type) {
             case CAMERA_TYPES.perspectiveCamera:
-
-                break;
-            
+                return <RenderedPerspectiveCamera properties={camera.properties} />
             case CAMERA_TYPES.ortographicCamera:
-
-                break;
+                return <RenderedOrtographicCamera properties={camera.properties} />
         }
     }
 
-    // TODO: HANDLE A WHOLE ARRAY
+    // TODO: HANDLE A WHOLE ARRAY INSTEAD
     return (
         <>
             {handleCameraType}

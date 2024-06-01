@@ -21,8 +21,7 @@ export const AssetScene = () => {
     <>
       <Canvas shadows
         style= {{ background: backgroundColor }}
-        frameloop="demand"
-      >
+        frameloop="demand" >
         <AmbientLight />
 
         <OrbitControls makeDefault target={[0, 0.32, 0]} maxPolarAngle={1.45} enableDamping={false} />
@@ -35,7 +34,6 @@ export const AssetScene = () => {
         </Selection>
 
         <Effects />
-
       </Canvas>
       
       <Sidebar />
