@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { EffectComposer } from '@react-three/postprocessing';
 import { RenderedBloom } from './RenderedBloom';
 import { RenderedDepthOfField } from './RenderedDepthOfField';
 import { RenderedGlitch } from './RenderedGlitch';
@@ -30,7 +30,7 @@ export const Effects = () => {
     if (!activeEffects.length) return;
     return (
         <EffectComposer multisampling={8} autoClear={false}>
-            {effectsList.map((effect: EffectWrapper) => {
+            {effectsList.map((effect) => {
                 return handleEffectType(effect); 
             })}
         </EffectComposer> 

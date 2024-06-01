@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { CAMERA_TYPES, CameraTypes, CameraWrapper } from "../../models/Camera";
+import { CAMERA_TYPES, CameraTypes, CameraWrapper, INIT_CAMERAS_LIST } from "../../models/Camera";
 
 type CamerasContext = {
     camerasList: CameraWrapper[],
@@ -12,7 +12,7 @@ export const CamerasContext = createContext<CamerasContext | null>( null );
 
 export const CamerasContextProvider = (props: {children: ReactNode}): JSX.Element => {
 
-    const [ camerasList, setCamerasList ] = useState<CameraWrapper[]>([])
+    const [ camerasList, setCamerasList ] = useState<CameraWrapper[]>(INIT_CAMERAS_LIST)
 
     const addCamera = useCallback((type: CameraTypes) => {
         const newCamerasList = [...camerasList];

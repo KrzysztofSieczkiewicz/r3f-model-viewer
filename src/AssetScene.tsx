@@ -5,12 +5,12 @@ import { Lights } from './components/canvas/lights/Lights';
 import { Canvas } from '@react-three/fiber';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { Assets } from './components/canvas/assets/Assets';
-import { Selection } from "@react-three/postprocessing";
 import { Effects } from './components/canvas/effects/Effects';
 import { PerspectiveCamera as PerspectiveCameraType} from 'three/src/Three';
 import { CameraTracker } from './components/canvas/scene/CameraTracker';
 import { AmbientLight } from './components/canvas/scene/AmbientLight';
 import { useSceneValue } from './components/contexts/SceneContext';
+import { Cameras } from './components/canvas/cameras/Cameras';
 
 export const AssetScene = () => {
   const [ backgroundColor ] = useSceneValue((scene) => scene['backgroundColor']);
@@ -28,10 +28,9 @@ export const AssetScene = () => {
         <PerspectiveCamera makeDefault ref={cameraRef} fov={50} position={[3, 2, 5]} />
         <CameraTracker cameraRef={cameraRef} />
 
-        <Selection>
-          <Lights />
-          <Assets />
-        </Selection>
+        <Lights />
+        <Assets />
+        <Cameras />
 
         <Effects />
       </Canvas>

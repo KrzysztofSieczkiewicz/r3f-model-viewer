@@ -8,6 +8,7 @@ type Props = {
     isSelected: boolean,
 }
 
+// TODO: DISSOLVE THIS INTO Lights.tsx
 export const RenderedLight = ( {light, isSelected}: Props) => {
 
     if(!light.properties.isVisible) return;

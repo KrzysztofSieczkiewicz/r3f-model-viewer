@@ -6,11 +6,13 @@ import { SidebarControlsContextProvider } from './components/contexts/SidebarCon
 import { SceneObjectsContextProvider } from './components/contexts/SceneObjectsContext';
 import { EffectsContextProvider } from './components/contexts/EffectsContext';
 import { SceneContextProvider } from './components/contexts/SceneContext';
+import { CamerasContextProvider } from './components/contexts/CamerasContext';
 
 export const App = (): JSX.Element => {
   return (
     <>
       <SceneContextProvider>
+      <CamerasContextProvider>
       <EffectsContextProvider>
       <SidebarControlsContextProvider>
       <SceneObjectsContextProvider>
@@ -20,6 +22,7 @@ export const App = (): JSX.Element => {
       </SceneObjectsContextProvider>
       </SidebarControlsContextProvider>
       </EffectsContextProvider>
+      </CamerasContextProvider>
       </SceneContextProvider>
     </>
   );

@@ -3,22 +3,25 @@ import React from "react";
 import { CAMERA_TYPES, CameraWrapper } from "../../../models/Camera";
 import { RenderedPerspectiveCamera } from "./RenderedPerspectiveCamera";
 import { RenderedOrtographicCamera } from "./RenderedOrtographicCamera";
+import { useCamerasContext } from "../../contexts/CamerasContext";
 
 export const Cameras = () => {
+    const { camerasList } = useCamerasContext();
 
-    const handleCameraType = (camera: CameraWrapper)  => {
+    const renderCamera = (camera: CameraWrapper)  => {
         switch(camera.type) {
             case CAMERA_TYPES.perspectiveCamera:
-                return <RenderedPerspectiveCamera properties={camera.properties} />
+                return <RenderedPerspectiveCamera key={camera.id} id={camera.id} properties={camera.properties} />
             case CAMERA_TYPES.ortographicCamera:
-                return <RenderedOrtographicCamera properties={camera.properties} />
+                return <RenderedOrtographicCamera key={camera.id} id={camera.id} properties={camera.properties} />
         }
     }
 
-    // TODO: HANDLE A WHOLE ARRAY INSTEAD
     return (
         <>
-            {handleCameraType}
+            {camerasList.map( (camera) => {
+                return renderCamera(camera);
+            })}
         </>
     );
 }
