@@ -11,7 +11,6 @@ export type CameraTypes =
 export type BaseCameraProperties = {
     is: string;
     position: [number, number, number],
-    isManual: boolean,
     aspectRatio: number,
 }
 
