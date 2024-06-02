@@ -11,6 +11,8 @@ type SidebarControlsContext = {
     updateScene: (property:string, value:any) => void,
 }
 
+// TODO: REMOVE REMAINING METHODS, MOVE THIS RESPONSIBILITY INTO SceneContext.tsx
+
 export const SidebarControlsContext = createContext<SidebarControlsContext | null>( null );
 
 export const SidebarControlsContextProvider = (props: {children: ReactNode}): JSX.Element => {
