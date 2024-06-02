@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import spotLightBillboard from '../../../icons/lightTypes/spotLight.svg';
+import cameraBillboard from '../../../icons/perspectiveCamera.svg';
 
 import { Billboard, Sphere, useHelper, useTexture } from "@react-three/drei";
 import { BoxHelper, Mesh } from 'three';
@@ -17,7 +17,7 @@ export const CameraBillboard = ( {onClick}: Props) => {
 
     // TODO: REPLACE IMAGES WITH 2D MESH, WILL ALLOW TO IMPLEMENT OUTLINES FOR SELECTION AND NEAT DYNAMIC COLOR CHANGING
     // TODO: ADD PROPER ICON
-    const image = spotLightBillboard
+    const image = cameraBillboard
     const texture = useTexture(image);
 
     useHelper(isHovered && selectionSphere as any, BoxHelper, "white");

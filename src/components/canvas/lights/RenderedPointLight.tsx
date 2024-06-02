@@ -15,7 +15,7 @@ type Props = {
 }
 
 export const RenderedPointLight = ( {light, isSelected}: Props) => {
-    const { updateLightProperties: updateLight } = useSceneObjectsContext();
+    const { updateLightProperties } = useSceneObjectsContext();
     const { updateSelected } = useSidebarControlsContext();
 
     const { color, position, distance, intensity } = light.properties as PointLightProperties;
@@ -27,7 +27,7 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
             {isSelected && 
                 <LightsGizmo
                     position={position}
-                    handleChange={(change: Partial<LightProperties>) => { updateLight(light.id, change) }}
+                    handleChange={(change: Partial<LightProperties>) => { updateLightProperties(light.id, change) }}
                 />
             }
             <pointLight

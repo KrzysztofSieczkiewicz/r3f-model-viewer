@@ -1,11 +1,12 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { CAMERA_TYPES, CameraTypes, CameraWrapper, INIT_CAMERAS_LIST } from "../../models/Camera";
+import { CAMERA_TYPES, CameraProperties, CameraTypes, CameraWrapper, INIT_CAMERAS_LIST } from "../../models/Camera";
 
 type CamerasContext = {
     camerasList: CameraWrapper[],
     addCamera: (type: CameraTypes) => void,
+    updateCameraProperties: (id: string, change: Partial<CameraProperties>) => void,
 }
 
 export const CamerasContext = createContext<CamerasContext | null>( null );
@@ -28,8 +29,19 @@ export const CamerasContextProvider = (props: {children: ReactNode}): JSX.Elemen
         setCamerasList(newCamerasList);
     }, [camerasList] );
 
+    const updateCameraProperties = useCallback((id: string, change: Partial<CameraProperties>) => {
+        const index = camerasList.findIndex(light => light.id === id);
+        if (index === -1) return;
+
+        const newCamera = { ...camerasList[index] };
+        newCamera.properties = { ...camerasList[index].properties, ...change }
+
+        const newCamerasList = camerasList.map( (camera, i) => i===index ? newCamera : camera);
+        setCamerasList(newCamerasList);
+    }, [camerasList])
+
     return (
-        <CamerasContext.Provider value={{ camerasList, addCamera }} >
+        <CamerasContext.Provider value={{ camerasList, addCamera, updateCameraProperties }} >
             {props.children}
         </CamerasContext.Provider>
     );

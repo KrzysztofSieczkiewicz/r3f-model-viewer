@@ -21,6 +21,8 @@ export type PerspectiveCameraProperties = {
 export type OrtographicCameraProperties = {
 } & BaseCameraProperties;
 
+export type CameraProperties = PerspectiveCameraProperties | OrtographicCameraProperties;
+
 
 export type CameraWrapper =
     { type: CAMERA_TYPES.perspectiveCamera, id: string, properties: PerspectiveCameraProperties } | 
