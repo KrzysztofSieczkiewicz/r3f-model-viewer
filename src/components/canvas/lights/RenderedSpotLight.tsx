@@ -22,7 +22,7 @@ export const RenderedSpotLight = ( {light}: Props) => {
 
     const { color, position, distance, intensity, angle, penumbra } = light.properties as SpotLightProperties;
 
-    useHelper((isSelected) && lightRef as any, SpotLightHelper, color);
+    useHelper(isSelected && lightRef as any, SpotLightHelper, color);
 
     return (
         <group>
