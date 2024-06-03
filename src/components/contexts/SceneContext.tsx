@@ -16,6 +16,7 @@ function useSceneData(): {
   const get = useCallback( () => scene.current, []);
   
   const set = useCallback( (value: Partial<SceneWrapper>) => {
+    
     scene.current = { ...scene.current, ...value};
     subscribers.current.forEach( (callback) => callback() );
   }, [])

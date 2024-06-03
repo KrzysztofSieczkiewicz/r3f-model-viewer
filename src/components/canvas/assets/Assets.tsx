@@ -16,9 +16,7 @@ export const Assets = () => {
                 <RenderedAsset 
                     key={asset.id}
                     asset={asset}
-                    updateAsset={(id: string, change: Partial<AssetWrapper>) => updateAsset(id, change)}
-                    isSelected={selectedObjectId === asset.id}
-                    updateSelected={(id: string) => setScene({selectedObjectId: id})}
+                    updateAsset={(change: Partial<AssetWrapper>) => updateAsset(asset.id, change)}
                 />
             );
         })
