@@ -4,9 +4,9 @@ import { CameraProperties, PerspectiveCameraProperties } from "../../../models/C
 import { CameraBillboard } from "./CameraBillboard";
 import { CamerasGizmo } from "./CamerasGizmo";
 import { useCamerasContext } from "../../contexts/CamerasContext";
-import { useSceneValue } from "../../contexts/SceneContext";
 
 import { PerspectiveCamera } from "@react-three/drei";
+import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 
 type Props = {
     id: string,
@@ -15,11 +15,13 @@ type Props = {
 
 export const RenderedPerspectiveCamera = ( {id, properties}: Props ) => {
     const { updateCameraProperties } = useCamerasContext();
-    const [ selectedObjectId, setScene ] = useSceneValue((scene)=> scene["selectedObjectId"]);
+    
+    const isSelected = useIsSelected(id);
+    const handleSelect = useToggleSelect(id);
     
     return (
         <group>
-            {selectedObjectId === id && 
+            {isSelected && 
                 <CamerasGizmo
                     position={properties.position}
                     handleChange={(change: Partial<CameraProperties>) => { updateCameraProperties(id, change) }}
@@ -30,7 +32,7 @@ export const RenderedPerspectiveCamera = ( {id, properties}: Props ) => {
                 aspect={properties.aspectRatio}
                 fov={properties.fov}
             >
-                <CameraBillboard onClick={() => setScene({selectedObjectId: id}) } />
+                <CameraBillboard onClick={handleSelect} />
             </PerspectiveCamera>
         </group>
     );

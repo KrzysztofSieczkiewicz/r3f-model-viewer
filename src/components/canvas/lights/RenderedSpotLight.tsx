@@ -7,24 +7,26 @@ import { SpotLight, SpotLightHelper } from "three";
 import { LightProperties, LightWrapper, SpotLightProperties } from "../../../models/Light"
 import { LightTypeBillboard } from "./LightTypeBillboard";
 import { LightsGizmo } from "./LightsGizmo";
-import { useSceneValue } from "../../contexts/SceneContext";
+import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 
 type Props = {
     light: LightWrapper,}
 
 export const RenderedSpotLight = ( {light}: Props) => {
     const { updateLightProperties: updateLight } = useSceneObjectsContext();
-    const [ selectedObjectId, setScene ] = useSceneValue((scene)=> scene["selectedObjectId"]);
 
     const lightRef = useRef<SpotLight>(null);
 
+    const isSelected = useIsSelected(light.id);
+    const handleSelect = useToggleSelect(light.id);
+
     const { color, position, distance, intensity, angle, penumbra } = light.properties as SpotLightProperties;
 
-    useHelper((selectedObjectId===light.id) && lightRef as any, SpotLightHelper, color);
+    useHelper((isSelected) && lightRef as any, SpotLightHelper, color);
 
     return (
         <group>
-            {selectedObjectId===light.id && 
+            {isSelected && 
                 <LightsGizmo
                     position={position}
                     handleChange={(change: Partial<LightProperties>) => { updateLight(light.id, change) }}
@@ -42,7 +44,7 @@ export const RenderedSpotLight = ( {light}: Props) => {
             >
                 <LightTypeBillboard 
                     type={light.type}
-                    onClick={() => setScene({selectedObjectId: light.id}) } />
+                    onClick={handleSelect} />
             </spotLight>
         </group>
     );

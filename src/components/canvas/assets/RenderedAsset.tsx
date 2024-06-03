@@ -43,8 +43,6 @@ export const RenderedAsset = memo(( {asset, updateAsset}: Props) => {
             setOutlineColor("#00FFFF");
         }
      }, [isHovered, isSelected])
-
-
     
     if(!asset.visible) return;
 

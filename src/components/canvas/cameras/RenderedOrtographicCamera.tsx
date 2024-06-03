@@ -4,9 +4,9 @@ import { CameraProperties, OrtographicCameraProperties } from "../../../models/C
 import { CameraBillboard } from "./CameraBillboard";
 import { CamerasGizmo } from "./CamerasGizmo";
 import { useCamerasContext } from "../../contexts/CamerasContext";
-import { useSceneValue } from "../../contexts/SceneContext";
 
 import { OrthographicCamera } from "@react-three/drei";
+import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 
 
 type Props = {
@@ -16,11 +16,13 @@ type Props = {
 
 export const RenderedOrtographicCamera = ( {id, properties}: Props ) => {
     const { updateCameraProperties } = useCamerasContext();
-    const [ selectedObjectId, setScene ] = useSceneValue((scene)=> scene["selectedObjectId"]);
+    
+    const isSelected = useIsSelected(id);
+    const handleSelect = useToggleSelect(id);
     
     return (
         <group>
-            {selectedObjectId === id && 
+            {isSelected && 
                 <CamerasGizmo
                     position={properties.position}
                     handleChange={(change: Partial<CameraProperties>) => { updateCameraProperties(id, change) }}
@@ -29,7 +31,7 @@ export const RenderedOrtographicCamera = ( {id, properties}: Props ) => {
             <OrthographicCamera 
                 position={properties.position}
             >
-                <CameraBillboard onClick={() => setScene({selectedObjectId: id}) } />
+                <CameraBillboard onClick={handleSelect} />
             </OrthographicCamera>
         </group>
     
