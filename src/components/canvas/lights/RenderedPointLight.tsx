@@ -1,21 +1,22 @@
 import React, { useRef } from "react";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
+import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 
 import { PointLight } from "three";
 
 import { LightProperties, LightWrapper, PointLightProperties } from "../../../models/Light"
 import { LightTypeBillboard } from './LightTypeBillboard';
 import { LightsGizmo } from "./LightsGizmo";
-import { useSceneValue } from "../../contexts/SceneContext";
 
 
 type Props = {
-    light: LightWrapper
+    light: LightWrapper,
+    isSelected: boolean
 }
 
-export const RenderedPointLight = ( {light}: Props) => {
+export const RenderedPointLight = ( {light, isSelected}: Props) => {
     const { updateLightProperties } = useSceneObjectsContext();
-    const [ selectedObjectId, setScene ] = useSceneValue((scene)=> scene["selectedObjectId"]);
+    const { updateSelected } = useSidebarControlsContext();
 
     const { color, position, distance, intensity } = light.properties as PointLightProperties;
     
@@ -23,7 +24,7 @@ export const RenderedPointLight = ( {light}: Props) => {
 
     return (
         <group>
-            {(selectedObjectId===light.id) && 
+            {isSelected && 
                 <LightsGizmo
                     position={position}
                     handleChange={(change: Partial<LightProperties>) => { updateLightProperties(light.id, change) }}
@@ -39,7 +40,7 @@ export const RenderedPointLight = ( {light}: Props) => {
             >
                 <LightTypeBillboard 
                     type={light.type} 
-                    onClick={() => setScene({selectedObjectId: light.id}) } />
+                    onClick={() => updateSelected(light.id) } />
             </pointLight>
         </group>
     );
