@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
-import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 
 import { useHelper } from "@react-three/drei";
 import { SpotLight, SpotLightHelper } from "three";
@@ -8,25 +7,24 @@ import { SpotLight, SpotLightHelper } from "three";
 import { LightProperties, LightWrapper, SpotLightProperties } from "../../../models/Light"
 import { LightTypeBillboard } from "./LightTypeBillboard";
 import { LightsGizmo } from "./LightsGizmo";
+import { useSceneValue } from "../../contexts/SceneContext";
 
 type Props = {
-    light: LightWrapper,
-    isSelected: boolean
-}
+    light: LightWrapper,}
 
-export const RenderedSpotLight = ( {light, isSelected}: Props) => {
+export const RenderedSpotLight = ( {light}: Props) => {
     const { updateLightProperties: updateLight } = useSceneObjectsContext();
-    const { updateSelected } = useSidebarControlsContext();
+    const [ selectedObjectId, setScene ] = useSceneValue((scene)=> scene["selectedObjectId"]);
 
     const lightRef = useRef<SpotLight>(null);
 
     const { color, position, distance, intensity, angle, penumbra } = light.properties as SpotLightProperties;
 
-    useHelper((isSelected) && lightRef as any, SpotLightHelper, color);
+    useHelper((selectedObjectId===light.id) && lightRef as any, SpotLightHelper, color);
 
     return (
         <group>
-            {isSelected && 
+            {selectedObjectId===light.id && 
                 <LightsGizmo
                     position={position}
                     handleChange={(change: Partial<LightProperties>) => { updateLight(light.id, change) }}
@@ -44,7 +42,7 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
             >
                 <LightTypeBillboard 
                     type={light.type}
-                    onClick={() => updateSelected(light.id) } />
+                    onClick={() => setScene({selectedObjectId: light.id}) } />
             </spotLight>
         </group>
     );

@@ -1,26 +1,26 @@
 import React from "react";
 
-import { OrthographicCamera } from "@react-three/drei";
-import { CameraProperties, CameraWrapper, OrtographicCameraProperties } from "../../../models/Camera";
+import { CameraProperties, OrtographicCameraProperties } from "../../../models/Camera";
 import { CameraBillboard } from "./CameraBillboard";
-import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 import { CamerasGizmo } from "./CamerasGizmo";
 import { useCamerasContext } from "../../contexts/CamerasContext";
+import { useSceneValue } from "../../contexts/SceneContext";
+
+import { OrthographicCamera } from "@react-three/drei";
 
 
 type Props = {
     id: string,
-    properties: OrtographicCameraProperties,
-    isSelected: boolean
+    properties: OrtographicCameraProperties
 }
 
-export const RenderedOrtographicCamera = ( {id, properties, isSelected}: Props ) => {
+export const RenderedOrtographicCamera = ( {id, properties}: Props ) => {
     const { updateCameraProperties } = useCamerasContext();
-    const { updateSelected } = useSidebarControlsContext();
+    const [ selectedObjectId, setScene ] = useSceneValue((scene)=> scene["selectedObjectId"]);
     
     return (
         <group>
-            {isSelected && 
+            {selectedObjectId === id && 
                 <CamerasGizmo
                     position={properties.position}
                     handleChange={(change: Partial<CameraProperties>) => { updateCameraProperties(id, change) }}
@@ -29,7 +29,7 @@ export const RenderedOrtographicCamera = ( {id, properties, isSelected}: Props )
             <OrthographicCamera 
                 position={properties.position}
             >
-                <CameraBillboard onClick={() => updateSelected(id) } />
+                <CameraBillboard onClick={() => setScene({selectedObjectId: id}) } />
             </OrthographicCamera>
         </group>
     

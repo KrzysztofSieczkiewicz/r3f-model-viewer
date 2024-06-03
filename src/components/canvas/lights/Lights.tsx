@@ -1,12 +1,9 @@
 import React from "react";
 import { RenderedLight } from "./RenderedLight";
-import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 export const Lights = () => {    
     const { lightsList } = useSceneObjectsContext();
-    const { selectedId } = useSidebarControlsContext();
-
 
     // TODO: ADD isSelected HANDLING
 
@@ -17,7 +14,6 @@ export const Lights = () => {
                 <RenderedLight
                     key={light.id} 
                     light={light}
-                    isSelected={selectedId === light.id}
                 />
             );
         })
