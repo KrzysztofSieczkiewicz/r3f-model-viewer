@@ -26,7 +26,7 @@ export const CameraBillboard = ( {onClick}: Props) => {
     <>
         <Billboard
             follow={true}
-            position={[0, 0, 0]} >
+            position={[0, 0, 0]}>
             <mesh>
                 <planeGeometry 
                     attach="geometry" 

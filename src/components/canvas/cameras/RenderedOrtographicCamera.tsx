@@ -25,15 +25,16 @@ export const RenderedOrtographicCamera = ( {id, properties}: Props ) => {
             {isSelected && 
                 <CamerasGizmo
                     position={properties.position}
+                    rotation={properties.rotation}
                     handleChange={(change: Partial<CameraProperties>) => { updateCameraProperties(id, change) }}
                 />
             }
-            <OrthographicCamera 
+            <OrthographicCamera
                 position={properties.position}
+                rotation={properties.rotation}
             >
                 <CameraBillboard onClick={handleSelect} />
             </OrthographicCamera>
         </group>
-    
     );
 }

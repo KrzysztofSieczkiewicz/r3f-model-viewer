@@ -66,10 +66,10 @@ export const AssetsGizmo = ( {asset, handleChange}: Props) => {
 
     return (
         <PivotControls
-                ref={controlsRef}
-                fixed={false}
-                scale={1}
-                onDrag={ (local) => { handleControlsDrag(local) }}
-                depthTest={false} />
+            ref={controlsRef}
+            fixed={false}
+            scale={1}
+            onDrag={ (local) => { handleControlsDrag(local) }}
+            depthTest={false} />
     );
 }
