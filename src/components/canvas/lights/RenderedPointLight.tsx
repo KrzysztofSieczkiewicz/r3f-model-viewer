@@ -3,10 +3,12 @@ import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { PointLight } from "three";
 
+import pointLightBillboard from '../../../icons/lightTypes/pointLight.svg';
 import { LightProperties, LightWrapper, PointLightProperties } from "../../../models/Light"
-import { LightTypeBillboard } from './LightTypeBillboard';
 import { LightsGizmo } from "./LightsGizmo";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
+import { IconBillboard } from "../helperObjects/IconBillboard";
+import { SelectionSphere } from "../helperObjects/SelectionSphere";
 
 
 type Props = {
@@ -39,10 +41,9 @@ export const RenderedPointLight = ( {light}: Props) => {
                 intensity={intensity}
                 distance={distance}
             >
-                <LightTypeBillboard 
-                    type={light.type} 
-                    onClick={handleSelect} />
+                <SelectionSphere onClick={handleSelect} />
             </pointLight>
+            <IconBillboard icon={pointLightBillboard} position={position} />
         </group>
     );
 }
