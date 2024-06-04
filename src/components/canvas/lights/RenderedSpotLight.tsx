@@ -1,28 +1,30 @@
 import React, { useRef } from "react";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
-import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 
 import { useHelper } from "@react-three/drei";
 import { SpotLight, SpotLightHelper } from "three";
 
+import spotLightBillboard from '../../../icons/lightTypes/spotLight.svg';
 import { LightProperties, LightWrapper, SpotLightProperties } from "../../../models/Light"
-import { LightTypeBillboard } from "./LightTypeBillboard";
 import { LightsGizmo } from "./LightsGizmo";
+import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
+import { IconBillboard } from "../helperObjects/IconBillboard";
+import { SelectionSphere } from "../helperObjects/SelectionSphere";
 
 type Props = {
-    light: LightWrapper,
-    isSelected: boolean
-}
+    light: LightWrapper,}
 
-export const RenderedSpotLight = ( {light, isSelected}: Props) => {
+export const RenderedSpotLight = ( {light}: Props) => {
     const { updateLightProperties: updateLight } = useSceneObjectsContext();
-    const { updateSelected } = useSidebarControlsContext();
 
     const lightRef = useRef<SpotLight>(null);
 
+    const isSelected = useIsSelected(light.id);
+    const handleSelect = useToggleSelect(light.id);
+
     const { color, position, distance, intensity, angle, penumbra } = light.properties as SpotLightProperties;
 
-    useHelper((isSelected) && lightRef as any, SpotLightHelper, color);
+    useHelper(isSelected && lightRef as any, SpotLightHelper, color);
 
     return (
         <group>
@@ -42,10 +44,9 @@ export const RenderedSpotLight = ( {light, isSelected}: Props) => {
                 angle={angle}
                 penumbra={penumbra}
             >
-                <LightTypeBillboard 
-                    type={light.type}
-                    onClick={() => updateSelected(light.id) } />
+                <SelectionSphere onClick={handleSelect} />
             </spotLight>
+            <IconBillboard icon={spotLightBillboard} position={position} />
         </group>
     );
 }

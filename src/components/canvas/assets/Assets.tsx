@@ -1,13 +1,11 @@
 import { useGLTF } from "@react-three/drei";
 import React from "react";
 import { RenderedAsset } from "./RenderedAsset";
-import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 import { AssetWrapper } from "../../../models/Asset";
 
 export const Assets = () => {
     const { assetsList, updateAsset } = useSceneObjectsContext();
-    const { selectedId, updateSelected } = useSidebarControlsContext();
         
     return (
         assetsList.map((asset) => {
@@ -16,9 +14,7 @@ export const Assets = () => {
                 <RenderedAsset 
                     key={asset.id}
                     asset={asset}
-                    updateAsset={(id: string, change: Partial<AssetWrapper>) => updateAsset(id, change)}
-                    isSelected={selectedId === asset.id}
-                    updateSelected={(id: string) => updateSelected(id)}
+                    updateAsset={(change: Partial<AssetWrapper>) => updateAsset(asset.id, change)}
                 />
             );
         })

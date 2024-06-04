@@ -8,7 +8,7 @@ function useSceneData(): {
   subscribe: (callback: () => void) => () => void;
 } {
 
-  const scene = useRef({
+  const scene = useRef<SceneWrapper>({
     ...INITIAL_SCENE_SETTINGS
   });
   const subscribers = useRef(new Set<()=>void>());
@@ -16,6 +16,7 @@ function useSceneData(): {
   const get = useCallback( () => scene.current, []);
   
   const set = useCallback( (value: Partial<SceneWrapper>) => {
+    
     scene.current = { ...scene.current, ...value};
     subscribers.current.forEach( (callback) => callback() );
   }, [])

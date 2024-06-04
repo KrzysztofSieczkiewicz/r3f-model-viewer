@@ -1,33 +1,36 @@
 import React, { useRef } from "react";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
-import { useSidebarControlsContext } from "../../contexts/SidebarControlsContext";
 
 import { PointLight } from "three";
 
+import pointLightBillboard from '../../../icons/lightTypes/pointLight.svg';
 import { LightProperties, LightWrapper, PointLightProperties } from "../../../models/Light"
-import { LightTypeBillboard } from './LightTypeBillboard';
 import { LightsGizmo } from "./LightsGizmo";
+import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
+import { IconBillboard } from "../helperObjects/IconBillboard";
+import { SelectionSphere } from "../helperObjects/SelectionSphere";
 
 
 type Props = {
-    light: LightWrapper,
-    isSelected: boolean
+    light: LightWrapper
 }
 
-export const RenderedPointLight = ( {light, isSelected}: Props) => {
-    const { updateLightProperties: updateLight } = useSceneObjectsContext();
-    const { updateSelected } = useSidebarControlsContext();
+export const RenderedPointLight = ( {light}: Props) => {
+    const { updateLightProperties } = useSceneObjectsContext();
 
     const { color, position, distance, intensity } = light.properties as PointLightProperties;
+
+    const isSelected = useIsSelected(light.id);
+    const handleSelect = useToggleSelect(light.id);
     
     let lightRef = useRef<PointLight>(null);
 
     return (
         <group>
-            {isSelected && 
+            {(isSelected) && 
                 <LightsGizmo
                     position={position}
-                    handleChange={(change: Partial<LightProperties>) => { updateLight(light.id, change) }}
+                    handleChange={(change: Partial<LightProperties>) => { updateLightProperties(light.id, change) }}
                 />
             }
             <pointLight
@@ -38,10 +41,9 @@ export const RenderedPointLight = ( {light, isSelected}: Props) => {
                 intensity={intensity}
                 distance={distance}
             >
-                <LightTypeBillboard 
-                    type={light.type} 
-                    onClick={() => updateSelected(light.id) } />
+                <SelectionSphere onClick={handleSelect} />
             </pointLight>
+            <IconBillboard icon={pointLightBillboard} position={position} />
         </group>
     );
 }

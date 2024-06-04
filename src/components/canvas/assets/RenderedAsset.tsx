@@ -5,12 +5,11 @@ import { AssetWrapper } from "../../../models/Asset";
 import React from "react";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { AssetsGizmo } from "./AssetsGizmo";
+import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 
 type Props = {
     asset: AssetWrapper,
-    updateAsset: (id: string, change: Partial<AssetWrapper>) => void,
-    isSelected: boolean,
-    updateSelected: (id: string) => void,
+    updateAsset: (change: Partial<AssetWrapper>) => void,
 }
 
 type GLTFResult = GLTF & {
@@ -20,10 +19,13 @@ type GLTFResult = GLTF & {
   };
 
 
-export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelected}: Props) => {
+export const RenderedAsset = memo(( {asset, updateAsset}: Props) => {
     const [ isHovered, setIsHovered ] = useState(false);
     const [ isOutline, setIsOutline ] = useState(false);
     const [ outlineColor, setOutlineColor ] = useState("white")
+
+    const isSelected = useIsSelected(asset.id);
+    const handleSelect = useToggleSelect(asset.id);
     
     const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
@@ -41,8 +43,6 @@ export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelec
             setOutlineColor("#00FFFF");
         }
      }, [isHovered, isSelected])
-
-
     
     if(!asset.visible) return;
 
@@ -52,7 +52,7 @@ export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelec
             {isSelected && 
                 <AssetsGizmo
                     asset={asset}
-                    handleChange={(newAsset) => updateAsset(asset.id, {...newAsset})}
+                    handleChange={(newAsset) => updateAsset({...newAsset})}
                 />
             }
             
@@ -60,7 +60,7 @@ export const RenderedAsset = memo(( {asset, updateAsset, isSelected, updateSelec
                 matrixWorldAutoUpdate={true}
                 onPointerOver={() => setIsHovered(true) }
                 onPointerOut={() => setIsHovered(false) }
-                onClick={() => updateSelected(asset.id) } 
+                onClick={handleSelect}
                 castShadow={asset.castShadow}
                 receiveShadow={asset.receiveShadow}
                 geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
