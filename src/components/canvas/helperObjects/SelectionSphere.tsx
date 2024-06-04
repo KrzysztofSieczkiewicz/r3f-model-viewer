@@ -21,7 +21,7 @@ export const SelectionSphere = ( {onClick}: Props) => {
                 ref={selectionSphere}
                 visible={false}
                 position={[0,0,0]}
-                args={[0.35, 4,2]}
+                args={[0.35, 8,4]}
                 onPointerOver={ () => {
                     setIsHovered(true)
                 }}
