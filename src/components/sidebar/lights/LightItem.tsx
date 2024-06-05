@@ -16,7 +16,7 @@ type Props = {
 }
 
 export const LightItem = ({ isActive, light, toggleExtend }: Props) => {
-    const { deleteLight, } = useSceneObjectsContext();
+    const { deleteLight } = useSceneObjectsContext();
 
     const renderLightHeader = () => {
         return <LightItemHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
