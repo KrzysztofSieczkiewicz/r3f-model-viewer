@@ -27,7 +27,7 @@ export const CamerasMenu = () => {
                 <AddCameraDropdown />
             </section>
             <section className={styles.menuSection}>
-                <h3 className={styles.sectionHeader}>Lights</h3>
+                <h3 className={styles.sectionHeader}>Cameras</h3>
                 
                 {camerasList.map((camera: CameraWrapper) => {
                     return (

@@ -11,6 +11,7 @@ import { AssetsMenu } from "./assets/AssetsMenu";
 import { EffectsMenu } from "./effects/EffectsMenu";
 import { LightsMenu } from "./lights/LightsMenu";
 import { SceneMenu } from "./scene/SceneMenu";
+import { CamerasMenu } from "./cameras/CamerasMenu";
 
 
 export const Sidebar = () => {
@@ -50,10 +51,17 @@ export const Sidebar = () => {
                 </SidebarMenuItem>
                 <SidebarMenuItem
                     icon={<ImageIcon className={styles.sidebarIcon} />}
-                    active={activeItem === "Rendering"}
-                    onClick={() => handleItemClick("Rendering")}
+                    active={activeItem === "Effects"}
+                    onClick={() => handleItemClick("Effects")}
                 >
                     <EffectsMenu />
+                </SidebarMenuItem>
+                <SidebarMenuItem
+                    icon={<ImageIcon className={styles.sidebarIcon} />}
+                    active={activeItem === "Cameras"}
+                    onClick={() => handleItemClick("Cameras")}
+                >
+                    <CamerasMenu />
                 </SidebarMenuItem>
             </ul>
         </nav>
