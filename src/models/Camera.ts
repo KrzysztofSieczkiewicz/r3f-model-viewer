@@ -10,6 +10,7 @@ export type CameraTypes =
 ;
 
 export type BaseCameraProperties = {
+    isVisible: boolean
     position: [number, number, number],
     rotation: [number, number, number],
     aspectRatio: number,
@@ -35,6 +36,7 @@ const INIT_CAMERAS_LIST: CameraWrapper[] = [
         type: CAMERA_TYPES.perspectiveCamera,
         id: generateNewID(),
         properties: {
+            isVisible: true,
             position: [1,2,3],
             rotation: [0,0,0],
             aspectRatio: 2,
@@ -45,6 +47,7 @@ const INIT_CAMERAS_LIST: CameraWrapper[] = [
         type: CAMERA_TYPES.ortographicCamera,
         id: generateNewID(),
         properties: {
+            isVisible: true,
             position: [3,2,1],
             rotation: [0,1,0],
             aspectRatio: 1.5
@@ -56,6 +59,7 @@ const DEFAULT_PERSPECTIVE_CAMERA: CameraWrapper = {
     type: CAMERA_TYPES.perspectiveCamera,
     id: generateNewID(),
     properties: {
+        isVisible: true,
         position: [1,2,3],
         rotation: [0,0,0],
         aspectRatio: 2,
@@ -67,6 +71,7 @@ const DEFAULT_ORTOGRAPHIC_CAMERA: CameraWrapper = {
     type: CAMERA_TYPES.ortographicCamera,
     id: generateNewID(),
     properties: {
+        isVisible: true,
         position: [3,2,1],
         rotation: [0,1,0],
         aspectRatio: 1.5

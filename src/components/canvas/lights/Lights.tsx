@@ -10,10 +10,10 @@ export const Lights = () => {
     const handleLightType = (light: LightWrapper) => {
         switch(light.type) {
             case LIGHT_TYPES.pointLight:
-                return <RenderedPointLight light={light} />
+                return <RenderedPointLight key={light.id} light={light} />
 
             case LIGHT_TYPES.spotLight:
-                return <RenderedSpotLight light={light} />
+                return <RenderedSpotLight key={light.id} light={light} />
         }
     }
 
