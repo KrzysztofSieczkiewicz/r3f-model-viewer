@@ -1,0 +1,23 @@
+@import '../../../App.module.css';
+
+.resetButton {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color-medium);
+    color: var(--color-resin-black);
+
+    transition-duration: 200ms;
+    cursor: pointer;
+    user-select: none;
+}
+.resetButton:hover {
+    background-color: var(--color-medium-dark);
+    color: var(--color-platinum);
+}
+.resetButton:active {
+    transform: rotate(90deg);
+}

@@ -1,8 +1,8 @@
 @import '../../../App.module.css';
 
 .track {
-    height: 1rem;
-    width: 8rem;
+    height: 0.75rem;
+    width: 7rem;
     display: flex;
 
     background-color: var(--color-medium);
@@ -36,28 +36,4 @@
     justify-content: center;
     width: 100%;
     font-size: 0.9rem;
-}
-
-.resetButton {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-left: 0.5rem;
-    font-size: 1rem;
-    border-radius: 50%;
-    border: none;
-    background-color: transparent;
-    color: var(--color-platinum);
-
-    transition-duration: var(--transition-duration);
-    cursor: pointer;
-    user-select: none;
-}
-.resetButton:hover {
-    background-color: var(--color-platinum);
-    color: var(--color-resin-black);
-}
-.resetButton:active {
-    transform: rotate(90deg);
-    background-color: var(--color-celtic-blue);
-    color: var(--color-platinum);
 }

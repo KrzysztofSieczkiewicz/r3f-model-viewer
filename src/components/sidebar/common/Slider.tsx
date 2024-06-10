@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import styles from './Silder.module.css';
 import commonStyles from '../Sidebar.module.css';
@@ -10,11 +10,13 @@ type Props = {
     step: number,
     value: number,
     defaultValue: number,
-    handleChange: (handledValue: number) => void
+    handleChange: (handledValue: number) => void,
+    
+    children?: ReactNode
 }
 
 export const Slider = (props: Props) => {
-    const { name, min, max, step, value, defaultValue, handleChange} = props;
+    const { name, min, max, step, value, defaultValue, handleChange, children} = props;
 
     const [ localValue, setLocalValue ] = useState(value);
     const [ startingPosX, setStartingPosX ] = useState(0);
@@ -28,10 +30,6 @@ export const Slider = (props: Props) => {
         } else {
             handleChange(newValue);
         }
-    }
-
-    const roundDisplayed = (number: number) => {
-        return Math.round((number) * 100) / 100;
     }
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -50,10 +48,10 @@ export const Slider = (props: Props) => {
 
     // TODO: WONT iF(!isMouseDown) return; BE BETTER?
     useEffect(() => {
-        if(isMouseDown) {
-            document.addEventListener('mouseup', handleMouseUp);
-            document.addEventListener('mousemove', handleMouseMove);
-        }
+        if(!isMouseDown) return;
+        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mousemove', handleMouseMove);
+
         return () => {
             document.removeEventListener('mouseup', handleMouseUp);
             document.removeEventListener('mousemove', handleMouseMove);
@@ -75,12 +73,6 @@ export const Slider = (props: Props) => {
         );
     }
 
-    // RESET VALUE TO DEFAULT
-    const handleResetDefault = () => {
-        handleInput(defaultValue);
-        handleChange(defaultValue);
-    }
-
     // TODO: add doubleclick to set value numerically
     // maybe wrap <span> in <div> with onDoubleClick that will return <input> instead?
     // and detect outside click or return etc. to return to <span>
@@ -92,9 +84,8 @@ export const Slider = (props: Props) => {
             >
                 {renderSliderPosition()}
             </div>
-            <button className={styles.resetButton}
-                onClick={handleResetDefault}
-            >&#8635;</button>
+            
+            {children}
         </div>
     );
 }
