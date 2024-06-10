@@ -65,6 +65,16 @@ export const Slider = (props: Props) => {
         setLocalValue(value);
     }, [value]);
 
+    const renderSliderPosition = () => {
+        const calculatedWidth = localValue / (max-min) * 100;
+
+        return (
+            <span
+                className={styles.sliderBar}
+                style={{ width: `${calculatedWidth}%`}}/>
+        );
+    }
+
     // RESET VALUE TO DEFAULT
     const handleResetDefault = () => {
         handleInput(defaultValue);
@@ -77,12 +87,10 @@ export const Slider = (props: Props) => {
     return (
         <div className={commonStyles.traitContainer}>
             <label className={commonStyles.traitName}>{name}</label>
-            <div className={styles.slider} 
+            <div className={styles.track} 
                 onMouseDown={(e) => handleMouseDown(e)}
             >
-                <span className={styles.value}
-                onDoubleClick={() => console.log("DoubleClicked")}
-                >{roundDisplayed(value)}</span>
+                {renderSliderPosition()}
             </div>
             <button className={styles.resetButton}
                 onClick={handleResetDefault}

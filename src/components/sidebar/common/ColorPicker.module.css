@@ -10,7 +10,7 @@
     border-radius: var( --controls-rounding);
 
     box-shadow: 
-        0.075rem 0.075rem 0.25rem var(--color-main-shadow) inset,
+        0.025rem 0.025rem 0.15rem var(--color-main-shadow) inset,
         -0.05rem -0.05rem 0.15rem var(--color-main-shadow-opposite) inset;
 
     user-select: none;
