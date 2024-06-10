@@ -3,9 +3,7 @@
 .sidebar {
     width: var(--nav-size);
     height: 100%;
-    padding-top: 3rem;
-    background-color: var(--color-resin-black);
-    box-shadow: 0 10px 10px 5px black;
+    padding-top: 1rem;
 
     position: absolute;
     top: 0;
@@ -25,8 +23,8 @@
 }
 
 .sidebarItem {
-    width: calc(var(--nav-size) * 1);
-    height: calc(var(--nav-size) * 1);
+    width: var(--nav-size);
+    height: var(--nav-size);
     margin: 0.25rem;
     display: flex;
     align-items: center;
