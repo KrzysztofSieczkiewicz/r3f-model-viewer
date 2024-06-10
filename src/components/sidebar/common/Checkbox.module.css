@@ -13,8 +13,8 @@
     border-radius: 0.15em;
     box-shadow: 
         0.075rem 0.075rem 0.15rem var(--color-main-shadow) inset,
-        0.075rem 0.075rem 0.35rem var(--color-main-shadow-opposite);
-    background-color: var(--color-main);
+        -0.075rem -0.075rem 0.75rem var(--color-main-shadow-opposite) inset;
+    background-color: var(--color-main-strong);
 
     outline: none;
     cursor: pointer;
@@ -27,8 +27,10 @@
 
 .checked {
     position: relative;
-    box-shadow: 0.075rem 0.075rem 0.35rem var(--color-main-shadow);
-    background-color: var(--color-celtic-blue);
+    box-shadow:
+        0.075rem 0.075rem 0.25rem var(--color-main-shadow),
+        -0.075rem -0.075rem 0.75rem var(--color-main-shadow-opposite);
+    --background-color: var(--color-celtic-blue);
 }
 
 .checked::before {
@@ -37,5 +39,5 @@
     font-size: 1rem;
     right: 0.1rem;
     top: -0.25rem;
-    color: var(--color-platinum);
+    color: var(--color-resin-black);
 }

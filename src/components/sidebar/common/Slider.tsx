@@ -30,7 +30,6 @@ export const Slider = (props: Props) => {
         }
     }
 
-    // ROUND DISPLAYED VALUE
     const roundDisplayed = (number: number) => {
         return Math.round((number) * 100) / 100;
     }
@@ -42,7 +41,6 @@ export const Slider = (props: Props) => {
 
     const handleMouseMove = (event: MouseEvent) => {
         const calculatedX = event.clientX - startingPosX;
-        
         handleInput(localValue + calculatedX * step);
     };
 
@@ -82,15 +80,9 @@ export const Slider = (props: Props) => {
             <div className={styles.slider} 
                 onMouseDown={(e) => handleMouseDown(e)}
             >
-                <span className={`${styles.arrow} ${styles.left}`}
-                onClick={() => handleInput(localValue - step)} > &#60; </span>
-
                 <span className={styles.value}
                 onDoubleClick={() => console.log("DoubleClicked")}
                 >{roundDisplayed(value)}</span>
-
-                <span className={`${styles.arrow} ${styles.right}`}
-                onClick={() => handleInput(localValue + step)} > &#62; </span>
             </div>
             <button className={styles.resetButton}
                 onClick={handleResetDefault}

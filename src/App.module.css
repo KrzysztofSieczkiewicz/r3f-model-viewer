@@ -1,7 +1,10 @@
 :global(*) {
     --color-main: #e0e0e0;
+    --color-main-strong: #efefef;
     --color-main-shadow: rgba(70, 70, 70, 0.8);
     --color-main-shadow-opposite: rgba(255, 255, 255, 0.8);
+
+    --color-medium: #8a8a8a;
 
 
     --color-resin-black: #212226;
@@ -19,7 +22,7 @@
 
     --nav-size: 4rem;
     --input-height: 1.5rem;
-    --slider-radius: 0.25rem;
+    --controls-rounding: 0.15rem;
     
     --transition-duration: 300ms;
 }

@@ -1,12 +1,12 @@
 @import '../../../App.module.css';
 
 .slider {
-    height: 1.25em;
-    width: 7em;
+    height: 1rem;
+    width: 8rem;
     display: flex;
 
-    background-color: var(--color-resin-black);
-    border-radius: var(--slider-radius);
+    background-color: var(--color-medium);
+    border-radius: var(--controls-rounding);
     color: var(--color-grey);
 
     text-align: center;
@@ -21,37 +21,6 @@
 }
 .slider:active {
     --filter: brightness(1.35);
-    background-color: var(--color-celtic-blue);
-    color: var(--color-platinum);
-}
-
-.arrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1em;
-    font-size: 0.9rem;
-    font-style: normal;
-    
-    color: var(--color-grey);
-    background-color: var(--color-resin-bright);
-
-    transition-duration: var(--transition-duration);
-}
-
-.arrow.right {
-    border-radius: 0 var(--slider-radius) var(--slider-radius) 0;
-}
-
-.arrow.left {
-    border-radius: var(--slider-radius) 0 0 var(--slider-radius);
-}
-
-.slider:hover .arrow {
-    background-color: var(--color-platinum);
-    color: var(--color-resin-black);
-}
-.slider:active .arrow {
     background-color: var(--color-celtic-blue);
     color: var(--color-platinum);
 }
