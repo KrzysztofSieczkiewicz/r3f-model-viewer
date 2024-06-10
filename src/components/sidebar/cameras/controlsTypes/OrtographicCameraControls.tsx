@@ -20,7 +20,7 @@ export const OrtogtaphicCameraControls = ( {id, properties}: Props) => {
                 handleChange={(val) => updateCameraProperties(id, {position: val} )} />
             <RotationSliders name="Rotation"
                 value={properties.rotation} step={0.01}
-                handleChange={(val) => updateCameraProperties(id, {position: val} )} />
+                handleChange={(val) => updateCameraProperties(id, {rotation: val} )} />
         </>
     );
 }
