@@ -25,7 +25,7 @@ export const Checkbox = ( {name, value, handleChange}: Props) => {
     return (
         <div className={commonStyles.traitContainer}>
             <label className={commonStyles.traitName}>{name}</label>
-            <div className="checkbox-container">
+            <div>
                 <input
                     className={isChecked ? `${styles.checkbox} ${styles.checked}` : styles.checkbox}
                     type="checkbox" 
