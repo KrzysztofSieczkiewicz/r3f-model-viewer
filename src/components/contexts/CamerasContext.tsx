@@ -1,12 +1,13 @@
-import React, { useCallback, useContext } from "react";
-import { ReactNode, createContext, useState } from "react";
+import React, { useCallback, useContext, ReactNode, createContext, useState } from "react";
 
-import { CAMERA_TYPES, CameraProperties, CameraTypes, CameraWrapper, INIT_CAMERAS_LIST } from "../../models/Camera";
+import { CAMERA_TYPES, CameraProperties, CameraTypes, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../models/Camera";
+
 
 type CamerasContext = {
     camerasList: CameraWrapper[],
     addCamera: (type: CameraTypes) => void,
     updateCameraProperties: (id: string, change: Partial<CameraProperties>) => void,
+    deleteCamera: (id: string) => void,
 }
 
 export const CamerasContext = createContext<CamerasContext | null>( null );
@@ -19,15 +20,22 @@ export const CamerasContextProvider = (props: {children: ReactNode}): JSX.Elemen
         const newCamerasList = [...camerasList];
         switch(type) {
             case CAMERA_TYPES.perspectiveCamera:
-                newCamerasList.push();
+                newCamerasList.push(DEFAULT_PERSPECTIVE_CAMERA);
                 break;
             case CAMERA_TYPES.ortographicCamera:
-                newCamerasList.push();
+                newCamerasList.push(DEFAULT_ORTOGRAPHIC_CAMERA);
                 break;
         }
-
         setCamerasList(newCamerasList);
-    }, [camerasList] );
+    }, [camerasList]);
+
+    const deleteCamera = useCallback((id: string) => {
+        const index = camerasList.findIndex(camera => camera.id === id);
+        if (index === -1) return;
+
+        const filteredCameras = camerasList.filter((camera) => camera.id !== id );
+        setCamerasList(filteredCameras);
+    }, [camerasList]);
 
     const updateCameraProperties = useCallback((id: string, change: Partial<CameraProperties>) => {
         const index = camerasList.findIndex(light => light.id === id);
@@ -41,7 +49,7 @@ export const CamerasContextProvider = (props: {children: ReactNode}): JSX.Elemen
     }, [camerasList])
 
     return (
-        <CamerasContext.Provider value={{ camerasList, addCamera, updateCameraProperties }} >
+        <CamerasContext.Provider value={{ camerasList, addCamera, updateCameraProperties, deleteCamera }} >
             {props.children}
         </CamerasContext.Provider>
     );
