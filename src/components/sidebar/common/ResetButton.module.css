@@ -4,19 +4,20 @@
     width: 1.5rem;
     height: 1.5rem;
     margin-left: 0.5rem;
+    padding-top: 0.2rem;
     font-size: 1rem;
     border-radius: 50%;
     border: none;
-    background-color: var(--color-medium);
-    color: var(--color-resin-black);
+    background-color: var(--color-medium-dark);
+    color: var(--color-platinum);
 
     transition-duration: 200ms;
     cursor: pointer;
     user-select: none;
 }
 .resetButton:hover {
-    background-color: var(--color-medium-dark);
-    color: var(--color-platinum);
+    background-color: var(--color-medium);
+    color: var(--color-resin-black);
 }
 .resetButton:active {
     transform: rotate(90deg);

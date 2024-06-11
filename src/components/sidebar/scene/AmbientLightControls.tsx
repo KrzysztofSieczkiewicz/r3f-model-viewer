@@ -4,6 +4,7 @@ import { Checkbox } from "../common/Checkbox";
 import { ColorPicker } from "../common/ColorPicker";
 import { Slider } from "../common/Slider";
 import { useScene } from "../../contexts/SceneContext";
+import { ResetButton } from "../common/ResetButton";
 
 export const AmbientLightControls = () => {
     const [ scene, setScene ] = useScene();
@@ -20,7 +21,10 @@ export const AmbientLightControls = () => {
             <Slider name="Intensity"
                 value={scene.ambientIntensity}
                 handleChange={(val) =>  setScene({ambientIntensity: val}) }
-                min={0} max={3} step={0.001} defaultValue={0.1} />
+                min={0} max={1} step={0.001} defaultValue={0.1} 
+            >
+                <ResetButton handleReset={() => setScene({ambientIntensity: 0.1})} />
+            </Slider>
         </>
     );
 }
