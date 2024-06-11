@@ -18,10 +18,6 @@ type Props = {
 export const LightItem = ({ isActive, light, toggleExtend }: Props) => {
     const { deleteLight } = useSceneObjectsContext();
 
-    const renderLightHeader = () => {
-        return <LightItemHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
-    }
-
     const renderLightControls = () => {
         switch(light.type) {
             case LIGHT_TYPES.pointLight:
@@ -34,14 +30,9 @@ export const LightItem = ({ isActive, light, toggleExtend }: Props) => {
     return (
         <div className={isActive ? `${styles.lightContainer} ${styles.active}` : styles.lightContainer}>
             
-            {renderLightHeader()}
+            <LightItemHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
 
-            {isActive &&
-            <div className={styles.lightBody}>
-                <DeleteItemButton deleteObject={() => deleteLight(light.id)}/>
-                {renderLightControls()}
-            </div>
-            }
+            {isActive && renderLightControls()}
         </div>
     );
 }

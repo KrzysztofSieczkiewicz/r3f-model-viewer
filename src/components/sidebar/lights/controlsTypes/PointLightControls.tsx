@@ -1,11 +1,12 @@
 import React from "react";
-
+import styles from './../Lights.module.css';
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 
 import { PositionSliders } from "../../common/PositionSliders";
 import { Slider } from "../../common/Slider";
 import { ColorPicker } from "../../common/ColorPicker";
 import { PointLightProperties } from "../../../../models/Light";
+import { DeleteItemButton } from "../../common/DeleteItemButton";
 
 type Props = {
     id: string,
@@ -13,10 +14,11 @@ type Props = {
 }
 
 export const PointLightControls = ( {id, properties}: Props ) => {
-    const { updateLightProperties } = useSceneObjectsContext();
+    const { updateLightProperties, deleteLight } = useSceneObjectsContext();
 
     return (
-        <>
+        <div className={styles.lightBody}>
+            <DeleteItemButton deleteObject={() => deleteLight(id)}/>
             <PositionSliders name="Position"
                 value={properties.position} step={0.01}
                 handleChange={(val) => updateLightProperties(id, {position: val} )} />
@@ -31,6 +33,6 @@ export const PointLightControls = ( {id, properties}: Props ) => {
                 value={properties.distance}
                 handleChange={(val) => updateLightProperties(id, {distance: val} )} 
                 min={0} max={100} step={0.1} defaultValue={10} />
-        </>
+        </div>
     );
 }
