@@ -114,17 +114,11 @@
 
 .listItemContainer {
     color: var(--color-platinum);
-    background-color: var(--color-resin-bright);
-    border: 1px solid black;
+    background-color: var(--color-main-weak);
+    border-radius: var(--sections-rounding);
+    box-shadow: 0.15rem 0.15rem 0.35rem 0 var(--color-main-shadow);
 
     margin: 0.5rem 0;
-    transition: border var(--transition-duration);
-}
-.listItemContainer:hover {
-    border: 0.5px solid var(--color-platinum);
-}
-.listItemContainer.active {
-    border: 0.5px solid var(--color-celtic-blue);
 }
 
 .listItemBody {

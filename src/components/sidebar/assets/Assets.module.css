@@ -1,59 +1,5 @@
 @import '../../../App.module.css';
 
-.assetHeader {
-    box-sizing: border-box;
-    display: inline-grid;
-    align-items: center;
-    gap: 0.25rem;
-
-    width: 100%;
-    height: 2.5rem;
-    padding: 0.4rem 0.25rem 0.5rem 0.25rem;
-
-    grid-template-columns: 1fr 5fr 1fr 1fr;
-
-    background-color: var(--color-resin-brighter);
-
-    cursor: pointer;
-}
-
-.assetIcon {
-    width: 100%;
-    height: 100%;
-    color: var(--color-platinum);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    user-select: none;
-}
-
-.assetName {
-    margin: 0;
-    padding-left: 0.5rem;
-
-    font-size: 0.9rem;
-    color: var(--color-platinum);
-}
-
-.extendIcon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-
-    user-select: none;
-    cursor: pointer;
-
-    font-size: 1.15rem;
-    color: var(--color-platinum);
-}
-
 /* TO BO MOVED AS A SEPARATE module.css */
 .addButton {
     display: block;

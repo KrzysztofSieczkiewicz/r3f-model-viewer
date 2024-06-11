@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './Assets.module.css';
+import styles from './AssetItemHeader.module.css';
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
