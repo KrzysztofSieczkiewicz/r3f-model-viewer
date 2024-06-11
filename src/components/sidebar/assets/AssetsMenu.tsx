@@ -1,18 +1,20 @@
 import React from "react";
 import { useState } from "react";
-import styles from './../Sidebar.module.css'
 import assetStyles from './Assets.module.css'
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { AssetItem } from "./AssetItem";
 import { AssetWrapper } from "../../../models/Asset";
+import { MenuSection } from "../commons/MenuSection";
+import { SidebarMenu } from "../commons/SidebarMenu";
 
 
 export const AssetsMenu = () => {
-    const { assetsList, updateAsset, deleteAsset, addAsset } = useSceneObjectsContext();
+    const { assetsList, addAsset } = useSceneObjectsContext();
    
     const [activeId, setActiveId] = useState("");
 
+    // TODO: CONSIDER MOVING THIS TO UTILS OR HOOKS -> THE SAME IS USED IN EVERY MENU
     const handleMenuItemClick = (id: string) => {
         if (activeId === id) {
             setActiveId("");
@@ -23,33 +25,23 @@ export const AssetsMenu = () => {
     
     // TODO: FINISH STYLING
     return (
-        <div className={styles.menu}>
-            <section className={styles.menuSection}>
+        <SidebarMenu>
+            <MenuSection>
                 <button className={assetStyles.addButton} onClick={() => {addAsset()}}> ADD NEW </button>
-            </section>
-            <section className={styles.menuSection}>
-                <h3 className={styles.sectionHeader}>Assets</h3>
-
+            </MenuSection>
+            
+            <MenuSection title="Assets">
                 {assetsList.map((asset: AssetWrapper) => {
                     return (
                         <AssetItem
                             key={asset.id}
                             isActive={activeId === asset.id}
-                            
-                            isVisible={asset.visible}
-                            name={asset.name}
-                            position={asset.position}
-                            rotation={asset.rotation}
-                            scale={asset.scale}
-
-                            onClick={() => handleMenuItemClick(asset.id)}
-                            updateAsset={(change: Partial<AssetWrapper>) => updateAsset(asset.id, change)}
-                            deleteAsset={() => deleteAsset(asset.id)}
+                            asset={asset}
+                            toggleExtend={() => handleMenuItemClick(asset.id)}
                         />
                     );
                 })}
-
-            </section>
-        </div>
+            </MenuSection>
+        </SidebarMenu>
     );
 }

@@ -8,7 +8,7 @@ type Props = {
     onClick: () => void
 }
 
-export const SidebarItem = (props: Props) => {
+export const SidebarMenuButton = (props: Props) => {
     const { icon, children, active, onClick } = props;
 
     return (
