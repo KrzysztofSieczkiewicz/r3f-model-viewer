@@ -14,8 +14,8 @@ export const AssetsMenu = () => {
    
     const [activeId, setActiveId] = useState("");
 
-    // TODO: CONSIDER MOVING THIS TO UTILS OR HOOKS -> THE SAME IS USED IN EVERY MENU
-    const handleMenuItemClick = (id: string) => {
+    // TODO: MOVE THIS TO UTILS OR HOOKS -> THE SAME IS USED IN EVERY MENU
+    const toggleItemExtend = (id: string) => {
         if (activeId === id) {
             setActiveId("");
         } else {
@@ -23,13 +23,13 @@ export const AssetsMenu = () => {
         }
     };
     
-    // TODO: FINISH STYLING
+    
     return (
         <SidebarMenu>
             <MenuSection>
                 <button className={assetStyles.addButton} onClick={() => {addAsset()}}> ADD NEW </button>
             </MenuSection>
-            
+
             <MenuSection title="Assets">
                 {assetsList.map((asset: AssetWrapper) => {
                     return (
@@ -37,7 +37,7 @@ export const AssetsMenu = () => {
                             key={asset.id}
                             isActive={activeId === asset.id}
                             asset={asset}
-                            toggleExtend={() => handleMenuItemClick(asset.id)}
+                            toggleExtend={() => toggleItemExtend(asset.id)}
                         />
                     );
                 })}

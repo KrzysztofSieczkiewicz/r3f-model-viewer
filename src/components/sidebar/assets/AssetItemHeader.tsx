@@ -16,7 +16,7 @@ type Props = {
 export const AssetItemHeader = ( {isActive, asset, toggleExtend }: Props) => {
     const { updateAsset, } = useSceneObjectsContext();
 
-    const renderArrow = () => {
+    const handleArrowDirection = () => {
         return isActive ? String.fromCharCode(8657) : String.fromCharCode(8659);
     }
 
@@ -32,7 +32,7 @@ export const AssetItemHeader = ( {isActive, asset, toggleExtend }: Props) => {
                 isVisible={asset.visible} 
                 updateObject={ (val: boolean) => updateAsset(asset.id, {visible: val} )} 
             />
-            <span className={styles.extendIcon}>{ renderArrow() }</span>
+            <span className={styles.extendIcon}>{ handleArrowDirection() }</span>
         </div>
     );
 }

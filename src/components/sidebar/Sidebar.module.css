@@ -1,5 +1,6 @@
 @import '../../App.module.css';
 
+/* SIDEBAR WITH BUTTONS */
 .sidebar {
     width: var(--nav-size);
     height: 100%;
@@ -72,6 +73,7 @@
     fill: var(--color-platinum);
 }
 
+/* SIDEBAR MENUS AND ITEMS */
 .menu {
     position: absolute;
     left: 3.5rem;

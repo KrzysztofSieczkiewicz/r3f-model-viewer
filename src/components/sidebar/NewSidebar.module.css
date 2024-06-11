@@ -4,6 +4,81 @@
     color: black;        
 }
 
+/* SIDEBAR WITH BUTTONS */
+.sidebar {
+    width: var(--nav-size);
+    height: 100%;
+    padding-top: 1rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.sidebarNav {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sidebarItem {
+    width: var(--nav-size);
+    height: var(--nav-size);
+    margin: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconButton {
+    --button-size: calc(var(--nav-size) * 0.75);
+    width: var(--button-size);
+    height: var(--button-size);
+    padding: 0;
+    margin: 0.1rem;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: transparent;
+    text-decoration: none;
+
+    transition: background-color var(--transition-duration);
+}
+
+.iconButton:hover {
+    background-color: var(--color-platinum);
+}
+
+.iconButton.active {
+    background-color: var(--color-celtic-blue);
+}
+
+.sidebarIcon {
+    fill: var(--color-platinum);
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: fill var(--transition-duration);
+}
+
+.iconButton:hover .sidebarIcon {
+    fill: var(--color-resin-black);
+}
+
+.iconButton.active .sidebarIcon {
+    fill: var(--color-platinum);
+}
+
+
+/* SIDEBAR MENUS AND ITEMS */
 .menu {
     position: absolute;
     left: var(--nav-size);
@@ -36,3 +111,29 @@
     font-size: 1rem;
     font-weight: 400;
 }
+
+.listItemContainer {
+    color: var(--color-platinum);
+    background-color: var(--color-resin-bright);
+    border: 1px solid black;
+
+    margin: 0.5rem 0;
+    transition: border var(--transition-duration);
+}
+.listItemContainer:hover {
+    border: 0.5px solid var(--color-platinum);
+}
+.listItemContainer.active {
+    border: 0.5px solid var(--color-celtic-blue);
+}
+
+.listItemBody {
+    padding: 0.5rem 0.75rem 0.75rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+
+    color: var(--color-platinum);
+}
+
+
+/* SIDEBAR MENUS AND ITEMS */

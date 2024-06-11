@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './Assets.module.css'
 
 import { AssetWrapper } from '../../../models/Asset';
 import { AssetControls } from './AssetControls';
 import { AssetItemHeader } from './AssetItemHeader';
+import { MenuListItem } from '../commons/MenuListItem';
 
 type Props = {
     isActive: boolean,
@@ -14,9 +14,9 @@ type Props = {
 export const AssetItem = ( {isActive, asset, toggleExtend}: Props) => {
 
     return (
-        <div className={isActive ? `${styles.assetContainer} ${styles.active}` : styles.assetContainer}>
+        <MenuListItem isActive={isActive}>
             <AssetItemHeader isActive={isActive} asset={asset} toggleExtend={() => toggleExtend()} />
             {isActive && <AssetControls asset={asset} />}
-        </div>
+        </MenuListItem>
     );
 }

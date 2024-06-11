@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './Assets.module.css'
+import styles from './../NewSidebar.module.css'
 
 import { PositionSliders } from "../common/PositionSliders";
 import { RotationSliders } from "../common/RotationSliders";
@@ -17,7 +17,7 @@ export const AssetControls = ({asset}: Props) => {
     const {updateAsset, deleteAsset} = useSceneObjectsContext();
 
     return (
-        <div className={styles.assetBody}>
+        <div className={styles.listItemBody}>
             <DeleteItemButton 
                 deleteObject={() => deleteAsset(asset.id)} />
 

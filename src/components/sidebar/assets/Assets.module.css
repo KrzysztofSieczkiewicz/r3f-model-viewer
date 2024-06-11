@@ -1,22 +1,5 @@
 @import '../../../App.module.css';
 
-.assetContainer {
-    color: var(--color-platinum);
-    background-color: var(--color-resin-bright);
-    border: 1px solid black;
-
-    margin: 0.5rem 0;
-    transition: border var(--transition-duration);
-}
-
-.assetContainer:hover {
-    border: 0.5px solid var(--color-platinum);
-}
-
-.assetContainer.active {
-    border: 0.5px solid var(--color-celtic-blue);
-}
-
 .assetHeader {
     box-sizing: border-box;
     display: inline-grid;
@@ -71,14 +54,7 @@
     color: var(--color-platinum);
 }
 
-.assetBody {
-    padding: 0.5rem 0.75rem 0.75rem 0.75rem;
-    display: flex;
-    flex-direction: column;
-
-    color: var(--color-platinum);
-}
-
+/* TO BO MOVED AS A SEPARATE module.css */
 .addButton {
     display: block;
     width: 75%;

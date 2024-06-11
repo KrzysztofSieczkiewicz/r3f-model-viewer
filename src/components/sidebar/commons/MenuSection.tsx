@@ -11,8 +11,9 @@ export const MenuSection = ({children, title}: Props) => {
     return (
         <section className={menuStyles.menuSection}>
             {title &&
-            <h3 className={menuStyles.sectionHeader}>{title}</h3>
-            }
+            <h3 className={menuStyles.sectionHeader}>
+                {title}
+            </h3> }
             {children}
         </section>
     );
