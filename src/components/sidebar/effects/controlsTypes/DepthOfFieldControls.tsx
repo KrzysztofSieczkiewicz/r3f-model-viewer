@@ -26,17 +26,17 @@ export const DepthOfFieldControls = ( {properties}: Props ) => {
             <Slider 
                 name={'Focus distance'} 
                 min={0} max={50} step={0.005} 
-                value={properties.focusDistance} defaultValue={1} 
+                value={properties.focusDistance}
                 handleChange={(value) => updateEffectProperties(type, {focusDistance: value} )} />
             <Slider 
                 name={'Focal length'} 
                 min={0} max={50} step={0.005} 
-                value={properties.focalLength} defaultValue={1} 
+                value={properties.focalLength}
                 handleChange={(value) => updateEffectProperties(type, {focalLength: value} )} />
             <Slider 
                 name={'Bokeh scale'} 
                 min={0} max={5} step={0.005} 
-                value={properties.bokehScale} defaultValue={1} 
+                value={properties.bokehScale} 
                 handleChange={(value) => updateEffectProperties(type, {bokehScale: value} )} />
         </div>
     );

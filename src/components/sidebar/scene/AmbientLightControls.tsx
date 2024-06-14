@@ -21,7 +21,7 @@ export const AmbientLightControls = () => {
             <Slider name="Intensity"
                 value={scene.ambientIntensity}
                 handleChange={(val) =>  setScene({ambientIntensity: val}) }
-                min={0} max={1} step={0.001} defaultValue={0.1} 
+                min={0} max={1} step={0.001}
             >
                 <ResetButton handleReset={() => setScene({ambientIntensity: 0.1})} />
             </Slider>

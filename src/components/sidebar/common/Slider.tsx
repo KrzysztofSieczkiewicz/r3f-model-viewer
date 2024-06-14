@@ -9,14 +9,13 @@ type Props = {
     max: number,
     step: number,
     value: number,
-    defaultValue: number,
     handleChange: (handledValue: number) => void,
     
     children?: ReactNode
 }
 
 export const Slider = (props: Props) => {
-    const { name, min, max, step, value, defaultValue, handleChange, children} = props;
+    const { name, min, max, step, value, handleChange, children} = props;
 
     const [ localValue, setLocalValue ] = useState(value);
     const [ startingPosX, setStartingPosX ] = useState(0);

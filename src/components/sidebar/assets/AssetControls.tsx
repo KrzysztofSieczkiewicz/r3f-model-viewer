@@ -2,12 +2,12 @@ import React from "react";
 import styles from './../NewSidebar.module.css'
 
 import { PositionSliders } from "../controls/PositionSliders";
-import { RotationSliders } from "../controls/RotationSliders";
 import { ScaleSliders } from "../controls/ScaleSliders";
 import { AssetWrapper } from "../../../models/Asset";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 import { DeleteItemButton } from "../common/DeleteItemButton";
 import { ItemTrait } from "../commons/ItemTrait";
+import { RotationSliders } from "../controls/RotationSliders";
 
 
 type Props = {

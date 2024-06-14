@@ -26,17 +26,17 @@ export const BloomControls = ( {properties}: Props ) => {
             <Slider 
                 name={'Intensity'} 
                 min={0} max={5} step={0.005} 
-                value={properties.intensity} defaultValue={1} 
+                value={properties.intensity}
                 handleChange={(value) => updateEffectProperties(type, {intensity: value} )} />
             <Slider 
                 name={'Threshold'} 
                 min={0} max={1} step={0.0005} 
-                value={properties.luminanceThreshold} defaultValue={0.15} 
+                value={properties.luminanceThreshold}
                 handleChange={(value) => updateEffectProperties(type, {luminanceThreshold: value} )} />
             <Slider 
                 name={'Smoothing'} 
                 min={0} max={1} step={0.0005} 
-                value={properties.luminanceSmoothing} defaultValue={0.025} 
+                value={properties.luminanceSmoothing} 
                 handleChange={(value) => updateEffectProperties(type, {luminanceSmoothing: value} )} />
         </div>
     );

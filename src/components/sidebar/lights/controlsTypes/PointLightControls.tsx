@@ -31,11 +31,11 @@ export const PointLightControls = ( {id, properties}: Props ) => {
             <Slider name="Intensity"
                 value={properties.intensity}
                 handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
-                min={0} max={3} step={0.005} defaultValue={1} />
+                min={0} max={3} step={0.005} />
             <Slider name="Distance"
                 value={properties.distance}
                 handleChange={(val) => updateLightProperties(id, {distance: val} )} 
-                min={0} max={100} step={0.1} defaultValue={10} />
+                min={0} max={100} step={0.1} />
         </div>
     );
 }
