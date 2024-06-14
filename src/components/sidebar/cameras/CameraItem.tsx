@@ -4,7 +4,7 @@ import styles from './Cameras.module.css';
 import { CAMERA_TYPES, CameraWrapper } from "../../../models/Camera"
 import { useCamerasContext } from '../../contexts/CamerasContext';
 import { DeleteItemButton } from '../common/DeleteItemButton';
-import { PerspectiveCameraControls } from './controlsTypes/PersperctiveCameraControls';
+import { PerspectiveCameraControls } from './controlsTypes/PerspectiveCameraControls';
 import { OrtogtaphicCameraControls } from './controlsTypes/OrtographicCameraControls';
 import { CameraItemHeader } from './CameraItemHeader';
 

@@ -1,30 +1,27 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import styles from './ScaleSliders.module.css';
-import commonStyles from '../Sidebar.module.css';
 import { normalizeArrayByIndex, roundNumber } from "../../../utils/mathUtil";
-import { AxesLockButton } from "./AxesLockButton";
+import { AxesLockButton } from "../common/AxesLockButton";
 
 type Props = {
-    name: string,
     step: number,
     value: [number,number,number],
     handleChange: (array: [number,number,number]) => void,
 }
 
 // TODO: CONSIDER ADDING CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
-export const ScaleSliders = (props: Props) => {
-    const { name, step, value, handleChange } = props;
-
+export const ScaleSliders = ({step, value, handleChange}: Props) => {
     const [ localValue, setLocalValue ] = useState<[number,number,number]>(value);
-    // RED GREEN BLUE - TODO: MOVE THIS TO GLOBAL CONSTANTS
-    const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
-
     const [ currentSlider, setCurrentSlider ] = useState<HTMLDivElement | null>(null);
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
-
     const [ axesLocked, setAxesLocked ] = useState(false);
+
+    // TODO: MOVE THESE TO GLOBAL CONSTANTS
+    const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
+
+    const handleMouseUp = () => setIsMouseDown(false);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         setStartingPosX(e.clientX);
@@ -34,7 +31,6 @@ export const ScaleSliders = (props: Props) => {
 
     const handleMouseMove = (event: MouseEvent) => {
         if (!currentSlider) return;
-
         const calculatedMouseMovement = (event.clientX - startingPosX) * step;
         const currentSliderIndex = Number(currentSlider.getAttribute('data-index'));
         
@@ -48,22 +44,16 @@ export const ScaleSliders = (props: Props) => {
             handleChange(newValue);
             return;
         }
-        // SINGLE VALUE CHANGE
         const newValue = [...localValue] as [number,number,number]
         newValue[currentSliderIndex] = localValue[currentSliderIndex] + calculatedMouseMovement;
         handleChange(newValue);
     };
 
-    const handleMouseUp = () => {
-        setIsMouseDown(false);
-    };
-    
-    // TODO: WONT iF(!isMouseDown) return; BE BETTER?
     useEffect(() => {
-        if(isMouseDown) {
-            document.addEventListener('mouseup', handleMouseUp);
-            document.addEventListener('mousemove', handleMouseMove);
-        };
+        if(!isMouseDown) return;
+        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mousemove', handleMouseMove);
+
         return () => {
             document.removeEventListener('mouseup', handleMouseUp);
             document.removeEventListener('mousemove', handleMouseMove);
@@ -76,8 +66,7 @@ export const ScaleSliders = (props: Props) => {
     }, [value]);
 
     return (
-        <div className={commonStyles.traitContainer}>
-            <label className={commonStyles.traitName}>{name}</label>
+        <>
             {localValue.map((value: number, index: number) => {
                 return (
                     <div className={styles.slider} 
@@ -92,7 +81,10 @@ export const ScaleSliders = (props: Props) => {
                     </div>
                 );
             })}
-            <AxesLockButton locked={axesLocked} setLocked={(val) => setAxesLocked(val)} />
-        </div>
+
+            <AxesLockButton 
+                locked={axesLocked} 
+                setLocked={(val) => setAxesLocked(val)} />
+        </>
     );
 }

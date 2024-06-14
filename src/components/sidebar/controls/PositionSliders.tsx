@@ -1,27 +1,26 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import styles from './RotationSliders.module.css';
-import commonStyles from '../Sidebar.module.css';
-import { radianToDeg, roundNumber } from "../../../utils/mathUtil";
+import styles from './PositionSliders.module.css';
+import { roundNumber } from "../../../utils/mathUtil";
 
 type Props = {
-    name: string,
     step: number,
     value: [number,number,number],
     handleChange: (array: [number,number,number]) => void,
 }
 
 // TODO: CONSIDER ADDING CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
-export const RotationSliders = (props: Props) => {
-    const { name, step, value, handleChange } = props;
+export const PositionSliders = ({step, value, handleChange}: Props) => {
 
     const [ localValue, setLocalValue ] = useState<[number,number,number]>(value);
-    // RED GREEN BLUE - TODO: MOVE THIS TO GLOBAL CONSTANTS
-    const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
-
     const [ currentSlider, setCurrentSlider ] = useState<HTMLDivElement | null>(null);
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
+
+    // RED GREEN BLUE
+    const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
+
+    const handleMouseUp = () => setIsMouseDown(false);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         setStartingPosX(e.clientX);
@@ -41,16 +40,10 @@ export const RotationSliders = (props: Props) => {
         handleChange(newValue);
     };
 
-    const handleMouseUp = () => {
-        setIsMouseDown(false)
-    };
-    
-    // TODO: WONT iF(!isMouseDown) return; BE BETTER?
     useEffect(() => {
-        if(isMouseDown) {
-            document.addEventListener('mouseup', handleMouseUp);
-            document.addEventListener('mousemove', handleMouseMove);
-        }
+        if(!isMouseDown) return;
+        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mousemove', handleMouseMove);
 
         return () => {
             document.removeEventListener('mouseup', handleMouseUp);
@@ -64,8 +57,7 @@ export const RotationSliders = (props: Props) => {
     }, [value]);
 
     return (
-        <div className={commonStyles.traitContainer}>
-            <label className={commonStyles.traitName}>{name}</label>
+        <>
             {localValue.map((value: number, index: number) => {
                 return (
                     <div className={styles.slider} 
@@ -77,11 +69,11 @@ export const RotationSliders = (props: Props) => {
                     >
                         <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[index] }}/>
                         <span className={styles.arrow}>&#60;</span>
-                        <span className={styles.value}>{roundNumber(radianToDeg(value), 1)}&deg;</span>
+                        <span className={styles.value}>{roundNumber(value, 2)}</span>
                         <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
                     </div>
                 )
             })}
-        </div>
+        </>
     );
 }

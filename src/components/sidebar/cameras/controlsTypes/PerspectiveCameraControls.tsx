@@ -3,15 +3,15 @@ import React from "react";
 import { PositionSliders } from "../../controls/PositionSliders";
 import { RotationSliders } from "../../controls/RotationSliders";
 import { useCamerasContext } from "../../../contexts/CamerasContext";
-import { OrtographicCameraProperties } from "../../../../models/Camera";
+import { PerspectiveCameraProperties } from "../../../../models/Camera";
 import { ItemTrait } from "../../commons/ItemTrait";
 
 type Props = {
     id: string,
-    properties: OrtographicCameraProperties;
+    properties: PerspectiveCameraProperties;
 }
 
-export const OrtogtaphicCameraControls = ( {id, properties}: Props) => {
+export const PerspectiveCameraControls = ( {id, properties}: Props) => {
     const { updateCameraProperties } = useCamerasContext();
 
     return (
@@ -22,7 +22,7 @@ export const OrtogtaphicCameraControls = ( {id, properties}: Props) => {
                     handleChange={(val) => updateCameraProperties(id, {position: val} )} />
             </ItemTrait>
 
-            <ItemTrait name="Rotation">
+            <ItemTrait name="Rotation" >
                 <RotationSliders
                     value={properties.rotation} step={0.01}
                     handleChange={(val) => updateCameraProperties(id, {rotation: val} )} />
