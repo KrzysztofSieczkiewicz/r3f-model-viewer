@@ -1,9 +1,10 @@
 @import '../../../App.module.css';
 
 .track {
-    height: 0.75rem;
-    width: 7rem;
+    height: 100%;
+    width: 100%;
     display: flex;
+    margin: auto 0;
 
     background-color: var(--color-medium);
     border-radius: var(--controls-rounding);
@@ -36,4 +37,15 @@
     justify-content: center;
     width: 100%;
     font-size: 0.9rem;
+}
+
+.arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.5rem;
+    font-size: 0.9rem;
+    font-style: normal;
+
+    transition-duration: var(--transition-duration);
 }

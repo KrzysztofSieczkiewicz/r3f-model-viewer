@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import styles from './SliderLimited.module.css';
-import commonStyles from '../Sidebar.module.css';
+import styles from './Sliders.module.css';
 
 type Props = {
     min: number,

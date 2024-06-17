@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactNode, useEffect, useState } from "react";
-import styles from './SliderNumeric.module.css';
+import styles from './Sliders.module.css';
 
 import { roundNumber } from "../../../utils/mathUtil";
 
@@ -49,8 +49,7 @@ export const SliderNumeric = ({step, rounding, value, handleChange, children}: P
 
     // TODO: REINTRODUCE AXIS COLOR INDICATOR
     return (
-        <div className={styles.slider}
-            onMouseDown={(e) => { handleMouseDown(e) }} >
+        <>
             <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[0] }}/>
             <div className={styles.track} 
                 onMouseDown={(e) => handleMouseDown(e)} >
@@ -59,6 +58,6 @@ export const SliderNumeric = ({step, rounding, value, handleChange, children}: P
                 <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
             </div>
             {children}
-        </div>
+        </>
     );
 }

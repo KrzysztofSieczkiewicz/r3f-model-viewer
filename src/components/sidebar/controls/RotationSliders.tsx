@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { SliderNumeric } from "./SliderNumeric";
+import { SliderArrayContainer } from "./sliderContainers/SliderArrayContainer";
 
 type Props = {
     step: number,
@@ -29,14 +30,14 @@ export const RotationSliders = ({step, value, handleChange}: Props) => {
         <>
             {localValue.map((value: number, index: number) => {
                 return (
-                    <div>
+                    <SliderArrayContainer>
                         <SliderNumeric 
                             key={index}
                             step={step}
                             rounding={1}
                             value={value}
                             handleChange={(val: number)=>handleSingleSlider(index, val)} />
-                    </div>
+                    </SliderArrayContainer>
                 )
             })}
         </>
