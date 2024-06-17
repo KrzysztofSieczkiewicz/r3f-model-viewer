@@ -1,21 +1,20 @@
 import React, { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import styles from './Silder.module.css';
+import styles from './SliderLimited.module.css';
 import commonStyles from '../Sidebar.module.css';
 
 type Props = {
-    name: string,
     min: number,
     max: number,
     step: number,
     value: number,
-    handleChange: (handledValue: number) => void,
+    handleChange: (newValue: number) => void,
     
     children?: ReactNode
 }
 
-export const Slider = (props: Props) => {
-    const { name, min, max, step, value, handleChange, children} = props;
+export const SliderLimited = (props: Props) => {
+    const { min, max, step, value, handleChange, children} = props;
 
     const [ localValue, setLocalValue ] = useState(value);
     const [ startingPosX, setStartingPosX ] = useState(0);
@@ -76,15 +75,12 @@ export const Slider = (props: Props) => {
     // maybe wrap <span> in <div> with onDoubleClick that will return <input> instead?
     // and detect outside click or return etc. to return to <span>
     return (
-        <div className={commonStyles.traitContainer}>
-            <label className={commonStyles.traitName}>{name}</label>
-            <div className={styles.track} 
-                onMouseDown={(e) => handleMouseDown(e)}
-            >
+        <>
+            <div className={styles.track} onMouseDown={(e) => handleMouseDown(e)}>
                 {renderSliderPosition()}
             </div>
             
             {children}
-        </div>
+        </>
     );
 }

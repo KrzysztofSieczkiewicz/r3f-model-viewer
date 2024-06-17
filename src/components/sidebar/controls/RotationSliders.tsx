@@ -28,13 +28,15 @@ export const RotationSliders = ({step, value, handleChange}: Props) => {
     return (
         <>
             {localValue.map((value: number, index: number) => {
-                return ( 
-                    <SliderNumeric 
-                        key={index}
-                        step={step}
-                        rounding={1}
-                        value={value}
-                        handleChange={(val: number)=>handleSingleSlider(index, val)} />
+                return (
+                    <div>
+                        <SliderNumeric 
+                            key={index}
+                            step={step}
+                            rounding={1}
+                            value={value}
+                            handleChange={(val: number)=>handleSingleSlider(index, val)} />
+                    </div>
                 )
             })}
         </>

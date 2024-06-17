@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactNode, useEffect, useState } from "react";
-import styles from './SilderNumeric.module.css';
+import styles from './SliderNumeric.module.css';
 
 import { roundNumber } from "../../../utils/mathUtil";
 
