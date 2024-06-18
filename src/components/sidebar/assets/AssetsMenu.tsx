@@ -1,16 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import assetStyles from './Assets.module.css'
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { AssetItem } from "./AssetItem";
 import { AssetWrapper } from "../../../models/Asset";
 import { MenuSection } from "../commons/MenuSection";
 import { SidebarMenu } from "../commons/SidebarMenu";
+import { AddAssetButton } from "./AddAssetButton";
 
 
 export const AssetsMenu = () => {
-    const { assetsList, addAsset } = useSceneObjectsContext();
+    const { assetsList } = useSceneObjectsContext();
    
     const [activeId, setActiveId] = useState("");
 
@@ -27,7 +27,7 @@ export const AssetsMenu = () => {
     return (
         <SidebarMenu>
             <MenuSection>
-                <button className={assetStyles.addButton} onClick={() => {addAsset()}}> ADD NEW </button>
+                <AddAssetButton />
             </MenuSection>
 
             <MenuSection title="Assets">
