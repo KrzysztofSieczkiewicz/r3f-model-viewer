@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from './../NewSidebar.module.css'
 
 import { PositionSliders } from "../controls/PositionSliders";
 import { ScaleSliders } from "../controls/ScaleSliders";
@@ -9,6 +8,7 @@ import { DeleteItemButton } from "../common/DeleteItemButton";
 import { ItemTrait } from "../commons/ItemTrait";
 import { RotationSliders } from "../controls/RotationSliders";
 import { AxesLockButton } from "../controls/buttons/AxesLockButton";
+import { ListItemBody } from "../commons/ListItemBody";
 
 
 type Props = {
@@ -20,9 +20,8 @@ export const AssetControls = ({asset}: Props) => {
     const [ axesLocked, setAxesLocked] = useState(false);
 
     return (
-        <div className={styles.listItemBody}>
-            <DeleteItemButton 
-                deleteObject={() => deleteAsset(asset.id)} />
+        <ListItemBody>
+            <DeleteItemButton deleteObject={() => deleteAsset(asset.id)} />
 
             <ItemTrait name="Position">
                 <PositionSliders
@@ -46,7 +45,7 @@ export const AssetControls = ({asset}: Props) => {
                     axesLock={axesLocked} />
                 <AxesLockButton locked={axesLocked} setLocked={(val) => setAxesLocked(val)} />
             </ItemTrait>
-        </div>
+        </ListItemBody>
     );
 
 }

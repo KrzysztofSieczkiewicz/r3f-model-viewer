@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from './Lights.module.css';
 
 import { LIGHT_TYPES, LightWrapper } from '../../../models/Light';
 import { PointLightControls } from './controlsTypes/PointLightControls';
 import { SpotLightControls } from './controlsTypes/SpotLightControls';
-import { DeleteItemButton } from '../common/DeleteItemButton';
 import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 import { LightItemHeader } from './LightItemHeader';
+import { MenuListItem } from '../commons/MenuListItem';
 
 type Props = {
     isActive: boolean,
@@ -28,11 +27,9 @@ export const LightItem = ({ isActive, light, toggleExtend }: Props) => {
     }
 
     return (
-        <div className={isActive ? `${styles.lightContainer} ${styles.active}` : styles.lightContainer}>
-            
+        <MenuListItem isActive={isActive}>
             <LightItemHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
-
             {isActive && renderLightControls()}
-        </div>
+        </MenuListItem>
     );
 }

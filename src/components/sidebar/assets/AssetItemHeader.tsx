@@ -25,7 +25,7 @@ export const AssetItemHeader = ( {isActive, asset, toggleExtend }: Props) => {
         <div 
             className={styles.assetHeader}
             onClick={toggleExtend}
-            >
+        >
             <PointLightIcon className={styles.assetIcon} />
             <p className={styles.assetName}>{asset.name}</p>
             <VisbilityEyeToggle 

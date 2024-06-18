@@ -32,14 +32,12 @@ export const AssetsMenu = () => {
 
             <MenuSection title="Assets">
                 {assetsList.map((asset: AssetWrapper) => {
-                    return (
-                        <AssetItem
-                            key={asset.id}
-                            isActive={activeId === asset.id}
-                            asset={asset}
-                            toggleExtend={() => toggleItemExtend(asset.id)}
-                        />
-                    );
+                    return <AssetItem
+                        key={asset.id}
+                        isActive={activeId === asset.id}
+                        asset={asset}
+                        toggleExtend={() => toggleItemExtend(asset.id)}
+                    />
                 })}
             </MenuSection>
         </SidebarMenu>

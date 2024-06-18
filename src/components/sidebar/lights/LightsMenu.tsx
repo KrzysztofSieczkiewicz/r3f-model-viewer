@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import styles from '../Sidebar.module.css';
 import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 
 import { LightItem } from './LightItem';
 import { LightWrapper } from '../../../models/Light';
 import { AddLightDropdown } from './AddLightDropdown';
+import { SidebarMenu } from '../commons/SidebarMenu';
+import { MenuSection } from '../commons/MenuSection';
 
 
 export const LightsMenu = () => {
@@ -22,26 +23,21 @@ export const LightsMenu = () => {
     };
     
     return (
-        <div className={styles.menu}>
-            <section className={styles.menuSection}>
+        <SidebarMenu>
+            <MenuSection>
                 <AddLightDropdown />
-            </section>
-            <section className={styles.menuSection}>
-                <h3 className={styles.sectionHeader}>Lights</h3>
-                
+            </MenuSection>
+
+            <MenuSection title="Lights">
                 {lightsList.map((light: LightWrapper) => {
-                    return (
-                        <LightItem
-                            key={light.id}
-                            isActive={activeId === light.id}
-                            light={light}
-
-                            toggleExtend={() => toggleItemExtension(light.id)}
-                        />
-                    );
+                    return <LightItem
+                        key={light.id}
+                        isActive={activeId === light.id}
+                        light={light}
+                        toggleExtend={() => toggleItemExtension(light.id)}
+                    />
                 })}
-
-            </section>
-        </div>
+            </MenuSection> 
+        </SidebarMenu>
     );
 }
