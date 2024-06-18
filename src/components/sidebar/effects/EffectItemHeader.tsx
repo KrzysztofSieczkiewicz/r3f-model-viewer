@@ -3,7 +3,7 @@ import styles from './Effects.module.css';
 
 import { ReactComponent as PointLightIcon } from './../../../icons/lightTypes/pointLight.svg';
 import { EffectWrapper } from "../../../models/Effect"
-import { VisibilityButton } from "../common/VisibilityButton";
+import { VisbilityEyeToggle } from "../common/VisbilityEyeToggle";
 import { useEffectsContext } from "../../contexts/EffectsContext";
 
 type Props = {
@@ -31,7 +31,7 @@ export const EffectItemHeader = ( {effect, isActive, toggleExtend}: Props) => {
             <PointLightIcon className={styles.effectIcon} />
             <p className={styles.effectName}>{ renderEffectName() }</p>
             
-            <VisibilityButton 
+            <VisbilityEyeToggle 
                 isVisible={enabled}
                 updateObject={ (val) => updateEffectProperties(effect.type, {enabled: val} )} 
             />

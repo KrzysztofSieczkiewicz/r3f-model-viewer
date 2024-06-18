@@ -4,7 +4,7 @@ import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 
 import { PositionSliders } from "../../controls/PositionSliders";
 import { SliderLimited } from "../../controls/SliderLimited";
-import { ColorPicker } from "../../common/ColorPicker";
+import { ColorPicker } from "../../controls/ColorPicker";
 import { SpotLightProperties } from "../../../../models/Light";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
 import { ItemTrait } from "../../commons/ItemTrait";

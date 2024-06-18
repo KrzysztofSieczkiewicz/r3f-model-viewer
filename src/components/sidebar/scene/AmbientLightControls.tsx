@@ -1,10 +1,10 @@
 import React from "react";
 
-import { Checkbox } from "../common/Checkbox";
-import { ColorPicker } from "../common/ColorPicker";
+import { Checkbox } from "../controls/Checkbox";
+import { ColorPicker } from "../controls/ColorPicker";
 import { SliderLimited } from "../controls/SliderLimited";
 import { useScene } from "../../contexts/SceneContext";
-import { ResetButton } from "../common/ResetButton";
+import { ResetButton } from "../controls/buttons/ResetButton";
 import { ItemTrait } from "../commons/ItemTrait";
 import { SliderSingleContainer } from "../controls/sliderContainers/SliderSingleContainer";
 

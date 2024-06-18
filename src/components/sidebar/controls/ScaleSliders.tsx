@@ -21,7 +21,6 @@ export const ScaleSliders = ({step, value, handleChange, axesLock = false, round
     const handleSingleSlider = (index: number, newValue: number) => {
         if(axesLock) {
             const scales = normalizeArrayByIndex(localValue, localValue[index]);
-            console.log(scales)
             const scaledValue = localValue.map( (value, i) => {
                 return value+(newValue-localValue[index]) * scales[i];
             }) as [number, number, number]

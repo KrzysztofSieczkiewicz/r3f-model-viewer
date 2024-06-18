@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './AxesLockButton.module.css';
-import { ReactComponent as LockedIcon } from './../../../icons/sidebar/lock_locked.svg';
-import { ReactComponent as UnlockedIcon } from './../../../icons/sidebar/lock_unlocked.svg';
+import styles from './ToggleButtons.module.css';
+import { ReactComponent as LockedIcon } from './../../../../icons/sidebar/lock_locked.svg';
+import { ReactComponent as UnlockedIcon } from './../../../../icons/sidebar/lock_unlocked.svg';
 
 type Props = {
     locked: boolean,

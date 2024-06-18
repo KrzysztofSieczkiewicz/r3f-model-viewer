@@ -2,7 +2,7 @@ import React from "react";
 import styles from '../Effects.module.css'
 
 import { EFFECT_TYPES, GlitchProperties } from "../../../../models/Effect";
-import { Checkbox } from "../../common/Checkbox";
+import { Checkbox } from "../../controls/Checkbox";
 import { useEffectsContext } from "../../../contexts/EffectsContext";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
 import { ItemTrait } from "../../commons/ItemTrait";

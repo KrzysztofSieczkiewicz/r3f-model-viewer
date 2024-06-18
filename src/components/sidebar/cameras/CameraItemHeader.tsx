@@ -3,7 +3,7 @@ import styles from './Cameras.module.css';
 
 import { CameraWrapper } from "../../../models/Camera";
 import { useCamerasContext } from "../../contexts/CamerasContext";
-import { VisibilityButton } from "../common/VisibilityButton";
+import { VisbilityEyeToggle } from "../common/VisbilityEyeToggle";
 import { CameraTypeIcon } from "./CameraTypeIcon";
 
 type Props = {
@@ -27,7 +27,7 @@ export const CameraItemHeader = ( {isActive, camera, toggleExtend }: Props) => {
         <div className={styles.cameraHeader} onClick={toggleExtend} >
             <CameraTypeIcon type={camera.type} />
             <p> CAMERA </p>
-            <VisibilityButton 
+            <VisbilityEyeToggle 
                 isVisible={isVisible}
                 updateObject={ (val) => updateCameraProperties(camera.id, {isVisible: val} )}  />
             <span className={styles.extendIcon}>{ renderArrow() }</span>

@@ -3,7 +3,7 @@ import styles from './Lights.module.css';
 
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
-import { VisibilityButton } from "../common/VisibilityButton";
+import { VisbilityEyeToggle } from "../common/VisbilityEyeToggle";
 import { LightTypeDropdown } from "./LightTypeDropdown";
 import { LightTypeIcon } from "./LightTypeIcon";
 import { LIGHT_TYPES, LightWrapper } from "../../../models/Light";
@@ -35,7 +35,7 @@ export const LightItemHeader = ( {isActive, light, toggleExtend }: Props) => {
                 handleChange={(val) => changeLightType(light.id, val)} 
             />
             <div className={styles.colorPreview} style={{backgroundColor: color}}/>
-            <VisibilityButton 
+            <VisbilityEyeToggle 
                 isVisible={isVisible}
                 updateObject={ (val) => updateLightProperties(light.id, {isVisible: val} )} 
             />

@@ -3,7 +3,7 @@ import styles from './AssetItemHeader.module.css';
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import { VisibilityButton } from "../common/VisibilityButton";
+import { VisbilityEyeToggle } from "../common/VisbilityEyeToggle";
 import { AssetWrapper } from "../../../models/Asset";
 
 
@@ -28,7 +28,7 @@ export const AssetItemHeader = ( {isActive, asset, toggleExtend }: Props) => {
             >
             <PointLightIcon className={styles.assetIcon} />
             <p className={styles.assetName}>{asset.name}</p>
-            <VisibilityButton 
+            <VisbilityEyeToggle 
                 isVisible={asset.visible} 
                 updateObject={ (val: boolean) => updateAsset(asset.id, {visible: val} )} 
             />

@@ -2,7 +2,7 @@ import React from "react";
 import styles from '../Effects.module.css'
 
 import { DepthOfFieldProperties, EFFECT_TYPES } from "../../../../models/Effect";
-import { Checkbox } from "../../common/Checkbox";
+import { Checkbox } from "../../controls/Checkbox";
 import { SliderLimited } from "../../controls/SliderLimited";
 import { useEffectsContext } from "../../../contexts/EffectsContext";
 import { DeleteItemButton } from "../../common/DeleteItemButton";

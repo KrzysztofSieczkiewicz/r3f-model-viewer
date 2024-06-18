@@ -8,7 +8,7 @@ import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 import { DeleteItemButton } from "../common/DeleteItemButton";
 import { ItemTrait } from "../commons/ItemTrait";
 import { RotationSliders } from "../controls/RotationSliders";
-import { AxesLockButton } from "../common/AxesLockButton";
+import { AxesLockButton } from "../controls/buttons/AxesLockButton";
 
 
 type Props = {
