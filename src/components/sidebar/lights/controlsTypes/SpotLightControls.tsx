@@ -9,6 +9,7 @@ import { DeleteItemButton } from "../../common/DeleteItemButton";
 import { ItemTrait } from "../../commons/ItemTrait";
 import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
+import { ResetButton } from "../../controls/buttons/ResetButton";
 
 type Props = {
     id: string,
@@ -40,6 +41,7 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
                         handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
                         min={0} max={3} step={0.005} />
                 </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </ItemTrait>
 
             <ItemTrait name="Distance">
@@ -49,6 +51,7 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
                         handleChange={(val) => updateLightProperties(id, {distance: val} )} 
                         min={0} max={100} step={0.1} />
                 </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {distance: 10} )} />
             </ItemTrait>
 
             <ItemTrait name="Angle">
@@ -58,6 +61,7 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
                             handleChange={(val) => updateLightProperties(id, {angle: val} )} 
                             min={0} max={1} step={0.002} />
                 </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {angle: 0.6} )} />
             </ItemTrait>
                 
             <ItemTrait name="Penumbra">
@@ -67,6 +71,7 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
                         handleChange={(val) => updateLightProperties(id, {penumbra: val} )} 
                         min={0} max={1} step={0.002} />
                 </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {penumbra: 0.6} )} />
             </ItemTrait>
         </ListItemBody>
     );

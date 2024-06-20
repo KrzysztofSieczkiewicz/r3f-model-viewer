@@ -1,5 +1,4 @@
 import React from "react";
-import styles from '../Effects.module.css'
 
 import { DepthOfFieldProperties, EFFECT_TYPES } from "../../../../models/Effect";
 import { Checkbox } from "../../controls/Checkbox";
@@ -8,6 +7,8 @@ import { useEffectsContext } from "../../../contexts/EffectsContext";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
 import { ItemTrait } from "../../commons/ItemTrait";
 import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
+import { ListItemBody } from "../../commons/ListItemBody";
+import { ResetButton } from "../../controls/buttons/ResetButton";
 
 type Props = {
     properties: DepthOfFieldProperties,
@@ -19,7 +20,7 @@ export const DepthOfFieldControls = ( {properties}: Props ) => {
     const type = EFFECT_TYPES.depthOfField;
 
     return (
-        <div className={styles.effectBody}>
+        <ListItemBody>
             <DeleteItemButton deleteObject={() => deleteEffect(type)}/>
             <ItemTrait name="Active">
                 <Checkbox
@@ -34,6 +35,7 @@ export const DepthOfFieldControls = ( {properties}: Props ) => {
                         value={properties.focusDistance}
                         handleChange={(value) => updateEffectProperties(type, {focusDistance: value} )} />
                 </SliderSingleContainer>
+                <ResetButton onReset={() => updateEffectProperties(type, {focusDistance: 0.0035} )} />
             </ItemTrait>
 
             <ItemTrait name="Focal length">
@@ -43,6 +45,7 @@ export const DepthOfFieldControls = ( {properties}: Props ) => {
                         value={properties.focalLength}
                         handleChange={(value) => updateEffectProperties(type, {focalLength: value} )} />
                 </SliderSingleContainer>
+                <ResetButton onReset={() => updateEffectProperties(type, {focalLength: 0.01} )} />
             </ItemTrait>
 
             <ItemTrait name="Bokeh scale">
@@ -52,7 +55,8 @@ export const DepthOfFieldControls = ( {properties}: Props ) => {
                         value={properties.bokehScale} 
                         handleChange={(value) => updateEffectProperties(type, {bokehScale: value} )} />
                 </SliderSingleContainer>
+                <ResetButton onReset={() => updateEffectProperties(type, {bokehScale: 3} )} />
             </ItemTrait>
-        </div>
+        </ListItemBody>
     );
 }

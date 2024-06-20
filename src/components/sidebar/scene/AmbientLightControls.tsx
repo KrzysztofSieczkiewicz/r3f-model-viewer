@@ -32,7 +32,7 @@ export const AmbientLightControls = () => {
                         handleChange={(val) =>  setScene({ambientIntensity: val}) }
                         min={0} max={1} step={0.001} />
                 </SliderSingleContainer>
-                <ResetButton handleReset={() => setScene({ambientIntensity: 0.1})} />
+                <ResetButton onReset={() => setScene({ambientIntensity: 0.1})} />
             </ItemTrait>
                 
         </>

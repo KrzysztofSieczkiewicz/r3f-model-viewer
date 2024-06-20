@@ -9,6 +9,8 @@ import { DeleteItemButton } from "../../common/DeleteItemButton";
 import { ItemTrait } from "../../commons/ItemTrait";
 import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
+import { ResetButton } from "../../controls/buttons/ResetButton";
+import { SliderArrayContainer } from "../../controls/sliderContainers/SliderArrayContainer";
 
 type Props = {
     id: string,
@@ -41,6 +43,7 @@ export const PointLightControls = ( {id, properties}: Props ) => {
                         handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
                         min={0} max={3} step={0.005} />
                 </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </ItemTrait>
 
             <ItemTrait name="Distance">
@@ -50,6 +53,7 @@ export const PointLightControls = ( {id, properties}: Props ) => {
                         handleChange={(val) => updateLightProperties(id, {distance: val} )} 
                         min={0} max={100} step={0.1} />
                 </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {distance: 10} )} />
             </ItemTrait>
         </ListItemBody>
     );

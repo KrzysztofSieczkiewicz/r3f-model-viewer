@@ -1,23 +1,23 @@
 import React from 'react';
-import styles from './Effects.module.css'
 
 import { EFFECT_TYPES, EffectWrapper } from '../../../models/Effect';
 import { BloomControls } from './controlsTypes/BloomControls';
 import { DepthOfFieldControls } from './controlsTypes/DepthOfFieldControls';
 import { GlitchControls } from './controlsTypes/GlitchControls';
 import { EffectItemHeader } from './EffectItemHeader';
+import { MenuListItem } from '../commons/MenuListItem';
 
 
 type Props = {
-    active: boolean,
+    isActive: boolean,
     effect: EffectWrapper
     toggleExtend: () => void
 }
 
-export const EffectItem = ( {active, effect, toggleExtend}: Props) => {
+export const EffectItem = ( {isActive, effect, toggleExtend}: Props) => {
 
     const renderEffectHeader = () => {
-        return <EffectItemHeader effect={effect} isActive={active} toggleExtend={() => toggleExtend()} />
+        return <EffectItemHeader effect={effect} isActive={isActive} toggleExtend={() => toggleExtend()} />
     }
 
     const renderEffectControls = () => {
@@ -32,9 +32,9 @@ export const EffectItem = ( {active, effect, toggleExtend}: Props) => {
     }
 
     return (
-        <div className={active ? `${styles.effectContainer} ${styles.active}` : styles.effectContainer}>
+        <MenuListItem isActive={isActive}>
             {renderEffectHeader()}
-            {active && renderEffectControls()}
-        </div>
+            {isActive && renderEffectControls()}
+        </MenuListItem>
     );
 }
