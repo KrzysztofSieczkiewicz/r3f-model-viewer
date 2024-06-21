@@ -6,6 +6,7 @@ import { ReactComponent as LightIcon } from './../../icons/sidebar/light.svg';
 import { ReactComponent as CubeIcon } from './../../icons/sidebar/cube.svg';
 import { ReactComponent as EarthIcon } from './../../icons/sidebar/earth.svg';
 import { ReactComponent as ImageIcon } from './../../icons/sidebar/image.svg';
+import { ReactComponent as CameraIcon } from './../../icons/sidebar/camera.svg';
 import { SidebarMenuButton } from "./SidebarMenuButton";
 import { AssetsMenu } from "./assets/AssetsMenu";
 import { EffectsMenu } from "./effects/EffectsMenu";
@@ -25,6 +26,7 @@ export const Sidebar = () => {
         }
     };
 
+    // TODO: PRODUCE PROPER SVGs WITH ICONS
     return (
         <nav className={styles.sidebar}>
             <ul className={styles.sidebarNav}>
@@ -53,7 +55,7 @@ export const Sidebar = () => {
                     <EffectsMenu />
                 </SidebarMenuButton>
                 <SidebarMenuButton
-                    icon={<ImageIcon className={styles.sidebarIcon} />}
+                    icon={<CameraIcon className={styles.sidebarIcon} />}
                     active={activeItem === "Cameras"}
                     onClick={() => handleItemClick("Cameras")} >
                     <CamerasMenu />

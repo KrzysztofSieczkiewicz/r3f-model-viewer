@@ -34,7 +34,7 @@ export const PositionSliders = ({step, value, handleChange}: Props) => {
                         <SliderNumeric 
                             key={index}
                             step={step}
-                            rounding={1}
+                            rounding={2}
                             value={value}
                             handleChange={(val: number)=>handleSingleSlider(index, val)} />
                     </SliderArrayContainer>

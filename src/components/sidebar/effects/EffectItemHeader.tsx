@@ -1,8 +1,8 @@
 import React from "react";
 import styles from '../commons/MenuListItemHeader.module.css';
 
-import { ReactComponent as PointLightIcon } from './../../../icons/lightTypes/pointLight.svg';
 import { EffectWrapper } from "../../../models/Effect";
+import { EffectTypeIcon } from "./EffectTypeIcon";
 
 type Props = {
     effect: EffectWrapper,
@@ -26,7 +26,7 @@ export const EffectItemHeader = ( {effect, isActive, toggleExtend}: Props) => {
             className={styles.header} 
             onClick={toggleExtend}
         >
-            <PointLightIcon className={styles.typeIcon} />
+            <EffectTypeIcon type={effect.type} />
             <p className={styles.displayName}>{ renderEffectName() }</p>
             <span className={styles.extendIcon}>{ renderArrow() }</span>
         </div>

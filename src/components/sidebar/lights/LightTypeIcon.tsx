@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './LightTypeIcon.module.css';
+import styles from '../commons/MenuListItemHeader.module.css';
 import { LIGHT_TYPES, LightTypes, } from "../../../models/Light"
 
 import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
