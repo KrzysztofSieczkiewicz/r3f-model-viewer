@@ -12,8 +12,8 @@ type Props = {
 export const LightTypeIcon = ( {type} :Props ) => {
     return(
     <>
-        {type === LIGHT_TYPES.pointLight && <PointLightIcon className={styles.lightIcon} />}
-        {type === LIGHT_TYPES.spotLight && <SpotlightIcon className={styles.lightIcon} />}
+        {type === LIGHT_TYPES.pointLight && <PointLightIcon className={styles.typeIcon} />}
+        {type === LIGHT_TYPES.spotLight && <SpotlightIcon className={styles.typeIcon} />}
     </>
     );
 }

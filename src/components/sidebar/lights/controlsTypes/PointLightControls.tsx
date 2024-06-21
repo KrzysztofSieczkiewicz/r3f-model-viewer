@@ -10,7 +10,6 @@ import { ItemTrait } from "../../commons/ItemTrait";
 import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
 import { ResetButton } from "../../controls/buttons/ResetButton";
-import { SliderArrayContainer } from "../../controls/sliderContainers/SliderArrayContainer";
 
 type Props = {
     id: string,

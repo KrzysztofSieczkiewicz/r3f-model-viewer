@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BloomProperties, DEFAULT_BLOOM_EFFECT, EFFECT_TYPES } from "../../../../models/Effect";
+import { BloomProperties, EFFECT_TYPES } from "../../../../models/Effect";
 import { Checkbox } from "../../controls/Checkbox";
 import { SliderLimited } from "../../controls/SliderLimited";
 import { useEffectsContext } from "../../../contexts/EffectsContext";

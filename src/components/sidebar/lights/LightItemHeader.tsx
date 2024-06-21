@@ -1,6 +1,5 @@
 import React from "react";
-import styles from './LightItemHeader.module.css';
-
+import styles from '../commons/MenuListItemHeader.module.css';
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { VisbilityEyeToggle } from "../common/VisbilityEyeToggle";
@@ -27,7 +26,8 @@ export const LightItemHeader = ( {isActive, light, toggleExtend }: Props) => {
 
     return (
         <div 
-            className={styles.lightHeader} 
+            style={{gridTemplateColumns: '1fr 5fr 1fr 1fr 1fr'}}
+            className={styles.header} 
             onClick={toggleExtend}
         >
             <LightTypeIcon type={light.type} />

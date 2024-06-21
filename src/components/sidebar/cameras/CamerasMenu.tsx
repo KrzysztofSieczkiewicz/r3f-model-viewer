@@ -1,11 +1,11 @@
-import React from "react";
-import styles from '../Sidebar.module.css';
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { useCamerasContext } from "../../contexts/CamerasContext";
+
 import { CameraWrapper } from "../../../models/Camera";
 import { CameraItem } from "./CameraItem";
 import { AddCameraDropdown } from "./AddCameraDropdown";
+import { MenuSection } from "../commons/MenuSection";
+import { SidebarMenu } from "../commons/SidebarMenu";
 
 
 export const CamerasMenu = () => {
@@ -22,13 +22,12 @@ export const CamerasMenu = () => {
     };
     
     return (
-        <div className={styles.menu}>
-            <section className={styles.menuSection}>
+        <SidebarMenu>
+            <MenuSection>
                 <AddCameraDropdown />
-            </section>
-            <section className={styles.menuSection}>
-                <h3 className={styles.sectionHeader}>Cameras</h3>
-                
+            </MenuSection>
+
+            <MenuSection title="Cameras">
                 {camerasList.map((camera: CameraWrapper) => {
                     return (
                         <CameraItem
@@ -40,8 +39,7 @@ export const CamerasMenu = () => {
                         />
                     );
                 })}
-
-            </section>
-        </div>
+            </MenuSection>
+        </SidebarMenu>
     );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './EffectItemHeader.module.css';
+import styles from '../commons/MenuListItemHeader.module.css';
 
 import { ReactComponent as PointLightIcon } from './../../../icons/lightTypes/pointLight.svg';
 import { EffectWrapper } from "../../../models/Effect";
@@ -22,11 +22,12 @@ export const EffectItemHeader = ( {effect, isActive, toggleExtend}: Props) => {
 
     return (
         <div 
-            className={styles.effectHeader} 
+            style={{gridTemplateColumns: '1fr 5fr 1fr'}}
+            className={styles.header} 
             onClick={toggleExtend}
         >
-            <PointLightIcon className={styles.effectIcon} />
-            <p className={styles.effectName}>{ renderEffectName() }</p>
+            <PointLightIcon className={styles.typeIcon} />
+            <p className={styles.displayName}>{ renderEffectName() }</p>
             <span className={styles.extendIcon}>{ renderArrow() }</span>
         </div>
     );

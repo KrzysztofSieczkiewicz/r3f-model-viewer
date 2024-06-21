@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './AssetItemHeader.module.css';
+import styles from './../commons/MenuListItemHeader.module.css';
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
@@ -22,12 +22,13 @@ export const AssetItemHeader = ( {isActive, asset, toggleExtend }: Props) => {
 
     // TODO: Replace PointLightIcon with proper asset icon
     return (
-        <div 
-            className={styles.assetHeader}
+        <div
+            style={{gridTemplateColumns: '1fr 5fr 1fr 1fr'}}
+            className={styles.header}
             onClick={toggleExtend}
         >
-            <PointLightIcon className={styles.assetIcon} />
-            <p className={styles.assetName}>{asset.name}</p>
+            <PointLightIcon className={styles.typeIcon} />
+            <p className={styles.displayName}>{asset.name}</p>
             <VisbilityEyeToggle 
                 isVisible={asset.visible} 
                 updateObject={ (val: boolean) => updateAsset(asset.id, {visible: val} )} 
