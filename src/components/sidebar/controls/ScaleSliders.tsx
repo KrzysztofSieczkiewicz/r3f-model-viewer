@@ -42,16 +42,14 @@ export const ScaleSliders = ({step, value, handleChange, axesLock = false, round
         <>
             {localValue.map((value: number, index: number) => {
                 return (
-                    <>
-                        <SliderArrayContainer>
-                            <SliderNumeric 
-                                key={index}
-                                step={step}
-                                rounding={rounding}
-                                value={value}
-                                handleChange={(val: number)=>handleSingleSlider(index, val)} />
-                        </SliderArrayContainer>
-                    </>
+                    <SliderArrayContainer key={index}>
+                        <SliderNumeric 
+                            key={index}
+                            step={step}
+                            rounding={rounding}
+                            value={value}
+                            handleChange={(val: number)=>handleSingleSlider(index, val)} />
+                    </SliderArrayContainer>
                 )
             })}
         </>

@@ -30,7 +30,7 @@ export const PositionSliders = ({step, value, handleChange}: Props) => {
         <>
             {localValue.map((value: number, index: number) => {
                 return (
-                    <SliderArrayContainer>
+                    <SliderArrayContainer key={index}>
                         <SliderNumeric 
                             key={index}
                             step={step}
