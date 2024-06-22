@@ -5,7 +5,7 @@
 }
 
 
-/* SIDEBAR WITH BUTTONS */
+/* SIDEBAR */
 .sidebar {
     width: var(--nav-size);
     height: 100%;
@@ -28,56 +28,12 @@
     justify-content: flex-start;
 }
 
-.sidebarItem {
-    width: var(--nav-size);
-    height: var(--nav-size);
-    margin: 0.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.iconButton {
-    --button-size: calc(var(--nav-size) * 0.75);
-    width: var(--button-size);
-    height: var(--button-size);
-    padding: 0;
-    margin: 0.1rem;
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: transparent;
-    text-decoration: none;
-
-    transition: background-color var(--transition-duration);
-}
-
-.iconButton:hover {
-    background-color: var(--color-platinum);
-}
-
-.iconButton.active {
-    background-color: var(--color-celtic-blue);
-}
-
 .sidebarIcon {
-    fill: var(--color-platinum);
+    fill: var(--color-text);
     width: 1.5rem;
     height: 1.5rem;
     transition: fill var(--transition-duration);
 }
-
-.iconButton:hover .sidebarIcon {
-    fill: var(--color-resin-black);
-}
-
-.iconButton.active .sidebarIcon {
-    fill: var(--color-platinum);
-}
-
 
 /* SIDEBAR MENUS AND ITEMS */
 .menu {

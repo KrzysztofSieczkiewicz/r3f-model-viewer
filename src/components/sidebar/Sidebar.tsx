@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import styles from './Sidebar.module.css';
+import styles from './NewSidebar.module.css';
 
 import { ReactComponent as LightIcon } from './../../icons/sidebar/light.svg';
 import { ReactComponent as CubeIcon } from './../../icons/sidebar/cube.svg';

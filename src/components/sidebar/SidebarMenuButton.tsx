@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styles from './Sidebar.module.css';
+import styles from './SidebarMenuButton.module.css';
 
 type Props = {
     icon: ReactNode;
