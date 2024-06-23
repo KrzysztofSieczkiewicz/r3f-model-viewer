@@ -10,6 +10,7 @@
     width: var(--nav-size);
     height: 100%;
     padding-top: 1rem;
+    margin-left: 0.5rem;
 
     position: absolute;
     top: 0;
@@ -26,13 +27,6 @@
     list-style: none;
     align-items: center;
     justify-content: flex-start;
-}
-
-.sidebarIcon {
-    fill: var(--color-text);
-    width: 1.5rem;
-    height: 1.5rem;
-    transition: fill var(--transition-duration);
 }
 
 /* SIDEBAR MENUS AND ITEMS */
