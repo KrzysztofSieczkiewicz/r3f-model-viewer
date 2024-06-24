@@ -1,5 +1,6 @@
 import { generateNewID } from '../utils/idUtil';
 
+// TODO: Move isSelected prop from AssetWrapper to SceneContext
 export type AssetWrapper = {
     id: string,
     object: string,

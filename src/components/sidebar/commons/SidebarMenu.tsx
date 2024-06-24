@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styles from './../NewSidebar.module.css'
+import styles from './../Sidebar.module.css'
 
 type Props = {
     children?: ReactNode

@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactNode } from "react";
-import styles from '../NewSidebar.module.css';
+import styles from '../Sidebar.module.css';
 
 type Props = {
     name: string,
