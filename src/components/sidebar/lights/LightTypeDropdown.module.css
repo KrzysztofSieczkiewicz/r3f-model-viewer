@@ -51,15 +51,15 @@
     position: fixed;
 
     width: 7rem;
-    background-color: var(--color-main-weak);
+    background-color: var(--color-main);
     box-shadow: 0 0 0.1rem var(--color-main-shadow) inset;
     border-radius: 0 0 0.75rem 0.75rem;
 }
 
 .option {
-    width: 100%;
+    width: 97%;
     height: 1.75rem;
-    margin: 0;
+    margin: 0 1.5%;
     text-align: start;
 
     color: black;
@@ -73,5 +73,5 @@
 }
 
 .option:hover {
-    background-color: var(--color-main);
+    background-color: var(--color-main-strong);
 }
