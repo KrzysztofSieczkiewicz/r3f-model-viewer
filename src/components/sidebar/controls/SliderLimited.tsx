@@ -1,20 +1,19 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import styles from './Silder.module.css';
-import commonStyles from '../Sidebar.module.css';
+import styles from './Sliders.module.css';
 
 type Props = {
-    name: string,
     min: number,
     max: number,
     step: number,
     value: number,
-    defaultValue: number,
-    handleChange: (handledValue: number) => void
+    handleChange: (newValue: number) => void,
+    
+    children?: ReactNode
 }
 
-export const Slider = (props: Props) => {
-    const { name, min, max, step, value, defaultValue, handleChange} = props;
+export const SliderLimited = (props: Props) => {
+    const { min, max, step, value, handleChange, children} = props;
 
     const [ localValue, setLocalValue ] = useState(value);
     const [ startingPosX, setStartingPosX ] = useState(0);
@@ -30,11 +29,6 @@ export const Slider = (props: Props) => {
         }
     }
 
-    // ROUND DISPLAYED VALUE
-    const roundDisplayed = (number: number) => {
-        return Math.round((number) * 100) / 100;
-    }
-
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         setStartingPosX(e.clientX);
         setIsMouseDown(true)
@@ -42,7 +36,6 @@ export const Slider = (props: Props) => {
 
     const handleMouseMove = (event: MouseEvent) => {
         const calculatedX = event.clientX - startingPosX;
-        
         handleInput(localValue + calculatedX * step);
     };
 
@@ -52,10 +45,10 @@ export const Slider = (props: Props) => {
 
     // TODO: WONT iF(!isMouseDown) return; BE BETTER?
     useEffect(() => {
-        if(isMouseDown) {
-            document.addEventListener('mouseup', handleMouseUp);
-            document.addEventListener('mousemove', handleMouseMove);
-        }
+        if(!isMouseDown) return;
+        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mousemove', handleMouseMove);
+
         return () => {
             document.removeEventListener('mouseup', handleMouseUp);
             document.removeEventListener('mousemove', handleMouseMove);
@@ -67,34 +60,26 @@ export const Slider = (props: Props) => {
         setLocalValue(value);
     }, [value]);
 
-    // RESET VALUE TO DEFAULT
-    const handleResetDefault = () => {
-        handleInput(defaultValue);
-        handleChange(defaultValue);
+    const renderSliderPosition = () => {
+        const calculatedWidth = localValue / (max-min) * 100;
+
+        return (
+            <span
+                className={styles.sliderBar}
+                style={{ width: `${calculatedWidth}%`}}/>
+        );
     }
 
     // TODO: add doubleclick to set value numerically
     // maybe wrap <span> in <div> with onDoubleClick that will return <input> instead?
     // and detect outside click or return etc. to return to <span>
     return (
-        <div className={commonStyles.traitContainer}>
-            <label className={commonStyles.traitName}>{name}</label>
-            <div className={styles.slider} 
-                onMouseDown={(e) => handleMouseDown(e)}
-            >
-                <span className={`${styles.arrow} ${styles.left}`}
-                onClick={() => handleInput(localValue - step)} > &#60; </span>
-
-                <span className={styles.value}
-                onDoubleClick={() => console.log("DoubleClicked")}
-                >{roundDisplayed(value)}</span>
-
-                <span className={`${styles.arrow} ${styles.right}`}
-                onClick={() => handleInput(localValue + step)} > &#62; </span>
+        <>
+            <div className={styles.track} onMouseDown={(e) => handleMouseDown(e)}>
+                {renderSliderPosition()}
             </div>
-            <button className={styles.resetButton}
-                onClick={handleResetDefault}
-            >&#8635;</button>
-        </div>
+            
+            {children}
+        </>
     );
 }

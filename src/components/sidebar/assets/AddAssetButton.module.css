@@ -1,0 +1,15 @@
+@import '../../../App.module.css';
+
+.addButton {
+    display: block;
+    width: 75%;
+    height: 1.5rem;
+    margin: 0.5rem auto;
+
+    border: 1px solid black;
+
+    color: var(--color-platinum);
+    background-color: var(--color-resin-brighter);
+
+    cursor: pointer;
+}

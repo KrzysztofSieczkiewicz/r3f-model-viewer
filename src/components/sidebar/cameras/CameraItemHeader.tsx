@@ -1,9 +1,9 @@
 import React from "react";
-import styles from './Cameras.module.css';
+import styles from '../commons/MenuListItemHeader.module.css';
 
 import { CameraWrapper } from "../../../models/Camera";
 import { useCamerasContext } from "../../contexts/CamerasContext";
-import { VisibilityButton } from "../common/VisibilityButton";
+import { VisbilityEyeToggle } from "../common/VisbilityEyeToggle";
 import { CameraTypeIcon } from "./CameraTypeIcon";
 
 type Props = {
@@ -18,19 +18,23 @@ export const CameraItemHeader = ( {isActive, camera, toggleExtend }: Props) => {
 
     const { isVisible } = camera.properties;
 
-    const renderArrow = () => {
+    const handleArrowDirection = () => {
         return isActive ? String.fromCharCode(8657) : String.fromCharCode(8659);
     }
 
     // TODO: ADd DISPLAY NAME PROPERTY + HANDLING
     return (
-        <div className={styles.cameraHeader} onClick={toggleExtend} >
-            <CameraTypeIcon type={camera.type} />
-            <p> CAMERA </p>
-            <VisibilityButton 
+        <div
+            style={{gridTemplateColumns: '1fr 5fr 1fr 1fr'}}
+            className={styles.header} 
+            onClick={toggleExtend} 
+        >
+            <CameraTypeIcon />
+            <p className={styles.displayName}>Camera</p>
+            <VisbilityEyeToggle 
                 isVisible={isVisible}
                 updateObject={ (val) => updateCameraProperties(camera.id, {isVisible: val} )}  />
-            <span className={styles.extendIcon}>{ renderArrow() }</span>
+            <span className={styles.extendIcon}>{ handleArrowDirection() }</span>
         </div>
     );
 }

@@ -1,22 +1,16 @@
 import React from "react";
-import styles from './Effects.module.css';
+import styles from '../commons/MenuListItemHeader.module.css';
 
-import { ReactComponent as PointLightIcon } from './../../../icons/lightTypes/pointLight.svg';
-import { EffectWrapper } from "../../../models/Effect"
-import { VisibilityButton } from "../common/VisibilityButton";
-import { useEffectsContext } from "../../contexts/EffectsContext";
+import { EffectWrapper } from "../../../models/Effect";
+import { EffectTypeIcon } from "./EffectTypeIcon";
 
 type Props = {
     effect: EffectWrapper,
     isActive: boolean,
-
     toggleExtend: () => void
 }
 
 export const EffectItemHeader = ( {effect, isActive, toggleExtend}: Props) => {
-    const { updateEffectProperties } = useEffectsContext();
-
-    const { enabled } = effect.properties;
 
     const renderEffectName = () => {
         return effect.type;
@@ -27,14 +21,13 @@ export const EffectItemHeader = ( {effect, isActive, toggleExtend}: Props) => {
     }
 
     return (
-        <div className={styles.effectHeader} onClick={toggleExtend}>
-            <PointLightIcon className={styles.effectIcon} />
-            <p className={styles.effectName}>{ renderEffectName() }</p>
-            
-            <VisibilityButton 
-                isVisible={enabled}
-                updateObject={ (val) => updateEffectProperties(effect.type, {enabled: val} )} 
-            />
+        <div 
+            style={{gridTemplateColumns: '1fr 5fr 1fr'}}
+            className={styles.header} 
+            onClick={toggleExtend}
+        >
+            <EffectTypeIcon type={effect.type} />
+            <p className={styles.displayName}>{ renderEffectName() }</p>
             <span className={styles.extendIcon}>{ renderArrow() }</span>
         </div>
     );

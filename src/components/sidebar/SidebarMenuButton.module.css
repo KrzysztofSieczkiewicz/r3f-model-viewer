@@ -1,0 +1,63 @@
+@import '../../App.module.css';
+
+.sidebarItem {
+    width: var(--nav-size);
+    height: var(--nav-size);
+    margin: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonBackground {
+    --button-size: calc(var(--nav-size) * 0.85);
+
+    width: var(--button-size);
+    height: var(--button-size);
+    padding: 0;
+    margin: 0;
+
+    border-radius: 50%;
+    box-shadow: 
+        0.05rem 0.05rem 0.15rem var(--color-main-shadow) inset,
+        -0.05rem -0.05rem 0.15rem var(--color-main-shadow-opposite) inset;
+
+    background-color: var(--color-main-weak);
+    text-decoration: none;
+}
+
+.button {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-main);
+    text-decoration: none;
+
+    transition: var(--transition-duration);
+}
+
+.button.active {
+    scale: 0.75;
+    background-color: var(--color-main-strong);
+
+    box-shadow: 
+        0.05rem 0.05rem 0.35rem var(--color-main-shadow),
+        -0.05rem -0.05rem 0.35rem var(--color-main-shadow-opposite);
+}
+
+.icon {
+    fill: var(--color-text);
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: fill var(--transition-duration);
+}
+
+.icon.active {
+    fill: var(--color-celtic-blue);
+}

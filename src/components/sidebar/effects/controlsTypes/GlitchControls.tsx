@@ -1,10 +1,11 @@
 import React from "react";
-import styles from '../Effects.module.css'
 
 import { EFFECT_TYPES, GlitchProperties } from "../../../../models/Effect";
-import { Checkbox } from "../../common/Checkbox";
+import { Checkbox } from "../../controls/Checkbox";
 import { useEffectsContext } from "../../../contexts/EffectsContext";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
+import { ItemTrait } from "../../commons/ItemTrait";
+import { ListItemBody } from "../../commons/ListItemBody";
 
 type Props = {
     properties: GlitchProperties,
@@ -16,12 +17,13 @@ export const GlitchControls = ( {properties}: Props ) => {
     const type = EFFECT_TYPES.glitch;
 
     return (
-        <div className={styles.effectBody}>
+        <ListItemBody>
             <DeleteItemButton deleteObject={() => deleteEffect(type)}/>
-            <Checkbox
-                name={'Active'}
-                value={properties.enabled}
-                handleChange={(value) => updateEffectProperties(type, {enabled: value} )} />
-        </div>
+            <ItemTrait name="Active">
+                <Checkbox
+                    value={properties.enabled}
+                    handleChange={(value) => updateEffectProperties(type, {enabled: value} )} />
+            </ItemTrait>
+        </ListItemBody>
     );
 }

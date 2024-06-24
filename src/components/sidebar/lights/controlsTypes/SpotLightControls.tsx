@@ -1,11 +1,15 @@
 import React from "react";
-
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 
-import { PositionSliders } from "../../common/PositionSliders";
-import { Slider } from "../../common/Slider";
-import { ColorPicker } from "../../common/ColorPicker";
+import { PositionSliders } from "../../controls/PositionSliders";
+import { SliderLimited } from "../../controls/SliderLimited";
+import { ColorPicker } from "../../controls/ColorPicker";
 import { SpotLightProperties } from "../../../../models/Light";
+import { DeleteItemButton } from "../../common/DeleteItemButton";
+import { ItemTrait } from "../../commons/ItemTrait";
+import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
+import { ListItemBody } from "../../commons/ListItemBody";
+import { ResetButton } from "../../controls/buttons/ResetButton";
 
 type Props = {
     id: string,
@@ -16,29 +20,59 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
     const { updateLightProperties, deleteLight } = useSceneObjectsContext();
 
     return (
-        <>
-            <PositionSliders name="Position"
-                value={properties.position} step={0.01}
-                handleChange={(val) => updateLightProperties(id, {position: val} )} />
-            <ColorPicker name="Color" 
-                currentColor={properties.color}
-                handleChange={(val) => updateLightProperties(id, {color: val} )}  />
-            <Slider name="Intensity"
-                value={properties.intensity}
-                handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
-                min={0} max={3} step={0.005} defaultValue={1} />
-            <Slider name="Distance"
-                value={properties.distance}
-                handleChange={(val) => updateLightProperties(id, {distance: val} )} 
-                min={0} max={100} step={0.1} defaultValue={10} />
-            <Slider name="Angle"
-                    value={properties.angle}
-                    handleChange={(val) => updateLightProperties(id, {angle: val} )} 
-                    min={0} max={1} step={0.002} defaultValue={0.3} />
-            <Slider name="Penumbra"
-                value={properties.penumbra}
-                handleChange={(val) => updateLightProperties(id, {penumbra: val} )} 
-                min={0} max={1} step={0.002} defaultValue={0.6} />
-        </>
+        <ListItemBody>
+            <DeleteItemButton deleteObject={() => deleteLight(id)}/>
+            <ItemTrait name="Position" >
+                <PositionSliders
+                    value={properties.position} step={0.01}
+                    handleChange={(val) => updateLightProperties(id, {position: val} )} />
+            </ItemTrait>
+
+            <ItemTrait name="Color" >
+                <ColorPicker
+                    currentColor={properties.color}
+                    handleChange={(val) => updateLightProperties(id, {color: val} )}  />
+            </ItemTrait>
+
+            <ItemTrait name="Intensity">
+                <SliderSingleContainer>
+                    <SliderLimited
+                        value={properties.intensity}
+                        handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
+                        min={0} max={3} step={0.005} />
+                </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {intensity: 1} )} />
+            </ItemTrait>
+
+            <ItemTrait name="Distance">
+                <SliderSingleContainer>
+                    <SliderLimited
+                        value={properties.distance}
+                        handleChange={(val) => updateLightProperties(id, {distance: val} )} 
+                        min={0} max={100} step={0.1} />
+                </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {distance: 10} )} />
+            </ItemTrait>
+
+            <ItemTrait name="Angle">
+                <SliderSingleContainer>
+                    <SliderLimited
+                            value={properties.angle}
+                            handleChange={(val) => updateLightProperties(id, {angle: val} )} 
+                            min={0} max={1} step={0.002} />
+                </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {angle: 0.6} )} />
+            </ItemTrait>
+                
+            <ItemTrait name="Penumbra">
+                <SliderSingleContainer>
+                    <SliderLimited
+                        value={properties.penumbra}
+                        handleChange={(val) => updateLightProperties(id, {penumbra: val} )} 
+                        min={0} max={1} step={0.002} />
+                </SliderSingleContainer>
+                <ResetButton onReset={() => updateLightProperties(id, {penumbra: 0.6} )} />
+            </ItemTrait>
+        </ListItemBody>
     );
 }

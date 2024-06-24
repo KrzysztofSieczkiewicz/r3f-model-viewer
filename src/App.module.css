@@ -1,4 +1,16 @@
 :global(*) {
+    --color-main: #e0e0e0;
+    --color-main-strong: #efefef;
+    --color-main-weak: #cbcbcb;
+    --color-main-shadow: rgba(70, 70, 70, 0.8);
+    --color-main-shadow-opposite: rgba(255, 255, 255, 0.8);
+
+    --color-medium: #aeaeae;
+    --color-medium-dark: #7c7c7c;
+
+    --color-text: #212226;
+
+
     --color-resin-black: #212226;
     --color-resin-bright: #2a2b30;
     --color-resin-brighter: #35363a;
@@ -12,9 +24,10 @@
     --color-celtic-blue: #276FBF;
     --color-imperial-red: #F03A47;
 
-    --nav-size: 3.5rem;
+    --nav-size: 4rem;
     --input-height: 1.5rem;
-    --slider-radius: 0.25rem;
+    --sections-rounding: 0.5rem;
+    --controls-rounding: 0.15rem;
     
     --transition-duration: 300ms;
 }

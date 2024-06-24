@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffectsContext } from '../../contexts/EffectsContext';
-import styles from './../Sidebar.module.css';
 
 import { EffectItem } from './EffectItem';
 import { EffectTypes } from '../../../models/Effect';
 import { AddEffectDropdown } from './AddEffectDropdown';
+import { MenuSection } from '../commons/MenuSection';
+import { SidebarMenu } from '../commons/SidebarMenu';
 
 
 
@@ -23,23 +24,23 @@ export const EffectsMenu = () => {
     };
     
     return (
-        <div className={styles.menu}>
-            <section className={styles.menuSection}>
+        <SidebarMenu>
+            <MenuSection>
                 <AddEffectDropdown />
-            </section>
-            <section className={styles.menuSection}>
-                <h3 className={styles.sectionHeader}>Effects</h3>
+            </MenuSection>
+
+            <MenuSection title="Effects">
                 {effectsList.map((effect) => {
                     return (
                         <EffectItem
                             key={effect.type}
                             effect={effect}
-                            active={activeEffect === effect.type}
+                            isActive={activeEffect === effect.type}
                             toggleExtend={() => handleItemClick(effect.type)}
                         />
                     );
                 })}
-            </section>
-        </div>
+            </MenuSection>
+        </SidebarMenu>
     );
 }

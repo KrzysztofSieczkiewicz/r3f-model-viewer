@@ -1,20 +1,11 @@
 import React from "react";
-import styles from './Cameras.module.css';
+import styles from '../commons/MenuListItemHeader.module.css';
 
-import { ReactComponent as SpotlightIcon } from '../../../icons/lightTypes/spotLight.svg';
-import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import { CAMERA_TYPES, CameraTypes } from "../../../models/Camera";
-
-type Props = {
-    type: CameraTypes
-}
+import { ReactComponent as CameraIcon } from '../../../icons/sidebar/camera.svg';
 
 // TODO: ADD PROPER ICONS FOR CAMERAS
-export const CameraTypeIcon = ( {type} :Props ) => {
+export const CameraTypeIcon = () => {
     return(
-    <>
-        {type === CAMERA_TYPES.perspectiveCamera && <PointLightIcon className={styles.cameraIcon} />}
-        {type === CAMERA_TYPES.ortographicCamera && <SpotlightIcon className={styles.cameraIcon} />}
-    </>
+        <CameraIcon className={styles.typeIcon} />
     );
 }
