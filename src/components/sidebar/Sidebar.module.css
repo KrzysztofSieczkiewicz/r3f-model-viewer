@@ -33,10 +33,11 @@
 .menu {
     position: absolute;
     left: var(--nav-size);
-    transform: translateY(50%);
+    transform: translateY(32%);
     overflow: visible;
 
     width: 24.5rem;
+    margin-left: 1rem;
     padding: 0 0.4rem;
 
     border-radius: 1rem;

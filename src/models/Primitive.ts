@@ -1,7 +1,5 @@
 export enum Primitives {
     Sphere,
-    Box,
-    Cylinder,
     Cone,
 }
 
@@ -10,3 +8,17 @@ export type SphereProperties = {
     horizontalTris: number,
     vertivalTris: number,
 }
+
+export type ConeProperties = {
+    radius: number,
+    horizontalTris: number,
+    vertivalTris: number,
+}
+
+
+
+export type PrimitiveProperties = SphereProperties | ConeProperties;
+
+export type PrimitiveWrapper =
+    {type: Primitives.Sphere, properties: SphereProperties} |
+    {type: Primitives.Cone, properties: ConeProperties}

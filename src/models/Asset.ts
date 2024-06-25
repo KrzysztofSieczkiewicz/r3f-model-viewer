@@ -1,4 +1,11 @@
 import { generateNewID } from '../utils/idUtil';
+import { PrimitiveProperties, PrimitiveWrapper, Primitives } from './Primitive';
+
+export enum Assets {
+    Primitive,
+    Unwrapped,
+    Scan
+}
 
 // TODO: Move isSelected prop from AssetWrapper to SceneContext
 export type AssetWrapper = {
@@ -14,6 +21,25 @@ export type AssetWrapper = {
     visible: boolean,
     isSelected: boolean,
 }
+
+export type NewAssetWrapper = 
+    { id: string, type: Assets.Primitive, mesh: PrimitiveWrapper } |
+    { id: string, type: Assets.Scan, mesh: AssetWrapper };
+
+export const NEW_INIT_ASSET_LIST: NewAssetWrapper[] = [
+    {
+    id: generateNewID(),
+    type: Assets.Primitive,
+    mesh: {
+        type: Primitives.Sphere,
+        properties: {
+            radius: 1,
+            horizontalTris: 3,
+            vertivalTris: 3,
+            }
+        }
+    }
+]
 
 const INIT_ASSET_LIST: AssetWrapper[] = [
     {
