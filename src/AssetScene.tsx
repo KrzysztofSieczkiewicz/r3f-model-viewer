@@ -11,6 +11,7 @@ import { CameraTracker } from './components/canvas/scene/CameraTracker';
 import { AmbientLight } from './components/canvas/scene/AmbientLight';
 import { useSceneValue } from './components/contexts/SceneContext';
 import { Cameras } from './components/canvas/cameras/Cameras';
+import { RenderedPrimitive } from './components/canvas/assets/RenderedPrimitive';
 
 export const AssetScene = () => {
   const [ backgroundColor ] = useSceneValue((scene) => scene['backgroundColor']);
@@ -30,6 +31,8 @@ export const AssetScene = () => {
         <Lights />
         <Assets />
         <Cameras />
+
+        <RenderedPrimitive />
 
         <Effects />
       </Canvas>

@@ -5,14 +5,15 @@ export enum Primitives {
 
 export type SphereProperties = {
     radius: number,
-    horizontalTris: number,
-    vertivalTris: number,
+    widthSegments: number
+    heightSegments: number,
 }
 
 export type ConeProperties = {
     radius: number,
-    horizontalTris: number,
-    vertivalTris: number,
+    height: number,
+    radialSegments: number,
+    heightSegments: number,
 }
 
 

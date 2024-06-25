@@ -1,5 +1,5 @@
 import { generateNewID } from '../utils/idUtil';
-import { PrimitiveProperties, PrimitiveWrapper, Primitives } from './Primitive';
+import { PrimitiveWrapper, Primitives } from './Primitive';
 
 export enum Assets {
     Primitive,
@@ -23,8 +23,7 @@ export type AssetWrapper = {
 }
 
 export type NewAssetWrapper = 
-    { id: string, type: Assets.Primitive, mesh: PrimitiveWrapper } |
-    { id: string, type: Assets.Scan, mesh: AssetWrapper };
+    { id: string, type: Assets.Primitive, mesh: PrimitiveWrapper }
 
 export const NEW_INIT_ASSET_LIST: NewAssetWrapper[] = [
     {
@@ -34,8 +33,8 @@ export const NEW_INIT_ASSET_LIST: NewAssetWrapper[] = [
         type: Primitives.Sphere,
         properties: {
             radius: 1,
-            horizontalTris: 3,
-            vertivalTris: 3,
+            widthSegments: 3,
+            heightSegments: 3,
             }
         }
     }
