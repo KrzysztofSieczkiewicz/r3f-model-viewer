@@ -32,8 +32,6 @@ export const AssetScene = () => {
         <Assets />
         <Cameras />
 
-        <RenderedPrimitive />
-
         <Effects />
       </Canvas>
       

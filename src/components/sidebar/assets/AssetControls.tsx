@@ -9,14 +9,16 @@ import { ItemTrait } from "../commons/ItemTrait";
 import { RotationSliders } from "../controls/RotationSliders";
 import { AxesLockButton } from "../controls/buttons/AxesLockButton";
 import { ListItemBody } from "../commons/ListItemBody";
+import { MeshSphereControls } from "./controls/MeshSphereControls";
+import { SphereProperties } from "../../../models/Primitive";
 
 
 type Props = {
     assetId: string,
-    assetProperties: AssetProperties,
+    asset: AssetWrapper,
 }
 
-export const AssetControls = ({assetId, assetProperties}: Props) => {
+export const AssetControls = ({assetId, asset}: Props) => {
     const {updateAssetProperties, deleteAsset} = useSceneObjectsContext();
     const [ axesLocked, setAxesLocked] = useState(false);
 
@@ -24,23 +26,27 @@ export const AssetControls = ({assetId, assetProperties}: Props) => {
         <ListItemBody>
             <DeleteItemButton deleteObject={() => deleteAsset(assetId)} />
 
+            <MeshSphereControls 
+                assetId={assetId}
+                 meshProperties={asset.mesh.properties as SphereProperties} />
+
             <ItemTrait name="Position">
                 <PositionSliders
-                    value={assetProperties.position}
+                    value={asset.properties.position}
                     step={0.005}
                     handleChange={(val) => updateAssetProperties(assetId, {position: val} )} />
             </ItemTrait>
 
             <ItemTrait name="Rotation">
                 <RotationSliders
-                    value={assetProperties.rotation}
+                    value={asset.properties.rotation}
                     step={0.01}
                     handleChange={(val) => updateAssetProperties(assetId, {rotation: val} )} />
             </ItemTrait>
 
             <ItemTrait name="Scale">
                 <ScaleSliders
-                    value={assetProperties.scale}
+                    value={asset.properties.scale}
                     step={0.01}
                     handleChange={(val) => updateAssetProperties(assetId, {scale: val} )}
                     axesLock={axesLocked} />

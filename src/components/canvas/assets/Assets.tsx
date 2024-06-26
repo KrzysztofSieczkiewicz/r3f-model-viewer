@@ -2,7 +2,8 @@ import { useGLTF } from "@react-three/drei";
 import React from "react";
 import { RenderedAsset } from "./RenderedAsset";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
-import { AssetProperties } from "../../../models/Asset";
+import { RenderedPrimitive } from "./primitives/RenderedPrimitive";
+import { SphereProperties } from "../../../models/Primitive";
 
 export const Assets = () => {
     const { assetsList } = useSceneObjectsContext();
@@ -11,10 +12,12 @@ export const Assets = () => {
         assetsList.map((asset) => {
             if(!asset.properties.visible) return <></>;
             return (
-                <RenderedAsset 
-                    key={asset.id}
-                    asset={asset}
-                />
+                <RenderedPrimitive
+                    properties={asset.mesh.properties as SphereProperties} />
+                // <RenderedAsset 
+                //     key={asset.id}
+                //     asset={asset}
+                // />
             );
         })
     );

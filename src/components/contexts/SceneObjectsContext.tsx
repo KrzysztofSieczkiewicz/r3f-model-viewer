@@ -3,12 +3,14 @@ import { ReactNode, createContext, useState } from "react";
 
 import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, defaultAsset } from "../../models/Asset";
 import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
+import { PrimitiveProperties } from "../../models/Primitive";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
 type SceneObjectsContext = {
     assetsList: AssetWrapper[], 
     updateAssetProperties: (id: string, change: Partial<AssetProperties>) => void,
+    updatePrimitiveProperties: (id: string, change: Partial<PrimitiveProperties>) => void,
     deleteAsset: (id: string) => void,
     addAsset: () => void,
 
@@ -97,6 +99,24 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsList(newAssetsList);
     }, [assetsList]);
 
+    const updatePrimitiveProperties = useCallback((id: string, change: Partial<PrimitiveProperties>) => {
+        const index = assetsList.findIndex(asset => asset.id === id);
+        if (index === -1) return;
+
+        const updatedAsset = {
+            ...assetsList[index],
+            mesh: {
+                ...assetsList[index].mesh,
+                properties: {
+                    ...assetsList[index].mesh,
+                    ...change
+                }
+            }
+        } as AssetWrapper;
+        const newAssetsList = assetsList.map( (asset, i) => i===index ? updatedAsset: asset);
+        setAssetsList(newAssetsList);
+    }, [assetsList]);
+
     const deleteAsset = (id: string) => {
         const filteredAssets = assetsList.filter( (asset) => asset.id !== id );
         setAssetsList(filteredAssets);
@@ -104,7 +124,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
 
     
     return (
-        <SceneObjectsContext.Provider value={{ lightsList, changeLightType, updateLightProperties, deleteLight, addLight, assetsList, updateAssetProperties, deleteAsset, addAsset }} >
+        <SceneObjectsContext.Provider value={{ lightsList, changeLightType, updateLightProperties, deleteLight, addLight, assetsList, updateAssetProperties, updatePrimitiveProperties, deleteAsset, addAsset }} >
             {props.children}
         </SceneObjectsContext.Provider>
     );

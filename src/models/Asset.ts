@@ -27,6 +27,31 @@ export type AssetWrapper =
 
 const INIT_ASSET_LIST: AssetWrapper[] = [
     {
+        id: generateNewID(),
+        type: Assets.Scan,
+        mesh: {
+            type: Primitives.Sphere,
+            properties: {
+                radius: 1,
+                heightSegments: 4,
+                widthSegments: 8
+            }
+        },
+        properties: {
+            name: "Sphere",
+            position:[0,0,0],
+            rotation:[0,0,0],
+            scale:[10,10,10],
+            isSelected: false,
+            castShadow: true,
+            receiveShadow: true,
+            visible: true,
+        }
+        }
+]
+
+const TMP_INIT_ASSET_LIST: AssetWrapper[] = [
+    {
     id: generateNewID(),
     type: Assets.Scan,
     mesh: {
