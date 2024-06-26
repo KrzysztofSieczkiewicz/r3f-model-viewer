@@ -8,6 +8,14 @@ type Props = {
 export const RenderedPrimitive = ( {properties}: Props) => {
 
 
+    // TODO: HANDLE DIFFERENT PRIMITIVES
+    const handlePrimitiveType = () => {
+    }
+
+    // TODO: REPLACE COMPONENT WITH THREE.sphereBufferedGeometry
+    // THIS WAY YOU CAN JUST CREATE PROPER GEOMETRY VARIABLE AND ASSIGN IT TO <mesh> INSIDE RenderedAsset
+
+
     return (
         <mesh matrixWorldAutoUpdate={true}>
             <sphereBufferGeometry 

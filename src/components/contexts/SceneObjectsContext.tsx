@@ -108,7 +108,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
             mesh: {
                 ...assetsList[index].mesh,
                 properties: {
-                    ...assetsList[index].mesh,
+                    ...assetsList[index].mesh.properties,
                     ...change
                 }
             }

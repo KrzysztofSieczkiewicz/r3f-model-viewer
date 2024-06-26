@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { Outlines, useGLTF } from "@react-three/drei";
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AssetWrapper } from "../../../models/Asset";
 import React from "react";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";

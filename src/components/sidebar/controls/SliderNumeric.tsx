@@ -4,6 +4,7 @@ import styles from './Sliders.module.css';
 
 import { roundNumber } from "../../../utils/mathUtil";
 
+// TODO: ADD MIN/MAX OPTIONAL PARAMS
 type Props = {
     step: number,
     rounding: number,
@@ -12,6 +13,7 @@ type Props = {
     
     children?: ReactNode,
 }
+
 
 // TODO: MOVE CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
 export const SliderNumeric = ({step, rounding, value, handleChange, children}: Props) => {
