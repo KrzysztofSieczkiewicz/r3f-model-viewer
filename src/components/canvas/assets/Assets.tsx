@@ -2,19 +2,18 @@ import { useGLTF } from "@react-three/drei";
 import React from "react";
 import { RenderedAsset } from "./RenderedAsset";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
-import { AssetWrapper } from "../../../models/Asset";
+import { AssetProperties } from "../../../models/Asset";
 
 export const Assets = () => {
-    const { assetsList, updateAsset } = useSceneObjectsContext();
+    const { assetsList } = useSceneObjectsContext();
         
     return (
         assetsList.map((asset) => {
-            if(!asset.visible) return <></>;
+            if(!asset.properties.visible) return <></>;
             return (
                 <RenderedAsset 
                     key={asset.id}
                     asset={asset}
-                    updateAsset={(change: Partial<AssetWrapper>) => updateAsset(asset.id, change)}
                 />
             );
         })

@@ -6,10 +6,10 @@ import React from "react";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { AssetsGizmo } from "./AssetsGizmo";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 type Props = {
-    asset: AssetWrapper,
-    updateAsset: (change: Partial<AssetWrapper>) => void,
+    asset: AssetWrapper
 }
 
 type GLTFResult = GLTF & {
@@ -19,7 +19,8 @@ type GLTFResult = GLTF & {
   };
 
 
-export const RenderedAsset = memo(( {asset, updateAsset}: Props) => {
+export const RenderedAsset = ( {asset}: Props) => {
+    const { updateAssetProperties } = useSceneObjectsContext();
     const [ isHovered, setIsHovered ] = useState(false);
     const [ isOutline, setIsOutline ] = useState(false);
     const [ outlineColor, setOutlineColor ] = useState("white")
@@ -44,7 +45,7 @@ export const RenderedAsset = memo(( {asset, updateAsset}: Props) => {
         }
      }, [isHovered, isSelected])
     
-    if(!asset.visible) return;
+    if(!asset.properties.visible) return;
 
     // TODO: UNIFY ROTATION UNITS, EVERYTHING IS USING DIFFERENT SYSTEM
     return (
@@ -52,7 +53,7 @@ export const RenderedAsset = memo(( {asset, updateAsset}: Props) => {
             {isSelected && 
                 <AssetsGizmo
                     asset={asset}
-                    handleChange={(newAsset) => updateAsset({...newAsset})}
+                    handleChange={(newAsset) => updateAssetProperties(asset.id, {...newAsset})}
                 />
             }
             
@@ -61,13 +62,13 @@ export const RenderedAsset = memo(( {asset, updateAsset}: Props) => {
                 onPointerOver={() => setIsHovered(true) }
                 onPointerOut={() => setIsHovered(false) }
                 onClick={handleSelect}
-                castShadow={asset.castShadow}
-                receiveShadow={asset.receiveShadow}
+                castShadow={asset.properties.castShadow}
+                receiveShadow={asset.properties.receiveShadow}
                 geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
                 material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
-                position={asset.position}
-                rotation={asset.rotation}
-                scale={asset.scale}
+                position={asset.properties.position}
+                rotation={asset.properties.rotation}
+                scale={asset.properties.scale}
             >
 
                 {isOutline && 
@@ -83,7 +84,7 @@ export const RenderedAsset = memo(( {asset, updateAsset}: Props) => {
             </mesh>
         </group>
     );
-});
+};
 
 
 useGLTF.preload("models/pear/Pear2_LOD0.gltf");

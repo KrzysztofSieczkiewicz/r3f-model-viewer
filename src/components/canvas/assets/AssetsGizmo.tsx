@@ -2,11 +2,11 @@ import { PivotControls } from "@react-three/drei";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Euler, Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
-import { AssetWrapper } from "../../../models/Asset";
+import { AssetProperties, AssetWrapper } from "../../../models/Asset";
 
 type Props = {
     asset: AssetWrapper,
-    handleChange: (change: Partial<AssetWrapper>) => void
+    handleChange: (change: Partial<AssetProperties>) => void
 }
 
 type Transformation = {
@@ -16,8 +16,8 @@ type Transformation = {
 
 export const AssetsGizmo = ( {asset, handleChange}: Props) => {
     const [ transformation, setTransformation ] = useState<Transformation>({
-        position: asset.position, 
-        rotation: asset.rotation
+        position: asset.properties.position, 
+        rotation: asset.properties.rotation
     });
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
 
@@ -58,10 +58,10 @@ export const AssetsGizmo = ( {asset, handleChange}: Props) => {
     useEffect(() => {
         if (!controlsRef.current) return;
 
-        controlsRef.current.position.set(...asset.position);
-        controlsRef.current.rotation.setFromQuaternion(new Quaternion().setFromEuler(new Euler(...asset.rotation)));
+        controlsRef.current.position.set(...asset.properties.position);
+        controlsRef.current.rotation.setFromQuaternion(new Quaternion().setFromEuler(new Euler(...asset.properties.rotation)));
         controlsRef.current.updateMatrix();
-    }, [asset.position, asset.rotation]);
+    }, [asset.properties.position, asset.properties.rotation]);
 
 
     return (

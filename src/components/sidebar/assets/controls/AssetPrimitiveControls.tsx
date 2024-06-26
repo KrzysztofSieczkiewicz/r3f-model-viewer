@@ -1,22 +1,20 @@
 import React, { useState } from "react";
-
-import { PositionSliders } from "../controls/PositionSliders";
-import { ScaleSliders } from "../controls/ScaleSliders";
-import { AssetProperties, AssetWrapper } from "../../../models/Asset";
-import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
-import { DeleteItemButton } from "../common/DeleteItemButton";
-import { ItemTrait } from "../commons/ItemTrait";
-import { RotationSliders } from "../controls/RotationSliders";
-import { AxesLockButton } from "../controls/buttons/AxesLockButton";
-import { ListItemBody } from "../commons/ListItemBody";
-
+import { DeleteItemButton } from "../../common/DeleteItemButton";
+import { ItemTrait } from "../../commons/ItemTrait";
+import { ListItemBody } from "../../commons/ListItemBody";
+import { PositionSliders } from "../../controls/PositionSliders";
+import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
+import { RotationSliders } from "../../controls/RotationSliders";
+import { ScaleSliders } from "../../controls/ScaleSliders";
+import { AxesLockButton } from "../../controls/buttons/AxesLockButton";
+import { AssetProperties } from "../../../../models/Asset";
 
 type Props = {
     assetId: string,
     assetProperties: AssetProperties,
 }
 
-export const AssetControls = ({assetId, assetProperties}: Props) => {
+export const AssetPrimitiveControls = ({assetId, assetProperties}: Props) => {
     const {updateAssetProperties, deleteAsset} = useSceneObjectsContext();
     const [ axesLocked, setAxesLocked] = useState(false);
 

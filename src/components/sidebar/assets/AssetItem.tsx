@@ -15,8 +15,8 @@ export const AssetItem = ( {isActive, asset, toggleExtend}: Props) => {
 
     return (
         <MenuListItem isActive={isActive}>
-            <AssetItemHeader isActive={isActive} asset={asset} toggleExtend={() => toggleExtend()} />
-            {isActive && <AssetControls asset={asset} />}
+            <AssetItemHeader isActive={isActive} assetId={asset.id} assetProperties={asset.properties} toggleExtend={() => toggleExtend()} />
+            {isActive && <AssetControls assetId={asset.id} assetProperties={asset.properties} />}
         </MenuListItem>
     );
 }

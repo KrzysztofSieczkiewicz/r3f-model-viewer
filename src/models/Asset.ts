@@ -7,79 +7,91 @@ export enum Assets {
     Scan
 }
 
-// TODO: Move isSelected prop from AssetWrapper to SceneContext
-export type AssetWrapper = {
-    id: string,
-    object: string,
+// TODO: Move isSelected prop from AssetProperties to SceneContext
+export type AssetProperties = {
     name: string,
     position: [number,number,number],
     rotation: [number,number,number],
     scale: [number,number,number],
-    ref: HTMLDivElement | null,
     castShadow: boolean,
     receiveShadow: boolean,
     visible: boolean,
     isSelected: boolean,
 }
 
-export type NewAssetWrapper = 
-    { id: string, type: Assets.Primitive, mesh: PrimitiveWrapper }
 
-export const NEW_INIT_ASSET_LIST: NewAssetWrapper[] = [
-    {
-    id: generateNewID(),
-    type: Assets.Primitive,
-    mesh: {
-        type: Primitives.Sphere,
-        properties: {
-            radius: 1,
-            widthSegments: 3,
-            heightSegments: 3,
-            }
-        }
-    }
-]
+export type AssetWrapper = 
+    { id: string, properties: AssetProperties, type: Assets.Primitive, mesh: PrimitiveWrapper } |
+    { id: string, properties: AssetProperties, type: Assets.Unwrapped, mesh: PrimitiveWrapper } |
+    { id: string, properties: AssetProperties, type: Assets.Scan, mesh: PrimitiveWrapper }
 
 const INIT_ASSET_LIST: AssetWrapper[] = [
     {
     id: generateNewID(),
-    name: "pear",
-    object: "toBeReplaced",
-    position:[0,0,0],
-    rotation:[0,0,0],
-    scale:[10,10,10],
-    ref: null,
-    isSelected: false,
-    castShadow: true,
-    receiveShadow: true,
-    visible: true,
+    type: Assets.Scan,
+    mesh: {
+        type: Primitives.Sphere,
+        properties: {
+            radius: 1,
+            heightSegments: 4,
+            widthSegments: 8
+        }
+    },
+    properties: {
+        name: "pear",
+        position:[0,0,0],
+        rotation:[0,0,0],
+        scale:[10,10,10],
+        isSelected: false,
+        castShadow: true,
+        receiveShadow: true,
+        visible: true,
+    }
     },{
     id: generateNewID(),
-    name: "pear",
-    object: "toBeReplaced",
-    position:[1,0,1],
-    rotation:[0,Math.PI,0],
-    scale:[10,10,10],
-    ref: null,
-    isSelected: false,
-    castShadow: true,
-    receiveShadow: true,
-    visible: true,
+    type: Assets.Scan,
+    mesh: {
+        type: Primitives.Sphere,
+        properties: {
+            radius: 1,
+            heightSegments: 4,
+            widthSegments: 8
+        }
+    },
+    properties: {
+        name: "pear",
+        position:[1,0,1],
+        rotation:[0,Math.PI,0],
+        scale:[10,10,10],
+        isSelected: false,
+        castShadow: true,
+        receiveShadow: true,
+        visible: true,
+    }
     }
 ]
 
 const defaultAsset: AssetWrapper = {
     id: generateNewID(),
-    name: "pear",
-    object: "toBeReplaced",
-    position:[0.25,0.5,0.75],
-    rotation:[0,0,0],
-    scale:[10,10,10],
-    ref: null,
-    isSelected: false,
-    castShadow: true,
-    receiveShadow: true,
-    visible: true,
+    type: Assets.Scan,
+    mesh: {
+        type: Primitives.Sphere,
+        properties: {
+            radius: 1,
+            heightSegments: 4,
+            widthSegments: 8
+        }
+    },
+    properties: {
+        name: "pear",
+        position:[0.25,0.5,0.75],
+        rotation:[0,0,0],
+        scale:[10,10,10],
+        isSelected: false,
+        castShadow: true,
+        receiveShadow: true,
+        visible: true,
+    }
 }
 
 export { INIT_ASSET_LIST, defaultAsset };
