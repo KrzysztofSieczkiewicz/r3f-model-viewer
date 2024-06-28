@@ -6,7 +6,7 @@ import { SliderLimited } from "../controls/SliderLimited";
 import { useScene } from "../../contexts/SceneContext";
 import { ResetButton } from "../controls/buttons/ResetButton";
 import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";
-import { SliderSingleContainer } from "../controls/sliderContainers/SliderSingleContainer";
+import { SliderLongContainer } from "../controls/sliderContainers/SliderLongContainer";
 
 export const AmbientLightControls = () => {
     const [ scene, setScene ] = useScene();
@@ -26,12 +26,12 @@ export const AmbientLightControls = () => {
             </SingleLineTrait>
 
             <SingleLineTrait name="Intensity">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         value={scene.ambientIntensity}
                         handleChange={(val) =>  setScene({ambientIntensity: val}) }
                         min={0} max={1} step={0.001} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => setScene({ambientIntensity: 0.1})} />
             </SingleLineTrait>
                 

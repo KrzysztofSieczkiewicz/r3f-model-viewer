@@ -7,7 +7,7 @@ import { ColorPicker } from "../../controls/ColorPicker";
 import { PointLightProperties } from "../../../../models/Light";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
-import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
+import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
 import { ResetButton } from "../../controls/buttons/ResetButton";
 
@@ -36,22 +36,22 @@ export const PointLightControls = ( {id, properties}: Props ) => {
             </SingleLineTrait>
 
             <SingleLineTrait name="Intensity">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited 
                         value={properties.intensity}
                         handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
                         min={0} max={3} step={0.005} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </SingleLineTrait>
 
             <SingleLineTrait name="Distance">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited 
                         value={properties.distance}
                         handleChange={(val) => updateLightProperties(id, {distance: val} )} 
                         min={0} max={100} step={0.1} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {distance: 10} )} />
             </SingleLineTrait>
         </ListItemBody>

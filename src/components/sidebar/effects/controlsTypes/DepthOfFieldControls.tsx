@@ -6,7 +6,7 @@ import { SliderLimited } from "../../controls/SliderLimited";
 import { useEffectsContext } from "../../../contexts/EffectsContext";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
-import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
+import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
 import { ResetButton } from "../../controls/buttons/ResetButton";
 
@@ -29,32 +29,32 @@ export const DepthOfFieldControls = ( {properties}: Props ) => {
             </SingleLineTrait>
 
             <SingleLineTrait name="Focus distance">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         min={0} max={50} step={0.005} 
                         value={properties.focusDistance}
                         handleChange={(value) => updateEffectProperties(type, {focusDistance: value} )} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {focusDistance: 0.0035} )} />
             </SingleLineTrait>
 
             <SingleLineTrait name="Focal length">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         min={0} max={50} step={0.005} 
                         value={properties.focalLength}
                         handleChange={(value) => updateEffectProperties(type, {focalLength: value} )} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {focalLength: 0.01} )} />
             </SingleLineTrait>
 
             <SingleLineTrait name="Bokeh scale">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         min={0} max={5} step={0.005} 
                         value={properties.bokehScale} 
                         handleChange={(value) => updateEffectProperties(type, {bokehScale: value} )} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {bokehScale: 3} )} />
             </SingleLineTrait>
         </ListItemBody>

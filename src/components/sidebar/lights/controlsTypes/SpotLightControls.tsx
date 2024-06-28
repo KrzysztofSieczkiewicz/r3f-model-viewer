@@ -7,7 +7,7 @@ import { ColorPicker } from "../../controls/ColorPicker";
 import { SpotLightProperties } from "../../../../models/Light";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
-import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
+import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
 import { ResetButton } from "../../controls/buttons/ResetButton";
 
@@ -35,42 +35,42 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
             </SingleLineTrait>
 
             <SingleLineTrait name="Intensity">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         value={properties.intensity}
                         handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
                         min={0} max={3} step={0.005} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </SingleLineTrait>
 
             <SingleLineTrait name="Distance">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         value={properties.distance}
                         handleChange={(val) => updateLightProperties(id, {distance: val} )} 
                         min={0} max={100} step={0.1} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {distance: 10} )} />
             </SingleLineTrait>
 
             <SingleLineTrait name="Angle">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                             value={properties.angle}
                             handleChange={(val) => updateLightProperties(id, {angle: val} )} 
                             min={0} max={1} step={0.002} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {angle: 0.6} )} />
             </SingleLineTrait>
                 
             <SingleLineTrait name="Penumbra">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         value={properties.penumbra}
                         handleChange={(val) => updateLightProperties(id, {penumbra: val} )} 
                         min={0} max={1} step={0.002} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {penumbra: 0.6} )} />
             </SingleLineTrait>
         </ListItemBody>

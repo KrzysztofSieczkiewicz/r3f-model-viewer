@@ -6,7 +6,7 @@ import { SliderLimited } from "../../controls/SliderLimited";
 import { useEffectsContext } from "../../../contexts/EffectsContext";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
-import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
+import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
 import { ResetButton } from "../../controls/buttons/ResetButton";
 
@@ -29,32 +29,32 @@ export const BloomControls = ( {properties}: Props ) => {
             </SingleLineTrait>
 
             <SingleLineTrait name="Intensity" >
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         min={0} max={5} step={0.005} 
                         value={properties.intensity}
                         handleChange={(value) => updateEffectProperties(type, {intensity: value} )} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {intensity: 1} )} />
             </SingleLineTrait>
             
             <SingleLineTrait name="Threshold">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         min={0} max={1} step={0.0005} 
                         value={properties.luminanceThreshold}
                         handleChange={(value) => updateEffectProperties(type, {luminanceThreshold: value} )} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {luminanceThreshold: 0.15} )} />
             </SingleLineTrait>
 
             <SingleLineTrait name="Smoothing">
-                <SliderSingleContainer>
+                <SliderLongContainer>
                     <SliderLimited
                         min={0} max={1} step={0.0005} 
                         value={properties.luminanceSmoothing} 
                         handleChange={(value) => updateEffectProperties(type, {luminanceSmoothing: value} )} />
-                </SliderSingleContainer>
+                </SliderLongContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {luminanceSmoothing: 0.025} )} />
             </SingleLineTrait>
         </ListItemBody>
