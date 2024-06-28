@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import styles from "./SliderContainers.module.css";
 
 type Props = {
     children?: ReactNode
@@ -6,7 +7,7 @@ type Props = {
 
 export const SliderShortContainer = ({children}: Props) => {
     return (
-        <div style={{ width: "3.5rem", height: "0.75rem", marginRight: "0.5rem"}}>
+        <div className={styles.shortContainer}>
             {children}
         </div>
     );

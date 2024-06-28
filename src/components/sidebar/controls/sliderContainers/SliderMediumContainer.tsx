@@ -5,9 +5,9 @@ type Props = {
     children?: ReactNode
 }
 
-export const SliderLongContainer = ({children}: Props) => {
+export const SliderMediumContainer = ({children}: Props) => {
     return (
-        <div className={styles.longContainer}>
+        <div className={styles.mediumContainer}>
             {children}
         </div>
     );
