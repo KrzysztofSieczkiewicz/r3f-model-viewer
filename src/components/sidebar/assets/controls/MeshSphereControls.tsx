@@ -1,9 +1,10 @@
 import React from "react";
-import { ItemTrait } from "../../commons/ItemTrait";
+import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 import { SphereProperties } from "../../../../models/Primitive";
 import { SliderNumeric } from "../../controls/SliderNumeric";
 import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
+import { ExpandableTraits } from "../../commons/traitContainers/ExpandableTraits";
 
 type Props = {
     assetId: string,
@@ -14,37 +15,40 @@ export const MeshSphereControls = ({assetId, meshProperties}: Props) => {
     const {updatePrimitiveProperties} = useSceneObjectsContext();
 
     return (
-        <div>
-            <ItemTrait name="Radius">
+        <ExpandableTraits name={"Mesh controls"}>
+            <SingleLineTrait name="Radius">
                 <SliderSingleContainer>
                     <SliderNumeric
                         value={meshProperties.radius}
                         step={0.01}
+                        min={0.01}
                         rounding={2}
                         handleChange={(val) => updatePrimitiveProperties(assetId, {radius: val} )} />
                 </SliderSingleContainer>
-            </ItemTrait>
+            </SingleLineTrait>
 
-            <ItemTrait name="Height segments">
+            <SingleLineTrait name="Height segments">
                 <SliderSingleContainer>
                     <SliderNumeric
                         value={meshProperties.heightSegments}
                         step={1}
+                        min={2}
                         rounding={0}
                         handleChange={(val) => updatePrimitiveProperties(assetId, {heightSegments: val} )} />
                 </SliderSingleContainer>
-            </ItemTrait>
+            </SingleLineTrait>
 
-            <ItemTrait name="Width segments">
+            <SingleLineTrait name="Width segments">
                 <SliderSingleContainer>
                     <SliderNumeric
                         value={meshProperties.widthSegments}
                         step={1}
+                        min={3}
                         rounding={0}
                         handleChange={(val) => updatePrimitiveProperties(assetId, {widthSegments: val} )} />
                 </SliderSingleContainer>
-            </ItemTrait>
-        </div>
+            </SingleLineTrait>
+        </ExpandableTraits>
     );
 
 }

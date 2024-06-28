@@ -5,7 +5,7 @@ import { Checkbox } from "../../controls/Checkbox";
 import { SliderLimited } from "../../controls/SliderLimited";
 import { useEffectsContext } from "../../../contexts/EffectsContext";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
-import { ItemTrait } from "../../commons/ItemTrait";
+import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { SliderSingleContainer } from "../../controls/sliderContainers/SliderSingleContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
 import { ResetButton } from "../../controls/buttons/ResetButton";
@@ -22,13 +22,13 @@ export const BloomControls = ( {properties}: Props ) => {
     return (
         <ListItemBody>
             <DeleteItemButton deleteObject={() => deleteEffect(type)}/>
-            <ItemTrait name="Active">
+            <SingleLineTrait name="Active">
                 <Checkbox
                     value={properties.enabled}
                     handleChange={(value) => updateEffectProperties(type, {enabled: value} )} />
-            </ItemTrait>
+            </SingleLineTrait>
 
-            <ItemTrait name="Intensity" >
+            <SingleLineTrait name="Intensity" >
                 <SliderSingleContainer>
                     <SliderLimited
                         min={0} max={5} step={0.005} 
@@ -36,9 +36,9 @@ export const BloomControls = ( {properties}: Props ) => {
                         handleChange={(value) => updateEffectProperties(type, {intensity: value} )} />
                 </SliderSingleContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {intensity: 1} )} />
-            </ItemTrait>
+            </SingleLineTrait>
             
-            <ItemTrait name="Threshold">
+            <SingleLineTrait name="Threshold">
                 <SliderSingleContainer>
                     <SliderLimited
                         min={0} max={1} step={0.0005} 
@@ -46,9 +46,9 @@ export const BloomControls = ( {properties}: Props ) => {
                         handleChange={(value) => updateEffectProperties(type, {luminanceThreshold: value} )} />
                 </SliderSingleContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {luminanceThreshold: 0.15} )} />
-            </ItemTrait>
+            </SingleLineTrait>
 
-            <ItemTrait name="Smoothing">
+            <SingleLineTrait name="Smoothing">
                 <SliderSingleContainer>
                     <SliderLimited
                         min={0} max={1} step={0.0005} 
@@ -56,7 +56,7 @@ export const BloomControls = ( {properties}: Props ) => {
                         handleChange={(value) => updateEffectProperties(type, {luminanceSmoothing: value} )} />
                 </SliderSingleContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {luminanceSmoothing: 0.025} )} />
-            </ItemTrait>
+            </SingleLineTrait>
         </ListItemBody>
     );
 }
