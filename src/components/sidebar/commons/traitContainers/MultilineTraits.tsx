@@ -9,18 +9,45 @@ type Props = {
 // Then, if provided -> display helper lines and "lock" button in the third column
 export const MultilineTraits = ({children}: Props) => {
 
-    const render = () => {
-        React.Children.map(children, (child) => {
-            <tr>
-                <label></label>
-                {child}
-                <div></div>
-            </tr>
-        })
+    const ROW_HEIGHT = 30;
+    const ROWS_NUMBER = React.Children.count(children);
+
+    const generateLinePath = (index: number) => {
+        // CALCULATE DISTANCE FROM THE MIDDLE ROW
+        const avgIndex = ROWS_NUMBER / 2;
+        const dist = Math.abs(avgIndex - index);
+
+        const horizontalLineLength = 25 + 2*dist;
+        const verticalLineHeight = dist * ROW_HEIGHT;
+
+        //DRAW HORIZONTAL LINE - LONGER FOR FIRST AND LAST
+        const startPointX = 0;
+        const startPointY = 0;
+
+        return (
+            <svg>
+                <g>
+                    <line stroke="black" strokeWidth="2" 
+                        x1={startPointX} y1={startPointY}
+                        x2={startPointX + horizontalLineLength} y2={startPointY} />
+                    <line stroke="black" strokeWidth="2"
+                        x1={startPointX + horizontalLineLength} y1={startPointY}
+                        x2={startPointX + horizontalLineLength} y2={startPointY+verticalLineHeight} />
+                </g>
+            </svg>
+        );
     }
 
-
     return (
-        <></>
+        <>
+            {React.Children.map(children, (child, index) => {
+                return (
+                    <tr>
+                        {child}
+                        {generateLinePath(index)}
+                    </tr>
+                );
+            }) }
+        </>
     );
 }
