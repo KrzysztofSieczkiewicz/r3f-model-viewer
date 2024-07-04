@@ -51,6 +51,9 @@ export const MultilineTraits = ({children}: Props) => {
         );
     }
 
+    //TODO: MAKE THE MAIN CONTAINER TO BE A GRID, COLUMN WITH LINE PATHS SHOULD BE FILLING THE WHOLE GRID CELL
+    // THEN YOU CAN DIVIDE SVG HEIGHT BY THE NUMBER OF CHILDREN TO GET APPROX ROW HEIGHT (AND BY THIS CALCULATE EACH LINE
+    // STARTING AND ENDING HEIGHT)
     return (
         <>
             {React.Children.map(children, (child, index) => {
