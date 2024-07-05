@@ -1,5 +1,6 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import styles from './MultilineTraits.module.css';
+import { AxesLockButton } from "../../controls/buttons/AxesLockButton";
 
 type Props = {
     children: ReactNode
@@ -12,6 +13,8 @@ export const MultilineTraits = ({children}: Props) => {
 
     const [rowHeight, setRowHeight] = useState(0);
     const [startingPointYOffset, setStartingPointOffset] = useState(0);
+
+    const [isLocked, setIsLocked] = useState(false);
 
     const gridContainerRef = useRef<HTMLDivElement>(null);
 
@@ -30,12 +33,11 @@ export const MultilineTraits = ({children}: Props) => {
 
     const generateLinePath = (index: number) => {
         // Determine index distance from the middle
-        const avgIndex= Math.round(ROWS_NUMBER / 2) /2;
-        const dist = avgIndex - index;
-        console.log(index + ": " + dist)
+        const avgIndex= Math.round(ROWS_NUMBER) / 2;
+        const dist = avgIndex - index - 0.5;
 
         // Declare line lengths
-        const horizontalLineLength = 15 + Math.abs(2 * dist);
+        const horizontalLineLength = 18 + Math.abs(2 * dist);
         const verticalLineHeight = dist * rowHeight;
 
         // Determine starting points
@@ -76,6 +78,9 @@ export const MultilineTraits = ({children}: Props) => {
                             <> {generateLinePath(index)} </>
                     ); 
                 })}
+                <div className={styles.buttonContainer}>
+                    <AxesLockButton locked={isLocked} setLocked={() => setIsLocked(!isLocked)} />
+                </div>
             </div>
 
         </div>

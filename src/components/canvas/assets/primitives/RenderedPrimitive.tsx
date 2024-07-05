@@ -18,7 +18,7 @@ export const RenderedPrimitive = ( {properties}: Props) => {
 
     return (
         <mesh matrixWorldAutoUpdate={true}>
-            <sphereBufferGeometry 
+            <sphereGeometry 
                 attach="geometry" 
                 args={[
                     properties.radius,

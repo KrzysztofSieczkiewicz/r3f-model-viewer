@@ -50,17 +50,7 @@ export const MeshSphereControls = ({assetId, meshProperties}: Props) => {
                             handleChange={(val) => updatePrimitiveProperties(assetId, {widthSegments: val} )} />
                     </SliderMediumContainer>
                 </SingleLineTrait>
-
-                <SingleLineTrait name="Width segments">
-                    <SliderMediumContainer>
-                        <SliderNumeric
-                            value={meshProperties.widthSegments}
-                            step={1}
-                            min={3}
-                            rounding={0}
-                            handleChange={(val) => updatePrimitiveProperties(assetId, {widthSegments: val} )} />
-                    </SliderMediumContainer>
-                </SingleLineTrait>
+                
             </MultilineTraits>
         </ExpandableTraits>
     );

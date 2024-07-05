@@ -23,3 +23,16 @@
     height: 100%;
     box-sizing: border-box;
 }
+
+.buttonContainer {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    top: 50%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
