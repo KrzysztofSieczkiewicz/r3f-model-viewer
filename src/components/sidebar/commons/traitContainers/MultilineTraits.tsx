@@ -1,4 +1,5 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
+import styles from './MultilineTraits.module.css';
 
 type Props = {
     children: ReactNode
@@ -9,41 +10,45 @@ type Props = {
 // Then, if provided -> display helper lines and "lock" button in the third column
 export const MultilineTraits = ({children}: Props) => {
 
-    const ROW_HEIGHT = 20;
+    const [rowHeight, setRowHeight] = useState(0);
+    const [startingPointYOffset, setStartingPointOffset] = useState(0);
+
+    const gridContainerRef = useRef<HTMLDivElement>(null);
+
     const ROWS_NUMBER = React.Children.count(children);
 
+    useEffect(() => {
+        if(!gridContainerRef.current) return;
+
+        const calcContainerHeight = gridContainerRef.current.offsetHeight;
+        const calcRowHeight = calcContainerHeight / ROWS_NUMBER;
+        const calcStartingPointOffset = calcRowHeight / 2;
+
+        setRowHeight(calcRowHeight);
+        setStartingPointOffset(calcStartingPointOffset);
+    }, [])
+
     const generateLinePath = (index: number) => {
-        // CALCULATE DISTANCE FROM THE MIDDLE ROW
-        console.log({ROWS_NUMBER})
-        let avgIndex = (ROWS_NUMBER / 2);
-        if (avgIndex%2===0) {
-            avgIndex= Math.round(ROWS_NUMBER / 2) /2;
-        } else {
-            avgIndex=  Math.round(ROWS_NUMBER / 2) /2
-        }
-        console.log({avgIndex})
+        // Determine index distance from the middle
+        const avgIndex= Math.round(ROWS_NUMBER / 2) /2;
         const dist = avgIndex - index;
-        console.log({dist})
+        console.log(index + ": " + dist)
 
-        /*
-        0. 1  
-        1. 2
-        */
+        // Declare line lengths
+        const horizontalLineLength = 15 + Math.abs(2 * dist);
+        const verticalLineHeight = dist * rowHeight;
 
-        const horizontalLineLength = 10 + 2*dist;
-        const verticalLineHeight = dist * ROW_HEIGHT;
-
-        //DRAW HORIZONTAL LINE - LONGER FOR FIRST AND LAST
+        // Determine starting points
         const startPointX = 0;
-        const startPointY = 0;
+        const startPointY = index * rowHeight + startingPointYOffset;
 
         return (
-            <svg>
+            <svg className={styles.svg}>
                 <g>
-                    <line stroke="black" strokeWidth="2" 
+                    <line stroke="black" strokeWidth="1" 
                         x1={startPointX} y1={startPointY}
                         x2={startPointX + horizontalLineLength} y2={startPointY} />
-                    <line stroke="black" strokeWidth="2"
+                    <line stroke="black" strokeWidth="1"
                         x1={startPointX + horizontalLineLength} y1={startPointY}
                         x2={startPointX + horizontalLineLength} y2={startPointY+verticalLineHeight} />
                 </g>
@@ -55,15 +60,24 @@ export const MultilineTraits = ({children}: Props) => {
     // THEN YOU CAN DIVIDE SVG HEIGHT BY THE NUMBER OF CHILDREN TO GET APPROX ROW HEIGHT (AND BY THIS CALCULATE EACH LINE
     // STARTING AND ENDING HEIGHT)
     return (
-        <>
-            {React.Children.map(children, (child, index) => {
-                return (
-                    <span>
-                        {child}
-                        {generateLinePath(index)}
-                    </span>
-                );
-            }) }
-        </>
+        <div ref={gridContainerRef} className={styles.gridContainer}>
+
+            <div className={styles.column1}>
+                {React.Children.map(children, (child, index) => {
+                    return (
+                        <div>{child}</div>
+                    );
+                })}
+            </div>
+
+            <div className={styles.column2}>
+                {React.Children.map(children, (child, index) => {
+                    return (
+                            <> {generateLinePath(index)} </>
+                    ); 
+                })}
+            </div>
+
+        </div>
     );
 }
