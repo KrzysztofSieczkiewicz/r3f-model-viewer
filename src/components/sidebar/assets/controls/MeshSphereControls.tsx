@@ -28,8 +28,8 @@ export const MeshSphereControls = ({assetId, meshProperties}: Props) => {
                 </SliderMediumContainer>
             </SingleLineTrait>
 
-            <MultilineTraits>
-                <SingleLineTrait name="Height segments">
+            <MultilineTraits displayName="Segments:">
+                <SingleLineTrait name="Height">
                     <SliderMediumContainer>
                         <SliderNumeric
                             value={meshProperties.heightSegments}
@@ -40,7 +40,7 @@ export const MeshSphereControls = ({assetId, meshProperties}: Props) => {
                     </SliderMediumContainer>
                 </SingleLineTrait>
 
-                <SingleLineTrait name="Width segments">
+                <SingleLineTrait name="Width">
                     <SliderMediumContainer>
                         <SliderNumeric
                             value={meshProperties.widthSegments}

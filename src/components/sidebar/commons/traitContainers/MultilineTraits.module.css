@@ -1,5 +1,10 @@
 @import '../../../../App.module.css';
 
+.containerName {
+    cursor: pointer;
+    font-size: var(--size-text-normal);
+}
+
 .gridContainer {
     width: 100%;
     display: grid;
@@ -7,6 +12,7 @@
 }
 
 .column1 {
+    padding-left: 0.75rem;
     grid-column: 1;
 }
 
@@ -28,7 +34,7 @@
     position: absolute;
     width: 1.5rem;
     height: 1.5rem;
-    top: 50%;
+    top: 49%;
     left: 15%;
     transform: translate(-50%, -50%);
 

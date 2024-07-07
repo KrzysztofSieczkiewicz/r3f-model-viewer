@@ -3,13 +3,14 @@ import styles from './MultilineTraits.module.css';
 import { AxesLockButton } from "../../controls/buttons/AxesLockButton";
 
 type Props = {
-    children: ReactNode
+    displayName: string;
+    children: ReactNode;
 }
 
 // TODO: if name is provided display it in the first column (centered)
 // Then display all provided children in the second column
 // Then, if provided -> display helper lines and "lock" button in the third column
-export const MultilineTraits = ({children}: Props) => {
+export const MultilineTraits = ({displayName, children}: Props) => {
 
     const [rowHeight, setRowHeight] = useState(0);
     const [startingPointYOffset, setStartingPointOffset] = useState(0);
@@ -58,31 +59,30 @@ export const MultilineTraits = ({children}: Props) => {
         );
     }
 
-    //TODO: MAKE THE MAIN CONTAINER TO BE A GRID, COLUMN WITH LINE PATHS SHOULD BE FILLING THE WHOLE GRID CELL
-    // THEN YOU CAN DIVIDE SVG HEIGHT BY THE NUMBER OF CHILDREN TO GET APPROX ROW HEIGHT (AND BY THIS CALCULATE EACH LINE
-    // STARTING AND ENDING HEIGHT)
+    // TODO: ADD A VERTICAL LINE TO MARK ALL RELATED TRAITS
     return (
-        <div ref={gridContainerRef} className={styles.gridContainer}>
+        <>
+            <label className={styles.containerName}>{displayName}</label>
+            <div ref={gridContainerRef} className={styles.gridContainer}>
+                <div className={styles.column1}>
+                    {React.Children.map(children, (child) => {
+                        return (
+                            <div>{child}</div>
+                        );
+                    })}
+                </div>
 
-            <div className={styles.column1}>
-                {React.Children.map(children, (child, index) => {
-                    return (
-                        <div>{child}</div>
-                    );
-                })}
-            </div>
-
-            <div className={styles.column2}>
-                {React.Children.map(children, (child, index) => {
-                    return (
-                            <> {generateLinePath(index)} </>
-                    ); 
-                })}
-                <div className={styles.buttonContainer}>
-                    <AxesLockButton locked={isLocked} setLocked={() => setIsLocked(!isLocked)} />
+                <div className={styles.column2}>
+                    {React.Children.map(children, (child, index) => {
+                        return (
+                                <> {generateLinePath(index)} </>
+                        ); 
+                    })}
+                    <div className={styles.buttonContainer}>
+                        <AxesLockButton locked={isLocked} setLocked={() => setIsLocked(!isLocked)} />
+                    </div>
                 </div>
             </div>
-
-        </div>
+        </>
     );
 }
