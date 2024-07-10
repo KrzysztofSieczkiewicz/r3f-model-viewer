@@ -1,7 +1,6 @@
 @import '../../../App.module.css';
 
 .containerName {
-    cursor: pointer;
     font-size: var(--size-text-normal);
 }
 

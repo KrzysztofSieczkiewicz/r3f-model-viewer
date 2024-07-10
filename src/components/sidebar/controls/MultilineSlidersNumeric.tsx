@@ -1,11 +1,24 @@
-import React, { cloneElement, ReactElement, ReactNode, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from './MultilineSlidersNumeric.module.css';
 import { AxesLockButton } from "./buttons/AxesLockButton";
 import { normalizeArrayByIndex } from "../../../utils/mathUtil";
 import { SliderNumeric } from "./SliderNumeric";
+import { SliderMediumContainer } from "./sliderContainers/SliderMediumContainer";
+import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";
+
+type SliderProps<T> = {
+    property: (keyof T),
+    value: number, 
+    name: string,
+
+    min?: number, 
+    max?: number, 
+    step?: number,
+    rounding?: number
+}
 
 type Props<T> = {
-    values: {property: (keyof T), value: number}[];
+    values: SliderProps<T>[];
     handleChange: (change: Partial<T>) => void;
     displayName: string
 }
@@ -64,8 +77,9 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
         if(isLocked) {
             const scales = normalizeArrayByIndex(rawValues, rawValues[index]);
             const normalizedValues = rawValues.map( (value, i) => {
-                return value+(newValue-rawValues[index]) * scales[i];
+                return value+(newValue-rawValues[index]) * scales[i] 
             });
+
             change = normalizedValues.reduce((acc, value, i) => {
                 const entry = values[i];
                 acc[entry.property] = value as any;
@@ -77,7 +91,7 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
         handleChange(change);
     }
 
-    // TODO: ADD A VERTICAL LINE TO MARK ALL RELATED TRAITS
+    // TODO: PRESENT <SliderNumeric> IN A MORE READABLE WAY
     return (
         <>
             <label className={styles.containerName}>{displayName}</label>
@@ -85,12 +99,18 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
                 <div className={styles.column1}>
                     {values.map((entry, index) => {
                         return (
-                        <SliderNumeric 
-                            key={index} 
-                            step={0.01} 
-                            rounding={0} 
-                            value={entry.value} 
-                            handleChange={(val) => handleSliderChange(index, val)} />
+                            <SingleLineTrait name={entry.name}>
+                                <SliderMediumContainer>
+                                    <SliderNumeric 
+                                        key={index}
+                                        min={entry.min? entry.min : 0}
+                                        max={entry.max? entry.max : 100}
+                                        step={entry.step? entry.step : 0.01} 
+                                        rounding={entry.rounding? entry.rounding : 0} 
+                                        value={entry.value} 
+                                        handleChange={(val) => handleSliderChange(index, val)} />
+                                </SliderMediumContainer>
+                            </SingleLineTrait>
                         )
                     })}
                 </div>
