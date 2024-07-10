@@ -1,4 +1,4 @@
-@import '../../../../App.module.css';
+@import '../../../App.module.css';
 
 .containerName {
     cursor: pointer;
@@ -6,6 +6,7 @@
 }
 
 .gridContainer {
+    border-left: 1px solid var(--color-medium-dark);
     width: 100%;
     display: grid;
     grid-template-columns: 4fr 3fr;
