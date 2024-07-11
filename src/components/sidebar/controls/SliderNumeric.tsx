@@ -4,6 +4,7 @@ import styles from './Sliders.module.css';
 
 import { roundNumber } from "../../../utils/mathUtil";
 
+// TODO: ADD MIN/MAX OPTIONAL PARAMS
 type Props = {
     step: number,
     rounding: number,
@@ -11,17 +12,22 @@ type Props = {
     handleChange: (newValue: number) => void,
     
     children?: ReactNode,
+    min?: number,
+    max?: number,
 }
 
+
 // TODO: MOVE CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
-export const SliderNumeric = ({step, rounding, value, handleChange, children}: Props) => {
+export const SliderNumeric = ({step, rounding, value, handleChange, children, min=-Infinity, max=Infinity}: Props) => {
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
     const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
 
     const handleInput = (newValue: number) => {
-        handleChange(newValue);
+        if (newValue >= min &&
+            newValue <= max)
+            handleChange(newValue);
     }
 
     const handleMouseUp = () =>  setIsMouseDown(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import menuStyles from './../NewSidebar.module.css'
+import menuStyles from './../Sidebar.module.css'
 
 import { ReactNode } from "react";
 

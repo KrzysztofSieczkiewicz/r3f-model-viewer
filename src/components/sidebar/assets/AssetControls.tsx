@@ -2,49 +2,59 @@ import React, { useState } from "react";
 
 import { PositionSliders } from "../controls/PositionSliders";
 import { ScaleSliders } from "../controls/ScaleSliders";
-import { AssetWrapper } from "../../../models/Asset";
+import { AssetProperties, AssetWrapper } from "../../../models/Asset";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 import { DeleteItemButton } from "../common/DeleteItemButton";
-import { ItemTrait } from "../commons/ItemTrait";
+import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";
 import { RotationSliders } from "../controls/RotationSliders";
 import { AxesLockButton } from "../controls/buttons/AxesLockButton";
 import { ListItemBody } from "../commons/ListItemBody";
+import { MeshSphereControls } from "./meshControls/MeshSphereControls";
+import { ConeProperties, Primitives, SphereProperties } from "../../../models/Primitive";
+import { MeshConeControls } from "./meshControls/MeshConeControls";
+import { MeshControls } from "./meshControls/MeshControls";
 
 
 type Props = {
+    assetId: string,
     asset: AssetWrapper,
 }
 
-export const AssetControls = ({asset}: Props) => {
-    const {updateAsset, deleteAsset} = useSceneObjectsContext();
+export const AssetControls = ({assetId, asset}: Props) => {
+    const {updateAssetProperties, deleteAsset} = useSceneObjectsContext();
     const [ axesLocked, setAxesLocked] = useState(false);
 
     return (
         <ListItemBody>
-            <DeleteItemButton deleteObject={() => deleteAsset(asset.id)} />
+            <DeleteItemButton deleteObject={() => deleteAsset(assetId)} />
 
-            <ItemTrait name="Position">
+            <MeshControls
+                assetId={assetId}
+                type={asset.type}
+                mesh={asset.mesh} />
+
+            <SingleLineTrait name="Position">
                 <PositionSliders
-                    value={asset.position}
+                    value={asset.properties.position}
                     step={0.005}
-                    handleChange={(val) => updateAsset(asset.id, {position: val} )} />
-            </ItemTrait>
+                    handleChange={(val) => updateAssetProperties(assetId, {position: val} )} />
+            </SingleLineTrait>
 
-            <ItemTrait name="Rotation">
+            <SingleLineTrait name="Rotation">
                 <RotationSliders
-                    value={asset.rotation}
+                    value={asset.properties.rotation}
                     step={0.01}
-                    handleChange={(val) => updateAsset(asset.id, {rotation: val} )} />
-            </ItemTrait>
+                    handleChange={(val) => updateAssetProperties(assetId, {rotation: val} )} />
+            </SingleLineTrait>
 
-            <ItemTrait name="Scale">
+            <SingleLineTrait name="Scale">
                 <ScaleSliders
-                    value={asset.scale}
+                    value={asset.properties.scale}
                     step={0.01}
-                    handleChange={(val) => updateAsset(asset.id, {scale: val} )}
+                    handleChange={(val) => updateAssetProperties(assetId, {scale: val} )}
                     axesLock={axesLocked} />
                 <AxesLockButton locked={axesLocked} setLocked={(val) => setAxesLocked(val)} />
-            </ItemTrait>
+            </SingleLineTrait>
         </ListItemBody>
     );
 

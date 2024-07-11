@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import styles from './NewSidebar.module.css';
+import styles from './Sidebar.module.css';
 
 import { SidebarMenuButton } from "./SidebarMenuButton";
 import { AssetsMenu } from "./assets/AssetsMenu";

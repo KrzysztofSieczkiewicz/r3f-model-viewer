@@ -12,9 +12,10 @@
 
     border-radius: var(--controls-rounding);
     box-shadow:
-        0.075rem 0.075rem 0.25rem var(--color-main-shadow),
-        -0.075rem -0.075rem 0.75rem var(--color-main-shadow-opposite);
+        0.05rem 0.05rem 0.15rem var(--color-main-shadow),
+        -0.05rem -0.05rem 0.5rem var(--color-main-shadow-opposite);
     background-color: var(--color-main-strong);
+    filter: brightness(110%);
 
     outline: none;
     cursor: pointer;
@@ -22,7 +23,7 @@
     transition: var(--transition-duration);
 }
 .checkbox:hover {
-    filter: brightness(120%);
+    filter: brightness(1);
 }
 
 .checked {

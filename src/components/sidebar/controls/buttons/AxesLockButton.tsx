@@ -7,6 +7,7 @@ type Props = {
     locked: boolean,
     setLocked: (value: boolean) => void
 }
+
 export const AxesLockButton = ( {locked, setLocked}: Props) => {
 
     const handleIcon = () => {

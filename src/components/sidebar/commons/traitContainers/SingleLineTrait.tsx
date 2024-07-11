@@ -1,13 +1,14 @@
 import React from "react";
 import { ReactNode } from "react";
-import styles from '../NewSidebar.module.css';
+import styles from '../../Sidebar.module.css';
 
 type Props = {
     name: string,
     children: ReactNode,
 }
 
-export const ItemTrait = ({name, children}: Props) => {
+// TODO: MOVE STYLES FOR TRAIT CONTAINERS INTO SEPARATE MODULE?
+export const SingleLineTrait = ({name, children}: Props) => {
 
     return (
         <div className={styles.traitContainer}>
