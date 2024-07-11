@@ -31,8 +31,8 @@ export const MeshSphereControls = ({assetId, meshProperties}: Props) => {
             <MultilineSlidersNumeric<SphereProperties>
                 displayName="Segments:" 
                 values={[ 
-                    {name: 'Height', property: 'heightSegments', value: meshProperties.heightSegments, min: 2, step: 1},
-                    {name: 'Width', property: 'widthSegments', value: meshProperties.widthSegments, min: 3, step: 1} ]}
+                    {name: 'Height', property: 'heightSegments', value: meshProperties.heightSegments, min:2, max:100, step:1, rounding:0},
+                    {name: 'Width', property: 'widthSegments', value: meshProperties.widthSegments, min:3, max:200, step:1, rounding:0} ]}
                 handleChange={(change) => updatePrimitiveProperties(assetId, change)} />
         </ExpandableTraits>
     );
