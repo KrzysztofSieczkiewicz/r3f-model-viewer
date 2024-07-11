@@ -54,7 +54,7 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
         const startPointY = index * rowHeight + startingPointYOffset;
 
         return (
-            <svg className={styles.svg}>
+            <svg className={styles.svg} key={index}>
                 <g>
                     <line stroke="black" strokeWidth="1" 
                         x1={startPointX} y1={startPointY}

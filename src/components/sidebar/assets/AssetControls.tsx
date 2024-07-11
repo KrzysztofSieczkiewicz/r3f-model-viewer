@@ -9,8 +9,10 @@ import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";
 import { RotationSliders } from "../controls/RotationSliders";
 import { AxesLockButton } from "../controls/buttons/AxesLockButton";
 import { ListItemBody } from "../commons/ListItemBody";
-import { MeshSphereControls } from "./controls/MeshSphereControls";
-import { SphereProperties } from "../../../models/Primitive";
+import { MeshSphereControls } from "./meshControls/MeshSphereControls";
+import { ConeProperties, Primitives, SphereProperties } from "../../../models/Primitive";
+import { MeshConeControls } from "./meshControls/MeshConeControls";
+import { MeshControls } from "./meshControls/MeshControls";
 
 
 type Props = {
@@ -26,9 +28,10 @@ export const AssetControls = ({assetId, asset}: Props) => {
         <ListItemBody>
             <DeleteItemButton deleteObject={() => deleteAsset(assetId)} />
 
-            <MeshSphereControls 
+            <MeshControls
                 assetId={assetId}
-                 meshProperties={asset.mesh.properties as SphereProperties} />
+                type={asset.type}
+                mesh={asset.mesh} />
 
             <SingleLineTrait name="Position">
                 <PositionSliders

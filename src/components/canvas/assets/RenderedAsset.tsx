@@ -7,6 +7,7 @@ import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { AssetsGizmo } from "./AssetsGizmo";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
+import { getPrimitiveGeometry } from "./meshes/PrimitiveMesh";
 
 type Props = {
     asset: AssetWrapper
@@ -64,7 +65,8 @@ export const RenderedAsset = ( {asset}: Props) => {
                 onClick={handleSelect}
                 castShadow={asset.properties.castShadow}
                 receiveShadow={asset.properties.receiveShadow}
-                geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
+                //geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
+                geometry={getPrimitiveGeometry(asset.mesh)}
                 material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
                 position={asset.properties.position}
                 rotation={asset.properties.rotation}

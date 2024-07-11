@@ -16,7 +16,7 @@ export const MeshSphereControls = ({assetId, meshProperties}: Props) => {
     const {updatePrimitiveProperties} = useSceneObjectsContext();
 
     return (
-        <ExpandableTraits name={"Mesh controls"}>
+        <ExpandableTraits name={"Mesh"}>
             <SingleLineTrait name="Radius">
                 <SliderMediumContainer>
                     <SliderNumeric
