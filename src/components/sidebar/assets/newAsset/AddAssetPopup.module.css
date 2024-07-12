@@ -2,10 +2,23 @@
 
 .popupOverlay {
     position: absolute;
-    top:0;
+    --top:0;
     left:0;
     width: 100vw;
     height: 100vh;
     
     background-color: var(--color-main-shadow);
+}
+
+.popup {
+    display: flex;
+    padding: 0.5rem;
+    width: fit-content;
+    background-color: var(--color-main-weak);
+}
+
+.button {
+    width: 7.5rem;
+    height: 7.5rem;
+    margin: 1rem 0.5rem;
 }
