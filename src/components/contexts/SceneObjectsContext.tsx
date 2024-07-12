@@ -1,9 +1,9 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, defaultAsset } from "../../models/Asset";
+import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, DEFAULT_ASSET, Assets } from "../../models/Asset";
 import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
-import { PrimitiveProperties } from "../../models/Primitive";
+import { DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/Primitive";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
@@ -13,6 +13,7 @@ type SceneObjectsContext = {
     updatePrimitiveProperties: (id: string, change: Partial<PrimitiveProperties>) => void,
     deleteAsset: (id: string) => void,
     addAsset: () => void,
+    addAssetPrimitive: (primitiveType: Primitives) => void,
 
     lightsList: LightWrapper[],
     changeLightType: (id: string, type: LightTypes) => void,
@@ -80,9 +81,25 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     // TODO: REPLACE "defaultAsset" WITH PROPER ASSET IMPORT LOGIC 
     // (ESP WITH CREATING NEW ID EACH TIME)
     const addAsset = () => {
-        const extendedAssetsList = [...assetsList, defaultAsset] as AssetWrapper[];
+        const extendedAssetsList = [...assetsList, DEFAULT_ASSET] as AssetWrapper[];
         setAssetsList(extendedAssetsList);
     };
+
+    const addAssetPrimitive = (primitiveType: Primitives) => {
+        let primitive;
+        switch(primitiveType) {
+            case Primitives.Sphere:
+                primitive = DEFAULT_MESH_SPHERE;
+                break;
+            case Primitives.Cone:
+                primitive = DEFAULT_MESH_CONE;
+                break;
+        }
+        const newAsset = {...DEFAULT_ASSET, type: Assets.Primitive, mesh: primitive};
+        const extendedAssetsList = [...assetsList, newAsset];
+
+        setAssetsList(extendedAssetsList);
+    }
 
     const updateAssetProperties = useCallback((id: string, change: Partial<AssetProperties>) => {
         const index = assetsList.findIndex(asset => asset.id === id);
@@ -124,7 +141,9 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
 
     
     return (
-        <SceneObjectsContext.Provider value={{ lightsList, changeLightType, updateLightProperties, deleteLight, addLight, assetsList, updateAssetProperties, updatePrimitiveProperties, deleteAsset, addAsset }} >
+        <SceneObjectsContext.Provider value={{ 
+            lightsList, changeLightType, updateLightProperties, deleteLight, addLight, 
+            assetsList, updateAssetProperties, updatePrimitiveProperties, deleteAsset, addAsset, addAssetPrimitive }} >
             {props.children}
         </SceneObjectsContext.Provider>
     );

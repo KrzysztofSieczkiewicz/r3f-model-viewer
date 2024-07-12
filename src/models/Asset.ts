@@ -28,7 +28,7 @@ export type AssetWrapper =
 const INIT_ASSET_LIST: AssetWrapper[] = [
     {
         id: generateNewID(),
-        type: Assets.Scan,
+        type: Assets.Primitive,
         mesh: {
             type: Primitives.Sphere,
             properties: {
@@ -96,9 +96,9 @@ const TMP_INIT_ASSET_LIST: AssetWrapper[] = [
     }
 ]
 
-const defaultAsset: AssetWrapper = {
+const DEFAULT_ASSET: AssetWrapper = {
     id: generateNewID(),
-    type: Assets.Scan,
+    type: Assets.Primitive,
     mesh: {
         type: Primitives.Sphere,
         properties: {
@@ -119,4 +119,4 @@ const defaultAsset: AssetWrapper = {
     }
 }
 
-export { INIT_ASSET_LIST, defaultAsset };
+export { INIT_ASSET_LIST, DEFAULT_ASSET };
