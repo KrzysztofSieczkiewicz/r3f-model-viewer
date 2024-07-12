@@ -16,7 +16,7 @@ export const PopupMainButton = ( {displayName, isOpen, toggleOpen}: Props) => {
             onClick={() => toggleOpen() }
         >
             <label className={styles.name}>{displayName}</label>
-            <div>
+            <div className={styles.iconContainer}>
                 <CubeIcon className={styles.mainIcon} />
                 {isOpen
                     ? <span className={styles.arrow}>&#8657;</span>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent, ReactNode, SVGProps } from "react";
 import styles from './PopupRectangleButton.module.css';
 
 import { PopupMainButton } from "./PopupMainButton";
@@ -8,10 +8,10 @@ type Props = {
     isOpen: boolean,
     toggleOpen: () => void,
 
-    optionsList: string[];
+    children: ReactNode;
 }
 
-export const PopupRectangleButton = ( {displayName, isOpen, toggleOpen, optionsList}: Props) => {
+export const PopupRectangleButton = ( {displayName, isOpen, toggleOpen, children}: Props) => {
 
     return (
         <div className={styles.container} >
@@ -22,11 +22,9 @@ export const PopupRectangleButton = ( {displayName, isOpen, toggleOpen, optionsL
             />
             {isOpen && (
                 <ul className={styles.optionsList}>
-                    {optionsList.map((option) => {
-                        return (
-                            <li>Sphere</li>
-                        );
-                    } )}
+                    {React.Children.map(children, child => (
+                        child
+                    ))}
                 </ul>
             )}
         </div>

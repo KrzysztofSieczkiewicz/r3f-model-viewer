@@ -24,28 +24,30 @@
     transition: var(--transition-duration);
 }
 
-.button.active {
-
-}
-
 .name {
-    align-self: flex-start;
-    align-items: center;
-    width: 100%;
     height: 2rem;
-    margin: 0;
-    text-align: start;
+    line-height: 2rem;
+    margin: 0 auto;
+    text-align: center;
     user-select: none;
 }
 
-.arrow {
-    align-self: flex-end;
-    margin: 0 auto;
-    user-select: none;
+.iconContainer {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    margin: 0.5rem 0;
 }
 
 .mainIcon {
+    grid-column: 2;
     height: 5rem;
     margin: auto;
     align-self: center;
+}
+
+.arrow {
+    grid-column: 3;
+    align-self: center;
+    margin: 0 auto;
+    user-select: none;
 }

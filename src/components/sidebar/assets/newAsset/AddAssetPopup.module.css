@@ -17,8 +17,8 @@
     background-color: var(--color-main-weak);
 }
 
-.button {
-    width: 7.5rem;
-    height: 7.5rem;
-    margin: 1rem 0.5rem;
+.listIcon {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 0.5rem;
 }
