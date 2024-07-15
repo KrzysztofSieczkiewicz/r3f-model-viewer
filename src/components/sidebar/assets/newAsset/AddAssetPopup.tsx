@@ -24,23 +24,21 @@ export const AddAssetPopup = () => {
     };
 
     return (
-        <div className={styles.popupOverlay}>
-            <div className={styles.popup}>
-                <PopupRectangleButton
-                    isOpen={activeName === "Primitives"}
-                    toggleOpen={() => toggleOpen("Primitives")}
-                    displayName="Primitives"
-                >
-                    <PopupListItem 
-                        displayName="Sphere" 
-                        icon={<SphereIcon className={styles.listIcon}/>} 
-                        onClick={ () => addAssetPrimitive(Primitives.Sphere)} />
-                    <PopupListItem 
-                        displayName="Cone" 
-                        icon={<ConeIcon className={styles.listIcon}/>}
-                        onClick={ () => addAssetPrimitive(Primitives.Cone)} />
-                </PopupRectangleButton>
-            </div>
-        </div>
+        <dialog open className={styles.popup}>
+            <PopupRectangleButton
+                isOpen={activeName === "Primitives"}
+                toggleOpen={() => toggleOpen("Primitives")}
+                displayName="Primitives"
+            >
+                <PopupListItem 
+                    displayName="Sphere" 
+                    icon={<SphereIcon className={styles.listIcon}/>} 
+                    onClick={ () => addAssetPrimitive(Primitives.Sphere)} />
+                <PopupListItem 
+                    displayName="Cone" 
+                    icon={<ConeIcon className={styles.listIcon}/>}
+                    onClick={ () => addAssetPrimitive(Primitives.Cone)} />
+            </PopupRectangleButton>
+        </dialog>
     );
 }

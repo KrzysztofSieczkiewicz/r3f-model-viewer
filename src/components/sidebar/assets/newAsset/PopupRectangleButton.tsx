@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, SVGProps } from "react";
+import React, { ReactNode } from "react";
 import styles from './PopupRectangleButton.module.css';
 
 import { PopupMainButton } from "./PopupMainButton";
