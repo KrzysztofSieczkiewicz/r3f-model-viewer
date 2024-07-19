@@ -65,6 +65,7 @@ export const Sidebar = () => {
                     <CamerasMenu />
                 </SidebarMenuButton>
             </ul>
+            <div id="sidebar-modal"></div>
         </nav>
     );
 }
