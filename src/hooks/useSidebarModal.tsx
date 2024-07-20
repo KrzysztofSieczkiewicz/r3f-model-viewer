@@ -22,8 +22,8 @@ export const useSidebarModal = () => {
 
     const Modal = ({ children }: ModalProps) => (
         isModalOpen && portalElement ? createPortal(
-            <div className="modal">
-                <div className="modal-content">
+            <div style={MODAL_STYLE}>
+                <div className="modal-content-positioner">
                     {children}
                 </div>
             </div>,
@@ -33,3 +33,12 @@ export const useSidebarModal = () => {
 
     return { openModal, closeModal, Modal };
 }
+
+const MODAL_STYLE = {
+    position: "fixed" as "fixed",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "rgba(0,0,0, 0.25)"
+};
