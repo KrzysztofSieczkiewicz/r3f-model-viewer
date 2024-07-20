@@ -1,8 +1,11 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect, ReactNode, useRef } from "react";
 import { createPortal } from "react-dom";
 
 type ModalProps = {
     children: ReactNode,
+
+    top?: number,
+    left?: number;
 }
 
 export const useSidebarModal = () => {
@@ -20,25 +23,34 @@ export const useSidebarModal = () => {
         setPortalElement(element);
     }, []);
 
-    const Modal = ({ children }: ModalProps) => (
-        isModalOpen && portalElement ? createPortal(
+    const Modal = ({ children, top, left }: ModalProps) => {
+        if (!isModalOpen || !portalElement) return null;
+
+        const MODAL_STYLE = {
+            position: "fixed" as "fixed",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: "rgba(0,0,0, 0.25)"
+        };
+        
+        const POSITIONER_STYLE = {
+            width: "fit-content",
+            margin: "0 auto",
+            
+            // TODO: HOW TO POSITION DIV CENTER DIRECTLY UNDER PROVIDED CORRDINATES?
+        };
+        
+        return createPortal(
             <div style={MODAL_STYLE}>
-                <div className="modal-content-positioner">
+                <div style={POSITIONER_STYLE}>
                     {children}
                 </div>
             </div>,
             portalElement
-        ) : null
-    );
+        );
+    };
 
     return { openModal, closeModal, Modal };
 }
-
-const MODAL_STYLE = {
-    position: "fixed" as "fixed",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "rgba(0,0,0, 0.25)"
-};
