@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode, useRef } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 type ModalProps = {
@@ -36,16 +36,25 @@ export const useSidebarModal = () => {
         };
         
         const POSITIONER_STYLE = {
+            position: "relative" as "relative",
             width: "fit-content",
-            margin: "0 auto",
-            
-            // TODO: HOW TO POSITION DIV CENTER DIRECTLY UNDER PROVIDED CORRDINATES?
+
+            top: top?? "50%",
+            left: left?? "50%",
+            transform: "translate(-50%, -50%)",
         };
         
         return createPortal(
-            <div style={MODAL_STYLE}>
-                <div style={POSITIONER_STYLE}>
+            <div style={MODAL_STYLE} 
+                className="modal" 
+                onClick={() => closeModal()}
+            >
+                <div style={POSITIONER_STYLE} 
+                    className="modal-content-positioner" 
+                    onClick={(e)=> e.stopPropagation()}
+                >
                     {children}
+
                 </div>
             </div>,
             portalElement
