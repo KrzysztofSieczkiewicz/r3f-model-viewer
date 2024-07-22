@@ -3,7 +3,7 @@ import { ReactNode, createContext, useState } from "react";
 
 import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Assets } from "../../models/Asset";
 import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
-import { DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/Primitive";
+import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/Primitive";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
@@ -93,6 +93,9 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
                 break;
             case Primitives.Cone:
                 primitive = DEFAULT_MESH_CONE;
+                break;
+            case Primitives.Box:
+                primitive = DEFAULT_MESH_BOX;
                 break;
         }
         const newAsset = {...getDefaultAsset(), type: Assets.Primitive, mesh: primitive};

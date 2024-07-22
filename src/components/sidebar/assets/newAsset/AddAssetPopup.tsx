@@ -49,6 +49,14 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
                         closeModal();
                     }
                     }/>
+                <PopupListItem 
+                    displayName="Box" 
+                    icon={<ConeIcon className={styles.listIcon}/>}
+                    onClick={ () => {
+                        addAssetPrimitive(Primitives.Box)
+                        closeModal();
+                    }
+                    }/>
             </PopupRectangleButton>
         </div>
     );

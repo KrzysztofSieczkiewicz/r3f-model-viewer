@@ -1,6 +1,6 @@
 import { Primitives, PrimitiveWrapper } from "../../../../models/Primitive";
 import { SphereGeometry } from "three/src/geometries/SphereGeometry";
-import { ConeGeometry } from "three";
+import { BoxGeometry, ConeGeometry } from "three";
 
 export const getPrimitiveGeometry = (primitive: PrimitiveWrapper) => {
     switch(primitive.type) {
@@ -15,5 +15,10 @@ export const getPrimitiveGeometry = (primitive: PrimitiveWrapper) => {
                 primitive.properties.height,
                 primitive.properties.radialSegments,
                 primitive.properties.heightSegments);
+        case Primitives.Box:
+            return new BoxGeometry(
+                primitive.properties.height,
+                primitive.properties.width,
+                primitive.properties.depth);
     }
 }
