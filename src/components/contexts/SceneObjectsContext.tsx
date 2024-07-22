@@ -7,7 +7,7 @@ import { DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
-type SceneObjectsContext = {
+type SceneObjectsContextProps = {
     assetsList: AssetWrapper[], 
     updateAssetProperties: (id: string, change: Partial<AssetProperties>) => void,
     updatePrimitiveProperties: (id: string, change: Partial<PrimitiveProperties>) => void,
@@ -22,7 +22,7 @@ type SceneObjectsContext = {
     addLight: (light: LightWrapper) => void,
 }
 
-export const SceneObjectsContext = createContext<SceneObjectsContext | null>( null );
+export const SceneObjectsContext = createContext<SceneObjectsContextProps | null>( null );
 
 export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.Element => {
 
@@ -149,7 +149,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     );
 }
 
-export const useSceneObjectsContext = (): SceneObjectsContext => {
+export const useSceneObjectsContext = (): SceneObjectsContextProps => {
     const context = useContext(SceneObjectsContext);
 
     if (context === null) {

@@ -33,7 +33,7 @@ export const useSidebarModal = () => {
               setModalWidth(modalRef.current.offsetWidth);
               setIsCalculated(true);
             }
-          }, [modalRef.current]);
+          }, []);
 
         const MODAL_STYLE = {
             position: "fixed" as "fixed",
