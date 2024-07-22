@@ -52,8 +52,8 @@ export const useSidebarModal = () => {
             width: "fit-content",
             top: typeof topY === 'number' ? `${topY}px` : topY,
             left: centerX !== undefined ? `${centerX - (modalWidth / 2)}px` : '50%',
-            transform: `translate(${centerX !== undefined ? '0' : '-50%'}, ${topY !== undefined ? '0' : '50%'})`,
-            opacity: isCalculated ? 1 : 0,
+            transform: `translate(${centerX !== undefined ? '0' : '-50%'}, ${topY !== undefined ? '0' : '-50%'})`,
+            opacity: isCalculated ? 1 : 0
         };
         
         if (!isModalOpen || !portalElement) return null;
