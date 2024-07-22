@@ -3,13 +3,13 @@ import React, { useRef } from "react";
 import cameraBillboardIcon from '../../../icons/perspectiveCamera.svg';
 import { CameraProperties, OrtographicCameraProperties } from "../../../models/Camera";
 import { CamerasGizmo } from "./CamerasGizmo";
-import { useCamerasContext } from "../../contexts/CamerasContext";
 
 import { OrthographicCamera, useHelper } from "@react-three/drei";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 import { SelectionSphere } from "../helperObjects/SelectionSphere";
 import { IconBillboard } from "../helperObjects/IconBillboard";
 import { CameraHelper } from "three";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
 }
 
 export const RenderedOrtographicCamera = ( {id, properties}: Props ) => {
-    const { updateCameraProperties } = useCamerasContext();
+    const { updateCameraProperties } = useSceneObjectsContext();
 
     const cameraRef = useRef(null);
     

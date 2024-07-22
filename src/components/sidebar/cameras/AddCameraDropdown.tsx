@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from './AddCameraDropdown.module.css';
-import { useCamerasContext } from "../../contexts/CamerasContext";
 import { CAMERA_TYPES } from "../../../models/Camera";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 
 export const AddCameraDropdown = () => {
     const [ isActive, setIsActive ] = useState(false);
 
-    const { addCamera } = useCamerasContext();
+    const { addCamera } = useSceneObjectsContext();
 
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const listRef = useRef<HTMLUListElement | null>(null);

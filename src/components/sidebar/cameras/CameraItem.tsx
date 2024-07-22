@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { CAMERA_TYPES, CameraWrapper } from "../../../models/Camera"
-import { useCamerasContext } from '../../contexts/CamerasContext';
 import { DeleteItemButton } from '../common/DeleteItemButton';
 import { PerspectiveCameraControls } from './controlsTypes/PerspectiveCameraControls';
 import { OrtogtaphicCameraControls } from './controlsTypes/OrtographicCameraControls';
 import { CameraItemHeader } from './CameraItemHeader';
 import { MenuListItem } from '../commons/MenuListItem';
 import { ListItemBody } from '../commons/ListItemBody';
+import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
 }
 
 export const CameraItem = ( {isActive, camera, toggleExtend}: Props ) => {
-    const { deleteCamera } = useCamerasContext();
+    const { deleteCamera } = useSceneObjectsContext();
 
     const renderCameraHeader = () => {
         return <CameraItemHeader isActive={isActive} camera={camera} toggleExtend={() => toggleExtend()} />

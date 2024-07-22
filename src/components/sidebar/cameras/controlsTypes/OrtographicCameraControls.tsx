@@ -2,10 +2,10 @@ import React from "react";
 
 import { PositionSliders } from "../../controls/PositionSliders";
 import { RotationSliders } from "../../controls/RotationSliders";
-import { useCamerasContext } from "../../../contexts/CamerasContext";
 import { OrtographicCameraProperties } from "../../../../models/Camera";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { ListItemBody } from "../../commons/ListItemBody";
+import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 
 type Props = {
     id: string,
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const OrtogtaphicCameraControls = ( {id, properties}: Props) => {
-    const { updateCameraProperties } = useCamerasContext();
+    const { updateCameraProperties } = useSceneObjectsContext();
 
     return (
         <ListItemBody>

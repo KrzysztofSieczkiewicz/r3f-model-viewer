@@ -1,3 +1,6 @@
+// TODO: INTRODUCE MORE PRIMITIVES
+//https://threejs-journey.com/lessons/geometries#the-different-built-in-geometries
+
 export enum Primitives {
     Sphere,
     Cone,

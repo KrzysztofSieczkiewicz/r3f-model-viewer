@@ -2,19 +2,12 @@ import React, { useCallback, useContext, useRef, useSyncExternalStore } from "re
 import { ReactNode, createContext } from "react";
 import { INITIAL_SCENE_SETTINGS, SceneWrapper } from "../../models/Scene";
 
-function useSceneData(): {
-  get: () => SceneWrapper;
-  set: (scene: Partial<SceneWrapper>) => void;
-  subscribe: (callback: () => void) => () => void;
-} {
+function useSceneData() {
 
-  const scene = useRef<SceneWrapper>({
-    ...INITIAL_SCENE_SETTINGS
-  });
+  const scene = useRef<SceneWrapper>({...INITIAL_SCENE_SETTINGS});
   const subscribers = useRef(new Set<()=>void>());
   
   const get = useCallback( () => scene.current, []);
-  
   const set = useCallback( (value: Partial<SceneWrapper>) => {
     
     scene.current = { ...scene.current, ...value};

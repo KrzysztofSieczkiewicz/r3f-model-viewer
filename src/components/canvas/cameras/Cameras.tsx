@@ -3,10 +3,10 @@ import React from "react";
 import { CAMERA_TYPES, CameraWrapper } from "../../../models/Camera";
 import { RenderedPerspectiveCamera } from "./RenderedPerspectiveCamera";
 import { RenderedOrtographicCamera } from "./RenderedOrtographicCamera";
-import { useCamerasContext } from "../../contexts/CamerasContext";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 export const Cameras = () => {
-    const { camerasList } = useCamerasContext();
+    const { camerasList } = useSceneObjectsContext();
 
     const renderCamera = (camera: CameraWrapper)  => {
         switch(camera.type) {
