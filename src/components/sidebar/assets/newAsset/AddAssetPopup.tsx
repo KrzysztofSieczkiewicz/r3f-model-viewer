@@ -9,7 +9,11 @@ import { PopupListItem } from "./PopupListItem";
 import { Primitives } from "../../../../models/Primitive";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 
-export const AddAssetPopup = () => {
+type Props = {
+    closeModal: () => void
+}
+
+export const AddAssetPopup = ({ closeModal }: Props) => {
     const {addAssetPrimitive} = useSceneObjectsContext();
 
     const [ activeName, setActiveName ] = useState("");
@@ -32,11 +36,19 @@ export const AddAssetPopup = () => {
                 <PopupListItem 
                     displayName="Sphere" 
                     icon={<SphereIcon className={styles.listIcon}/>} 
-                    onClick={ () => addAssetPrimitive(Primitives.Sphere)} />
+                    onClick={ () => {
+                        addAssetPrimitive(Primitives.Sphere)
+                        closeModal();
+                    }
+                }/>
                 <PopupListItem 
                     displayName="Cone" 
                     icon={<ConeIcon className={styles.listIcon}/>}
-                    onClick={ () => addAssetPrimitive(Primitives.Cone)} />
+                    onClick={ () => {
+                        addAssetPrimitive(Primitives.Cone)
+                        closeModal();
+                    }
+                    }/>
             </PopupRectangleButton>
         </div>
     );

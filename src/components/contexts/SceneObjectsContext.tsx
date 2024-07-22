@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, DEFAULT_ASSET, Assets } from "../../models/Asset";
+import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Assets } from "../../models/Asset";
 import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
 import { DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/Primitive";
 
@@ -81,7 +81,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     // TODO: REPLACE "defaultAsset" WITH PROPER ASSET IMPORT LOGIC 
     // (ESP WITH CREATING NEW ID EACH TIME)
     const addAsset = () => {
-        const extendedAssetsList = [...assetsList, DEFAULT_ASSET] as AssetWrapper[];
+        const extendedAssetsList = [...assetsList, getDefaultAsset()] as AssetWrapper[];
         setAssetsList(extendedAssetsList);
     };
 
@@ -95,7 +95,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
                 primitive = DEFAULT_MESH_CONE;
                 break;
         }
-        const newAsset = {...DEFAULT_ASSET, type: Assets.Primitive, mesh: primitive};
+        const newAsset = {...getDefaultAsset(), type: Assets.Primitive, mesh: primitive};
         const extendedAssetsList = [...assetsList, newAsset];
 
         setAssetsList(extendedAssetsList);

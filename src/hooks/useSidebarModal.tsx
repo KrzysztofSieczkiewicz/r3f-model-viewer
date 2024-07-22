@@ -1,11 +1,11 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect, ReactNode, useRef } from "react";
 import { createPortal } from "react-dom";
 
 type ModalProps = {
     children: ReactNode,
 
-    top?: number,
-    left?: number;
+    topY?: number,
+    centerX?: number;
 }
 
 export const useSidebarModal = () => {
@@ -23,8 +23,17 @@ export const useSidebarModal = () => {
         setPortalElement(element);
     }, []);
 
-    const Modal = ({ children, top, left }: ModalProps) => {
-        if (!isModalOpen || !portalElement) return null;
+    const Modal = ({ children, topY, centerX }: ModalProps) => {
+        const [modalWidth, setModalWidth] = useState<number>(0);
+        const [isCalculated, setIsCalculated] = useState<boolean>(false);
+        const modalRef = useRef<HTMLDivElement>(null);
+
+        useEffect(() => {
+            if (modalRef.current) {
+              setModalWidth(modalRef.current.offsetWidth);
+              setIsCalculated(true);
+            }
+          }, [modalRef.current]);
 
         const MODAL_STYLE = {
             position: "fixed" as "fixed",
@@ -32,24 +41,29 @@ export const useSidebarModal = () => {
             bottom: 0,
             left: 0,
             right: 0,
-            backgroundColor: "rgba(0,0,0, 0.25)"
+            backgroundColor: "rgba(0,0,0, 0.25)",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: topY !== undefined ? 'flex-start' : 'center',
         };
         
         const POSITIONER_STYLE = {
-            position: "relative" as "relative",
+            position: "absolute" as "absolute",
             width: "fit-content",
-
-            top: top?? "50%",
-            left: left?? "50%",
-            transform: "translate(-50%, -50%)",
+            top: typeof topY === 'number' ? `${topY}px` : topY,
+            left: centerX !== undefined ? `${centerX - (modalWidth / 2)}px` : '50%',
+            transform: `translate(${centerX !== undefined ? '0' : '-50%'}, ${topY !== undefined ? '0' : '50%'})`,
+            opacity: isCalculated ? 1 : 0,
         };
         
+        if (!isModalOpen || !portalElement) return null;
         return createPortal(
             <div style={MODAL_STYLE} 
                 className="modal" 
                 onClick={() => closeModal()}
             >
-                <div style={POSITIONER_STYLE} 
+                <div ref={modalRef}
+                    style={POSITIONER_STYLE} 
                     className="modal-content-positioner" 
                     onClick={(e)=> e.stopPropagation()}
                 >
