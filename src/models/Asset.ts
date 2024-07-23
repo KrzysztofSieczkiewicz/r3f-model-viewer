@@ -15,8 +15,7 @@ export type AssetProperties = {
     scale: [number,number,number],
     castShadow: boolean,
     receiveShadow: boolean,
-    visible: boolean,
-    isSelected: boolean,
+    visible: boolean
 }
 
 
@@ -42,7 +41,6 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
             position:[0,0,0],
             rotation:[0,0,0],
             scale:[1,1,1],
-            isSelected: false,
             castShadow: true,
             receiveShadow: true,
             visible: true,
@@ -67,7 +65,6 @@ const getDefaultAsset = (): AssetWrapper => {
             position:[0.25,0.5,0.75],
             rotation:[0,0,0],
             scale:[1,1,1],
-            isSelected: false,
             castShadow: true,
             receiveShadow: true,
             visible: true,
