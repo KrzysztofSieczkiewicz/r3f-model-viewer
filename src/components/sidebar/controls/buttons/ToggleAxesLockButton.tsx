@@ -8,7 +8,7 @@ type Props = {
     setLocked: (value: boolean) => void
 }
 
-export const AxesLockButton = ( {locked, setLocked}: Props) => {
+export const ToggleAxesLockButton = ( {locked, setLocked}: Props) => {
 
     const handleIcon = () => {
         if (locked) return <LockedIcon className={styles.icon} />

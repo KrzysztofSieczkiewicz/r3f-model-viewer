@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from './MultilineSlidersNumeric.module.css';
-import { AxesLockButton } from "./buttons/AxesLockButton";
+import { ToggleAxesLockButton } from "./buttons/ToggleAxesLockButton";
 import { normalizeArrayByIndex } from "../../../utils/mathUtil";
 import { SliderNumeric } from "./SliderNumeric";
 import { SliderMediumContainer } from "./sliderContainers/SliderMediumContainer";
@@ -117,7 +117,7 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
                     {values.map((entry, index) => {return drawGuideLinePath(index);} )}
                     
                     <div className={styles.buttonContainer}>
-                        <AxesLockButton locked={isLocked} setLocked={() => setIsLocked(!isLocked)} />
+                        <ToggleAxesLockButton locked={isLocked} setLocked={() => setIsLocked(!isLocked)} />
                     </div>
                 </div>
             </div>

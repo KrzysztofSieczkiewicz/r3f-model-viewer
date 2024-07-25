@@ -2,16 +2,13 @@ import React, { useState } from "react";
 
 import { PositionSliders } from "../controls/PositionSliders";
 import { ScaleSliders } from "../controls/ScaleSliders";
-import { AssetProperties, AssetWrapper } from "../../../models/Asset";
+import { AssetWrapper } from "../../../models/Asset";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 import { DeleteItemButton } from "../common/DeleteItemButton";
 import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";
 import { RotationSliders } from "../controls/RotationSliders";
-import { AxesLockButton } from "../controls/buttons/AxesLockButton";
+import { ToggleAxesLockButton } from "../controls/buttons/ToggleAxesLockButton";
 import { ListItemBody } from "../commons/ListItemBody";
-import { MeshSphereControls } from "./meshControls/MeshSphereControls";
-import { ConeProperties, Primitives, SphereProperties } from "../../../models/Primitive";
-import { MeshConeControls } from "./meshControls/MeshConeControls";
 import { MeshControls } from "./meshControls/MeshControls";
 
 
@@ -53,7 +50,7 @@ export const AssetControls = ({assetId, asset}: Props) => {
                     step={0.01}
                     handleChange={(val) => updateAssetProperties(assetId, {scale: val} )}
                     axesLock={axesLocked} />
-                <AxesLockButton locked={axesLocked} setLocked={(val) => setAxesLocked(val)} />
+                <ToggleAxesLockButton locked={axesLocked} setLocked={(val) => setAxesLocked(val)} />
             </SingleLineTrait>
         </ListItemBody>
     );
