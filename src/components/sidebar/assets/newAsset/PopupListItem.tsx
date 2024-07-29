@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './PopupListItem.module.css'
 
 type Props = {
     displayName: string;
@@ -9,7 +10,10 @@ type Props = {
 export const PopupListItem = ( {displayName, icon, onClick}: Props) => {
 
     return (
-        <li onClick={() => onClick()}>
+        <li 
+            className={styles.option}
+            onClick={() => onClick()}
+        >
             {icon}
             {displayName}
         </li>

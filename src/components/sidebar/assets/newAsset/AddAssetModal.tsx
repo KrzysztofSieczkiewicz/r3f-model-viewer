@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import styles from './AddAssetPopup.module.css'
-
-import { PopupRectangleButton } from "./PopupRectangleButton";
+import styles from './AddAssetModal.module.css'
 
 import { ReactComponent as SphereIcon } from '../../../../icons/sidebar/primitives/primitive_sphere.svg'
 import { ReactComponent as ConeIcon } from '../../../../icons/sidebar/primitives/primitive_cone.svg'
 import { PopupListItem } from "./PopupListItem";
 import { Primitives } from "../../../../models/Primitive";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
+import { PopupButtonLarge } from "../../modal/PopupButtonLarge";
 
 type Props = {
     closeModal: () => void
@@ -28,7 +27,7 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
 
     return (
         <div className={styles.modal}>
-            <PopupRectangleButton
+            <PopupButtonLarge
                 isOpen={activeName === "Primitives"}
                 toggleOpen={() => toggleOpen("Primitives")}
                 displayName="Primitives"
@@ -57,7 +56,7 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
                         closeModal();
                     }
                     }/>
-            </PopupRectangleButton>
+            </PopupButtonLarge>
         </div>
     );
 }

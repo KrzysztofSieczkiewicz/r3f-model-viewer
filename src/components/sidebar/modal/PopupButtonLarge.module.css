@@ -1,4 +1,4 @@
-@import '../../../../App.module.css';
+@import '../../../App.module.css';
 
 .container {
     width: 7.5rem;
@@ -50,4 +50,16 @@
     align-self: center;
     margin: 0 auto;
     user-select: none;
+}
+
+.optionsList {
+    list-style: none;
+    box-sizing: border-box;
+    position: fixed;
+
+    width: 7.5rem;
+    padding: 0.5rem;
+
+    background-color: var(--color-main);
+    border-radius: 0 0 0.75rem 0.75rem;
 }

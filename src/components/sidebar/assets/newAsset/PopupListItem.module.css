@@ -1,0 +1,21 @@
+@import '../../../../App.module.css';
+
+.option {
+    width: 97%;
+    height: 1.75rem;
+    margin: 0 1.5%;
+    text-align: start;
+
+    color: black;
+    border: none;
+    border-radius: 0.75rem;
+    background-color: transparent;
+
+    user-select: none;
+    cursor: pointer;
+    transition: var(--transition-duration);
+}
+
+.option:hover {
+    background-color: var(--color-main-strong);
+}

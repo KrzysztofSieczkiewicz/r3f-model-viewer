@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
 import assetStyles from './AddAssetButton.module.css';
-import { AddAssetPopup } from "./newAsset/AddAssetPopup";
+import { AddAssetPopup } from "./newAsset/AddAssetModal";
 import { useSidebarModal } from "../../../hooks/useSidebarModal";
 import { getElementCenter, getElementDimensions } from "../../../utils/refUtil";
 
 
 // TODO MOVE THIS COMPONENT AS 'ADD BUTTON WITH MODAL' TO BE REUSED
 export const AddAssetButton = () => {
-    const { openModal, closeModal, Modal } = useSidebarModal();
+    const { openModal, closeModal, SidebarModal } = useSidebarModal();
 
     const [modalPosition, setModalPosition ] = useState({centerX: 0, topY: 0})
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -27,9 +27,9 @@ export const AddAssetButton = () => {
     return (
         <>
             <button ref={buttonRef} className={assetStyles.addButton} onClick={() => {updateButtonPosition(); openModal()}}> ADD NEW </button>
-            <Modal topY={modalPosition.topY} centerX={modalPosition.centerX}>
+            <SidebarModal topY={modalPosition.topY} centerX={modalPosition.centerX}>
                 <AddAssetPopup closeModal={closeModal}/>
-            </Modal>
+            </SidebarModal>
         </>
     );
 }

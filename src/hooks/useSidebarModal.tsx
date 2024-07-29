@@ -23,7 +23,7 @@ export const useSidebarModal = () => {
         setPortalElement(element);
     }, []);
 
-    const Modal = ({ children, topY, centerX }: ModalProps) => {
+    const SidebarModal = ({ children, topY, centerX }: ModalProps) => {
         const [modalWidth, setModalWidth] = useState<number>(0);
         const [isCalculated, setIsCalculated] = useState<boolean>(false);
         const modalRef = useRef<HTMLDivElement>(null);
@@ -75,5 +75,5 @@ export const useSidebarModal = () => {
         );
     };
 
-    return { openModal, closeModal, Modal };
+    return { openModal, closeModal, SidebarModal };
 }

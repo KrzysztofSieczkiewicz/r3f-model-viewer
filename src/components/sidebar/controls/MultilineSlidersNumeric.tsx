@@ -40,7 +40,7 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
 
         setRowHeight(calcRowHeight);
         setStartingPointOffset(calcStartingPointOffset);
-    }, [])
+    }, [values.length])
 
     const drawGuideLinePath = (index: number) => {
         // Determine index distance from the middle
