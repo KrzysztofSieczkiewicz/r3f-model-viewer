@@ -3,7 +3,7 @@ import styles from './AddAssetModal.module.css'
 
 import { ReactComponent as SphereIcon } from '../../../../icons/sidebar/primitives/primitive_sphere.svg'
 import { ReactComponent as ConeIcon } from '../../../../icons/sidebar/primitives/primitive_cone.svg'
-import { PopupListItem } from "./PopupListItem";
+import { ModalListButton } from "../../modal/ModalListButton";
 import { Primitives } from "../../../../models/Primitive";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 import { PopupButtonLarge } from "../../modal/PopupButtonLarge";
@@ -32,7 +32,7 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
                 toggleOpen={() => toggleOpen("Primitives")}
                 displayName="Primitives"
             >
-                <PopupListItem 
+                <ModalListButton 
                     displayName="Sphere" 
                     icon={<SphereIcon className={styles.listIcon}/>} 
                     onClick={ () => {
@@ -40,7 +40,7 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
                         closeModal();
                     }
                 }/>
-                <PopupListItem 
+                <ModalListButton 
                     displayName="Cone" 
                     icon={<ConeIcon className={styles.listIcon}/>}
                     onClick={ () => {
@@ -48,7 +48,7 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
                         closeModal();
                     }
                     }/>
-                <PopupListItem 
+                <ModalListButton 
                     displayName="Box" 
                     icon={<ConeIcon className={styles.listIcon}/>}
                     onClick={ () => {

@@ -1,6 +1,6 @@
-@import '../../../../App.module.css';
+@import '../../../App.module.css';
 
-.option {
+.button {
     width: 97%;
     height: 1.75rem;
     margin: 0 1.5%;
@@ -16,6 +16,6 @@
     transition: var(--transition-duration);
 }
 
-.option:hover {
+.button:hover {
     background-color: var(--color-main-strong);
 }

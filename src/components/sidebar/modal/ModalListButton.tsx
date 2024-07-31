@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './PopupListItem.module.css'
+import styles from './ModalListButton.module.css'
 
 type Props = {
     displayName: string;
@@ -7,15 +7,15 @@ type Props = {
     onClick: () => void;
 }
 
-export const PopupListItem = ( {displayName, icon, onClick}: Props) => {
+export const ModalListButton = ( {displayName, icon, onClick}: Props) => {
 
     return (
-        <li 
-            className={styles.option}
+        <button 
+            className={styles.button}
             onClick={() => onClick()}
         >
             {icon}
             {displayName}
-        </li>
+        </button>
     );
 }

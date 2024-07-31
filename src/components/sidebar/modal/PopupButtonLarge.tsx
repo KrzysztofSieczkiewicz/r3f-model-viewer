@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import styles from './PopupButtonLarge.module.css';
 
 import { ReactComponent as CubeIcon } from './../../../icons/sidebar/cube.svg';
+import { ModalSingleColumnList } from "./ModalSingleColumnList";
 
 type Props = {
     displayName: string,
@@ -21,7 +22,9 @@ export const PopupButtonLarge = ( {displayName, isOpen, toggleOpen, children}: P
     return (
         <div className={styles.container} >
             <button
-                className={isOpen ? `${styles.button} ${styles.active}` : styles.button}
+                className={isOpen 
+                        ? `${styles.button} ${styles.active}` 
+                        : styles.button}
                 onClick={() => toggleOpen() }
             >
                 <label className={styles.name}>{displayName}</label>
@@ -32,13 +35,7 @@ export const PopupButtonLarge = ( {displayName, isOpen, toggleOpen, children}: P
                         : <span className={styles.arrow}>&#8659;</span>}
                 </div>
             </button>
-            {isOpen && (
-                <ul className={styles.optionsList}>
-                    {React.Children.map(children, child => (
-                        child
-                    ))}
-                </ul>
-            )}
+            {isOpen && <ModalSingleColumnList isOpen={isOpen} children={children} />}
         </div>
     );
 }
