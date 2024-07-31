@@ -14,7 +14,7 @@ export const ModalListButton = ( {displayName, icon, onClick}: Props) => {
             className={styles.button}
             onClick={() => onClick()}
         >
-            {icon}
+            {React.cloneElement(icon, {className: styles.listIcon})}
             {displayName}
         </button>
     );

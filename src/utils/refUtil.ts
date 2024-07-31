@@ -6,8 +6,6 @@ export const getElementCenter = (ref: HTMLElement): {centerX: number, centerY: n
     const centerX = (rect.left + rect.width/2);
     const centerY = (rect.bottom + rect.height/2);
 
-    console.log({centerX, centerY})
-
     return { centerX, centerY};
 }
 

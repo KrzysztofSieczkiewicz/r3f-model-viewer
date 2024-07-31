@@ -24,6 +24,10 @@
     transition: var(--transition-duration);
 }
 
+.button.active {
+    filter: brightness(1.2);
+}
+
 .name {
     height: 2rem;
     line-height: 2rem;

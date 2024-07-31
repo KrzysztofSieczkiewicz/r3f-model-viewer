@@ -17,7 +17,7 @@ const renderListItem = (button: ReactNode) => {
 
 export const ModalSingleColumnList = ({ isOpen, children }: Props) => {
 
-    if(!isOpen) return <></>
+    if(!isOpen) return;
     return (
         <ul className={styles.optionsList}>
             {React.Children.map(children, child => renderListItem(child))}

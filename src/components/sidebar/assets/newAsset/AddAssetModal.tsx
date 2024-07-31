@@ -26,33 +26,33 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
     };
 
     return (
-        <div className={styles.modal}>
+        <div className={styles.modalContents}>
             <PopupButtonLarge
                 isOpen={activeName === "Primitives"}
                 toggleOpen={() => toggleOpen("Primitives")}
                 displayName="Primitives"
             >
                 <ModalListButton 
-                    displayName="Sphere" 
-                    icon={<SphereIcon className={styles.listIcon}/>} 
+                    displayName="Sphere"
+                    icon={<SphereIcon/>}
                     onClick={ () => {
-                        addAssetPrimitive(Primitives.Sphere)
+                        addAssetPrimitive(Primitives.Sphere);
                         closeModal();
                     }
                 }/>
                 <ModalListButton 
                     displayName="Cone" 
-                    icon={<ConeIcon className={styles.listIcon}/>}
+                    icon={<ConeIcon/>}
                     onClick={ () => {
-                        addAssetPrimitive(Primitives.Cone)
+                        addAssetPrimitive(Primitives.Cone);
                         closeModal();
                     }
                     }/>
                 <ModalListButton 
                     displayName="Box" 
-                    icon={<ConeIcon className={styles.listIcon}/>}
+                    icon={<ConeIcon/>}
                     onClick={ () => {
-                        addAssetPrimitive(Primitives.Box)
+                        addAssetPrimitive(Primitives.Box);
                         closeModal();
                     }
                     }/>
