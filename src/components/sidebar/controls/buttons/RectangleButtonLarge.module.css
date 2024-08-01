@@ -1,12 +1,4 @@
-@import '../../../App.module.css';
-
-.container {
-    width: 7.5rem;
-    height: 7.5rem;
-    margin: 1rem 0.5rem;
-
-    vertical-align: middle;
-}
+@import '../../../../App.module.css';
 
 .button {
     display: flex;
@@ -37,12 +29,13 @@
 }
 
 .iconContainer {
+    max-width: 100%;
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
     margin: 0.5rem 0;
 }
 
-.mainIcon {
+.icon {
     grid-column: 2;
     height: 5rem;
     margin: auto;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ToggleButtons.module.css';
+import styles from './ToggleAxesLockButton.module.css';
 import { ReactComponent as LockedIcon } from './../../../../icons/sidebar/lock_locked.svg';
 import { ReactComponent as UnlockedIcon } from './../../../../icons/sidebar/lock_unlocked.svg';
 

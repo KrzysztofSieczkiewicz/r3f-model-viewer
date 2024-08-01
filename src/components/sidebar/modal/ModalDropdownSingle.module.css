@@ -1,0 +1,9 @@
+@import '../../../App.module.css';
+
+.container {
+    width: 7.5rem;
+    height: 7.5rem;
+    margin: 1rem 0.5rem;
+
+    vertical-align: middle;
+}

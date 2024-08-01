@@ -3,10 +3,12 @@ import styles from './AddAssetModal.module.css'
 
 import { ReactComponent as SphereIcon } from '../../../../icons/sidebar/primitives/primitive_sphere.svg'
 import { ReactComponent as ConeIcon } from '../../../../icons/sidebar/primitives/primitive_cone.svg'
-import { ModalListButton } from "../../modal/ModalListButton";
+import { ReactComponent as CubeIcon } from '../../../../icons/sidebar/cube.svg';
+
+import { ModalListButton } from "../../modal/ModalDropdownOptionButton";
 import { Primitives } from "../../../../models/Primitive";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
-import { PopupButtonLarge } from "../../modal/PopupButtonLarge";
+import { ModalDropdownSingle } from "../../modal/ModalDropdownSingle";
 
 type Props = {
     closeModal: () => void
@@ -15,22 +17,23 @@ type Props = {
 export const AddAssetPopup = ({ closeModal }: Props) => {
     const {addAssetPrimitive} = useSceneObjectsContext();
 
-    const [ activeName, setActiveName ] = useState("");
+    const [ activeDropdown, setActiveNameDropdown ] = useState("");
 
-    const toggleOpen = (name: string) => {
-        if (activeName === name) {
-            setActiveName("");
+    const toggleOpenDropdown = (name: string) => {
+        if (activeDropdown === name) {
+            setActiveNameDropdown("");
         } else {
-            setActiveName(name);
+            setActiveNameDropdown(name);
         }
     };
 
     return (
         <div className={styles.modalContents}>
-            <PopupButtonLarge
-                isOpen={activeName === "Primitives"}
-                toggleOpen={() => toggleOpen("Primitives")}
+            <ModalDropdownSingle
+                isOpen={activeDropdown === "Primitives"}
+                toggleOpen={() => toggleOpenDropdown("Primitives")}
                 displayName="Primitives"
+                icon={<CubeIcon/>} 
             >
                 <ModalListButton 
                     displayName="Sphere"
@@ -38,25 +41,80 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
                     onClick={ () => {
                         addAssetPrimitive(Primitives.Sphere);
                         closeModal();
-                    }
-                }/>
+                    }}/>
                 <ModalListButton 
                     displayName="Cone" 
                     icon={<ConeIcon/>}
                     onClick={ () => {
                         addAssetPrimitive(Primitives.Cone);
                         closeModal();
-                    }
-                    }/>
+                    }}/>
                 <ModalListButton 
                     displayName="Box" 
                     icon={<ConeIcon/>}
                     onClick={ () => {
                         addAssetPrimitive(Primitives.Box);
                         closeModal();
-                    }
-                    }/>
-            </PopupButtonLarge>
+                    }}/>
+            </ModalDropdownSingle>
+            
+            <ModalDropdownSingle
+                isOpen={activeDropdown === "Scans"}
+                toggleOpen={() => toggleOpenDropdown("Scans")}
+                displayName="Scans"
+                icon={<SphereIcon/>} 
+            >
+                <ModalListButton 
+                    displayName="Sphere"
+                    icon={<SphereIcon/>}
+                    onClick={ () => {
+                        addAssetPrimitive(Primitives.Sphere);
+                        closeModal();
+                    }}/>
+                <ModalListButton 
+                    displayName="Cone" 
+                    icon={<ConeIcon/>}
+                    onClick={ () => {
+                        addAssetPrimitive(Primitives.Cone);
+                        closeModal();
+                    }}/>
+                <ModalListButton 
+                    displayName="Box" 
+                    icon={<ConeIcon/>}
+                    onClick={ () => {
+                        addAssetPrimitive(Primitives.Box);
+                        closeModal();
+                    }}/>
+            </ModalDropdownSingle>
+
+            <ModalDropdownSingle
+                isOpen={activeDropdown === "Models"}
+                toggleOpen={() => toggleOpenDropdown("Models")}
+                displayName="Models"
+                icon={<ConeIcon/>} 
+            >
+                <ModalListButton 
+                    displayName="Sphere"
+                    icon={<SphereIcon/>}
+                    onClick={ () => {
+                        addAssetPrimitive(Primitives.Sphere);
+                        closeModal();
+                    }}/>
+                <ModalListButton 
+                    displayName="Cone" 
+                    icon={<ConeIcon/>}
+                    onClick={ () => {
+                        addAssetPrimitive(Primitives.Cone);
+                        closeModal();
+                    }}/>
+                <ModalListButton 
+                    displayName="Box" 
+                    icon={<ConeIcon/>}
+                    onClick={ () => {
+                        addAssetPrimitive(Primitives.Box);
+                        closeModal();
+                    }}/>
+            </ModalDropdownSingle>
         </div>
     );
 }

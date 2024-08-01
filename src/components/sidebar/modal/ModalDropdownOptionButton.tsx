@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './ModalListButton.module.css'
+import styles from './ModalDropdownOptionButton.module.css'
 
 type Props = {
     displayName: string;
