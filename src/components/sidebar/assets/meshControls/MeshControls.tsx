@@ -3,6 +3,7 @@ import { Assets } from "../../../../models/Asset";
 import { Primitives, PrimitiveWrapper } from "../../../../models/Primitive"
 import { MeshConeControls } from "./MeshConeControls";
 import { MeshSphereControls } from "./MeshSphereControls";
+import { MeshBoxControls } from "./MeshBoxControls";
 
 type Props = {
     assetId: string,
@@ -29,9 +30,11 @@ export const MeshControls = ( {assetId, type, mesh}: Props) => {
     const handlePrimitiveType = () => {
         switch(mesh.type) {
             case Primitives.Sphere:
-                return <MeshSphereControls assetId={assetId} meshProperties={mesh.properties}/>
+                return <MeshSphereControls assetId={assetId} meshProperties={mesh.properties} />
             case Primitives.Cone:
-                return <MeshConeControls assetId={assetId} meshProperties={mesh.properties}/>
+                return <MeshConeControls assetId={assetId} meshProperties={mesh.properties} />
+            case Primitives.Box:
+                return <MeshBoxControls assetId={assetId} meshProperties={mesh.properties} />
         }
     }
 

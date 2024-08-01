@@ -15,8 +15,7 @@ export type AssetProperties = {
     scale: [number,number,number],
     castShadow: boolean,
     receiveShadow: boolean,
-    visible: boolean,
-    isSelected: boolean,
+    visible: boolean
 }
 
 
@@ -28,7 +27,7 @@ export type AssetWrapper =
 const INIT_ASSET_LIST: AssetWrapper[] = [
     {
         id: generateNewID(),
-        type: Assets.Scan,
+        type: Assets.Primitive,
         mesh: {
             type: Primitives.Sphere,
             properties: {
@@ -41,8 +40,7 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
             name: "Sphere",
             position:[0,0,0],
             rotation:[0,0,0],
-            scale:[10,10,10],
-            isSelected: false,
+            scale:[1,1,1],
             castShadow: true,
             receiveShadow: true,
             visible: true,
@@ -50,73 +48,28 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
         }
 ]
 
-const TMP_INIT_ASSET_LIST: AssetWrapper[] = [
-    {
-    id: generateNewID(),
-    type: Assets.Scan,
-    mesh: {
-        type: Primitives.Sphere,
+const getDefaultAsset = (): AssetWrapper => {
+    return {
+        id: generateNewID(),
+        type: Assets.Primitive,
+        mesh: {
+            type: Primitives.Sphere,
+            properties: {
+                radius: 1,
+                heightSegments: 4,
+                widthSegments: 8
+            }
+        },
         properties: {
-            radius: 1,
-            heightSegments: 4,
-            widthSegments: 8
+            name: "pear",
+            position:[0.25,0.5,0.75],
+            rotation:[0,0,0],
+            scale:[1,1,1],
+            castShadow: true,
+            receiveShadow: true,
+            visible: true,
         }
-    },
-    properties: {
-        name: "pear",
-        position:[0,0,0],
-        rotation:[0,0,0],
-        scale:[10,10,10],
-        isSelected: false,
-        castShadow: true,
-        receiveShadow: true,
-        visible: true,
-    }
-    },{
-    id: generateNewID(),
-    type: Assets.Scan,
-    mesh: {
-        type: Primitives.Sphere,
-        properties: {
-            radius: 1,
-            heightSegments: 4,
-            widthSegments: 8
-        }
-    },
-    properties: {
-        name: "pear",
-        position:[1,0,1],
-        rotation:[0,Math.PI,0],
-        scale:[10,10,10],
-        isSelected: false,
-        castShadow: true,
-        receiveShadow: true,
-        visible: true,
-    }
-    }
-]
-
-const defaultAsset: AssetWrapper = {
-    id: generateNewID(),
-    type: Assets.Scan,
-    mesh: {
-        type: Primitives.Sphere,
-        properties: {
-            radius: 1,
-            heightSegments: 4,
-            widthSegments: 8
-        }
-    },
-    properties: {
-        name: "pear",
-        position:[0.25,0.5,0.75],
-        rotation:[0,0,0],
-        scale:[10,10,10],
-        isSelected: false,
-        castShadow: true,
-        receiveShadow: true,
-        visible: true,
-    }
+    };
 }
 
-export { INIT_ASSET_LIST, defaultAsset };
+export { INIT_ASSET_LIST, getDefaultAsset };

@@ -15,13 +15,13 @@ type SelectionList = {
 }
 
 export const LightTypeDropdown = (props: Props): JSX.Element => {
-    const { current, selectionList: list, handleChange } = props;
+    const { current, selectionList, handleChange } = props;
 
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     const getDisplayNameByType = (type: string) => {
-        return list.find((light) =>  light.type === type)?.display
+        return selectionList.find((light) =>  light.type === type)?.display
     }
 
     const selectOption = (option: LIGHT_TYPES) => {
@@ -65,7 +65,7 @@ export const LightTypeDropdown = (props: Props): JSX.Element => {
             </button>
             {isOpen && (
                 <div className={styles.optionsList}>
-                    {list.map((item) => (
+                    {selectionList.map((item) => (
                         <button className={styles.option}
                             key={item.type}
                             onClick={(e) => {

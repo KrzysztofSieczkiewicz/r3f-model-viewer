@@ -2,9 +2,9 @@ import React from "react";
 import styles from '../commons/MenuListItemHeader.module.css';
 
 import { CameraWrapper } from "../../../models/Camera";
-import { useCamerasContext } from "../../contexts/CamerasContext";
 import { VisbilityEyeToggle } from "../common/VisbilityEyeToggle";
 import { CameraTypeIcon } from "./CameraTypeIcon";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 type Props = {
     isActive: boolean,
@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const CameraItemHeader = ( {isActive, camera, toggleExtend }: Props) => {
-    const { updateCameraProperties, } = useCamerasContext();
+    const { updateCameraProperties } = useSceneObjectsContext();
 
     const { isVisible } = camera.properties;
 

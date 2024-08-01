@@ -1,32 +1,40 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, defaultAsset } from "../../models/Asset";
+import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Assets } from "../../models/Asset";
 import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
-import { PrimitiveProperties } from "../../models/Primitive";
+import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/Primitive";
+import { CAMERA_TYPES, CameraProperties, CameraTypes, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../models/Camera";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
-type SceneObjectsContext = {
+type SceneObjectsContextProps = {
     assetsList: AssetWrapper[], 
     updateAssetProperties: (id: string, change: Partial<AssetProperties>) => void,
     updatePrimitiveProperties: (id: string, change: Partial<PrimitiveProperties>) => void,
     deleteAsset: (id: string) => void,
     addAsset: () => void,
+    addAssetPrimitive: (primitiveType: Primitives) => void,
 
     lightsList: LightWrapper[],
     changeLightType: (id: string, type: LightTypes) => void,
     updateLightProperties: (id: string, change: Partial<LightProperties>) => void,
     deleteLight: (id: string) => void,
     addLight: (light: LightWrapper) => void,
+
+    camerasList: CameraWrapper[],
+    addCamera: (type: CameraTypes) => void,
+    updateCameraProperties: (id: string, change: Partial<CameraProperties>) => void,
+    deleteCamera: (id: string) => void,
 }
 
-export const SceneObjectsContext = createContext<SceneObjectsContext | null>( null );
+export const SceneObjectsContext = createContext<SceneObjectsContextProps | null>( null );
 
 export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.Element => {
 
     const [ assetsList, setAssetsList ] = useState<AssetWrapper[]>(INIT_ASSET_LIST);
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
+    const [ camerasList, setCamerasList ] = useState<CameraWrapper[]>(INIT_CAMERAS_LIST)
 
     const addLight = useCallback((light: LightWrapper) => {
         const extendedLights = [...lightsList, light] as LightWrapper[];
@@ -80,9 +88,28 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     // TODO: REPLACE "defaultAsset" WITH PROPER ASSET IMPORT LOGIC 
     // (ESP WITH CREATING NEW ID EACH TIME)
     const addAsset = () => {
-        const extendedAssetsList = [...assetsList, defaultAsset] as AssetWrapper[];
+        const extendedAssetsList = [...assetsList, getDefaultAsset()] as AssetWrapper[];
         setAssetsList(extendedAssetsList);
     };
+
+    const addAssetPrimitive = (primitiveType: Primitives) => {
+        let primitive;
+        switch(primitiveType) {
+            case Primitives.Sphere:
+                primitive = DEFAULT_MESH_SPHERE;
+                break;
+            case Primitives.Cone:
+                primitive = DEFAULT_MESH_CONE;
+                break;
+            case Primitives.Box:
+                primitive = DEFAULT_MESH_BOX;
+                break;
+        }
+        const newAsset = {...getDefaultAsset(), type: Assets.Primitive, mesh: primitive};
+        const extendedAssetsList = [...assetsList, newAsset];
+
+        setAssetsList(extendedAssetsList);
+    }
 
     const updateAssetProperties = useCallback((id: string, change: Partial<AssetProperties>) => {
         const index = assetsList.findIndex(asset => asset.id === id);
@@ -122,15 +149,54 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsList(filteredAssets);
     };
 
+
+
+    const addCamera = useCallback((type: CameraTypes) => {
+        const newCamerasList = [...camerasList];
+        switch(type) {
+            case CAMERA_TYPES.perspectiveCamera:
+                newCamerasList.push(DEFAULT_PERSPECTIVE_CAMERA);
+                break;
+            case CAMERA_TYPES.ortographicCamera:
+                newCamerasList.push(DEFAULT_ORTOGRAPHIC_CAMERA);
+                break;
+        }
+        setCamerasList(newCamerasList);
+    }, [camerasList]);
+
+    const deleteCamera = useCallback((id: string) => {
+        const index = camerasList.findIndex(camera => camera.id === id);
+        if (index === -1) return;
+
+        const filteredCameras = camerasList.filter((camera) => camera.id !== id );
+        setCamerasList(filteredCameras);
+    }, [camerasList]);
+
+    const updateCameraProperties = useCallback((id: string, change: Partial<CameraProperties>) => {
+        const index = camerasList.findIndex(light => light.id === id);
+        if (index === -1) return;
+
+        const newCamera = { ...camerasList[index] };
+        newCamera.properties = { ...camerasList[index].properties, ...change }
+
+        const newCamerasList = camerasList.map( (camera, i) => i===index ? newCamera : camera);
+        setCamerasList(newCamerasList);
+    }, [camerasList])
+
+    
+
     
     return (
-        <SceneObjectsContext.Provider value={{ lightsList, changeLightType, updateLightProperties, deleteLight, addLight, assetsList, updateAssetProperties, updatePrimitiveProperties, deleteAsset, addAsset }} >
+        <SceneObjectsContext.Provider value={{ 
+            lightsList, changeLightType, updateLightProperties, deleteLight, addLight, 
+            assetsList, updateAssetProperties, updatePrimitiveProperties, deleteAsset, addAsset, addAssetPrimitive,
+            camerasList, addCamera, updateCameraProperties, deleteCamera }} >
             {props.children}
         </SceneObjectsContext.Provider>
     );
 }
 
-export const useSceneObjectsContext = (): SceneObjectsContext => {
+export const useSceneObjectsContext = (): SceneObjectsContextProps => {
     const context = useContext(SceneObjectsContext);
 
     if (context === null) {

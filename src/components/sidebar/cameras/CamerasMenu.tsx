@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { useCamerasContext } from "../../contexts/CamerasContext";
 
 import { CameraWrapper } from "../../../models/Camera";
 import { CameraItem } from "./CameraItem";
 import { AddCameraDropdown } from "./AddCameraDropdown";
 import { MenuSection } from "../commons/MenuSection";
 import { SidebarMenu } from "../commons/SidebarMenu";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 
 export const CamerasMenu = () => {
-    const { camerasList } = useCamerasContext();
+    const { camerasList } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
 

@@ -3,13 +3,13 @@ import React, { useRef } from "react";
 import cameraBillboardIcon from '../../../icons/perspectiveCamera.svg';
 import { CameraProperties, PerspectiveCameraProperties } from "../../../models/Camera";
 import { CamerasGizmo } from "./CamerasGizmo";
-import { useCamerasContext } from "../../contexts/CamerasContext";
 
 import { PerspectiveCamera, useHelper } from "@react-three/drei";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 import { CameraHelper } from "three";
 import { IconBillboard } from "../helperObjects/IconBillboard";
 import { SelectionSphere } from "../helperObjects/SelectionSphere";
+import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 type Props = {
     id: string,
@@ -17,7 +17,7 @@ type Props = {
 }
 
 export const RenderedPerspectiveCamera = ( {id, properties}: Props ) => {
-    const { updateCameraProperties } = useCamerasContext();
+    const { updateCameraProperties } = useSceneObjectsContext();
 
     const cameraRef = useRef(null);
     

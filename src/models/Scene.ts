@@ -1,8 +1,9 @@
 export type SceneWrapper = {
-  selectedObjectId: string,
+  selectedObject: string,
   viewCameraRotation: [number,number,number],
 
   // TODO: CONSIDER MOVING THESE INTO SEPARATE CONTEXT REGARDING ONLY RENDER SETTINGS OR ENVIRONMENT SETTINGS
+  // TODO: MAKE A SEPARATE CONTEXT FOR USER SETTINGS (e.g. background color, sliders sensitivity, icons size etc.)
   backgroundColor: string,
   isAmbientActive: boolean
   ambientColor: string,
@@ -11,7 +12,7 @@ export type SceneWrapper = {
 }
 
 const INITIAL_SCENE_SETTINGS = {
-  selectedObjectId: "",
+  selectedObject: "",
   viewCameraRotation: [0, 0, 0] as [number,number,number],
 
   backgroundColor: "#262626",

@@ -9,14 +9,14 @@ type Props = {
 }
 
 export const CameraTracker = ( { cameraRef }: Props ) => {
-  const [ scene, setScene ] = useScene();
-  
-  useFrame( () => {
-    if(!cameraRef.current) return;
+    const [ scene, setScene ] = useScene();
     
-    const rotation = cameraRef.current.rotation;
-    setScene({viewCameraRotation: [rotation.x, rotation.y, rotation.z]});
-  })
+    useFrame( () => {
+        if(!cameraRef.current) return;
+        
+        const rotation = cameraRef.current.rotation;
+        setScene({viewCameraRotation: [rotation.x, rotation.y, rotation.z]});
+    })
 
-  return <group />
+    return <group />
 }
