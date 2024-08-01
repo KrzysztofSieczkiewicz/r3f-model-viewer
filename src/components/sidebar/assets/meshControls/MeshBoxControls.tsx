@@ -1,6 +1,6 @@
 import React from "react";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
-import { BoxProperties } from "../../../../models/Primitive";
+import { BoxProperties } from "../../../../models/assets/meshes/Primitive";
 import { ExpandableTraits } from "../../commons/traitContainers/ExpandableTraits";
 import { MultilineSlidersNumeric } from "../../controls/MultilineSlidersNumeric";
 

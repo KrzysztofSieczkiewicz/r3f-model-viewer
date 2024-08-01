@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { PositionSliders } from "../controls/PositionSliders";
 import { ScaleSliders } from "../controls/ScaleSliders";
-import { AssetWrapper } from "../../../models/Asset";
+import { AssetWrapper } from "../../../models/assets/Asset";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 import { DeleteItemButton } from "../common/DeleteItemButton";
 import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";

@@ -1,6 +1,6 @@
 import React from "react";
-import { Assets } from "../../../../models/Asset";
-import { Primitives, PrimitiveWrapper } from "../../../../models/Primitive"
+import { Assets } from "../../../../models/assets/Asset";
+import { Primitives, PrimitiveWrapper } from "../../../../models/assets/meshes/Primitive"
 import { MeshConeControls } from "./MeshConeControls";
 import { MeshSphereControls } from "./MeshSphereControls";
 import { MeshBoxControls } from "./MeshBoxControls";

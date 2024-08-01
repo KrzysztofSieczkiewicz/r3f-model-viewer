@@ -1,7 +1,7 @@
 import React from "react";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
-import { ConeProperties } from "../../../../models/Primitive";
+import { ConeProperties } from "../../../../models/assets/meshes/Primitive";
 import { SliderNumeric } from "../../controls/SliderNumeric";
 import { ExpandableTraits } from "../../commons/traitContainers/ExpandableTraits";
 import { SliderMediumContainer } from "../../controls/sliderContainers/SliderMediumContainer";

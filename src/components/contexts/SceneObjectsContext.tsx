@@ -1,9 +1,9 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Assets } from "../../models/Asset";
+import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Assets } from "../../models/assets/Asset";
 import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
-import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/Primitive";
+import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/assets/meshes/Primitive";
 import { CAMERA_TYPES, CameraProperties, CameraTypes, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../models/Camera";
 
 export type EditableWrapper = AssetWrapper | LightWrapper

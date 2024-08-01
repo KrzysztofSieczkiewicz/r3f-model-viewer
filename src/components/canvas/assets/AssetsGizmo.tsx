@@ -2,7 +2,7 @@ import { PivotControls } from "@react-three/drei";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Euler, Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
-import { AssetProperties, AssetWrapper } from "../../../models/Asset";
+import { AssetProperties, AssetWrapper } from "../../../models/assets/Asset";
 
 type Props = {
     asset: AssetWrapper,

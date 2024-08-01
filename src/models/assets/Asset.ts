@@ -1,5 +1,5 @@
-import { generateNewID } from '../utils/idUtil';
-import { PrimitiveWrapper, Primitives } from './Primitive';
+import { generateNewID } from '../../utils/idUtil';
+import { PrimitiveWrapper, Primitives } from './meshes/Primitive';
 
 export enum Assets {
     Primitive,
