@@ -1,17 +1,16 @@
 import React from "react";
-import { Assets } from "../../../../models/assets/Asset";
 import { Primitives, PrimitiveWrapper } from "../../../../models/assets/meshes/Primitive"
 import { MeshConeControls } from "./MeshConeControls";
 import { MeshSphereControls } from "./MeshSphereControls";
 import { MeshBoxControls } from "./MeshBoxControls";
+import { ExpandableTraits } from "../../commons/traitContainers/ExpandableTraits";
 
 type Props = {
     assetId: string,
-    type: Assets,
     mesh: PrimitiveWrapper;
 }
 
-export const MeshControls = ( {assetId, type, mesh}: Props) => {
+export const MeshControls = ( {assetId, mesh}: Props) => {
 
     const handleAssetType = () => {
         return handlePrimitiveType();
@@ -38,7 +37,9 @@ export const MeshControls = ( {assetId, type, mesh}: Props) => {
         }
     }
 
-    return (<>
-        {handleAssetType()}
-    </>);
+    return (
+        <ExpandableTraits name={"Mesh"}>
+            {handleAssetType()}
+        </ExpandableTraits>
+    );
 }

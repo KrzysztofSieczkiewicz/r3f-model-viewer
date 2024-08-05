@@ -1,13 +1,17 @@
 import { generateNewID } from '../../utils/idUtil';
-import { PrimitiveWrapper, Primitives } from './meshes/Primitive';
+import { DEFAULT_MATERIAL_STANDARD, EditableMaterialWrapper } from './materials/EditableMaterial';
+import { DEFAULT_MESH_SPHERE, PrimitiveWrapper } from './meshes/Primitive';
 
-export enum Assets {
+export enum Meshes {
     Primitive,
     Unwrapped,
     Scan
 }
 
-// TODO: Move isSelected prop from AssetProperties to SceneContext
+export enum Materials {
+    Editable,
+}
+
 export type AssetProperties = {
     name: string,
     position: [number,number,number],
@@ -18,24 +22,18 @@ export type AssetProperties = {
     visible: boolean
 }
 
-
 export type AssetWrapper = 
-    { id: string, properties: AssetProperties, type: Assets.Primitive, mesh: PrimitiveWrapper } |
-    { id: string, properties: AssetProperties, type: Assets.Unwrapped, mesh: PrimitiveWrapper } |
-    { id: string, properties: AssetProperties, type: Assets.Scan, mesh: PrimitiveWrapper }
+    { id: string, properties: AssetProperties, meshType: Meshes.Primitive, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper} |
+    { id: string, properties: AssetProperties, meshType: Meshes.Unwrapped, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper} |
+    { id: string, properties: AssetProperties, meshType: Meshes.Scan, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper}
 
 const INIT_ASSET_LIST: AssetWrapper[] = [
     {
         id: generateNewID(),
-        type: Assets.Primitive,
-        mesh: {
-            type: Primitives.Sphere,
-            properties: {
-                radius: 1,
-                heightSegments: 4,
-                widthSegments: 8
-            }
-        },
+        meshType: Meshes.Primitive,
+        mesh: DEFAULT_MESH_SPHERE,
+        materialType: Materials.Editable,
+        material: DEFAULT_MATERIAL_STANDARD,
         properties: {
             name: "Sphere",
             position:[0,0,0],
@@ -45,21 +43,16 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
             receiveShadow: true,
             visible: true,
         }
-        }
+    }
 ]
 
 const getDefaultAsset = (): AssetWrapper => {
     return {
         id: generateNewID(),
-        type: Assets.Primitive,
-        mesh: {
-            type: Primitives.Sphere,
-            properties: {
-                radius: 1,
-                heightSegments: 4,
-                widthSegments: 8
-            }
-        },
+        meshType: Meshes.Primitive,
+        mesh: DEFAULT_MESH_SPHERE,
+        materialType: Materials.Editable,
+        material: DEFAULT_MATERIAL_STANDARD,
         properties: {
             name: "pear",
             position:[0.25,0.5,0.75],

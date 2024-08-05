@@ -31,7 +31,6 @@ export type PrimitiveProperties =
     ConeProperties |
     BoxProperties;
 
-
 export type PrimitiveWrapper =
     {type: Primitives.Sphere, properties: SphereProperties} |
     {type: Primitives.Cone, properties: ConeProperties} |
