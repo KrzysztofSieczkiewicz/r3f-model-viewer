@@ -147,7 +147,7 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                 </SliderLongContainer>
             </SingleLineTrait>
 
-            <SingleLineTrait name="Clearcoat roughness">
+            <SingleLineTrait name="Coat roughness">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
@@ -156,7 +156,7 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                 </SliderLongContainer>
             </SingleLineTrait>
 
-            <SingleLineTrait name="Specular intensity">
+            <SingleLineTrait name="Specular">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
