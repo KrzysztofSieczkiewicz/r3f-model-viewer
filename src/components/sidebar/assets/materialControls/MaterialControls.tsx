@@ -1,36 +1,34 @@
 import React from "react";
 import { ExpandableTraits } from "../../commons/traitContainers/ExpandableTraits";
 import { AssetWrapper, Materials } from "../../../../models/assets/Asset";
-import { EditableMaterials } from "../../../../models/assets/materials/EditableMaterial";
+import { EditableMaterials, EditableMaterialWrapper } from "../../../../models/assets/materials/EditableMaterial";
 import { PhysicalMaterialControls } from "./PhysicalMaterialControls";
 
 // TODO: WHEN MATERIALS GET EXTENDED BY A ONE MORE LAYER, ADD A TYPE PROP THAT FIRST DETERMINES WHICH KIND OF MATERIAL
 // SHOULD BE USED, AND THEN e.g. GET THE PROPER VALUE FROM MATERIAL VAR
 type Props = {
-    assetId: string,
     asset: AssetWrapper;
 }
 
-export const MaterialControls = ({assetId, asset}: Props) => {
+export const MaterialControls = ({asset}: Props) => {
 
     const handleMaterialType = () => {
         switch(asset.materialType) {
             case Materials.Editable:
-                return handleEditableMaterialType(asset.material.type)
+                return handleEditableMaterialType(asset.material)
         }
     }
 
-    const handleEditableMaterialType = (type: EditableMaterials) => {
-        switch(type) {
+    const handleEditableMaterialType = (material: EditableMaterialWrapper) => {
+        switch(material.type) {
             case EditableMaterials.Physical:
-                return <PhysicalMaterialControls />
+                return <PhysicalMaterialControls properties={material.properties}/>
         }
     }
 
     return (
         <ExpandableTraits name={"Material"}>
-            <></>
-            {/* {handleAssetType()} */}
+            {handleMaterialType()}
         </ExpandableTraits>
     );
 }

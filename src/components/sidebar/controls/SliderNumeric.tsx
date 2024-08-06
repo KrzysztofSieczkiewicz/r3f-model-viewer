@@ -7,18 +7,18 @@ import { roundNumber } from "../../../utils/mathUtil";
 // TODO: ADD MIN/MAX OPTIONAL PARAMS
 type Props = {
     step: number,
-    rounding: number,
     value: number,
     handleChange: (newValue: number) => void,
     
     children?: ReactNode,
     min?: number,
     max?: number,
+    rounding?: number,
 }
 
 
 // TODO: MOVE CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
-export const SliderNumeric = ({step, rounding, value, handleChange, children, min=-Infinity, max=Infinity}: Props) => {
+export const SliderNumeric = ({step, value, handleChange, children, min=-Infinity, max=Infinity, rounding=2}: Props) => {
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 

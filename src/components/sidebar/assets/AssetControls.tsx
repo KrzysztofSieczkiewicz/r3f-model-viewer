@@ -10,6 +10,7 @@ import { RotationSliders } from "../controls/RotationSliders";
 import { ToggleAxesLockButton } from "../controls/buttons/ToggleAxesLockButton";
 import { ListItemBody } from "../commons/ListItemBody";
 import { MeshControls } from "./meshControls/MeshControls";
+import { MaterialControls } from "./materialControls/MaterialControls";
 
 // TODO: WHEN MESHES GET EXTENDED BY A ONE MORE LAYER, ADD A TYPE PROP THAT FIRST DETERMINES WHICH KIND OF MESH
 // SHOULD BE USED, AND THEN e.g. GET THE PROPER VALUE FROM ASSET VAR
@@ -26,9 +27,8 @@ export const AssetControls = ({assetId, asset}: Props) => {
         <ListItemBody>
             <DeleteItemButton deleteObject={() => deleteAsset(assetId)} />
 
-            <MeshControls
-                assetId={assetId}
-                mesh={asset.mesh} />
+            <MeshControls asset={asset} />
+            <MaterialControls asset={asset} />
 
             <SingleLineTrait name="Position">
                 <PositionSliders

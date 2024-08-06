@@ -1,5 +1,5 @@
 import { generateNewID } from '../../utils/idUtil';
-import { DEFAULT_MATERIAL_STANDARD, EditableMaterialWrapper } from './materials/EditableMaterial';
+import { DEFAULT_MATERIAL_PHYSICAL, DEFAULT_MATERIAL_STANDARD, EditableMaterialWrapper } from './materials/EditableMaterial';
 import { DEFAULT_MESH_SPHERE, PrimitiveWrapper } from './meshes/Primitive';
 
 export enum Meshes {
@@ -33,7 +33,7 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
         meshType: Meshes.Primitive,
         mesh: DEFAULT_MESH_SPHERE,
         materialType: Materials.Editable,
-        material: DEFAULT_MATERIAL_STANDARD,
+        material: DEFAULT_MATERIAL_PHYSICAL,
         properties: {
             name: "Sphere",
             position:[0,0,0],
@@ -52,7 +52,7 @@ const getDefaultAsset = (): AssetWrapper => {
         meshType: Meshes.Primitive,
         mesh: DEFAULT_MESH_SPHERE,
         materialType: Materials.Editable,
-        material: DEFAULT_MATERIAL_STANDARD,
+        material: DEFAULT_MATERIAL_PHYSICAL,
         properties: {
             name: "pear",
             position:[0.25,0.5,0.75],
