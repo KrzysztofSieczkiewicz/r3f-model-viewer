@@ -1,13 +1,13 @@
 import React from "react";
 import { ReactNode } from "react";
-import styles from '../../Sidebar.module.css';
+import styles from './SingleLineTrait.module.css';
 
 type Props = {
     name: string,
     children: ReactNode,
 }
 
-// TODO: MOVE STYLES FOR TRAIT CONTAINERS INTO SEPARATE MODULE?
+// TODO: HOW TO ADJUST FOR DIFFERENT TRAIT NAMES LENGTHS?
 export const SingleLineTrait = ({name, children}: Props) => {
 
     return (

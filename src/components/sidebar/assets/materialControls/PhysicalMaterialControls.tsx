@@ -12,26 +12,11 @@ type Props = {
 
 export const PhysicalMaterialControls = ( {properties}: Props) => {
 
-    const transparent = properties.transparent;
-    const opacity = properties.opacity;
-    const flatShading = properties.flatShading;
-    const displayWireframe = properties.displayWireframe;
-
-    const color = properties.color;
-    const emissive = properties.emissive;
-    const roughness = properties.roughness;
-    const metalness = properties.metalness;
-    const ior = properties.ior;
-    const reflectivity = properties.reflectivity;
-    const iridescence = properties.iridescence
-    const iridescenceIor = properties.iridescenceIor
-    const sheen = properties.sheen;
-    const sheenRoughness = properties.sheenRoughness;
-    const sheenColor = properties.sheenColor;
-    const clearcoat = properties.clearcoat;
-    const clearcoatRoughness = properties.clearcoatRoughness;
-    const specularIntensity = properties.specularIntensity;
-    const specularColor = properties.specularColor;
+    const {transparent, opacity, flatShading, displayWireframe,
+        color, emissive, roughness, metalness, ior, reflectivity,
+        iridescence, iridescenceIor, sheen, sheenRoughness, sheenColor,
+        clearcoat, clearcoatRoughness, specularIntensity, specularColor
+    } = properties;
 
 
     return (
@@ -45,9 +30,9 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
             <SingleLineTrait name="Opacity">
                 <SliderLongContainer>
                     <SliderNumeric
-                            min={0} max={1} step={0.005}
-                            value={opacity}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                        min={0} max={1} step={0.005}
+                        value={opacity}
+                        handleChange={(value) => console.log("Tried updating material")} />
                 </SliderLongContainer>
             </SingleLineTrait>
 
