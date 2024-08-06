@@ -7,7 +7,6 @@ export enum EditableMaterials {
 export type BasicMaterialProperties = {
     transparent: boolean,
     opacity: number,
-    depthTest: boolean
     flatShading: boolean,
     displayWireframe: boolean,
 }
@@ -61,7 +60,6 @@ export const DEFAULT_MATERIAL_PHYSICAL: EditableMaterialWrapper = {
     properties: {
         transparent: false,
         opacity: 1,
-        depthTest: true,
         flatShading: false,
         displayWireframe: false,
 
@@ -88,7 +86,6 @@ export const DEFAULT_MATERIAL_STANDARD: EditableMaterialWrapper = {
     properties: {
         transparent: false,
         opacity: 1,
-        depthTest: true,
         flatShading: false,
         displayWireframe: false,
 
@@ -104,7 +101,6 @@ export const DEFAULT_MATERIAL_BASIC: EditableMaterialWrapper = {
     properties: {
         transparent: false,
         opacity: 1,
-        depthTest: true,
         flatShading: false,
         displayWireframe: false,
 

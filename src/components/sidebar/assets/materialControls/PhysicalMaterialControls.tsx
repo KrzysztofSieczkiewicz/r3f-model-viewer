@@ -14,7 +14,6 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
 
     const transparent = properties.transparent;
     const opacity = properties.opacity;
-    const ignoreDepth = properties.depthTest;
     const flatShading = properties.flatShading;
     const displayWireframe = properties.displayWireframe;
 
@@ -50,12 +49,6 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                             value={opacity}
                             handleChange={(value) => console.log("Tried updating material")} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-
-            <SingleLineTrait name="Ignore depth">
-                <Checkbox
-                    value={ignoreDepth}
-                    handleChange={(value) => console.log("Tried updating material")} />
             </SingleLineTrait>
 
             <SingleLineTrait name="Flat shading">
