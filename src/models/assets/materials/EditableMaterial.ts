@@ -59,7 +59,7 @@ export const DEFAULT_MATERIAL_PHYSICAL: EditableMaterialWrapper = {
     type: EditableMaterials.Physical,
     properties: {
         transparent: false,
-        opacity: 1,
+        opacity: 0.5,
         flatShading: false,
         displayWireframe: false,
 
@@ -85,7 +85,7 @@ export const DEFAULT_MATERIAL_STANDARD: EditableMaterialWrapper = {
     type: EditableMaterials.Standard,
     properties: {
         transparent: false,
-        opacity: 1,
+        opacity: 0.5,
         flatShading: false,
         displayWireframe: false,
 
@@ -100,7 +100,7 @@ export const DEFAULT_MATERIAL_BASIC: EditableMaterialWrapper = {
     type: EditableMaterials.Basic,
     properties: {
         transparent: false,
-        opacity: 1,
+        opacity: 0.5,
         flatShading: false,
         displayWireframe: false,
 

@@ -40,8 +40,8 @@ export const DEFAULT_MESH_SPHERE: PrimitiveWrapper = {
     type: Primitives.Sphere,
     properties: {
         radius: 1,
-        widthSegments: 24,
-        heightSegments: 12,
+        widthSegments: 48,
+        heightSegments: 24,
     }
 }
 

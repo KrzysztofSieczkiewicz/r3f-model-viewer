@@ -8,6 +8,7 @@ import { AssetsGizmo } from "./AssetsGizmo";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 import { getPrimitiveGeometry } from "./meshes/PrimitiveMesh";
+import { getEditableMaterial } from "./materials/EditableMaterial";
 
 type Props = {
     asset: AssetWrapper
@@ -67,7 +68,8 @@ export const RenderedAsset = ( {asset}: Props) => {
                 receiveShadow={asset.properties.receiveShadow}
                 //geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
                 geometry={getPrimitiveGeometry(asset.mesh)}
-                material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
+                //material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
+                material={getEditableMaterial(asset.material)}
                 position={asset.properties.position}
                 rotation={asset.properties.rotation}
                 scale={asset.properties.scale}

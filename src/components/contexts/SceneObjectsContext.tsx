@@ -152,10 +152,10 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
 
         const updatedAsset = {
             ...assetsList[index],
-            mesh: {
-                ...assetsList[index].mesh,
+            material: {
+                ...assetsList[index].material,
                 properties: {
-                    ...assetsList[index].mesh.properties,
+                    ...assetsList[index].material.properties,
                     ...change
                 }
             }
