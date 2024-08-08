@@ -1,29 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from './SingleChoiceDropdown.module.css';
 
-import { LIGHT_TYPES } from "../../../models/Light";
-
+// TODO: simplify this??? make this work on pure stirng values and string arrays 
+// handle proper selection and changes in the parent component then.
 type Props = {
-    current: string,
-    selectionList: SelectionList[],
-    handleChange: (item: LIGHT_TYPES) => void
+    selected: string,
+    selectionList: string[],
+    handleChange: (value: string) => void
 }
 
-type SelectionList = {
-    type: LIGHT_TYPES,
-    display: string
-}
-
-export const Dropdown = ({current, selectionList, handleChange}: Props) => {
+export const SindleChoiceDropdown = ({selected, selectionList, handleChange}: Props) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    const getDisplayNameByType = (type: string) => {
-        return selectionList.find((light) =>  light.type === type)?.display
-    }
-
-    const selectOption = (option: LIGHT_TYPES) => {
+    const selectOption = (option: string) => {
         handleChange(option);
         setIsOpen(false);
     }
@@ -57,7 +48,7 @@ export const Dropdown = ({current, selectionList, handleChange}: Props) => {
                     toggleList()
                 }}
             >
-                <div className={styles.value}>{getDisplayNameByType(current)}</div>
+                <div className={styles.value}>{selected}</div>
                 {isOpen
                 ? <span className={styles.arrow}>&#8657;</span>
                 : <span className={styles.arrow}>&#8659;</span>}
@@ -66,13 +57,13 @@ export const Dropdown = ({current, selectionList, handleChange}: Props) => {
                 <div className={styles.optionsList}>
                     {selectionList.map((item) => (
                         <button className={styles.option}
-                            key={item.type}
+                            key={item}
                             onClick={(e) => {
                                 e.stopPropagation();
-                                selectOption(item.type);
+                                selectOption(item);
                             }}
                         >
-                            {item.display}
+                            {item}
                         </button>
                     ))}
                 </div>

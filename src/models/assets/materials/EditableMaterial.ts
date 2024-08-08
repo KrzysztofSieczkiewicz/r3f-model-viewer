@@ -1,7 +1,7 @@
 export enum EditableMaterials {
-    Physical,
-    Standard,
-    Basic,
+    Physical = "Physical",
+    Standard = "Standard",
+    Basic = "Basic",
 }
 
 export type BasicMaterialProperties = {
