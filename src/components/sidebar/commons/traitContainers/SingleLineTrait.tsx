@@ -1,5 +1,4 @@
-import React from "react";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import styles from './SingleLineTrait.module.css';
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 export const SingleLineTrait = ({name, children}: Props) => {
 
     return (
-        <div className={styles.traitContainer}>
+        <div className={styles.container}>
             <label className={styles.traitName}>{name}</label>
             {children}
         </div>
