@@ -22,7 +22,7 @@ export const MaterialControls = ({asset}: Props) => {
     const handleEditableMaterialType = (material: EditableMaterialWrapper) => {
         switch(material.type) {
             case EditableMaterials.Physical:
-                return <PhysicalMaterialControls properties={material.properties}/>
+                return <PhysicalMaterialControls assetId={asset.id} properties={material.properties}/>
         }
     }
 

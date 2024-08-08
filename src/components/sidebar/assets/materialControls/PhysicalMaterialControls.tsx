@@ -6,12 +6,15 @@ import { ColorPicker } from "../../controls/ColorPicker";
 import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { SliderNumeric } from "../../controls/SliderNumeric";
 import { TraitsSection } from "../../commons/traitContainers/TraitsSection";
+import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 
 type Props = {
+    assetId: string,
     properties: PhysicalMaterialProperties
 }
 
-export const PhysicalMaterialControls = ( {properties}: Props) => {
+export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
+    const { updateEditableMaterialProperties } = useSceneObjectsContext();
 
     const {transparent, opacity, flatShading, displayWireframe,
         color, emissive, roughness, metalness, ior, reflectivity,
@@ -26,14 +29,14 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
             <SingleLineTrait name="Transparent">
                 <Checkbox
                     value={transparent}
-                    handleChange={(value) => console.log("Tried updating material")} />
+                    handleChange={(value) => updateEditableMaterialProperties(assetId, {transparent: value} )} />
             </SingleLineTrait>
             <SingleLineTrait name="Opacity">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005}
                         value={opacity}
-                        handleChange={(value) => console.log("Tried updating material")} />
+                        handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
                 </SliderLongContainer>
             </SingleLineTrait>
             </TraitsSection>
@@ -42,12 +45,12 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                 <SingleLineTrait name="Flat shading">
                     <Checkbox
                         value={flatShading}
-                        handleChange={(value) => console.log("Tried updating material")} />
+                        handleChange={(value) => updateEditableMaterialProperties(assetId, {flatShading: value} )} />
                 </SingleLineTrait>
                 <SingleLineTrait name="Display wireframe">
                     <Checkbox
                         value={displayWireframe}
-                        handleChange={(value) => console.log("Tried updating material")} />
+                        handleChange={(value) => updateEditableMaterialProperties(assetId, {displayWireframe: value} )} />
                 </SingleLineTrait>
             </TraitsSection>
 
@@ -55,14 +58,14 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                 <SingleLineTrait name="Color">
                     <ColorPicker
                         currentColor={color}
-                        handleChange={(value) =>  console.log("Tried updating material") } />
+                        handleChange={(value) => updateEditableMaterialProperties(assetId, {color: value} )} />
                 </SingleLineTrait>
                 <SingleLineTrait name="Roughness">
                     <SliderLongContainer>
                         <SliderNumeric
                             min={0} max={1} step={0.005} 
                             value={roughness}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {roughness: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
                 <SingleLineTrait name="Metalness">
@@ -70,7 +73,7 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={1} step={0.005} 
                             value={metalness}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {metalness: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
                 <SingleLineTrait name="Reflectivity">
@@ -78,7 +81,7 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={1} step={0.005} 
                             value={reflectivity}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {reflectivity: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
                 <SingleLineTrait name="IOR">
@@ -86,8 +89,13 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={3} step={0.005} 
                             value={ior}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {ior: value} )} />
                     </SliderLongContainer>
+                </SingleLineTrait>
+                <SingleLineTrait name="Emissive">
+                    <ColorPicker
+                        currentColor={emissive}
+                        handleChange={(value) =>  updateEditableMaterialProperties(assetId, {emissive: value} )} />
                 </SingleLineTrait>
             </TraitsSection>
 
@@ -97,7 +105,7 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={1} step={0.005} 
                             value={iridescence}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescence: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
                 <SingleLineTrait name="IOR">
@@ -105,7 +113,7 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={3} step={0.005} 
                             value={iridescenceIor}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {ior: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
             </TraitsSection>
@@ -116,7 +124,7 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={1} step={0.005} 
                             value={sheen}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {sheen: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
                 <SingleLineTrait name="Roughness">
@@ -124,13 +132,13 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={1} step={0.005} 
                             value={sheenRoughness}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {sheenRoughness: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
                 <SingleLineTrait name="Color">
                     <ColorPicker
                         currentColor={sheenColor}
-                        handleChange={(value) =>  console.log("Tried updating material") } />
+                        handleChange={(value) =>  updateEditableMaterialProperties(assetId, {sheenColor: value} ) } />
                 </SingleLineTrait>
             </TraitsSection>
 
@@ -140,7 +148,7 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={1} step={0.005} 
                             value={clearcoat}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoat: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
                 <SingleLineTrait name="Roughness">
@@ -148,7 +156,7 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={1} step={0.005} 
                             value={clearcoatRoughness}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatRoughness: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
             </TraitsSection>
@@ -159,13 +167,13 @@ export const PhysicalMaterialControls = ( {properties}: Props) => {
                         <SliderNumeric
                             min={0} max={1} step={0.005} 
                             value={specularIntensity}
-                            handleChange={(value) => console.log("Tried updating material")} />
+                            handleChange={(value) => updateEditableMaterialProperties(assetId, {specularIntensity: value} )} />
                     </SliderLongContainer>
                 </SingleLineTrait>
                 <SingleLineTrait name="Color">
                     <ColorPicker
                         currentColor={specularColor}
-                        handleChange={(value) =>  console.log("Tried updating material") } />
+                        handleChange={(value) => updateEditableMaterialProperties(assetId, {specularColor: value} )} />
                 </SingleLineTrait>
             </TraitsSection>
         </>
