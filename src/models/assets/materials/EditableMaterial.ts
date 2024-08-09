@@ -54,8 +54,7 @@ export type EditableMaterialWrapper =
     {type: EditableMaterials.Standard, properties: StandardMaterialProperties} |
     {type: EditableMaterials.Basic, properties: PhongMaterialProperties}
 
-
-export const DEFAULT_MATERIAL_PHYSICAL: EditableMaterialWrapper = {
+const DEFAULT_MATERIAL_PHYSICAL: EditableMaterialWrapper = {
     type: EditableMaterials.Physical,
     properties: {
         transparent: false,
@@ -81,7 +80,7 @@ export const DEFAULT_MATERIAL_PHYSICAL: EditableMaterialWrapper = {
     }
 }
 
-export const DEFAULT_MATERIAL_STANDARD: EditableMaterialWrapper = {
+const DEFAULT_MATERIAL_STANDARD: EditableMaterialWrapper = {
     type: EditableMaterials.Standard,
     properties: {
         transparent: false,
@@ -96,7 +95,7 @@ export const DEFAULT_MATERIAL_STANDARD: EditableMaterialWrapper = {
     }
 }
 
-export const DEFAULT_MATERIAL_BASIC: EditableMaterialWrapper = {
+const DEFAULT_MATERIAL_BASIC: EditableMaterialWrapper = {
     type: EditableMaterials.Basic,
     properties: {
         transparent: false,
@@ -109,4 +108,10 @@ export const DEFAULT_MATERIAL_BASIC: EditableMaterialWrapper = {
         specular: '#000000',
         shininess: 0.3,
     }
+}
+
+export const  DEFAULT_EDITABLE_MATERIALS = {
+    [EditableMaterials.Physical]: DEFAULT_MATERIAL_PHYSICAL,
+    [EditableMaterials.Standard]: DEFAULT_MATERIAL_STANDARD,
+    [EditableMaterials.Basic]: DEFAULT_MATERIAL_BASIC
 }

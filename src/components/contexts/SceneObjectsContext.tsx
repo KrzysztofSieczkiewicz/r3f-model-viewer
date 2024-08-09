@@ -5,7 +5,7 @@ import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Meshes
 import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
 import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/assets/meshes/Primitive";
 import { CAMERA_TYPES, CameraProperties, CameraTypes, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../models/Camera";
-import { EditableMaterialProperties } from "../../models/assets/materials/EditableMaterial";
+import { DEFAULT_EDITABLE_MATERIALS, EditableMaterialProperties, EditableMaterials } from "../../models/assets/materials/EditableMaterial";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
@@ -14,6 +14,7 @@ type SceneObjectsContextProps = {
     updateAssetProperties: (id: string, change: Partial<AssetProperties>) => void,
     updatePrimitiveProperties: (id: string, change: Partial<PrimitiveProperties>) => void,
     updateEditableMaterialProperties: (id: string, change: Partial<EditableMaterialProperties>) => void,
+    changeEditableMaterialType: (id: string, newType: EditableMaterials) => void,
     deleteAsset: (id: string) => void,
     addAsset: () => void,
     addAssetPrimitive: (primitiveType: Primitives) => void,
@@ -169,6 +170,26 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsList(filteredAssets);
     };
 
+    //TODO [URGENT]: debug this
+    const changeEditableMaterialType = useCallback((id: string, newType: EditableMaterials) => {
+        const index = assetsList.findIndex(asset => asset.id === id);
+        if (index === -1) return;
+
+        const updatedAsset = {
+            ...assetsList[index],
+            material: {
+                type: DEFAULT_EDITABLE_MATERIALS[newType].type,
+                properties: {
+                    ...assetsList[index].material.properties,
+                    ...DEFAULT_EDITABLE_MATERIALS[newType].properties
+                }
+            }
+        } as AssetWrapper;
+
+        const newAssetsList = assetsList.map( (asset, i) => i===index ? updatedAsset: asset);
+        setAssetsList(newAssetsList);
+    }, [assetsList]);
+
 
 
     const addCamera = useCallback((type: CameraTypes) => {
@@ -209,7 +230,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     return (
         <SceneObjectsContext.Provider value={{ 
             lightsList, changeLightType, updateLightProperties, deleteLight, addLight, 
-            assetsList, updateAssetProperties, updatePrimitiveProperties, updateEditableMaterialProperties, deleteAsset, addAsset, addAssetPrimitive,
+            assetsList, updateAssetProperties, updatePrimitiveProperties, updateEditableMaterialProperties, changeEditableMaterialType, deleteAsset, addAsset, addAssetPrimitive,
             camerasList, addCamera, updateCameraProperties, deleteCamera }} >
             {props.children}
         </SceneObjectsContext.Provider>

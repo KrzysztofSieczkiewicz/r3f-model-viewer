@@ -1,5 +1,5 @@
 import React from "react";
-import { DEFAULT_MATERIAL_STANDARD, EditableMaterials, StandardMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
+import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, StandardMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 import { TraitsSection } from "../../commons/traitContainers/TraitsSection";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
@@ -17,19 +17,21 @@ type Props = {
 }
 
 export const StandardMaterialControls = ({assetId, properties}: Props) => {
-    const { updateEditableMaterialProperties } = useSceneObjectsContext();
+    const { updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
 
     const { transparent, opacity, flatShading, displayWireframe,
         color, emissive, roughness, metalness } = properties;
 
-    const defaultProperties = DEFAULT_MATERIAL_STANDARD.properties as StandardMaterialProperties;
+    const defaultProperties = DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Standard].properties;
 
 
     return (<>
         <TraitsSection>
             <SingleLineTrait name="Material type">
                 <SindleChoiceDropdown 
-                    selected={EditableMaterials.Standard} selectionList={Object.values(EditableMaterials)} handleChange={ (value: string) => console.log(value)} />
+                    selected={EditableMaterials.Standard} 
+                    selectionList={Object.values(EditableMaterials)} 
+                    handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
             </SingleLineTrait>
         </TraitsSection>
 

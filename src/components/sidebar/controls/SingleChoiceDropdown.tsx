@@ -3,18 +3,18 @@ import styles from './SingleChoiceDropdown.module.css';
 
 // TODO: simplify this??? make this work on pure stirng values and string arrays 
 // handle proper selection and changes in the parent component then.
-type Props = {
-    selected: string,
-    selectionList: string[],
-    handleChange: (value: string) => void
+type Props<T> = {
+    selected: T,
+    selectionList: T[],
+    handleChange: (value: T) => void
 }
 
-export const SindleChoiceDropdown = ({selected, selectionList, handleChange}: Props) => {
+export const SindleChoiceDropdown = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    const selectOption = (option: string) => {
+    const selectOption = (option: T) => {
         handleChange(option);
         setIsOpen(false);
     }
@@ -48,7 +48,7 @@ export const SindleChoiceDropdown = ({selected, selectionList, handleChange}: Pr
                     toggleList()
                 }}
             >
-                <div className={styles.value}>{selected}</div>
+                <div className={styles.value}>{String(selected)}</div>
                 {isOpen
                 ? <span className={styles.arrow}>&#8657;</span>
                 : <span className={styles.arrow}>&#8659;</span>}
@@ -57,13 +57,13 @@ export const SindleChoiceDropdown = ({selected, selectionList, handleChange}: Pr
                 <div className={styles.optionsList}>
                     {selectionList.map((item) => (
                         <button className={styles.option}
-                            key={item}
+                            key={String(item)}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 selectOption(item);
                             }}
                         >
-                            {item}
+                            {String(item)}
                         </button>
                     ))}
                 </div>

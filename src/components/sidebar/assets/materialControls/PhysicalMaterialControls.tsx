@@ -1,7 +1,7 @@
 import React from "react";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { Checkbox } from "../../controls/buttons/Checkbox";
-import { DEFAULT_MATERIAL_PHYSICAL, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
+import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
 import { ColorPicker } from "../../controls/ColorPicker";
 import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { SliderNumeric } from "../../controls/SliderNumeric";
@@ -16,7 +16,7 @@ type Props = {
 }
 
 export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
-    const { updateEditableMaterialProperties } = useSceneObjectsContext();
+    const { updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
 
     const {transparent, opacity, flatShading, displayWireframe,
         color, emissive, roughness, metalness, ior, reflectivity,
@@ -24,14 +24,16 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
         clearcoat, clearcoatRoughness, specularIntensity, specularColor
     } = properties;
 
-    const defaultProperties = DEFAULT_MATERIAL_PHYSICAL.properties as PhysicalMaterialProperties;
+    const defaultProperties = DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Physical].properties;
 
 
     return (<>
         <TraitsSection>
             <SingleLineTrait name="Material type">
                 <SindleChoiceDropdown 
-                    selected={EditableMaterials.Physical} selectionList={Object.values(EditableMaterials)} handleChange={ (value: string) => console.log(value)} />
+                    selected={EditableMaterials.Physical} 
+                    selectionList={Object.values(EditableMaterials)} 
+                    handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
             </SingleLineTrait>
         </TraitsSection>
 
