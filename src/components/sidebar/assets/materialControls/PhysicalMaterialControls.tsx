@@ -28,11 +28,13 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
 
 
     return (<>
-        <SingleLineTrait name="Metarial type">
-            <SindleChoiceDropdown 
-                selected={EditableMaterials.Physical} selectionList={Object.values(EditableMaterials)} handleChange={ (value: string) => console.log(value)} />
-        </SingleLineTrait>
-        
+        <TraitsSection>
+            <SingleLineTrait name="Material type">
+                <SindleChoiceDropdown 
+                    selected={EditableMaterials.Physical} selectionList={Object.values(EditableMaterials)} handleChange={ (value: string) => console.log(value)} />
+            </SingleLineTrait>
+        </TraitsSection>
+
         <TraitsSection displayName="Transparency">
         <SingleLineTrait name="Transparent">
             <Checkbox

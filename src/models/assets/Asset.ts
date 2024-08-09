@@ -3,13 +3,13 @@ import { DEFAULT_MATERIAL_PHYSICAL, DEFAULT_MATERIAL_STANDARD, EditableMaterialW
 import { DEFAULT_MESH_SPHERE, PrimitiveWrapper } from './meshes/Primitive';
 
 export enum Meshes {
-    Primitive,
-    Unwrapped,
-    Scan
+    Primitive = "Primitive",
+    Unwrapped = "Model",
+    Scan = "Scan"
 }
 
 export enum Materials {
-    Editable,
+    Editable = "Editable",
 }
 
 export type AssetProperties = {

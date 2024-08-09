@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import styles from './SingleLineTrait.module.css';
 
 type Props = {
-    name: string,
+    name?: string,
     children: ReactNode,
 }
 
@@ -11,7 +11,7 @@ export const SingleLineTrait = ({name, children}: Props) => {
 
     return (
         <div className={styles.container}>
-            <label className={styles.traitName}>{name}</label>
+            {name && <label className={styles.traitName}>{name}</label>}
             {children}
         </div>
     );

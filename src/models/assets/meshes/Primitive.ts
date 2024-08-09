@@ -2,9 +2,9 @@
 //https://threejs-journey.com/lessons/geometries#the-different-built-in-geometries
 
 export enum Primitives {
-    Sphere,
-    Cone,
-    Box,
+    Sphere = "Sphere",
+    Cone = "Cone",
+    Box = "Box",
 }
 
 export type SphereProperties = {
