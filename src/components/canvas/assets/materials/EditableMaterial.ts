@@ -3,8 +3,7 @@ import { EditableMaterials, EditableMaterialWrapper } from "../../../../models/a
 
 export const getEditableMaterial = (material: EditableMaterialWrapper) => {
     switch(material.type) {
-        case EditableMaterials.Physical:
-
+        case EditableMaterials.Physical: {
             const {transparent, opacity, flatShading, displayWireframe,
                 color, emissive, roughness, metalness, ior, reflectivity,
                 iridescence, iridescenceIor, sheen, sheenRoughness, sheenColor,
@@ -32,10 +31,27 @@ export const getEditableMaterial = (material: EditableMaterialWrapper) => {
                 specularIntensity: specularIntensity,
                 specularColor: specularColor
             });
+        }
 
-        case EditableMaterials.Standard:
-            return new MeshStandardMaterial();
-        case EditableMaterials.Basic:
+        case EditableMaterials.Standard: {
+            const { transparent, opacity, flatShading, displayWireframe,
+                color, emissive, roughness, metalness 
+            } = material.properties;
+
+            return new MeshStandardMaterial({
+                transparent: transparent,
+                opacity: opacity,
+                flatShading: flatShading,
+                wireframe: displayWireframe,
+                color: color,
+                emissive: emissive,
+                roughness: roughness,
+                metalness: metalness,
+            });
+        }
+
+        case EditableMaterials.Basic: {
             return new MeshPhongMaterial();
+        }
     }
 }

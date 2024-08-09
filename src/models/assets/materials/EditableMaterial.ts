@@ -4,7 +4,7 @@ export enum EditableMaterials {
     Basic = "Basic",
 }
 
-export type BasicMaterialProperties = {
+export type CommonMaterialProperties = {
     transparent: boolean,
     opacity: number,
     flatShading: boolean,
@@ -27,21 +27,21 @@ export type PhysicalMaterialProperties = {
     clearcoatRoughness: number,
     specularIntensity: number,
     specularColor: string
-} & BasicMaterialProperties;
+} & CommonMaterialProperties;
 
 export type StandardMaterialProperties = {
     color: string,
     emissive: string,
     roughness: number,
     metalness: number
-} & BasicMaterialProperties;
+} & CommonMaterialProperties;
 
 export type PhongMaterialProperties = {
     color: string,
     emissive: string,
     specular: string,
     shininess: number,
-} & BasicMaterialProperties
+} & CommonMaterialProperties
 
 export type EditableMaterialProperties =
     PhysicalMaterialProperties |

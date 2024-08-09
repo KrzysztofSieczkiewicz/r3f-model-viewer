@@ -36,20 +36,20 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
         </TraitsSection>
 
         <TraitsSection displayName="Transparency">
-        <SingleLineTrait name="Transparent">
-            <Checkbox
-                value={transparent}
-                handleChange={(value) => updateEditableMaterialProperties(assetId, {transparent: value} )} />
-        </SingleLineTrait>
-        <SingleLineTrait name="Opacity">
-            <SliderLongContainer>
-                <SliderNumeric
-                    min={0} max={1} step={0.005}
-                    value={opacity}
-                    handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
-            </SliderLongContainer>
-            <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {opacity: defaultProperties.opacity} )} />
-        </SingleLineTrait>
+            <SingleLineTrait name="Transparent">
+                <Checkbox
+                    value={transparent}
+                    handleChange={(value) => updateEditableMaterialProperties(assetId, {transparent: value} )} />
+            </SingleLineTrait>
+            <SingleLineTrait name="Opacity">
+                <SliderLongContainer>
+                    <SliderNumeric
+                        min={0} max={1} step={0.005}
+                        value={opacity}
+                        handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
+                </SliderLongContainer>
+                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {opacity: defaultProperties.opacity} )} />
+            </SingleLineTrait>
         </TraitsSection>
 
         <TraitsSection displayName="Display">
