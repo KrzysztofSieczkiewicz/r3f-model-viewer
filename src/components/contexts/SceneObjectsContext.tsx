@@ -133,12 +133,15 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         const index = assetsList.findIndex(asset => asset.id === id);
         if (index === -1) return;
 
+        const initialAsset = assetsList[index]
+        const initialMesh = initialAsset.mesh;
+
         const updatedAsset = {
-            ...assetsList[index],
+            ...initialAsset,
             mesh: {
-                ...assetsList[index].mesh,
+                ...initialMesh,
                 properties: {
-                    ...assetsList[index].mesh.properties,
+                    ...initialMesh.properties,
                     ...change
                 }
             }

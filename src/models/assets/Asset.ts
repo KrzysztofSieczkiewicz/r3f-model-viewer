@@ -10,6 +10,7 @@ export enum Meshes {
 
 export enum Materials {
     Editable = "Editable",
+    Mapped = "Mapped"
 }
 
 export type AssetProperties = {
@@ -22,9 +23,16 @@ export type AssetProperties = {
     visible: boolean
 }
 
+// TODO: GET RID OF materialType, change meshType into just 'type'?
+// ALTHOUGH YOU CAN FIND A WAY TO ASSIGN EDITABLE MATERIALS FOR EACH meshType,
+// AND Mapped materials for Models and Scans etc...
+// TODO: Find if meshType Unwrapped and meshType scanned require anything to store in the mesh variable (if not -> remove them)
+// and adjust the application not to require that shit
+// TODO: CONSIDER HANDLING ASSET WRAPPER WITH WILDCARD TO ALLOW COMPONENTS USING AssetWrapper TO ALREADY KNOW WHAT MESH TYPE IS INSIDE?
+// OR JUST MAKE THEM LOOK INSIDE AND ACT BASED ON TYPES
 export type AssetWrapper = 
     { id: string, properties: AssetProperties, meshType: Meshes.Primitive, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper} |
-    { id: string, properties: AssetProperties, meshType: Meshes.Unwrapped, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper} |
+    { id: string, properties: AssetProperties, meshType: Meshes.Unwrapped, mesh: PrimitiveWrapper, materialType: Materials.Mapped, material: EditableMaterialWrapper} |
     { id: string, properties: AssetProperties, meshType: Meshes.Scan, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper}
 
 const INIT_ASSET_LIST: AssetWrapper[] = [
