@@ -13,10 +13,10 @@ export const ExpandableTraits = ({name, children}: Props) => {
     return (
         <div className={styles.expendableContainer} >
             
-                <label 
+                <div 
                     className={styles.containerName}
                     onClick={() => setIsExpanded(!isExpanded)}
-                >{name}</label>
+                >{name}</div>
 
                 {isExpanded && <div className={styles.traitsContainer}>
                     {children}

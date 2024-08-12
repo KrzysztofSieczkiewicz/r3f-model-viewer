@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Checkbox } from "../controls/Checkbox";
+import { Checkbox } from "../controls/buttons/Checkbox";
 import { ColorPicker } from "../controls/ColorPicker";
 import { SliderLimited } from "../controls/SliderLimited";
 import { useScene } from "../../contexts/SceneContext";

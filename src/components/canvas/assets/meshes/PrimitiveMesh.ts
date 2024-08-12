@@ -1,4 +1,4 @@
-import { Primitives, PrimitiveWrapper } from "../../../../models/Primitive";
+import { Primitives, PrimitiveWrapper } from "../../../../models/assets/meshes/Primitive";
 import { SphereGeometry } from "three/src/geometries/SphereGeometry";
 import { BoxGeometry, ConeGeometry } from "three";
 

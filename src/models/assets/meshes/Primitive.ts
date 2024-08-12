@@ -2,9 +2,9 @@
 //https://threejs-journey.com/lessons/geometries#the-different-built-in-geometries
 
 export enum Primitives {
-    Sphere,
-    Cone,
-    Box,
+    Sphere = "Sphere",
+    Cone = "Cone",
+    Box = "Box",
 }
 
 export type SphereProperties = {
@@ -31,7 +31,6 @@ export type PrimitiveProperties =
     ConeProperties |
     BoxProperties;
 
-
 export type PrimitiveWrapper =
     {type: Primitives.Sphere, properties: SphereProperties} |
     {type: Primitives.Cone, properties: ConeProperties} |
@@ -41,8 +40,8 @@ export const DEFAULT_MESH_SPHERE: PrimitiveWrapper = {
     type: Primitives.Sphere,
     properties: {
         radius: 1,
-        widthSegments: 24,
-        heightSegments: 12,
+        widthSegments: 48,
+        heightSegments: 24,
     }
 }
 

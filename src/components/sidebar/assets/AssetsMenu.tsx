@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { AssetItem } from "./AssetItem";
-import { AssetWrapper } from "../../../models/Asset";
+import { AssetWrapper } from "../../../models/assets/Asset";
 import { MenuSection } from "../commons/MenuSection";
 import { SidebarMenu } from "../commons/SidebarMenu";
 import { AddAssetButton } from "./AddAssetButton";

@@ -107,7 +107,7 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
     // TODO: PRESENT <SliderNumeric> IN A MORE READABLE WAY
     return (
         <>
-            <label className={styles.containerName}>{displayName}</label>
+            <p className={styles.containerName}>{displayName}</p>
             <div ref={gridContainerRef} className={styles.gridContainer}>
                 <div className={styles.column1}>
                     {values.map((entry, index) => {return renderSliderNumeric(entry, index);} )}

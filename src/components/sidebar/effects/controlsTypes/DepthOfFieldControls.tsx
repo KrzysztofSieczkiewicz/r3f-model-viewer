@@ -1,7 +1,7 @@
 import React from "react";
 
 import { DepthOfFieldProperties, EFFECT_TYPES } from "../../../../models/Effect";
-import { Checkbox } from "../../controls/Checkbox";
+import { Checkbox } from "../../controls/buttons/Checkbox";
 import { SliderLimited } from "../../controls/SliderLimited";
 import { useEffectsContext } from "../../../contexts/EffectsContext";
 import { DeleteItemButton } from "../../common/DeleteItemButton";

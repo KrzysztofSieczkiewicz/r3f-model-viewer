@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { PositionSliders } from "../controls/PositionSliders";
 import { ScaleSliders } from "../controls/ScaleSliders";
-import { AssetWrapper } from "../../../models/Asset";
+import { AssetWrapper } from "../../../models/assets/Asset";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 import { DeleteItemButton } from "../common/DeleteItemButton";
 import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";
@@ -10,8 +10,10 @@ import { RotationSliders } from "../controls/RotationSliders";
 import { ToggleAxesLockButton } from "../controls/buttons/ToggleAxesLockButton";
 import { ListItemBody } from "../commons/ListItemBody";
 import { MeshControls } from "./meshControls/MeshControls";
+import { MaterialControls } from "./materialControls/MaterialControls";
 
-
+// TODO: WHEN MESHES GET EXTENDED BY A ONE MORE LAYER, ADD A TYPE PROP THAT FIRST DETERMINES WHICH KIND OF MESH
+// SHOULD BE USED, AND THEN e.g. GET THE PROPER VALUE FROM ASSET VAR
 type Props = {
     assetId: string,
     asset: AssetWrapper,
@@ -25,10 +27,8 @@ export const AssetControls = ({assetId, asset}: Props) => {
         <ListItemBody>
             <DeleteItemButton deleteObject={() => deleteAsset(assetId)} />
 
-            <MeshControls
-                assetId={assetId}
-                type={asset.type}
-                mesh={asset.mesh} />
+            <MeshControls asset={asset} />
+            <MaterialControls asset={asset} />
 
             <SingleLineTrait name="Position">
                 <PositionSliders

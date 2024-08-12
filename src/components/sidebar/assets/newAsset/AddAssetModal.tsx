@@ -6,7 +6,7 @@ import { ReactComponent as ConeIcon } from '../../../../icons/sidebar/primitives
 import { ReactComponent as CubeIcon } from '../../../../icons/sidebar/cube.svg';
 
 import { ModalListButton } from "../../modal/ModalDropdownOptionButton";
-import { Primitives } from "../../../../models/Primitive";
+import { Primitives } from "../../../../models/assets/meshes/Primitive";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 import { ModalDropdownSingle } from "../../modal/ModalDropdownSingle";
 

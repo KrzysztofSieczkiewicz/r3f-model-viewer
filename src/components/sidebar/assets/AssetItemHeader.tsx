@@ -4,7 +4,7 @@ import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
 import { VisbilityEyeToggle } from "../common/VisbilityEyeToggle";
-import { AssetProperties } from "../../../models/Asset";
+import { AssetProperties } from "../../../models/assets/Asset";
 
 
 type Props = {

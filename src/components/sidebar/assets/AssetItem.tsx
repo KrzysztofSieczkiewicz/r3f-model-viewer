@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AssetWrapper } from '../../../models/Asset';
+import { AssetWrapper } from '../../../models/assets/Asset';
 import { AssetControls } from './AssetControls';
 import { AssetItemHeader } from './AssetItemHeader';
 import { MenuListItem } from '../commons/MenuListItem';

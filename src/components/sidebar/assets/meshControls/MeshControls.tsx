@@ -1,44 +1,42 @@
 import React from "react";
-import { Assets } from "../../../../models/Asset";
-import { Primitives, PrimitiveWrapper } from "../../../../models/Primitive"
+import { Primitives, PrimitiveWrapper } from "../../../../models/assets/meshes/Primitive"
 import { MeshConeControls } from "./MeshConeControls";
 import { MeshSphereControls } from "./MeshSphereControls";
 import { MeshBoxControls } from "./MeshBoxControls";
+import { ExpandableTraits } from "../../commons/traitContainers/ExpandableTraits";
+import { AssetWrapper, Meshes } from "../../../../models/assets/Asset";
 
 type Props = {
-    assetId: string,
-    type: Assets,
-    mesh: PrimitiveWrapper;
+    asset: AssetWrapper;
 }
 
-export const MeshControls = ( {assetId, type, mesh}: Props) => {
+export const MeshControls = ( {asset}: Props) => {
 
     const handleAssetType = () => {
-        return handlePrimitiveType();
-        /*
-        switch(type) {
-            case Assets.Primitive:
-                return handlePrimitiveType();
-            case Assets.Unwrapped:
-                // TODO: ADD UNWRAPPED MODELS HANDLING
-            case Assets.Scan:
-                // TODO: ADD SCANNED MODELS HANDLING
+        switch(asset.meshType) {
+            case Meshes.Primitive:
+                return handlePrimitiveType(asset.id, asset.mesh);
+            // case Assets.Unwrapped:
+            //     // TODO: ADD UNWRAPPED MODELS HANDLING
+            // case Assets.Scan:
+            //     // TODO: ADD SCANNED MODELS HANDLING
         }
-        */
     }
 
-    const handlePrimitiveType = () => {
+    const handlePrimitiveType = (id: string, mesh: PrimitiveWrapper) => {
         switch(mesh.type) {
             case Primitives.Sphere:
-                return <MeshSphereControls assetId={assetId} meshProperties={mesh.properties} />
+                return <MeshSphereControls assetId={id} meshProperties={mesh.properties} />
             case Primitives.Cone:
-                return <MeshConeControls assetId={assetId} meshProperties={mesh.properties} />
+                return <MeshConeControls assetId={id} meshProperties={mesh.properties} />
             case Primitives.Box:
-                return <MeshBoxControls assetId={assetId} meshProperties={mesh.properties} />
+                return <MeshBoxControls assetId={id} meshProperties={mesh.properties} />
         }
     }
 
-    return (<>
-        {handleAssetType()}
-    </>);
+    return (
+        <ExpandableTraits name={"Mesh"}>
+            {handleAssetType()}
+        </ExpandableTraits>
+    );
 }
