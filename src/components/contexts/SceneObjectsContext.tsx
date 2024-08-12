@@ -170,7 +170,6 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsList(filteredAssets);
     };
 
-    //TODO [URGENT]: debug this
     const changeEditableMaterialType = useCallback((id: string, newType: EditableMaterials) => {
         const index = assetsList.findIndex(asset => asset.id === id);
         if (index === -1) return;
@@ -180,13 +179,11 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
             material: {
                 type: newType,
                 properties: {
+                    ...DEFAULT_EDITABLE_MATERIALS[newType].properties,
                     ...assetsList[index].material.properties,
-                    ...DEFAULT_EDITABLE_MATERIALS[newType].properties
                 }
             }
         } as AssetWrapper;
-
-        console.log({updatedAsset})
 
         const newAssetsList = assetsList.map( (asset, i) => i===index ? updatedAsset: asset);
         setAssetsList(newAssetsList);

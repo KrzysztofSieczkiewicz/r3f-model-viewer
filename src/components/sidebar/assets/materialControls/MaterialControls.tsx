@@ -4,9 +4,8 @@ import { AssetWrapper, Materials } from "../../../../models/assets/Asset";
 import { EditableMaterials, EditableMaterialWrapper } from "../../../../models/assets/materials/EditableMaterial";
 import { PhysicalMaterialControls } from "./PhysicalMaterialControls";
 import { StandardMaterialControls } from "./StandardMaterialControls";
+import { PhongMaterialControls } from "./PhongMaterialControls";
 
-// TODO: WHEN MATERIALS GET EXTENDED BY A ONE MORE LAYER, ADD A TYPE PROP THAT FIRST DETERMINES WHICH KIND OF MATERIAL
-// SHOULD BE USED, AND THEN e.g. GET THE PROPER VALUE FROM MATERIAL VAR
 type Props = {
     asset: AssetWrapper;
 }
@@ -26,6 +25,8 @@ export const MaterialControls = ({asset}: Props) => {
                 return <PhysicalMaterialControls assetId={asset.id} properties={material.properties} />
             case EditableMaterials.Standard:
                 return <StandardMaterialControls assetId={asset.id} properties={material.properties} />
+            case EditableMaterials.Basic:
+                return <PhongMaterialControls assetId={asset.id} properties={material.properties} />
         }
     }
 

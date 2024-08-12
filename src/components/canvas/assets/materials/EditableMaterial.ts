@@ -51,7 +51,20 @@ export const getEditableMaterial = (material: EditableMaterialWrapper) => {
         }
 
         case EditableMaterials.Basic: {
-            return new MeshPhongMaterial();
+            const { transparent, opacity, flatShading, displayWireframe,
+                color, emissive, specular, shininess 
+            } = material.properties;
+
+            return new MeshPhongMaterial({
+                transparent: transparent,
+                opacity: opacity,
+                flatShading: flatShading,
+                wireframe: displayWireframe,
+                color: color,
+                emissive: emissive,
+                specular: specular,
+                shininess: shininess,
+        });
         }
     }
 }
