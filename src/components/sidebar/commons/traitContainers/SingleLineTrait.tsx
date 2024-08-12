@@ -11,7 +11,7 @@ export const SingleLineTrait = ({name, children}: Props) => {
 
     return (
         <div className={styles.container}>
-            {name && <label className={styles.traitName}>{name}</label>}
+            {name && <p className={styles.traitName}>{name}</p>}
             {children}
         </div>
     );

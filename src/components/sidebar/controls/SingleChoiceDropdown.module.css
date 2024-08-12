@@ -35,6 +35,7 @@
 .value {
     align-self: flex-start;
     margin: auto 0;
+    padding-top: 0.15rem;
     padding-left: 0.25rem;
     text-align: start;
     user-select: none;

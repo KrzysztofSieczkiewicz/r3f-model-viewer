@@ -11,7 +11,7 @@ export const TraitsSection = ( {displayName, children}: Props) => {
     const renderDisplayName = (displayName: string|undefined) => {
         if(displayName === undefined) return;
 
-        return <label className={styles.sectionName}>{displayName}</label>
+        return <p className={styles.sectionName}>{displayName}</p>
     }
 
     return (

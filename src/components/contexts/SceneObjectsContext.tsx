@@ -178,13 +178,15 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         const updatedAsset = {
             ...assetsList[index],
             material: {
-                type: DEFAULT_EDITABLE_MATERIALS[newType].type,
+                type: newType,
                 properties: {
                     ...assetsList[index].material.properties,
                     ...DEFAULT_EDITABLE_MATERIALS[newType].properties
                 }
             }
         } as AssetWrapper;
+
+        console.log({updatedAsset})
 
         const newAssetsList = assetsList.map( (asset, i) => i===index ? updatedAsset: asset);
         setAssetsList(newAssetsList);
