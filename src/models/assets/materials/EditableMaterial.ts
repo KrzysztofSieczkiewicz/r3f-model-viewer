@@ -1,5 +1,6 @@
 import { BaseMaterialProperties } from "./BaseMaterial";
 
+//TODO: ADD TOON MATERIAL https://threejs.org/docs/#api/en/materials/MeshToonMaterial
 export enum EditableMaterials {
     Physical = "Physical",
     Standard = "Standard",
