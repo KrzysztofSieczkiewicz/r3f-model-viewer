@@ -9,6 +9,7 @@ import { TraitsSection } from "../../commons/traitContainers/TraitsSection";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 import { ResetButton } from "../../controls/buttons/ResetButton";
 import { SindleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
+import { TexturePicker } from "../../controls/TexturePicker";
 
 type Props = {
     assetId: string,
@@ -28,6 +29,12 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
 
 
     return (<>
+        <TraitsSection>
+            <SingleLineTrait name="Test texture">
+                <TexturePicker />
+            </SingleLineTrait>
+        </TraitsSection>
+
         <TraitsSection>
             <SingleLineTrait name="Material type">
                 <SindleChoiceDropdown 

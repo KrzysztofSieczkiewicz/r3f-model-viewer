@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import styles from './TexturePicker.module.css';
+
 import { Texture } from "three";
 
 type Props = {
-    map: Texture;
+    map?: Texture | null;
 }
 
-export const TexturePicker = ({map}: Props) => {
+export const TexturePicker = ({map=null}: Props) => {
 
     const [ isPickerOpen, setIsPickerOpen ] = useState(false);
     const [ position, setPosition ] = useState(0);
@@ -15,9 +17,17 @@ export const TexturePicker = ({map}: Props) => {
         setIsPickerOpen(active => !active);
     }
 
+    const handleDisplayedTitle = () => {
+        if (map === null) return "Select file...";
+        return map.name;
+    }
+
     return (<>
-        <div onMouseDown={(e) => toggleColorPicker(e)} >
-            <p>{map.name}</p>
+        <div
+            className={styles.previewContainer}
+            onMouseDown={(e) => toggleColorPicker(e)} 
+        >
+            <p className={styles.mapName}>{handleDisplayedTitle()}</p>
         </div>
 
         {isPickerOpen &&
@@ -29,7 +39,8 @@ export const TexturePicker = ({map}: Props) => {
 
 // TODO: CONSIDER REPLACING WITH MODAL?
 const PickerWindow = () => {
-    return (<>
-
-    </>)
+    return (
+    <div className={styles.pickerWindowContainer}>
+        <p>Select file</p>
+    </div>)
 }
