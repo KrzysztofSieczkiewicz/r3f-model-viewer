@@ -31,5 +31,8 @@
 
 
 .pickerWindowContainer {
-    
+    position: fixed;
+    width: fit-content;
+
+    background-color: red;
 }
