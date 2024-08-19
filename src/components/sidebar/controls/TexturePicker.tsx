@@ -11,10 +11,11 @@ type Props = {
 
 export const TexturePicker = ({map=null}: Props) => {
 
+    const [ texture, setTexture ] = useState<Texture|null>(null)
     const [ isPickerOpen, setIsPickerOpen ] = useState(false);
     const [ position, setPosition ] = useState(0);
 
-    const toggleColorPicker = (e: React.MouseEvent<HTMLDivElement>) => {
+    const togglePicker = (e: React.MouseEvent<HTMLDivElement>) => {
         setPosition(e.clientX - 25);
         setIsPickerOpen(active => !active);
     }
@@ -27,14 +28,14 @@ export const TexturePicker = ({map=null}: Props) => {
     return (<>
         <div
             className={styles.previewContainer}
-            onMouseDown={(e) => toggleColorPicker(e)} 
+            onMouseDown={(e) => togglePicker(e)} 
         >
             <p className={styles.mapName}>{handleDisplayedTitle()}</p>
         </div>
 
         {isPickerOpen &&
         <div>
-            <TexturePickerPopup/>
+            <TexturePickerPopup handleChange={setTexture}/>
         </div>}
     </>)
 }
@@ -43,21 +44,30 @@ export const TexturePicker = ({map=null}: Props) => {
 // TODO [API]: ADD A "SEARCH THE SERVER" SELECTOR
 // TODO [API]: ADD A "SEARCH FROM PROJECT FILES" SELECTOR
 // TODO: ADD "LOAD FROM URL" SELECTOR
-const TexturePickerPopup = () => {
+type TexturePickerPopupProps = {
+    handleChange: (newTexture: Texture|null) => void
+}
 
-    const [texture, setTexture] = useState<Texture|null>(null)
-    const [imageUrl, setImageUrl] = useState<string>("");
+const TexturePickerPopup = ( {handleChange}: TexturePickerPopupProps) => {
+
+    const [imageUrl, setImageUrl] = useState("");
+    const [textureName, setTextureName] = useState("");
 
     const loadedTexture = useSafeTextureLoader(imageUrl);
     
     useEffect(() => {
-        setTexture(loadedTexture);
+        if(!loadedTexture) return;
+
+        loadedTexture.name = textureName; // TODO: MAYBE INSTEAD OF SETTING NAME JUST PASS IT TO THE PARENT AS "FILE NAME?"
+        handleChange(loadedTexture);
     }, [loadedTexture]);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        if (file)
+        if (file) {
             setImageUrl(URL.createObjectURL(file));
+            setTextureName(file.name);
+        }
     }
 
     const renderDiskFileSelector = () => {

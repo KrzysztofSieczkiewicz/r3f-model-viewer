@@ -11,10 +11,16 @@ export const useSafeTextureLoader = (url: string | null) => {
             setTexture(null);
             return;
         }
+        const abortController = new AbortController() 
 
         loader
             .loadAsync(url)
-            .then(texture => setTexture(texture));
+            .then(texture => setTexture(texture))
+            .catch(() => setTexture(null));
+
+        return () => {
+            abortController.abort()
+        }
     }, [url]);
 
     return texture;
