@@ -3,6 +3,7 @@ import styles from './TexturePicker.module.css';
 
 import { Texture, TextureLoader } from "three";
 import { useLoader } from "@react-three/fiber";
+import { useSafeTextureLoader } from "../../../hooks/useSafeTextureLoader";
 
 type Props = {
     map?: Texture | null;
@@ -45,31 +46,27 @@ export const TexturePicker = ({map=null}: Props) => {
 const TexturePickerPopup = () => {
 
     const [texture, setTexture] = useState<Texture|null>(null)
-    const [imageUrl, setImageUrl] = useState<string>("https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg");
+    const [imageUrl, setImageUrl] = useState<string>("");
 
-    const loadedTexture = useLoader(TextureLoader as any, imageUrl);
+    const loadedTexture = useSafeTextureLoader(imageUrl);
     
     useEffect(() => {
-        console.log({loadedTexture})
         setTexture(loadedTexture);
     }, [loadedTexture]);
 
-    // Set the image URL, triggering useLoader to load the texture
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        console.log({file})
-        if (!file) return;
-
-        setImageUrl(URL.createObjectURL(file));
+        if (file)
+            setImageUrl(URL.createObjectURL(file));
     }
 
     const renderDiskFileSelector = () => {
-        return (<>
+        return (
             <input type="file"
                 accept=".jpg,.jpeg,.png"
                 onChange={(e) => handleFileChange(e)}
-            ></input>
-        </>);
+            />
+        );
     }
 
     return (
