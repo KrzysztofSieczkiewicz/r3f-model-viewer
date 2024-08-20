@@ -3,7 +3,7 @@ import React from "react";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhongMaterialProperties } from "../../../../models/assets/materials/EditableMaterial"
 import { TraitsSection } from "../../commons/traitContainers/TraitsSection";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
-import { SindleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
+import { SingleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { Checkbox } from "../../controls/buttons/Checkbox";
 import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
@@ -27,7 +27,7 @@ export const PhongMaterialControls = ({assetId, properties}: Props) => {
     return (<>
         <TraitsSection>
             <SingleLineTrait name="Material type">
-                <SindleChoiceDropdown 
+                <SingleChoiceDropdown 
                     selected={EditableMaterials.Basic} 
                     selectionList={Object.values(EditableMaterials)} 
                     handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />

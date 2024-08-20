@@ -3,7 +3,7 @@ import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, StandardMaterialProperti
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 import { TraitsSection } from "../../commons/traitContainers/TraitsSection";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
-import { SindleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
+import { SingleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
 import { Checkbox } from "../../controls/buttons/Checkbox";
 import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { SliderNumeric } from "../../controls/SliderNumeric";
@@ -31,10 +31,11 @@ export const StandardMaterialControls = ({assetId, properties}: Props) => {
     const defaultProperties = DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Standard].properties;
 
     // TODO: AFTER INTRODUCING CONDITIONAL DISPLAYING/GREYING OUT -> MAYBE SEPARATE THIS INTO SUBCOMPONENTS?
+    // PREFERABLY MOVE INTO SEPARATE renderSection() functions
     return (<>
         <TraitsSection>
             <SingleLineTrait name="Material type">
-                <SindleChoiceDropdown 
+                <SingleChoiceDropdown 
                     selected={EditableMaterials.Standard} 
                     selectionList={Object.values(EditableMaterials)} 
                     handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
@@ -67,13 +68,13 @@ export const StandardMaterialControls = ({assetId, properties}: Props) => {
             </SingleLineTrait>
         </TraitsSection>
 
-        <TraitsSection displayName="Rougness">
-            <SingleLineTrait name="Map">
+        <TraitsSection displayName="Surface">
+            <SingleLineTrait name="Roughness">
                 <TexturePicker
                     map={roughnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
             </SingleLineTrait>
-            <SingleLineTrait name="Value">
+            <SingleLineTrait name="Roughness">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
@@ -82,15 +83,12 @@ export const StandardMaterialControls = ({assetId, properties}: Props) => {
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {roughness: defaultProperties.roughness} )} />
             </SingleLineTrait>
-        </TraitsSection>
-
-        <TraitsSection displayName="Metalness">
-            <SingleLineTrait name="Map">
+            <SingleLineTrait name="Metalness">
                 <TexturePicker
                     map={metalnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
             </SingleLineTrait>
-            <SingleLineTrait name="Value">
+            <SingleLineTrait name="Metalness">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
