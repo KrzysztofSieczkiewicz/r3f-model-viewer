@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styles from './TexturePicker.module.css';
 
-import { Texture, TextureLoader } from "three";
-import { useLoader } from "@react-three/fiber";
+import { Texture } from "three";
 import { useSafeTextureLoader } from "../../../hooks/useSafeTextureLoader";
 
 type Props = {
-    map?: Texture | null;
+    map: Texture|null;
+    handleChange: (newMap: Texture|null) => void
 }
 
-export const TexturePicker = ({map=null}: Props) => {
+export const TexturePicker = ({map=null, handleChange}: Props) => {
 
-    const [ texture, setTexture ] = useState<Texture|null>(null)
     const [ isPickerOpen, setIsPickerOpen ] = useState(false);
-    const [ position, setPosition ] = useState(0);
+    const [ popupPosition, setPosition ] = useState(0);
 
     const togglePicker = (e: React.MouseEvent<HTMLDivElement>) => {
         setPosition(e.clientX - 25);
@@ -23,6 +22,11 @@ export const TexturePicker = ({map=null}: Props) => {
     const handleDisplayedTitle = () => {
         if (map === null) return "Select file...";
         return map.name;
+    }
+
+    const handleTextureChange = (newTexture: Texture|null) => {
+        handleChange(newTexture);
+        setIsPickerOpen(false);
     }
 
     return (<>
@@ -35,7 +39,7 @@ export const TexturePicker = ({map=null}: Props) => {
 
         {isPickerOpen &&
         <div>
-            <TexturePickerPopup handleChange={setTexture}/>
+            <TexturePickerPopup handleChange={handleTextureChange}/>
         </div>}
     </>)
 }
@@ -57,7 +61,6 @@ const TexturePickerPopup = ( {handleChange}: TexturePickerPopupProps) => {
     
     useEffect(() => {
         if(!loadedTexture) return;
-
         loadedTexture.name = textureName; // TODO: MAYBE INSTEAD OF SETTING NAME JUST PASS IT TO THE PARENT AS "FILE NAME?"
         handleChange(loadedTexture);
     }, [loadedTexture]);

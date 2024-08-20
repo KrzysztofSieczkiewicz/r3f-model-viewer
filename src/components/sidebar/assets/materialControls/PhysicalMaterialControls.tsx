@@ -30,12 +30,6 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
 
     return (<>
         <TraitsSection>
-            <SingleLineTrait name="Test texture">
-                <TexturePicker />
-            </SingleLineTrait>
-        </TraitsSection>
-
-        <TraitsSection>
             <SingleLineTrait name="Material type">
                 <SindleChoiceDropdown 
                     selected={EditableMaterials.Physical} 
