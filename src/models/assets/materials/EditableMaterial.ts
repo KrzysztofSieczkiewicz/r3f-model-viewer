@@ -107,10 +107,63 @@ export type EditableMaterialWrapper =
     {type: EditableMaterials.Standard, properties: StandardMaterialProperties} |
     {type: EditableMaterials.Basic, properties: PhongMaterialProperties}
 
+    
+const DEFAULT_MATERIAL_BASIC: EditableMaterialWrapper = {
+    type: EditableMaterials.Basic,
+    properties: {
+        transparent: false,
+        opacity: 0.5,
+        flatShading: false,
+        displayWireframe: false,
+
+        color: '#ffffff',
+        emissive: '#000000',
+        specular: '#000000',
+        shininess: 0.3,
+    }
+}
+
+const DEFAULT_MATERIAL_STANDARD: EditableMaterialWrapper = {
+    type: EditableMaterials.Standard,
+    properties: {
+        transparent: false,
+        opacity: 0.5,
+        flatShading: false,
+        displayWireframe: false,
+
+        colorMap: null,
+        color: '#ffffff',
+
+        roughnessMap: null,
+        roughness: 0.5,
+        metalnessMap: null,
+        metalness: 0,
+
+        environmentMap: null,
+        environmentMapRotation: 0,
+        environmentMapIntensity: 1,
+
+        emissive: '#000000',
+        emissiveMap: null,
+        emissiveIntensity: 0.25,
+        
+        alphaMap: null,
+        ambientOcclusionMap: null,
+        ambientOcclusionMapIntensity: 0.75,
+
+        normalMap: null,
+        normalScale: 1,
+        bumpMap: null,
+        bumpScale: 0.75,
+        displacementMap: null,
+        displacementScale: 1,
+        displacementBias: 0,
+    }
+}
+
 const DEFAULT_MATERIAL_PHYSICAL: EditableMaterialWrapper = {
     type: EditableMaterials.Physical,
     properties: {
-
         flatShading: false,
         displayWireframe: false,
 
@@ -184,122 +237,6 @@ const DEFAULT_MATERIAL_PHYSICAL: EditableMaterialWrapper = {
         thickness: 0,        
     }
 }
-
-const DEFAULT_MATERIAL_STANDARD: EditableMaterialWrapper = {
-    type: EditableMaterials.Standard,
-    properties: {
-        transparent: false,
-        opacity: 0.5,
-        flatShading: false,
-        displayWireframe: false,
-
-        colorMap: null,
-        color: '#ffffff',
-
-        roughnessMap: null,
-        roughness: 0.5,
-        metalnessMap: null,
-        metalness: 0,
-
-        environmentMap: null,
-        environmentMapRotation: 0,
-        environmentMapIntensity: 1,
-
-        emissive: '#000000',
-        emissiveMap: null,
-        emissiveIntensity: 0.25,
-        
-        alphaMap: null,
-        ambientOcclusionMap: null,
-        ambientOcclusionMapIntensity: 0.75,
-
-        normalMap: null,
-        normalScale: 1,
-        bumpMap: null,
-        bumpScale: 0.75,
-        displacementMap: null,
-        displacementScale: 1,
-        displacementBias: 0,
-    }
-}
-
-const DEFAULT_MATERIAL_BASIC: EditableMaterialWrapper = {
-    type: EditableMaterials.Basic,
-    properties: {
-        transparent: false,
-        opacity: 0.5,
-        flatShading: false,
-        displayWireframe: false,
-
-        color: '#ffffff',
-        emissive: '#000000',
-        specular: '#000000',
-        shininess: 0.3,
-    }
-}
-
-// const DEFAULT_MATERIAL_MAPPED: EditableMaterialWrapper = {
-//     type: EditableMaterials.Mapped,
-//     properties: {
-//         alphaMap: null,
-//         ambientOcclusionMap: null,
-//         ambientOcclusionMapIntensity: 1,
-//         bumpMap: null,
-//         bumpScale: 0,
-//         color: '#ffffff',
-//         colorMap: null,
-//         displacementMap: null,
-//         displacementScale: 0,
-//         displacementBias: 0,
-//         emissive: '#000000',
-//         emissiveMap: null,
-//         emissiveIntensity: 0,
-//         environmentMap: null,
-//         environmentMapRotation: 0,
-//         environmentMapIntensity: 0,
-//         metalnessMap: null,
-//         metalness: 0.2,
-//         normalMap: null,
-//         normalMapType: 1,
-//         normalScale: 0,
-//         roughnessMap: null,
-//         roughness: 1,
-//         anisotropyMap: null,
-//         anisotropy: 0.2,
-//         anisotropyRotation: 0,
-//         attenuationColor: '#ffffff',
-//         attenuationDistance: 1,
-//         clearcoatMap: null,
-//         clearcoat: 0,
-//         clearcoatRoughnessMap: null,
-//         clearcoatRoughness: 0.5,
-//         clearcoatNormalMap: null,
-//         clearcoatNormalScale: new Vector2(1,2),
-//         dispersion: 0.1,
-//         ior: 1.35,
-//         reflectivity: 0.5,
-//         iridescenceMap: null,
-//         iridescence: 1.2,
-//         iridescenceIor: 1.4,
-//         sheen: 1,
-//         sheenRoughnessMap: null,
-//         sheenRoughness: 0.5,
-//         sheenColorMap: null,
-//         sheenColor: '#000000',
-//         specularIntensityMap: null,
-//         specularIntensity: 1,
-//         specularColorMap: null,
-//         specularColor: '#000000',
-//         thicknessMap: null,
-//         thickness: 0,
-//         transmissionMap: null,
-//         transmission: 0,
-//         transparent: false,
-//         opacity: 1,
-//         flatShading: false,
-//         displayWireframe: false,
-//     }
-// }
 
 export const  DEFAULT_EDITABLE_MATERIALS = {
     [EditableMaterials.Physical]: DEFAULT_MATERIAL_PHYSICAL,
