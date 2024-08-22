@@ -77,7 +77,7 @@ export const RenderedAsset = ( {asset}: Props) => {
 
                 {isOutline && 
                 <Outlines 
-                    thickness={0.0025} 
+                    thickness={0.025} 
                     color={outlineColor} 
                     screenspace={false} 
                     opacity={1} 

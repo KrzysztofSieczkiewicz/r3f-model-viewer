@@ -1,7 +1,6 @@
 import React from "react";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 
-import { PositionSliders } from "../../controls/PositionSliders";
 import { SliderLimited } from "../../controls/SliderLimited";
 import { ColorPicker } from "../../controls/ColorPicker";
 import { SpotLightProperties } from "../../../../models/Light";
@@ -10,6 +9,7 @@ import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
 import { ResetButton } from "../../controls/buttons/ResetButton";
+import { SlidersArray } from "../../controls/SlidersArray";
 
 type Props = {
     id: string,
@@ -23,8 +23,9 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
         <ListItemBody>
             <DeleteItemButton deleteObject={() => deleteLight(id)}/>
             <SingleLineTrait name="Position" >
-                <PositionSliders
-                    value={properties.position} step={0.01}
+                <SlidersArray
+                    value={properties.position}
+                    step={0.01}
                     handleChange={(val) => updateLightProperties(id, {position: val} )} />
             </SingleLineTrait>
 

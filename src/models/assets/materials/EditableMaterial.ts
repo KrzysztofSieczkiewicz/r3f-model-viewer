@@ -1,4 +1,4 @@
-import { Texture, Vector2 } from "three";
+import { Texture } from "three";
 
 // TODO: IF THIS FILE GETS ANY LARGER -> SEPARATE MATERIALS INTO DIFFERENT FILES
 //TODO: ADD TOON MATERIAL https://threejs.org/docs/#api/en/materials/MeshToonMaterial
@@ -73,7 +73,7 @@ export type PhysicalMaterialProperties = {
     clearcoatRoughnessMap: Texture|null,
     clearcoatRoughness: number,
     clearcoatNormalMap: Texture|null,
-    clearcoatNormalScale: Vector2,
+    clearcoatNormalScale: [number, number],
 
     anisotropyMap: Texture|null,
     anisotropy: number,
@@ -217,7 +217,7 @@ const DEFAULT_MATERIAL_PHYSICAL: EditableMaterialWrapper = {
         clearcoatRoughnessMap: null,
         clearcoatRoughness: 0.25,
         clearcoatNormalMap: null,
-        clearcoatNormalScale: new Vector2(1,1),
+        clearcoatNormalScale: [1,1],
 
         anisotropyMap: null,
         anisotropy: 0,
@@ -242,46 +242,4 @@ export const  DEFAULT_EDITABLE_MATERIALS = {
     [EditableMaterials.Physical]: DEFAULT_MATERIAL_PHYSICAL,
     [EditableMaterials.Standard]: DEFAULT_MATERIAL_STANDARD,
     [EditableMaterials.Basic]: DEFAULT_MATERIAL_BASIC,
-}
-
-
-export type MappedPhysicalMaterialsProperties = {
-    reflectivity: number,
-    dispersion: number,
-    ior: number,
-
-    specularIntensityMap: Texture|null,
-    specularIntensity: number,
-    specularColorMap: Texture|null,
-    specularColor: string,
-
-    attenuationColor: string,
-    attenuationDistance: number,
-    
-    clearcoatMap: Texture|null,
-    clearcoat: number,
-    clearcoatRoughnessMap: Texture|null,
-    clearcoatRoughness: number,
-    clearcoatNormalMap: Texture|null,
-    clearcoatNormalScale: Vector2,
-
-    anisotropyMap: Texture|null,
-    anisotropy: number,
-    anisotropyRotation: number,
-
-    iridescenceMap: Texture|null,
-    iridescence: number,
-    iridescenceIor: number,
-
-    sheen: number,
-    sheenRoughnessMap: Texture|null,
-    sheenRoughness: number,
-    sheenColorMap: Texture|null,
-    sheenColor: string,
-
-    thicknessMap: Texture|null,
-    thickness: number,
-
-    transmissionMap: Texture|null,
-    transmission: number,
 }
