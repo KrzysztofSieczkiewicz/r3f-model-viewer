@@ -10,7 +10,7 @@ import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 import { ResetButton } from "../../controls/buttons/ResetButton";
 import { SingleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
 import { TexturePicker } from "../../controls/TexturePicker";
-import { SliderShortContainer } from "../../controls/sliderContainers/SliderShortContainer";
+import { SlidersArray } from "../../controls/SlidersArray";
 
 type Props = {
     assetId: string,
@@ -74,7 +74,7 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                     currentColor={color}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {color: value} )} />
             </SingleLineTrait>
-        </TraitsSection> 
+        </TraitsSection>
 
         <TraitsSection displayName="Surface">
             <SingleLineTrait name="Roughness">
@@ -365,30 +365,12 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                     map={clearcoatNormalMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatNormalMap: value} )} />
             </SingleLineTrait>
-
-            {/* // TODO: HANDLE DOUBLE SLIDER */}
             <SingleLineTrait name="Normal scale">
-                <SliderShortContainer>
-                    <SliderNumeric
-                        min={0} max={5} step={0.005} 
-                        value={clearcoatNormalScale[0]}
-                        handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatRoughness: value} )} />
-                </SliderShortContainer>
-                <SliderShortContainer>
-                    <SliderNumeric
-                        min={0} max={5} step={0.005} 
-                        value={clearcoatNormalScale[1]}
-                        handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatRoughness: value} )} />
-                </SliderShortContainer>
-            </SingleLineTrait>
-            {/* <SingleLineTrait name="Normal scale">
-                <SliderLongContainer>
-                    <SliderNumeric
-                        min={0} max={1} step={0.005} 
+                    <SlidersArray
+                        step={0.005} 
                         value={clearcoatNormalScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatNormalScale: value} )} />
-                </SliderLongContainer>
-            </SingleLineTrait> */}
+            </SingleLineTrait>
         </TraitsSection>
 
         <TraitsSection displayName="Anisotropy">

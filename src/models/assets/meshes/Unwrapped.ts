@@ -1,7 +1,5 @@
-export type UnwrappedProperties = {
 
-}
 
 export type UnwrappedWrapper = {
-    
+    src: string,
 }

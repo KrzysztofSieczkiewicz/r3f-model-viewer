@@ -1,6 +1,7 @@
 import { generateNewID } from '../../utils/idUtil';
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, EditableMaterialWrapper } from './materials/EditableMaterial';
 import { DEFAULT_MESH_SPHERE, PrimitiveWrapper } from './meshes/Primitive';
+import { UnwrappedWrapper } from './meshes/Unwrapped';
 
 export enum Meshes {
     Primitive = "Primitive",
@@ -10,7 +11,6 @@ export enum Meshes {
 
 export enum Materials {
     Editable = "Editable",
-    Mapped = "Mapped"
 }
 
 export type AssetProperties = {
@@ -32,7 +32,7 @@ export type AssetProperties = {
 // OR JUST MAKE THEM LOOK INSIDE AND ACT BASED ON TYPES
 export type AssetWrapper = 
     { id: string, properties: AssetProperties, meshType: Meshes.Primitive, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper} |
-    { id: string, properties: AssetProperties, meshType: Meshes.Unwrapped, mesh: PrimitiveWrapper, materialType: Materials.Mapped, material: EditableMaterialWrapper} |
+    { id: string, properties: AssetProperties, meshType: Meshes.Unwrapped, mesh: UnwrappedWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper} |
     { id: string, properties: AssetProperties, meshType: Meshes.Scan, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper}
 
 const INIT_ASSET_LIST: AssetWrapper[] = [

@@ -65,6 +65,7 @@ const TexturePickerPopup = ( {handleChange}: TexturePickerPopupProps) => {
         handleChange(loadedTexture);
     }, [loadedTexture]);
 
+    // TODO: introduce proper caching or at least handle releasing url after you're done
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
