@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { Outlines, useGLTF } from "@react-three/drei";
 import { useEffect, useState } from "react";
-import { AssetWrapper } from "../../../models/assets/Asset";
+import { AssetWrapper, Meshes } from "../../../models/assets/Asset";
 import React from "react";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { AssetsGizmo } from "./AssetsGizmo";
@@ -49,6 +49,14 @@ export const RenderedAsset = ( {asset}: Props) => {
     
     if(!asset.properties.visible) return;
 
+    const handleGeometry = (asset: AssetWrapper) => {
+        switch (asset.meshType) {
+            case Meshes.Primitive:
+                return getPrimitiveGeometry(asset.mesh)
+
+        }
+    }
+
     // TODO: UNIFY ROTATION UNITS, EVERYTHING IS USING DIFFERENT SYSTEM
     return (
         <group>
@@ -67,7 +75,7 @@ export const RenderedAsset = ( {asset}: Props) => {
                 castShadow={asset.properties.castShadow}
                 receiveShadow={asset.properties.receiveShadow}
                 //geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
-                geometry={getPrimitiveGeometry(asset.mesh)}
+                geometry={handleGeometry(asset)}
                 //material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
                 material={getEditableMaterial(asset.material)}
                 position={asset.properties.position}
@@ -77,7 +85,7 @@ export const RenderedAsset = ( {asset}: Props) => {
 
                 {isOutline && 
                 <Outlines 
-                    thickness={0.0025} 
+                    thickness={0.025} 
                     color={outlineColor} 
                     screenspace={false} 
                     opacity={1} 

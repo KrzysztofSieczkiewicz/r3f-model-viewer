@@ -64,7 +64,9 @@ export const getEditableMaterial = (material: EditableMaterialWrapper) => {
                 emissive: emissive,
                 specular: specular,
                 shininess: shininess,
-        });
+            });
         }
+
+        
     }
 }

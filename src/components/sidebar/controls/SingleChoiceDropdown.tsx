@@ -9,7 +9,7 @@ type Props<T> = {
     handleChange: (value: T) => void
 }
 
-export const SindleChoiceDropdown = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
+export const SingleChoiceDropdown = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);

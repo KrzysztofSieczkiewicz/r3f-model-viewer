@@ -108,7 +108,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
                 primitive = DEFAULT_MESH_BOX;
                 break;
         }
-        const newAsset = {...getDefaultAsset(), type: Meshes.Primitive, mesh: primitive};
+        const newAsset = {...getDefaultAsset(), meshType: Meshes.Primitive, mesh: primitive} as AssetWrapper;
         const extendedAssetsList = [...assetsList, newAsset];
 
         setAssetsList(extendedAssetsList);
@@ -133,12 +133,17 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         const index = assetsList.findIndex(asset => asset.id === id);
         if (index === -1) return;
 
+        const initialAsset = assetsList[index];
+        if(initialAsset.meshType !== Meshes.Primitive) return;
+        
+        const initialMesh = initialAsset.mesh;
+
         const updatedAsset = {
-            ...assetsList[index],
+            ...initialAsset,
             mesh: {
-                ...assetsList[index].mesh,
+                ...initialMesh,
                 properties: {
-                    ...assetsList[index].mesh.properties,
+                    ...initialMesh.properties,
                     ...change
                 }
             }
