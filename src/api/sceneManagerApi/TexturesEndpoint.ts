@@ -1,12 +1,24 @@
-import { SceneManagerClient } from "../SceneManagerClient"
+import { apiClient } from "./SceneManagerApi";
 
-
-// Fetch all textures
-export const getTextures = async () => {
-    return SceneManagerClient('/textures');
+interface Texture {
+    
 }
 
-// Fetch a single texture by ID
+// GET all textures
+export const getTextures = async () => {
+    return apiClient.request<Texture>(
+        '/textures',
+        'GET'
+    );
+}
+
+// GET a single texture by ID
 export const getTexture = async (id: string) => {
-    return SceneManagerClient(`/textures/${id}`)
+    const result = apiClient.request<Texture>(
+        `/textures${id}`,
+        'GET'
+    );
+
+    console.log({result})
+    return result
 }
