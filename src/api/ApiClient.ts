@@ -3,11 +3,12 @@ export class ApiClient {
     private baseUrl: string;
     private defaultHeaders: Record<string, string>;
 
-    constructor(baseUrl: string) {
+    constructor(baseUrl: string, commonHeaders?: Record<string,string>) {
         // TODO: replace this and constructor parameter with getting a value from env
         this.baseUrl = baseUrl;
         this.defaultHeaders = {
             "Content-Type": "application/json",
+            ...commonHeaders
         };
     }
 
