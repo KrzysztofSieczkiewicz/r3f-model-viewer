@@ -30,8 +30,13 @@ const request = async <T>(
     return response.json() as Promise<T>
 }
 
-const get = () => {
-    
+const get = <T>(path: string, headers?: Record<string,string>,  body?: any) => {
+    return request<T>(
+        path,
+        "GET",
+        headers,
+        body,
+    )
 }
 
 export const apiClient = new ApiClient('localhost:9090');

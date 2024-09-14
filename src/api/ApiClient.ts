@@ -11,7 +11,7 @@ export class ApiClient {
         };
     }
 
-    async request<T>(
+    private async request<T>(
         path: string,
         method: "GET" | "POST" | "PUT" | "DELETE",
         headers?: Record<string, string>,
@@ -34,5 +34,52 @@ export class ApiClient {
         }
 
         return response.json() as Promise<T>
+    }
+
+
+    async get<T>(path: string, headers?: Record<string, string>, body?: any) {
+        // TODO: Make sure that passing headers and body like this will not cause errors
+        const response = this.request<T>(
+            path,
+            "GET",
+            headers,
+            body,
+        );
+
+        // Add additional checks here
+        return response;
+    }
+
+    async post<T>(path: string, headers?: Record<string, string>, body?: any) {
+        const response = this.request<T>(
+            path,
+            "POST",
+            headers,
+            body,
+        );
+
+        return response;
+    }
+
+    async put<T>(path: string, headers?: Record<string, string>, body?: any) {
+        const response = this.request<T>(
+            path,
+            "PUT",
+            headers,
+            body,
+        );
+
+        return response;
+    }
+
+    async delete<T>(path: string, headers?: Record<string, string>, body?: any) {
+        const response = this.request<T>(
+            path,
+            "DELETE",
+            headers,
+            body,
+        );
+
+        return response;
     }
 }
