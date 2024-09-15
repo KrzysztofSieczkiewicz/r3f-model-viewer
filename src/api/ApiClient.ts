@@ -38,18 +38,26 @@ export class ApiClient {
             const contentType = response.headers.get("Content-Type");
             const isJson = contentType?.includes("application/json");
 
+            let responseBody: any;
+            if(isJson) {
+                responseBody = await response.json();
+            } else {
+                responseBody = await response.text();
+            }
+
             if (!response.ok) {
-                const errorBody = isJson ? await response.json() : await response.text();
                 const error: ApiError = new Error(`Request failed with status ${response.status}: ${response.statusText}`);
                 error.status = response.status;
                 error.statusText = response.statusText;
-                error.responseBody = errorBody;
+                error.responseBody = responseBody;
                 throw error;
             }
             
-            console.log({body: response.json()})
+            response.headers.forEach(header => console.log(header))
+            console.log({responseBody});
 
-            return isJson ? await response.json() : ({} as T); // Ensure correct type for empty responses
+            return responseBody as T;
+
         } catch (error) {
             console.error('Network request failed:', error);
             throw error;
@@ -57,13 +65,12 @@ export class ApiClient {
     }
 
 
-    async get<T>(path: string, headers?: Record<string, string>, body?: any) {
+    async get<T>(path: string, headers?: Record<string, string>) {
         // TODO: Make sure that passing headers and body like this will not cause errors
         const response = this.request<T>(
             path,
             "GET",
             headers,
-            body,
         );
 
         // Add additional checks here
@@ -71,35 +78,30 @@ export class ApiClient {
     }
 
     async post<T>(path: string, headers?: Record<string, string>, body?: any) {
-        const response = this.request<T>(
+        return this.request<T>(
             path,
             "POST",
             headers,
             body,
         );
-
-        return response;
     }
 
     async put<T>(path: string, headers?: Record<string, string>, body?: any) {
-        const response = this.request<T>(
+        return this.request<T>(
             path,
             "PUT",
             headers,
             body,
         );
-
-        return response;
     }
 
     async delete<T>(path: string, headers?: Record<string, string>, body?: any) {
-        const response = this.request<T>(
+        return this.request<T>(
             path,
             "DELETE",
             headers,
             body,
         );
-
-        return response;
     }
+
 }

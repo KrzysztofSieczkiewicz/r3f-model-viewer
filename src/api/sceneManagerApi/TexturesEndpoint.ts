@@ -1,6 +1,6 @@
 import { apiClient } from "./SceneManagerApi";
 
-interface ApiTexture {
+export type ApiTexture = {
     id: string,
     name: string,
     path: string,
@@ -8,7 +8,7 @@ interface ApiTexture {
 
 // GET all textures
 export const getTextures = async () => {
-    const result = apiClient.get<ApiTexture[]>('/textures');
+    const result = await apiClient.get<ApiTexture[]>('/textures');
 
     console.log({result})
     return result;
@@ -16,7 +16,7 @@ export const getTextures = async () => {
 
 // GET a single texture by ID
 export const getTexture = async (id: string) => {
-    const result = apiClient.get<ApiTexture>(`/textures${id}`);
+    const result = await apiClient.get<ApiTexture>(`/textures${id}`);
 
     console.log({result});
     return result;

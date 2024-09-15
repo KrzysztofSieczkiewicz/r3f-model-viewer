@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { Checkbox } from "../../controls/buttons/Checkbox";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
@@ -12,6 +12,7 @@ import { SingleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
 import { TexturePicker } from "../../controls/TexturePicker";
 import { SlidersArray } from "../../controls/SlidersArray";
 import { useSceneManagerApi } from "../../../../hooks/useSceneManagerApi";
+import { ApiTexture } from "../../../../api/sceneManagerApi/TexturesEndpoint";
 
 type Props = {
     assetId: string,
@@ -41,6 +42,37 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
     const defaultProperties = DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Physical].properties;
 
     const { textures } = useSceneManagerApi();
+
+
+    const [texturesList, setTexturesList] = useState<ApiTexture[] | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    const [buttonClicked, setButtonClicked] = useState(false)
+
+    useEffect(() => {
+        // Define an async function inside the useEffect hook
+        const fetchTextures = async () => {
+            try {
+                setLoading(true);
+                const result = await textures.getTextures();
+                setTexturesList(result);
+                console.log(result)
+            } catch (err) {
+                if (err instanceof Error) {
+                    setError(err.message);
+                    console.log(err.message)
+                } else {
+                    setError('An unexpected error occurred');
+                    console.log('An unexpected error occurred')
+                }
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchTextures();
+    }, [buttonClicked]);
 
     return (<>
         
@@ -164,7 +196,9 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
             </SingleLineTrait>
         </TraitsSection>
 
-        <button onClick={() => textures.getTextures()}>Call and log API</button>
+        <button onClick={() => {textures.getTextures()
+            setButtonClicked(true)
+        }}>Call and log API</button>
 
         <TraitsSection displayName="Attenuation">
             <SingleLineTrait name="Color">
