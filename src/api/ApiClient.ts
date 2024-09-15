@@ -1,3 +1,8 @@
+interface ApiError extends Error {
+    status?: number;
+    statusText?: string;
+    responseBody?: any;
+}
 
 export class ApiClient {
     private baseUrl: string;
@@ -28,17 +33,26 @@ export class ApiClient {
             ...(body ? { body: JSON.stringify(body) } : {})
         };
 
-        console.log('Fetching URL:', url);
-
         try {
             const response = await fetch(url, options);
+            const contentType = response.headers.get("Content-Type");
+            const isJson = contentType?.includes("application/json");
+
             if (!response.ok) {
-                throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+                const errorBody = isJson ? await response.json() : await response.text();
+                const error: ApiError = new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+                error.status = response.status;
+                error.statusText = response.statusText;
+                error.responseBody = errorBody;
+                throw error;
             }
-            return response.json() as Promise<T>;
+            
+            console.log({body: response.json()})
+
+            return isJson ? await response.json() : ({} as T); // Ensure correct type for empty responses
         } catch (error) {
-            console.error('Fetch failed:', error);
-            throw new Error(`Network request failed with error: ${error}`);
+            console.error('Network request failed:', error);
+            throw error;
         }
     }
 

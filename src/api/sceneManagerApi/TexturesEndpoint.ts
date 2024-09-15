@@ -10,7 +10,7 @@ interface ApiTexture {
 export const getTextures = async () => {
     const result = apiClient.get<ApiTexture[]>('/textures');
 
-    console.log({result});
+    console.log({result})
     return result;
 }
 

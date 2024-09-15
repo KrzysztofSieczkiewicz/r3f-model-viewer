@@ -40,7 +40,7 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
 
     const defaultProperties = DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Physical].properties;
 
-    const { texturesEndpoint } = useSceneManagerApi();
+    const { textures } = useSceneManagerApi();
 
     return (<>
         
@@ -164,7 +164,7 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
             </SingleLineTrait>
         </TraitsSection>
 
-        <button onClick={() => texturesEndpoint.getTextures()}>Call and log API</button>
+        <button onClick={() => textures.getTextures()}>Call and log API</button>
 
         <TraitsSection displayName="Attenuation">
             <SingleLineTrait name="Color">
