@@ -28,13 +28,18 @@ export class ApiClient {
             ...(body ? { body: JSON.stringify(body) } : {})
         };
 
-        const response = await fetch(url, options);
-        
-        if (!response.ok) {
-            throw new Error(`Request failed with\n status:\n${response.status}\n and message:\n${response.statusText}`);
-        }
+        console.log('Fetching URL:', url);
 
-        return response.json() as Promise<T>
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+            }
+            return response.json() as Promise<T>;
+        } catch (error) {
+            console.error('Fetch failed:', error);
+            throw new Error(`Network request failed with error: ${error}`);
+        }
     }
 
 

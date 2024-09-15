@@ -11,6 +11,7 @@ import { ResetButton } from "../../controls/buttons/ResetButton";
 import { SingleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
 import { TexturePicker } from "../../controls/TexturePicker";
 import { SlidersArray } from "../../controls/SlidersArray";
+import { useSceneManagerApi } from "../../../../hooks/useSceneManagerApi";
 
 type Props = {
     assetId: string,
@@ -39,8 +40,10 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
 
     const defaultProperties = DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Physical].properties;
 
+    const { texturesEndpoint } = useSceneManagerApi();
 
     return (<>
+        
         <TraitsSection>
             <SingleLineTrait name="Material type">
                 <SingleChoiceDropdown 
@@ -160,6 +163,8 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {specularIntensity: defaultProperties.specularIntensity} )} />
             </SingleLineTrait>
         </TraitsSection>
+
+        <button onClick={() => texturesEndpoint.getTextures()}>Call and log API</button>
 
         <TraitsSection displayName="Attenuation">
             <SingleLineTrait name="Color">
