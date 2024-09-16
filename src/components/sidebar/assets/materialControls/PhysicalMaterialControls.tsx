@@ -13,6 +13,7 @@ import { TexturePicker } from "../../controls/TexturePicker";
 import { SlidersArray } from "../../controls/SlidersArray";
 import { useSceneManagerApi } from "../../../../hooks/useSceneManagerApi";
 import { ApiTexture } from "../../../../api/sceneManagerApi/TexturesEndpoint";
+import { useQuery } from "react-query";
 
 type Props = {
     assetId: string,
@@ -40,39 +41,19 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
     } = properties;
 
     const defaultProperties = DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Physical].properties;
+    
+    const [isFetchTriggered, setIsFetchTriggered] = useState(false);
 
-    const { textures } = useSceneManagerApi();
+    const { texturesEndpoint } = useSceneManagerApi();
 
-
-    const [texturesList, setTexturesList] = useState<ApiTexture[] | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-
-    const [buttonClicked, setButtonClicked] = useState(false)
-
-    useEffect(() => {
-        // Define an async function inside the useEffect hook
-        const fetchTextures = async () => {
-            try {
-                setLoading(true);
-                const result = await textures.getTextures();
-                setTexturesList(result);
-                console.log(result)
-            } catch (err) {
-                if (err instanceof Error) {
-                    setError(err.message);
-                    console.log(err.message)
-                } else {
-                    setError('An unexpected error occurred');
-                    console.log('An unexpected error occurred')
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchTextures();
-    }, [buttonClicked]);
+    const { data: textures, error, isLoading } = useQuery(
+        'textures', 
+        texturesEndpoint.getTextures,
+        {
+            enabled: isFetchTriggered,
+            retry: false,
+        }
+    );
 
     return (<>
         
@@ -196,8 +177,8 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
             </SingleLineTrait>
         </TraitsSection>
 
-        <button onClick={() => {textures.getTextures()
-            setButtonClicked(true)
+        <button onClick={() => {
+            setIsFetchTriggered(true)
         }}>Call and log API</button>
 
         <TraitsSection displayName="Attenuation">
