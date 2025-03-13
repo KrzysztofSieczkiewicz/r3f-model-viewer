@@ -1,4 +1,4 @@
-import { BlendFunction, GlitchMode } from 'postprocessing';
+import { BlendFunction, GlitchMode } from "postprocessing";
 
 // TODO: ADD BarrelDistortion and Halo
 export enum EFFECT_TYPES {

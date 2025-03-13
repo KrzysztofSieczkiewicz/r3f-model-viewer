@@ -14,6 +14,7 @@ export const ColorPicker = ( {currentColor, handleChange} :Props) :JSX.Element =
   const [ isColorPickerOpen, setIsColorPickerOpen ] = useState(false);
   const [ position, setPosition ] = useState(0);
 
+  const previewRef = useRef<HTMLDivElement | null>(null);
   const popupRef = useRef<HTMLDivElement | null>(null);
 
   // OPEN AND HIDE COLOR PALETTE
@@ -23,7 +24,10 @@ export const ColorPicker = ( {currentColor, handleChange} :Props) :JSX.Element =
   }
 
   // DETECT IF CLICKED OUTSIDE AND CLOSE COLOR PALETTE
-  const handleClickOutside = (e :MouseEvent) => {
+  const handleClickOutside = (e: MouseEvent) => {
+    if (previewRef.current && previewRef.current.contains(e.target as Node)) {
+      return;
+    }
     if (isColorPickerOpen && popupRef.current && !popupRef.current.contains(e.target as Node)) {
       setIsColorPickerOpen(false);
     }
@@ -35,11 +39,11 @@ export const ColorPicker = ( {currentColor, handleChange} :Props) :JSX.Element =
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [popupRef, isColorPickerOpen]);
+  }, [previewRef, popupRef, isColorPickerOpen]);
 
   return (
     <>
-      <div className={styles.colorPreview} onMouseDown={(e) => toggleColorPicker(e)}
+      <div ref={previewRef} className={styles.colorPreview} onClick={(e) => toggleColorPicker(e) }
         style={{backgroundColor: currentColor}}
       />
       {isColorPickerOpen && 

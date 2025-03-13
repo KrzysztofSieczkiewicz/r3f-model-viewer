@@ -30,7 +30,7 @@ export const RenderedAsset = ( {asset}: Props) => {
     const isSelected = useIsSelected(asset.id);
     const handleSelect = useToggleSelect(asset.id);
     
-    const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
+    //const { nodes } = useGLTF("models/pear/Pear2_LOD0.gltf")  as unknown as GLTFResult;
 
     useEffect( () => {// TODO: MOVE COLORS TO SOME COMMON FILE TO BE SHARED ACROSS ALL COMPONENTS
         if (!isSelected && !isHovered) {
@@ -99,4 +99,4 @@ export const RenderedAsset = ( {asset}: Props) => {
 };
 
 
-useGLTF.preload("models/pear/Pear2_LOD0.gltf");
+//useGLTF.preload("models/pear/Pear2_LOD0.gltf");

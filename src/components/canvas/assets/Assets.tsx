@@ -20,4 +20,4 @@ export const Assets = () => {
 
 }
 
-useGLTF.preload("models/pear/Pear2_LOD0.gltf");
+//useGLTF.preload("models/pear/Pear2_LOD0.gltf");
