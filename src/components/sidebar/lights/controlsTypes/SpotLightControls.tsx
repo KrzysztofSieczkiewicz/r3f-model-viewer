@@ -5,11 +5,11 @@ import { SliderLimited } from "../../controls/SliderLimited";
 import { ColorPicker } from "../../controls/ColorPicker";
 import { SpotLightProperties } from "../../../../models/Light";
 import { DeleteItemButton } from "../../common/DeleteItemButton";
-import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { ListItemBody } from "../../commons/ListItemBody";
 import { ResetButton } from "../../controls/buttons/ResetButton";
 import { SlidersArray } from "../../controls/SlidersArray";
+import { TraitSingle } from "../../../../features/sideMenu/components/common/traitContainers/TraitSingle";
 
 type Props = {
     id: string,
@@ -22,20 +22,20 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
     return (
         <ListItemBody>
             <DeleteItemButton deleteObject={() => deleteLight(id)}/>
-            <SingleLineTrait name="Position" >
+            <TraitSingle name="Position" >
                 <SlidersArray
                     value={properties.position}
                     step={0.01}
                     handleChange={(val) => updateLightProperties(id, {position: val} )} />
-            </SingleLineTrait>
+            </TraitSingle>
 
-            <SingleLineTrait name="Color" >
+            <TraitSingle name="Color" >
                 <ColorPicker
                     currentColor={properties.color}
                     handleChange={(val) => updateLightProperties(id, {color: val} )}  />
-            </SingleLineTrait>
+            </TraitSingle>
 
-            <SingleLineTrait name="Intensity">
+            <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <SliderLimited
                         value={properties.intensity}
@@ -43,9 +43,9 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
                         min={0} max={3} step={0.005} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {intensity: 1} )} />
-            </SingleLineTrait>
+            </TraitSingle>
 
-            <SingleLineTrait name="Distance">
+            <TraitSingle name="Distance">
                 <SliderLongContainer>
                     <SliderLimited
                         value={properties.distance}
@@ -53,9 +53,9 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
                         min={0} max={100} step={0.1} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {distance: 10} )} />
-            </SingleLineTrait>
+            </TraitSingle>
 
-            <SingleLineTrait name="Angle">
+            <TraitSingle name="Angle">
                 <SliderLongContainer>
                     <SliderLimited
                             value={properties.angle}
@@ -63,9 +63,9 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
                             min={0} max={1} step={0.002} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {angle: 0.6} )} />
-            </SingleLineTrait>
+            </TraitSingle>
                 
-            <SingleLineTrait name="Penumbra">
+            <TraitSingle name="Penumbra">
                 <SliderLongContainer>
                     <SliderLimited
                         value={properties.penumbra}
@@ -73,7 +73,7 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
                         min={0} max={1} step={0.002} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {penumbra: 0.6} )} />
-            </SingleLineTrait>
+            </TraitSingle>
         </ListItemBody>
     );
 }

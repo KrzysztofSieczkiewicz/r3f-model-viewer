@@ -3,8 +3,8 @@ import { Primitives, PrimitiveWrapper } from "../../../../models/assets/meshes/P
 import { MeshConeControls } from "./MeshConeControls";
 import { MeshSphereControls } from "./MeshSphereControls";
 import { MeshBoxControls } from "./MeshBoxControls";
-import { ExpandableTraits } from "../../commons/traitContainers/ExpandableTraits";
 import { AssetWrapper, Meshes } from "../../../../models/assets/Asset";
+import { TraitExpandable } from "../../../../features/sideMenu/components/common/traitContainers/TraitExpandable";
 
 type Props = {
     asset: AssetWrapper;
@@ -35,8 +35,8 @@ export const MeshControls = ( {asset}: Props) => {
     }
 
     return (
-        <ExpandableTraits name={"Mesh"}>
+        <TraitExpandable name={"Mesh"}>
             {handleAssetType()}
-        </ExpandableTraits>
+        </TraitExpandable>
     );
 }

@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
-import styles from './../Sidebar.module.css'
+import styles from './Submenu.module.css';
 
 type Props = {
     children?: ReactNode
 }
 
-export const SidebarMenu = ({children}: Props) => {
+export const Submenu = ({children}: Props) => {
     return (
         <div className={styles.menu}>
             {children}

@@ -1,10 +1,10 @@
 import React from "react";
-import { ExpandableTraits } from "../../commons/traitContainers/ExpandableTraits";
 import { AssetWrapper, Materials } from "../../../../models/assets/Asset";
 import { EditableMaterials, EditableMaterialWrapper } from "../../../../models/assets/materials/EditableMaterial";
 import { PhysicalMaterialControls } from "./PhysicalMaterialControls";
 import { StandardMaterialControls } from "./StandardMaterialControls";
 import { PhongMaterialControls } from "./PhongMaterialControls";
+import { TraitExpandable } from "../../../../features/sideMenu/components/common/traitContainers/TraitExpandable";
 
 type Props = {
     asset: AssetWrapper;
@@ -31,8 +31,8 @@ export const MaterialControls = ({asset}: Props) => {
     }
 
     return (
-        <ExpandableTraits name={"Material"}>
+        <TraitExpandable name={"Material"}>
             {handleMaterialType()}
-        </ExpandableTraits>
+        </TraitExpandable>
     );
 }

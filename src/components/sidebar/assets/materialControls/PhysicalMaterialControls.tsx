@@ -1,16 +1,16 @@
 import React from "react";
-import { SingleLineTrait } from "../../commons/traitContainers/SingleLineTrait";
 import { Checkbox } from "../../controls/buttons/Checkbox";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
 import { ColorPicker } from "../../controls/ColorPicker";
 import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
 import { SliderNumeric } from "../../controls/SliderNumeric";
-import { TraitsSection } from "../../commons/traitContainers/TraitsSection";
 import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
 import { ResetButton } from "../../controls/buttons/ResetButton";
 import { SingleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
 import { TexturePicker } from "../../controls/TexturePicker";
 import { SlidersArray } from "../../controls/SlidersArray";
+import { TraitSingle } from "../../../../features/sideMenu/components/common/traitContainers/TraitSingle";
+import { TraitSection } from "../../../../features/sideMenu/components/common/traitContainers/TraitSection";
 
 type Props = {
     assetId: string,
@@ -41,48 +41,48 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
 
 
     return (<>
-        <TraitsSection>
-            <SingleLineTrait name="Material type">
+        <TraitSection>
+            <TraitSingle name="Material type">
                 <SingleChoiceDropdown 
                     selected={EditableMaterials.Physical} 
                     selectionList={Object.values(EditableMaterials)} 
                     handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Display">
-            <SingleLineTrait name="Flat shading">
+        <TraitSection displayName="Display">
+            <TraitSingle name="Flat shading">
                 <Checkbox
                     value={flatShading}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {flatShading: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Wireframe">
+            </TraitSingle>
+            <TraitSingle name="Wireframe">
                 <Checkbox
                     value={displayWireframe}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {displayWireframe: value} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Color">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Color">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={colorMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {colorMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Color">
+            </TraitSingle>
+            <TraitSingle name="Color">
                 <ColorPicker
                     currentColor={color}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {color: value} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Surface">
-            <SingleLineTrait name="Roughness">
+        <TraitSection displayName="Surface">
+            <TraitSingle name="Roughness">
                 <TexturePicker
                     map={roughnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Roughness">
+            </TraitSingle>
+            <TraitSingle name="Roughness">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
@@ -90,13 +90,13 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {roughness: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {roughness: defaultProperties.roughness} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Metalness">
+            </TraitSingle>
+            <TraitSingle name="Metalness">
                 <TexturePicker
                     map={metalnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Metalness">
+            </TraitSingle>
+            <TraitSingle name="Metalness">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
@@ -104,8 +104,8 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {metalness: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.metalness} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Reflectivity">
+            </TraitSingle>
+            <TraitSingle name="Reflectivity">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
@@ -113,8 +113,8 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {reflectivity: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {reflectivity: defaultProperties.reflectivity} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Dispersion">
+            </TraitSingle>
+            <TraitSingle name="Dispersion">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
@@ -122,8 +122,8 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {dispersion: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {dispersion: defaultProperties.dispersion} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="IOR">
+            </TraitSingle>
+            <TraitSingle name="IOR">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={2.333} step={0.005} 
@@ -131,26 +131,26 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {ior: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {ior: defaultProperties.ior} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Specular">
-            <SingleLineTrait name="Color map">
+        <TraitSection displayName="Specular">
+            <TraitSingle name="Color map">
                 <TexturePicker
                     map={specularColorMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {specularColorMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Color">
+            </TraitSingle>
+            <TraitSingle name="Color">
                 <ColorPicker
                     currentColor={specularColor}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {specularColor: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Intensity map">
+            </TraitSingle>
+            <TraitSingle name="Intensity map">
                 <TexturePicker
                     map={specularIntensityMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {specularIntensityMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Intensity">
+            </TraitSingle>
+            <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={2} step={0.005} 
@@ -158,16 +158,16 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {specularIntensity: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {specularIntensity: defaultProperties.specularIntensity} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Attenuation">
-            <SingleLineTrait name="Color">
+        <TraitSection displayName="Attenuation">
+            <TraitSingle name="Color">
                 <ColorPicker
                     currentColor={attenuationColor}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {attenuationColor: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Distance">
+            </TraitSingle>
+            <TraitSingle name="Distance">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={Infinity} step={0.005} 
@@ -175,21 +175,21 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {attenuationDistance: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {attenuationDistance: defaultProperties.attenuationDistance} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Emissive">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Emissive">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={emissiveMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Color">
+            </TraitSingle>
+            <TraitSingle name="Color">
                 <ColorPicker
                     currentColor={emissive}
                     handleChange={(value) =>  updateEditableMaterialProperties(assetId, {emissive: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Intensity">
+            </TraitSingle>
+            <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={3} step={0.005} 
@@ -197,16 +197,16 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveIntensity: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {emissiveIntensity: defaultProperties.emissiveIntensity} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Environment">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Environment">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={environmentMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Rotation">
+            </TraitSingle>
+            <TraitSingle name="Rotation">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={360} step={0.005} 
@@ -214,8 +214,8 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapRotation: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapRotation} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Intensity">
+            </TraitSingle>
+            <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={3} step={0.005} 
@@ -223,82 +223,82 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapIntensity: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapIntensity} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Transparency">
-            <SingleLineTrait name="Transparent">
+        <TraitSection displayName="Transparency">
+            <TraitSingle name="Transparent">
                 <Checkbox
                     value={transparent}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {transparent: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Alpha map">
+            </TraitSingle>
+            <TraitSingle name="Alpha map">
                 <TexturePicker
                     map={alphaMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {alphaMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Opacity">
+            </TraitSingle>
+            <TraitSingle name="Opacity">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={3} step={0.005} 
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-            <SingleLineTrait name="Transmission map">
+            </TraitSingle>
+            <TraitSingle name="Transmission map">
                 <TexturePicker
                     map={transmissionMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {transmissionMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Transmission">
+            </TraitSingle>
+            <TraitSingle name="Transmission">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={3} step={0.005} 
                         value={transmission}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {transmission: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Ambient occlusion">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Ambient occlusion">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={ambientOcclusionMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {ambientOcclusionMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Intensity">
+            </TraitSingle>
+            <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={3} step={0.005} 
                         value={ambientOcclusionMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {ambientOcclusionMapIntensity: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Normal">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Normal">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={normalMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {normalMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Scale">
+            </TraitSingle>
+            <TraitSingle name="Scale">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={3} step={0.005} 
                         value={normalScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {normalScale: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Bump">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Bump">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={bumpMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Scale">
+            </TraitSingle>
+            <TraitSingle name="Scale">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={3} step={0.005} 
@@ -306,112 +306,112 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpScale: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.bumpScale} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Displacement">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Displacement">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={displacementMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Scale">
+            </TraitSingle>
+            <TraitSingle name="Scale">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={360} step={0.005} 
                         value={displacementScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementScale: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-            <SingleLineTrait name="Bias">
+            </TraitSingle>
+            <TraitSingle name="Bias">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={360} step={0.005} 
                         value={displacementBias}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementBias: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Clearcoat">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Clearcoat">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={clearcoatMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Strength">
+            </TraitSingle>
+            <TraitSingle name="Strength">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
                         value={clearcoat}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoat: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-            <SingleLineTrait name="Roughness Map">
+            </TraitSingle>
+            <TraitSingle name="Roughness Map">
                 <TexturePicker
                     map={clearcoatRoughnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatRoughnessMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Roughness">
+            </TraitSingle>
+            <TraitSingle name="Roughness">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
                         value={clearcoatRoughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatRoughness: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-            <SingleLineTrait name="Normal Map">
+            </TraitSingle>
+            <TraitSingle name="Normal Map">
                 <TexturePicker
                     map={clearcoatNormalMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatNormalMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Normal scale">
+            </TraitSingle>
+            <TraitSingle name="Normal scale">
                     <SlidersArray
                         step={0.005} 
                         value={clearcoatNormalScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatNormalScale: value} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Anisotropy">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Anisotropy">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={anisotropyMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {anisotropyMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Strength">
+            </TraitSingle>
+            <TraitSingle name="Strength">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
                         value={anisotropy}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {anisotropy: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-            <SingleLineTrait name="Rotation">
+            </TraitSingle>
+            <TraitSingle name="Rotation">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={360} step={0.005} 
                         value={anisotropyRotation}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {anisotropyRotation: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Iridescence">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Iridescence">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={iridescenceMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescenceMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Strength">
+            </TraitSingle>
+            <TraitSingle name="Strength">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
                         value={iridescence}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescence: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-            <SingleLineTrait name="Rotation">
+            </TraitSingle>
+            <TraitSingle name="Rotation">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={2.333} step={0.005} 
@@ -419,57 +419,57 @@ export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescenceIor: value} )} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {iridescenceIor: defaultProperties.iridescenceIor} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Sheen">
-            <SingleLineTrait name="Intensity">
+        <TraitSection displayName="Sheen">
+            <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
                         value={sheen}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {sheen: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-            <SingleLineTrait name="Roughness Map">
+            </TraitSingle>
+            <TraitSingle name="Roughness Map">
                 <TexturePicker
                     map={sheenRoughnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {sheenRoughnessMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Roughness">
+            </TraitSingle>
+            <TraitSingle name="Roughness">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={1} step={0.005} 
                         value={sheenRoughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {sheenRoughness: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-            <SingleLineTrait name="Color Map">
+            </TraitSingle>
+            <TraitSingle name="Color Map">
                 <TexturePicker
                     map={sheenColorMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {sheenColorMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Color">
+            </TraitSingle>
+            <TraitSingle name="Color">
                 <ColorPicker
                     currentColor={sheenColor}
                     handleChange={(value) =>  updateEditableMaterialProperties(assetId, {sheenColor: value} )} />
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
 
-        <TraitsSection displayName="Thickness">
-            <SingleLineTrait name="Map">
+        <TraitSection displayName="Thickness">
+            <TraitSingle name="Map">
                 <TexturePicker
                     map={thicknessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {thicknessMap: value} )} />
-            </SingleLineTrait>
-            <SingleLineTrait name="Strength">
+            </TraitSingle>
+            <TraitSingle name="Strength">
                 <SliderLongContainer>
                     <SliderNumeric
                         min={0} max={5} step={0.005} 
                         value={thickness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {thickness: value} )} />
                 </SliderLongContainer>
-            </SingleLineTrait>
-        </TraitsSection>
+            </TraitSingle>
+        </TraitSection>
     </>);
 }

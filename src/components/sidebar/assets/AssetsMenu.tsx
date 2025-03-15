@@ -4,9 +4,9 @@ import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
 import { AssetItem } from "./AssetItem";
 import { AssetWrapper } from "../../../models/assets/Asset";
-import { MenuSection } from "../commons/MenuSection";
-import { SidebarMenu } from "../commons/SidebarMenu";
 import { AddAssetButton } from "./AddAssetButton";
+import { Submenu } from "../../../features/sideMenu/components/common/submenu/Submenu";
+import { SubmenuSection } from "../../../features/sideMenu/components/common/submenu/SubmenuSection";
 
 
 export const AssetsMenu = () => {
@@ -25,12 +25,12 @@ export const AssetsMenu = () => {
     
     
     return (
-        <SidebarMenu>
-            <MenuSection>
+        <Submenu>
+            <SubmenuSection>
                 <AddAssetButton />
-            </MenuSection>
+            </SubmenuSection>
 
-            <MenuSection title="Assets">
+            <SubmenuSection title="Assets">
                 {assetsList.map((asset: AssetWrapper) => {
                     return <AssetItem
                         key={asset.id}
@@ -39,7 +39,7 @@ export const AssetsMenu = () => {
                         toggleExtend={() => toggleItemExtend(asset.id)}
                     />
                 })}
-            </MenuSection>
-        </SidebarMenu>
+            </SubmenuSection>
+        </Submenu>
     );
 }

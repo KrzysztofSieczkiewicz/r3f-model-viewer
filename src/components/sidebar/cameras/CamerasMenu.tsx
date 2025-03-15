@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { CameraWrapper } from "../../../models/Camera";
 import { CameraItem } from "./CameraItem";
 import { AddCameraDropdown } from "./AddCameraDropdown";
-import { MenuSection } from "../commons/MenuSection";
-import { SidebarMenu } from "../commons/SidebarMenu";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
+import { Submenu } from "../../../features/sideMenu/components/common/submenu/Submenu";
+import { SubmenuSection } from "../../../features/sideMenu/components/common/submenu/SubmenuSection";
 
 
 export const CamerasMenu = () => {
@@ -22,12 +22,12 @@ export const CamerasMenu = () => {
     };
     
     return (
-        <SidebarMenu>
-            <MenuSection>
+        <Submenu>
+            <SubmenuSection>
                 <AddCameraDropdown />
-            </MenuSection>
+            </SubmenuSection>
 
-            <MenuSection title="Cameras">
+            <SubmenuSection title="Cameras">
                 {camerasList.map((camera: CameraWrapper) => {
                     return (
                         <CameraItem
@@ -39,7 +39,7 @@ export const CamerasMenu = () => {
                         />
                     );
                 })}
-            </MenuSection>
-        </SidebarMenu>
+            </SubmenuSection>
+        </Submenu>
     );
 }

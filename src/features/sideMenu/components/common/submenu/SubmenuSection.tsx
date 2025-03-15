@@ -1,5 +1,5 @@
 import React from "react";
-import menuStyles from './../Sidebar.module.css'
+import styles from './Submenu.module.css';
 
 import { ReactNode } from "react";
 
@@ -7,11 +7,11 @@ type Props = {
     children: ReactNode,
     title?: string,
 }
-export const MenuSection = ({children, title}: Props) => {
+export const SubmenuSection = ({children, title}: Props) => {
     return (
-        <section className={menuStyles.menuSection}>
+        <section className={styles.menuSection}>
             {title &&
-            <h3 className={menuStyles.sectionHeader}>
+            <h3 className={styles.sectionHeader}>
                 {title}
             </h3> }
             {children}

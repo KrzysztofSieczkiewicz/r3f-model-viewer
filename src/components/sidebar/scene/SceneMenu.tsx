@@ -1,16 +1,16 @@
 import React from "react";
 
-import { MenuSection } from "../commons/MenuSection";
 import { AmbientLightControls } from "./AmbientLightControls";
-import { SidebarMenu } from "../commons/SidebarMenu";
+import { Submenu } from "../../../features/sideMenu/components/common/submenu/Submenu";
+import { SubmenuSection } from "../../../features/sideMenu/components/common/submenu/SubmenuSection";
 
 export const SceneMenu = () => {
     
     return (
-        <SidebarMenu>
-            <MenuSection title="Ambient light">
+        <Submenu>
+            <SubmenuSection title="Ambient light">
                 <AmbientLightControls />
-            </MenuSection>
-        </SidebarMenu>
+            </SubmenuSection>
+        </Submenu>
     );
 }

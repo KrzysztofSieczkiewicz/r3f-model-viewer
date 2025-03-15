@@ -13,6 +13,13 @@ type Props = {
 
 export const AssetItem = ( {isActive, asset, toggleExtend}: Props) => {
 
+    // TODO [CURRENT]: REWORK THIS (AND OTHER TYPES) to use 
+    // SubmenuListedItem
+    // SubmenuListedItemHeader
+    // SubmenuListedItemBody
+    // Then - thic class should be merged with AssetControls and named SubmenuListedAsset
+    // Ideally AssetControls would be a similar component compared to MeshControls and MaterialControls. Just containing some controls (and opened by default)
+    // That would simplify this component so it wouldn't contain traits containers etc. directly
     return (
         <MenuListItem isActive={isActive}>
             <AssetItemHeader isActive={isActive} assetId={asset.id} assetProperties={asset.properties} toggleExtend={() => toggleExtend()} />

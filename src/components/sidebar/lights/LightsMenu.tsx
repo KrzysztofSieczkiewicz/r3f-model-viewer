@@ -5,8 +5,8 @@ import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 import { LightItem } from './LightItem';
 import { LightWrapper } from '../../../models/Light';
 import { AddLightDropdown } from './AddLightDropdown';
-import { SidebarMenu } from '../commons/SidebarMenu';
-import { MenuSection } from '../commons/MenuSection';
+import { SubmenuSection } from '../../../features/sideMenu/components/common/submenu/SubmenuSection';
+import { Submenu } from '../../../features/sideMenu/components/common/submenu/Submenu';
 
 
 export const LightsMenu = () => {
@@ -23,12 +23,12 @@ export const LightsMenu = () => {
     };
     
     return (
-        <SidebarMenu>
-            <MenuSection>
+        <Submenu>
+            <SubmenuSection>
                 <AddLightDropdown />
-            </MenuSection>
+            </SubmenuSection>
 
-            <MenuSection title="Lights">
+            <SubmenuSection title="Lights">
                 {lightsList.map((light: LightWrapper) => {
                     return <LightItem
                         key={light.id}
@@ -37,7 +37,7 @@ export const LightsMenu = () => {
                         toggleExtend={() => toggleItemExtension(light.id)}
                     />
                 })}
-            </MenuSection> 
-        </SidebarMenu>
+            </SubmenuSection> 
+        </Submenu>
     );
 }

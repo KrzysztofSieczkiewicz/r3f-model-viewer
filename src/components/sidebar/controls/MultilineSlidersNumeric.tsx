@@ -4,7 +4,7 @@ import { ToggleAxesLockButton } from "./buttons/ToggleAxesLockButton";
 import { normalizeArrayByIndex } from "../../../utils/mathUtil";
 import { SliderNumeric } from "./SliderNumeric";
 import { SliderMediumContainer } from "./sliderContainers/SliderMediumContainer";
-import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";
+import { TraitSingle } from "../../../features/sideMenu/components/common/traitContainers/TraitSingle";
 
 type SliderProps<T> = {
     property: (keyof T),
@@ -69,7 +69,7 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
 
     const renderSliderNumeric = (entry: SliderProps<T>, index: number) => {
         return (
-            <SingleLineTrait name={entry.name} key={index}>
+            <TraitSingle name={entry.name} key={index}>
                 <SliderMediumContainer>
                     <SliderNumeric
                         {...entry.min !== undefined && { min: entry.min}}
@@ -79,7 +79,7 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
                         value={entry.value} 
                         handleChange={(val) => handleSliderChange(index, val)} />
                 </SliderMediumContainer>
-            </SingleLineTrait>
+            </TraitSingle>
         );
     }
 

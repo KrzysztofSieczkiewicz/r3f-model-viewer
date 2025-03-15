@@ -5,8 +5,8 @@ import { useEffectsContext } from '../../contexts/EffectsContext';
 import { EffectItem } from './EffectItem';
 import { EffectTypes } from '../../../models/Effect';
 import { AddEffectDropdown } from './AddEffectDropdown';
-import { MenuSection } from '../commons/MenuSection';
-import { SidebarMenu } from '../commons/SidebarMenu';
+import { Submenu } from '../../../features/sideMenu/components/common/submenu/Submenu';
+import { SubmenuSection } from '../../../features/sideMenu/components/common/submenu/SubmenuSection';
 
 
 
@@ -24,12 +24,12 @@ export const EffectsMenu = () => {
     };
     
     return (
-        <SidebarMenu>
-            <MenuSection>
+        <Submenu>
+            <SubmenuSection>
                 <AddEffectDropdown />
-            </MenuSection>
+            </SubmenuSection>
 
-            <MenuSection title="Effects">
+            <SubmenuSection title="Effects">
                 {effectsList.map((effect) => {
                     return (
                         <EffectItem
@@ -40,7 +40,7 @@ export const EffectsMenu = () => {
                         />
                     );
                 })}
-            </MenuSection>
-        </SidebarMenu>
+            </SubmenuSection>
+        </Submenu>
     );
 }

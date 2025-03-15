@@ -3,11 +3,11 @@ import React from "react";
 import { AssetWrapper } from "../../../models/assets/Asset";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 import { DeleteItemButton } from "../common/DeleteItemButton";
-import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";
 import { ListItemBody } from "../commons/ListItemBody";
 import { MeshControls } from "./meshControls/MeshControls";
 import { MaterialControls } from "./materialControls/MaterialControls";
 import { SlidersArray } from "../controls/SlidersArray";
+import { TraitSingle } from "../../../features/sideMenu/components/common/traitContainers/TraitSingle";
 
 
 type Props = {
@@ -27,27 +27,27 @@ export const AssetControls = ({assetId, asset}: Props) => {
             <MeshControls asset={asset} />
             <MaterialControls asset={asset} />
 
-            <SingleLineTrait name="Position">
+            <TraitSingle name="Position">
                 <SlidersArray
                     value={position}
                     step={0.01}
                     handleChange={(val) => updateAssetProperties(assetId, {position: val})} />
-            </SingleLineTrait>
+            </TraitSingle>
 
-            <SingleLineTrait name="Rotation">
+            <TraitSingle name="Rotation">
                 <SlidersArray
                     value={rotation}
                     step={0.01}
                     handleChange={(val) => updateAssetProperties(assetId, {rotation: val})} />
-            </SingleLineTrait>
+            </TraitSingle>
 
-            <SingleLineTrait name="Scale">
+            <TraitSingle name="Scale">
                 <SlidersArray
                     value={scale}
                     step={0.01}
                     handleChange={(val) => updateAssetProperties(assetId, {scale: val})}
                     axesLocking />
-            </SingleLineTrait>
+            </TraitSingle>
         </ListItemBody>
     );
 

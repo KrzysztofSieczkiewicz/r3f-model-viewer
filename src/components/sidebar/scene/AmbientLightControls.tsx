@@ -5,27 +5,27 @@ import { ColorPicker } from "../controls/ColorPicker";
 import { SliderLimited } from "../controls/SliderLimited";
 import { useScene } from "../../contexts/SceneContext";
 import { ResetButton } from "../controls/buttons/ResetButton";
-import { SingleLineTrait } from "../commons/traitContainers/SingleLineTrait";
 import { SliderLongContainer } from "../controls/sliderContainers/SliderLongContainer";
+import { TraitSingle } from "../../../features/sideMenu/components/common/traitContainers/TraitSingle";
 
 export const AmbientLightControls = () => {
     const [ scene, setScene ] = useScene();
     
     return (
         <>
-            <SingleLineTrait name="Active">
+            <TraitSingle name="Active">
                 <Checkbox
                     value={scene.isAmbientActive}
                 handleChange={(val) => setScene( {isAmbientActive: val} )} />
-            </SingleLineTrait>
+            </TraitSingle>
 
-            <SingleLineTrait name="Color">
+            <TraitSingle name="Color">
                 <ColorPicker
                     currentColor={scene.ambientColor}
                     handleChange={(val) =>  setScene({ambientColor: val}) } />
-            </SingleLineTrait>
+            </TraitSingle>
 
-            <SingleLineTrait name="Intensity">
+            <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <SliderLimited
                         value={scene.ambientIntensity}
@@ -33,7 +33,7 @@ export const AmbientLightControls = () => {
                         min={0} max={1} step={0.001} />
                 </SliderLongContainer>
                 <ResetButton onReset={() => setScene({ambientIntensity: 0.1})} />
-            </SingleLineTrait>
+            </TraitSingle>
                 
         </>
     );
