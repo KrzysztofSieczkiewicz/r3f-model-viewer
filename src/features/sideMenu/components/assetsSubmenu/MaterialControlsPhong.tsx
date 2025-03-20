@@ -1,22 +1,22 @@
 import React from "react";
 
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhongMaterialProperties } from "../../../../models/assets/materials/EditableMaterial"
-import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
-import { SingleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
-import { Checkbox } from "../../controls/buttons/Checkbox";
-import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
-import { SliderNumeric } from "../../controls/SliderNumeric";
-import { ResetButton } from "../../controls/buttons/ResetButton";
-import { ColorPicker } from "../../controls/ColorPicker";
-import { TraitSingle } from "../../../../features/sideMenu/components/common/traitContainers/TraitSingle";
-import { TraitSection } from "../../../../features/sideMenu/components/common/traitContainers/TraitSection";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { SingleChoiceDropdown } from "../../../../components/sidebar/controls/SingleChoiceDropdown";
+import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
+import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
+import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
+import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
+import { ColorPicker } from "../../../../components/sidebar/controls/ColorPicker";
+import { TraitSingle } from "../common/traitContainers/TraitSingle";
+import { TraitSection } from "../common/traitContainers/TraitSection";
 
 type Props = {
     assetId: string,
     properties: PhongMaterialProperties
 }
 
-export const PhongMaterialControls = ({assetId, properties}: Props) => {
+export const MaterialControlsPhong = ({assetId, properties}: Props) => {
     const { updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
 
     const { transparent, opacity, flatShading, displayWireframe,

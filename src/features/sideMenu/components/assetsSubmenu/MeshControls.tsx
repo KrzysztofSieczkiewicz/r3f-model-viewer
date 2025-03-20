@@ -1,10 +1,11 @@
 import React from "react";
-import { Primitives, PrimitiveWrapper } from "../../../../models/assets/meshes/Primitive"
-import { MeshConeControls } from "./MeshConeControls";
-import { MeshSphereControls } from "./MeshSphereControls";
-import { MeshBoxControls } from "./MeshBoxControls";
+
+import { Primitives, PrimitiveWrapper } from "../../../../models/assets/meshes/Primitive";
 import { AssetWrapper, Meshes } from "../../../../models/assets/Asset";
-import { TraitExpandable } from "../../../../features/sideMenu/components/common/traitContainers/TraitExpandable";
+import { TraitExpandable } from "../common/traitContainers/TraitExpandable";
+import { MeshControlsBox } from "./MeshControlsBox";
+import { MeshControlsSphere } from "./MeshControlsSphere";
+import { MeshControlsCone } from "./MeshControlsCone";
 
 type Props = {
     asset: AssetWrapper;
@@ -26,11 +27,11 @@ export const MeshControls = ( {asset}: Props) => {
     const handlePrimitiveType = (id: string, mesh: PrimitiveWrapper) => {
         switch(mesh.type) {
             case Primitives.Sphere:
-                return <MeshSphereControls assetId={id} meshProperties={mesh.properties} />
+                return <MeshControlsSphere assetId={id} meshProperties={mesh.properties} />
             case Primitives.Cone:
-                return <MeshConeControls assetId={id} meshProperties={mesh.properties} />
+                return <MeshControlsCone assetId={id} meshProperties={mesh.properties} />
             case Primitives.Box:
-                return <MeshBoxControls assetId={id} meshProperties={mesh.properties} />
+                return <MeshControlsBox assetId={id} meshProperties={mesh.properties} />
         }
     }
 

@@ -1,10 +1,10 @@
 import React from "react";
-import styles from './../commons/MenuListItemHeader.module.css';
-import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
+import styles from './../../../../components/sidebar/commons/MenuListItemHeader.module.css';
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 
-import { ReactComponent as PointLightIcon } from '../../../icons/lightTypes/pointLight.svg';
-import { VisbilityEyeToggle } from "../common/VisbilityEyeToggle";
-import { AssetProperties } from "../../../models/assets/Asset";
+import { ReactComponent as PointLightIcon } from '../../../../icons/lightTypes/pointLight.svg';
+import { VisbilityEyeToggle } from "../../../../components/sidebar/common/VisbilityEyeToggle";
+import { AssetProperties } from "../../../../models/assets/Asset";
 
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
     toggleExtend: () => void,
 }
 
-export const AssetItemHeader = ( {isActive, assetId, assetProperties, toggleExtend }: Props) => {
+export const ListedAssetObjectHeader = ( {isActive, assetId, assetProperties, toggleExtend }: Props) => {
     const { updateAssetProperties, } = useSceneObjectsContext();
 
     const handleArrowDirection = () => {

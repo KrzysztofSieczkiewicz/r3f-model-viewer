@@ -1,14 +1,14 @@
 import React from "react";
-import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { BoxProperties } from "../../../../models/assets/meshes/Primitive";
-import { MultilineSlidersNumeric } from "../../controls/MultilineSlidersNumeric";
+import { MultilineSlidersNumeric } from "../../../../components/sidebar/controls/MultilineSlidersNumeric";
 
 type Props = {
     assetId: string,
     meshProperties: BoxProperties,
 }
 
-export const MeshBoxControls = ({assetId, meshProperties}: Props) => {
+export const MeshControlsBox = ({assetId, meshProperties}: Props) => {
     const {updatePrimitiveProperties} = useSceneObjectsContext();
 
     return (<>

@@ -5,7 +5,10 @@ type Props = {
     children: ReactNode
 }
 
-export const SubmenuListedItemHeader = ( {children }: Props) => {
+// TODO: make this a parametrized class that can be used by any submenu.
+// at best it should just contain all children as parameter and list of their widths ratios
+
+export const SubmenuListedObjectHeader = ( {children }: Props) => {
 
     return (
         <div

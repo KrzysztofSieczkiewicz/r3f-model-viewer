@@ -1,31 +1,24 @@
 import React from "react";
 
-import { AssetWrapper } from "../../../models/assets/Asset";
-import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
-import { DeleteItemButton } from "../common/DeleteItemButton";
-import { ListItemBody } from "../commons/ListItemBody";
-import { MeshControls } from "./meshControls/MeshControls";
-import { MaterialControls } from "./materialControls/MaterialControls";
-import { SlidersArray } from "../controls/SlidersArray";
-import { TraitSingle } from "../../../features/sideMenu/components/common/traitContainers/TraitSingle";
+import { TraitExpandable } from "../common/traitContainers/TraitExpandable";
+import { AssetWrapper } from "../../../../models/assets/Asset";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { TraitSingle } from "../common/traitContainers/TraitSingle";
+import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
 
 
 type Props = {
-    assetId: string,
     asset: AssetWrapper,
 }
 
-export const AssetControls = ({assetId, asset}: Props) => {
-    const {updateAssetProperties, deleteAsset} = useSceneObjectsContext();
+export const AssetControls = ({asset}: Props) => {
+    const {updateAssetProperties} = useSceneObjectsContext();
 
     const { scale, rotation, position } = asset.properties;
+    const assetId = asset.id;
 
     return (
-        <ListItemBody>
-            <DeleteItemButton deleteObject={() => deleteAsset(assetId)} />
-
-            <MeshControls asset={asset} />
-            <MaterialControls asset={asset} />
+        <TraitExpandable name="General">
 
             <TraitSingle name="Position">
                 <SlidersArray
@@ -48,7 +41,7 @@ export const AssetControls = ({assetId, asset}: Props) => {
                     handleChange={(val) => updateAssetProperties(assetId, {scale: val})}
                     axesLocking />
             </TraitSingle>
-        </ListItemBody>
+        </TraitExpandable>
     );
 
 }

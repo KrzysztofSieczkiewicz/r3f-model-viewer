@@ -2,11 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
 
-import { AssetItem } from "./AssetItem";
 import { AssetWrapper } from "../../../models/assets/Asset";
 import { AddAssetButton } from "./AddAssetButton";
 import { Submenu } from "../../../features/sideMenu/components/common/submenu/Submenu";
 import { SubmenuSection } from "../../../features/sideMenu/components/common/submenu/SubmenuSection";
+import { ListedAssetObject } from "../../../features/sideMenu/components/assetsSubmenu/ListedAssetObject";
 
 
 export const AssetsMenu = () => {
@@ -32,7 +32,7 @@ export const AssetsMenu = () => {
 
             <SubmenuSection title="Assets">
                 {assetsList.map((asset: AssetWrapper) => {
-                    return <AssetItem
+                    return <ListedAssetObject
                         key={asset.id}
                         isActive={activeId === asset.id}
                         asset={asset}

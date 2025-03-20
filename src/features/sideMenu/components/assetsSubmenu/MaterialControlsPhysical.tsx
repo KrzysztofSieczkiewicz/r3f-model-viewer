@@ -1,23 +1,23 @@
 import React from "react";
-import { Checkbox } from "../../controls/buttons/Checkbox";
+import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
-import { ColorPicker } from "../../controls/ColorPicker";
-import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
-import { SliderNumeric } from "../../controls/SliderNumeric";
-import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
-import { ResetButton } from "../../controls/buttons/ResetButton";
-import { SingleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
-import { TexturePicker } from "../../controls/TexturePicker";
-import { SlidersArray } from "../../controls/SlidersArray";
-import { TraitSingle } from "../../../../features/sideMenu/components/common/traitContainers/TraitSingle";
-import { TraitSection } from "../../../../features/sideMenu/components/common/traitContainers/TraitSection";
+import { ColorPicker } from "../../../../components/sidebar/controls/ColorPicker";
+import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
+import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
+import { SingleChoiceDropdown } from "../../../../components/sidebar/controls/SingleChoiceDropdown";
+import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
+import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
+import { TraitSingle } from "../common/traitContainers/TraitSingle";
+import { TraitSection } from "../common/traitContainers/TraitSection";
 
 type Props = {
     assetId: string,
     properties: PhysicalMaterialProperties
 }
 
-export const PhysicalMaterialControls = ( {assetId, properties}: Props) => {
+export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
     const { updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
 
     const {

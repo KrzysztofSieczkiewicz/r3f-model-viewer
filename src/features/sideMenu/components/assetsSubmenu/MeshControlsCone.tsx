@@ -1,17 +1,17 @@
 import React from "react";
-import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { ConeProperties } from "../../../../models/assets/meshes/Primitive";
-import { SliderNumeric } from "../../controls/SliderNumeric";
-import { SliderMediumContainer } from "../../controls/sliderContainers/SliderMediumContainer";
-import { MultilineSlidersNumeric } from "../../controls/MultilineSlidersNumeric";
-import { TraitSingle } from "../../../../features/sideMenu/components/common/traitContainers/TraitSingle";
+import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
+import { SliderMediumContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderMediumContainer";
+import { MultilineSlidersNumeric } from "../../../../components/sidebar/controls/MultilineSlidersNumeric";
+import { TraitSingle } from "../common/traitContainers/TraitSingle";
 
 type Props = {
     assetId: string,
     meshProperties: ConeProperties,
 }
 
-export const MeshConeControls = ({assetId, meshProperties}: Props) => {
+export const MeshControlsCone = ({assetId, meshProperties}: Props) => {
     const {updatePrimitiveProperties} = useSceneObjectsContext();
 
     return (<>

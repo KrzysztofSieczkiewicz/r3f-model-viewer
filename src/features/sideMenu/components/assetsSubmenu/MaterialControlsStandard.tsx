@@ -1,15 +1,15 @@
 import React from "react";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, StandardMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
-import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
-import { SingleChoiceDropdown } from "../../controls/SingleChoiceDropdown";
-import { Checkbox } from "../../controls/buttons/Checkbox";
-import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
-import { SliderNumeric } from "../../controls/SliderNumeric";
-import { ResetButton } from "../../controls/buttons/ResetButton";
-import { ColorPicker } from "../../controls/ColorPicker";
-import { TexturePicker } from "../../controls/TexturePicker";
-import { TraitSingle } from "../../../../features/sideMenu/components/common/traitContainers/TraitSingle";
-import { TraitSection } from "../../../../features/sideMenu/components/common/traitContainers/TraitSection";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { SingleChoiceDropdown } from "../../../../components/sidebar/controls/SingleChoiceDropdown";
+import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
+import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
+import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
+import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
+import { ColorPicker } from "../../../../components/sidebar/controls/ColorPicker";
+import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
+import { TraitSingle } from "../common/traitContainers/TraitSingle";
+import { TraitSection } from "../common/traitContainers/TraitSection";
 
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
     properties: StandardMaterialProperties
 }
 
-export const StandardMaterialControls = ({assetId, properties}: Props) => {
+export const MaterialControlsStandard = ({assetId, properties}: Props) => {
     const { updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
 
     const { transparent, opacity, flatShading, displayWireframe,
