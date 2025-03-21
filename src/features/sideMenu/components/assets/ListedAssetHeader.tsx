@@ -1,7 +1,7 @@
 import React from "react";
-import styles from './../../../../components/sidebar/commons/MenuListItemHeader.module.css';
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import styles from './../common/submenu/Submenu.module.css';
 
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { ReactComponent as PointLightIcon } from '../../../../icons/lightTypes/pointLight.svg';
 import { VisbilityEyeToggle } from "../../../../components/sidebar/common/VisbilityEyeToggle";
 import { AssetProperties } from "../../../../models/assets/Asset";
@@ -14,27 +14,28 @@ type Props = {
     toggleExtend: () => void,
 }
 
-export const ListedAssetObjectHeader = ( {isActive, assetId, assetProperties, toggleExtend }: Props) => {
+export const ListedAssetHeader = ( {isActive, assetId, assetProperties, toggleExtend }: Props) => {
     const { updateAssetProperties, } = useSceneObjectsContext();
 
     const handleArrowDirection = () => {
         return isActive ? String.fromCharCode(8657) : String.fromCharCode(8659);
     }
 
-    // TODO: Replace PointLightIcon with proper asset icon
+    // TODO: Replace PointLightIcon with separate AssetTypeIcon component that will accept asset type and return matching (or default) asset type icon
+    // see LightTypeIcon for reference
     return (
         <div
             style={{gridTemplateColumns: '1fr 5fr 1fr 1fr'}}
-            className={styles.header}
+            className={styles.listedItemHeader}
             onClick={toggleExtend}
         >
-            <PointLightIcon className={styles.typeIcon} />
-            <p className={styles.displayName}>{assetProperties.name}</p>
+            <PointLightIcon className={styles.listedItemIcon} />
+            <p className={styles.listedItemDisplayName}>{assetProperties.name}</p>
             <VisbilityEyeToggle 
                 isVisible={assetProperties.visible} 
                 updateObject={ (val: boolean) => updateAssetProperties(assetId, {visible: val} )} 
             />
-            <span className={styles.extendIcon}>{ handleArrowDirection() }</span>
+            <span className={styles.listedItemExtendIcon}>{ handleArrowDirection() }</span>
         </div>
     );
 }

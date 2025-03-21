@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { SubmenuListedObject } from '../common/submenu/SubmenuListedObject';
-import { SubmenuListedObjectBody } from '../common/submenu/SubmenuListedObjectBody';
+import { ListedObject } from '../common/submenu/ListedObject';
+import { ListedObjectBody } from '../common/submenu/ListedObjectBody';
 import { AssetWrapper } from '../../../../models/assets/Asset';
-import { ListedAssetObjectHeader } from './ListedAssetObjectHeader';
+import { ListedAssetHeader } from './ListedAssetHeader';
 import { DeleteItemButton } from '../../../../components/sidebar/common/DeleteItemButton';
 import { useSceneObjectsContext } from '../../../../components/contexts/SceneObjectsContext';
 import { AssetControls } from './AssetControls';
@@ -16,20 +16,20 @@ type Props = {
     toggleExtend: () => void,
 }
 
-export const ListedAssetObject = ( {isActive, asset, toggleExtend}: Props) => {
+export const ListedAsset = ( {isActive, asset, toggleExtend}: Props) => {
     const {deleteAsset} = useSceneObjectsContext();
 
     return (
-        <SubmenuListedObject isActive={isActive}>
-            <ListedAssetObjectHeader isActive={isActive} assetId={asset.id} assetProperties={asset.properties} toggleExtend={() => toggleExtend()} />
+        <ListedObject isActive={isActive}>
+            <ListedAssetHeader isActive={isActive} assetId={asset.id} assetProperties={asset.properties} toggleExtend={() => toggleExtend()} />
             {isActive && 
-            <SubmenuListedObjectBody>
+            <ListedObjectBody>
                 <DeleteItemButton deleteObject={() => deleteAsset(asset.id)} />
                 <AssetControls asset={asset}/>
                 <MeshControls asset={asset} />
                 <MaterialControls asset={asset} />
-            </SubmenuListedObjectBody>
+            </ListedObjectBody>
             }
-        </SubmenuListedObject>
+        </ListedObject>
     );
 }

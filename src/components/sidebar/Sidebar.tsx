@@ -3,11 +3,11 @@ import { useState } from "react";
 import styles from './Sidebar.module.css';
 
 import { SidebarMenuButton } from "./SidebarMenuButton";
-import { AssetsMenu } from "./assets/AssetsMenu";
+import { AssetsMenu } from "../../features/sideMenu/components/assets/AssetsSubmenu";
 import { EffectsMenu } from "./effects/EffectsMenu";
 import { LightsMenu } from "./lights/LightsMenu";
 import { SceneMenu } from "./scene/SceneMenu";
-import { CamerasMenu } from "./cameras/CamerasMenu";
+import { CamerasMenu } from "../../features/sideMenu/components/cameras/CamerasMenu";
 
 export enum MenuTypes {
     None,

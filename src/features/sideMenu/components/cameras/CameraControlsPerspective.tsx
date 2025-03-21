@@ -1,16 +1,16 @@
 import React from "react";
 
 import { PerspectiveCameraProperties } from "../../../../models/Camera";
-import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
-import { SlidersArray } from "../../controls/SlidersArray";
-import { TraitSingle } from "../../../../features/sideMenu/components/common/traitContainers/TraitSingle";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
+import { TraitSingle } from "../common/traitContainers/TraitSingle";
 
 type Props = {
     id: string,
     properties: PerspectiveCameraProperties;
 }
 
-export const PerspectiveCameraControls = ( {id, properties}: Props) => {
+export const CameraControlsPerspective = ( {id, properties}: Props) => {
     const { updateCameraProperties } = useSceneObjectsContext();
 
     return (

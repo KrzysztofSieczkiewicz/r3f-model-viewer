@@ -5,9 +5,9 @@ type Props = {
     children: ReactNode;
 }
 
-export const SubmenuListedObjectBody = ( {children}: Props) => {
+export const ListedObjectBody = ( {children}: Props) => {
     return (
-        <div className={styles.listItemBody}>
+        <div className={styles.listedItemBody}>
             {children}
         </div>
     );

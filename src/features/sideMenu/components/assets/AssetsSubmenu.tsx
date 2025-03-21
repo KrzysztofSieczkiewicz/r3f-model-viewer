@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 
-import { AssetWrapper } from "../../../models/assets/Asset";
-import { AddAssetButton } from "./AddAssetButton";
-import { Submenu } from "../../../features/sideMenu/components/common/submenu/Submenu";
-import { SubmenuSection } from "../../../features/sideMenu/components/common/submenu/SubmenuSection";
-import { ListedAssetObject } from "../../../features/sideMenu/components/assetsSubmenu/ListedAssetObject";
+import { AssetWrapper } from "../../../../models/assets/Asset";
+import { ButtonAddAsset } from "./ButtonAddAsset";
+import { Submenu } from "../common/submenu/Submenu";
+import { SubmenuSection } from "../common/submenu/SubmenuSection";
+import { ListedAsset } from "./ListedAsset";
 
 
 export const AssetsMenu = () => {
@@ -27,12 +27,12 @@ export const AssetsMenu = () => {
     return (
         <Submenu>
             <SubmenuSection>
-                <AddAssetButton />
+                <ButtonAddAsset />
             </SubmenuSection>
 
             <SubmenuSection title="Assets">
                 {assetsList.map((asset: AssetWrapper) => {
-                    return <ListedAssetObject
+                    return <ListedAsset
                         key={asset.id}
                         isActive={activeId === asset.id}
                         asset={asset}

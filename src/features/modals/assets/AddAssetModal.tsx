@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import styles from './AddAssetModal.module.css'
 
-import { ReactComponent as SphereIcon } from '../../../../icons/sidebar/primitives/primitive_sphere.svg'
-import { ReactComponent as ConeIcon } from '../../../../icons/sidebar/primitives/primitive_cone.svg'
-import { ReactComponent as CubeIcon } from '../../../../icons/sidebar/cube.svg';
+import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
+import { ReactComponent as ConeIcon } from '../../../icons/sidebar/primitives/primitive_cone.svg'
+import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
 
-import { ModalListButton } from "../../modal/ModalDropdownOptionButton";
-import { Primitives } from "../../../../models/assets/meshes/Primitive";
-import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
-import { ModalDropdownSingle } from "../../modal/ModalDropdownSingle";
+import { useSceneObjectsContext } from "../../../components/contexts/SceneObjectsContext";
+import { ModalDropdownSingle } from "../../../components/sidebar/modal/ModalDropdownSingle";
+import { ModalListButton } from "../../../components/sidebar/modal/ModalDropdownOptionButton";
+import { Primitives } from "../../../models/assets/meshes/Primitive";
 
+// TODO: find a way to center this modal to a middle of the screen
 type Props = {
     closeModal: () => void
 }
 
-export const AddAssetPopup = ({ closeModal }: Props) => {
+export const AddAssetModal = ({ closeModal }: Props) => {
     const {addAssetPrimitive} = useSceneObjectsContext();
 
     const [ activeDropdown, setActiveNameDropdown ] = useState("");
@@ -27,6 +28,12 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
         }
     };
 
+    const addPrimitiveAndClose = (assetType: Primitives) => {
+        addAssetPrimitive(assetType);
+        closeModal();
+    }
+
+
     return (
         <div className={styles.modalContents}>
             <ModalDropdownSingle
@@ -38,24 +45,15 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
                 <ModalListButton 
                     displayName="Sphere"
                     icon={<SphereIcon/>}
-                    onClick={ () => {
-                        addAssetPrimitive(Primitives.Sphere);
-                        closeModal();
-                    }}/>
+                    onClick={ () => addPrimitiveAndClose(Primitives.Sphere)} />
                 <ModalListButton 
                     displayName="Cone" 
                     icon={<ConeIcon/>}
-                    onClick={ () => {
-                        addAssetPrimitive(Primitives.Cone);
-                        closeModal();
-                    }}/>
+                    onClick={ () => addPrimitiveAndClose(Primitives.Cone)} />
                 <ModalListButton 
                     displayName="Box" 
                     icon={<ConeIcon/>}
-                    onClick={ () => {
-                        addAssetPrimitive(Primitives.Box);
-                        closeModal();
-                    }}/>
+                    onClick={ () => addPrimitiveAndClose(Primitives.Box)}/>
             </ModalDropdownSingle>
             
             <ModalDropdownSingle
@@ -67,24 +65,15 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
                 <ModalListButton 
                     displayName="Sphere"
                     icon={<SphereIcon/>}
-                    onClick={ () => {
-                        addAssetPrimitive(Primitives.Sphere);
-                        closeModal();
-                    }}/>
+                    onClick={ () => addPrimitiveAndClose(Primitives.Sphere)} />
                 <ModalListButton 
                     displayName="Cone" 
                     icon={<ConeIcon/>}
-                    onClick={ () => {
-                        addAssetPrimitive(Primitives.Cone);
-                        closeModal();
-                    }}/>
+                    onClick={ () => addPrimitiveAndClose(Primitives.Cone)} />
                 <ModalListButton 
                     displayName="Box" 
                     icon={<ConeIcon/>}
-                    onClick={ () => {
-                        addAssetPrimitive(Primitives.Box);
-                        closeModal();
-                    }}/>
+                    onClick={ () => addPrimitiveAndClose(Primitives.Box)}/>
             </ModalDropdownSingle>
 
             <ModalDropdownSingle
@@ -96,24 +85,15 @@ export const AddAssetPopup = ({ closeModal }: Props) => {
                 <ModalListButton 
                     displayName="Sphere"
                     icon={<SphereIcon/>}
-                    onClick={ () => {
-                        addAssetPrimitive(Primitives.Sphere);
-                        closeModal();
-                    }}/>
+                    onClick={ () => addPrimitiveAndClose(Primitives.Sphere)} />
                 <ModalListButton 
                     displayName="Cone" 
                     icon={<ConeIcon/>}
-                    onClick={ () => {
-                        addAssetPrimitive(Primitives.Cone);
-                        closeModal();
-                    }}/>
+                    onClick={ () => addPrimitiveAndClose(Primitives.Cone)} />
                 <ModalListButton 
                     displayName="Box" 
                     icon={<ConeIcon/>}
-                    onClick={ () => {
-                        addAssetPrimitive(Primitives.Box);
-                        closeModal();
-                    }}/>
+                    onClick={ () => addPrimitiveAndClose(Primitives.Box)}/>
             </ModalDropdownSingle>
         </div>
     );

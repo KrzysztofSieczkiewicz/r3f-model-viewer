@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-import { CameraWrapper } from "../../../models/Camera";
-import { CameraItem } from "./CameraItem";
-import { AddCameraDropdown } from "./AddCameraDropdown";
-import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
-import { Submenu } from "../../../features/sideMenu/components/common/submenu/Submenu";
-import { SubmenuSection } from "../../../features/sideMenu/components/common/submenu/SubmenuSection";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { Submenu } from "../common/submenu/Submenu";
+import { SubmenuSection } from "../common/submenu/SubmenuSection";
+import { DropdownAddCamera } from "./DropdownAddCamera";
+import { CameraWrapper } from "../../../../models/Camera";
+import { ListedCamera } from "./ListedCamera";
 
 
 export const CamerasMenu = () => {
@@ -24,13 +24,13 @@ export const CamerasMenu = () => {
     return (
         <Submenu>
             <SubmenuSection>
-                <AddCameraDropdown />
+                <DropdownAddCamera />
             </SubmenuSection>
 
             <SubmenuSection title="Cameras">
                 {camerasList.map((camera: CameraWrapper) => {
                     return (
-                        <CameraItem
+                        <ListedCamera
                             key={camera.id}
                             isActive={activeId === camera.id}
                             camera={camera}

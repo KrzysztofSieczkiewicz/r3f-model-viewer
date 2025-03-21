@@ -6,9 +6,9 @@ type Props = {
     children: ReactNode
 }
 
-export const SubmenuListedObject = ({isActive, children}: Props) => {
+export const ListedObject = ({isActive, children}: Props) => {
     return (
-        <div className={isActive ? `${styles.listItemContainer} ${styles.active}` : styles.listItemContainer}>
+        <div className={isActive ? `${styles.listedItemContainer} ${styles.active}` : styles.listedItemContainer}>
             {children}
         </div>
     );

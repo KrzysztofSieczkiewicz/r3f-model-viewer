@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from './AddCameraDropdown.module.css';
-import { CAMERA_TYPES } from "../../../models/Camera";
-import { useSceneObjectsContext } from "../../contexts/SceneObjectsContext";
+import styles from './DropdownAddCamera.module.css';
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { CAMERA_TYPES } from "../../../../models/Camera";
 
 
-export const AddCameraDropdown = () => {
+export const DropdownAddCamera = () => {
     const [ isActive, setIsActive ] = useState(false);
 
     const { addCamera } = useSceneObjectsContext();

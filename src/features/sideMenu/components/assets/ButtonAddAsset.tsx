@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react";
-import assetStyles from './AddAssetButton.module.css';
-import { AddAssetPopup } from "./newAsset/AddAssetModal";
-import { useSidebarModal } from "../../../hooks/useSidebarModal";
-import { getElementCenter, getElementDimensions } from "../../../utils/refUtil";
+import assetStyles from './../common/submenu/Submenu.module.css';
+import { AddAssetModal } from "../../../modals/assets/AddAssetModal";
+import { useSidebarModal } from "../../../../hooks/useSidebarModal";
+import { getElementCenter, getElementDimensions } from "../../../../utils/refUtil";
+import { ButtonAddListedObject } from "../common/submenu/ButtonAddListedObject";
 
+// TODO: Should this component be joined with modal handling as : AddButtonWithModal ???
 
-// TODO MOVE THIS COMPONENT AS 'ADD BUTTON WITH MODAL' TO BE REUSED
-export const AddAssetButton = () => {
+export const ButtonAddAsset = () => {
     const { openModal, closeModal, SidebarModal } = useSidebarModal();
 
     const [modalPosition, setModalPosition ] = useState({centerX: 0, topY: 0})
@@ -25,11 +26,13 @@ export const AddAssetButton = () => {
       };
 
     return (
-        <>
-            <button ref={buttonRef} className={assetStyles.addButton} onClick={() => {updateButtonPosition(); openModal()}}> ADD NEW </button>
+        <ButtonAddListedObject buttonName="ADD ASSET" handleClicked={() => {
+            updateButtonPosition();
+            openModal(); 
+            } }>
             <SidebarModal topY={modalPosition.topY} centerX={modalPosition.centerX}>
-                <AddAssetPopup closeModal={closeModal}/>
+                <AddAssetModal closeModal={closeModal}/>
             </SidebarModal>
-        </>
+        </ButtonAddListedObject>
     );
 }
