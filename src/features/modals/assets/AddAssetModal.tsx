@@ -10,7 +10,6 @@ import { ModalDropdownSingle } from "../../../components/sidebar/modal/ModalDrop
 import { ModalListButton } from "../../../components/sidebar/modal/ModalDropdownOptionButton";
 import { Primitives } from "../../../models/assets/meshes/Primitive";
 
-// TODO: find a way to center this modal to a middle of the screen
 type Props = {
     closeModal: () => void
 }

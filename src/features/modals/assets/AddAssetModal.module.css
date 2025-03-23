@@ -3,7 +3,6 @@
 .modalContents {
     display: flex;
     padding: 0.5rem;
-    width: fit-content;
     background-color: var(--color-main-weak);
 
     margin: auto 0;

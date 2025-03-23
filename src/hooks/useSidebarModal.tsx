@@ -3,9 +3,6 @@ import { createPortal } from "react-dom";
 
 type ModalProps = {
     children: ReactNode,
-
-    topY?: number,
-    centerX?: number;
 }
 
 export const useSidebarModal = () => {
@@ -23,7 +20,7 @@ export const useSidebarModal = () => {
         setPortalElement(element);
     }, []);
 
-    const SidebarModal = ({ children, topY, centerX }: ModalProps) => {
+    const SidebarModal = ({ children }: ModalProps) => {
         const [modalWidth, setModalWidth] = useState<number>(0);
         const [isCalculated, setIsCalculated] = useState<boolean>(false);
         const modalRef = useRef<HTMLDivElement>(null);
@@ -41,18 +38,17 @@ export const useSidebarModal = () => {
             bottom: 0,
             left: 0,
             right: 0,
+            width: "100%",
+            height: "100%",
             backgroundColor: "rgba(0,0,0, 0.25)",
             display: 'flex',
             justifyContent: 'center',
-            alignItems: topY !== undefined ? 'flex-start' : 'center',
+            alignItems: 'center'
         };
         
         const POSITIONER_STYLE = {
             position: "absolute" as "absolute",
             width: "fit-content",
-            top: typeof topY === 'number' ? `${topY}px` : topY,
-            left: centerX !== undefined ? `${centerX - (modalWidth / 2)}px` : '50%',
-            transform: `translate(${centerX !== undefined ? '0' : '-50%'}, ${topY !== undefined ? '0' : '-50%'})`,
             opacity: isCalculated ? 1 : 0
         };
         
