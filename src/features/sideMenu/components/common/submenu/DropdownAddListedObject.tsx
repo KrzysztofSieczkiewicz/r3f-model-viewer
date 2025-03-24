@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from './Submenu.module.css';
+import { useHandleOutsideClick } from "../../../hooks/useHandleClickOutside";
 
 type Props<T> = {
     availableOptions: T[],
@@ -13,7 +14,13 @@ export const DropdownAddListedObject = <T extends string | number>({ availableOp
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const listRef = useRef<HTMLUListElement | null>(null);
 
-    const handleDisplayOptionsList = () => {
+    useHandleOutsideClick(
+        [buttonRef, listRef],
+        isActive,
+        () => setIsActive(false)
+    );
+
+    const renderDisplayOptionsList = () => {
         if (allOptions == undefined) {
             return availableOptions.map((option) => renderListButton(option, true));
         } else {
@@ -23,14 +30,6 @@ export const DropdownAddListedObject = <T extends string | number>({ availableOp
             });
         }
     }
-
-    const handleClickOutside = (e :MouseEvent) => {
-        if(!isActive) return;
-        if(buttonRef.current?.contains(e.target as Node)) return;
-        if(listRef.current?.contains(e.target as Node)) return;
-        
-        setIsActive(false);
-    };
 
     const renderListButton = (option: T, isAvailable: boolean) => {
         return (
@@ -48,18 +47,13 @@ export const DropdownAddListedObject = <T extends string | number>({ availableOp
         );
     };
 
-    useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, [isActive, buttonRef]);
-
     return (
         <div className={styles.addItemDropdownContainer}>
             <button ref={buttonRef} className={styles.addItemDropdownButton} onClick={() => setIsActive(!isActive)}> ADD NEW </button>
             
             {isActive &&
             <ul ref={listRef} className={styles.addItemDropdownList}>
-                { handleDisplayOptionsList() }
+                { renderDisplayOptionsList() }
             </ul>}
         </div>
     );
