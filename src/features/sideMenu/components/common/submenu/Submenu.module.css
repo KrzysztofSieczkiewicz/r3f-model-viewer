@@ -55,6 +55,55 @@
 }
 
 /* ADD ITEM DROPDOWN */
+.addItemDropdownContainer {
+    position: relative;
+    width: 10rem;
+    height: var(--button-height);
+}
+
+.addItemDropdownButton {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid black;
+
+    color: var(--color-platinum);
+    background-color: var(--color-resin-brighter);
+
+    cursor: pointer;
+}
+
+.addItemDropdownList {
+    position: absolute;
+    top: var(--button-height);
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+
+    width: 10rem;
+    padding: 0;
+}
+
+.addItemDropdownListItem {
+    width: 100%;
+    height: 1.5rem;
+}
+
+.addItemDropdownListItemButton {
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
+}
+
+.addItemDropdownListItemButtonDisabled {
+    width: 100%;
+    height: 100%;
+    color: var(--color-main-weak)
+}
 
 
 /* SUBMENU LISTED ITEMS */

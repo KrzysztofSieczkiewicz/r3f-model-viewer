@@ -2,10 +2,10 @@ import React from "react";
 import styles from './../common/submenu/Submenu.module.css';
 
 import { ReactComponent as PointLightIcon } from '../../../../icons/lightTypes/pointLight.svg';
-import { EffectTypes } from "../../../../models/Effect";
+import { EffectType } from "../../../../models/Effect";
 
 type Props = {
-    type: EffectTypes;
+    type: EffectType;
 }
 
 // TODO: INTRODUCE PROPER EFFECT ICONS

@@ -1,13 +1,14 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { DEFAULT_BLOOM_EFFECT, DEFAULT_DOF_EFFECT, DEFAULT_GLITCH_EFFECT, EFFECT_TYPES, EffectProperties, EffectTypes, EffectWrapper, INIT_EFFECTS_LIST } from "../../models/Effect";
+import { DEFAULT_BLOOM_EFFECT, DEFAULT_DOF_EFFECT, DEFAULT_GLITCH_EFFECT, EFFECT_TYPES, EffectProperties, EffectType, EffectWrapper, INIT_EFFECTS_LIST } from "../../models/Effect";
 
 type EffectsContext = {
     effectsList: EffectWrapper[],
-    addEffect: (type: EffectTypes) => void,
-    updateEffectProperties: (type: EffectTypes, change: Partial<EffectProperties>) => void,
-    deleteEffect: (type: EffectTypes) => void,
+    getAvailableEffects: () => EffectType[]
+    addEffect: (type: EffectType) => void,
+    updateEffectProperties: (type: EffectType, change: Partial<EffectProperties>) => void,
+    deleteEffect: (type: EffectType) => void,
 }
 
 export const EffectsContext = createContext<EffectsContext | null>( null );
@@ -16,7 +17,13 @@ export const EffectsContextProvider = (props: {children: ReactNode}): JSX.Elemen
 
     const [ effectsList, setEffectsList ] = useState<EffectWrapper[]>(INIT_EFFECTS_LIST)
 
-    const addEffect = useCallback((type: EffectTypes) => {
+    const getAvailableEffects = useCallback(() => {
+        return Object.values(EFFECT_TYPES).filter(
+            value => !effectsList.some(effect => effect.type === value)
+        ) as EffectType[];
+    }, [effectsList]);
+
+    const addEffect = useCallback((type: EffectType) => {
         const index = effectsList.findIndex(effect => effect.type === type);
         if(index !== -1) return;
 
@@ -36,7 +43,7 @@ export const EffectsContextProvider = (props: {children: ReactNode}): JSX.Elemen
         setEffectsList(newEffectsList);
     }, [effectsList])
 
-    const updateEffectProperties = useCallback((type: EffectTypes, change: Partial<EffectProperties>) => {
+    const updateEffectProperties = useCallback((type: EffectType, change: Partial<EffectProperties>) => {
         const index = effectsList.findIndex(effect => effect.type === type);
         if(index === -1) return;
 
@@ -47,7 +54,7 @@ export const EffectsContextProvider = (props: {children: ReactNode}): JSX.Elemen
         setEffectsList(newEffectsList);
     }, [effectsList]);
 
-    const deleteEffect = useCallback((type: EffectTypes)=> {
+    const deleteEffect = useCallback((type: EffectType)=> {
         const index = effectsList.findIndex(effect => effect.type === type);
         if(index === -1) return;
 
@@ -57,7 +64,7 @@ export const EffectsContextProvider = (props: {children: ReactNode}): JSX.Elemen
 
 
     return (
-        <EffectsContext.Provider value={{ effectsList, addEffect, updateEffectProperties, deleteEffect }} >
+        <EffectsContext.Provider value={{ effectsList, getAvailableEffects, addEffect, updateEffectProperties, deleteEffect }} >
             {props.children}
         </EffectsContext.Provider>
     );

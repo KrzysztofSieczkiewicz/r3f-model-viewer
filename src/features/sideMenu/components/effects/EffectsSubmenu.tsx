@@ -3,19 +3,19 @@ import { useState } from 'react';
 import { useEffectsContext } from '../../../../components/contexts/EffectsContext';
 
 import { ListedEffect } from './ListedEffect';
-import { EffectTypes } from '../../../../models/Effect';
-import { AddEffectDropdown } from '../../../../components/sidebar/effects/AddEffectDropdown';
+import { EFFECT_TYPES, EffectType } from '../../../../models/Effect';
 import { Submenu } from '../common/submenu/Submenu';
 import { SubmenuSection } from '../common/submenu/SubmenuSection';
+import { DropdownAddListedObject } from '../common/submenu/DropdownAddListedObject';
 
 
 
 export const EffectsSubmenu = () => {
-    const { effectsList } = useEffectsContext();
+    const { effectsList, addEffect, getAvailableEffects } = useEffectsContext();
    
-    const [activeEffect, setActiveEffect] = useState<EffectTypes | null>(null);
+    const [activeEffect, setActiveEffect] = useState<EffectType | null>(null);
 
-    const handleItemClick = (type: EffectTypes) => {
+    const handleItemClick = (type: EffectType) => {
         if (activeEffect === type) {
             setActiveEffect(null);
         } else {
@@ -26,7 +26,10 @@ export const EffectsSubmenu = () => {
     return (
         <Submenu>
             <SubmenuSection>
-                <AddEffectDropdown />
+                <DropdownAddListedObject<EffectType>
+                    availableOptions={getAvailableEffects()}
+                    allOptions={Object.values(EFFECT_TYPES)}
+                    onClick={(type: EffectType) => addEffect(type)} />
             </SubmenuSection>
 
             <SubmenuSection title="Effects">
