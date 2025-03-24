@@ -3,11 +3,11 @@ import { useState } from "react";
 import styles from './Sidebar.module.css';
 
 import { SidebarMenuButton } from "./SidebarMenuButton";
-import { AssetsMenu } from "../../features/sideMenu/components/assets/AssetsSubmenu";
-import { EffectsMenu } from "./effects/EffectsMenu";
-import { LightsMenu } from "./lights/LightsMenu";
-import { SceneMenu } from "./scene/SceneMenu";
-import { CamerasMenu } from "../../features/sideMenu/components/cameras/CamerasMenu";
+import { AssetsMenu } from "../assets/AssetsSubmenu";
+import { EffectsSubmenu } from "../effects/EffectsSubmenu";
+import { LightsMenu } from "../../../../components/sidebar/lights/LightsMenu";
+import { SceneMenu } from "../../../../components/sidebar/scene/SceneMenu";
+import { CamerasSubmenu } from "../cameras/CamerasSubmenu";
 
 export enum MenuTypes {
     None,
@@ -56,13 +56,13 @@ export const Sidebar = () => {
                     type={MenuTypes.Effects}
                     active={activeItem === MenuTypes.Effects}
                     onClick={() => handleItemClick(MenuTypes.Effects)} >
-                    <EffectsMenu />
+                    <EffectsSubmenu />
                 </SidebarMenuButton>
                 <SidebarMenuButton
                     type={MenuTypes.Cameras}
                     active={activeItem === MenuTypes.Cameras}
                     onClick={() => handleItemClick(MenuTypes.Cameras)} >
-                    <CamerasMenu />
+                    <CamerasSubmenu />
                 </SidebarMenuButton>
             </ul>
             <div id="sidebar-modal"></div>

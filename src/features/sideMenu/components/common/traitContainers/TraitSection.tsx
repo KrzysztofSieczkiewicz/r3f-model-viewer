@@ -2,11 +2,11 @@ import React, { ReactNode } from "react";
 import styles from './TraitContainers.module.css';
 
 type Props = {
-    displayName?: string;
+    name?: string;
     children: ReactNode;
 }
 
-export const TraitSection = ( {displayName, children}: Props) => {
+export const TraitSection = ( {name, children}: Props) => {
 
     const renderDisplayName = (displayName: string|undefined) => {
         if(displayName === undefined) return;
@@ -16,7 +16,7 @@ export const TraitSection = ( {displayName, children}: Props) => {
 
     return (
         <div className={styles.sectionMainContainer}>
-            {renderDisplayName(displayName)}
+            {renderDisplayName(name)}
             <ul className={styles.sectionSubtraitsList}>
                 {React.Children.map(children, child => {
                     return <li className={styles.sectionSubtraitContainer}>{child}</li>

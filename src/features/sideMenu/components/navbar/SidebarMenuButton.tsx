@@ -3,11 +3,11 @@ import styles from './SidebarMenuButton.module.css';
 
 import { MenuTypes } from "./Sidebar";
 
-import { ReactComponent as LightIcon } from './../../icons/sidebar/light.svg';
-import { ReactComponent as CubeIcon } from './../../icons/sidebar/cube.svg';
-import { ReactComponent as EarthIcon } from './../../icons/sidebar/earth.svg';
-import { ReactComponent as ImageIcon } from './../../icons/sidebar/image.svg';
-import { ReactComponent as CameraIcon } from './../../icons/sidebar/camera.svg';
+import { ReactComponent as LightIcon } from './../../../../icons/sidebar/light.svg';
+import { ReactComponent as CubeIcon } from './../../../../icons/sidebar/cube.svg';
+import { ReactComponent as EarthIcon } from './../../../../icons/sidebar/earth.svg';
+import { ReactComponent as ImageIcon } from './../../../../icons/sidebar/image.svg';
+import { ReactComponent as CameraIcon } from './../../../../icons/sidebar/camera.svg';
 
 type Props = {
     type: MenuTypes;

@@ -6,6 +6,6 @@ import { ReactComponent as CameraIcon } from '../../../../icons/sidebar/camera.s
 // TODO: ADD PROPER ICONS FOR CAMERAS
 export const ListedCameraTypeIcon = () => {
     return(
-        <CameraIcon className={styles.typeIcon} />
+        <CameraIcon className={styles.listedItemIcon} />
     );
 }

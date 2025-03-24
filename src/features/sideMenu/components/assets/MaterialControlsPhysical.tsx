@@ -50,7 +50,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Display">
+        <TraitSection name="Display">
             <TraitSingle name="Flat shading">
                 <Checkbox
                     value={flatShading}
@@ -63,7 +63,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Color">
+        <TraitSection name="Color">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={colorMap}
@@ -76,7 +76,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Surface">
+        <TraitSection name="Surface">
             <TraitSingle name="Roughness">
                 <TexturePicker
                     map={roughnessMap}
@@ -134,7 +134,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Specular">
+        <TraitSection name="Specular">
             <TraitSingle name="Color map">
                 <TexturePicker
                     map={specularColorMap}
@@ -161,7 +161,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Attenuation">
+        <TraitSection name="Attenuation">
             <TraitSingle name="Color">
                 <ColorPicker
                     currentColor={attenuationColor}
@@ -178,7 +178,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Emissive">
+        <TraitSection name="Emissive">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={emissiveMap}
@@ -200,7 +200,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Environment">
+        <TraitSection name="Environment">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={environmentMap}
@@ -226,7 +226,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Transparency">
+        <TraitSection name="Transparency">
             <TraitSingle name="Transparent">
                 <Checkbox
                     value={transparent}
@@ -260,7 +260,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Ambient occlusion">
+        <TraitSection name="Ambient occlusion">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={ambientOcclusionMap}
@@ -276,7 +276,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Normal">
+        <TraitSection name="Normal">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={normalMap}
@@ -292,7 +292,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Bump">
+        <TraitSection name="Bump">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={bumpMap}
@@ -309,7 +309,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Displacement">
+        <TraitSection name="Displacement">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={displacementMap}
@@ -333,7 +333,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Clearcoat">
+        <TraitSection name="Clearcoat">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={clearcoatMap}
@@ -373,7 +373,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Anisotropy">
+        <TraitSection name="Anisotropy">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={anisotropyMap}
@@ -397,7 +397,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Iridescence">
+        <TraitSection name="Iridescence">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={iridescenceMap}
@@ -422,7 +422,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Sheen">
+        <TraitSection name="Sheen">
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <SliderNumeric
@@ -456,7 +456,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Thickness">
+        <TraitSection name="Thickness">
             <TraitSingle name="Map">
                 <TexturePicker
                     map={thicknessMap}

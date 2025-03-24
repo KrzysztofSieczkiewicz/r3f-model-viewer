@@ -1,27 +1,24 @@
 import React from "react";
 
 import { BloomProperties, EFFECT_TYPES } from "../../../../models/Effect";
-import { Checkbox } from "../../controls/buttons/Checkbox";
-import { SliderLimited } from "../../controls/SliderLimited";
-import { useEffectsContext } from "../../../contexts/EffectsContext";
-import { DeleteItemButton } from "../../common/DeleteItemButton";
-import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
-import { ListItemBody } from "../../commons/ListItemBody";
-import { ResetButton } from "../../controls/buttons/ResetButton";
-import { TraitSingle } from "../../../../features/sideMenu/components/common/traitContainers/TraitSingle";
+import { TraitSingle } from "../common/traitContainers/TraitSingle";
+import { useEffectsContext } from "../../../../components/contexts/EffectsContext";
+import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
+import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
+import { SliderLimited } from "../../../../components/sidebar/controls/SliderLimited";
+import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
 
 type Props = {
     properties: BloomProperties,
 }
 
-export const BloomControls = ( {properties}: Props ) => {
-    const { updateEffectProperties, deleteEffect } = useEffectsContext(); 
+export const EffectControlsBloom = ( {properties}: Props ) => {
+    const { updateEffectProperties } = useEffectsContext(); 
 
     const type = EFFECT_TYPES.bloom;
 
     return (
-        <ListItemBody>
-            <DeleteItemButton deleteObject={() => deleteEffect(type)}/>
+        <>
             <TraitSingle name="Active">
                 <Checkbox
                     value={properties.enabled}
@@ -57,6 +54,6 @@ export const BloomControls = ( {properties}: Props ) => {
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateEffectProperties(type, {luminanceSmoothing: 0.025} )} />
             </TraitSingle>
-        </ListItemBody>
+        </>
     );
 }

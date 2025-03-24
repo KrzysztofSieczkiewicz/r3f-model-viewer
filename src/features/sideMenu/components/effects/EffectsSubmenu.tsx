@@ -1,16 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
-import { useEffectsContext } from '../../contexts/EffectsContext';
+import { useEffectsContext } from '../../../../components/contexts/EffectsContext';
 
-import { EffectItem } from './EffectItem';
-import { EffectTypes } from '../../../models/Effect';
-import { AddEffectDropdown } from './AddEffectDropdown';
-import { Submenu } from '../../../features/sideMenu/components/common/submenu/Submenu';
-import { SubmenuSection } from '../../../features/sideMenu/components/common/submenu/SubmenuSection';
+import { ListedEffect } from './ListedEffect';
+import { EffectTypes } from '../../../../models/Effect';
+import { AddEffectDropdown } from '../../../../components/sidebar/effects/AddEffectDropdown';
+import { Submenu } from '../common/submenu/Submenu';
+import { SubmenuSection } from '../common/submenu/SubmenuSection';
 
 
 
-export const EffectsMenu = () => {
+export const EffectsSubmenu = () => {
     const { effectsList } = useEffectsContext();
    
     const [activeEffect, setActiveEffect] = useState<EffectTypes | null>(null);
@@ -32,7 +32,7 @@ export const EffectsMenu = () => {
             <SubmenuSection title="Effects">
                 {effectsList.map((effect) => {
                     return (
-                        <EffectItem
+                        <ListedEffect
                             key={effect.type}
                             effect={effect}
                             isActive={activeEffect === effect.type}

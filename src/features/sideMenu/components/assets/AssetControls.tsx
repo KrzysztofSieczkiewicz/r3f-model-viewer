@@ -19,7 +19,6 @@ export const AssetControls = ({asset}: Props) => {
 
     return (
         <TraitExpandable name="General">
-
             <TraitSingle name="Position">
                 <SlidersArray
                     value={position}

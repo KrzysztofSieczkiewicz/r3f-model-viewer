@@ -34,7 +34,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Transparency">
+        <TraitSection name="Transparency">
             <TraitSingle name="Transparent">
                 <Checkbox
                     value={transparent}
@@ -51,7 +51,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Display">
+        <TraitSection name="Display">
             <TraitSingle name="Flat shading">
                 <Checkbox
                     value={flatShading}
@@ -64,7 +64,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
             </TraitSingle>
         </TraitSection>
 
-        <TraitSection displayName="Surface">
+        <TraitSection name="Surface">
             <TraitSingle name="Color">
                 <ColorPicker
                     currentColor={color}

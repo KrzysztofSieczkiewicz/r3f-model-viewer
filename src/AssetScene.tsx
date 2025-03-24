@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Lights } from './components/canvas/lights/Lights';
 import { Canvas } from '@react-three/fiber';
-import { Sidebar } from './components/sidebar/Sidebar';
+import { Sidebar } from './features/sideMenu/components/navbar/Sidebar';
 import { Assets } from './components/canvas/assets/Assets';
 import { Effects } from './components/canvas/effects/Effects';
 import { PerspectiveCamera as PerspectiveCameraType} from 'three/src/Three';

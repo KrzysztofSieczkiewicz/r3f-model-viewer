@@ -8,7 +8,7 @@ import { CameraWrapper } from "../../../../models/Camera";
 import { ListedCamera } from "./ListedCamera";
 
 
-export const CamerasMenu = () => {
+export const CamerasSubmenu = () => {
     const { camerasList } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
