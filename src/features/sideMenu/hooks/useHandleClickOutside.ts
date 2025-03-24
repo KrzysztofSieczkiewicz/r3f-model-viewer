@@ -12,6 +12,10 @@ export const useHandleOutsideClick = (
         const isClickInside = refs.some(ref => 
           ref.current?.contains(event.target as Node)
         );
+
+        if (!isClickInside) {
+          callback();
+        }
       };
   
       document.addEventListener('mousedown', handleClickOutside);
