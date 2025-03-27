@@ -1,27 +1,24 @@
 import React from "react";
-import { useSceneObjectsContext } from "../../../contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 
-import { SliderLimited } from "../../controls/SliderLimited";
-import { ColorPicker } from "../../controls/ColorPicker";
+import { SliderLimited } from "../../../../components/sidebar/controls/SliderLimited";
+import { ColorPicker } from "../../../../components/sidebar/controls/ColorPicker";
 import { SpotLightProperties } from "../../../../models/Light";
-import { DeleteItemButton } from "../../common/DeleteItemButton";
-import { SliderLongContainer } from "../../controls/sliderContainers/SliderLongContainer";
-import { ListItemBody } from "../../commons/ListItemBody";
-import { ResetButton } from "../../controls/buttons/ResetButton";
-import { SlidersArray } from "../../controls/SlidersArray";
-import { TraitSingle } from "../../../../features/sideMenu/components/common/traitContainers/TraitSingle";
+import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
+import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
+import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
+import { TraitSingle } from "../common/traitContainers/TraitSingle";
 
 type Props = {
     id: string,
     properties: SpotLightProperties,
 }
 
-export const SpotLightControls = ( {id, properties}: Props ) => {
-    const { updateLightProperties, deleteLight } = useSceneObjectsContext();
+export const LightControlsSpotlight = ( {id, properties}: Props ) => {
+    const { updateLightProperties } = useSceneObjectsContext();
 
     return (
-        <ListItemBody>
-            <DeleteItemButton deleteObject={() => deleteLight(id)}/>
+        <>
             <TraitSingle name="Position" >
                 <SlidersArray
                     value={properties.position}
@@ -74,6 +71,6 @@ export const SpotLightControls = ( {id, properties}: Props ) => {
                 </SliderLongContainer>
                 <ResetButton onReset={() => updateLightProperties(id, {penumbra: 0.6} )} />
             </TraitSingle>
-        </ListItemBody>
+        </>
     );
 }

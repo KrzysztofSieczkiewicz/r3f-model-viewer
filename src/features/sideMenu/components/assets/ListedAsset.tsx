@@ -28,8 +28,7 @@ export const ListedAsset = ( {isActive, asset, toggleExtend}: Props) => {
                 <AssetControls asset={asset}/>
                 <MeshControls asset={asset} />
                 <MaterialControls asset={asset} />
-            </ListedObjectBody>
-            }
+            </ListedObjectBody>}
         </ListedObject>
     );
 }

@@ -20,10 +20,6 @@ type Props = {
 export const ListedCamera = ( {isActive, camera, toggleExtend}: Props ) => {
     const { deleteCamera } = useSceneObjectsContext();
 
-    const renderCameraHeader = () => {
-        return <ListedCameraHeader isActive={isActive} camera={camera} toggleExtend={() => toggleExtend()} />
-    }
-
     const renderCameraControls = () => {
         switch(camera.type) {
             case CAMERA_TYPES.perspectiveCamera:
@@ -35,7 +31,7 @@ export const ListedCamera = ( {isActive, camera, toggleExtend}: Props ) => {
     
     return (
         <MenuListItem isActive={isActive}>
-            {renderCameraHeader()}
+            <ListedCameraHeader isActive={isActive} camera={camera} toggleExtend={() => toggleExtend()} />
             
             {isActive &&
             <ListItemBody>

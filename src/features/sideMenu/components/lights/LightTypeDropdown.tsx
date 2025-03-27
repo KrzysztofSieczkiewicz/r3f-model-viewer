@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styles from './LightTypeDropdown.module.css';
-import { LIGHT_TYPES } from '../../../models/Light';
+import { LIGHT_TYPES } from '../../../../models/Light';
 
 type Props = {
     current: string,

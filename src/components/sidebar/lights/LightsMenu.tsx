@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 
-import { LightItem } from './LightItem';
+import { ListedLight } from '../../../features/sideMenu/components/lights/ListedLight';
 import { LightWrapper } from '../../../models/Light';
 import { AddLightDropdown } from './AddLightDropdown';
 import { SubmenuSection } from '../../../features/sideMenu/components/common/submenu/SubmenuSection';
@@ -30,7 +30,7 @@ export const LightsMenu = () => {
 
             <SubmenuSection title="Lights">
                 {lightsList.map((light: LightWrapper) => {
-                    return <LightItem
+                    return <ListedLight
                         key={light.id}
                         isActive={activeId === light.id}
                         light={light}

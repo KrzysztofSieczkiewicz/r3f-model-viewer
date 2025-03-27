@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from './Submenu.module.css';
 import { useHandleOutsideClick } from "../../../hooks/useHandleClickOutside";
 
 type Props<T> = {
     availableOptions: T[],
     allOptions?: T[],
-    onClick: (option: T) => void;
+    onChange: (option: T) => void;
 }
 
-export const DropdownAddListedObject = <T extends string | number>({ availableOptions, allOptions, onClick }: Props<T>) => {
+export const DropdownAddListedObject = <T extends string | number>({ availableOptions, allOptions, onChange }: Props<T>) => {
     const [ isActive, setIsActive ] = useState(false);
 
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -20,12 +20,12 @@ export const DropdownAddListedObject = <T extends string | number>({ availableOp
         () => setIsActive(false)
     );
 
-    const renderDisplayOptionsList = () => {
-        if (allOptions == undefined) {
-            return availableOptions.map((option) => renderListButton(option, true));
+    const renderOptionsList = (available: T[], all?: T[]) => {
+        if (all === undefined) {
+            return available.map((option) => renderListButton(option, true));
         } else {
-            return allOptions.map((option) => {
-                const isAvailable = availableOptions.includes(option);
+            return all.map((option) => {
+                const isAvailable = available.includes(option);
                 return renderListButton(option, isAvailable);
             });
         }
@@ -38,7 +38,7 @@ export const DropdownAddListedObject = <T extends string | number>({ availableOp
                     className={`${isAvailable ? styles.addItemDropdownListItemButton : styles.addItemDropdownListItemButtonDisabled}`}
                     onClick={() => {
                         if(!isAvailable) return;
-                        onClick(option);
+                        onChange(option);
                         setIsActive(false); }}
                     >
                         {option}
@@ -49,11 +49,14 @@ export const DropdownAddListedObject = <T extends string | number>({ availableOp
 
     return (
         <div className={styles.addItemDropdownContainer}>
-            <button ref={buttonRef} className={styles.addItemDropdownButton} onClick={() => setIsActive(!isActive)}> ADD NEW </button>
+            <button 
+                ref={buttonRef} 
+                className={styles.addItemDropdownButton} 
+                onClick={() => setIsActive(!isActive)}> ADD NEW </button>
             
             {isActive &&
             <ul ref={listRef} className={styles.addItemDropdownList}>
-                { renderDisplayOptionsList() }
+                { renderOptionsList(availableOptions, allOptions) }
             </ul>}
         </div>
     );

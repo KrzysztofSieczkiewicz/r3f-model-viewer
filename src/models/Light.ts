@@ -1,7 +1,7 @@
 import { generateNewID } from '../utils/idUtil';
 
 export enum LIGHT_TYPES {
-  pointLight =  "Point light",
+  pointLight = "Point light",
   spotLight = "Spot light"
 };
 export type LightTypes = 

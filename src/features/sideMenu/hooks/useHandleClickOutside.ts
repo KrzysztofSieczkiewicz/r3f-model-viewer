@@ -2,11 +2,11 @@ import { useEffect } from "react";
 
 export const useHandleOutsideClick = (
     refs: Array<React.RefObject<HTMLElement>>,
-    isOpen: boolean,
+    isActive: boolean,
     callback: () => void
   ) => {
     useEffect(() => {
-      if (!isOpen) return;
+      if (!isActive) return;
   
       const handleClickOutside = (event: MouseEvent) => {
         const isClickInside = refs.some(ref => 
@@ -20,5 +20,5 @@ export const useHandleOutsideClick = (
   
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [isOpen, refs, callback]);
+    }, [isActive, refs, callback]);
   };
