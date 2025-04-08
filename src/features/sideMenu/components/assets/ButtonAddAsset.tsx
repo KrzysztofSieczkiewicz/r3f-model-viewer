@@ -1,7 +1,7 @@
 import React from "react";
 import { AddAssetModal } from "../../../modals/assets/AddAssetModal";
 import { useSidebarModal } from "../../../../hooks/useSidebarModal";
-import { ButtonAddListedObject } from "../common/submenu/ButtonAddListedObject";
+import { ButtonAddListedObject } from "../common/controls/ButtonAddListedObject";
 
 export const ButtonAddAsset = () => {
     const { openModal, closeModal, SidebarModal } = useSidebarModal();

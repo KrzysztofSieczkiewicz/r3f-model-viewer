@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRef, useState } from 'react';
-import styles from './DropdownChangeListedObjectType.module.css';
+import styles from './DropdownListedObjectType.module.css';
 import { useHandleOutsideClick } from '../../../hooks/useHandleClickOutside';
 
 type Props<T> = {
@@ -9,7 +9,7 @@ type Props<T> = {
     onChange: (option: T) => void;
 }
 
-export const DropdownChangeListedObjectType = <T extends string | number>({current, availableOptions, onChange}: Props<T>): JSX.Element => {
+export const DropdownListedObjectType = <T extends string | number>({current, availableOptions, onChange}: Props<T>): JSX.Element => {
     const [ isOpen, setIsOpen ] = useState(false);
 
     const dropdownRef = useRef<HTMLDivElement | null>(null);

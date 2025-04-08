@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './../common/submenu/Submenu.module.css';
+import styles from './../common/submenus/Submenu.module.css';
 
 import { ReactComponent as CameraIcon } from '../../../../icons/sidebar/camera.svg';
 

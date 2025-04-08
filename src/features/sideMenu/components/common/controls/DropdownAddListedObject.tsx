@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import styles from './Submenu.module.css';
+import styles from './DropdownAddListedObject.module.css';
 import { useHandleOutsideClick } from "../../../hooks/useHandleClickOutside";
 
 type Props<T> = {
@@ -33,9 +33,9 @@ export const DropdownAddListedObject = <T extends string | number>({ availableOp
 
     const renderListButton = (option: T, isAvailable: boolean) => {
         return (
-            <li className={styles.addItemDropdownListItem} key={option}>
+            <li className={styles.listItem} key={option}>
                 <button 
-                    className={`${isAvailable ? styles.addItemDropdownListItemButton : styles.addItemDropdownListItemButtonDisabled}`}
+                    className={isAvailable ? `${styles.listItemButton}` : `${styles.listItemButton} ${styles.disabled}`}
                     onClick={() => {
                         if(!isAvailable) return;
                         onChange(option);
@@ -48,14 +48,14 @@ export const DropdownAddListedObject = <T extends string | number>({ availableOp
     };
 
     return (
-        <div className={styles.addItemDropdownContainer}>
+        <div className={styles.container}>
             <button 
                 ref={buttonRef} 
-                className={styles.addItemDropdownButton} 
+                className={styles.button} 
                 onClick={() => setIsActive(!isActive)}> ADD NEW </button>
             
             {isActive &&
-            <ul ref={listRef} className={styles.addItemDropdownList}>
+            <ul ref={listRef} className={styles.optionsList}>
                 { renderOptionsList(availableOptions, allOptions) }
             </ul>}
         </div>

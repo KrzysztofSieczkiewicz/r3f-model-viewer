@@ -4,7 +4,7 @@ import { EffectWrapper } from '../../../../models/Effect';
 import { ListedEffectHeader } from './ListedEffectHeader';
 import { MenuListItem } from '../../../../components/sidebar/commons/MenuListItem';
 import { EffectControls } from './EffectControls';
-import { ListedObjectBody } from '../common/submenu/ListedObjectBody';
+import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
 import { useEffectsContext } from '../../../../components/contexts/EffectsContext';
 import { DeleteItemButton } from '../../../../components/sidebar/common/DeleteItemButton';
 

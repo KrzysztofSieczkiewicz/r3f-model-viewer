@@ -5,8 +5,8 @@ import { useSceneObjectsContext } from '../../contexts/SceneObjectsContext';
 import { ListedLight } from '../../../features/sideMenu/components/lights/ListedLight';
 import { LightWrapper } from '../../../models/Light';
 import { AddLightDropdown } from './AddLightDropdown';
-import { SubmenuSection } from '../../../features/sideMenu/components/common/submenu/SubmenuSection';
-import { Submenu } from '../../../features/sideMenu/components/common/submenu/Submenu';
+import { SubmenuSection } from '../../../features/sideMenu/components/common/submenus/SubmenuSection';
+import { Submenu } from '../../../features/sideMenu/components/common/submenus/Submenu';
 
 
 export const LightsMenu = () => {

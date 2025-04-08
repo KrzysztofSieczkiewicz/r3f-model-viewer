@@ -4,7 +4,7 @@ import { LightWrapper } from '../../../../models/Light';
 import { LightItemHeader } from './LightItemHeader';
 import { MenuListItem } from '../../../../components/sidebar/commons/MenuListItem';
 import { LightControls } from './LightControls';
-import { ListedObjectBody } from '../common/submenu/ListedObjectBody';
+import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
 import { useSceneObjectsContext } from '../../../../components/contexts/SceneObjectsContext';
 import { DeleteItemButton } from '../../../../components/sidebar/common/DeleteItemButton';
 

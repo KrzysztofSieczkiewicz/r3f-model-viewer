@@ -4,8 +4,8 @@ import { useSceneObjectsContext } from "../../../../components/contexts/SceneObj
 
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { ButtonAddAsset } from "./ButtonAddAsset";
-import { Submenu } from "../common/submenu/Submenu";
-import { SubmenuSection } from "../common/submenu/SubmenuSection";
+import { Submenu } from "../common/submenus/Submenu";
+import { SubmenuSection } from "../common/submenus/SubmenuSection";
 import { ListedAsset } from "./ListedAsset";
 
 

@@ -4,11 +4,9 @@ import { useEffectsContext } from '../../../../components/contexts/EffectsContex
 
 import { ListedEffect } from './ListedEffect';
 import { EFFECT_TYPES, EffectType } from '../../../../models/Effect';
-import { Submenu } from '../common/submenu/Submenu';
-import { SubmenuSection } from '../common/submenu/SubmenuSection';
-import { DropdownAddListedObject } from '../common/submenu/DropdownAddListedObject';
-
-
+import { Submenu } from '../common/submenus/Submenu';
+import { SubmenuSection } from '../common/submenus/SubmenuSection';
+import { DropdownAddListedObject } from '../common/controls/DropdownAddListedObject';
 
 export const EffectsSubmenu = () => {
     const { effectsList, addEffect, getAvailableEffects } = useEffectsContext();

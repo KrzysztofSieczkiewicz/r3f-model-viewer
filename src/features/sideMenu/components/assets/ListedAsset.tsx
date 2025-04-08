@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ListedObject } from '../common/submenu/ListedObject';
-import { ListedObjectBody } from '../common/submenu/ListedObjectBody';
+import { ListedObject } from '../common/submenus/ListedObject';
+import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
 import { AssetWrapper } from '../../../../models/assets/Asset';
 import { ListedAssetHeader } from './ListedAssetHeader';
 import { DeleteItemButton } from '../../../../components/sidebar/common/DeleteItemButton';
