@@ -6,7 +6,6 @@ import { useSceneObjectsContext } from "../../../../components/contexts/SceneObj
 import { VisbilityEyeToggle } from "../../../../components/sidebar/common/VisbilityEyeToggle";
 import { LightTypeIcon } from "../../../../components/sidebar/lights/LightTypeIcon";
 import { LIGHT_TYPES, LightTypes, LightWrapper } from "../../../../models/Light";
-import { LightTypeDropdown } from "./LightTypeDropdown";
 import { DropdownChangeListedObjectType } from "../common/submenu/DropdownChangeListedObjectType";
 
 
@@ -37,11 +36,6 @@ export const LightItemHeader = ( {isActive, light, toggleExtend }: Props) => {
                 current={light.type} 
                 availableOptions={Object.values(LIGHT_TYPES)} 
                 onChange={(type: LightTypes) => changeLightType(light.id, type)} />
-
-            <LightTypeDropdown 
-                current={light.type} 
-                selectionList={[{type: LIGHT_TYPES.pointLight, display: "Point light"}, {type: LIGHT_TYPES.spotLight, display: "Spot light"}]} 
-                handleChange={(val) => changeLightType(light.id, val)}  />
             <div className={lightStyles.headerColorPreview} style={{backgroundColor: color}}/>
             <VisbilityEyeToggle 
                 isVisible={isVisible}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRef, useState } from 'react';
-import styles from './Submenu.module.css';
+import styles from './DropdownChangeListedObjectType.module.css';
 import { useHandleOutsideClick } from '../../../hooks/useHandleClickOutside';
 
 type Props<T> = {
@@ -51,14 +51,14 @@ export const DropdownChangeListedObjectType = <T extends string | number>({curre
         <div className={styles.container}
             ref={dropdownRef}>
             <button
-                className={isOpen ? `${styles.body} ${styles.active}` : styles.body}
+                className={isOpen ? `${styles.dropdownButton} ${styles.active}` : styles.dropdownButton}
                 type="button"
                 onClick={(e) => {
                     e.stopPropagation();
                     toggleList()
                 }}
             >
-                <div className={styles.value}>{current}</div>
+                <div className={styles.currentValue}>{current}</div>
                 {isOpen
                 ? <span className={styles.arrow}>&#8657;</span>
                 : <span className={styles.arrow}>&#8659;</span>}
