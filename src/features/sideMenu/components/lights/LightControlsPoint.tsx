@@ -7,7 +7,7 @@ import { PointLightProperties } from "../../../../models/Light";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
 import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
-import { TraitSingle } from "../common/traitContainers/TraitSingle";
+import { TraitSingle } from "../common/traits/TraitSingle";
 
 type Props = {
     id: string,

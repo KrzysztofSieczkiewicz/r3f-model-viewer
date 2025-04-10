@@ -6,7 +6,7 @@ import { SliderLimited } from "../controls/SliderLimited";
 import { useScene } from "../../contexts/SceneContext";
 import { ResetButton } from "../controls/buttons/ResetButton";
 import { SliderLongContainer } from "../controls/sliderContainers/SliderLongContainer";
-import { TraitSingle } from "../../../features/sideMenu/components/common/traitContainers/TraitSingle";
+import { TraitSingle } from "../../../features/sideMenu/components/common/traits/TraitSingle";
 
 export const AmbientLightControls = () => {
     const [ scene, setScene ] = useScene();

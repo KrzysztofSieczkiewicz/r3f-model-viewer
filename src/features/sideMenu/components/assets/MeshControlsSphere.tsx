@@ -4,7 +4,7 @@ import { SphereProperties } from "../../../../models/assets/meshes/Primitive";
 import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
 import { SliderMediumContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderMediumContainer";
 import { MultilineSlidersNumeric } from "../../../../components/sidebar/controls/MultilineSlidersNumeric";
-import { TraitSingle } from "../common/traitContainers/TraitSingle";
+import { TraitSingle } from "../common/traits/TraitSingle";
 
 type Props = {
     assetId: string,

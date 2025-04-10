@@ -5,7 +5,7 @@ import styles from './Sidebar.module.css';
 import { SidebarMenuButton } from "./SidebarMenuButton";
 import { AssetsMenu } from "../assets/AssetsSubmenu";
 import { EffectsSubmenu } from "../effects/EffectsSubmenu";
-import { LightsMenu } from "../../../../components/sidebar/lights/LightsMenu";
+import { LightsSubenu } from "../lights/LightsSubenu";
 import { SceneMenu } from "../../../../components/sidebar/scene/SceneMenu";
 import { CamerasSubmenu } from "../cameras/CamerasSubmenu";
 
@@ -50,7 +50,7 @@ export const Sidebar = () => {
                     type={MenuTypes.Lights}
                     active={activeItem === MenuTypes.Lights}
                     onClick={() => handleItemClick(MenuTypes.Lights)} >
-                    <LightsMenu />
+                    <LightsSubenu />
                 </SidebarMenuButton>
                 <SidebarMenuButton
                     type={MenuTypes.Effects}

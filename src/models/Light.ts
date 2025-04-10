@@ -4,7 +4,7 @@ export enum LIGHT_TYPES {
   pointLight = "Point light",
   spotLight = "Spot light"
 };
-export type LightTypes = 
+export type LightType = 
   LIGHT_TYPES.pointLight | 
   LIGHT_TYPES.spotLight;
 

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Primitives, PrimitiveWrapper } from "../../../../models/assets/meshes/Primitive";
 import { AssetWrapper, Meshes } from "../../../../models/assets/Asset";
-import { TraitExpandable } from "../common/traitContainers/TraitExpandable";
+import { TraitExpandable } from "../common/traits/TraitExpandable";
 import { MeshControlsBox } from "./MeshControlsBox";
 import { MeshControlsSphere } from "./MeshControlsSphere";
 import { MeshControlsCone } from "./MeshControlsCone";

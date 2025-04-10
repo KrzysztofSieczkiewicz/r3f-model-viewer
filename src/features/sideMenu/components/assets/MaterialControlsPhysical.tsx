@@ -9,8 +9,8 @@ import { ResetButton } from "../../../../components/sidebar/controls/buttons/Res
 import { SingleChoiceDropdown } from "../../../../components/sidebar/controls/SingleChoiceDropdown";
 import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
 import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
-import { TraitSingle } from "../common/traitContainers/TraitSingle";
-import { TraitSection } from "../common/traitContainers/TraitSection";
+import { TraitSingle } from "../common/traits/TraitSingle";
+import { TraitSection } from "../common/traits/TraitSection";
 
 type Props = {
     assetId: string,

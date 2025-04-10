@@ -1,7 +1,7 @@
 import React from "react";
 import { AssetWrapper, Materials } from "../../../../models/assets/Asset";
 import { EditableMaterials, EditableMaterialWrapper } from "../../../../models/assets/materials/EditableMaterial";
-import { TraitExpandable } from "../common/traitContainers/TraitExpandable";
+import { TraitExpandable } from "../common/traits/TraitExpandable";
 import { MaterialControlsPhysical } from "./MaterialControlsPhysical";
 import { MaterialControlsStandard } from "./MaterialControlsStandard";
 import { MaterialControlsPhong } from "./MaterialControlsPhong";

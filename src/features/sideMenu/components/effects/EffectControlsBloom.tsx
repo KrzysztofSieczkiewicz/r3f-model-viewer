@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BloomProperties, EFFECT_TYPES } from "../../../../models/Effect";
-import { TraitSingle } from "../common/traitContainers/TraitSingle";
+import { TraitSingle } from "../common/traits/TraitSingle";
 import { useEffectsContext } from "../../../../components/contexts/EffectsContext";
 import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";

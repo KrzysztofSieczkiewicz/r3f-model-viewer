@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Meshes } from "../../models/assets/Asset";
-import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightTypes, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
+import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightType, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
 import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/assets/meshes/Primitive";
 import { CAMERA_TYPES, CameraProperties, CameraTypes, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../models/Camera";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterialProperties, EditableMaterials } from "../../models/assets/materials/EditableMaterial";
@@ -20,7 +20,7 @@ type SceneObjectsContextProps = {
     addAssetPrimitive: (primitiveType: Primitives) => void,
 
     lightsList: LightWrapper[],
-    changeLightType: (id: string, type: LightTypes) => void,
+    changeLightType: (id: string, type: LightType) => void,
     updateLightProperties: (id: string, change: Partial<LightProperties>) => void,
     deleteLight: (id: string) => void,
     addLight: (light: LightWrapper) => void,
@@ -39,12 +39,18 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
     const [ camerasList, setCamerasList ] = useState<CameraWrapper[]>(INIT_CAMERAS_LIST)
 
+
+    
+    // TODO [CURRENT]: Modify this method to accept LIGHT_TYPE instead (maybe rename to addDefaultLight). Should save You some reused code
+
+
+
     const addLight = useCallback((light: LightWrapper) => {
         const extendedLights = [...lightsList, light] as LightWrapper[];
         setLightsList(extendedLights);
     }, [lightsList]);
 
-    const changeLightType = useCallback((id: string, type: LightTypes) => {
+    const changeLightType = useCallback((id: string, type: LightType) => {
         const index = lightsList.findIndex(light => light.id === id);
         if (index === -1) return;
 

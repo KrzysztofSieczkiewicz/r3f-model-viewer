@@ -8,8 +8,8 @@ import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNum
 import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
 import { ColorPicker } from "../../../../components/sidebar/controls/ColorPicker";
 import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
-import { TraitSingle } from "../common/traitContainers/TraitSingle";
-import { TraitSection } from "../common/traitContainers/TraitSection";
+import { TraitSingle } from "../common/traits/TraitSingle";
+import { TraitSection } from "../common/traits/TraitSection";
 
 
 type Props = {

@@ -3,7 +3,7 @@ import React from 'react';
 import { LIGHT_TYPES, LightWrapper } from '../../../../models/Light';
 import { LightControlsPoint } from './LightControlsPoint';
 import { LightControlsSpotlight } from './LightControlsSpotlight';
-import { TraitSection } from '../common/traitContainers/TraitSection';
+import { TraitSection } from '../common/traits/TraitSection';
 
 type Props = {
     light: LightWrapper,

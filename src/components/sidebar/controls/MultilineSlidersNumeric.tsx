@@ -4,7 +4,7 @@ import { ToggleAxesLockButton } from "./buttons/ToggleAxesLockButton";
 import { normalizeArrayByIndex } from "../../../utils/mathUtil";
 import { SliderNumeric } from "./SliderNumeric";
 import { SliderMediumContainer } from "./sliderContainers/SliderMediumContainer";
-import { TraitSingle } from "../../../features/sideMenu/components/common/traitContainers/TraitSingle";
+import { TraitSingle } from "../../../features/sideMenu/components/common/traits/TraitSingle";
 
 type SliderProps<T> = {
     property: (keyof T),

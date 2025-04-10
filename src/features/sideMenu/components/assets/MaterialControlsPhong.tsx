@@ -8,8 +8,8 @@ import { SliderLongContainer } from "../../../../components/sidebar/controls/sli
 import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
 import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
 import { ColorPicker } from "../../../../components/sidebar/controls/ColorPicker";
-import { TraitSingle } from "../common/traitContainers/TraitSingle";
-import { TraitSection } from "../common/traitContainers/TraitSection";
+import { TraitSingle } from "../common/traits/TraitSingle";
+import { TraitSection } from "../common/traits/TraitSection";
 
 type Props = {
     assetId: string,

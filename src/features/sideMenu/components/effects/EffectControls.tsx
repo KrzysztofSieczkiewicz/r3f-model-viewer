@@ -1,6 +1,6 @@
 import React from "react";
 import { BloomProperties, DepthOfFieldProperties, EFFECT_TYPES, EffectProperties, EffectWrapper, GlitchProperties } from "../../../../models/Effect";
-import { TraitSection } from "../common/traitContainers/TraitSection";
+import { TraitSection } from "../common/traits/TraitSection";
 import { EffectControlsBloom } from "./EffectControlsBloom";
 import { EffectControlsDepthOfField } from "./EffectControlsDepthOfField";
 import { EffectControlsGlitch } from "./EffectControlsGlitch";
