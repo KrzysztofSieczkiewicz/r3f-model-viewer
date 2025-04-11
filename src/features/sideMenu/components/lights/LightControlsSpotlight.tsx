@@ -2,7 +2,7 @@ import React from "react";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 
 import { SliderLimited } from "../../../../components/sidebar/controls/SliderLimited";
-import { ColorPicker } from "../../../../components/sidebar/controls/ColorPicker";
+import { ColorPicker } from "../common/controls/ColorPicker";
 import { SpotLightProperties } from "../../../../models/Light";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";

@@ -2,7 +2,7 @@ import React from "react";
 import styles from './../common/submenus/Submenu.module.css';
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 
-import { VisbilityEyeToggle } from "../../../../components/sidebar/common/VisbilityEyeToggle";
+import { ButtonToggleVisibility } from "../common/controls/ButtonToggleVisibility";
 import { ListedLightTypeIcon } from "./ListedLightTypeIcon";
 import { LIGHT_TYPES, LightType, LightWrapper } from "../../../../models/Light";
 import { DropdownListedObjectType } from "../common/controls/DropdownListedObjectType";
@@ -36,7 +36,7 @@ export const ListedLightHeader = ( {isActive, light, toggleExtend }: Props) => {
                 availableOptions={Object.values(LIGHT_TYPES)} 
                 onChange={(type: LightType) => changeLightType(light.id, type)} />
             <div className={styles.listedItemColorPreview} style={{backgroundColor: color}}/>
-            <VisbilityEyeToggle 
+            <ButtonToggleVisibility 
                 isVisible={isVisible}
                 updateObject={ (val) => updateLightProperties(light.id, {isVisible: val} )} 
             />

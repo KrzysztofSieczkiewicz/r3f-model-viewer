@@ -3,7 +3,7 @@ import styles from './../common/submenus/Submenu.module.css';
 
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { ReactComponent as PointLightIcon } from '../../../../icons/lightTypes/pointLight.svg';
-import { VisbilityEyeToggle } from "../../../../components/sidebar/common/VisbilityEyeToggle";
+import { ButtonToggleVisibility } from "../common/controls/ButtonToggleVisibility";
 import { AssetProperties } from "../../../../models/assets/Asset";
 
 
@@ -31,7 +31,7 @@ export const ListedAssetHeader = ( {isActive, assetId, assetProperties, toggleEx
         >
             <PointLightIcon className={styles.listedItemIcon} />
             <p className={styles.listedItemDisplayName}>{assetProperties.name}</p>
-            <VisbilityEyeToggle 
+            <ButtonToggleVisibility 
                 isVisible={assetProperties.visible} 
                 updateObject={ (val: boolean) => updateAssetProperties(assetId, {visible: val} )} 
             />

@@ -6,7 +6,7 @@ import { MenuListItem } from '../../../../components/sidebar/commons/MenuListIte
 import { LightControls } from './LightControls';
 import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
 import { useSceneObjectsContext } from '../../../../components/contexts/SceneObjectsContext';
-import { DeleteItemButton } from '../../../../components/sidebar/common/DeleteItemButton';
+import { ButtonDeleteObject } from '../common/controls/ButtonDeleteObject';
 
 type Props = {
     isActive: boolean,
@@ -23,7 +23,7 @@ export const ListedLight = ({ isActive, light, toggleExtend }: Props) => {
             <ListedLightHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
             {isActive && 
             <ListedObjectBody>
-                <DeleteItemButton deleteObject={() => deleteLight(light.id)} />
+                <ButtonDeleteObject handleDelete={() => deleteLight(light.id)} />
                 <LightControls light={light} />
             </ListedObjectBody>}
         </MenuListItem>

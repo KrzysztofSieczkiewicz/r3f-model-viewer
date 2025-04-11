@@ -7,7 +7,7 @@ import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkb
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
 import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
-import { ColorPicker } from "../../../../components/sidebar/controls/ColorPicker";
+import { ColorPicker } from "../common/controls/ColorPicker";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { TraitSection } from "../common/traits/TraitSection";
 

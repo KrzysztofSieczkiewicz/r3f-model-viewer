@@ -1,7 +1,7 @@
 import React from "react";
 import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
-import { ColorPicker } from "../../../../components/sidebar/controls/ColorPicker";
+import { ColorPicker } from "../common/controls/ColorPicker";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";

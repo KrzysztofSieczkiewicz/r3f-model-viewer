@@ -2,7 +2,7 @@ import React from "react";
 import styles from './../common/submenus/Submenu.module.css';
 
 import { CameraWrapper } from "../../../../models/Camera";
-import { VisbilityEyeToggle } from "../../../../components/sidebar/common/VisbilityEyeToggle";
+import { ButtonToggleVisibility } from "../common/controls/ButtonToggleVisibility";
 import { ListedCameraTypeIcon } from "./ListedCameraTypeIcon";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 
@@ -31,7 +31,7 @@ export const ListedCameraHeader = ( {isActive, camera, toggleExtend }: Props) =>
         >
             <ListedCameraTypeIcon />
             <p className={styles.listedItemDisplayName}>Camera</p>
-            <VisbilityEyeToggle 
+            <ButtonToggleVisibility 
                 isVisible={isVisible}
                 updateObject={ (val) => updateCameraProperties(camera.id, {isVisible: val} )}  />
             <span className={styles.listedItemExtendIcon}>{ handleArrowDirection() }</span>

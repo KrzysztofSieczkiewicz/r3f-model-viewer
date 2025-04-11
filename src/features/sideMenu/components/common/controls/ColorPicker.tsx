@@ -24,6 +24,11 @@ export const ColorPicker = ( {currentColor, handleChange} :Props) :JSX.Element =
   }
 
   // DETECT IF CLICKED OUTSIDE AND CLOSE COLOR PALETTE
+
+
+  // TODO: REPLACE WITH useDetectOutsideClick
+
+
   const handleClickOutside = (e: MouseEvent) => {
     if (previewRef.current && previewRef.current.contains(e.target as Node)) {
       return;

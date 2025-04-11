@@ -6,7 +6,7 @@ import { MenuListItem } from '../../../../components/sidebar/commons/MenuListIte
 import { EffectControls } from './EffectControls';
 import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
 import { useEffectsContext } from '../../../../components/contexts/EffectsContext';
-import { DeleteItemButton } from '../../../../components/sidebar/common/DeleteItemButton';
+import { ButtonDeleteObject } from '../common/controls/ButtonDeleteObject';
 
 
 type Props = {
@@ -23,7 +23,7 @@ export const ListedEffect = ( {isActive, effect, toggleExtend}: Props) => {
             <ListedEffectHeader effect={effect} isActive={isActive} toggleExtend={() => toggleExtend()} />
             {isActive && 
             <ListedObjectBody>
-                <DeleteItemButton deleteObject={() => deleteEffect(effect.type)} />
+                <ButtonDeleteObject handleDelete={() => deleteEffect(effect.type)} />
                 <EffectControls effect={effect} />
             </ListedObjectBody>}
         </MenuListItem>

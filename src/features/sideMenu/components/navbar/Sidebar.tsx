@@ -6,8 +6,8 @@ import { SidebarMenuButton } from "./SidebarMenuButton";
 import { AssetsMenu } from "../assets/AssetsSubmenu";
 import { EffectsSubmenu } from "../effects/EffectsSubmenu";
 import { LightsSubenu } from "../lights/LightsSubenu";
-import { SceneMenu } from "../../../../components/sidebar/scene/SceneMenu";
 import { CamerasSubmenu } from "../cameras/CamerasSubmenu";
+import { SceneSubmenu } from "../scene/SceneSubmenu";
 
 export enum MenuTypes {
     None,
@@ -38,7 +38,7 @@ export const Sidebar = () => {
                     type={MenuTypes.Environment}
                     active={activeItem === MenuTypes.Environment}
                     onClick={() => handleItemClick(MenuTypes.Environment)} >
-                    <SceneMenu />
+                    <SceneSubmenu />
                 </SidebarMenuButton>
                 <SidebarMenuButton
                     type={MenuTypes.Objects}

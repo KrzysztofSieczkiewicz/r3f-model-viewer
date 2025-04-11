@@ -4,7 +4,7 @@ import { ListedObject } from '../common/submenus/ListedObject';
 import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
 import { AssetWrapper } from '../../../../models/assets/Asset';
 import { ListedAssetHeader } from './ListedAssetHeader';
-import { DeleteItemButton } from '../../../../components/sidebar/common/DeleteItemButton';
+import { ButtonDeleteObject } from '../common/controls/ButtonDeleteObject';
 import { useSceneObjectsContext } from '../../../../components/contexts/SceneObjectsContext';
 import { AssetControls } from './AssetControls';
 import { MeshControls } from './MeshControls';
@@ -24,7 +24,7 @@ export const ListedAsset = ( {isActive, asset, toggleExtend}: Props) => {
             <ListedAssetHeader isActive={isActive} assetId={asset.id} assetProperties={asset.properties} toggleExtend={() => toggleExtend()} />
             {isActive && 
             <ListedObjectBody>
-                <DeleteItemButton deleteObject={() => deleteAsset(asset.id)} />
+                <ButtonDeleteObject handleDelete={() => deleteAsset(asset.id)} />
                 <AssetControls asset={asset}/>
                 <MeshControls asset={asset} />
                 <MaterialControls asset={asset} />

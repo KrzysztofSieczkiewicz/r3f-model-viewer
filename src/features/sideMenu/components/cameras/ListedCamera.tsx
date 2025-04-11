@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { CAMERA_TYPES, CameraWrapper } from "../../../../models/Camera"
-import { DeleteItemButton } from '../../../../components/sidebar/common/DeleteItemButton';
+import { ButtonDeleteObject } from '../common/controls/ButtonDeleteObject';
 import { CameraControlsPerspective } from './CameraControlsPerspective';
 import { CameraControlsOrtographic } from './CameraControlsOrtographic';
 import { ListedCameraHeader } from './ListedCameraHeader';
@@ -35,7 +35,7 @@ export const ListedCamera = ( {isActive, camera, toggleExtend}: Props ) => {
             
             {isActive &&
             <ListItemBody>
-                <DeleteItemButton deleteObject={() => deleteCamera(camera.id)}/>
+                <ButtonDeleteObject handleDelete={() => deleteCamera(camera.id)}/>
                 {renderCameraControls()}
             </ListItemBody>
             }
