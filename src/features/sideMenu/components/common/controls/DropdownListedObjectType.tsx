@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRef, useState } from 'react';
 import styles from './DropdownListedObjectType.module.css';
-import { useHandleOutsideClick } from '../../../hooks/useHandleClickOutside';
+import { useDetectClickOutside } from '../../../hooks/useDetectClickOutside';
 
 type Props<T> = {
     current: string,
@@ -14,7 +14,7 @@ export const DropdownListedObjectType = <T extends string | number>({current, av
 
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    useHandleOutsideClick(
+    useDetectClickOutside(
         [dropdownRef],
         isOpen,
         () => setIsOpen(false)

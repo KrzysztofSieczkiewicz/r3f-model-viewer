@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LightWrapper } from '../../../../models/Light';
-import { LightItemHeader } from './LightItemHeader';
+import { ListedLightHeader } from './ListedLightHeader';
 import { MenuListItem } from '../../../../components/sidebar/commons/MenuListItem';
 import { LightControls } from './LightControls';
 import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
@@ -20,7 +20,7 @@ export const ListedLight = ({ isActive, light, toggleExtend }: Props) => {
 
     return (
         <MenuListItem isActive={isActive}>
-            <LightItemHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
+            <ListedLightHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
             {isActive && 
             <ListedObjectBody>
                 <DeleteItemButton deleteObject={() => deleteLight(light.id)} />

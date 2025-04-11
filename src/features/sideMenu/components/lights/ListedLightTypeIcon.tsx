@@ -9,7 +9,7 @@ type Props = {
     type: LightType
 }
 
-export const LightTypeIcon = ( {type} :Props ) => {
+export const ListedLightTypeIcon = ( {type} :Props ) => {
     return(
     <>
         {type === LIGHT_TYPES.pointLight && <PointLightIcon className={styles.listedItemIcon} />}

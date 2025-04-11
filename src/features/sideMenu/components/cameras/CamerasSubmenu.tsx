@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { Submenu } from "../common/submenus/Submenu";
 import { SubmenuSection } from "../common/submenus/SubmenuSection";
-import { DropdownAddCamera } from "./DropdownAddCamera";
-import { CameraWrapper } from "../../../../models/Camera";
+import { CAMERA_TYPES, CameraType, CameraWrapper } from "../../../../models/Camera";
 import { ListedCamera } from "./ListedCamera";
+import { DropdownAddListedObject } from "../common/controls/DropdownAddListedObject";
 
 
 export const CamerasSubmenu = () => {
-    const { camerasList } = useSceneObjectsContext();
+    const { camerasList, addCamera } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
 
@@ -24,7 +24,9 @@ export const CamerasSubmenu = () => {
     return (
         <Submenu>
             <SubmenuSection>
-                <DropdownAddCamera />
+                <DropdownAddListedObject
+                    availableOptions={Object.values(CAMERA_TYPES)}
+                    onChange={(type: CameraType) => addCamera(type)} />
             </SubmenuSection>
 
             <SubmenuSection title="Cameras">

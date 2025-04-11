@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useHandleOutsideClick = (
+export const useDetectClickOutside = (
     refs: Array<React.RefObject<HTMLElement>>,
     isActive: boolean,
     callback: () => void

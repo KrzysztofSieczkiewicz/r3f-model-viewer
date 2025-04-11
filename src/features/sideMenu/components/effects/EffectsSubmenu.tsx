@@ -24,7 +24,7 @@ export const EffectsSubmenu = () => {
     return (
         <Submenu>
             <SubmenuSection>
-                <DropdownAddListedObject<EffectType>
+                <DropdownAddListedObject
                     availableOptions={getAvailableEffects()}
                     allOptions={Object.values(EFFECT_TYPES)}
                     onChange={(type: EffectType) => addEffect(type)} />

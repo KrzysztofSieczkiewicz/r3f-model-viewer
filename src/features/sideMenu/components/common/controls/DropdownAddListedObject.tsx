@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styles from './DropdownAddListedObject.module.css';
-import { useHandleOutsideClick } from "../../../hooks/useHandleClickOutside";
+import { useDetectClickOutside } from "../../../hooks/useDetectClickOutside";
 
 type Props<T> = {
     availableOptions: T[],
@@ -14,7 +14,7 @@ export const DropdownAddListedObject = <T extends string | number>({ availableOp
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const listRef = useRef<HTMLUListElement | null>(null);
 
-    useHandleOutsideClick(
+    useDetectClickOutside(
         [buttonRef, listRef],
         isActive,
         () => setIsActive(false)

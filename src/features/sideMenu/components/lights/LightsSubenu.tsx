@@ -4,14 +4,13 @@ import { useSceneObjectsContext } from '../../../../components/contexts/SceneObj
 
 import { ListedLight } from './ListedLight';
 import { LIGHT_TYPES, LightType, LightWrapper } from '../../../../models/Light';
-import { AddLightDropdown } from '../../../../components/sidebar/lights/AddLightDropdown';
 import { SubmenuSection } from '../common/submenus/SubmenuSection';
 import { Submenu } from '../common/submenus/Submenu';
 import { DropdownAddListedObject } from '../common/controls/DropdownAddListedObject';
 
 
 export const LightsSubenu = () => {
-    const { lightsList, addLight } = useSceneObjectsContext();
+    const { lightsList, addDefaultLight } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
 
@@ -26,12 +25,9 @@ export const LightsSubenu = () => {
     return (
         <Submenu>
             <SubmenuSection>
-                <AddLightDropdown />
-            </SubmenuSection>
-            <SubmenuSection>
-                <DropdownAddListedObject<LightType>
+                <DropdownAddListedObject
                     availableOptions={Object.values(LIGHT_TYPES)}
-                    onChange={(type: LightType) => addLight(type)} />
+                    onChange={(type: LightType) => addDefaultLight(type)} />
             </SubmenuSection>
 
             <SubmenuSection title="Lights">

@@ -2,9 +2,9 @@ import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Meshes } from "../../models/assets/Asset";
-import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightType, LIGHT_TYPES, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT } from "../../models/Light";
+import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightType, getDefaultLight } from "../../models/Light";
 import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../models/assets/meshes/Primitive";
-import { CAMERA_TYPES, CameraProperties, CameraTypes, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../models/Camera";
+import { CAMERA_TYPES, CameraProperties, CameraType, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../models/Camera";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterialProperties, EditableMaterials } from "../../models/assets/materials/EditableMaterial";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
@@ -23,10 +23,10 @@ type SceneObjectsContextProps = {
     changeLightType: (id: string, type: LightType) => void,
     updateLightProperties: (id: string, change: Partial<LightProperties>) => void,
     deleteLight: (id: string) => void,
-    addLight: (light: LightWrapper) => void,
+    addDefaultLight: (type: LightType) => void,
 
     camerasList: CameraWrapper[],
-    addCamera: (type: CameraTypes) => void,
+    addCamera: (type: CameraType) => void,
     updateCameraProperties: (id: string, change: Partial<CameraProperties>) => void,
     deleteCamera: (id: string) => void,
 }
@@ -39,14 +39,10 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
     const [ camerasList, setCamerasList ] = useState<CameraWrapper[]>(INIT_CAMERAS_LIST)
 
-
-    
-    // TODO [CURRENT]: Modify this method to accept LIGHT_TYPE instead (maybe rename to addDefaultLight). Should save You some reused code
-
-
-
-    const addLight = useCallback((light: LightWrapper) => {
-        const extendedLights = [...lightsList, light] as LightWrapper[];
+    const addDefaultLight = useCallback((type: LightType) => {
+        const newLight = getDefaultLight(type);
+        console.log({newLight})
+        const extendedLights = [...lightsList, newLight] as LightWrapper[];
         setLightsList(extendedLights);
     }, [lightsList]);
 
@@ -54,15 +50,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         const index = lightsList.findIndex(light => light.id === id);
         if (index === -1) return;
 
-        let defaultProps;
-        switch(type) {
-            case LIGHT_TYPES.pointLight:
-                defaultProps = DEFAULT_POINTLIGHT.properties;
-                break;
-            case LIGHT_TYPES.spotLight:
-                defaultProps = DEFAULT_SPOTLIGHT.properties;
-                break;
-        }
+        let defaultProps = getDefaultLight(type).properties;
 
         const newLight = { ...lightsList[index], type: type } as LightWrapper;
         newLight.properties = { ...defaultProps, ...lightsList[index].properties }
@@ -202,7 +190,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
 
 
 
-    const addCamera = useCallback((type: CameraTypes) => {
+    const addCamera = useCallback((type: CameraType) => {
         const newCamerasList = [...camerasList];
         switch(type) {
             case CAMERA_TYPES.perspectiveCamera:
@@ -239,7 +227,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     
     return (
         <SceneObjectsContext.Provider value={{ 
-            lightsList, changeLightType, updateLightProperties, deleteLight, addLight, 
+            lightsList, changeLightType, updateLightProperties, deleteLight, addDefaultLight, 
             assetsList, updateAssetProperties, updatePrimitiveProperties, updateEditableMaterialProperties, changeEditableMaterialType, deleteAsset, addAsset, addAssetPrimitive,
             camerasList, addCamera, updateCameraProperties, deleteCamera }} >
             {props.children}

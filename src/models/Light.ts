@@ -57,7 +57,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
   }
 ]
 
-const DEFAULT_POINTLIGHT: LightWrapper = {
+const createDefaultPointlight = (): LightWrapper => ({
   type: LIGHT_TYPES.pointLight,
   id: generateNewID(),
   properties: {
@@ -67,9 +67,9 @@ const DEFAULT_POINTLIGHT: LightWrapper = {
     color: "white",
     intensity:1,
   }
-}
+});
 
-const DEFAULT_SPOTLIGHT: LightWrapper = {
+const createDefaultSpotlight = (): LightWrapper => ({
   type: LIGHT_TYPES.spotLight,
   id: generateNewID(),
   properties: {
@@ -81,6 +81,15 @@ const DEFAULT_SPOTLIGHT: LightWrapper = {
     angle: 0.6,
     penumbra: 0.6,
   }
+});
+
+const getDefaultLight = (type: LightType) => {
+  switch(type) {
+    case LIGHT_TYPES.pointLight:
+      return createDefaultPointlight();
+    case LIGHT_TYPES.spotLight:
+      return createDefaultSpotlight();
+  }
 }
 
-export { INIT_LIGHTS_LIST, DEFAULT_POINTLIGHT, DEFAULT_SPOTLIGHT };
+export { INIT_LIGHTS_LIST, getDefaultLight};

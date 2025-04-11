@@ -3,7 +3,7 @@ import styles from './../common/submenus/Submenu.module.css';
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 
 import { VisbilityEyeToggle } from "../../../../components/sidebar/common/VisbilityEyeToggle";
-import { LightTypeIcon } from "./LightTypeIcon";
+import { ListedLightTypeIcon } from "./ListedLightTypeIcon";
 import { LIGHT_TYPES, LightType, LightWrapper } from "../../../../models/Light";
 import { DropdownListedObjectType } from "../common/controls/DropdownListedObjectType";
 
@@ -15,7 +15,7 @@ type Props = {
     toggleExtend: () => void,
 }
 
-export const LightItemHeader = ( {isActive, light, toggleExtend }: Props) => {
+export const ListedLightHeader = ( {isActive, light, toggleExtend }: Props) => {
     const { updateLightProperties, changeLightType, } = useSceneObjectsContext();
 
     const { color, isVisible } = light.properties;
@@ -30,7 +30,7 @@ export const LightItemHeader = ( {isActive, light, toggleExtend }: Props) => {
             className={styles.listedItemHeader} 
             onClick={toggleExtend}
         >
-            <LightTypeIcon type={light.type} />
+            <ListedLightTypeIcon type={light.type} />
             <DropdownListedObjectType<LIGHT_TYPES> 
                 current={light.type} 
                 availableOptions={Object.values(LIGHT_TYPES)} 
