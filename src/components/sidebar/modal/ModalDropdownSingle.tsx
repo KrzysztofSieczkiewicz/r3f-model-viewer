@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import styles from './ModalDropdownSingle.module.css';
 
 import { ModalSingleColumnList } from "./ModalSingleColumnList";
-import { RectangleButtonLarge } from "../controls/buttons/RectangleButtonLarge";
+import { ButtonLargeRectangle } from "./ButtonLargeRectangle";
 
 type Props = {
     displayName: string,
@@ -34,7 +34,7 @@ type Props = {
 export const ModalDropdownSingle = ( {displayName, isOpen, toggleOpen, children, icon}: Props) => {
     return (
         <div className={styles.container} >
-            <RectangleButtonLarge
+            <ButtonLargeRectangle
                 isToggled={isOpen}
                 toggle={toggleOpen}
                 displayName={displayName}

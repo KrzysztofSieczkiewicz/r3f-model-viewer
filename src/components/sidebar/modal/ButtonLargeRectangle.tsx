@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './RectangleButtonLarge.module.css';
+import styles from './ButtonLargeRectangle.module.css';
 
 type Props = {
     isToggled: boolean,
@@ -10,7 +10,7 @@ type Props = {
     
 }
 
-export const RectangleButtonLarge = ({isToggled, toggle, displayName, icon}: Props) => {
+export const ButtonLargeRectangle = ({isToggled, toggle, displayName, icon}: Props) => {
 
     return (
         <button

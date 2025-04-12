@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from './ColorPicker.module.css';
 
 import { HexColorPicker } from "react-colorful";
+import { useDetectClickOutside } from "../../../hooks/useDetectClickOutside";
 
 type Props = {
   currentColor: string,
@@ -23,28 +24,12 @@ export const ColorPicker = ( {currentColor, handleChange} :Props) :JSX.Element =
     setIsColorPickerOpen(active => !active);
   }
 
-  // DETECT IF CLICKED OUTSIDE AND CLOSE COLOR PALETTE
+  useDetectClickOutside(
+          [popupRef],
+          isColorPickerOpen,
+          () => setIsColorPickerOpen(false)
+      );
 
-
-  // TODO: REPLACE WITH useDetectOutsideClick
-
-
-  const handleClickOutside = (e: MouseEvent) => {
-    if (previewRef.current && previewRef.current.contains(e.target as Node)) {
-      return;
-    }
-    if (isColorPickerOpen && popupRef.current && !popupRef.current.contains(e.target as Node)) {
-      setIsColorPickerOpen(false);
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [previewRef, popupRef, isColorPickerOpen]);
 
   return (
     <>

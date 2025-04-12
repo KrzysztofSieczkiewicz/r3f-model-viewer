@@ -1,12 +1,12 @@
 import React from "react";
-import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
+import { Checkbox } from "../common/controls/Checkbox";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
-import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
-import { SingleChoiceDropdown } from "../../../../components/sidebar/controls/SingleChoiceDropdown";
+import { ButtonReset } from "../common/controls/ButtonReset";
+import { Dropdown } from "../../../common/Dropdown";
 import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
 import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
@@ -43,7 +43,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
     return (<>
         <TraitSection>
             <TraitSingle name="Material type">
-                <SingleChoiceDropdown 
+                <Dropdown 
                     selected={EditableMaterials.Physical} 
                     selectionList={Object.values(EditableMaterials)} 
                     handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
@@ -89,7 +89,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={roughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {roughness: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {roughness: defaultProperties.roughness} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {roughness: defaultProperties.roughness} )} />
             </TraitSingle>
             <TraitSingle name="Metalness">
                 <TexturePicker
@@ -103,7 +103,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={metalness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {metalness: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.metalness} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.metalness} )} />
             </TraitSingle>
             <TraitSingle name="Reflectivity">
                 <SliderLongContainer>
@@ -112,7 +112,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={reflectivity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {reflectivity: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {reflectivity: defaultProperties.reflectivity} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {reflectivity: defaultProperties.reflectivity} )} />
             </TraitSingle>
             <TraitSingle name="Dispersion">
                 <SliderLongContainer>
@@ -121,7 +121,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={dispersion}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {dispersion: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {dispersion: defaultProperties.dispersion} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {dispersion: defaultProperties.dispersion} )} />
             </TraitSingle>
             <TraitSingle name="IOR">
                 <SliderLongContainer>
@@ -130,7 +130,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={ior}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {ior: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {ior: defaultProperties.ior} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {ior: defaultProperties.ior} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -157,7 +157,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={specularIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {specularIntensity: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {specularIntensity: defaultProperties.specularIntensity} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {specularIntensity: defaultProperties.specularIntensity} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -174,7 +174,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={attenuationDistance}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {attenuationDistance: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {attenuationDistance: defaultProperties.attenuationDistance} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {attenuationDistance: defaultProperties.attenuationDistance} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -196,7 +196,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={emissiveIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveIntensity: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {emissiveIntensity: defaultProperties.emissiveIntensity} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {emissiveIntensity: defaultProperties.emissiveIntensity} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -213,7 +213,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={environmentMapRotation}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapRotation: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapRotation} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapRotation} )} />
             </TraitSingle>
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
@@ -222,7 +222,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={environmentMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapIntensity: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapIntensity} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapIntensity} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -305,7 +305,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={bumpScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpScale: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.bumpScale} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.bumpScale} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -418,7 +418,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                         value={iridescenceIor}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescenceIor: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {iridescenceIor: defaultProperties.iridescenceIor} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {iridescenceIor: defaultProperties.iridescenceIor} )} />
             </TraitSingle>
         </TraitSection>
 

@@ -1,11 +1,11 @@
 import React from "react";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, StandardMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
-import { SingleChoiceDropdown } from "../../../../components/sidebar/controls/SingleChoiceDropdown";
-import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
+import { Dropdown } from "../../../common/Dropdown";
+import { Checkbox } from "../common/controls/Checkbox";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
-import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
+import { ButtonReset } from "../common/controls/ButtonReset";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
 import { TraitSingle } from "../common/traits/TraitSingle";
@@ -35,7 +35,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
     return (<>
         <TraitSection>
             <TraitSingle name="Material type">
-                <SingleChoiceDropdown 
+                <Dropdown 
                     selected={EditableMaterials.Standard} 
                     selectionList={Object.values(EditableMaterials)} 
                     handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
@@ -81,7 +81,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                         value={roughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {roughness: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {roughness: defaultProperties.roughness} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {roughness: defaultProperties.roughness} )} />
             </TraitSingle>
             <TraitSingle name="Metalness">
                 <TexturePicker
@@ -95,7 +95,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                         value={metalness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {metalness: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.metalness} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.metalness} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -117,7 +117,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                         value={emissiveIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveIntensity: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {emissiveIntensity: defaultProperties.emissiveIntensity} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {emissiveIntensity: defaultProperties.emissiveIntensity} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -134,7 +134,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                         value={environmentMapRotation}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapRotation: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapRotation} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapRotation} )} />
             </TraitSingle>
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
@@ -143,7 +143,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                         value={environmentMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapIntensity: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapIntensity} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapIntensity} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -192,7 +192,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                         value={bumpScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpScale: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.bumpScale} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.bumpScale} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -238,7 +238,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {opacity: defaultProperties.opacity} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {opacity: defaultProperties.opacity} )} />
             </TraitSingle>
         </TraitSection>
     </>)

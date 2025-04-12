@@ -1,14 +1,14 @@
 import React from 'react';
-import styles from './ToggleAxesLockButton.module.css';
-import { ReactComponent as LockedIcon } from './../../../../icons/sidebar/lock_locked.svg';
-import { ReactComponent as UnlockedIcon } from './../../../../icons/sidebar/lock_unlocked.svg';
+import styles from './ButtonLockAxes.module.css';
+import { ReactComponent as LockedIcon } from './../../../../../icons/sidebar/lock_locked.svg';
+import { ReactComponent as UnlockedIcon } from './../../../../../icons/sidebar/lock_unlocked.svg';
 
 type Props = {
     locked: boolean,
     setLocked: (value: boolean) => void
 }
 
-export const ToggleAxesLockButton = ( {locked, setLocked}: Props) => {
+export const ButtonLockAxes = ( {locked, setLocked}: Props) => {
 
     const handleIcon = () => {
         if (locked) return <LockedIcon className={styles.icon} />

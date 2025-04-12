@@ -5,7 +5,7 @@ import { SliderLimited } from "../../../../components/sidebar/controls/SliderLim
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { SpotLightProperties } from "../../../../models/Light";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
-import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
+import { ButtonReset } from "../common/controls/ButtonReset";
 import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
 
@@ -39,7 +39,7 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
                         handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
                         min={0} max={3} step={0.005} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateLightProperties(id, {intensity: 1} )} />
+                <ButtonReset onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </TraitSingle>
 
             <TraitSingle name="Distance">
@@ -49,7 +49,7 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
                         handleChange={(val) => updateLightProperties(id, {distance: val} )} 
                         min={0} max={100} step={0.1} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateLightProperties(id, {distance: 10} )} />
+                <ButtonReset onReset={() => updateLightProperties(id, {distance: 10} )} />
             </TraitSingle>
 
             <TraitSingle name="Angle">
@@ -59,7 +59,7 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
                             handleChange={(val) => updateLightProperties(id, {angle: val} )} 
                             min={0} max={1} step={0.002} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateLightProperties(id, {angle: 0.6} )} />
+                <ButtonReset onReset={() => updateLightProperties(id, {angle: 0.6} )} />
             </TraitSingle>
                 
             <TraitSingle name="Penumbra">
@@ -69,7 +69,7 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
                         handleChange={(val) => updateLightProperties(id, {penumbra: val} )} 
                         min={0} max={1} step={0.002} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateLightProperties(id, {penumbra: 0.6} )} />
+                <ButtonReset onReset={() => updateLightProperties(id, {penumbra: 0.6} )} />
             </TraitSingle>
         </>
     );

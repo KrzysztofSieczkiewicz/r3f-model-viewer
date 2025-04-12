@@ -2,11 +2,11 @@ import React from "react";
 
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhongMaterialProperties } from "../../../../models/assets/materials/EditableMaterial"
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
-import { SingleChoiceDropdown } from "../../../../components/sidebar/controls/SingleChoiceDropdown";
-import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
+import { Dropdown } from "../../../common/Dropdown";
+import { Checkbox } from "../common/controls/Checkbox";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
-import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
+import { ButtonReset } from "../common/controls/ButtonReset";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { TraitSection } from "../common/traits/TraitSection";
@@ -27,7 +27,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
     return (<>
         <TraitSection>
             <TraitSingle name="Material type">
-                <SingleChoiceDropdown 
+                <Dropdown 
                     selected={EditableMaterials.Basic} 
                     selectionList={Object.values(EditableMaterials)} 
                     handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
@@ -47,7 +47,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {opacity: defaultProperties.opacity} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {opacity: defaultProperties.opacity} )} />
             </TraitSingle>
         </TraitSection>
 
@@ -82,7 +82,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
                         value={shininess}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {shininess: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEditableMaterialProperties(assetId, {shininess: defaultProperties.shininess} )} />
+                <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {shininess: defaultProperties.shininess} )} />
             </TraitSingle>
             <TraitSingle name="Emissive">
                 <ColorPicker

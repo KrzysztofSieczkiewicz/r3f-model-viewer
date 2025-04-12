@@ -3,10 +3,10 @@ import React from "react";
 import { DepthOfFieldProperties, EFFECT_TYPES } from "../../../../models/Effect";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { useEffectsContext } from "../../../../components/contexts/EffectsContext";
-import { Checkbox } from "../../../../components/sidebar/controls/buttons/Checkbox";
+import { Checkbox } from "../common/controls/Checkbox";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { SliderLimited } from "../../../../components/sidebar/controls/SliderLimited";
-import { ResetButton } from "../../../../components/sidebar/controls/buttons/ResetButton";
+import { ButtonReset } from "../common/controls/ButtonReset";
 
 type Props = {
     properties: DepthOfFieldProperties,
@@ -32,7 +32,7 @@ export const EffectControlsDepthOfField = ( {properties}: Props ) => {
                         value={properties.focusDistance}
                         handleChange={(value) => updateEffectProperties(type, {focusDistance: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEffectProperties(type, {focusDistance: 0.0035} )} />
+                <ButtonReset onReset={() => updateEffectProperties(type, {focusDistance: 0.0035} )} />
             </TraitSingle>
 
             <TraitSingle name="Focal length">
@@ -42,7 +42,7 @@ export const EffectControlsDepthOfField = ( {properties}: Props ) => {
                         value={properties.focalLength}
                         handleChange={(value) => updateEffectProperties(type, {focalLength: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEffectProperties(type, {focalLength: 0.01} )} />
+                <ButtonReset onReset={() => updateEffectProperties(type, {focalLength: 0.01} )} />
             </TraitSingle>
 
             <TraitSingle name="Bokeh scale">
@@ -52,7 +52,7 @@ export const EffectControlsDepthOfField = ( {properties}: Props ) => {
                         value={properties.bokehScale} 
                         handleChange={(value) => updateEffectProperties(type, {bokehScale: value} )} />
                 </SliderLongContainer>
-                <ResetButton onReset={() => updateEffectProperties(type, {bokehScale: 3} )} />
+                <ButtonReset onReset={() => updateEffectProperties(type, {bokehScale: 3} )} />
             </TraitSingle>
         </>
     );

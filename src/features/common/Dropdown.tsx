@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from './SingleChoiceDropdown.module.css';
+import styles from './Dropdown.module.css';
 
 // TODO: simplify this??? make this work on pure stirng values and string arrays 
 // handle proper selection and changes in the parent component then.
+
 type Props<T> = {
     selected: T,
     selectionList: T[],
     handleChange: (value: T) => void
 }
 
-export const SingleChoiceDropdown = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
+export const Dropdown = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);

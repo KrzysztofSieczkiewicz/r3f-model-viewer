@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { normalizeArrayByIndex } from "../../../utils/mathUtil";
 import { SliderShortContainer } from "./sliderContainers/SliderShortContainer";
 import { SliderNumeric } from "./SliderNumeric";
-import { ToggleAxesLockButton } from "./buttons/ToggleAxesLockButton";
+import { ButtonLockAxes } from "../../../features/sideMenu/components/common/controls/ButtonLockAxes";
 
 type ValueArray = [number, number] | [number, number, number];
 
@@ -56,6 +56,6 @@ export const SlidersArray = <T extends ValueArray> ({
                 </SliderShortContainer>
             );
         })}
-        { axesLocking && <ToggleAxesLockButton locked={axesLocked} setLocked={(val) => setAxesLocked(val)}/> }
+        { axesLocking && <ButtonLockAxes locked={axesLocked} setLocked={(val) => setAxesLocked(val)}/> }
     </>);
 }

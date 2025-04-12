@@ -1,11 +1,11 @@
 import React from "react";
-import styles from './ResetButton.module.css';
+import styles from './ButtonReset.module.css';
 
 type Props = {
     onReset: () => void,
 }
 
-export const ResetButton = ( {onReset}: Props) => {
+export const ButtonReset = ( {onReset}: Props) => {
 
     return (
         <button className={styles.resetButton}
