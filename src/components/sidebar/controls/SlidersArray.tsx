@@ -49,7 +49,7 @@ export const SlidersArray = <T extends ValueArray> ({
                 <SliderShortContainer key={index}>
                     <SliderNumeric 
                         key={index}
-                        step={step}
+                        increment={step}
                         rounding={rounding}
                         value={value}
                         handleChange={(val: number)=>handleSliderValueChange(index, val)} />

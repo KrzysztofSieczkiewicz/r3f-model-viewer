@@ -8,12 +8,10 @@ type Props = {
     step: number,
     value: number,
     handleChange: (newValue: number) => void,
-    
-    children?: ReactNode
 }
 
 export const SliderLimited = (props: Props) => {
-    const { min, max, step, value, handleChange, children} = props;
+    const { min, max, step, value, handleChange} = props;
 
     const [ localValue, setLocalValue ] = useState(value);
     const [ startingPosX, setStartingPosX ] = useState(0);
@@ -79,7 +77,6 @@ export const SliderLimited = (props: Props) => {
                 {renderSliderPosition()}
             </div>
             
-            {children}
         </>
     );
 }

@@ -19,7 +19,7 @@ export const MeshControlsCone = ({assetId, meshProperties}: Props) => {
             <SliderMediumContainer>
                 <SliderNumeric
                     value={meshProperties.radius}
-                    step={0.01}
+                    increment={0.01}
                     min={0.01}
                     rounding={2}
                     handleChange={(val) => updatePrimitiveProperties(assetId, {radius: val} )} />
@@ -29,7 +29,7 @@ export const MeshControlsCone = ({assetId, meshProperties}: Props) => {
             <SliderMediumContainer>
                 <SliderNumeric
                     value={meshProperties.height}
-                    step={0.01}
+                    increment={0.01}
                     min={0.01}
                     rounding={2}
                     handleChange={(val) => updatePrimitiveProperties(assetId, {height: val} )} />

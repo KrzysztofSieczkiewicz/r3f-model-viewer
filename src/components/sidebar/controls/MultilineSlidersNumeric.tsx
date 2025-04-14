@@ -74,7 +74,7 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
                     <SliderNumeric
                         {...entry.min !== undefined && { min: entry.min}}
                         {...entry.max !== undefined && { max: entry.max}}
-                        step={entry.step} 
+                        increment={entry.step} 
                         rounding={entry.rounding} 
                         value={entry.value} 
                         handleChange={(val) => handleSliderChange(index, val)} />

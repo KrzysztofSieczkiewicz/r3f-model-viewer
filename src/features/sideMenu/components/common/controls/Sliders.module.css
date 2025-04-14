@@ -51,3 +51,9 @@
 
     transition-duration: var(--transition-duration);
 }
+
+.axisColorIndicator {
+    display: none;
+    width: 2px;
+    height: 100%;
+}

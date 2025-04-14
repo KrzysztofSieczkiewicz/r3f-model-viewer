@@ -1,24 +1,24 @@
 import React from "react";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from './Sliders.module.css';
 
 import { roundNumber } from "../../../../../utils/mathUtil";
 
 
 type Props = {
-    step: number,
     value: number,
     handleChange: (newValue: number) => void,
     
-    children?: ReactNode,
     min?: number,
     max?: number,
+    increment?: number,
     rounding?: number,
+    displayValue?: boolean,
 }
 
 
 // TODO: MOVE CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
-export const SliderNumeric = ({step, value, handleChange, children, min=-Infinity, max=Infinity, rounding=2}: Props) => {
+export const SliderNumeric = ({increment=0.01, value, handleChange, min=-Infinity, max=Infinity, rounding=2, displayValue=true}: Props) => {
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
@@ -39,7 +39,7 @@ export const SliderNumeric = ({step, value, handleChange, children, min=-Infinit
 
     const handleMouseMove = (event: MouseEvent) => {
         const calculatedX = event.clientX - startingPosX;
-        handleInput(value + calculatedX * step);
+        handleInput(value + calculatedX * increment);
     };
 
     useEffect(() => {
@@ -53,17 +53,20 @@ export const SliderNumeric = ({step, value, handleChange, children, min=-Infinit
         };
     }, [isMouseDown]);
 
+    const renderSliderValue = () => {
+        if(displayValue) return roundNumber(value, rounding)
+    }
+
     // TODO: REINTRODUCE AXIS COLOR INDICATOR
     return (
         <>
             <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[0] }}/>
             <div className={styles.track} 
                 onMouseDown={(e) => handleMouseDown(e)} >
-                <span className={styles.arrow}>&#60;</span>
-                <span className={styles.value}>{roundNumber(value, rounding)}</span>
-                <span className={`${styles.arrow} ${styles.right}`}>&#62;</span>
+                {/* <span className={styles.arrow}>&#60;</span> */}
+                {<span className={styles.value}>{renderSliderValue()}</span>}
+                {/* <span className={`${styles.arrow} ${styles.right}`}>&#62;</span> */}
             </div>
-            {children}
         </>
     );
 }
