@@ -4,8 +4,8 @@ import { TraitSingle } from "../common/traits/TraitSingle";
 import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
-import { SliderLimited } from "../../../../components/sidebar/controls/SliderLimited";
 import { ButtonReset } from "../common/controls/ButtonReset";
+import { Slider } from "../common/controls/Slider";
 
 
 export const SceneControlsAmbientLighting = () => {
@@ -27,10 +27,10 @@ export const SceneControlsAmbientLighting = () => {
 
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderLimited
+                    <Slider
                         value={scene.ambientIntensity}
                         handleChange={(val) =>  setScene({ambientIntensity: val}) }
-                        min={0} max={1} step={0.001} />
+                        min={0} max={1} increment={0.001} />
                 </SliderLongContainer>
                 <ButtonReset onReset={() => setScene({ambientIntensity: 0.1})} />
             </TraitSingle>

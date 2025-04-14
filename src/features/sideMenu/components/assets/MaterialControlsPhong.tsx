@@ -5,7 +5,7 @@ import { useSceneObjectsContext } from "../../../../components/contexts/SceneObj
 import { DropdownItemTrait } from "../common/controls/DropdownItemTrait";
 import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
-import { SliderNumeric } from "../common/controls/SliderNumeric";
+import { Slider } from "../common/controls/Slider";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { TraitSingle } from "../common/traits/TraitSingle";
@@ -42,7 +42,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Opacity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005}
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
@@ -77,7 +77,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Shininess">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={shininess}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {shininess: value} )} />

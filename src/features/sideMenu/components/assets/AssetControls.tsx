@@ -4,7 +4,7 @@ import { TraitExpandable } from "../common/traits/TraitExpandable";
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { TraitSingle } from "../common/traits/TraitSingle";
-import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
+import { SlidersArray } from "../common/controls/SlidersArray";
 
 
 type Props = {

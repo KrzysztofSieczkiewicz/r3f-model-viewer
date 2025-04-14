@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from './MultilineSlidersNumeric.module.css';
-import { ButtonLockAxes } from "../../../features/sideMenu/components/common/controls/ButtonLockAxes";
-import { normalizeArrayByIndex } from "../../../utils/mathUtil";
-import { SliderNumeric } from "../../../features/sideMenu/components/common/controls/SliderNumeric";
-import { SliderMediumContainer } from "./sliderContainers/SliderMediumContainer";
-import { TraitSingle } from "../../../features/sideMenu/components/common/traits/TraitSingle";
+import styles from './SlidersMultiline.module.css';
+import { ButtonLockAxes } from "./ButtonLockAxes";
+import { normalizeArrayByIndex } from "../../../../../utils/mathUtil";
+import { Slider } from "./Slider";
+import { SliderMediumContainer } from "../../../../../components/sidebar/controls/sliderContainers/SliderMediumContainer";
+import { TraitSingle } from "../traits/TraitSingle";
 
 type SliderProps<T> = {
     property: (keyof T),
@@ -22,7 +22,7 @@ type Props<T> = {
     displayName: string
 }
 
-export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}: Props<T>) => {
+export const SlidersMultiline = <T,>({displayName, values, handleChange}: Props<T>) => {
 
     const [isLocked, setIsLocked] = useState(true);
 
@@ -67,11 +67,11 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
         );
     }
 
-    const renderSliderNumeric = (entry: SliderProps<T>, index: number) => {
+    const renderSlider = (entry: SliderProps<T>, index: number) => {
         return (
             <TraitSingle name={entry.name} key={index}>
                 <SliderMediumContainer>
-                    <SliderNumeric
+                    <Slider
                         {...entry.min !== undefined && { min: entry.min}}
                         {...entry.max !== undefined && { max: entry.max}}
                         increment={entry.step} 
@@ -104,13 +104,13 @@ export const MultilineSlidersNumeric = <T,>({displayName, values, handleChange}:
         handleChange(change);
     }
 
-    // TODO: PRESENT <SliderNumeric> IN A MORE READABLE WAY
+    // TODO: PRESENT <Slider> IN A MORE READABLE WAY
     return (
         <>
             <p className={styles.containerName}>{displayName}</p>
             <div ref={gridContainerRef} className={styles.gridContainer}>
                 <div className={styles.column1}>
-                    {values.map((entry, index) => {return renderSliderNumeric(entry, index);} )}
+                    {values.map((entry, index) => {return renderSlider(entry, index);} )}
                 </div>
 
                 <div className={styles.column2}>

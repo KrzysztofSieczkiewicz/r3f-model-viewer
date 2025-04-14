@@ -1,6 +1,7 @@
 @import '../../../../../App.module.css';
 
 .track {
+    position: relative;
     height: 100%;
     width: 100%;
     display: flex;
@@ -18,6 +19,7 @@
 }
 
 .sliderBar {
+    position: absolute;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -34,10 +36,12 @@
 }
 
 .value {
+    position: absolute;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100%;
     font-size: 0.75rem;
 }
 

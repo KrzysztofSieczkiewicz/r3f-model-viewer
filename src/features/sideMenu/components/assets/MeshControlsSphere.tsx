@@ -1,9 +1,9 @@
 import React from "react";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { SphereProperties } from "../../../../models/assets/meshes/Primitive";
-import { SliderNumeric } from "../common/controls/SliderNumeric";
+import { Slider } from "../common/controls/Slider";
 import { SliderMediumContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderMediumContainer";
-import { MultilineSlidersNumeric } from "../../../../components/sidebar/controls/MultilineSlidersNumeric";
+import { SlidersMultiline } from "../common/controls/SlidersMultiline";
 import { TraitSingle } from "../common/traits/TraitSingle";
 
 type Props = {
@@ -17,7 +17,7 @@ export const MeshControlsSphere = ({assetId, meshProperties}: Props) => {
     return (<>
         <TraitSingle name="Radius">
             <SliderMediumContainer>
-                <SliderNumeric
+                <Slider
                     value={meshProperties.radius}
                     increment={0.01}
                     min={0.01}
@@ -26,7 +26,7 @@ export const MeshControlsSphere = ({assetId, meshProperties}: Props) => {
             </SliderMediumContainer>
         </TraitSingle>
 
-        <MultilineSlidersNumeric<SphereProperties>
+        <SlidersMultiline<SphereProperties>
             displayName="Segments:" 
             values={[ 
                 {name: 'Height', property: 'heightSegments', value: meshProperties.heightSegments, min:2, max:100, step:1, rounding:0},

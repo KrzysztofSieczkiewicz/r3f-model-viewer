@@ -3,12 +3,12 @@ import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
-import { SliderNumeric } from "../common/controls/SliderNumeric";
+import { Slider } from "../common/controls/Slider";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { DropdownItemTrait } from "../common/controls/DropdownItemTrait";
 import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
-import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
+import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { TraitSection } from "../common/traits/TraitSection";
 
@@ -84,7 +84,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Roughness">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={roughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {roughness: value} )} />
@@ -98,7 +98,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Metalness">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={metalness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {metalness: value} )} />
@@ -107,7 +107,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Reflectivity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={reflectivity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {reflectivity: value} )} />
@@ -116,7 +116,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Dispersion">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={dispersion}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {dispersion: value} )} />
@@ -125,7 +125,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="IOR">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={2.333} increment={0.005} 
                         value={ior}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {ior: value} )} />
@@ -152,7 +152,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={2} increment={0.005} 
                         value={specularIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {specularIntensity: value} )} />
@@ -169,7 +169,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Distance">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={Infinity} increment={0.005} 
                         value={attenuationDistance}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {attenuationDistance: value} )} />
@@ -191,7 +191,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={emissiveIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveIntensity: value} )} />
@@ -208,7 +208,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Rotation">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={360} increment={0.005} 
                         value={environmentMapRotation}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapRotation: value} )} />
@@ -217,7 +217,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={environmentMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapIntensity: value} )} />
@@ -239,7 +239,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Opacity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
@@ -252,7 +252,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Transmission">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={transmission}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {transmission: value} )} />
@@ -268,7 +268,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={ambientOcclusionMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {ambientOcclusionMapIntensity: value} )} />
@@ -284,7 +284,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Scale">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={normalScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {normalScale: value} )} />
@@ -300,7 +300,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Scale">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={bumpScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpScale: value} )} />
@@ -317,7 +317,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Scale">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={360} increment={0.005} 
                         value={displacementScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementScale: value} )} />
@@ -325,7 +325,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Bias">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={360} increment={0.005} 
                         value={displacementBias}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementBias: value} )} />
@@ -341,7 +341,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Strength">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={clearcoat}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoat: value} )} />
@@ -354,7 +354,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Roughness">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={clearcoatRoughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatRoughness: value} )} />
@@ -381,7 +381,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Strength">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={anisotropy}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {anisotropy: value} )} />
@@ -389,7 +389,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Rotation">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={360} increment={0.005} 
                         value={anisotropyRotation}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {anisotropyRotation: value} )} />
@@ -405,7 +405,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Strength">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={iridescence}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescence: value} )} />
@@ -413,7 +413,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Rotation">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={2.333} increment={0.005} 
                         value={iridescenceIor}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescenceIor: value} )} />
@@ -425,7 +425,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
         <TraitSection name="Sheen">
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={sheen}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {sheen: value} )} />
@@ -438,7 +438,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Roughness">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={sheenRoughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {sheenRoughness: value} )} />
@@ -464,7 +464,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Strength">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={5} increment={0.005} 
                         value={thickness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {thickness: value} )} />

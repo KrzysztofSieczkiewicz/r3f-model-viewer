@@ -4,7 +4,7 @@ import { useSceneObjectsContext } from "../../../../components/contexts/SceneObj
 import { DropdownItemTrait } from "../common/controls/DropdownItemTrait";
 import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
-import { SliderNumeric } from "../common/controls/SliderNumeric";
+import { Slider } from "../common/controls/Slider";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
@@ -76,7 +76,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Roughness">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={roughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {roughness: value} )} />
@@ -90,7 +90,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Metalness">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005} 
                         value={metalness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {metalness: value} )} />
@@ -112,7 +112,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={emissiveIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveIntensity: value} )} />
@@ -129,7 +129,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Rotation">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={360} increment={0.005} 
                         value={environmentMapRotation}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapRotation: value} )} />
@@ -138,7 +138,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={environmentMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapIntensity: value} )} />
@@ -155,7 +155,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={ambientOcclusionMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {ambientOcclusionMapIntensity: value} )} />
@@ -171,7 +171,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Scale">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={normalScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {normalScale: value} )} />
@@ -187,7 +187,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Scale">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={3} increment={0.005} 
                         value={bumpScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpScale: value} )} />
@@ -204,7 +204,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Scale">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={360} increment={0.005} 
                         value={displacementScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementScale: value} )} />
@@ -212,7 +212,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Bias">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={360} increment={0.005} 
                         value={displacementBias}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementBias: value} )} />
@@ -233,7 +233,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             </TraitSingle>
             <TraitSingle name="Opacity">
                 <SliderLongContainer>
-                    <SliderNumeric
+                    <Slider
                         min={0} max={1} increment={0.005}
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />

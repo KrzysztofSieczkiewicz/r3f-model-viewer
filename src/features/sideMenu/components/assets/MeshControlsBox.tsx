@@ -1,7 +1,7 @@
 import React from "react";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { BoxProperties } from "../../../../models/assets/meshes/Primitive";
-import { MultilineSlidersNumeric } from "../../../../components/sidebar/controls/MultilineSlidersNumeric";
+import { SlidersMultiline } from "../common/controls/SlidersMultiline";
 
 type Props = {
     assetId: string,
@@ -12,7 +12,7 @@ export const MeshControlsBox = ({assetId, meshProperties}: Props) => {
     const {updatePrimitiveProperties} = useSceneObjectsContext();
 
     return (<>
-        <MultilineSlidersNumeric<BoxProperties>
+        <SlidersMultiline<BoxProperties>
             displayName="Size:" 
             values={[ 
                 {name: 'Height', property: 'height', value: meshProperties.height, min:0.01, max:100, step:0.01, rounding:2},

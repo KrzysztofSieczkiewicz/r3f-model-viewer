@@ -1,4 +1,4 @@
-@import '../../../App.module.css';
+@import '../../../../../App.module.css';
 
 .containerName {
     font-size: var(--size-text-normal);

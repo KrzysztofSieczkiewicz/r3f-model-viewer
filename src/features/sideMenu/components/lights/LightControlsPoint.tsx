@@ -1,13 +1,13 @@
 import React from "react";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 
-import { SliderLimited } from "../../../../components/sidebar/controls/SliderLimited";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { PointLightProperties } from "../../../../models/Light";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { ButtonReset } from "../common/controls/ButtonReset";
-import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
+import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
+import { Slider } from "../common/controls/Slider";
 
 type Props = {
     id: string,
@@ -34,20 +34,20 @@ export const LightControlsPoint = ( {id, properties}: Props ) => {
 
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
-                    <SliderLimited 
+                    <Slider
                         value={properties.intensity}
                         handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
-                        min={0} max={3} step={0.005} />
+                        min={0} max={3} increment={0.005} />
                 </SliderLongContainer>
                 <ButtonReset onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </TraitSingle>
 
             <TraitSingle name="Distance">
                 <SliderLongContainer>
-                    <SliderLimited 
+                    <Slider 
                         value={properties.distance}
                         handleChange={(val) => updateLightProperties(id, {distance: val} )} 
-                        min={0} max={100} step={0.1} />
+                        min={0} max={100} increment={0.1} />
                 </SliderLongContainer>
                 <ButtonReset onReset={() => updateLightProperties(id, {distance: 10} )} />
             </TraitSingle>

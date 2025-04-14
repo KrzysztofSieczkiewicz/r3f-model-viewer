@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { useEffect, useState } from "react";
 
-import { normalizeArrayByIndex } from "../../../utils/mathUtil";
-import { SliderShortContainer } from "./sliderContainers/SliderShortContainer";
-import { SliderNumeric } from "../../../features/sideMenu/components/common/controls/SliderNumeric";
-import { ButtonLockAxes } from "../../../features/sideMenu/components/common/controls/ButtonLockAxes";
+import { normalizeArrayByIndex } from "../../../../../utils/mathUtil";
+import { SliderShortContainer } from "../../../../../components/sidebar/controls/sliderContainers/SliderShortContainer";
+import { Slider } from "./Slider";
+import { ButtonLockAxes } from "./ButtonLockAxes";
 
 type ValueArray = [number, number] | [number, number, number];
 
@@ -47,7 +47,7 @@ export const SlidersArray = <T extends ValueArray> ({
         {localValue.map((value: number, index: number) => {
             return (
                 <SliderShortContainer key={index}>
-                    <SliderNumeric 
+                    <Slider 
                         key={index}
                         increment={step}
                         rounding={rounding}

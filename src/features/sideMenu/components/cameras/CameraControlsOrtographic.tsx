@@ -2,7 +2,7 @@ import React from "react";
 
 import { OrtographicCameraProperties } from "../../../../models/Camera";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
-import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
+import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
 
 type Props = {

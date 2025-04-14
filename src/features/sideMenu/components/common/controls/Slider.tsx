@@ -14,20 +14,34 @@ type Props = {
     increment?: number,
     rounding?: number,
     displayValue?: boolean,
+    displayedUnit?: string,
 }
 
-
 // TODO: MOVE CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
-export const SliderNumeric = ({increment=0.01, value, handleChange, min=-Infinity, max=Infinity, rounding=2, displayValue=true}: Props) => {
+
+export const Slider = ({
+        value, 
+        handleChange, 
+
+        min=-Infinity, 
+        max=Infinity,
+        increment=0.01, 
+        rounding=2, 
+        displayValue=true, 
+        displayedUnit=""
+    }: Props) => {
+        
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 
-    const indicatorColors = ["#F03A47", "#018E42", "#276FBF"];
-
     const handleInput = (newValue: number) => {
-        if (newValue >= min &&
-            newValue <= max)
+        if (newValue < min) {
+            handleChange(min);
+        } else if (newValue > max) {
+            handleChange(max);
+        } else {
             handleChange(newValue);
+        }
     }
 
     const handleMouseUp = () =>  setIsMouseDown(false);
@@ -37,8 +51,8 @@ export const SliderNumeric = ({increment=0.01, value, handleChange, min=-Infinit
         setIsMouseDown(true)
     };
 
-    const handleMouseMove = (event: MouseEvent) => {
-        const calculatedX = event.clientX - startingPosX;
+    const handleMouseMove = (e: MouseEvent) => {
+        const calculatedX = e.clientX - startingPosX;
         handleInput(value + calculatedX * increment);
     };
 
@@ -53,19 +67,38 @@ export const SliderNumeric = ({increment=0.01, value, handleChange, min=-Infinit
         };
     }, [isMouseDown]);
 
-    const renderSliderValue = () => {
-        if(displayValue) return roundNumber(value, rounding)
+
+    const renderSliderValue = (value: number) => {
+        if(!displayValue) return;
+
+        const roundedValue = roundNumber(value, rounding).toString();
+        const displayedValue = roundedValue.concat(displayedUnit)
+        return (
+            <span className={styles.value}>
+                {displayedValue}
+            </span>)
+            
+    }
+
+    const renderSliderTrack = (value: number) => {
+        if (min!=Infinity || max !=Infinity) {
+            const trackWidth = value / (max-min) * 100;
+
+            return (
+                <span
+                    className={styles.sliderBar}
+                    style={{width: `${trackWidth}%`}}/>
+            );
+        }
     }
 
     // TODO: REINTRODUCE AXIS COLOR INDICATOR
     return (
         <>
-            <div className={styles.axisColorIndicator} style={{ backgroundColor: indicatorColors[0] }}/>
-            <div className={styles.track} 
+            <div className={styles.track}
                 onMouseDown={(e) => handleMouseDown(e)} >
-                {/* <span className={styles.arrow}>&#60;</span> */}
-                {<span className={styles.value}>{renderSliderValue()}</span>}
-                {/* <span className={`${styles.arrow} ${styles.right}`}>&#62;</span> */}
+                {renderSliderTrack(value)}
+                {renderSliderValue(value)}
             </div>
         </>
     );
