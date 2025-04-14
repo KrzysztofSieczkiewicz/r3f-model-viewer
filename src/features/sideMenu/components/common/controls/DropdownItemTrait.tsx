@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from './Dropdown.module.css';
-
-// TODO: simplify this??? make this work on pure stirng values and string arrays 
-// handle proper selection and changes in the parent component then.
+import React, { useRef, useState } from "react";
+import styles from './DropdownItemTrait.module.css';
+import { useDetectClickOutside } from "../../../hooks/useDetectClickOutside";
 
 type Props<T> = {
     selected: T,
@@ -10,12 +8,21 @@ type Props<T> = {
     handleChange: (value: T) => void
 }
 
-export const Dropdown = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
+export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    const selectOption = (option: T) => {
+    useDetectClickOutside(
+        [dropdownRef],
+        isOpen,
+        () => {
+            setIsOpen(false)
+            console.log("Triggered")
+        }
+    );
+
+    const handleSelect = (option: T) => {
         handleChange(option);
         setIsOpen(false);
     }
@@ -24,20 +31,6 @@ export const Dropdown = <T,> ({selected, selectionList, handleChange}: Props<T>)
         setIsOpen(!isOpen); 
     }
 
-    const handleClickOutside = (e: MouseEvent) => {
-        if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-          setIsOpen(false);
-        }
-      }
-
-    useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
-
-        return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
-        };
-      }, [isOpen]);
-
     return (
         <div className={styles.container}
             ref={dropdownRef}>
@@ -45,7 +38,6 @@ export const Dropdown = <T,> ({selected, selectionList, handleChange}: Props<T>)
                 className={isOpen ? `${styles.body} ${styles.active}` : styles.body}
                 type="button"
                 onClick={(e) => {
-                    e.stopPropagation();
                     toggleList()
                 }}
             >
@@ -60,8 +52,7 @@ export const Dropdown = <T,> ({selected, selectionList, handleChange}: Props<T>)
                         <button className={styles.option}
                             key={String(item)}
                             onClick={(e) => {
-                                e.stopPropagation();
-                                selectOption(item);
+                                handleSelect(item);
                             }}
                         >
                             {String(item)}

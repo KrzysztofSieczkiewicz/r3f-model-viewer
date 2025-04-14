@@ -1,7 +1,7 @@
 import React from "react";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { ConeProperties } from "../../../../models/assets/meshes/Primitive";
-import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
+import { SliderNumeric } from "../common/controls/SliderNumeric";
 import { SliderMediumContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderMediumContainer";
 import { MultilineSlidersNumeric } from "../../../../components/sidebar/controls/MultilineSlidersNumeric";
 import { TraitSingle } from "../common/traits/TraitSingle";

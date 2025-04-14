@@ -3,7 +3,7 @@ import React from "react";
 import { DepthOfFieldProperties, EFFECT_TYPES } from "../../../../models/Effect";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { useEffectsContext } from "../../../../components/contexts/EffectsContext";
-import { Checkbox } from "../common/controls/Checkbox";
+import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { SliderLimited } from "../../../../components/sidebar/controls/SliderLimited";
 import { ButtonReset } from "../common/controls/ButtonReset";
@@ -20,7 +20,7 @@ export const EffectControlsDepthOfField = ( {properties}: Props ) => {
     return (
         <>
             <TraitSingle name="Active">
-                <Checkbox
+                <CheckboxItemTrait
                     value={properties.enabled}
                     handleChange={(value) => updateEffectProperties(type, {enabled: value} )} />
             </TraitSingle>

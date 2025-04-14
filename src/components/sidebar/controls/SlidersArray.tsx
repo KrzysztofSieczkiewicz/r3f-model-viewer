@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { normalizeArrayByIndex } from "../../../utils/mathUtil";
 import { SliderShortContainer } from "./sliderContainers/SliderShortContainer";
-import { SliderNumeric } from "./SliderNumeric";
+import { SliderNumeric } from "../../../features/sideMenu/components/common/controls/SliderNumeric";
 import { ButtonLockAxes } from "../../../features/sideMenu/components/common/controls/ButtonLockAxes";
 
 type ValueArray = [number, number] | [number, number, number];

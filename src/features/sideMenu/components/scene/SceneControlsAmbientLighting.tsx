@@ -1,7 +1,7 @@
 import React from "react";
 import { useScene } from "../../../../components/contexts/SceneContext";
 import { TraitSingle } from "../common/traits/TraitSingle";
-import { Checkbox } from "../common/controls/Checkbox";
+import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
 import { SliderLimited } from "../../../../components/sidebar/controls/SliderLimited";
@@ -14,7 +14,7 @@ export const SceneControlsAmbientLighting = () => {
     return (
         <>
             <TraitSingle name="Active">
-                <Checkbox
+                <CheckboxItemTrait
                     value={scene.isAmbientActive}
                     handleChange={(val) => setScene( {isAmbientActive: val} )} />
             </TraitSingle>

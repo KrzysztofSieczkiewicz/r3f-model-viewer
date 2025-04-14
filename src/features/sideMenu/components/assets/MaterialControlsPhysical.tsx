@@ -1,12 +1,12 @@
 import React from "react";
-import { Checkbox } from "../common/controls/Checkbox";
+import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
-import { SliderNumeric } from "../../../../components/sidebar/controls/SliderNumeric";
+import { SliderNumeric } from "../common/controls/SliderNumeric";
 import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
 import { ButtonReset } from "../common/controls/ButtonReset";
-import { Dropdown } from "../../../common/Dropdown";
+import { DropdownItemTrait } from "../common/controls/DropdownItemTrait";
 import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
 import { SlidersArray } from "../../../../components/sidebar/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
@@ -43,7 +43,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
     return (<>
         <TraitSection>
             <TraitSingle name="Material type">
-                <Dropdown 
+                <DropdownItemTrait 
                     selected={EditableMaterials.Physical} 
                     selectionList={Object.values(EditableMaterials)} 
                     handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
@@ -52,12 +52,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Display">
             <TraitSingle name="Flat shading">
-                <Checkbox
+                <CheckboxItemTrait
                     value={flatShading}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {flatShading: value} )} />
             </TraitSingle>
             <TraitSingle name="Wireframe">
-                <Checkbox
+                <CheckboxItemTrait
                     value={displayWireframe}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {displayWireframe: value} )} />
             </TraitSingle>
@@ -228,7 +228,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Transparency">
             <TraitSingle name="Transparent">
-                <Checkbox
+                <CheckboxItemTrait
                     value={transparent}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {transparent: value} )} />
             </TraitSingle>

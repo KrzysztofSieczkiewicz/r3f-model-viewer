@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from './MultilineSlidersNumeric.module.css';
 import { ButtonLockAxes } from "../../../features/sideMenu/components/common/controls/ButtonLockAxes";
 import { normalizeArrayByIndex } from "../../../utils/mathUtil";
-import { SliderNumeric } from "./SliderNumeric";
+import { SliderNumeric } from "../../../features/sideMenu/components/common/controls/SliderNumeric";
 import { SliderMediumContainer } from "./sliderContainers/SliderMediumContainer";
 import { TraitSingle } from "../../../features/sideMenu/components/common/traits/TraitSingle";
 

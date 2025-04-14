@@ -2,7 +2,7 @@ import React from "react";
 import { ReactNode, useEffect, useState } from "react";
 import styles from './Sliders.module.css';
 
-import { roundNumber } from "../../../utils/mathUtil";
+import { roundNumber } from "../../../../../utils/mathUtil";
 
 // TODO: ADD MIN/MAX OPTIONAL PARAMS
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
 
 
 // TODO: MOVE CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
-export const SliderNumeric = ({step, value, handleChange, children, min=-Infinity, max=Infinity, rounding=2}: Props) => {
+export const SliderNumericCopy = ({step, value, handleChange, children, min=-Infinity, max=Infinity, rounding=2}: Props) => {
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
 

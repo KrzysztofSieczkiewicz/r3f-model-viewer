@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import styles from './Checkbox.module.css';
+import styles from './CheckboxItemTrait.module.css';
 
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
     handleChange: (val: boolean) => void
 }
 
-export const Checkbox = ( {value, handleChange}: Props) => {
+export const CheckboxItemTrait = ( {value, handleChange}: Props) => {
     const [isChecked, setIsChecked]=useState(value);
 
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
