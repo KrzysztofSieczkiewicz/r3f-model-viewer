@@ -1,10 +1,29 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { useCallback, useEffect, useRef } from "react";
 
-type BackdropProps = {
-  children?: ReactNode,
-  onClick?: () => void;
+// TODO[CURRENT]: clean up this hook (together with useSidebarModal) and create clean PortalTarget for them. Think about clean PortalTarget handling
+
+// Move this to portal instead
+const BackdropInteractionCatcher = () => {
+
+  return (
+    <div
+      id="BackdropInteractionPrevention"
+      style={{
+        position: "absolute" as "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        opacity: 0.1,
+        transform: 'translateZ(0)',
+        pointerEvents: 'auto',
+        backgroundColor: 'red'
+      }}
+    />
+  )
 }
+
 
 // TODO[CURRENT]: move this to the portal solution. maybe include new context for app modals
 export const useDetectClickOutside = (
@@ -19,6 +38,7 @@ export const useDetectClickOutside = (
     const isClickInBounds = refs.some(ref => ref.current?.contains(event.target as Node) );
 
     if (!isClickInBounds) {
+      event.preventDefault();
       callback();
     }
   }, [refs, isActive, callback]);
@@ -30,26 +50,5 @@ export const useDetectClickOutside = (
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isActive, refs, callback]);
 
-  const BackdropPreventInteraction = useCallback(({children, onClick}: BackdropProps) => (
-    <div
-      id="BackdropInteractionPrevention"
-      onClick={onClick}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        opacity: 0.1,
-        zIndex: 0,
-        transform: 'translateZ(0)',
-        pointerEvents: 'auto',
-        backgroundColor: 'red'
-      }}
-    >
-      {children}
-    </div>
-  ), []);
-
-  return BackdropPreventInteraction
+  return BackdropInteractionCatcher;
 };

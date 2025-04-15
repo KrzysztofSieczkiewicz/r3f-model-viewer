@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRef, useState } from 'react';
 import styles from './DropdownListedObjectType.module.css';
-import { useDetectClickOutside } from '../../../hooks/useDetectClickOutside';
+import { useDetectClickOutside } from '../../../hooks/useInterceptClickOutside';
 
 type Props<T> = {
     current: string,

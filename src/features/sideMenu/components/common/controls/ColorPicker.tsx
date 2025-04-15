@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from './ColorPicker.module.css';
 
 import { HexColorPicker } from "react-colorful";
-import { useDetectClickOutside } from "../../../hooks/useDetectClickOutside";
+import { useDetectClickOutside as useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
 
 type Props = {
   currentColor: string,
@@ -18,18 +18,17 @@ export const ColorPicker = ( {currentColor, handleChange} :Props) :JSX.Element =
   const previewRef = useRef<HTMLDivElement | null>(null);
   const popupRef = useRef<HTMLDivElement | null>(null);
 
+  useInterceptClickOutside(
+    [popupRef, previewRef],
+    isColorPickerOpen,
+    () => setIsColorPickerOpen(false)
+  );
+
   // OPEN AND HIDE COLOR PALETTE
   const toggleColorPicker = (e: React.MouseEvent<HTMLDivElement>) => {
     setPosition(e.clientX - 25);
     setIsColorPickerOpen(active => !active);
   }
-
-  useDetectClickOutside(
-          [popupRef],
-          isColorPickerOpen,
-          () => setIsColorPickerOpen(false)
-      );
-
 
   return (
     <>

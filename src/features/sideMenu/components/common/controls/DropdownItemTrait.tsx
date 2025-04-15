@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styles from './DropdownItemTrait.module.css';
-import { useDetectClickOutside } from "../../../hooks/useDetectClickOutside";
+import { useDetectClickOutside } from "../../../hooks/useInterceptClickOutside";
 
 type Props<T> = {
     selected: T,
@@ -16,10 +16,7 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: 
     useDetectClickOutside(
         [dropdownRef],
         isOpen,
-        () => {
-            setIsOpen(false)
-            console.log("Triggered")
-        }
+        () => setIsOpen(false)
     );
 
     const handleSelect = (option: T) => {

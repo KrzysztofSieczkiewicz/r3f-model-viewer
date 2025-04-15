@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styles from './DropdownAddListedObject.module.css';
-import { useDetectClickOutside } from "../../../hooks/useDetectClickOutside";
+import { useDetectClickOutside } from "../../../hooks/useInterceptClickOutside";
 
 type Props<T> = {
     availableOptions: T[],

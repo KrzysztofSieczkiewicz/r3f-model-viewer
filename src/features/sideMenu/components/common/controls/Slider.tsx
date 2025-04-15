@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styles from './Sliders.module.css';
 
 import { roundNumber } from "../../../../../utils/mathUtil";
-import { useDetectClickOutside } from "../../../hooks/useDetectClickOutside";
+import { useDetectClickOutside } from "../../../hooks/useInterceptClickOutside";
 
 
 type Props = {
@@ -79,9 +79,8 @@ export const Slider = ({
     const renderInput = (value: number) => {
         return (
             <>
-                <Backdrop>
-                <input ref={inputFieldRef} type="number" value={value} onChange={(e) => handleSliderChange(+e.target.value)}/>
-                </Backdrop>
+            <Backdrop/>
+            <input ref={inputFieldRef} type="number" value={value} style={{position:"relative", zIndex:1}} onChange={(e) => handleSliderChange(+e.target.value)}/>
             </>
         );
     }
