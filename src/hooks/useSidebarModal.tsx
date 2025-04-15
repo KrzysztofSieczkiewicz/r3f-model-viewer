@@ -5,6 +5,7 @@ type ModalProps = {
     children: ReactNode,
 }
 
+// TODO: update it up to standard - that was rushed implementation
 export const useSidebarModal = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);

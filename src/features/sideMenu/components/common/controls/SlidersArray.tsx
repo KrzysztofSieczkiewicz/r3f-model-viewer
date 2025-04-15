@@ -29,7 +29,7 @@ export const SlidersArray = <T extends ValueArray> ({
     const handleSliderValueChange = useCallback((index: number, newValue: number) => {
         if(axesLocked) {
             const scales = normalizeArrayByIndex(localValue, localValue[index]);
-            const scaledValue = localValue.map( (internalValue, i) => { return internalValue+(newValue-localValue[index]) * scales[i] })
+            const scaledValue = localValue.map( (internalValue, i) => { return internalValue+(newValue-localValue[index])*scales[i] })
             handleChange(scaledValue as T);
         } else {
             const value = [...localValue] ;
