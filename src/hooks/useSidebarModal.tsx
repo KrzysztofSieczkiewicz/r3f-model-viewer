@@ -17,8 +17,10 @@ export const useSidebarModal = () => {
         const element = document.getElementById('sidebar-modal');
         if (!element) {
             console.error("Sidebar component should contain a <div id='sidebar-modal'> element.");
+            return;
         }
         setPortalElement(element);
+        return () => setPortalElement(null);
     }, []);
 
     const SidebarModal = ({ children }: ModalProps) => {
@@ -28,10 +30,10 @@ export const useSidebarModal = () => {
 
         useEffect(() => {
             if (modalRef.current) {
-              setModalWidth(modalRef.current.offsetWidth);
-              setIsCalculated(true);
+                setModalWidth(modalRef.current.offsetWidth);
+                setIsCalculated(true);
             }
-          }, []);
+        }, []);
 
         const MODAL_STYLE = {
             position: "fixed" as "fixed",

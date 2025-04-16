@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styles from './DropdownItemTrait.module.css';
-import { useDetectClickOutside } from "../../../hooks/useInterceptClickOutside";
+import { useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
 
 type Props<T> = {
     selected: T,
@@ -13,7 +13,7 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: 
     const [ isOpen, setIsOpen ] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    useDetectClickOutside(
+    useInterceptClickOutside(
         [dropdownRef],
         isOpen,
         () => setIsOpen(false)

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from './ColorPicker.module.css';
 
 import { HexColorPicker } from "react-colorful";
-import { useDetectClickOutside as useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
+import { useInterceptClickOutside as useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
 
 type Props = {
   currentColor: string,

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styles from './Sliders.module.css';
 
 import { roundNumber } from "../../../../../utils/mathUtil";
-import { useDetectClickOutside } from "../../../hooks/useInterceptClickOutside";
+import { useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
 
 
 type Props = {
@@ -33,14 +33,14 @@ export const Slider = ({
         
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
-    const [ isInInputMode, setIsInInputMode ] = useState(false);
+    const [ isInputMode, setIsInputMode ] = useState(false);
 
     const inputFieldRef = useRef<HTMLInputElement>(null);
-    const Backdrop = useDetectClickOutside(
-        [inputFieldRef],
-        isInInputMode,
-        () => setIsInInputMode(false)
-    )
+    // const BackdropInteractionCatcher = useInterceptClickOutside(
+    //     [inputFieldRef],
+    //     isInputMode,
+    //     () => setIsInputMode(false)
+    // )
 
     const handleSliderChange = (newValue: number) => {
         if (newValue < min) {
@@ -79,7 +79,10 @@ export const Slider = ({
     const renderInput = (value: number) => {
         return (
             <>
-            <Backdrop/>
+            {/* <BackdropInteractionCatcher /> */}
+                {/* targetRef={inputFieldRef}
+                isActive={isInputMode}
+                onExit={()=>setIsInputMode(false)} /> */}
             <input ref={inputFieldRef} type="number" value={value} style={{position:"relative", zIndex:1}} onChange={(e) => handleSliderChange(+e.target.value)}/>
             </>
         );
@@ -112,14 +115,14 @@ export const Slider = ({
         return (
             <div className={styles.track}
                 onMouseDown={(e) => handleMouseDown(e)}
-                onDoubleClick={() => setIsInInputMode(true)} >
+                onDoubleClick={() => setIsInputMode(true)} >
                 {displayedTrackElement}
                 {displayedValueElement}
             </div>);
     }
 
     const render = () => {
-        if(!isInInputMode) {
+        if(!isInputMode) {
             return renderSlider(value)
         } else {
             return renderInput(value)
