@@ -1,33 +1,23 @@
-import React, { useState } from "react";
+import React, { RefObject, useState } from "react";
+//import { RefObject } from "react";
 import { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-// TODO[CURRENT]: clean up this hook (together with useSidebarModal) and create clean PortalTarget for them. Think about clean PortalTarget handling
 export const useInterceptClickOutside = (
-  refs: Array<React.RefObject<HTMLElement>>,
+  refs: Array<RefObject<HTMLElement>>,
   isActive: boolean,
   callback: () => void
 ) => {
 
-
-
-
-// TODO: CREATE SINGLE DIV AND MAKE IT TRANSPARENT WHERE NEEDED WITH CLIP-PATHS
-
-
-
-
-
-
   const isMounted = useRef(true);
 
   const handleClickOutside = useCallback((event: MouseEvent) => {
-    // const isClickInBounds = refs.some(ref => ref.current?.contains(event.target as Node) );
+    const isClickInBounds = refs.some(ref => ref.current?.contains(event.target as Node) );
 
-    // if (isClickInBounds) return;
+    if (isClickInBounds) return;
     
-    // event.preventDefault();
-    // callback();
+    event.preventDefault();
+    callback();
     
   }, [refs, isActive, callback]);
 
@@ -39,23 +29,6 @@ export const useInterceptClickOutside = (
 
   const BackdropInteractionCatcher = () => {
     const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
-    const backdropRef = useRef<HTMLDivElement>(null);
-
-    const recognizeTargetClick = (event: React.MouseEvent<HTMLDivElement>) => {
-      if (!backdropRef.current) return;
-
-      const {clientX, clientY} = event;
-      
-      backdropRef.current.style.pointerEvents = 'none';
-      const elementAtPoint = document.elementFromPoint(clientX, clientY);
-      backdropRef.current.style.pointerEvents = 'auto';
-  
-      const isClickInBounds = refs.some(ref => ref.current === elementAtPoint)
-      console.log({elementAtPoint})
-  
-      if (!isClickInBounds) callback()
-
-    }
   
     useEffect(() => {
       const element = document.getElementById('sidebar-modal');
@@ -69,27 +42,45 @@ export const useInterceptClickOutside = (
         setPortalElement(null);
       }
     }, []);
-  
+
+
+    const computeClipPaths = (refs: Array<RefObject<HTMLElement>>) => {
+      const clipPaths = refs.map((ref, index) => {
+        if (!ref.current) return null;
+        const boundingRect = ref.current.getBoundingClientRect();
+        const clipPathId = `clip-${index}`;
+    
+        console.log({boundingRect})
+        return (
+          <clipPath id={clipPathId} key={clipPathId} clipPathUnits="userSpaceOnUse">
+            <rect
+              x={boundingRect.x}
+              y={boundingRect.y}
+              width={boundingRect.width}
+              height={boundingRect.height}
+            />
+          </clipPath>
+        );
+      })
+    
+      return clipPaths
+    }
+ 
+  // TODO[CURRENT]: FINISH WITH SVG https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/clipPath
     if (!isActive || !portalElement) return null;
     return createPortal(
-      <div
-        id="ClickInterceptBackdrop"
-        ref={backdropRef}
-        onClick={(e) => recognizeTargetClick(e)}
+      <svg
+        id="clickInterceptOverlay"
+        pointerEvents="auto"
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          zIndex: 1000,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-      </div>,
+          height: "100%",
+          width: "100%",
+        }} >
+        {computeClipPaths(refs)}
+      </svg>,
       portalElement
     );
   }

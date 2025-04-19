@@ -36,11 +36,11 @@ export const Slider = ({
     const [ isInputMode, setIsInputMode ] = useState(false);
 
     const inputFieldRef = useRef<HTMLInputElement>(null);
-    // const BackdropInteractionCatcher = useInterceptClickOutside(
-    //     [inputFieldRef],
-    //     isInputMode,
-    //     () => setIsInputMode(false)
-    // )
+    const BackdropInteractionCatcher = useInterceptClickOutside(
+        [inputFieldRef],
+        isInputMode,
+        () => setIsInputMode(false)
+    )
 
     const handleSliderChange = (newValue: number) => {
         if (newValue < min) {
@@ -79,7 +79,7 @@ export const Slider = ({
     const renderInput = (value: number) => {
         return (
             <>
-            {/* <BackdropInteractionCatcher /> */}
+            <BackdropInteractionCatcher />
                 {/* targetRef={inputFieldRef}
                 isActive={isInputMode}
                 onExit={()=>setIsInputMode(false)} /> */}
