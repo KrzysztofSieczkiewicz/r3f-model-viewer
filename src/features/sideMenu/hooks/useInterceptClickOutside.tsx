@@ -1,15 +1,16 @@
 import React, { RefObject, useState } from "react";
-//import { RefObject } from "react";
 import { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
 export const useInterceptClickOutside = (
   refs: Array<RefObject<HTMLElement>>,
   isActive: boolean,
   callback: () => void
 ) => {
-
   const isMounted = useRef(true);
+
+  const { width, height } = useWindowDimensions();
 
   const handleClickOutside = useCallback((event: MouseEvent) => {
     const isClickInBounds = refs.some(ref => ref.current?.contains(event.target as Node) );
@@ -44,34 +45,24 @@ export const useInterceptClickOutside = (
     }, []);
 
 
-    const computeClipPaths = (refs: Array<RefObject<HTMLElement>>) => {
-      const clipPaths = refs.map((ref, index) => {
-        if (!ref.current) return null;
+    const computePath = () => {
+      const outerRectanglePath = `M0 0 h${width} v${height} h-${width} Z `;
+      let path = outerRectanglePath;
+
+      refs.forEach((ref) => {
+        if (!ref.current) return;
         const boundingRect = ref.current.getBoundingClientRect();
-        const clipPathId = `clip-${index}`;
-    
-        console.log({boundingRect})
-        return (
-          <clipPath id={clipPathId} key={clipPathId} clipPathUnits="userSpaceOnUse">
-            <rect
-              x={boundingRect.x}
-              y={boundingRect.y}
-              width={boundingRect.width}
-              height={boundingRect.height}
-            />
-          </clipPath>
-        );
-      })
-    
-      return clipPaths
+        path = path.concat(`M${boundingRect.x} ${boundingRect.y} v${boundingRect.height} h${boundingRect.width} v-${boundingRect.height} Z `) 
+      });
+
+      return <path d={path} pointerEvents="auto" style={{opacity: 0}}/>
     }
  
-  // TODO[CURRENT]: FINISH WITH SVG https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/clipPath
     if (!isActive || !portalElement) return null;
     return createPortal(
       <svg
         id="clickInterceptOverlay"
-        pointerEvents="auto"
+        pointerEvents="none"
         style={{
           position: "fixed",
           top: 0,
@@ -79,7 +70,7 @@ export const useInterceptClickOutside = (
           height: "100%",
           width: "100%",
         }} >
-        {computeClipPaths(refs)}
+        {computePath()}
       </svg>,
       portalElement
     );

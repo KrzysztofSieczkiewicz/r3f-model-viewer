@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useEffect, useState } from "react";
-import styles from './Sliders.module.css';
+import styles from './Slider.module.css';
 
 import { roundNumber } from "../../../../../utils/mathUtil";
 import { useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
@@ -17,8 +17,6 @@ type Props = {
     displayValue?: boolean,
     displayedUnit?: string,
 }
-
-// TODO: MOVE CURSOR TO ANOTHER SIDE OF THE SCREEN IF MOVED TOO CLOSE TO THE EDGE
 
 export const Slider = ({
         value, 
@@ -64,7 +62,6 @@ export const Slider = ({
         handleSliderChange(value + calculatedX * increment);
     };
 
-
     useEffect(() => {
         if(!isMouseDown) return;
         document.addEventListener('mouseup', handleMouseUp);
@@ -79,11 +76,15 @@ export const Slider = ({
     const renderInput = (value: number) => {
         return (
             <>
-            <BackdropInteractionCatcher />
-                {/* targetRef={inputFieldRef}
-                isActive={isInputMode}
-                onExit={()=>setIsInputMode(false)} /> */}
-            <input ref={inputFieldRef} type="number" value={value} style={{position:"relative", zIndex:1}} onChange={(e) => handleSliderChange(+e.target.value)}/>
+                <BackdropInteractionCatcher />
+                <input 
+                    ref={inputFieldRef} 
+                    className={styles.inputField}
+                    type="text"
+                    step="any"
+                    value={value} 
+                    onChange={(e) => e.preventDefault()}
+                    onBlur={(e) => handleSliderChange(+e.target.value)} />
             </>
         );
     }
@@ -113,12 +114,11 @@ export const Slider = ({
         }
 
         return (
-            <div className={styles.track}
-                onMouseDown={(e) => handleMouseDown(e)}
-                onDoubleClick={() => setIsInputMode(true)} >
+            <>
                 {displayedTrackElement}
                 {displayedValueElement}
-            </div>);
+            </>
+        );
     }
 
     const render = () => {
@@ -129,12 +129,12 @@ export const Slider = ({
         }
     }
 
-    // TODO: WHEN RENDERING INPUT - REPLACE SLIDER TRACK WITH THE INPUT FIELD OF THE SAME WIDTH - IT WILL REMOVE EVENT LISTENERS COLLISIONS
-
-    // TODO: REINTRODUCE AXIS COLOR INDICATOR
     return (
-        <>
+        <div className={styles.track}
+            onMouseDown={(e) => handleMouseDown(e)}
+            onDoubleClick={() => setIsInputMode(true)} >
             {render()}
-        </>
+        </div>
+            
     );
 }
