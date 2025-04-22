@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { RefObject, useRef } from "react";
 import { useEffect, useState } from "react";
 import styles from './Slider.module.css';
 
@@ -12,7 +12,7 @@ type Props = {
     
     min?: number,
     max?: number,
-    increment?: number,
+    step?: number,
     rounding?: number,
     displayValue?: boolean,
     displayedUnit?: string,
@@ -23,7 +23,7 @@ export const Slider = ({
         handleChange, 
         min=-Infinity, 
         max=Infinity,
-        increment=0.01, 
+        step=0.01, 
         rounding=2, 
         displayValue=true, 
         displayedUnit=""
@@ -32,12 +32,20 @@ export const Slider = ({
     const [ startingPosX, setStartingPosX ] = useState(0);
     const [ isMouseDown, setIsMouseDown ] = useState(false);
     const [ isInputMode, setIsInputMode ] = useState(false);
+    const [ localInputValue, setLocalInputValue ] = useState(value);
+
+    useEffect( () => {
+        console.log(value)
+        setLocalInputValue(roundNumber(value, rounding))
+    }, [value])
+
 
     const inputFieldRef = useRef<HTMLInputElement>(null);
+
     const BackdropInteractionCatcher = useInterceptClickOutside(
         [inputFieldRef],
         isInputMode,
-        () => setIsInputMode(false)
+        () => handleInputConfirm(localInputValue)
     )
 
     const handleSliderChange = (newValue: number) => {
@@ -50,6 +58,13 @@ export const Slider = ({
         }
     }
 
+    // TODO: CURRENT - Handle NaN in inputs, allow for both . and , points
+    // remove redundant methods that do the same, improve local values handling
+    const handleInputConfirm = (newValue: number) => {
+        handleSliderChange(newValue);
+        setIsInputMode(false)
+    }
+
     const handleMouseUp = () =>  setIsMouseDown(false);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -58,8 +73,10 @@ export const Slider = ({
     };
 
     const handleMouseMove = (e: MouseEvent) => {
+        if(isInputMode) return;
+
         const calculatedX = e.clientX - startingPosX;
-        handleSliderChange(value + calculatedX * increment);
+        handleSliderChange(value + calculatedX * step);
     };
 
     useEffect(() => {
@@ -73,7 +90,8 @@ export const Slider = ({
         };
     }, [isMouseDown]);
 
-    const renderInput = (value: number) => {
+    const renderInput = () => {
+
         return (
             <>
                 <BackdropInteractionCatcher />
@@ -81,15 +99,19 @@ export const Slider = ({
                     ref={inputFieldRef} 
                     className={styles.inputField}
                     type="text"
-                    step="any"
-                    value={value} 
-                    onChange={(e) => e.preventDefault()}
-                    onBlur={(e) => handleSliderChange(+e.target.value)} />
+                    step="0.01"
+                    value={localInputValue}
+                    autoFocus
+                    onChange={(e) => setLocalInputValue(+e.target.value)}
+                    onKeyDown={(e) => {
+                        if(e.key !== 'Enter') return;
+                        handleInputConfirm(localInputValue)
+                    }}  />
             </>
         );
     }
 
-    const renderSlider = (value: number) => {
+    const renderSlider = () => {
         let displayedValueElement = null;
         if(displayValue) {
             const displayedValue = roundNumber(value, rounding)
@@ -123,9 +145,9 @@ export const Slider = ({
 
     const render = () => {
         if(!isInputMode) {
-            return renderSlider(value)
+            return renderSlider()
         } else {
-            return renderInput(value)
+            return renderInput()
         }
     }
 

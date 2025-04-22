@@ -28,7 +28,7 @@ export const EffectControlsDepthOfField = ( {properties}: Props ) => {
             <TraitSingle name="Focus distance">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={50} increment={0.005} 
+                        min={0} max={50} step={0.005} 
                         value={properties.focusDistance}
                         handleChange={(value) => updateEffectProperties(type, {focusDistance: value} )} />
                 </SliderLongContainer>
@@ -38,7 +38,7 @@ export const EffectControlsDepthOfField = ( {properties}: Props ) => {
             <TraitSingle name="Focal length">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={50} increment={0.005} 
+                        min={0} max={50} step={0.005} 
                         value={properties.focalLength}
                         handleChange={(value) => updateEffectProperties(type, {focalLength: value} )} />
                 </SliderLongContainer>
@@ -48,7 +48,7 @@ export const EffectControlsDepthOfField = ( {properties}: Props ) => {
             <TraitSingle name="Bokeh scale">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={5} increment={0.005} 
+                        min={0} max={5} step={0.005} 
                         value={properties.bokehScale} 
                         handleChange={(value) => updateEffectProperties(type, {bokehScale: value} )} />
                 </SliderLongContainer>

@@ -43,7 +43,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
             <TraitSingle name="Opacity">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={1} increment={0.005}
+                        min={0} max={1} step={0.005}
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
                 </SliderLongContainer>
@@ -78,7 +78,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
             <TraitSingle name="Shininess">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={1} increment={0.005} 
+                        min={0} max={1} step={0.005} 
                         value={shininess}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {shininess: value} )} />
                 </SliderLongContainer>

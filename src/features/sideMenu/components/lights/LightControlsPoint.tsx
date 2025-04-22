@@ -37,7 +37,7 @@ export const LightControlsPoint = ( {id, properties}: Props ) => {
                     <Slider
                         value={properties.intensity}
                         handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
-                        min={0} max={3} increment={0.005} />
+                        min={0} max={3} step={0.005} />
                 </SliderLongContainer>
                 <ButtonReset onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </TraitSingle>
@@ -47,7 +47,7 @@ export const LightControlsPoint = ( {id, properties}: Props ) => {
                     <Slider 
                         value={properties.distance}
                         handleChange={(val) => updateLightProperties(id, {distance: val} )} 
-                        min={0} max={100} increment={0.1} />
+                        min={0} max={100} step={0.1} />
                 </SliderLongContainer>
                 <ButtonReset onReset={() => updateLightProperties(id, {distance: 10} )} />
             </TraitSingle>

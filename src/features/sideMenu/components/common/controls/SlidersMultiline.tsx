@@ -74,7 +74,7 @@ export const SlidersMultiline = <T,>({displayName, values, handleChange}: Props<
                     <Slider
                         {...entry.min !== undefined && { min: entry.min}}
                         {...entry.max !== undefined && { max: entry.max}}
-                        increment={entry.step} 
+                        step={entry.step} 
                         rounding={entry.rounding} 
                         value={entry.value} 
                         handleChange={(val) => handleSliderChange(index, val)} />

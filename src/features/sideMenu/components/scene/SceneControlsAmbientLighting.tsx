@@ -30,7 +30,7 @@ export const SceneControlsAmbientLighting = () => {
                     <Slider
                         value={scene.ambientIntensity}
                         handleChange={(val) =>  setScene({ambientIntensity: val}) }
-                        min={0} max={1} increment={0.001} />
+                        min={0} max={1} step={0.001} />
                 </SliderLongContainer>
                 <ButtonReset onReset={() => setScene({ambientIntensity: 0.1})} />
             </TraitSingle>

@@ -28,7 +28,7 @@ export const EffectControlsBloom = ( {properties}: Props ) => {
             <TraitSingle name="Intensity" >
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={5} increment={0.005} 
+                        min={0} max={5} step={0.005} 
                         value={properties.intensity}
                         handleChange={(value) => updateEffectProperties(type, {intensity: value} )} />
                 </SliderLongContainer>
@@ -38,7 +38,7 @@ export const EffectControlsBloom = ( {properties}: Props ) => {
             <TraitSingle name="Threshold">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={1} increment={0.0005} 
+                        min={0} max={1} step={0.0005} 
                         value={properties.luminanceThreshold}
                         handleChange={(value) => updateEffectProperties(type, {luminanceThreshold: value} )} />
                 </SliderLongContainer>
@@ -48,7 +48,7 @@ export const EffectControlsBloom = ( {properties}: Props ) => {
             <TraitSingle name="Smoothing">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={1} increment={0.0005} 
+                        min={0} max={1} step={0.0005} 
                         value={properties.luminanceSmoothing} 
                         handleChange={(value) => updateEffectProperties(type, {luminanceSmoothing: value} )} />
                 </SliderLongContainer>

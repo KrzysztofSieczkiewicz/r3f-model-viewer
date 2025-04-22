@@ -77,7 +77,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Roughness">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={1} increment={0.005} 
+                        min={0} max={1} step={0.005} 
                         value={roughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {roughness: value} )} />
                 </SliderLongContainer>
@@ -91,7 +91,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Metalness">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={1} increment={0.005} 
+                        min={0} max={1} step={0.005} 
                         value={metalness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {metalness: value} )} />
                 </SliderLongContainer>
@@ -113,7 +113,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={3} increment={0.005} 
+                        min={0} max={3} step={0.005} 
                         value={emissiveIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveIntensity: value} )} />
                 </SliderLongContainer>
@@ -130,7 +130,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Rotation">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={360} increment={0.005} 
+                        min={0} max={360} step={0.005} 
                         value={environmentMapRotation}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapRotation: value} )} />
                 </SliderLongContainer>
@@ -139,7 +139,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={3} increment={0.005} 
+                        min={0} max={3} step={0.005} 
                         value={environmentMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapIntensity: value} )} />
                 </SliderLongContainer>
@@ -156,7 +156,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Intensity">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={3} increment={0.005} 
+                        min={0} max={3} step={0.005} 
                         value={ambientOcclusionMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {ambientOcclusionMapIntensity: value} )} />
                 </SliderLongContainer>
@@ -172,7 +172,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Scale">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={3} increment={0.005} 
+                        min={0} max={3} step={0.005} 
                         value={normalScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {normalScale: value} )} />
                 </SliderLongContainer>
@@ -188,7 +188,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Scale">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={3} increment={0.005} 
+                        min={0} max={3} step={0.005} 
                         value={bumpScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpScale: value} )} />
                 </SliderLongContainer>
@@ -205,7 +205,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Scale">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={360} increment={0.005} 
+                        min={0} max={360} step={0.005} 
                         value={displacementScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementScale: value} )} />
                 </SliderLongContainer>
@@ -213,7 +213,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Bias">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={360} increment={0.005} 
+                        min={0} max={360} step={0.005} 
                         value={displacementBias}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementBias: value} )} />
                 </SliderLongContainer>
@@ -234,7 +234,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
             <TraitSingle name="Opacity">
                 <SliderLongContainer>
                     <Slider
-                        min={0} max={1} increment={0.005}
+                        min={0} max={1} step={0.005}
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
                 </SliderLongContainer>
