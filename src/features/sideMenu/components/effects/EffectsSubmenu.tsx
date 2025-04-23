@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useEffectsContext } from '../../../../components/contexts/EffectsContext';
+import { useEffectsContext } from '../../../common/contexts/EffectsContext';
 
 import { ListedEffect } from './ListedEffect';
 import { EFFECT_TYPES, EffectType } from '../../../../models/Effect';

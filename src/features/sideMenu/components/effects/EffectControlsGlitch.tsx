@@ -2,7 +2,7 @@ import React from "react";
 
 import { EFFECT_TYPES, GlitchProperties } from "../../../../models/Effect";
 import { TraitSingle } from "../common/traits/TraitSingle";
-import { useEffectsContext } from "../../../../components/contexts/EffectsContext";
+import { useEffectsContext } from "../../../common/contexts/EffectsContext";
 import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 
 type Props = {

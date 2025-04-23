@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './../common/submenus/Submenu.module.css';
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 
 import { ButtonToggleVisibility } from "../common/controls/ButtonToggleVisibility";
 import { ListedLightTypeIcon } from "./ListedLightTypeIcon";

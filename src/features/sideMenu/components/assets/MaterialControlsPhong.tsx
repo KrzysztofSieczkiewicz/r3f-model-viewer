@@ -1,10 +1,10 @@
 import React from "react";
 
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhongMaterialProperties } from "../../../../models/assets/materials/EditableMaterial"
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { DropdownItemTrait } from "../common/controls/DropdownItemTrait";
 import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
-import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
+import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { Slider } from "../common/controls/Slider";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { ColorPicker } from "../common/controls/ColorPicker";
@@ -41,12 +41,12 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {transparent: value} )} />
             </TraitSingle>
             <TraitSingle name="Opacity">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005}
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {opacity: defaultProperties.opacity} )} />
             </TraitSingle>
         </TraitSection>
@@ -76,12 +76,12 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
                     handleChange={(value) =>  updateEditableMaterialProperties(assetId, {specular: value} )} />
             </TraitSingle>
             <TraitSingle name="Shininess">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={shininess}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {shininess: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {shininess: defaultProperties.shininess} )} />
             </TraitSingle>
             <TraitSingle name="Emissive">

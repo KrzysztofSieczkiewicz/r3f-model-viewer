@@ -2,12 +2,12 @@ import React from "react";
 import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
 import { ColorPicker } from "../common/controls/ColorPicker";
-import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
+import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { Slider } from "../common/controls/Slider";
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { DropdownItemTrait } from "../common/controls/DropdownItemTrait";
-import { TexturePicker } from "../../../../components/sidebar/controls/TexturePicker";
+import { TexturePicker } from "../common/controls/TexturePicker";
 import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { TraitSection } from "../common/traits/TraitSection";
@@ -83,12 +83,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Roughness">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={roughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {roughness: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {roughness: defaultProperties.roughness} )} />
             </TraitSingle>
             <TraitSingle name="Metalness">
@@ -97,39 +97,39 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Metalness">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={metalness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {metalness: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.metalness} )} />
             </TraitSingle>
             <TraitSingle name="Reflectivity">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={reflectivity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {reflectivity: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {reflectivity: defaultProperties.reflectivity} )} />
             </TraitSingle>
             <TraitSingle name="Dispersion">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={dispersion}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {dispersion: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {dispersion: defaultProperties.dispersion} )} />
             </TraitSingle>
             <TraitSingle name="IOR">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={2.333} step={0.005} 
                         value={ior}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {ior: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {ior: defaultProperties.ior} )} />
             </TraitSingle>
         </TraitSection>
@@ -151,12 +151,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {specularIntensityMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Intensity">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={2} step={0.005} 
                         value={specularIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {specularIntensity: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {specularIntensity: defaultProperties.specularIntensity} )} />
             </TraitSingle>
         </TraitSection>
@@ -168,12 +168,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {attenuationColor: value} )} />
             </TraitSingle>
             <TraitSingle name="Distance">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={Infinity} step={0.005} 
                         value={attenuationDistance}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {attenuationDistance: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {attenuationDistance: defaultProperties.attenuationDistance} )} />
             </TraitSingle>
         </TraitSection>
@@ -190,12 +190,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) =>  updateEditableMaterialProperties(assetId, {emissive: value} )} />
             </TraitSingle>
             <TraitSingle name="Intensity">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={3} step={0.005} 
                         value={emissiveIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveIntensity: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {emissiveIntensity: defaultProperties.emissiveIntensity} )} />
             </TraitSingle>
         </TraitSection>
@@ -207,21 +207,21 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Rotation">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={360} step={0.005} 
                         value={environmentMapRotation}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapRotation: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapRotation} )} />
             </TraitSingle>
             <TraitSingle name="Intensity">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={3} step={0.005} 
                         value={environmentMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMapIntensity: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.environmentMapIntensity} )} />
             </TraitSingle>
         </TraitSection>
@@ -238,12 +238,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {alphaMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Opacity">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={3} step={0.005} 
                         value={opacity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {opacity: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Transmission map">
                 <TexturePicker
@@ -251,12 +251,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {transmissionMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Transmission">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={3} step={0.005} 
                         value={transmission}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {transmission: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
         </TraitSection>
 
@@ -267,12 +267,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {ambientOcclusionMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Intensity">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={3} step={0.005} 
                         value={ambientOcclusionMapIntensity}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {ambientOcclusionMapIntensity: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
         </TraitSection>
 
@@ -283,12 +283,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {normalMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Scale">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={3} step={0.005} 
                         value={normalScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {normalScale: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
         </TraitSection>
 
@@ -299,12 +299,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Scale">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={3} step={0.005} 
                         value={bumpScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpScale: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {metalness: defaultProperties.bumpScale} )} />
             </TraitSingle>
         </TraitSection>
@@ -316,20 +316,20 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Scale">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={360} step={0.005} 
                         value={displacementScale}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementScale: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Bias">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={360} step={0.005} 
                         value={displacementBias}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementBias: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
         </TraitSection>
 
@@ -340,12 +340,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Strength">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={clearcoat}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoat: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Roughness Map">
                 <TexturePicker
@@ -353,12 +353,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatRoughnessMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Roughness">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={clearcoatRoughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatRoughness: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Normal Map">
                 <TexturePicker
@@ -380,20 +380,20 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {anisotropyMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Strength">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={anisotropy}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {anisotropy: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Rotation">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={360} step={0.005} 
                         value={anisotropyRotation}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {anisotropyRotation: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
         </TraitSection>
 
@@ -404,32 +404,32 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescenceMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Strength">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={iridescence}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescence: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Rotation">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={2.333} step={0.005} 
                         value={iridescenceIor}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescenceIor: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {iridescenceIor: defaultProperties.iridescenceIor} )} />
             </TraitSingle>
         </TraitSection>
 
         <TraitSection name="Sheen">
             <TraitSingle name="Intensity">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={sheen}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {sheen: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Roughness Map">
                 <TexturePicker
@@ -437,12 +437,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {sheenRoughnessMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Roughness">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.005} 
                         value={sheenRoughness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {sheenRoughness: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Color Map">
                 <TexturePicker
@@ -463,12 +463,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {thicknessMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Strength">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={5} step={0.005} 
                         value={thickness}
                         handleChange={(value) => updateEditableMaterialProperties(assetId, {thickness: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
             </TraitSingle>
         </TraitSection>
     </>);

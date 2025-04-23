@@ -1,5 +1,5 @@
 import React from "react";
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { BoxProperties } from "../../../../models/assets/meshes/Primitive";
 import { SlidersMultiline } from "../common/controls/SlidersMultiline";
 

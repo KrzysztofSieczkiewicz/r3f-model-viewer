@@ -2,7 +2,7 @@ import React from "react";
 
 import { TraitExpandable } from "../common/traits/TraitExpandable";
 import { AssetWrapper } from "../../../../models/assets/Asset";
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { SlidersArray } from "../common/controls/SlidersArray";
 

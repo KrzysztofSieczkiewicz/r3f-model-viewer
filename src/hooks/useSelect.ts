@@ -1,4 +1,4 @@
-import { useSceneValue } from "../components/contexts/SceneContext"
+import { useSceneValue } from "../features/common/contexts/SceneContext"
 
 export const useIsSelected = (id: string) => {
     const [ selectedObjectId ] = useSceneValue((scene) => scene["selectedObject"])

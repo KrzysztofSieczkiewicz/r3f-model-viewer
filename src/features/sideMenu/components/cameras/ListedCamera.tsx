@@ -5,9 +5,10 @@ import { ButtonDeleteObject } from '../common/controls/ButtonDeleteObject';
 import { CameraControlsPerspective } from './CameraControlsPerspective';
 import { CameraControlsOrtographic } from './CameraControlsOrtographic';
 import { ListedCameraHeader } from './ListedCameraHeader';
-import { MenuListItem } from '../../../../components/sidebar/commons/MenuListItem';
-import { ListItemBody } from '../../../../components/sidebar/commons/ListItemBody';
-import { useSceneObjectsContext } from '../../../../components/contexts/SceneObjectsContext';
+import { useSceneObjectsContext } from '../../../common/contexts/SceneObjectsContext';
+import { ListedObject } from '../common/submenus/ListedObject';
+import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
+import { CameraControls } from './CameraControls';
 
 
 type Props = {
@@ -30,15 +31,14 @@ export const ListedCamera = ( {isActive, camera, toggleExtend}: Props ) => {
     }
     
     return (
-        <MenuListItem isActive={isActive}>
+        <ListedObject isActive={isActive}>
             <ListedCameraHeader isActive={isActive} camera={camera} toggleExtend={() => toggleExtend()} />
-            
             {isActive &&
-            <ListItemBody>
+            <ListedObjectBody>
                 <ButtonDeleteObject handleDelete={() => deleteCamera(camera.id)}/>
-                {renderCameraControls()}
-            </ListItemBody>
+                <CameraControls camera={camera} />
+            </ListedObjectBody>
             }
-        </MenuListItem>
+        </ListedObject>
     );
 }

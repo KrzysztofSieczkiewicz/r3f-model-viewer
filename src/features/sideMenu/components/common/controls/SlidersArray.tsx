@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useEffect, useState } from "react";
 
 import { normalizeArrayByIndex } from "../../../../../utils/mathUtil";
-import { SliderShortContainer } from "../../../../../components/sidebar/controls/sliderContainers/SliderShortContainer";
+import { SliderContainerShort } from "./SliderContainerShort";
 import { Slider } from "./Slider";
 import { ButtonLockAxes } from "./ButtonLockAxes";
 
@@ -46,14 +46,14 @@ export const SlidersArray = <T extends ValueArray> ({
     return (<>
         {localValue.map((value: number, index: number) => {
             return (
-                <SliderShortContainer key={index}>
+                <SliderContainerShort key={index}>
                     <Slider 
                         key={index}
                         step={step}
                         rounding={rounding}
                         value={value}
                         handleChange={(val: number)=>handleSliderValueChange(index, val)} />
-                </SliderShortContainer>
+                </SliderContainerShort>
             );
         })}
         { axesLocking && <ButtonLockAxes locked={axesLocked} setLocked={(val) => setAxesLocked(val)}/> }

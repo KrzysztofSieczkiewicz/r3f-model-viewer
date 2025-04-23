@@ -1,8 +1,8 @@
 import React from "react";
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { ConeProperties } from "../../../../models/assets/meshes/Primitive";
 import { Slider } from "../common/controls/Slider";
-import { SliderMediumContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderMediumContainer";
+import { SliderContainerMedium } from "../common/controls/SliderContainerMedium";
 import { SlidersMultiline } from "../common/controls/SlidersMultiline";
 import { TraitSingle } from "../common/traits/TraitSingle";
 
@@ -16,24 +16,24 @@ export const MeshControlsCone = ({assetId, meshProperties}: Props) => {
 
     return (<>
         <TraitSingle name="Radius">
-            <SliderMediumContainer>
+            <SliderContainerMedium>
                 <Slider
                     value={meshProperties.radius}
                     step={0.01}
                     min={0.01}
                     rounding={2}
                     handleChange={(val) => updatePrimitiveProperties(assetId, {radius: val} )} />
-            </SliderMediumContainer>
+            </SliderContainerMedium>
         </TraitSingle>
         <TraitSingle name="Height">
-            <SliderMediumContainer>
+            <SliderContainerMedium>
                 <Slider
                     value={meshProperties.height}
                     step={0.01}
                     min={0.01}
                     rounding={2}
                     handleChange={(val) => updatePrimitiveProperties(assetId, {height: val} )} />
-            </SliderMediumContainer>
+            </SliderContainerMedium>
         </TraitSingle>
 
         <SlidersMultiline<ConeProperties>

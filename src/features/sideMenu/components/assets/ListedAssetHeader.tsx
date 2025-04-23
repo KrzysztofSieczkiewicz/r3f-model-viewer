@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './../common/submenus/Submenu.module.css';
 
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { ReactComponent as PointLightIcon } from '../../../../icons/lightTypes/pointLight.svg';
 import { ButtonToggleVisibility } from "../common/controls/ButtonToggleVisibility";
 import { AssetProperties } from "../../../../models/assets/Asset";

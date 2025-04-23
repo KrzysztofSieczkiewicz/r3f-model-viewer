@@ -1,7 +1,7 @@
 import React from "react";
 
 import { PerspectiveCameraProperties } from "../../../../models/Camera";
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
 

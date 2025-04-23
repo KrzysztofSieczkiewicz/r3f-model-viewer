@@ -1,9 +1,9 @@
 import React from "react";
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 
 import { ColorPicker } from "../common/controls/ColorPicker";
 import { PointLightProperties } from "../../../../models/Light";
-import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
+import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
@@ -33,22 +33,22 @@ export const LightControlsPoint = ( {id, properties}: Props ) => {
             </TraitSingle>
 
             <TraitSingle name="Intensity">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         value={properties.intensity}
                         handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
                         min={0} max={3} step={0.005} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </TraitSingle>
 
             <TraitSingle name="Distance">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider 
                         value={properties.distance}
                         handleChange={(val) => updateLightProperties(id, {distance: val} )} 
                         min={0} max={100} step={0.1} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateLightProperties(id, {distance: 10} )} />
             </TraitSingle>
         </>

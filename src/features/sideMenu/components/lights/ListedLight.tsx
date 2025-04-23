@@ -2,11 +2,11 @@ import React from 'react';
 
 import { LightWrapper } from '../../../../models/Light';
 import { ListedLightHeader } from './ListedLightHeader';
-import { MenuListItem } from '../../../../components/sidebar/commons/MenuListItem';
 import { LightControls } from './LightControls';
 import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
-import { useSceneObjectsContext } from '../../../../components/contexts/SceneObjectsContext';
+import { useSceneObjectsContext } from '../../../common/contexts/SceneObjectsContext';
 import { ButtonDeleteObject } from '../common/controls/ButtonDeleteObject';
+import { ListedObject } from '../common/submenus/ListedObject';
 
 type Props = {
     isActive: boolean,
@@ -19,13 +19,13 @@ export const ListedLight = ({ isActive, light, toggleExtend }: Props) => {
     const { deleteLight } = useSceneObjectsContext();
 
     return (
-        <MenuListItem isActive={isActive}>
+        <ListedObject isActive={isActive}>
             <ListedLightHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
             {isActive && 
             <ListedObjectBody>
                 <ButtonDeleteObject handleDelete={() => deleteLight(light.id)} />
                 <LightControls light={light} />
             </ListedObjectBody>}
-        </MenuListItem>
+        </ListedObject>
     );
 }

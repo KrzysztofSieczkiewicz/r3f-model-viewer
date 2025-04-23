@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { ButtonAddAsset } from "./ButtonAddAsset";

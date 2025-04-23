@@ -4,7 +4,7 @@ import styles from './../common/submenus/Submenu.module.css';
 import { CameraWrapper } from "../../../../models/Camera";
 import { ButtonToggleVisibility } from "../common/controls/ButtonToggleVisibility";
 import { ListedCameraTypeIcon } from "./ListedCameraTypeIcon";
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 
 type Props = {
     isActive: boolean,

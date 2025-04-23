@@ -3,7 +3,7 @@ import styles from './SlidersMultiline.module.css';
 import { ButtonLockAxes } from "./ButtonLockAxes";
 import { normalizeArrayByIndex } from "../../../../../utils/mathUtil";
 import { Slider } from "./Slider";
-import { SliderMediumContainer } from "../../../../../components/sidebar/controls/sliderContainers/SliderMediumContainer";
+import { SliderContainerMedium } from "./SliderContainerMedium";
 import { TraitSingle } from "../traits/TraitSingle";
 
 type SliderProps<T> = {
@@ -70,7 +70,7 @@ export const SlidersMultiline = <T,>({displayName, values, handleChange}: Props<
     const renderSlider = (entry: SliderProps<T>, index: number) => {
         return (
             <TraitSingle name={entry.name} key={index}>
-                <SliderMediumContainer>
+                <SliderContainerMedium>
                     <Slider
                         {...entry.min !== undefined && { min: entry.min}}
                         {...entry.max !== undefined && { max: entry.max}}
@@ -78,7 +78,7 @@ export const SlidersMultiline = <T,>({displayName, values, handleChange}: Props<
                         rounding={entry.rounding} 
                         value={entry.value} 
                         handleChange={(val) => handleSliderChange(index, val)} />
-                </SliderMediumContainer>
+                </SliderContainerMedium>
             </TraitSingle>
         );
     }

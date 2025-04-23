@@ -2,9 +2,9 @@ import React from "react";
 
 import { BloomProperties, EFFECT_TYPES } from "../../../../models/Effect";
 import { TraitSingle } from "../common/traits/TraitSingle";
-import { useEffectsContext } from "../../../../components/contexts/EffectsContext";
+import { useEffectsContext } from "../../../common/contexts/EffectsContext";
 import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
-import { SliderLongContainer } from "../../../../components/sidebar/controls/sliderContainers/SliderLongContainer";
+import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { Slider } from "../common/controls/Slider";
 
@@ -26,32 +26,32 @@ export const EffectControlsBloom = ( {properties}: Props ) => {
             </TraitSingle>
 
             <TraitSingle name="Intensity" >
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={5} step={0.005} 
                         value={properties.intensity}
                         handleChange={(value) => updateEffectProperties(type, {intensity: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEffectProperties(type, {intensity: 1} )} />
             </TraitSingle>
             
             <TraitSingle name="Threshold">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.0005} 
                         value={properties.luminanceThreshold}
                         handleChange={(value) => updateEffectProperties(type, {luminanceThreshold: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEffectProperties(type, {luminanceThreshold: 0.15} )} />
             </TraitSingle>
 
             <TraitSingle name="Smoothing">
-                <SliderLongContainer>
+                <SliderContainerLong>
                     <Slider
                         min={0} max={1} step={0.0005} 
                         value={properties.luminanceSmoothing} 
                         handleChange={(value) => updateEffectProperties(type, {luminanceSmoothing: value} )} />
-                </SliderLongContainer>
+                </SliderContainerLong>
                 <ButtonReset onReset={() => updateEffectProperties(type, {luminanceSmoothing: 0.025} )} />
             </TraitSingle>
         </>

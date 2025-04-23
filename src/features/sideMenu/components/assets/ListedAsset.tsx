@@ -5,7 +5,7 @@ import { ListedObjectBody } from '../common/submenus/ListedObjectBody';
 import { AssetWrapper } from '../../../../models/assets/Asset';
 import { ListedAssetHeader } from './ListedAssetHeader';
 import { ButtonDeleteObject } from '../common/controls/ButtonDeleteObject';
-import { useSceneObjectsContext } from '../../../../components/contexts/SceneObjectsContext';
+import { useSceneObjectsContext } from '../../../common/contexts/SceneObjectsContext';
 import { AssetControls } from './AssetControls';
 import { MeshControls } from './MeshControls';
 import { MaterialControls } from './MaterialControls';

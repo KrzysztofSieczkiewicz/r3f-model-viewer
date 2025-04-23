@@ -5,10 +5,10 @@ import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/
 import { ReactComponent as ConeIcon } from '../../../icons/sidebar/primitives/primitive_cone.svg'
 import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
 
-import { useSceneObjectsContext } from "../../../components/contexts/SceneObjectsContext";
-import { ModalDropdownSingle } from "../../../components/sidebar/modal/ModalDropdownSingle";
-import { ModalListButton } from "../../../components/sidebar/modal/ModalDropdownOptionButton";
+import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 import { Primitives } from "../../../models/assets/meshes/Primitive";
+import { ModalDropdownSingle } from "../common/ModalDropdownSingle";
+import { ModalListButton } from "../common/ModalDropdownOptionButton";
 
 type Props = {
     closeModal: () => void

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useSceneObjectsContext } from '../../../../components/contexts/SceneObjectsContext';
+import { useSceneObjectsContext } from '../../../common/contexts/SceneObjectsContext';
 
 import { ListedLight } from './ListedLight';
 import { LIGHT_TYPES, LightType, LightWrapper } from '../../../../models/Light';

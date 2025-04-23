@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useSceneObjectsContext } from "../../../../components/contexts/SceneObjectsContext";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { Submenu } from "../common/submenus/Submenu";
 import { SubmenuSection } from "../common/submenus/SubmenuSection";
 import { CAMERA_TYPES, CameraType, CameraWrapper } from "../../../../models/Camera";
