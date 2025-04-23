@@ -84,7 +84,7 @@ export const Slider = ({
             document.removeEventListener('mouseup', handleMouseUp);
             document.removeEventListener('mousemove', handleMouseMove);
         };
-    }, [isMouseDown, handleMouseUp, handleMouseMove]);
+    }, [isMouseDown]);
 
     
     const renderInputComponent = useCallback(() => {
