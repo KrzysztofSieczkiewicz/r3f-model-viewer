@@ -45,7 +45,7 @@ export const useInterceptClickOutside = (
     }, []);
 
 
-    const computePath = () => {
+    const computePath = useCallback(() => {
       const outerRectanglePath = `M0 0 h${width} v${height} h-${width} Z `;
       let path = outerRectanglePath;
 
@@ -56,7 +56,7 @@ export const useInterceptClickOutside = (
       });
 
       return <path d={path} pointerEvents="auto" style={{opacity: 0}}/>
-    }
+    }, [width, height]);
  
     if (!isActive || !portalElement) return null;
     return createPortal(
@@ -77,4 +77,4 @@ export const useInterceptClickOutside = (
   }
 
   return BackdropInteractionCatcher;
-};
+}

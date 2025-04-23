@@ -1,5 +1,4 @@
-import React, { RefObject, useRef } from "react";
-import { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import styles from './Slider.module.css';
 
 import { roundNumber } from "../../../../../utils/mathUtil";
@@ -29,55 +28,52 @@ export const Slider = ({
         displayedUnit=""
     }: Props) => {
         
-    const [ startingPosX, setStartingPosX ] = useState(0);
-    const [ isMouseDown, setIsMouseDown ] = useState(false);
-    const [ isInputMode, setIsInputMode ] = useState(false);
-    const [ localInputValue, setLocalInputValue ] = useState(value);
-
-    useEffect( () => {
-        console.log(value)
-        setLocalInputValue(roundNumber(value, rounding))
-    }, [value])
-
+    const [startingPosX, setStartingPosX] = useState(0);
+    const [isMouseDown, setIsMouseDown] = useState(false);
+    const [isInputMode, setIsInputMode] = useState(false);
 
     const inputFieldRef = useRef<HTMLInputElement>(null);
+
+
+    const handleValueUpdate = useCallback((newValue: number) => {
+        const clampedValue = Math.max(min, Math.min(max, newValue));
+        handleChange(clampedValue);
+    }, [handleChange, max, min]);
+
+    const updateInputValue = useCallback(() => {
+        if (!inputFieldRef.current) return;
+    
+        const valueString = inputFieldRef.current.value.replace(",", ".");
+        const valueFloat = parseFloat(valueString);
+        if (!isNaN(valueFloat)) {
+            handleValueUpdate(valueFloat);
+        }
+    
+        setIsInputMode(false);
+    }, [handleValueUpdate]);
+
 
     const BackdropInteractionCatcher = useInterceptClickOutside(
         [inputFieldRef],
         isInputMode,
-        () => handleInputConfirm(localInputValue)
+        updateInputValue
     )
 
-    const handleSliderChange = (newValue: number) => {
-        if (newValue < min) {
-            handleChange(min);
-        } else if (newValue > max) {
-            handleChange(max);
-        } else {
-            handleChange(newValue);
-        }
-    }
 
-    // TODO: CURRENT - Handle NaN in inputs, allow for both . and , points
-    // remove redundant methods that do the same, improve local values handling
-    const handleInputConfirm = (newValue: number) => {
-        handleSliderChange(newValue);
-        setIsInputMode(false)
-    }
+    const handleMouseUp = useCallback(() => {
+        setIsMouseDown(false);
+    }, []);
 
-    const handleMouseUp = () =>  setIsMouseDown(false);
-
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         setStartingPosX(e.clientX);
-        setIsMouseDown(true)
-    };
+        setIsMouseDown(true);
+    }, []);
 
-    const handleMouseMove = (e: MouseEvent) => {
-        if(isInputMode) return;
-
+    const handleMouseMove = useCallback((e: MouseEvent) => {
+        if (isInputMode) return;
         const calculatedX = e.clientX - startingPosX;
-        handleSliderChange(value + calculatedX * step);
-    };
+        handleValueUpdate(value + calculatedX * step);
+    }, [isInputMode, startingPosX, step, value, handleValueUpdate]);
 
     useEffect(() => {
         if(!isMouseDown) return;
@@ -88,9 +84,22 @@ export const Slider = ({
             document.removeEventListener('mouseup', handleMouseUp);
             document.removeEventListener('mousemove', handleMouseMove);
         };
-    }, [isMouseDown]);
+    }, [isMouseDown, handleMouseUp, handleMouseMove]);
 
-    const renderInput = () => {
+    
+    const renderInputComponent = useCallback(() => {
+        const localInputValue = roundNumber(value, rounding).toString()
+
+        const handleDisplayedValueUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
+            if (!inputFieldRef.current) return;
+            inputFieldRef.current.value = e.target.value;
+        };
+
+        const handleConfirm = (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter' && inputFieldRef.current) {
+                updateInputValue();
+            }
+        };
 
         return (
             <>
@@ -100,18 +109,15 @@ export const Slider = ({
                     className={styles.inputField}
                     type="text"
                     step="0.01"
-                    value={localInputValue}
+                    defaultValue={localInputValue}
                     autoFocus
-                    onChange={(e) => setLocalInputValue(+e.target.value)}
-                    onKeyDown={(e) => {
-                        if(e.key !== 'Enter') return;
-                        handleInputConfirm(localInputValue)
-                    }}  />
+                    onChange={(e) => handleDisplayedValueUpdate(e)}
+                    onKeyDown={(e) => handleConfirm(e)} />
             </>
         );
-    }
+    }, [BackdropInteractionCatcher, updateInputValue]);
 
-    const renderSlider = () => {
+    const renderSliderComponent = useCallback(() => {
         let displayedValueElement = null;
         if(displayValue) {
             const displayedValue = roundNumber(value, rounding)
@@ -125,7 +131,7 @@ export const Slider = ({
         }
 
         let displayedTrackElement = null;
-        if (min!=Infinity || max !=Infinity) {
+        if (min!=Infinity && max !=Infinity) {
             const trackWidth = value / (max-min) * 100;
 
             displayedTrackElement = (
@@ -141,22 +147,15 @@ export const Slider = ({
                 {displayedValueElement}
             </>
         );
-    }
-
-    const render = () => {
-        if(!isInputMode) {
-            return renderSlider()
-        } else {
-            return renderInput()
-        }
-    }
+    }, [displayValue, displayedUnit, max, min, rounding, value]);
 
     return (
-        <div className={styles.track}
-            onMouseDown={(e) => handleMouseDown(e)}
-            onDoubleClick={() => setIsInputMode(true)} >
-            {render()}
+        <div
+            className={styles.track}
+            onMouseDown={handleMouseDown}
+            onDoubleClick={() => setIsInputMode(true)}
+        >
+            {!isInputMode ? renderSliderComponent() : renderInputComponent()}
         </div>
-            
     );
 }
