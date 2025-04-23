@@ -1,0 +1,22 @@
+@import '../../../../../App.module.css';
+
+.popup {
+    position: fixed;
+}
+
+.shortContainer {
+    height: 1rem;
+    width: 3.5rem;
+    margin-right: 0.5rem;
+}
+
+.mediumContainer {
+    height: 1rem;
+    width: 5rem;
+    margin-right: 0.5rem;
+}
+
+.longContainer {
+    height: 1rem;
+    width: 7.5rem;
+}

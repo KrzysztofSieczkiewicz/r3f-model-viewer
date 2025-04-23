@@ -1,4 +1,4 @@
-import { BlendFunction, GlitchMode } from 'postprocessing';
+import { BlendFunction, GlitchMode } from "postprocessing";
 
 // TODO: ADD BarrelDistortion and Halo
 export enum EFFECT_TYPES {
@@ -6,7 +6,7 @@ export enum EFFECT_TYPES {
     depthOfField = "Depth of Field",
     glitch = "Glitch",
 };
-export type EffectTypes = typeof EFFECT_TYPES[keyof typeof EFFECT_TYPES];
+export type EffectType = typeof EFFECT_TYPES[keyof typeof EFFECT_TYPES];
 
 type CommonProperties = {
     enabled: boolean,

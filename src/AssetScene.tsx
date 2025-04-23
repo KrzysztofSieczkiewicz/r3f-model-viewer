@@ -1,16 +1,16 @@
 import React, { useRef } from 'react';
 
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { Lights } from './components/canvas/lights/Lights';
 import { Canvas } from '@react-three/fiber';
-import { Sidebar } from './components/sidebar/Sidebar';
-import { Assets } from './components/canvas/assets/Assets';
-import { Effects } from './components/canvas/effects/Effects';
+import { Sidebar } from './features/sideMenu/components/navbar/Sidebar';
 import { PerspectiveCamera as PerspectiveCameraType} from 'three/src/Three';
-import { CameraTracker } from './components/canvas/scene/CameraTracker';
-import { AmbientLight } from './components/canvas/scene/AmbientLight';
-import { useSceneValue } from './components/contexts/SceneContext';
-import { Cameras } from './components/canvas/cameras/Cameras';
+import { useSceneValue } from './features/common/contexts/SceneContext';
+import { AmbientLight } from './features/canvas/scene/AmbientLight';
+import { CameraTracker } from './features/canvas/scene/CameraTracker';
+import { Lights } from './features/canvas/lights/Lights';
+import { Assets } from './features/canvas/assets/Assets';
+import { Cameras } from './features/canvas/cameras/Cameras';
+import { Effects } from './features/canvas/effects/Effects';
 
 export const AssetScene = () => {
   const [ backgroundColor ] = useSceneValue((scene) => scene['backgroundColor']);
@@ -30,8 +30,8 @@ export const AssetScene = () => {
         <Lights />
         <Assets />
         <Cameras />
-
         <Effects />
+
       </Canvas>
       
       <Sidebar />

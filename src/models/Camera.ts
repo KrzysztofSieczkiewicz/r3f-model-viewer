@@ -4,7 +4,7 @@ export enum CAMERA_TYPES {
     perspectiveCamera =  "Perspective Camera",
     ortographicCamera = "Ortographic Camera"
 };
-export type CameraTypes = 
+export type CameraType = 
     CAMERA_TYPES.perspectiveCamera | 
     CAMERA_TYPES.ortographicCamera
 ;
