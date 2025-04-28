@@ -35,6 +35,7 @@ export const AssetScene = () => {
       </Canvas>
       
       <Sidebar />
+      <div id="sidebar-modal"></div>
     </>
   );
 }

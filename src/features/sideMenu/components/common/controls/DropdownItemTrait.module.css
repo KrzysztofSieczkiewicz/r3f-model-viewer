@@ -48,7 +48,7 @@
 
 .optionsList {
     box-sizing: border-box;
-    position: fixed;
+    position: relative;
 
     width: 7rem;
     background-color: var(--color-main);

@@ -7,12 +7,12 @@
 /* SIDEBAR SUBMENUS */
 .menu {
     position: absolute;
-    top: 10%;
+    top: 15px;
     left: var(--nav-size);
-    overflow: visible;
+    overflow: scroll;
 
     width: 24.5rem;
-    max-height: 100vh;
+    max-height: 95vh;
     margin-left: 1rem;
     padding: 0 0.4rem;
 
@@ -26,7 +26,7 @@
 }
 
 .menuSection {
-    margin: 0.5rem 2%;
+    margin: 0.5rem auto;
     padding: 0.35rem;
     width: 95%;
 

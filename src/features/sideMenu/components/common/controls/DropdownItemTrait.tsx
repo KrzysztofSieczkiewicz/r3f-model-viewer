@@ -11,10 +11,10 @@ type Props<T> = {
 export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const listRef = useRef<HTMLDivElement | null>(null);
 
-    useInterceptClickOutside(
-        [dropdownRef],
+    const Backdrop = useInterceptClickOutside(
+        [listRef],
         isOpen,
         () => setIsOpen(false)
     );
@@ -29,8 +29,7 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: 
     }
 
     return (
-        <div className={styles.container}
-            ref={dropdownRef}>
+        <div className={styles.container} >
             <button
                 className={isOpen ? `${styles.body} ${styles.active}` : styles.body}
                 type="button"
@@ -44,18 +43,21 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: 
                 : <span className={styles.arrow}>&#8659;</span>}
             </button>
             {isOpen && (
-                <div className={styles.optionsList}>
-                    {selectionList.map((item) => (
-                        <button className={styles.option}
-                            key={String(item)}
-                            onClick={(e) => {
-                                handleSelect(item);
-                            }}
-                        >
-                            {String(item)}
-                        </button>
-                    ))}
-                </div>
+                <>
+                    <Backdrop />
+                    <div className={styles.optionsList} ref={listRef}>
+                        {selectionList.map((item) => (
+                            <button className={styles.option}
+                                key={String(item)}
+                                onClick={(e) => {
+                                    handleSelect(item);
+                                }}
+                            >
+                                {String(item)}
+                            </button>
+                        ))}
+                    </div>
+                </>
             )}
         </div>
     )

@@ -34,7 +34,7 @@ export const useInterceptClickOutside = (
     useEffect(() => {
       const element = document.getElementById('sidebar-modal');
       if (!element) {
-          console.error("Sidebar component should contain a <div id='sidebar-modal'> element.");
+          console.error("Scene main component should contain a <div id='sidebar-modal'> element.");
           return;
       }
       setPortalElement(element);

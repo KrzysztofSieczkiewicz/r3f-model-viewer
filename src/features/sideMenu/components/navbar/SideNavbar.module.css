@@ -1,14 +1,14 @@
 @import '../../../../App.module.css';
 
 .sideNavbar {
-    width: var(--nav-size);
-    height: 100%;
-    padding-top: 1rem;
-    margin-left: 0.5rem;
-
     position: absolute;
     top: 0;
     left: 0;
+
+    width: 100%;
+    height: 25rem;
+    padding-top: 0.75rem;
+    margin-left: 0.5rem;
 }
 
 .buttonsList {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from './Sidebar.module.css';
 
 import { SidebarMenuButton } from "./SidebarMenuButton";
 import { AssetsSubmenu } from "../assets/AssetsSubmenu";
@@ -38,7 +39,7 @@ export const Sidebar = () => {
 
     // TODO: PRODUCE PROPER SVGs WITH ICONS
     return (
-        <div className="sidebar">
+        <div className={styles.sidebar}>
             <SideNavbar>
                 <SidebarMenuButton
                     type={MenuTypes.Environment}
@@ -74,10 +75,7 @@ export const Sidebar = () => {
                     onClick={() => handleItemClick(MenuTypes.Cameras)} >
                         <CameraIcon />
                 </SidebarMenuButton>
-            </SideNavbar>
-
-            {/* TODO: HANDLE AS A COMPONENT RETURNED FROM THE useSidebarModal hook*/}
-            <div id="sidebar-modal"></div>
+            </SideNavbar>            
 
             <Submenu>
                 <SceneSubmenu active={activeItem === MenuTypes.Environment} />
