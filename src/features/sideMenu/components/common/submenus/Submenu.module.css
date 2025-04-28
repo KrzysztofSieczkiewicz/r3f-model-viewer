@@ -7,11 +7,12 @@
 /* SIDEBAR SUBMENUS */
 .menu {
     position: absolute;
+    top: 10%;
     left: var(--nav-size);
-    transform: translateY(32%);
     overflow: visible;
 
     width: 24.5rem;
+    max-height: 100vh;
     margin-left: 1rem;
     padding: 0 0.4rem;
 

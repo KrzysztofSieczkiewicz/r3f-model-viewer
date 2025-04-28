@@ -4,28 +4,30 @@ import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsCon
 
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { ButtonAddAsset } from "./ButtonAddAsset";
-import { Submenu } from "../common/submenus/Submenu";
 import { SubmenuSection } from "../common/submenus/SubmenuSection";
 import { ListedAsset } from "./ListedAsset";
 
+type Props = {
+    active: boolean;
+}
 
-export const AssetsMenu = () => {
+export const AssetsSubmenu = ({active}: Props) => {
     const { assetsList } = useSceneObjectsContext();
    
-    const [activeId, setActiveId] = useState("");
+    const [activeAssetId, setActiveAssetId] = useState("");
 
     // TODO: MOVE THIS TO UTILS OR HOOKS -> THE SAME IS USED IN EVERY MENU
     const toggleItemExtend = (id: string) => {
-        if (activeId === id) {
-            setActiveId("");
+        if (activeAssetId === id) {
+            setActiveAssetId("");
         } else {
-            setActiveId(id);
+            setActiveAssetId(id);
         }
     };
     
-    
+    if(!active) return;
     return (
-        <Submenu>
+        <>
             <SubmenuSection>
                 <ButtonAddAsset />
             </SubmenuSection>
@@ -34,12 +36,12 @@ export const AssetsMenu = () => {
                 {assetsList.map((asset: AssetWrapper) => {
                     return <ListedAsset
                         key={asset.id}
-                        isActive={activeId === asset.id}
+                        isActive={activeAssetId === asset.id}
                         asset={asset}
                         toggleExtend={() => toggleItemExtend(asset.id)}
                     />
                 })}
             </SubmenuSection>
-        </Submenu>
+        </>
     );
 }
