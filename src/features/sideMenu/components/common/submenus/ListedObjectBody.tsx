@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import cssStyles from './Submenu.module.css';
-import { useTransition, animated } from "react-spring";
+import { useTransition, animated, useSpring, easings } from "react-spring";
 
 type Props = {
     children: ReactNode,
@@ -13,7 +13,7 @@ export const ListedObjectBody = ( {children, isVisible}: Props) => {
         from: { opacity: 0, maxHeight: 0 },
         enter: { opacity: 1, maxHeight: 500 },
         leave: { opacity: 0, maxHeight: 0 },
-        config: { mass: 1, tension: 80, friction: 120, duration: 300 },
+        config: { duration: 150, easing: easings.easeInOutQuad },
     });
 
     return (
@@ -22,7 +22,7 @@ export const ListedObjectBody = ( {children, isVisible}: Props) => {
                 item 
                     ? <animated.div 
                         style={style}
-                        className={cssStyles.listedItemBody} >
+                        className={cssStyles.listedObjectBody} >
                             {children}
                     </animated.div>
                     : null

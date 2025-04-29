@@ -11,10 +11,10 @@
     left: var(--nav-size);
     overflow: scroll;
 
-    width: 24.5rem;
+    width: 26rem;
     max-height: 95vh;
     margin-left: 1rem;
-    padding: 0 0.4rem;
+    padding: 0 0.75rem;
 
     border-radius: 1rem;
     box-shadow: 
@@ -49,10 +49,11 @@
     margin: 0.5rem 0;
 }
 
-.listedItemBody {
+.listedObjectBody {
     padding: 0.5rem 0.75rem 0.75rem 0.75rem;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
 
     color: var(--color-platinum);
 }
