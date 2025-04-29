@@ -2,13 +2,12 @@ import React, { ReactNode } from "react";
 import styles from './Submenu.module.css';
 
 type Props = {
-    isActive: boolean,
     children: ReactNode
 }
 
-export const ListedObject = ({isActive, children}: Props) => {
+export const ListedObject = ({children}: Props) => {
     return (
-        <div className={isActive ? `${styles.listedItemContainer} ${styles.active}` : styles.listedItemContainer}>
+        <div className={styles.listedObjectContainer}>
             {children}
         </div>
     );

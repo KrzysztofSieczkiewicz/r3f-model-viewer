@@ -41,8 +41,7 @@
 }
 
 /* SUBMENU LISTED ITEMS */
-.listedItemContainer {
-    color: var(--color-platinum);
+.listedObjectContainer {
     background-color: var(--color-main-weak);
     border-radius: var(--sections-rounding);
     box-shadow: 0.15rem 0.15rem 0.35rem 0 var(--color-main-shadow);

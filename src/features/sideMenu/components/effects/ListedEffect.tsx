@@ -19,13 +19,13 @@ export const ListedEffect = ( {isActive, effect, toggleExtend}: Props) => {
     const {deleteEffect} = useEffectsContext();
 
     return (
-        <ListedObject isActive={isActive}>
+        <ListedObject>
             <ListedEffectHeader effect={effect} isActive={isActive} toggleExtend={() => toggleExtend()} />
-            {isActive && 
-            <ListedObjectBody>
+
+            <ListedObjectBody isVisible={isActive}>
                 <ButtonDeleteObject handleDelete={() => deleteEffect(effect.type)} />
                 <EffectControls effect={effect} />
-            </ListedObjectBody>}
+            </ListedObjectBody>
         </ListedObject>
     );
 }

@@ -19,13 +19,12 @@ export const ListedLight = ({ isActive, light, toggleExtend }: Props) => {
     const { deleteLight } = useSceneObjectsContext();
 
     return (
-        <ListedObject isActive={isActive}>
+        <ListedObject>
             <ListedLightHeader isActive={isActive} light={light} toggleExtend={() => toggleExtend()} />
-            {isActive && 
-            <ListedObjectBody>
+            <ListedObjectBody isVisible={isActive}>
                 <ButtonDeleteObject handleDelete={() => deleteLight(light.id)} />
                 <LightControls light={light} />
-            </ListedObjectBody>}
+            </ListedObjectBody>
         </ListedObject>
     );
 }

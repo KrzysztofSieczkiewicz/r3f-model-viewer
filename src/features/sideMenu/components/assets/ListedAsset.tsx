@@ -20,15 +20,20 @@ export const ListedAsset = ( {isActive, asset, toggleExtend}: Props) => {
     const {deleteAsset} = useSceneObjectsContext();
 
     return (
-        <ListedObject isActive={isActive}>
-            <ListedAssetHeader isActive={isActive} assetId={asset.id} assetProperties={asset.properties} toggleExtend={() => toggleExtend()} />
-            {isActive && 
-            <ListedObjectBody>
+        <ListedObject>
+            <ListedAssetHeader 
+                isActive={isActive} 
+                assetId={asset.id} 
+                assetProperties={asset.properties} 
+                toggleExtend={() => toggleExtend()} />
+
+            <ListedObjectBody isVisible={isActive}>
                 <ButtonDeleteObject handleDelete={() => deleteAsset(asset.id)} />
                 <AssetControls asset={asset}/>
                 <MeshControls asset={asset} />
                 <MaterialControls asset={asset} />
-            </ListedObjectBody>}
+            </ListedObjectBody>
+            
         </ListedObject>
     );
 }

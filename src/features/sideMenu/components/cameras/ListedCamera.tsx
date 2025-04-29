@@ -31,14 +31,13 @@ export const ListedCamera = ( {isActive, camera, toggleExtend}: Props ) => {
     }
     
     return (
-        <ListedObject isActive={isActive}>
+        <ListedObject>
             <ListedCameraHeader isActive={isActive} camera={camera} toggleExtend={() => toggleExtend()} />
-            {isActive &&
-            <ListedObjectBody>
+
+            <ListedObjectBody isVisible={isActive}>
                 <ButtonDeleteObject handleDelete={() => deleteCamera(camera.id)}/>
                 <CameraControls camera={camera} />
             </ListedObjectBody>
-            }
         </ListedObject>
     );
 }
