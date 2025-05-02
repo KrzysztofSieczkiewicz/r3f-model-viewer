@@ -4,11 +4,15 @@ import { useEffectsContext } from '../../../common/contexts/EffectsContext';
 
 import { ListedEffect } from './ListedEffect';
 import { EFFECT_TYPES, EffectType } from '../../../../models/Effect';
-import { Submenu } from '../common/submenus/Submenu';
 import { SubmenuSection } from '../common/submenus/SubmenuSection';
 import { DropdownAddListedObject } from '../common/controls/DropdownAddListedObject';
+import { Submenu } from '../common/submenus/Submenu';
 
-export const EffectsSubmenu = () => {
+type Props = {
+    active: boolean;
+}
+
+export const EffectsSubmenu = ({active}: Props) => {
     const { effectsList, addEffect, getAvailableEffects } = useEffectsContext();
    
     const [activeEffect, setActiveEffect] = useState<EffectType | null>(null);
@@ -22,7 +26,7 @@ export const EffectsSubmenu = () => {
     };
     
     return (
-        <Submenu>
+        <Submenu active={active}>
             <SubmenuSection>
                 <DropdownAddListedObject
                     availableOptions={getAvailableEffects()}

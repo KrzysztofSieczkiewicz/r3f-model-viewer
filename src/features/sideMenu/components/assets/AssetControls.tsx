@@ -18,7 +18,7 @@ export const AssetControls = ({asset}: Props) => {
     const assetId = asset.id;
 
     return (
-        <TraitExpandable name="General">
+        <TraitExpandable name="General" expanded={true}>
             <TraitSingle name="Position">
                 <SlidersArray
                     value={position}

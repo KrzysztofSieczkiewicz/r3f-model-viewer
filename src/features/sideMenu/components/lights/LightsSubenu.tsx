@@ -5,11 +5,14 @@ import { useSceneObjectsContext } from '../../../common/contexts/SceneObjectsCon
 import { ListedLight } from './ListedLight';
 import { LIGHT_TYPES, LightType, LightWrapper } from '../../../../models/Light';
 import { SubmenuSection } from '../common/submenus/SubmenuSection';
-import { Submenu } from '../common/submenus/Submenu';
 import { DropdownAddListedObject } from '../common/controls/DropdownAddListedObject';
+import { Submenu } from '../common/submenus/Submenu';
 
+type Props = {
+    active: boolean;
+}
 
-export const LightsSubenu = () => {
+export const LightsSubenu = ({active}: Props) => {
     const { lightsList, addDefaultLight } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
@@ -21,9 +24,9 @@ export const LightsSubenu = () => {
             setActiveItem(id)
         }
     };
-    
+
     return (
-        <Submenu>
+        <Submenu active={active}>
             <SubmenuSection>
                 <DropdownAddListedObject
                     availableOptions={Object.values(LIGHT_TYPES)}

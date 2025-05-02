@@ -1,13 +1,19 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from './Sidebar.module.css';
 
 import { SidebarMenuButton } from "./SidebarMenuButton";
-import { AssetsMenu } from "../assets/AssetsSubmenu";
+import { AssetsSubmenu } from "../assets/AssetsSubmenu";
 import { EffectsSubmenu } from "../effects/EffectsSubmenu";
 import { LightsSubenu } from "../lights/LightsSubenu";
 import { CamerasSubmenu } from "../cameras/CamerasSubmenu";
 import { SceneSubmenu } from "../scene/SceneSubmenu";
+import { SideNavbar } from "./SideNavbar";
+
+import { ReactComponent as LightIcon } from './../../../../icons/sidebar/light.svg';
+import { ReactComponent as CubeIcon } from './../../../../icons/sidebar/cube.svg';
+import { ReactComponent as EarthIcon } from './../../../../icons/sidebar/earth.svg';
+import { ReactComponent as ImageIcon } from './../../../../icons/sidebar/image.svg';
+import { ReactComponent as CameraIcon } from './../../../../icons/sidebar/camera.svg';
 
 export enum MenuTypes {
     None,
@@ -32,40 +38,52 @@ export const Sidebar = () => {
 
     // TODO: PRODUCE PROPER SVGs WITH ICONS
     return (
-        <nav className={styles.sidebar}>
-            <ul className={styles.sidebarNav}>
+        <div className={styles.sidebar}>
+            <SideNavbar>
                 <SidebarMenuButton
                     type={MenuTypes.Environment}
                     active={activeItem === MenuTypes.Environment}
                     onClick={() => handleItemClick(MenuTypes.Environment)} >
-                    <SceneSubmenu />
+                        <EarthIcon />
                 </SidebarMenuButton>
+
                 <SidebarMenuButton
                     type={MenuTypes.Objects}
                     active={activeItem === MenuTypes.Objects}
                     onClick={() => handleItemClick(MenuTypes.Objects)} >
-                    <AssetsMenu />
+                        <CubeIcon />
                 </SidebarMenuButton>
+
                 <SidebarMenuButton 
                     type={MenuTypes.Lights}
                     active={activeItem === MenuTypes.Lights}
                     onClick={() => handleItemClick(MenuTypes.Lights)} >
-                    <LightsSubenu />
+                        <LightIcon />
                 </SidebarMenuButton>
+
                 <SidebarMenuButton
                     type={MenuTypes.Effects}
                     active={activeItem === MenuTypes.Effects}
                     onClick={() => handleItemClick(MenuTypes.Effects)} >
-                    <EffectsSubmenu />
+                        <ImageIcon />
                 </SidebarMenuButton>
+
                 <SidebarMenuButton
                     type={MenuTypes.Cameras}
                     active={activeItem === MenuTypes.Cameras}
                     onClick={() => handleItemClick(MenuTypes.Cameras)} >
-                    <CamerasSubmenu />
+                        <CameraIcon />
                 </SidebarMenuButton>
-            </ul>
-            <div id="sidebar-modal"></div>
-        </nav>
+            </SideNavbar>            
+
+            <>
+                <SceneSubmenu active={activeItem === MenuTypes.Environment} />
+                <AssetsSubmenu active={activeItem === MenuTypes.Objects} />
+                <LightsSubenu active={activeItem === MenuTypes.Lights} />
+                <EffectsSubmenu active={activeItem === MenuTypes.Effects} />
+                <CamerasSubmenu active={activeItem === MenuTypes.Cameras} />
+            </>
+        </div>
+        
     );
 }

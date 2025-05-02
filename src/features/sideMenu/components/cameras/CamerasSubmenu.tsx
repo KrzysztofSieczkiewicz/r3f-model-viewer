@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
 import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
-import { Submenu } from "../common/submenus/Submenu";
 import { SubmenuSection } from "../common/submenus/SubmenuSection";
 import { CAMERA_TYPES, CameraType, CameraWrapper } from "../../../../models/Camera";
 import { ListedCamera } from "./ListedCamera";
 import { DropdownAddListedObject } from "../common/controls/DropdownAddListedObject";
+import { Submenu } from "../common/submenus/Submenu";
 
+type Props = {
+    active: boolean;
+}
 
-export const CamerasSubmenu = () => {
+export const CamerasSubmenu = ({active}: Props) => {
     const { camerasList, addCamera } = useSceneObjectsContext();
    
     const [activeId, setActiveItem] = useState("");
@@ -20,9 +23,9 @@ export const CamerasSubmenu = () => {
             setActiveItem(id)
         }
     };
-    
+
     return (
-        <Submenu>
+        <Submenu active={active}>
             <SubmenuSection>
                 <DropdownAddListedObject
                     availableOptions={Object.values(CAMERA_TYPES)}

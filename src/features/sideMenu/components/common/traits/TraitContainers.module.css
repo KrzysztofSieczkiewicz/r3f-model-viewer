@@ -10,6 +10,7 @@
 .expendableContainerName {
     cursor: pointer;
     font-size: var(--size-text-normal);
+    user-select: none;
 }
 
 .expandedTraitContainer {

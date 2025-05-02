@@ -34,7 +34,7 @@
 .value {
     align-self: flex-start;
     margin: auto 0;
-    padding-top: 0.15rem;
+    padding-top: 0.05rem;
     padding-left: 0.25rem;
     text-align: start;
     user-select: none;
@@ -48,7 +48,7 @@
 
 .optionsList {
     box-sizing: border-box;
-    position: fixed;
+    position: relative;
 
     width: 7rem;
     background-color: var(--color-main);

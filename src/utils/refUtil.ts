@@ -9,11 +9,11 @@ export const getElementCenter = (ref: HTMLElement): {centerX: number, centerY: n
     return { centerX, centerY};
 }
 
-export const getElementDimensions = (ref: HTMLElement): {width: number, height: number} => {
-    if (!ref) {
+export const getElementDimensions = (ref: React.RefObject<HTMLElement>): {width: number, height: number} => {
+    if (!ref.current) {
         throw new Error('The element provided is null or undefined.');
     }
-    const rect = ref.getBoundingClientRect();
+    const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
 

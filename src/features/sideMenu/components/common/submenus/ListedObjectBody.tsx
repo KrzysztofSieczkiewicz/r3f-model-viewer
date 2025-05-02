@@ -1,14 +1,32 @@
 import React, { ReactNode } from "react";
-import styles from './Submenu.module.css';
+import cssStyles from './Submenu.module.css';
+import { useTransition, animated, useSpring, easings } from "react-spring";
 
 type Props = {
-    children: ReactNode;
+    children: ReactNode,
+    isVisible: boolean;
 }
 
-export const ListedObjectBody = ( {children}: Props) => {
+export const ListedObjectBody = ( {children, isVisible}: Props) => {
+
+    const transition = useTransition(isVisible, {
+        from: { opacity: 0, maxHeight: '0vh' },
+        enter: { opacity: 1, maxHeight: '60vh' },
+        leave: { opacity: 0, maxHeight: '0vh' },
+        config: { duration: 250, easing: easings.easeInOutQuad },
+    });
+
     return (
-        <div className={styles.listedItemBody}>
-            {children}
-        </div>
+        <> {
+            transition( (style, item) => 
+                item 
+                    ? <animated.div 
+                        style={style}
+                        className={cssStyles.listedObjectBody} >
+                            {children}
+                    </animated.div>
+                    : null
+            )
+        } </>
     );
 }

@@ -1,13 +1,17 @@
 import React from "react";
 
 import { SceneControlsAmbientLighting } from "./SceneControlsAmbientLighting";
-import { Submenu } from "../common/submenus/Submenu";
 import { SubmenuSection } from "../common/submenus/SubmenuSection";
+import { Submenu } from "../common/submenus/Submenu";
 
-export const SceneSubmenu = () => {
+type Props = {
+    active: boolean;
+}
+
+export const SceneSubmenu = ( {active}: Props) => {
     
     return (
-        <Submenu>
+        <Submenu active={active}>
             <SubmenuSection title="Ambient light">
                 <SceneControlsAmbientLighting />
             </SubmenuSection>

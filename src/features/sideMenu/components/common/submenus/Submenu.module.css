@@ -5,15 +5,21 @@
 }
 
 /* SIDEBAR SUBMENUS */
-.menu {
+.submenuContainer {
     position: absolute;
+    top: 15px;
     left: var(--nav-size);
-    transform: translateY(32%);
-    overflow: visible;
 
-    width: 24.5rem;
+    width: 26rem;
+    max-height: 95vh;
+}
+
+.submenu {
+
+    overflow: scroll;
+
     margin-left: 1rem;
-    padding: 0 0.4rem;
+    padding: 0 0.75rem;
 
     border-radius: 1rem;
     box-shadow: 
@@ -25,7 +31,7 @@
 }
 
 .menuSection {
-    margin: 0.5rem 2%;
+    margin: 0.5rem auto;
     padding: 0.35rem;
     width: 95%;
 
@@ -40,8 +46,7 @@
 }
 
 /* SUBMENU LISTED ITEMS */
-.listedItemContainer {
-    color: var(--color-platinum);
+.listedObjectContainer {
     background-color: var(--color-main-weak);
     border-radius: var(--sections-rounding);
     box-shadow: 0.15rem 0.15rem 0.35rem 0 var(--color-main-shadow);
@@ -49,10 +54,12 @@
     margin: 0.5rem 0;
 }
 
-.listedItemBody {
+.listedObjectBody {
     padding: 0.5rem 0.75rem 0.75rem 0.75rem;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     color: var(--color-platinum);
 }
