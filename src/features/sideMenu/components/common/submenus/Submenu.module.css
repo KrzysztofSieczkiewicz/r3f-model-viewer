@@ -5,14 +5,19 @@
 }
 
 /* SIDEBAR SUBMENUS */
-.menu {
+.submenuContainer {
     position: absolute;
     top: 15px;
     left: var(--nav-size);
-    overflow: scroll;
 
     width: 26rem;
     max-height: 95vh;
+}
+
+.submenu {
+
+    overflow: scroll;
+
     margin-left: 1rem;
     padding: 0 0.75rem;
 
@@ -53,7 +58,8 @@
     padding: 0.5rem 0.75rem 0.75rem 0.75rem;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     color: var(--color-platinum);
 }

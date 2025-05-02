@@ -6,6 +6,7 @@ import { AssetWrapper } from "../../../../models/assets/Asset";
 import { ButtonAddAsset } from "./ButtonAddAsset";
 import { SubmenuSection } from "../common/submenus/SubmenuSection";
 import { ListedAsset } from "./ListedAsset";
+import { Submenu } from "../common/submenus/Submenu";
 
 type Props = {
     active: boolean;
@@ -24,10 +25,9 @@ export const AssetsSubmenu = ({active}: Props) => {
             setActiveAssetId(id);
         }
     };
-    
-    if(!active) return;
+
     return (
-        <>
+        <Submenu active={active}>
             <SubmenuSection>
                 <ButtonAddAsset />
             </SubmenuSection>
@@ -42,6 +42,6 @@ export const AssetsSubmenu = ({active}: Props) => {
                     />
                 })}
             </SubmenuSection>
-        </>
+        </Submenu>
     );
 }

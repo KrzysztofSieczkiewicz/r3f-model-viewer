@@ -10,10 +10,10 @@ type Props = {
 export const ListedObjectBody = ( {children, isVisible}: Props) => {
 
     const transition = useTransition(isVisible, {
-        from: { opacity: 0, maxHeight: 0 },
-        enter: { opacity: 1, maxHeight: 500 },
-        leave: { opacity: 0, maxHeight: 0 },
-        config: { duration: 150, easing: easings.easeInOutQuad },
+        from: { opacity: 0, maxHeight: '0vh' },
+        enter: { opacity: 1, maxHeight: '60vh' },
+        leave: { opacity: 0, maxHeight: '0vh' },
+        config: { duration: 250, easing: easings.easeInOutQuad },
     });
 
     return (

@@ -6,6 +6,7 @@ import { ListedEffect } from './ListedEffect';
 import { EFFECT_TYPES, EffectType } from '../../../../models/Effect';
 import { SubmenuSection } from '../common/submenus/SubmenuSection';
 import { DropdownAddListedObject } from '../common/controls/DropdownAddListedObject';
+import { Submenu } from '../common/submenus/Submenu';
 
 type Props = {
     active: boolean;
@@ -24,9 +25,8 @@ export const EffectsSubmenu = ({active}: Props) => {
         }
     };
     
-    if(!active) return;
     return (
-        <>
+        <Submenu active={active}>
             <SubmenuSection>
                 <DropdownAddListedObject
                     availableOptions={getAvailableEffects()}
@@ -46,6 +46,6 @@ export const EffectsSubmenu = ({active}: Props) => {
                     );
                 })}
             </SubmenuSection>
-        </>
+        </Submenu>
     );
 }

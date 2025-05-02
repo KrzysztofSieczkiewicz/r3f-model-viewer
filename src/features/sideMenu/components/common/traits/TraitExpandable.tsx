@@ -16,7 +16,7 @@ export const TraitExpandable = ({name, expanded, children}: Props) => {
         from: { opacity: 0, maxHeight: 0 },
         enter: { opacity: 1, maxHeight: 2000 },
         leave: { opacity: 0, maxHeight: 0 },
-        config: { duration: 150, easing: easings.easeInOutQuad },
+        config: { duration: 200, easing: easings.easeInOutQuad },
     });
     
     return (
@@ -24,8 +24,9 @@ export const TraitExpandable = ({name, expanded, children}: Props) => {
             
                 <div 
                     className={styles.expendableContainerName}
-                    onClick={() => setIsExpanded(!isExpanded)}
-                >{name}</div>
+                    onClick={() => setIsExpanded(!isExpanded)}>
+                        {name}
+                </div>
 
                 {
                     transition( (style, item) => 

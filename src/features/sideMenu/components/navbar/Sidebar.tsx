@@ -7,7 +7,6 @@ import { EffectsSubmenu } from "../effects/EffectsSubmenu";
 import { LightsSubenu } from "../lights/LightsSubenu";
 import { CamerasSubmenu } from "../cameras/CamerasSubmenu";
 import { SceneSubmenu } from "../scene/SceneSubmenu";
-import { Submenu } from "../common/submenus/Submenu";
 import { SideNavbar } from "./SideNavbar";
 
 import { ReactComponent as LightIcon } from './../../../../icons/sidebar/light.svg';
@@ -77,13 +76,13 @@ export const Sidebar = () => {
                 </SidebarMenuButton>
             </SideNavbar>            
 
-            <Submenu>
+            <>
                 <SceneSubmenu active={activeItem === MenuTypes.Environment} />
                 <AssetsSubmenu active={activeItem === MenuTypes.Objects} />
                 <LightsSubenu active={activeItem === MenuTypes.Lights} />
                 <EffectsSubmenu active={activeItem === MenuTypes.Effects} />
                 <CamerasSubmenu active={activeItem === MenuTypes.Cameras} />
-            </Submenu>
+            </>
         </div>
         
     );
