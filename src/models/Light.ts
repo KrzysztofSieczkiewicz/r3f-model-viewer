@@ -1,12 +1,15 @@
+import { Object3D } from 'three';
 import { generateNewID } from '../utils/idUtil';
 
 export enum LIGHT_TYPES {
-  pointLight = "Point light",
-  spotLight = "Spot light"
+  pointLight = "Point",
+  spotLight = "Spotlight",
+  directionalLight = "Directional",
 };
 export type LightType = 
   LIGHT_TYPES.pointLight | 
-  LIGHT_TYPES.spotLight;
+  LIGHT_TYPES.spotLight |
+  LIGHT_TYPES.directionalLight;
 
 
 type BaseLightProperties = {
@@ -22,13 +25,21 @@ export type PointLightProperties = BaseLightProperties & {};
 export type SpotLightProperties = BaseLightProperties & {
   angle: number,
   penumbra: number,
+  // TODO: add 'decay'
+}
+
+export type DirectionalLightProperties = BaseLightProperties & {
+  target: Object3D, // TODO: also add to spotLight (if target is not set - create empty object with coordinates that can be manipulated)
 }
 
 export type LightProperties = PointLightProperties | SpotLightProperties;
 
+
+
 export type LightWrapper = 
   { type: LIGHT_TYPES.pointLight, id: string, properties: PointLightProperties } | 
-  { type: LIGHT_TYPES.spotLight, id: string, properties: SpotLightProperties }
+  { type: LIGHT_TYPES.spotLight, id: string, properties: SpotLightProperties } |
+  { type: LIGHT_TYPES.directionalLight, id: string, properties: DirectionalLightProperties}
 ;
 
 const INIT_LIGHTS_LIST: LightWrapper[] = [
@@ -53,6 +64,17 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       intensity:1,
       angle: 0.3,
       penumbra: 0.6,
+    }
+  },{
+    type: LIGHT_TYPES.directionalLight,
+    id:generateNewID(),
+    properties: {
+      isVisible: true,
+      position:[2,2,2],
+      distance: 10,
+      color:"#33dcfa",
+      intensity:1,
+      target: new Object3D()
     }
   }
 ]
@@ -83,12 +105,28 @@ const createDefaultSpotlight = (): LightWrapper => ({
   }
 });
 
+const createDefaultDirectionalLight = (): LightWrapper => ({
+  type: LIGHT_TYPES.directionalLight,
+  id: generateNewID(),
+  properties: {
+    isVisible: true,
+    position:[2,1,1],
+    distance: 10,
+    color: "white",
+    intensity:1,
+    target: new Object3D()
+  }
+});
+
+
 const getDefaultLight = (type: LightType) => {
   switch(type) {
     case LIGHT_TYPES.pointLight:
       return createDefaultPointlight();
     case LIGHT_TYPES.spotLight:
       return createDefaultSpotlight();
+    case LIGHT_TYPES.directionalLight:
+      return createDefaultDirectionalLight();
   }
 }
 
