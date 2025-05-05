@@ -4,6 +4,7 @@ import { LIGHT_TYPES, LightWrapper } from '../../../../models/Light';
 import { LightControlsPoint } from './LightControlsPoint';
 import { LightControlsSpotlight } from './LightControlsSpotlight';
 import { TraitSection } from '../common/traits/TraitSection';
+import { LightControlsDirectional } from './LightControlsDirectional';
 
 type Props = {
     light: LightWrapper,
@@ -17,6 +18,8 @@ export const LightControls = ({ light }: Props) => {
                 return <LightControlsPoint id={light.id} properties={light.properties} />
             case LIGHT_TYPES.spotLight:
                 return <LightControlsSpotlight id={light.id} properties={light.properties} />
+            case LIGHT_TYPES.directionalLight:
+                return <LightControlsDirectional id={light.id} properties={light.properties} />
         }
     }
 

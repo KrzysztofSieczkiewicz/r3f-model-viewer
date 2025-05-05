@@ -17,12 +17,15 @@ type BaseLightProperties = {
   position: [number,number,number],
   color: string,
   intensity: number,
-  distance: number,
+  
 }
 
-export type PointLightProperties = BaseLightProperties & {};
+export type PointLightProperties = BaseLightProperties & {
+  distance: number,
+};
 
 export type SpotLightProperties = BaseLightProperties & {
+  distance: number,
   angle: number,
   penumbra: number,
   // TODO: add 'decay'
@@ -71,7 +74,6 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
     properties: {
       isVisible: true,
       position:[2,2,2],
-      distance: 10,
       color:"#33dcfa",
       intensity:1,
       target: new Object3D()
@@ -111,7 +113,6 @@ const createDefaultDirectionalLight = (): LightWrapper => ({
   properties: {
     isVisible: true,
     position:[2,1,1],
-    distance: 10,
     color: "white",
     intensity:1,
     target: new Object3D()
