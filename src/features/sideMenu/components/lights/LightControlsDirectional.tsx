@@ -8,6 +8,7 @@ import { ButtonReset } from "../common/controls/ButtonReset";
 import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { Slider } from "../common/controls/Slider";
+import { PickerTargetAsset } from "../common/controls/PickerTargetAsset";
 
 type Props = {
     id: string,
@@ -42,6 +43,11 @@ export const LightControlsDirectional = ( {id, properties}: Props ) => {
                 <ButtonReset onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </TraitSingle>
 
+            <TraitSingle name="Target">
+                <PickerTargetAsset currentTargetID={properties.targetID}/>
+            </TraitSingle>
         </>
     );
+
+    // TODO [CURRENT] - add a new component - canvasObjectPicker
 }
