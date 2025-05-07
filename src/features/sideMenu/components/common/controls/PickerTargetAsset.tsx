@@ -6,15 +6,12 @@ import { DropdownItemTrait } from "./DropdownItemTrait";
 const unselectedName = "Custom"
 
 type Props = {
-    currentTargetID: string|null
+    value: string|undefined,
+    onChange: (id: string|undefined) => void,
 }
 
-export const PickerTargetAsset = ({currentTargetID}: Props) => {
+export const PickerTargetAsset = ({value, onChange}: Props) => {
     const { assetsList } = useSceneObjectsContext();
-    const initialAsset = assetsList.find((asset) => asset.id === currentTargetID)
-
-    const [ selectedAssetID, setSelectedAssetID ] = useState<string|null>(currentTargetID)
-    const [ selectedAsset, setSelectedAsset ] = useState<AssetWrapper|undefined>(initialAsset);
 
     const handleSelectionList = () => {
         const selectionList = assetsList.map( (asset: AssetWrapper) => {return asset.name});
@@ -22,25 +19,19 @@ export const PickerTargetAsset = ({currentTargetID}: Props) => {
     }
 
     const handleSelectedName = () => {
-        if (!selectedAsset) return unselectedName;
+        if (!value) return unselectedName;
 
-        const asset = assetsList.find( (asset) => asset.id === selectedAsset.id)
+        const asset = assetsList.find( (asset) => asset.id === value)
         if (asset) return asset.name;
 
         return unselectedName;
     }
 
-    const selectByName = (name: string) => {
-        const selected = assetsList.find( (asset) => asset.name === name)
-        if (!selected) return;
-
-        setSelectedAssetID(selected.id)
-    }
 
     return (
         <DropdownItemTrait 
             selected={handleSelectedName()} 
             selectionList={handleSelectionList()} 
-            handleChange={selectByName} />
+            handleSelect={onChange} />
     )
 }

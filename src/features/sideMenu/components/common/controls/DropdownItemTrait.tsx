@@ -5,10 +5,10 @@ import { useInterceptClickOutside } from "../../../hooks/useInterceptClickOutsid
 type Props<T> = {
     selected: T,
     selectionList: T[],
-    handleChange: (value: T) => void
+    handleSelect: (value: T) => void
 }
 
-export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
+export const DropdownItemTrait = <T,> ({selected, selectionList, handleSelect}: Props<T>) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
     const listRef = useRef<HTMLDivElement | null>(null);
@@ -19,8 +19,8 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: 
         () => setIsOpen(false)
     );
 
-    const handleSelect = (option: T) => {
-        handleChange(option);
+    const handleSelectAndClose = (option: T) => {
+        handleSelect(option);
         setIsOpen(false);
     }
 
@@ -50,7 +50,7 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: 
                             <button className={styles.option}
                                 key={String(item)}
                                 onClick={(e) => {
-                                    handleSelect(item);
+                                    handleSelectAndClose(item);
                                 }}
                             >
                                 {String(item)}

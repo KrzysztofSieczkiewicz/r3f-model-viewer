@@ -38,7 +38,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                 <DropdownItemTrait 
                     selected={EditableMaterials.Standard} 
                     selectionList={Object.values(EditableMaterials)} 
-                    handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
+                    handleSelect={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
             </TraitSingle>
         </TraitSection>
 
