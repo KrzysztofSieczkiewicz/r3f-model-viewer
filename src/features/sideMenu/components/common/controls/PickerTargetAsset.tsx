@@ -15,6 +15,8 @@ type Props = {
 export const PickerTargetAsset = ({value, onChange}: Props) => {
     const { assetsList } = useSceneObjectsContext();
 
+    const [ isTargeting, setIsTargeting ] = useState<boolean>(value !== undefined)
+
     const handleSelectionList = () => {
         const selectionList = assetsList.map( (asset: AssetWrapper) => {return asset.name});
         return selectionList;

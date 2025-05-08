@@ -2,26 +2,13 @@ import React, { useRef, useState } from "react";
 import styles from './DropdownItemTrait.module.css';
 import { useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
 
-type SelectableObject<T> = {
-    object: T,
-    displayName: string
-}
-
-type StringProps = {
+type Props = {
     selected: string;
     selectionList: string[];
     handleSelect: (index: number) => void;
 }
 
-type ObjectProps<T> = {
-    selected: SelectableObject<T>;
-    selectionList: SelectableObject<T>[];
-    handleSelect: (index: number) => void;
-}
-
-type Props<T> = StringProps | ObjectProps<T>;
-
-export const DropdownItemTrait = <T,> ({selected, selectionList, handleSelect}: Props<T>) => {
+export const DropdownItemTrait = ({selected, selectionList, handleSelect}: Props) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
     const listRef = useRef<HTMLDivElement | null>(null);
@@ -32,12 +19,6 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleSelect}: 
         () => setIsOpen(false)
     );
 
-    const getDisplayName = (item: SelectableObject<T> | string) => {
-        return typeof item === "string"
-            ? item
-            : item.displayName
-    }
-
     return (
         <div className={styles.container} >
             <button
@@ -47,7 +28,7 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleSelect}: 
                     setIsOpen(!isOpen)
                 }}
             >
-                <div className={styles.value}>{getDisplayName(selected)}</div>
+                <div className={styles.value}>{selected}</div>
                 {isOpen
                 ? <span className={styles.arrow}>&#8657;</span>
                 : <span className={styles.arrow}>&#8659;</span>}
@@ -64,7 +45,7 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleSelect}: 
                                     setIsOpen(false);
                                 }}
                             >
-                                {getDisplayName(item)}
+                                {item}
                             </button>
                         ))}
                     </div>
