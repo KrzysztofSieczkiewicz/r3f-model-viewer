@@ -46,7 +46,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                 <DropdownItemTrait 
                     selected={EditableMaterials.Physical} 
                     selectionList={Object.values(EditableMaterials)} 
-                    handleSelect={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
+                    handleSelect={ (index: number) => changeEditableMaterialType(assetId, Object.values(EditableMaterials)[index])} />
             </TraitSingle>
         </TraitSection>
 

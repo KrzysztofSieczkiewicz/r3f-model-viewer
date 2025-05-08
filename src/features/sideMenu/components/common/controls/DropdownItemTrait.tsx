@@ -2,11 +2,24 @@ import React, { useRef, useState } from "react";
 import styles from './DropdownItemTrait.module.css';
 import { useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
 
-type Props<T> = {
-    selected: T,
-    selectionList: T[],
-    handleSelect: (value: T) => void
+type SelectableObject<T> = {
+    object: T,
+    displayName: string
 }
+
+type StringProps = {
+    selected: string;
+    selectionList: string[];
+    handleSelect: (index: number) => void;
+}
+
+type ObjectProps<T> = {
+    selected: SelectableObject<T>;
+    selectionList: SelectableObject<T>[];
+    handleSelect: (index: number) => void;
+}
+
+type Props<T> = StringProps | ObjectProps<T>;
 
 export const DropdownItemTrait = <T,> ({selected, selectionList, handleSelect}: Props<T>) => {
 
@@ -19,13 +32,10 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleSelect}: 
         () => setIsOpen(false)
     );
 
-    const handleSelectAndClose = (option: T) => {
-        handleSelect(option);
-        setIsOpen(false);
-    }
-
-    const toggleList = () => {
-        setIsOpen(!isOpen); 
+    const getDisplayName = (item: SelectableObject<T> | string) => {
+        return typeof item === "string"
+            ? item
+            : item.displayName
     }
 
     return (
@@ -34,10 +44,10 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleSelect}: 
                 className={isOpen ? `${styles.body} ${styles.active}` : styles.body}
                 type="button"
                 onClick={(e) => {
-                    toggleList()
+                    setIsOpen(!isOpen)
                 }}
             >
-                <div className={styles.value}>{String(selected)}</div>
+                <div className={styles.value}>{getDisplayName(selected)}</div>
                 {isOpen
                 ? <span className={styles.arrow}>&#8657;</span>
                 : <span className={styles.arrow}>&#8659;</span>}
@@ -46,14 +56,15 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleSelect}: 
                 <>
                     <Backdrop />
                     <div className={styles.optionsList} ref={listRef}>
-                        {selectionList.map((item) => (
+                        {selectionList.map((item, index) => (
                             <button className={styles.option}
-                                key={String(item)}
-                                onClick={(e) => {
-                                    handleSelectAndClose(item);
+                                key={index}
+                                onClick={() => {
+                                    handleSelect(index);
+                                    setIsOpen(false);
                                 }}
                             >
-                                {String(item)}
+                                {getDisplayName(item)}
                             </button>
                         ))}
                     </div>

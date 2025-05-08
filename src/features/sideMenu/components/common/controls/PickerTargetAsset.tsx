@@ -5,6 +5,8 @@ import { DropdownItemTrait } from "./DropdownItemTrait";
 
 const unselectedName = "Custom"
 
+// TODO - finish this- DropdownItemTrait is using index instead of name now
+
 type Props = {
     value: string|undefined,
     onChange: (id: string|undefined) => void,
@@ -27,11 +29,14 @@ export const PickerTargetAsset = ({value, onChange}: Props) => {
         return unselectedName;
     }
 
+    const handleSelectById = (index: number) => {
+        onChange( assetsList[index].id )
+    }
 
     return (
         <DropdownItemTrait 
             selected={handleSelectedName()} 
             selectionList={handleSelectionList()} 
-            handleSelect={onChange} />
+            handleSelect={handleSelectById} />
     )
 }
