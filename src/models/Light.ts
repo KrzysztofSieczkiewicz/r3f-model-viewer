@@ -32,7 +32,7 @@ export type SpotLightProperties = BaseLightProperties & {
 }
 
 export type DirectionalLightProperties = BaseLightProperties & {
-  targetID: string | undefined, // TODO: also add to spotLight (if target is not set - create empty object with coordinates that can be manipulated)
+  target: [number, number, number], // TODO: also add to spotLight (if target is not set - create empty object with coordinates that can be manipulated)
 }
 
 export type LightProperties = PointLightProperties | SpotLightProperties | DirectionalLightProperties;
@@ -76,7 +76,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       position:[2,2,2],
       color:"#33dcfa",
       intensity:1,
-      targetID: undefined
+      target:[0,0,0]
     }
   }
 ]
@@ -115,7 +115,7 @@ const createDefaultDirectionalLight = (): LightWrapper => ({
     position:[2,1,1],
     color: "white",
     intensity:1,
-    targetID: undefined
+    target:[0,0,0]
   }
 });
 

@@ -44,7 +44,10 @@ export const LightControlsDirectional = ( {id, properties}: Props ) => {
             </TraitSingle>
 
             <TraitSingle name="Target">
-                <PickerTargetAsset value={properties.targetID} onChange={(val: string|undefined) => updateLightProperties(id, {targetID: val})}/>
+            <SlidersArray
+                    value={properties.target}
+                    step={0.01}
+                    handleChange={(val) => updateLightProperties(id, {target: val} )} />
             </TraitSingle>
         </>
     );

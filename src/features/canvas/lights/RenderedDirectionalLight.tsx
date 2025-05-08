@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import { DirectionalLight, DirectionalLightHelper } from "three";
+import { DirectionalLight, DirectionalLightHelper, Object3D, Vector3 } from "three";
 
 import pointLightBillboard from '../../../icons/lightTypes/pointLight.svg';
 import { DirectionalLightProperties, LightProperties, LightWrapper } from "../../../models/Light"
@@ -20,7 +20,7 @@ type Props = {
 export const RenderedDirectionalLight = ( {light}: Props) => {
     const { updateLightProperties } = useSceneObjectsContext();
 
-    const { color, position, intensity } = light.properties as DirectionalLightProperties;
+    const { color, position, intensity, target } = light.properties as DirectionalLightProperties;
 
     const isSelected = useIsSelected(light.id);
     const handleSelect = useToggleSelect(light.id);
@@ -28,6 +28,11 @@ export const RenderedDirectionalLight = ( {light}: Props) => {
     let lightRef = useRef<DirectionalLight>(null);
 
     useHelper(isSelected && lightRef as any, DirectionalLightHelper, 1, color);
+
+    useEffect( () => {
+        lightRef.current?.lookAt(...target)
+        new Object3D()
+    }, [target, position])
 
     return (
         <group>
