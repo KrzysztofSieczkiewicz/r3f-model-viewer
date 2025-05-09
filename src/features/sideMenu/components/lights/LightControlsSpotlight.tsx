@@ -42,6 +42,13 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
                 <ButtonReset onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </TraitSingle>
 
+            <TraitSingle name="Target">
+                <SlidersArray
+                        value={properties.target}
+                        step={0.01}
+                        handleChange={(val) => updateLightProperties(id, {target: val} )} />
+            </TraitSingle>
+
             <TraitSingle name="Distance">
                 <SliderContainerLong>
                     <Slider

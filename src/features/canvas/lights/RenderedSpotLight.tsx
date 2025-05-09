@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { useHelper } from "@react-three/drei";
-import { SpotLight, SpotLightHelper } from "three";
+import { Object3D, SpotLight, SpotLightHelper } from "three";
 
 import spotLightBillboard from '../../../icons/lightTypes/spotLight.svg';
 import { LightProperties, LightWrapper, SpotLightProperties } from "../../../models/Light"
@@ -12,28 +12,38 @@ import { SelectionSphere } from "../helperObjects/SelectionSphere";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 
 type Props = {
-    light: LightWrapper,}
+    light: LightWrapper
+}
 
 export const RenderedSpotLight = ( {light}: Props) => {
-    const { updateLightProperties: updateLight } = useSceneObjectsContext();
+    const { updateLightProperties } = useSceneObjectsContext();
 
     const lightRef = useRef<SpotLight>(null);
+    const targetRef = useRef<Object3D>(new Object3D());
 
     const isSelected = useIsSelected(light.id);
     const handleSelect = useToggleSelect(light.id);
 
-    const { color, position, distance, intensity, angle, penumbra } = light.properties as SpotLightProperties;
+    const { color, position, distance, intensity, angle, penumbra, target } = light.properties as SpotLightProperties;
 
     useHelper(isSelected && lightRef as any, SpotLightHelper, color);
 
+    useEffect(() => {
+            targetRef.current.position.set(...target)
+        }, [position, target])
+
     return (
         <group>
-            {isSelected && 
+            {isSelected && <>
                 <LightsGizmo
                     position={position}
-                    handleChange={(change: Partial<LightProperties>) => { updateLight(light.id, change) }}
+                    handleChange={(position) => { updateLightProperties(light.id, {position: position}) }}
                 />
-            }
+                <LightsGizmo
+                    position={target}
+                    handleChange={(target) => { updateLightProperties(light.id, {target: target}) }}
+                />
+            </>}
             <spotLight // TODO: ADD TARGET HANDLING
                 key={light.id} 
                 position={position}
@@ -43,6 +53,7 @@ export const RenderedSpotLight = ( {light}: Props) => {
                 intensity={intensity}
                 angle={angle}
                 penumbra={penumbra}
+                target={targetRef.current}
             >
                 <SelectionSphere onClick={handleSelect} />
             </spotLight>

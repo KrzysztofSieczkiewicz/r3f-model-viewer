@@ -1,4 +1,3 @@
-import { Object3D } from 'three';
 import { generateNewID } from '../utils/idUtil';
 
 export enum LIGHT_TYPES {
@@ -17,7 +16,6 @@ type BaseLightProperties = {
   position: [number,number,number],
   color: string,
   intensity: number,
-  
 }
 
 export type PointLightProperties = BaseLightProperties & {
@@ -28,6 +26,7 @@ export type SpotLightProperties = BaseLightProperties & {
   distance: number,
   angle: number,
   penumbra: number,
+  target: [number, number, number],
   // TODO: add 'decay'
   // TODO: add 'attenuation' (maybe for other lights too)
 }
@@ -68,6 +67,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       intensity:1,
       angle: 0.3,
       penumbra: 0.6,
+      target: [0,0,0]
     }
   },{
     type: LIGHT_TYPES.directionalLight,
@@ -105,6 +105,7 @@ const createDefaultSpotlight = (): LightWrapper => ({
     intensity:1,
     angle: 0.6,
     penumbra: 0.6,
+    target: [0,0,0]
   }
 });
 
