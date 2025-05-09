@@ -29,6 +29,7 @@ export type SpotLightProperties = BaseLightProperties & {
   angle: number,
   penumbra: number,
   // TODO: add 'decay'
+  // TODO: add 'attenuation' (maybe for other lights too)
 }
 
 export type DirectionalLightProperties = BaseLightProperties & {

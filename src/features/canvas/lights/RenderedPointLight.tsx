@@ -23,7 +23,7 @@ export const RenderedPointLight = ( {light}: Props) => {
     const isSelected = useIsSelected(light.id);
     const handleSelect = useToggleSelect(light.id);
     
-    let lightRef = useRef<PointLight>(null);
+    const lightRef = useRef<PointLight>(null);
 
     return (
         <group>
