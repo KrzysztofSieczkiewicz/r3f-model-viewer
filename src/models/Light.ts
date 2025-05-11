@@ -28,7 +28,8 @@ export type SpotLightProperties = BaseLightProperties & {
   penumbra: number,
   target: [number, number, number],
   decay: number,
-  // TODO: add 'attenuation' (maybe for other lights too)
+  attenuation: number,
+  // TODO: add more react-three-drei SpotLight properties 
 }
 
 export type DirectionalLightProperties = BaseLightProperties & {
@@ -68,6 +69,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       angle: 0.3,
       penumbra: 0.6,
       decay: 0,
+      attenuation: 0,
       target: [0,0,0]
     }
   },{
@@ -107,6 +109,7 @@ const createDefaultSpotlight = (): LightWrapper => ({
     angle: 0.6,
     penumbra: 0.6,
     decay: 0,
+    attenuation: 0,
     target: [0,0,0]
   }
 });

@@ -4,7 +4,7 @@ import { Billboard, useTexture } from "@react-three/drei";
 
 type Props = {
     icon: string,
-    position: [number, number, number],
+    position?: [number, number, number],
 }
 
 export const IconBillboard = ( {position, icon}: Props) => {
