@@ -78,6 +78,16 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
                 </SliderContainerLong>
                 <ButtonReset onReset={() => updateLightProperties(id, {penumbra: 0.6} )} />
             </TraitSingle>
+
+            <TraitSingle name="Decay">
+                <SliderContainerLong>
+                    <Slider
+                        value={properties.decay}
+                        handleChange={(val) => updateLightProperties(id, {decay: val} )} 
+                        min={0} max={1} step={0.002} />
+                </SliderContainerLong>
+                <ButtonReset onReset={() => updateLightProperties(id, {decay: 0} )} />
+            </TraitSingle>
         </>
     );
 }

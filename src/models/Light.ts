@@ -27,7 +27,7 @@ export type SpotLightProperties = BaseLightProperties & {
   angle: number,
   penumbra: number,
   target: [number, number, number],
-  // TODO: add 'decay'
+  decay: number,
   // TODO: add 'attenuation' (maybe for other lights too)
 }
 
@@ -67,6 +67,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       intensity:1,
       angle: 0.3,
       penumbra: 0.6,
+      decay: 0,
       target: [0,0,0]
     }
   },{
@@ -105,6 +106,7 @@ const createDefaultSpotlight = (): LightWrapper => ({
     intensity:1,
     angle: 0.6,
     penumbra: 0.6,
+    decay: 0,
     target: [0,0,0]
   }
 });
