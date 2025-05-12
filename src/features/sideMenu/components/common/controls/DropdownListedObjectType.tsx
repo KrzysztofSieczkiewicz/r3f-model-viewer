@@ -37,7 +37,8 @@ export const DropdownListedObjectType = <T extends string | number>({current, av
             <li className={styles.listItem} key={option}>
                 <button 
                     className={styles.option}
-                    onClick={() => {
+                    onClick={(e) => {
+                        e.stopPropagation();
                         onChange(option);
                         setIsOpen(false); }}
                     >

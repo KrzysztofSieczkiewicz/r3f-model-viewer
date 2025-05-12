@@ -51,6 +51,16 @@ export const LightControlsPoint = ( {id, properties}: Props ) => {
                 </SliderContainerLong>
                 <ButtonReset onReset={() => updateLightProperties(id, {distance: 10} )} />
             </TraitSingle>
+
+            <TraitSingle name="Decay">
+                <SliderContainerLong>
+                    <Slider 
+                        value={properties.decay}
+                        handleChange={(val) => updateLightProperties(id, {decay: val} )} 
+                        min={0} max={10} step={0.1} />
+                </SliderContainerLong>
+                <ButtonReset onReset={() => updateLightProperties(id, {decay: 0} )} />
+            </TraitSingle>
         </>
     );
 }

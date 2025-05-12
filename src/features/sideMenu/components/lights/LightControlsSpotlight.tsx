@@ -37,7 +37,7 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
                     <Slider
                         value={properties.intensity}
                         handleChange={(val) => updateLightProperties(id, {intensity: val} )} 
-                        min={0} max={3} step={0.005} />
+                        min={0} max={10} step={0.01} />
                 </SliderContainerLong>
                 <ButtonReset onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </TraitSingle>
@@ -57,6 +57,15 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
                         min={0} max={100} step={0.1} />
                 </SliderContainerLong>
                 <ButtonReset onReset={() => updateLightProperties(id, {distance: 10} )} />
+            </TraitSingle>
+
+            <TraitSingle name="Radius">
+                <SliderContainerLong>
+                    <Slider
+                        value={properties.radius}
+                        handleChange={(val) => updateLightProperties(id, {radius: val} )} 
+                        min={0.01} max={25} step={0.01} />
+                </SliderContainerLong>
             </TraitSingle>
 
             <TraitSingle name="Angle">
@@ -97,6 +106,16 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
                         min={0} max={10} step={0.01} />
                 </SliderContainerLong>
                 <ButtonReset onReset={() => updateLightProperties(id, {attenuation: 0} )} />
+            </TraitSingle>
+
+            <TraitSingle name="Attenuation blending">
+                <SliderContainerLong>
+                    <Slider
+                        value={properties.attenuationBlending}
+                        handleChange={(val) => updateLightProperties(id, {attenuationBlending: val} )} 
+                        min={0} max={10} step={0.01} />
+                </SliderContainerLong>
+                <ButtonReset onReset={() => updateLightProperties(id, {attenuationBlending: 0} )} />
             </TraitSingle>
         </>
     );

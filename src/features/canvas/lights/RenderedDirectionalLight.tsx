@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
-import { BoxHelper, DirectionalLight, DirectionalLightHelper, Mesh, Object3D, Vector3 } from "three";
+import { DirectionalLight, DirectionalLightHelper, Object3D } from "three";
 
 import pointLightBillboard from '../../../icons/lightTypes/pointLight.svg';
-import { DirectionalLightProperties, LightProperties, LightWrapper } from "../../../models/Light"
+import { DirectionalLightProperties, LightWrapper } from "../../../models/Light"
 import { LightsGizmo } from "./LightsGizmo";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 import { IconBillboard } from "../helperObjects/IconBillboard";
@@ -35,29 +35,27 @@ export const RenderedDirectionalLight = ( {light}: Props) => {
     }, [position, target])
 
     return (
-        <group>
+        <group key={light.id}>
             {(isSelected) && <>
                 <LightsGizmo
                     position={position}
-                    handleChange={(position) => { updateLightProperties(light.id, {position: position}) }}
-                />
+                    handleChange={(position) => { updateLightProperties(light.id, {position: position}) }} />
                 <LightsGizmo
                     position={target}
-                    handleChange={(target) => { updateLightProperties(light.id, {target: target}) }}
-                />
+                    handleChange={(target) => { updateLightProperties(light.id, {target: target}) }} />
             </>}
 
-            <directionalLight
-                key={light.id} 
-                position={position}
-                ref={lightRef}
-                color={color} 
-                intensity={intensity}
-                target={targetRef.current}
-            >
+            <group position={position}>
+                <directionalLight
+                    position={[0,0,0]}
+                    ref={lightRef}
+                    color={color} 
+                    intensity={intensity}
+                    target={targetRef.current} />
                 <SelectionSphere onClick={handleSelect} />
-            </directionalLight>
-            <IconBillboard icon={pointLightBillboard} position={position} />
+                <IconBillboard icon={pointLightBillboard} />
+            </group>
+
         </group>
     );
 }

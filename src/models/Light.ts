@@ -20,16 +20,18 @@ type BaseLightProperties = {
 
 export type PointLightProperties = BaseLightProperties & {
   distance: number,
+  decay: number,
 };
 
 export type SpotLightProperties = BaseLightProperties & {
   distance: number,
   angle: number,
+  radius: number,
   penumbra: number,
   target: [number, number, number],
   decay: number,
   attenuation: number,
-  // TODO: add more react-three-drei SpotLight properties 
+  attenuationBlending: number,
 }
 
 export type DirectionalLightProperties = BaseLightProperties & {
@@ -54,6 +56,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       isVisible: true,
       position:[3,0.5,0],
       distance: 10,
+      decay: 0,
       color: "#f53259",
       intensity:1,
     }
@@ -64,12 +67,14 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       isVisible: true,
       position:[-1,2.25,-1],
       distance: 10,
+      radius: 0,
       color:"#33dcfa",
       intensity:1,
       angle: 0.3,
       penumbra: 0.6,
       decay: 0,
       attenuation: 0,
+      attenuationBlending: 0,
       target: [0,0,0]
     }
   },{
@@ -92,6 +97,7 @@ const createDefaultPointlight = (): LightWrapper => ({
     isVisible: true,
     position:[2,1,1],
     distance: 10,
+    decay: 0,
     color: "white",
     intensity:1,
   }
@@ -104,12 +110,14 @@ const createDefaultSpotlight = (): LightWrapper => ({
     isVisible: true,
     position:[2,1,1],
     distance: 10,
+    radius: 0,
     color: "white",
     intensity:1,
     angle: 0.6,
     penumbra: 0.6,
     decay: 0,
     attenuation: 0,
+    attenuationBlending: 0,
     target: [0,0,0]
   }
 });
