@@ -2,19 +2,20 @@ import React from "react";
 import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 
 import { ColorPicker } from "../common/controls/ColorPicker";
-import { PointLightProperties } from "../../../../models/Light";
+import { DirectionalLightProperties } from "../../../../models/Light";
 import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { Slider } from "../common/controls/Slider";
+import { PickerTargetAsset } from "../common/controls/PickerTargetAsset";
 
 type Props = {
     id: string,
-    properties: PointLightProperties,
+    properties: DirectionalLightProperties,
 }
 
-export const LightControlsPoint = ( {id, properties}: Props ) => {
+export const LightControlsDirectional = ( {id, properties}: Props ) => {
     const { updateLightProperties } = useSceneObjectsContext();
 
     return (
@@ -42,25 +43,14 @@ export const LightControlsPoint = ( {id, properties}: Props ) => {
                 <ButtonReset onReset={() => updateLightProperties(id, {intensity: 1} )} />
             </TraitSingle>
 
-            <TraitSingle name="Distance">
-                <SliderContainerLong>
-                    <Slider 
-                        value={properties.distance}
-                        handleChange={(val) => updateLightProperties(id, {distance: val} )} 
-                        min={0} max={100} step={0.1} />
-                </SliderContainerLong>
-                <ButtonReset onReset={() => updateLightProperties(id, {distance: 10} )} />
-            </TraitSingle>
-
-            <TraitSingle name="Decay">
-                <SliderContainerLong>
-                    <Slider 
-                        value={properties.decay}
-                        handleChange={(val) => updateLightProperties(id, {decay: val} )} 
-                        min={0} max={10} step={0.1} />
-                </SliderContainerLong>
-                <ButtonReset onReset={() => updateLightProperties(id, {decay: 0} )} />
+            <TraitSingle name="Target">
+                <SlidersArray
+                        value={properties.target}
+                        step={0.01}
+                        handleChange={(val) => updateLightProperties(id, {target: val} )} />
             </TraitSingle>
         </>
     );
+
+    // TODO [CURRENT] - add a new component - canvasObjectPicker
 }

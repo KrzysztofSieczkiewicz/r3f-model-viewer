@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
+// TODO: also update on scroll - whenever component changes position
 export const useInterceptClickOutside = (
   refs: Array<RefObject<HTMLElement>>,
   isActive: boolean,

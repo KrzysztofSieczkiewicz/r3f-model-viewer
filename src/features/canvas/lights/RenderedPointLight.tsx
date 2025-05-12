@@ -18,32 +18,33 @@ type Props = {
 export const RenderedPointLight = ( {light}: Props) => {
     const { updateLightProperties } = useSceneObjectsContext();
 
-    const { color, position, distance, intensity } = light.properties as PointLightProperties;
+    const { color, position, distance, decay, intensity } = light.properties as PointLightProperties;
 
     const isSelected = useIsSelected(light.id);
     const handleSelect = useToggleSelect(light.id);
     
-    let lightRef = useRef<PointLight>(null);
+    const lightRef = useRef<PointLight>(null);
 
     return (
-        <group>
+        <group key={light.id} >
             {(isSelected) && 
                 <LightsGizmo
                     position={position}
-                    handleChange={(change: Partial<LightProperties>) => { updateLightProperties(light.id, change) }}
-                />
+                    handleChange={(change: Partial<LightProperties>) => { updateLightProperties(light.id, change) }} />
             }
-            <pointLight
-                key={light.id} 
-                position={position}
-                ref={lightRef}
-                color={color} 
-                intensity={intensity}
-                distance={distance}
-            >
+
+            <group position={position}>
+                <pointLight
+                    position={[0,0,0]}
+                    ref={lightRef}
+                    color={color} 
+                    intensity={intensity}
+                    distance={distance}
+                    decay={decay} />
                 <SelectionSphere onClick={handleSelect} />
-            </pointLight>
-            <IconBillboard icon={pointLightBillboard} position={position} />
+                <IconBillboard icon={pointLightBillboard} />
+            </group>
+            
         </group>
     );
 }

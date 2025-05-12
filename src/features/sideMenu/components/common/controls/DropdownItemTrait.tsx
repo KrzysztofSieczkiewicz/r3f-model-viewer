@@ -2,13 +2,13 @@ import React, { useRef, useState } from "react";
 import styles from './DropdownItemTrait.module.css';
 import { useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
 
-type Props<T> = {
-    selected: T,
-    selectionList: T[],
-    handleChange: (value: T) => void
+type Props = {
+    selected: string;
+    selectionList: string[];
+    handleSelect: (index: number) => void;
 }
 
-export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: Props<T>) => {
+export const DropdownItemTrait = ({selected, selectionList, handleSelect}: Props) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
     const listRef = useRef<HTMLDivElement | null>(null);
@@ -19,25 +19,16 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: 
         () => setIsOpen(false)
     );
 
-    const handleSelect = (option: T) => {
-        handleChange(option);
-        setIsOpen(false);
-    }
-
-    const toggleList = () => {
-        setIsOpen(!isOpen); 
-    }
-
     return (
         <div className={styles.container} >
             <button
                 className={isOpen ? `${styles.body} ${styles.active}` : styles.body}
                 type="button"
                 onClick={(e) => {
-                    toggleList()
+                    setIsOpen(!isOpen)
                 }}
             >
-                <div className={styles.value}>{String(selected)}</div>
+                <div className={styles.value}>{selected}</div>
                 {isOpen
                 ? <span className={styles.arrow}>&#8657;</span>
                 : <span className={styles.arrow}>&#8659;</span>}
@@ -46,14 +37,15 @@ export const DropdownItemTrait = <T,> ({selected, selectionList, handleChange}: 
                 <>
                     <Backdrop />
                     <div className={styles.optionsList} ref={listRef}>
-                        {selectionList.map((item) => (
+                        {selectionList.map((item, index) => (
                             <button className={styles.option}
-                                key={String(item)}
-                                onClick={(e) => {
-                                    handleSelect(item);
+                                key={index}
+                                onClick={() => {
+                                    handleSelect(index);
+                                    setIsOpen(false);
                                 }}
                             >
-                                {String(item)}
+                                {item}
                             </button>
                         ))}
                     </div>

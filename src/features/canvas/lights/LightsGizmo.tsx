@@ -2,11 +2,10 @@ import { PivotControls } from "@react-three/drei";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
-import { LightProperties, LightWrapper } from "../../../models/Light";
 
 type Props = {
-    position: [number, number, number],
-    handleChange: (change: Partial<LightProperties>) => void
+    position: [number, number, number];
+    handleChange: (change: any) => void;
 }
 
 
@@ -38,7 +37,7 @@ export const LightsGizmo = ( {position, handleChange}: Props) => {
 
     // Update attached object on local changes
     useEffect(() => {
-        handleChange( {position: handledPosition} );
+        handleChange( handledPosition );
     }, [handledPosition]);
 
     // Update controls when values are changed externally

@@ -23,8 +23,7 @@ export const ListedAsset = ( {isActive, asset, toggleExtend}: Props) => {
         <ListedObject>
             <ListedAssetHeader 
                 isActive={isActive} 
-                assetId={asset.id} 
-                assetProperties={asset.properties} 
+                asset={asset}
                 toggleExtend={() => toggleExtend()} />
 
             <ListedObjectBody isVisible={isActive}>

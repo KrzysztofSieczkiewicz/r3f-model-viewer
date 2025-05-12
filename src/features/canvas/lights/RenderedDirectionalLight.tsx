@@ -1,41 +1,42 @@
 import React, { useEffect, useRef } from "react";
 
-import { useHelper } from "@react-three/drei";
-import { Object3D, SpotLight as SpotLightType, SpotLightHelper } from "three";
-import { SpotLight as SpotLight } from '@react-three/drei'
+import { DirectionalLight, DirectionalLightHelper, Object3D } from "three";
 
-import spotLightBillboard from '../../../icons/lightTypes/spotLight.svg';
-import { LightWrapper, SpotLightProperties } from "../../../models/Light"
+import pointLightBillboard from '../../../icons/lightTypes/pointLight.svg';
+import { DirectionalLightProperties, LightWrapper } from "../../../models/Light"
 import { LightsGizmo } from "./LightsGizmo";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 import { IconBillboard } from "../helperObjects/IconBillboard";
 import { SelectionSphere } from "../helperObjects/SelectionSphere";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
+import { useHelper } from "@react-three/drei";
+
+// TODO: find suitable icon and replace pointLightBillboard
 
 type Props = {
     light: LightWrapper
 }
 
-export const RenderedSpotLight = ( {light}: Props) => {
+export const RenderedDirectionalLight = ( {light}: Props) => {
     const { updateLightProperties } = useSceneObjectsContext();
-
-    const lightRef = useRef<SpotLightType>(null);
+    
+    const lightRef = useRef<DirectionalLight>(null);
     const targetRef = useRef<Object3D>(new Object3D());
+
+    const { color, position, intensity, target } = light.properties as DirectionalLightProperties;
 
     const isSelected = useIsSelected(light.id);
     const handleSelect = useToggleSelect(light.id);
 
-    const { color, position, distance, radius, intensity, angle, penumbra, decay, attenuation, attenuationBlending, target } = light.properties as SpotLightProperties;
-
-    useHelper(isSelected && lightRef as any, SpotLightHelper, color);
+    useHelper(isSelected && lightRef as any, DirectionalLightHelper, 1, color);
 
     useEffect(() => {
-            targetRef.current.position.set(...target)
-        }, [position, target])
+        targetRef.current.position.set(...target)
+    }, [position, target])
 
     return (
-        <group key={light.id} >
-            {isSelected && <>
+        <group key={light.id}>
+            {(isSelected) && <>
                 <LightsGizmo
                     position={position}
                     handleChange={(position) => { updateLightProperties(light.id, {position: position}) }} />
@@ -43,24 +44,18 @@ export const RenderedSpotLight = ( {light}: Props) => {
                     position={target}
                     handleChange={(target) => { updateLightProperties(light.id, {target: target}) }} />
             </>}
+
             <group position={position}>
-                <SpotLight
+                <directionalLight
                     position={[0,0,0]}
-                    castShadow
-                    radiusTop={radius}
-                    distance={distance}
                     ref={lightRef}
-                    color={color}
+                    color={color} 
                     intensity={intensity}
-                    angle={angle}
-                    penumbra={penumbra}
-                    decay={decay}
-                    attenuation={attenuation}
-                    anglePower={attenuationBlending}
                     target={targetRef.current} />
                 <SelectionSphere onClick={handleSelect} />
-                <IconBillboard icon={spotLightBillboard}/>
-            </group>            
+                <IconBillboard icon={pointLightBillboard} />
+            </group>
+
         </group>
     );
 }

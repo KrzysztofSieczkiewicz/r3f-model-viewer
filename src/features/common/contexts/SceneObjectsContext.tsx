@@ -10,7 +10,7 @@ import { DEFAULT_EDITABLE_MATERIALS, EditableMaterialProperties, EditableMateria
 export type EditableWrapper = AssetWrapper | LightWrapper
 
 type SceneObjectsContextProps = {
-    assetsList: AssetWrapper[], 
+    assetsList: AssetWrapper[],
     updateAssetProperties: (id: string, change: Partial<AssetProperties>) => void,
     updatePrimitiveProperties: (id: string, change: Partial<PrimitiveProperties>) => void,
     updateEditableMaterialProperties: (id: string, change: Partial<EditableMaterialProperties>) => void,
@@ -84,6 +84,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
 
     // TODO: REPLACE "defaultAsset" WITH PROPER ASSET IMPORT LOGIC 
     // (ESP WITH CREATING NEW ID EACH TIME)
+
     const addAsset = () => {
         const extendedAssetsList = [...assetsList, getDefaultAsset()];
         setAssetsList(extendedAssetsList);

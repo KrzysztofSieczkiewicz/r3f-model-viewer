@@ -18,7 +18,7 @@ export const ColorPicker = ( {currentColor, handleChange} :Props) :JSX.Element =
   const previewRef = useRef<HTMLDivElement | null>(null);
   const popupRef = useRef<HTMLDivElement | null>(null);
 
-  useInterceptClickOutside(
+  const Backdrop = useInterceptClickOutside(
     [popupRef, previewRef],
     isColorPickerOpen,
     () => setIsColorPickerOpen(false)
@@ -37,6 +37,7 @@ export const ColorPicker = ( {currentColor, handleChange} :Props) :JSX.Element =
       />
       {isColorPickerOpen && 
       <div ref={popupRef} className={styles.popup} style={{ left: position }}>
+        <Backdrop />
         <HexColorPicker color={currentColor} onChange={handleChange} />
       </div>}
     </>

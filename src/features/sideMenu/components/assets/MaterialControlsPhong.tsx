@@ -30,7 +30,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
                 <DropdownItemTrait 
                     selected={EditableMaterials.Basic} 
                     selectionList={Object.values(EditableMaterials)} 
-                    handleChange={ (type: EditableMaterials) => changeEditableMaterialType(assetId, type)} />
+                    handleSelect={ (index: number) => changeEditableMaterialType(assetId, Object.values(EditableMaterials)[index])} />
             </TraitSingle>
         </TraitSection>
 

@@ -4,17 +4,16 @@ import styles from './../common/submenus/Submenu.module.css';
 import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { ReactComponent as PointLightIcon } from '../../../../icons/lightTypes/pointLight.svg';
 import { ButtonToggleVisibility } from "../common/controls/ButtonToggleVisibility";
-import { AssetProperties } from "../../../../models/assets/Asset";
+import { AssetWrapper } from "../../../../models/assets/Asset";
 
 
 type Props = {
     isActive: boolean,
-    assetId: string,
-    assetProperties: AssetProperties,
+    asset: AssetWrapper,
     toggleExtend: () => void,
 }
 
-export const ListedAssetHeader = ( {isActive, assetId, assetProperties, toggleExtend }: Props) => {
+export const ListedAssetHeader = ( {isActive, asset, toggleExtend }: Props) => {
     const { updateAssetProperties, } = useSceneObjectsContext();
 
     const handleArrowDirection = () => {
@@ -30,10 +29,10 @@ export const ListedAssetHeader = ( {isActive, assetId, assetProperties, toggleEx
             onClick={toggleExtend}
         >
             <PointLightIcon className={styles.listedItemIcon} />
-            <p className={styles.listedItemDisplayName}>{assetProperties.name}</p>
+            <p className={styles.listedItemDisplayName}>{asset.name}</p>
             <ButtonToggleVisibility 
-                isVisible={assetProperties.visible} 
-                updateObject={ (val: boolean) => updateAssetProperties(assetId, {visible: val} )} 
+                isVisible={asset.properties.visible} 
+                updateObject={ (val: boolean) => updateAssetProperties(asset.id, {visible: val} )} 
             />
             <span className={styles.listedItemExtendIcon}>{ handleArrowDirection() }</span>
         </div>
