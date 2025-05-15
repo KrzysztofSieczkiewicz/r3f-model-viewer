@@ -35,7 +35,7 @@ export type SpotLightProperties = BaseLightProperties & {
 }
 
 export type DirectionalLightProperties = BaseLightProperties & {
-  target: [number, number, number], // TODO: also add to spotLight (if target is not set - create empty object with coordinates that can be manipulated)
+  target: [number, number, number],
 }
 
 export type LightProperties = PointLightProperties | SpotLightProperties | DirectionalLightProperties;
@@ -67,7 +67,7 @@ const INIT_LIGHTS_LIST: LightWrapper[] = [
       isVisible: true,
       position:[-1,2.25,-1],
       distance: 10,
-      radius: 0,
+      radius: 0.01,
       color:"#33dcfa",
       intensity:1,
       angle: 0.3,
@@ -110,7 +110,7 @@ const createDefaultSpotlight = (): LightWrapper => ({
     isVisible: true,
     position:[2,1,1],
     distance: 10,
-    radius: 0,
+    radius: 0.01,
     color: "white",
     intensity:1,
     angle: 0.6,
