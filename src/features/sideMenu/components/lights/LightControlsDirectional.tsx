@@ -1,14 +1,13 @@
 import React from "react";
 import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 
-import { ColorPicker } from "../common/controls/ColorPicker";
+import { PickerColor } from "../common/controls/PickerColor";
 import { DirectionalLightProperties } from "../../../../models/Light";
 import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { Slider } from "../common/controls/Slider";
-import { PickerTargetAsset } from "../common/controls/PickerTargetAsset";
 
 type Props = {
     id: string,
@@ -28,7 +27,7 @@ export const LightControlsDirectional = ( {id, properties}: Props ) => {
             </TraitSingle>
 
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={properties.color}
                     handleChange={(val) => updateLightProperties(id, {color: val} )}  />
             </TraitSingle>

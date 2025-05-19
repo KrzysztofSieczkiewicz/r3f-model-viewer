@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from './TexturePicker.module.css';
+import styles from './PickerTexture.module.css';
 
 import { Texture } from "three";
 import { useSafeTextureLoader } from "../../../../../hooks/useSafeTextureLoader";
@@ -9,7 +9,7 @@ type Props = {
     handleChange: (newMap: Texture|null) => void
 }
 
-export const TexturePicker = ({map=null, handleChange}: Props) => {
+export const PickerTexture = ({map=null, handleChange}: Props) => {
 
     const [ isPickerOpen, setIsPickerOpen ] = useState(false);
     const [ popupPosition, setPosition ] = useState(0);

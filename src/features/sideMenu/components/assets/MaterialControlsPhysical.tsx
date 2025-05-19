@@ -1,13 +1,13 @@
 import React from "react";
 import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterials, PhysicalMaterialProperties } from "../../../../models/assets/materials/EditableMaterial";
-import { ColorPicker } from "../common/controls/ColorPicker";
+import { PickerColor } from "../common/controls/PickerColor";
 import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { Slider } from "../common/controls/Slider";
 import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { DropdownItemTrait } from "../common/controls/DropdownItemTrait";
-import { TexturePicker } from "../common/controls/TexturePicker";
+import { PickerTexture } from "../common/controls/PickerTexture";
 import { SlidersArray } from "../common/controls/SlidersArray";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { TraitSection } from "../common/traits/TraitSection";
@@ -65,12 +65,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Color">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={colorMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {colorMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={color}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {color: value} )} />
             </TraitSingle>
@@ -78,7 +78,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Surface">
             <TraitSingle name="Roughness">
-                <TexturePicker
+                <PickerTexture
                     map={roughnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
             </TraitSingle>
@@ -92,7 +92,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {roughness: defaultProperties.roughness} )} />
             </TraitSingle>
             <TraitSingle name="Metalness">
-                <TexturePicker
+                <PickerTexture
                     map={metalnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
             </TraitSingle>
@@ -136,17 +136,17 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Specular">
             <TraitSingle name="Color map">
-                <TexturePicker
+                <PickerTexture
                     map={specularColorMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {specularColorMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={specularColor}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {specularColor: value} )} />
             </TraitSingle>
             <TraitSingle name="Intensity map">
-                <TexturePicker
+                <PickerTexture
                     map={specularIntensityMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {specularIntensityMap: value} )} />
             </TraitSingle>
@@ -163,7 +163,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Attenuation">
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={attenuationColor}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {attenuationColor: value} )} />
             </TraitSingle>
@@ -180,12 +180,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Emissive">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={emissiveMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={emissive}
                     handleChange={(value) =>  updateEditableMaterialProperties(assetId, {emissive: value} )} />
             </TraitSingle>
@@ -202,7 +202,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Environment">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={environmentMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMap: value} )} />
             </TraitSingle>
@@ -233,7 +233,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {transparent: value} )} />
             </TraitSingle>
             <TraitSingle name="Alpha map">
-                <TexturePicker
+                <PickerTexture
                     map={alphaMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {alphaMap: value} )} />
             </TraitSingle>
@@ -246,7 +246,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                 </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Transmission map">
-                <TexturePicker
+                <PickerTexture
                     map={transmissionMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {transmissionMap: value} )} />
             </TraitSingle>
@@ -262,7 +262,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Ambient occlusion">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={ambientOcclusionMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {ambientOcclusionMap: value} )} />
             </TraitSingle>
@@ -278,7 +278,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Normal">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={normalMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {normalMap: value} )} />
             </TraitSingle>
@@ -294,7 +294,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Bump">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={bumpMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpMap: value} )} />
             </TraitSingle>
@@ -311,7 +311,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Displacement">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={displacementMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementMap: value} )} />
             </TraitSingle>
@@ -335,7 +335,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Clearcoat">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={clearcoatMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatMap: value} )} />
             </TraitSingle>
@@ -348,7 +348,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                 </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Roughness Map">
-                <TexturePicker
+                <PickerTexture
                     map={clearcoatRoughnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatRoughnessMap: value} )} />
             </TraitSingle>
@@ -361,7 +361,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                 </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Normal Map">
-                <TexturePicker
+                <PickerTexture
                     map={clearcoatNormalMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {clearcoatNormalMap: value} )} />
             </TraitSingle>
@@ -375,7 +375,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Anisotropy">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={anisotropyMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {anisotropyMap: value} )} />
             </TraitSingle>
@@ -399,7 +399,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Iridescence">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={iridescenceMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {iridescenceMap: value} )} />
             </TraitSingle>
@@ -432,7 +432,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                 </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Roughness Map">
-                <TexturePicker
+                <PickerTexture
                     map={sheenRoughnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {sheenRoughnessMap: value} )} />
             </TraitSingle>
@@ -445,12 +445,12 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
                 </SliderContainerLong>
             </TraitSingle>
             <TraitSingle name="Color Map">
-                <TexturePicker
+                <PickerTexture
                     map={sheenColorMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {sheenColorMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={sheenColor}
                     handleChange={(value) =>  updateEditableMaterialProperties(assetId, {sheenColor: value} )} />
             </TraitSingle>
@@ -458,7 +458,7 @@ export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
 
         <TraitSection name="Thickness">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={thicknessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {thicknessMap: value} )} />
             </TraitSingle>

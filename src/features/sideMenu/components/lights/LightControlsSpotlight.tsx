@@ -1,7 +1,7 @@
 import React from "react";
 import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 
-import { ColorPicker } from "../common/controls/ColorPicker";
+import { PickerColor } from "../common/controls/PickerColor";
 import { SpotLightProperties } from "../../../../models/Light";
 import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { ButtonReset } from "../common/controls/ButtonReset";
@@ -27,7 +27,7 @@ export const LightControlsSpotlight = ( {id, properties}: Props ) => {
             </TraitSingle>
 
             <TraitSingle name="Color" >
-                <ColorPicker
+                <PickerColor
                     currentColor={properties.color}
                     handleChange={(val) => updateLightProperties(id, {color: val} )}  />
             </TraitSingle>

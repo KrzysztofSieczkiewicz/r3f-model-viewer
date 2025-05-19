@@ -6,8 +6,8 @@ import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { Slider } from "../common/controls/Slider";
 import { ButtonReset } from "../common/controls/ButtonReset";
-import { ColorPicker } from "../common/controls/ColorPicker";
-import { TexturePicker } from "../common/controls/TexturePicker";
+import { PickerColor } from "../common/controls/PickerColor";
+import { PickerTexture } from "../common/controls/PickerTexture";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { TraitSection } from "../common/traits/TraitSection";
 
@@ -57,12 +57,12 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
 
         <TraitSection name="Color">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={colorMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {colorMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={color}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {color: value} )} />
             </TraitSingle>
@@ -70,7 +70,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
 
         <TraitSection name="Surface">
             <TraitSingle name="Roughness">
-                <TexturePicker
+                <PickerTexture
                     map={roughnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
             </TraitSingle>
@@ -84,7 +84,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {roughness: defaultProperties.roughness} )} />
             </TraitSingle>
             <TraitSingle name="Metalness">
-                <TexturePicker
+                <PickerTexture
                     map={metalnessMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {roughnessMap: value} )} />
             </TraitSingle>
@@ -101,12 +101,12 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
 
         <TraitSection name="Emissive">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={emissiveMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {emissiveMap: value} )} />
             </TraitSingle>
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={emissive}
                     handleChange={(value) =>  updateEditableMaterialProperties(assetId, {emissive: value} )} />
             </TraitSingle>
@@ -123,7 +123,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
 
         <TraitSection name="Environment">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={environmentMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {environmentMap: value} )} />
             </TraitSingle>
@@ -149,7 +149,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
 
         <TraitSection name="Ambient occlusion">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={ambientOcclusionMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {ambientOcclusionMap: value} )} />
             </TraitSingle>
@@ -165,7 +165,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
 
         <TraitSection name="Normal">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={normalMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {normalMap: value} )} />
             </TraitSingle>
@@ -181,7 +181,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
 
         <TraitSection name="Bump">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={bumpMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {bumpMap: value} )} />
             </TraitSingle>
@@ -198,7 +198,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
 
         <TraitSection name="Displacement">
             <TraitSingle name="Map">
-                <TexturePicker
+                <PickerTexture
                     map={displacementMap}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {displacementMap: value} )} />
             </TraitSingle>
@@ -227,7 +227,7 @@ export const MaterialControlsStandard = ({assetId, properties}: Props) => {
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {transparent: value} )} />
             </TraitSingle>
             <TraitSingle name="Alpha map">
-            <TexturePicker
+            <PickerTexture
                 map={alphaMap}
                 handleChange={(value) => updateEditableMaterialProperties(assetId, {alphaMap: value} )} />
             </TraitSingle>

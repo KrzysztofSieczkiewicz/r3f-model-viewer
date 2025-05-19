@@ -2,7 +2,7 @@ import React from "react";
 import { useScene } from "../../../common/contexts/SceneContext";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
-import { ColorPicker } from "../common/controls/ColorPicker";
+import { PickerColor } from "../common/controls/PickerColor";
 import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { ButtonReset } from "../common/controls/ButtonReset";
 import { Slider } from "../common/controls/Slider";
@@ -20,7 +20,7 @@ export const SceneControlsAmbientLighting = () => {
             </TraitSingle>
 
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={scene.ambientColor}
                     handleChange={(val) =>  setScene({ambientColor: val}) } />
             </TraitSingle>

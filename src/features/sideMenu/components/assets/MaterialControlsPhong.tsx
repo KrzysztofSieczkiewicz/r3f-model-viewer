@@ -7,7 +7,7 @@ import { CheckboxItemTrait } from "../common/controls/CheckboxItemTrait";
 import { SliderContainerLong } from "../common/controls/SliderContainerLong";
 import { Slider } from "../common/controls/Slider";
 import { ButtonReset } from "../common/controls/ButtonReset";
-import { ColorPicker } from "../common/controls/ColorPicker";
+import { PickerColor } from "../common/controls/PickerColor";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { TraitSection } from "../common/traits/TraitSection";
 
@@ -66,12 +66,12 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
 
         <TraitSection name="Surface">
             <TraitSingle name="Color">
-                <ColorPicker
+                <PickerColor
                     currentColor={color}
                     handleChange={(value) => updateEditableMaterialProperties(assetId, {color: value} )} />
             </TraitSingle>
             <TraitSingle name="Specular">
-                <ColorPicker
+                <PickerColor
                     currentColor={specular}
                     handleChange={(value) =>  updateEditableMaterialProperties(assetId, {specular: value} )} />
             </TraitSingle>
@@ -85,7 +85,7 @@ export const MaterialControlsPhong = ({assetId, properties}: Props) => {
                 <ButtonReset onReset={() => updateEditableMaterialProperties(assetId, {shininess: defaultProperties.shininess} )} />
             </TraitSingle>
             <TraitSingle name="Emissive">
-                <ColorPicker
+                <PickerColor
                     currentColor={emissive}
                     handleChange={(value) =>  updateEditableMaterialProperties(assetId, {emissive: value} )} />
             </TraitSingle>

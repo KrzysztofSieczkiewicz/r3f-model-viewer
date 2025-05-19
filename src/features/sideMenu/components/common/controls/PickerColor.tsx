@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect, useRef, useState } from "react";
-import styles from './ColorPicker.module.css';
+import { useRef, useState } from "react";
+import styles from './PickerColor.module.css';
 
 import { HexColorPicker } from "react-colorful";
 import { useInterceptClickOutside as useInterceptClickOutside } from "../../../hooks/useInterceptClickOutside";
@@ -10,7 +10,7 @@ type Props = {
   handleChange: (color: string) => void,
 }
 
-export const ColorPicker = ( {currentColor, handleChange} :Props) :JSX.Element => {
+export const PickerColor = ( {currentColor, handleChange} :Props) :JSX.Element => {
 
   const [ isColorPickerOpen, setIsColorPickerOpen ] = useState(false);
   const [ position, setPosition ] = useState(0);
