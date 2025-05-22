@@ -9,6 +9,8 @@ import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 import { getPrimitiveGeometry } from "./meshes/PrimitiveMesh";
 import { getEditableMaterial } from "./materials/EditableMaterial";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
+import { UnwrappedMesh } from "./meshes/UnwrappedMesh";
+import { UnwrappedWrapper } from "../../../models/assets/meshes/Unwrapped";
 
 type Props = {
     asset: AssetWrapper
@@ -75,13 +77,16 @@ export const RenderedAsset = ( {asset}: Props) => {
                 castShadow={asset.properties.castShadow}
                 receiveShadow={asset.properties.receiveShadow}
                 //geometry={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.geometry} // TODO: Still to be parametrized
-                geometry={handleGeometry(asset)}
+                //geometry={handleGeometry(asset)}
+                geometry={UnwrappedMesh({} as UnwrappedWrapper)}
                 //material={nodes.Aset_food_fruit_S_tezbbgrra_LOD0.material} // TODO: As above
                 material={getEditableMaterial(asset.material)}
                 position={asset.properties.position}
                 rotation={asset.properties.rotation}
                 scale={asset.properties.scale}
             >
+                
+                {/* {UnwrappedMesh({} as UnwrappedWrapper)} */}
 
                 {isOutline && 
                 <Outlines 
