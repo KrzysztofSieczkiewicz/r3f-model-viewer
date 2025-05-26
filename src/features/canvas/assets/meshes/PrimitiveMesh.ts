@@ -2,7 +2,7 @@ import { Primitives, PrimitiveWrapper } from "../../../../models/assets/meshes/P
 import { SphereGeometry } from "three/src/geometries/SphereGeometry";
 import { BoxGeometry, ConeGeometry } from "three";
 
-export const getPrimitiveGeometry = (primitive: PrimitiveWrapper) => {
+export const PrimitiveGeometry = (primitive: PrimitiveWrapper) => {
     switch(primitive.type) {
         case Primitives.Sphere:
             return new SphereGeometry(
