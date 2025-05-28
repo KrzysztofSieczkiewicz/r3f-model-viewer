@@ -50,6 +50,24 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
             receiveShadow: true,
             visible: true,
         }
+    },
+    {
+        id: generateNewID(),
+        name: "Sphere",
+        meshType: Meshes.Unwrapped,
+        mesh: {
+            src: "models/pear/Pear2_LOD0.gltf"
+        },
+        materialType: Materials.Editable,
+        material: DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Physical],
+        properties: {
+            position:[0,0,0],
+            rotation:[0,0,0],
+            scale:[10,10,10],
+            castShadow: true,
+            receiveShadow: true,
+            visible: true,
+        }
     }
 ]
 

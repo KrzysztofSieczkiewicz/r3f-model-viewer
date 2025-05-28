@@ -1,45 +1,35 @@
-import * as THREE from "three";
-import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils";
-import { useGLTF } from "@react-three/drei";
+import React from "react";
+import { ReactNode } from "react";
+import { AssetWrapper } from "../../../../models/assets/Asset";
+import { useLoadAndMergeGLTF } from "../../hooks/useLoadAndMergeGLTF";
 import { UnwrappedWrapper } from "../../../../models/assets/meshes/Unwrapped";
-import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { getEditableMaterial } from "../materials/EditableMaterial";
 
-type GLTFResult = GLTF & {
-    nodes: {
-        [key: string]: THREE.Mesh;
-    };
-};
-
-export const UnwrappedGeometry = (unwrappedModel: UnwrappedWrapper) => {
-
-    unwrappedModel.src = "models/pear/Pear2_LOD0.gltf";
-    
-    const { nodes } = useGLTF(unwrappedModel.src) as unknown as GLTFResult;
-
-    const geometries: THREE.BufferGeometry[] = [];
-    for (const key in nodes) {
-        const node = nodes[key];
-
-        if (node instanceof THREE.Mesh && node.geometry) {
-            const geometry = node.geometry.clone();
-            node.updateWorldMatrix(true, false);
-            geometry.applyMatrix4(node.matrixWorld);
-            geometries.push(geometry);
-        }
-    }
-
-    if (geometries.length == 0) {
-        console.warn("File " + unwrappedModel.src + " doesn't contain any geometry")
-        return new THREE.BufferGeometry(); // TODO: handle asset not being created
-    }
-
-    const mergedGeometry = BufferGeometryUtils.mergeGeometries(geometries);
-
-    if (!mergedGeometry) {
-        console.warn("Failed to merge geometries for file: " + unwrappedModel.src)
-        return new THREE.BufferGeometry();
-    }
-
-    return (nodes.node.geometry)
-
+type Props = {
+    asset: AssetWrapper
+    children?: ReactNode
 }
+
+export const UnwrappedMesh = ( {asset, children}: Props ) => {
+
+    const mesh = asset.mesh as UnwrappedWrapper
+    const geometry = useLoadAndMergeGLTF(mesh.src)
+
+    
+    if(!asset.properties.visible) return;
+
+    return (
+        <mesh
+            matrixWorldAutoUpdate={true}
+            castShadow={asset.properties.castShadow}
+            receiveShadow={asset.properties.receiveShadow}
+            geometry={geometry}
+            material={getEditableMaterial(asset.material)}
+            position={asset.properties.position}
+            rotation={asset.properties.rotation}
+            scale={asset.properties.scale}
+        >
+            {children}
+        </mesh>
+    );
+};
