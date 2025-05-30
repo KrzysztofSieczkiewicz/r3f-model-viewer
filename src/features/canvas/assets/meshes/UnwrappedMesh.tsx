@@ -9,6 +9,9 @@ type Props = {
     children?: ReactNode
 }
 
+// TODO: CREATE A LOADER THAT LISTS MESHES WITH THEIR GEOMETRY AND MATERIALS
+// THEN YOU WILL DISPLAY THIS LIST IN A MODAL AND ALLOW IMPORTING SELECTED GEOMETRY WITH MATERIALS
+
 export const UnwrappedMesh = ( {asset, children}: Props ) => {
 
     const mesh = asset.mesh as UnwrappedWrapper
