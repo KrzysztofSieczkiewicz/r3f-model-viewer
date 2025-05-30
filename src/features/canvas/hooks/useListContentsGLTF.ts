@@ -3,8 +3,13 @@ import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type ListedMesh = {
-    meshName: string,
-    materialNames: string[],
+    name: string,
+    materials: ListedMaterial[],
+}
+
+type ListedMaterial = {
+    name: string;
+    type: string;
 }
 
 type GLTFResult = GLTF & {
@@ -16,7 +21,7 @@ type GLTFResult = GLTF & {
     };
 };
 
-export const useImportFromGLTF = (src: string) => {
+export const useListContentsGLTF = (src: string) => {
     
     const { scene } = useGLTF(src) as unknown as GLTFResult;
 
@@ -25,25 +30,30 @@ export const useImportFromGLTF = (src: string) => {
     scene.traverse((object) => {
         if (object instanceof THREE.Mesh) {
             
-            const meshName = object.name;
-            const materialNames: string[] = [];
+            const name = object.name;
+            const materials: ListedMaterial[] = [];
 
             if (object.material) {
+                console.log({material: object.material})
                 if (Array.isArray(object.material)) {
                     object.material.forEach( material => {
-                        if (material.name) materialNames.push(material.name);
+                        if (material.name) {
+                            materials.push( {name: material.name, type: material.type} );
+                        }
                     });
                 } else {
-                    if (object.material.name) materialNames.push(object.material.name);
+                    if (object.material.name) materials.push({name: object.material.name, type: object.material.type});
                 }
             }
 
             meshes.push({
-                meshName,
-                materialNames,
+                name,
+                materials
             });
         }
     });
+
+    console.log(meshes)
 
     return { meshes }
 }

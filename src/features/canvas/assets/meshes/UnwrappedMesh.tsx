@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { UnwrappedWrapper } from "../../../../models/assets/meshes/Unwrapped";
 import { useImportFromGLTF } from "../../hooks/useImportFromGLTF";
+import { useListContentsGLTF } from "../../hooks/useListContentsGLTF";
 
 type Props = {
     asset: AssetWrapper
@@ -16,6 +17,7 @@ export const UnwrappedMesh = ( {asset, children}: Props ) => {
 
     const mesh = asset.mesh as UnwrappedWrapper
     const { material, geometry } = useImportFromGLTF(mesh.src);
+    useListContentsGLTF(mesh.src);
 
     
     if(!asset.properties.visible) return;
