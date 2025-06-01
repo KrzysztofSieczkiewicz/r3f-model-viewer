@@ -15,7 +15,7 @@ type Props = {
 }
 
 export const AddAssetModal = ({ closeModal }: Props) => {
-    const {addAssetPrimitive} = useSceneObjectsContext();
+    const { addAssetPrimitive } = useSceneObjectsContext();
 
     const [ activeDropdown, setActiveNameDropdown ] = useState("");
 
