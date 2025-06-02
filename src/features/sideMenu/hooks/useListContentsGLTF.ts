@@ -2,12 +2,12 @@ import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
-type ListedMesh = {
+export type ListedMesh = {
     name: string,
     materials: ListedMaterial[],
 }
 
-type ListedMaterial = {
+export type ListedMaterial = {
     name: string;
     type: string;
 }

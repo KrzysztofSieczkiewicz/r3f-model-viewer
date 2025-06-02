@@ -7,9 +7,7 @@ export const ButtonAddAsset = () => {
     const { openModal, closeModal, SidebarModal } = useSidebarModal();
 
     return (
-        <ButtonAddObject buttonName="ADD ASSET" handleClicked={() => {
-            openModal(); 
-            } }>
+        <ButtonAddObject buttonName="ADD ASSET" handleClicked={() => openModal() }>
             <SidebarModal>
                 <AddAssetModal closeModal={closeModal}/>
             </SidebarModal>
