@@ -56,7 +56,8 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
         name: "Sphere",
         meshType: Meshes.Unwrapped,
         mesh: {
-            src: "models/pear/Pear2_LOD0.gltf"
+            //src: "models/pear/Pear2_LOD0.gltf"
+            src: "models/car/scene.gltf"
         },
         materialType: Materials.Editable,
         material: DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Physical],

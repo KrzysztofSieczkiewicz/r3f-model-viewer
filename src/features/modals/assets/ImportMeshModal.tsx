@@ -15,12 +15,13 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
 
     const { meshes } =  useListContentsGLTF(src)
 
-
     const handleMeshSelection = (mesh: ListedMesh) => {
         if (mesh.uuid !== selectedMesh?.uuid) {
             setSelectedMesh(mesh)
+            setSelectedMaterial(mesh.materials[0])
         } else {
             setSelectedMesh(null)
+            setSelectedMaterial(null)
         }
     }
 
@@ -35,11 +36,17 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
     const renderMeshTable = (meshesList: ListedMesh[]) => {
         return (
             <table className={styles.table}>
-                {meshesList.map( (mesh) => {
-                    return (<tr onClick={() => handleMeshSelection(mesh)}>
-                        <td>{mesh.name}</td>
-                    </tr>);
-                })}
+                <thead><td><b>Mesh</b></td></thead>
+                <tbody className={styles.tableBody}>
+                    {meshesList.map( (mesh, index) => {
+                        const isOdd = index%2 === 1
+                        const isSelected = mesh.uuid === selectedMesh?.uuid
+                        console.log({isOdd})
+                        return (<tr key={mesh.uuid} onClick={() => handleMeshSelection(mesh)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
+                            <td className={styles.tableCell}>{mesh.name}</td>
+                        </tr>);
+                    })}
+                </tbody>
             </table>
         )
     }
@@ -47,12 +54,17 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
     const renderMaterialsTable = () => {
         return (
             <table className={styles.table}>
-                {selectedMesh?.materials.map( (material) => {
-                    return (<tr onClick={() => handleMaterialSelection(material)}>
-                        <td>{material.name}</td>
-                        <td>{material.type}</td>
-                    </tr>);
-                })}
+                <thead><td><b>Material</b></td><td><b>Type</b></td></thead>
+                <tbody className={styles.tableBody}>
+                    {selectedMesh?.materials.map( (material, index) => {
+                        const isOdd = index%2 === 1
+                        const isSelected = material.uuid === selectedMaterial?.uuid
+                        return (<tr key={material.uuid} onClick={() => handleMaterialSelection(material)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
+                            <td className={styles.tableCell}>{material.name}</td>
+                            <td className={styles.tableCell}>{material.type}</td>
+                        </tr>);
+                    })}
+                </tbody>
             </table>
         )
     }
@@ -61,10 +73,10 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
     return (
     <div className={styles.modalContents}>
         <div className={styles.tablesContainer}>
-            <div className={styles.table}>
+            <div className={styles.tableContainer}>
                 {renderMeshTable(meshes)}
             </div>
-            <div className={styles.table}>
+            <div className={styles.tableContainer}>
                 {renderMaterialsTable()}
             </div>
         </div>

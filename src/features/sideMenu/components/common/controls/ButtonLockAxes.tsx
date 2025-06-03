@@ -17,7 +17,7 @@ export const ButtonLockAxes = ( {locked, setLocked}: Props) => {
 
     return (
         <button 
-            className={locked ? `${styles.button} ${styles.enabled}` : styles.button}
+            className={`${styles.button} ${locked ? styles.enabled : ''}`}
             onClick={() => setLocked(!locked)} >
             {handleIcon()}
         </button>
