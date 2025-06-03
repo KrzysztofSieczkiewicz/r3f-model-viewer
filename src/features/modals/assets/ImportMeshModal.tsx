@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import styles from './ImportMeshModal.module.css'
+
 import { ListedMaterial, ListedMesh, useListContentsGLTF } from "../../sideMenu/hooks/useListContentsGLTF"
 
 type Props = {
@@ -13,34 +15,57 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
 
     const { meshes } =  useListContentsGLTF(src)
 
-    const renderMeshList = () => {
-        const meshesList = meshes.map( (mesh, index) => {
-            if (index <=5) return mesh
-        })
+
+    const handleMeshSelection = (mesh: ListedMesh) => {
+        if (mesh.uuid !== selectedMesh?.uuid) {
+            setSelectedMesh(mesh)
+        } else {
+            setSelectedMesh(null)
+        }
+    }
+
+    const handleMaterialSelection = (material: ListedMaterial) => {
+        if (material.uuid !== selectedMaterial?.uuid) {
+            setSelectedMaterial(material)
+        } else {
+            setSelectedMaterial(null)
+        }
+    }
+
+    const renderMeshTable = (meshesList: ListedMesh[]) => {
         return (
-            meshesList.map( mesh => {
-                if (!mesh) return
-                return <p key={mesh.name} onClick={() => setSelectedMesh(mesh)}>{mesh.name}</p>
-            })
+            <table className={styles.table}>
+                {meshesList.map( (mesh) => {
+                    return (<tr onClick={() => handleMeshSelection(mesh)}>
+                        <td>{mesh.name}</td>
+                    </tr>);
+                })}
+            </table>
         )
     }
 
-    const renderMaterialsList = () => {
+    const renderMaterialsTable = () => {
         return (
-            selectedMesh?.materials.map( material => {
-                return <p key={material.name} onClick={() => setSelectedMaterial(material)}>{material.name} - {material.type}</p>
-            })
+            <table className={styles.table}>
+                {selectedMesh?.materials.map( (material) => {
+                    return (<tr onClick={() => handleMaterialSelection(material)}>
+                        <td>{material.name}</td>
+                        <td>{material.type}</td>
+                    </tr>);
+                })}
+            </table>
         )
     }
+
 
     return (
-    <div>
-        <div className="selection-container">
-            <div className="selection-mesh">
-                {renderMeshList()}
+    <div className={styles.modalContents}>
+        <div className={styles.tablesContainer}>
+            <div className={styles.table}>
+                {renderMeshTable(meshes)}
             </div>
-            <div className="selection-material">
-                {renderMaterialsList()}
+            <div className={styles.table}>
+                {renderMaterialsTable()}
             </div>
         </div>
     </div>

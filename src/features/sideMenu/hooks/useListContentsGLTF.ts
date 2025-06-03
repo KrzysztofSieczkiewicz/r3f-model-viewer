@@ -3,12 +3,14 @@ import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 export type ListedMesh = {
+    uuid: string,
     name: string,
-    materials: ListedMaterial[],
+    materials: ListedMaterial[];
 }
 
 export type ListedMaterial = {
-    name: string;
+    uuid: string,
+    name: string,
     type: string;
 }
 
@@ -30,30 +32,29 @@ export const useListContentsGLTF = (src: string) => {
     scene.traverse((object) => {
         if (object instanceof THREE.Mesh) {
             
+            const uuid = object.uuid
             const name = object.name;
             const materials: ListedMaterial[] = [];
 
             if (object.material) {
-                console.log({material: object.material})
                 if (Array.isArray(object.material)) {
                     object.material.forEach( material => {
                         if (material.name) {
-                            materials.push( {name: material.name, type: material.type} );
+                            materials.push( {uuid: object.material.uuid, name: material.name, type: material.type} );
                         }
                     });
                 } else {
-                    if (object.material.name) materials.push({name: object.material.name, type: object.material.type});
+                    if (object.material.name) materials.push({uuid: object.material.uuid, name: object.material.name, type: object.material.type});
                 }
             }
 
             meshes.push({
+                uuid,
                 name,
                 materials
             });
         }
     });
-
-    console.log(meshes)
 
     return { meshes }
 }
