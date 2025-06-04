@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from './ImportMeshModal.module.css'
 
-import { ListedMaterial, ListedMesh, useListContentsGLTF } from "../../sideMenu/hooks/useListContentsGLTF"
+import { ListedMetadataGLTF, MaterialMetadataGLTF, MeshMetadataGLTF, useImportGLTF } from "../../sideMenu/hooks/useImportGLTF"
 
 type Props = {
     src: string;
@@ -10,23 +10,43 @@ type Props = {
 
 export const ImportMeshModal = ({src, closeModal}: Props) => {
 
-    const [ selectedMesh, setSelectedMesh ] = useState<ListedMesh|null>(null);
-    const [ selectedMaterial, setSelectedMaterial ] = useState<ListedMaterial|null>(null);
+    const [meshes, setMeshes] = useState<ListedMetadataGLTF[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    const { meshes } =  useListContentsGLTF(src)
+    const [ selectedMesh, setSelectedMesh ] = useState<ListedMetadataGLTF|null>(null);
+    const [ selectedMaterial, setSelectedMaterial ] = useState<MaterialMetadataGLTF|null>(null);
 
-    const handleMeshSelection = (mesh: ListedMesh) => {
-        if (mesh.uuid !== selectedMesh?.uuid) {
-            setSelectedMesh(mesh)
-            setSelectedMaterial(mesh.materials[0])
+    const { getContents } =  useImportGLTF()
+
+    useEffect( () => {
+        setIsLoading(true);
+        setError(null);
+
+        getContents(src)
+            .then( (loadedMeshes) => {
+                setMeshes(loadedMeshes.meshes);
+                setIsLoading(false);
+            })
+            .catch( err => {
+                console.error("Failed to load data from GLTF file: ", err);
+                setError("Failed to load contents of the file.")
+                setIsLoading(false);
+            });
+    }, [src])
+
+    const handleMeshSelection = (selected: ListedMetadataGLTF) => {
+        if (selected.mesh.id !== selectedMesh?.mesh.id) {
+            setSelectedMesh(selected)
+            setSelectedMaterial(selected.materials[0])
         } else {
             setSelectedMesh(null)
             setSelectedMaterial(null)
         }
     }
 
-    const handleMaterialSelection = (material: ListedMaterial) => {
-        if (material.uuid !== selectedMaterial?.uuid) {
+    const handleMaterialSelection = (material: MaterialMetadataGLTF) => {
+        if (material.id !== selectedMaterial?.id) {
             setSelectedMaterial(material)
         } else {
             setSelectedMaterial(null)
@@ -37,39 +57,30 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
         closeModal();
     }
 
-    const renderMeshTable = (meshesList: ListedMesh[]) => {
+    const renderMeshTable = (available: ListedMetadataGLTF[]) => {
         return (
-            <table className={styles.table}>
-                <thead><td><b>Mesh</b></td></thead>
-                <tbody className={styles.tableBody}>
-                    {meshesList.map( (mesh, index) => {
-                        const isOdd = index%2 === 1
-                        const isSelected = mesh.uuid === selectedMesh?.uuid
-                        console.log({isOdd})
-                        return (<tr key={mesh.uuid} onClick={() => handleMeshSelection(mesh)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
-                            <td className={styles.tableCell}>{mesh.name}</td>
-                        </tr>);
-                    })}
-                </tbody>
-            </table>
-        )
+            available.map( (entry, index) => {
+                const mesh = entry.mesh;
+                const isOdd = index%2 === 1
+                const isSelected = mesh.id === selectedMesh?.mesh.id
+
+                return (<tr key={mesh.id} onClick={() => handleMeshSelection(entry)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
+                    <td className={styles.tableCell}>{mesh.name}</td>
+                </tr>);
+            })
+        );
     }
 
-    const renderMaterialsTable = () => {
+    const renderMaterialsTable = (selected: ListedMetadataGLTF | null) => {
         return (
-            <table className={styles.table}>
-                <thead><td><b>Material</b></td><td><b>Type</b></td></thead>
-                <tbody className={styles.tableBody}>
-                    {selectedMesh?.materials.map( (material, index) => {
-                        const isOdd = index%2 === 1
-                        const isSelected = material.uuid === selectedMaterial?.uuid
-                        return (<tr key={material.uuid} onClick={() => handleMaterialSelection(material)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
-                            <td className={styles.tableCell}>{material.name}</td>
-                            <td className={styles.tableCell}>{material.type}</td>
-                        </tr>);
-                    })}
-                </tbody>
-            </table>
+            selected?.materials.map( (material, index) => {
+                const isOdd = index%2 === 1
+                const isSelected = material.id === selectedMaterial?.id
+                return (<tr key={material.id} onClick={() => handleMaterialSelection(material)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
+                    <td className={styles.tableCell}>{material.name}</td>
+                    <td className={styles.tableCell}>{material.type}</td>
+                </tr>);
+            })
         )
     }
 
@@ -77,12 +88,25 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
     return (
     <div className={styles.modalContents}>
         <div className={styles.tablesContainer}>
+
             <div className={styles.tableContainer}>
-                {renderMeshTable(meshes)}
+                <table className={styles.table}>
+                    <thead><td><b>Mesh</b></td></thead>
+                    <tbody className={styles.tableBody}>
+                        {renderMeshTable(meshes)}
+                    </tbody>
+                </table>
             </div>
+
             <div className={styles.tableContainer}>
-                {renderMaterialsTable()}
+                <table className={styles.table}>
+                    <thead><td><b>Material</b></td><td><b>Type</b></td></thead>
+                    <tbody className={styles.tableBody}>
+                        {renderMaterialsTable(selectedMesh)}
+                    </tbody>
+                </table>
             </div>
+
         </div>
         <button onClick={handleImportTrigger}>Import</button>
     </div>
