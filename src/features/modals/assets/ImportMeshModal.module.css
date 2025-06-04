@@ -2,6 +2,7 @@
 
 .modalContents {
     display: flex;
+    flex-flow: column;
     padding: 0.5rem;
     background-color: var(--color-main-weak);
 
@@ -10,7 +11,7 @@
 
 .tablesContainer {
     width: 50vw;
-    max-height: 75vh;
+    max-height: 50vh;
     margin: 0;
     padding: 0.5rem;
 

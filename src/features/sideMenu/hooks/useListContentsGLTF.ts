@@ -23,6 +23,8 @@ type GLTFResult = GLTF & {
     };
 };
 
+// TODO: IMPROVE THIS BY ELIMINATING LOADING OF THE GLTF BEFORE PARSING CONTENTS
+
 export const useListContentsGLTF = (src: string) => {
     
     const { scene } = useGLTF(src) as unknown as GLTFResult;

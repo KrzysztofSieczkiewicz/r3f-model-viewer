@@ -33,6 +33,10 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
         }
     }
 
+    const handleImportTrigger = () => {
+        closeModal();
+    }
+
     const renderMeshTable = (meshesList: ListedMesh[]) => {
         return (
             <table className={styles.table}>
@@ -80,6 +84,7 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
                 {renderMaterialsTable()}
             </div>
         </div>
+        <button onClick={handleImportTrigger}>Import</button>
     </div>
     )
 }
