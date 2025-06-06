@@ -51,7 +51,7 @@ export type StandardMaterialProperties = {
     bumpScale: number,
     displacementMap: Texture|null,
     displacementScale: number,
-    displacementBias: number
+    displacementBias: number,
 } & BaseMaterialProperties;
 
 

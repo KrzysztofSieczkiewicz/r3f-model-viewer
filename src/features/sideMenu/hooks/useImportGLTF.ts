@@ -1,15 +1,10 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GeometryMetadataGLTF } from "../../../models/assets/meshes/Unwrapped";
 
 export type ListedMetadataGLTF = {
-    mesh: MeshMetadataGLTF,
+    mesh: GeometryMetadataGLTF,
     materials: MaterialMetadataGLTF[]
-}
-
-export type MeshMetadataGLTF = {
-    id: string,
-    name: string,
-    traversalIndex: number,
 }
 
 export type MaterialMetadataGLTF = {
@@ -84,7 +79,7 @@ export const useImportGLTF = () => {
         });
     };
 
-    const loadGeometry = (src: string, required: MeshMetadataGLTF) => {
+    const loadGeometry = (src: string, required: GeometryMetadataGLTF) => {
         return new Promise( (resolve, reject) => {
             const loader = new GLTFLoader();
 
@@ -124,7 +119,7 @@ export const useImportGLTF = () => {
         })
     }
 
-    const loadContents = (src: string, requiredMesh: MeshMetadataGLTF, requiredMaterial: MaterialMetadataGLTF | null): Promise<LoadingRestultGLTF> => {
+    const loadContents = (src: string, requiredMesh: GeometryMetadataGLTF, requiredMaterial: MaterialMetadataGLTF | null): Promise<LoadingRestultGLTF> => {
         return new Promise( (resolve, reject) => {
             const loader = new GLTFLoader();
 

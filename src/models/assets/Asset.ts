@@ -60,8 +60,14 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
         name: "Sphere",
         meshType: Meshes.Unwrapped,
         mesh: {
-            //src: "models/pear/Pear2_LOD0.gltf"
-            src: "models/car/scene.gltf"
+            src: "models/car/scene.gltf",
+            geometries: [
+                {
+                    id: "Rim_FL_Rim_0_0",
+                    name: "Rim_FL_Rim_0",
+                    traversalIndex: 0,
+                }
+            ],
         },
         materialType: Materials.Editable,
         material: DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Physical],
@@ -101,7 +107,14 @@ const getDefaultUnwrappedAsset = (): UnwrappedAssetWrapper => {
         name: "pear",
         meshType: Meshes.Unwrapped,
         mesh: {
-            src: ""
+            src: "",
+            geometries: [
+                {
+                    id: "",
+                    name: "",
+                    traversalIndex: 0,
+                }
+            ],
         },
         materialType: Materials.Editable,
         material: DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Standard],

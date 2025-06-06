@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import * as THREE from "three";
 import { ReactNode } from "react";
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { UnwrappedWrapper } from "../../../../models/assets/meshes/Unwrapped";
 import { useImportFromGLTF } from "../../hooks/useImportFromGLTF";
+import { useImportGLTF } from "../../../sideMenu/hooks/useImportGLTF";
 
 type Props = {
     asset: AssetWrapper
@@ -15,10 +17,28 @@ type Props = {
 export const UnwrappedMesh = ( {asset, children}: Props ) => {
 
     const mesh = asset.mesh as UnwrappedWrapper
-    const { material, geometry } = useImportFromGLTF(mesh.src);
+    //const { material, geometry } = useImportFromGLTF(mesh.src);
+     
+    const [ geometry, setGeometry ] = useState<THREE.BufferGeometry>(new THREE.BufferGeometry)
+    const [ material, setMaterial ] = useState<THREE.Material>(new THREE.Material)
+    const { loadContents } =  useImportGLTF() 
     
-    if(!asset.properties.visible) return;
+    useEffect( () => {
+        // console.log({src: mesh.src})
+        // console.log({geometry: mesh.geometries[0]})
+        console.log({mesh: mesh}) 
 
+        loadContents(mesh.src, mesh.geometries[0], null)
+            .then( (contents) => {
+                setGeometry(contents.geometry)
+                console.log("loaded object:", {geometry})
+            })
+            .catch( err => {
+                console.error("Failed to load contents of the GLTF file: ", err);
+            });
+    }, []);
+
+    if(!asset.properties.visible) return;
     return (
         <mesh
             matrixWorldAutoUpdate={true}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import styles from './ImportMeshModal.module.css'
 
-import { ListedMetadataGLTF, MaterialMetadataGLTF, MeshMetadataGLTF, useImportGLTF } from "../../sideMenu/hooks/useImportGLTF"
+import { ListedMetadataGLTF, MaterialMetadataGLTF, useImportGLTF } from "../../sideMenu/hooks/useImportGLTF"
+import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 
 type Props = {
     src: string;
@@ -10,6 +11,8 @@ type Props = {
 
 export const ImportMeshModal = ({src, closeModal}: Props) => {
 
+    const { addAssetUnwrapped } = useSceneObjectsContext();
+
     const [meshes, setMeshes] = useState<ListedMetadataGLTF[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -17,6 +20,7 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
     const [ selectedMesh, setSelectedMesh ] = useState<ListedMetadataGLTF|null>(null);
     const [ selectedMaterial, setSelectedMaterial ] = useState<MaterialMetadataGLTF|null>(null);
 
+    // TODO: Check why it executes twice
     const { getContents, loadContents } =  useImportGLTF()
 
     useEffect( () => {
@@ -55,15 +59,21 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
 
     const handleImportTrigger = () => {
         if (!selectedMesh) return;
-        loadContents(src, selectedMesh.mesh, selectedMaterial)
+
+        const change = {
+            mesh: {
+                src: src,
+                geometries: [selectedMesh.mesh]
+            }
+        }
+        addAssetUnwrapped(change);
+
+        loadContents(src, selectedMesh.mesh, null)
             .then( (contents) => {
-                console.log({geometry: contents.geometry});
-                console.log({material: contents.material});
-                closeModal();
+                console.log("loaded object:", {contents})
             })
             .catch( err => {
                 console.error("Failed to load contents of the GLTF file: ", err);
-                setError("Failed to load contents of the file.")
             });
     }
 

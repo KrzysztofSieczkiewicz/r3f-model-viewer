@@ -18,7 +18,7 @@ type SceneObjectsContextProps = {
     deleteAsset: (id: string) => void,
     addAsset: () => void,
     addAssetPrimitive: (primitiveType: Primitives) => void,
-    addAssetUnwrapped: (change: Partial<UnwrappedAssetWrapper>) => void,
+    addAssetUnwrapped: (change?: Partial<UnwrappedAssetWrapper>) => void,
 
     lightsList: LightWrapper[],
     changeLightType: (id: string, type: LightType) => void,
@@ -113,6 +113,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         if(change) {
             newAsset = { ...newAsset, ...change }
         }
+        console.log("New Asset: " ,{newAsset});
 
         const extendedAssetsList = [...assetsList, getDefaultAsset()];
         setAssetsList(extendedAssetsList);
