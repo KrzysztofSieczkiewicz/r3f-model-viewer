@@ -124,7 +124,7 @@ export const useImportGLTF = () => {
         })
     }
 
-    const loadContents = (src: string, requiredMesh: MeshMetadataGLTF, requiredMaterial?: MaterialMetadataGLTF): Promise<LoadingRestultGLTF> => {
+    const loadContents = (src: string, requiredMesh: MeshMetadataGLTF, requiredMaterial: MaterialMetadataGLTF | null): Promise<LoadingRestultGLTF> => {
         return new Promise( (resolve, reject) => {
             const loader = new GLTFLoader();
 

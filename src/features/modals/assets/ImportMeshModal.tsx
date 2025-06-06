@@ -17,7 +17,7 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
     const [ selectedMesh, setSelectedMesh ] = useState<ListedMetadataGLTF|null>(null);
     const [ selectedMaterial, setSelectedMaterial ] = useState<MaterialMetadataGLTF|null>(null);
 
-    const { getContents } =  useImportGLTF()
+    const { getContents, loadContents } =  useImportGLTF()
 
     useEffect( () => {
         setIsLoading(true);
@@ -29,8 +29,8 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
                 setIsLoading(false);
             })
             .catch( err => {
-                console.error("Failed to load data from GLTF file: ", err);
-                setError("Failed to load contents of the file.")
+                console.error("Failed to read data from the GLTF file: ", err);
+                setError("Failed to read contents of the file.")
                 setIsLoading(false);
             });
     }, [src])
@@ -54,7 +54,17 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
     }
 
     const handleImportTrigger = () => {
-        closeModal();
+        if (!selectedMesh) return;
+        loadContents(src, selectedMesh.mesh, selectedMaterial)
+            .then( (contents) => {
+                console.log({geometry: contents.geometry});
+                console.log({material: contents.material});
+                closeModal();
+            })
+            .catch( err => {
+                console.error("Failed to load contents of the GLTF file: ", err);
+                setError("Failed to load contents of the file.")
+            });
     }
 
     const renderMeshTable = (available: ListedMetadataGLTF[]) => {

@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from "react";
 import { ReactNode, createContext, useState } from "react";
 
-import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Meshes } from "../../../models/assets/Asset";
+import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Meshes, UnwrappedAssetWrapper, getDefaultUnwrappedAsset } from "../../../models/assets/Asset";
 import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightType, getDefaultLight } from "../../../models/Light";
 import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../../models/assets/meshes/Primitive";
 import { CAMERA_TYPES, CameraProperties, CameraType, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../../models/Camera";
@@ -18,6 +18,7 @@ type SceneObjectsContextProps = {
     deleteAsset: (id: string) => void,
     addAsset: () => void,
     addAssetPrimitive: (primitiveType: Primitives) => void,
+    addAssetUnwrapped: (change: Partial<UnwrappedAssetWrapper>) => void,
 
     lightsList: LightWrapper[],
     changeLightType: (id: string, type: LightType) => void,
@@ -79,18 +80,15 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setLightsList(filteredLights);
     }, [lightsList]);
 
-    
 
-
-    // TODO: REPLACE "defaultAsset" WITH PROPER ASSET IMPORT LOGIC 
-    // (ESP WITH CREATING NEW ID EACH TIME)
 
     const addAsset = () => {
         const extendedAssetsList = [...assetsList, getDefaultAsset()];
         setAssetsList(extendedAssetsList);
     };
 
-    const addAssetPrimitive = (primitiveType: Primitives) => {
+
+    const addAssetPrimitive = useCallback((primitiveType: Primitives) => {
         let primitive;
         switch(primitiveType) {
             case Primitives.Sphere:
@@ -106,6 +104,17 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         const newAsset = {...getDefaultAsset(), meshType: Meshes.Primitive, mesh: primitive} as AssetWrapper;
         const extendedAssetsList = [...assetsList, newAsset];
 
+        setAssetsList(extendedAssetsList);
+    }, [assetsList]);
+
+    const addAssetUnwrapped = (change?: Partial<UnwrappedAssetWrapper>) => {
+        let newAsset = getDefaultUnwrappedAsset();
+
+        if(change) {
+            newAsset = { ...newAsset, ...change }
+        }
+
+        const extendedAssetsList = [...assetsList, getDefaultAsset()];
         setAssetsList(extendedAssetsList);
     }
 
@@ -229,7 +238,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     return (
         <SceneObjectsContext.Provider value={{ 
             lightsList, changeLightType, updateLightProperties, deleteLight, addDefaultLight, 
-            assetsList, updateAssetProperties, updatePrimitiveProperties, updateEditableMaterialProperties, changeEditableMaterialType, deleteAsset, addAsset, addAssetPrimitive,
+            assetsList, updateAssetProperties, updatePrimitiveProperties, updateEditableMaterialProperties, changeEditableMaterialType, deleteAsset, addAsset, addAssetPrimitive, addAssetUnwrapped,
             camerasList, addCamera, updateCameraProperties, deleteCamera }} >
             {props.children}
         </SceneObjectsContext.Provider>

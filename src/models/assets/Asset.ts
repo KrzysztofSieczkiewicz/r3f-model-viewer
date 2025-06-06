@@ -29,10 +29,14 @@ export type AssetProperties = {
 // and adjust the application not to require that shit
 // TODO: CONSIDER HANDLING ASSET WRAPPER WITH WILDCARD TO ALLOW COMPONENTS USING AssetWrapper TO ALREADY KNOW WHAT MESH TYPE IS INSIDE?
 // OR JUST MAKE THEM LOOK INSIDE AND ACT BASED ON TYPES
+export type PrimitiveAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Primitive, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper};
+export type UnwrappedAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Unwrapped, mesh: UnwrappedWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper};
+export type ScanAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Scan, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper};
+
 export type AssetWrapper = 
-    { id: string, name: string, properties: AssetProperties, meshType: Meshes.Primitive, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper} |
-    { id: string, name: string, properties: AssetProperties, meshType: Meshes.Unwrapped, mesh: UnwrappedWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper} |
-    { id: string, name: string, properties: AssetProperties, meshType: Meshes.Scan, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper}
+    PrimitiveAssetWrapper |
+    UnwrappedAssetWrapper |
+    ScanAssetWrapper;
 
 const INIT_ASSET_LIST: AssetWrapper[] = [
     {
@@ -91,4 +95,25 @@ const getDefaultAsset = (): AssetWrapper => {
     };
 }
 
-export { INIT_ASSET_LIST, getDefaultAsset };
+const getDefaultUnwrappedAsset = (): UnwrappedAssetWrapper => {
+    return {
+        id: generateNewID(),
+        name: "pear",
+        meshType: Meshes.Unwrapped,
+        mesh: {
+            src: ""
+        },
+        materialType: Materials.Editable,
+        material: DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Standard],
+        properties: {
+            position:[0,0,0],
+            rotation:[0,0,0],
+            scale:[1,1,1],
+            castShadow: true,
+            receiveShadow: true,
+            visible: true,
+        }
+    };
+}
+
+export { INIT_ASSET_LIST, getDefaultAsset, getDefaultUnwrappedAsset };
