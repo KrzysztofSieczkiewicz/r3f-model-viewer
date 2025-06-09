@@ -19,15 +19,13 @@ export const UnwrappedMesh = ( {asset, children}: Props ) => {
     const mesh = asset.mesh as UnwrappedWrapper
     //const { material, geometry } = useImportFromGLTF(mesh.src);
      
-    const [ geometry, setGeometry ] = useState<THREE.BufferGeometry>(new THREE.BufferGeometry)
-    const [ material, setMaterial ] = useState<THREE.Material>(new THREE.Material)
+    const [ geometry, setGeometry ] = useState<THREE.BufferGeometry>(new THREE.BufferGeometry())
+    const [ material, setMaterial ] = useState<THREE.Material>(new THREE.Material())
     const { loadContents } =  useImportGLTF() 
-    
-    useEffect( () => {
-        // console.log({src: mesh.src})
-        // console.log({geometry: mesh.geometries[0]})
-        console.log({mesh: mesh}) 
 
+    console.log({mesh: mesh}) 
+
+    useEffect( () => {
         loadContents(mesh.src, mesh.geometries[0], null)
             .then( (contents) => {
                 setGeometry(contents.geometry)
@@ -36,7 +34,7 @@ export const UnwrappedMesh = ( {asset, children}: Props ) => {
             .catch( err => {
                 console.error("Failed to load contents of the GLTF file: ", err);
             });
-    }, []);
+    }, [])
 
     if(!asset.properties.visible) return;
     return (
@@ -45,7 +43,7 @@ export const UnwrappedMesh = ( {asset, children}: Props ) => {
             castShadow={asset.properties.castShadow}
             receiveShadow={asset.properties.receiveShadow}
             geometry={geometry}
-            material={material}
+            //material={material}
             position={asset.properties.position}
             rotation={asset.properties.rotation}
             scale={asset.properties.scale}

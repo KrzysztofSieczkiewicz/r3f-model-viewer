@@ -115,7 +115,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         }
         console.log("New Asset: " ,{newAsset});
 
-        const extendedAssetsList = [...assetsList, getDefaultAsset()];
+        const extendedAssetsList = [...assetsList, newAsset];
         setAssetsList(extendedAssetsList);
     }
 

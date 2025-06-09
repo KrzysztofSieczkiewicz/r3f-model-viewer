@@ -57,14 +57,14 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
     },
     {
         id: generateNewID(),
-        name: "Sphere",
+        name: "Test",
         meshType: Meshes.Unwrapped,
         mesh: {
             src: "models/car/scene.gltf",
             geometries: [
                 {
-                    id: "Rim_FL_Rim_0_0",
-                    name: "Rim_FL_Rim_0",
+                    id: "",
+                    name: "",
                     traversalIndex: 0,
                 }
             ],
@@ -104,7 +104,7 @@ const getDefaultAsset = (): AssetWrapper => {
 const getDefaultUnwrappedAsset = (): UnwrappedAssetWrapper => {
     return {
         id: generateNewID(),
-        name: "pear",
+        name: "unwrapped",
         meshType: Meshes.Unwrapped,
         mesh: {
             src: "",
