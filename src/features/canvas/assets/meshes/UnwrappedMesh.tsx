@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { ReactNode } from "react";
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { UnwrappedWrapper } from "../../../../models/assets/meshes/Unwrapped";
-import { useImportFromGLTF } from "../../hooks/useImportFromGLTF";
 import { useImportGLTF } from "../../../sideMenu/hooks/useImportGLTF";
 
 type Props = {
@@ -17,10 +16,8 @@ type Props = {
 export const UnwrappedMesh = ( {asset, children}: Props ) => {
 
     const mesh = asset.mesh as UnwrappedWrapper
-    //const { material, geometry } = useImportFromGLTF(mesh.src);
-     
-    const [ geometry, setGeometry ] = useState<THREE.BufferGeometry>(new THREE.BufferGeometry())
-    const [ material, setMaterial ] = useState<THREE.Material>(new THREE.Material())
+
+    const [ props, setProps ] = useState<{geometry?: THREE.BufferGeometry, material?: THREE.Material}>();
     const { loadContents } =  useImportGLTF() 
 
     console.log({mesh: mesh}) 
@@ -28,13 +25,19 @@ export const UnwrappedMesh = ( {asset, children}: Props ) => {
     useEffect( () => {
         loadContents(mesh.src, mesh.geometries[0], null)
             .then( (contents) => {
-                setGeometry(contents.geometry)
-                console.log("loaded object:", {geometry})
+
+                const geometry = contents.geometry || undefined;
+                const material = contents.material || undefined;
+
+                setProps({
+                    geometry: geometry,
+                    material: material
+                })
             })
             .catch( err => {
                 console.error("Failed to load contents of the GLTF file: ", err);
             });
-    }, [])
+    }, [mesh.src, mesh.geometries])
 
     if(!asset.properties.visible) return;
     return (
@@ -42,8 +45,7 @@ export const UnwrappedMesh = ( {asset, children}: Props ) => {
             matrixWorldAutoUpdate={true}
             castShadow={asset.properties.castShadow}
             receiveShadow={asset.properties.receiveShadow}
-            geometry={geometry}
-            //material={material}
+            {...props}
             position={asset.properties.position}
             rotation={asset.properties.rotation}
             scale={asset.properties.scale}

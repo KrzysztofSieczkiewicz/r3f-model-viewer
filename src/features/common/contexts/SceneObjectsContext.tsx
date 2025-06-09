@@ -42,7 +42,6 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
 
     const addDefaultLight = useCallback((type: LightType) => {
         const newLight = getDefaultLight(type);
-        console.log({newLight})
         const extendedLights = [...lightsList, newLight] as LightWrapper[];
         setLightsList(extendedLights);
     }, [lightsList]);
@@ -113,7 +112,6 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         if(change) {
             newAsset = { ...newAsset, ...change }
         }
-        console.log("New Asset: " ,{newAsset});
 
         const extendedAssetsList = [...assetsList, newAsset];
         setAssetsList(extendedAssetsList);

@@ -67,14 +67,6 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
             }
         }
         addAssetUnwrapped(change);
-
-        loadContents(src, selectedMesh.mesh, null)
-            .then( (contents) => {
-                console.log("loaded object:", {contents})
-            })
-            .catch( err => {
-                console.error("Failed to load contents of the GLTF file: ", err);
-            });
     }
 
     const renderMeshTable = (available: ListedMetadataGLTF[]) => {
