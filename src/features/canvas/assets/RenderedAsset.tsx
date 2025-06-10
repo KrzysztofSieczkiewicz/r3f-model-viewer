@@ -1,12 +1,12 @@
+import React from "react";
+
 import { Outlines } from "@react-three/drei";
 import { useEffect, useState } from "react";
 import { AssetWrapper } from "../../../models/assets/Asset";
-import React from "react";
 import { AssetsGizmo } from "./AssetsGizmo";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
-
 import { RenderedMesh } from "./meshes/RenderedMesh";
 
 type Props = {
@@ -52,7 +52,7 @@ export const RenderedAsset = ( {asset}: Props) => {
                     handleChange={(newAsset) => updateAssetProperties(asset.id, {...newAsset})} /> 
             }
 
-            <RenderedMesh asset={asset}>
+            <RenderedMesh assetID={asset.id} meshType={asset.meshType}>
                 {isOutline && 
                     <Outlines 
                         thickness={0.025} 

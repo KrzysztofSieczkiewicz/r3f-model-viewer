@@ -11,7 +11,7 @@ export type EditableWrapper = AssetWrapper | LightWrapper
 
 type SceneObjectsContextProps = {
     assetsList: AssetWrapper[],
-    getAsset: (is: string) => AssetWrapper,
+    getAsset: (id: string) => AssetWrapper,
     updateAssetProperties: (id: string, change: Partial<AssetProperties>) => void,
     updatePrimitiveProperties: (id: string, change: Partial<PrimitiveProperties>) => void,
     updateAssetMaterialProperties: (id: string, change: Partial<EditableMaterialProperties>) => void,
@@ -32,7 +32,7 @@ type SceneObjectsContextProps = {
     deleteCamera: (id: string) => void,
 }
 
-export const SceneObjectsContext = createContext<SceneObjectsContextProps | null>( null );
+export const SceneObjectsContext = createContext<SceneObjectsContextProps | null>(null);
 
 export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.Element => {
 
@@ -40,7 +40,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
     const [ camerasList, setCamerasList ] = useState<CameraWrapper[]>(INIT_CAMERAS_LIST)
 
-    
+
     /* ASSETS */
 
     const assetsList = useMemo(() => {

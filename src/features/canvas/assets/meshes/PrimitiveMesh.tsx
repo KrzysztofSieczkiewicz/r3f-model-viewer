@@ -4,13 +4,17 @@ import { BoxGeometry, ConeGeometry } from "three";
 import React, { ReactNode } from "react";
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { getEditableMaterial } from "../materials/EditableMaterial";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 
 type Props = {
-    asset: AssetWrapper
+    assetID: string
     children?: ReactNode
 }
 
-export const PrimitiveMesh = ( {asset, children}: Props ) => {
+export const PrimitiveMesh = ( {assetID, children}: Props ) => {
+    const { getAsset } = useSceneObjectsContext();
+
+    const asset = getAsset(assetID);
 
     const handleGeometry = (mesh: PrimitiveWrapper) => {
         switch(mesh.type) {

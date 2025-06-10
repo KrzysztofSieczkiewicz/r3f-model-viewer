@@ -4,21 +4,24 @@ import { ReactNode } from "react";
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { UnwrappedWrapper } from "../../../../models/assets/meshes/Unwrapped";
 import { useImportGLTF } from "../../../sideMenu/hooks/useImportGLTF";
+import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 
 type Props = {
-    asset: AssetWrapper
+    assetID: string
     children?: ReactNode
 }
 
 // TODO: CREATE A LOADER THAT LISTS MESHES WITH THEIR GEOMETRY AND MATERIALS
 // THEN YOU WILL DISPLAY THIS LIST IN A MODAL AND ALLOW IMPORTING SELECTED GEOMETRY WITH MATERIALS
 
-export const UnwrappedMesh = ( {asset, children}: Props ) => {
+export const UnwrappedMesh = ( {assetID, children}: Props ) => {
+    const { getAsset } = useSceneObjectsContext();
 
     const [ props, setProps ] = useState<{geometry?: THREE.BufferGeometry, material?: THREE.Material}>();
     const meshRef = useRef<THREE.Mesh>(null);
     const { loadContents } =  useImportGLTF()
 
+    const asset = getAsset(assetID)
     const mesh = asset.mesh as UnwrappedWrapper
 
     console.log("TRIGGERED RERENDER")
@@ -26,7 +29,6 @@ export const UnwrappedMesh = ( {asset, children}: Props ) => {
     useEffect( () => {
         loadContents(mesh.src, mesh.geometries[0], null)
             .then( (contents) => {
-
                 const geometry = contents.geometry || undefined;
                 const material = contents.material || undefined;
 
