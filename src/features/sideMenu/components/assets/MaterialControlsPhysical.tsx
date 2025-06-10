@@ -18,7 +18,7 @@ type Props = {
 }
 
 export const MaterialControlsPhysical = ( {assetId, properties}: Props) => {
-    const { updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
+    const { updateAssetMaterialProperties: updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
 
     const {
         flatShading, displayWireframe,

@@ -83,7 +83,6 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
 ]
 
 const initializeAssetList = (): Record<string, AssetWrapper> => {
-    const assetsRecord = {} as Record<string, AssetWrapper>;
 
     return INIT_ASSET_LIST.reduce((acc, asset) => {
         acc[asset.id] = asset;
@@ -138,4 +137,4 @@ const getDefaultUnwrappedAsset = (): UnwrappedAssetWrapper => {
     };
 }
 
-export { INIT_ASSET_LIST, getDefaultAsset, getDefaultUnwrappedAsset };
+export { INIT_ASSET_LIST, getDefaultAsset, getDefaultUnwrappedAsset, initializeAssetList };

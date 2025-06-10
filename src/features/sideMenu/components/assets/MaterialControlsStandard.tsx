@@ -18,7 +18,7 @@ type Props = {
 }
 
 export const MaterialControlsStandard = ({assetId, properties}: Props) => {
-    const { updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
+    const { updateAssetMaterialProperties: updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
 
     const { transparent, opacity, flatShading, displayWireframe,
         colorMap, color, roughnessMap, roughness, metalnessMap, metalness,

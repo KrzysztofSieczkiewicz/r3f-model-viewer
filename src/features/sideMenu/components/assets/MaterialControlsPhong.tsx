@@ -17,7 +17,7 @@ type Props = {
 }
 
 export const MaterialControlsPhong = ({assetId, properties}: Props) => {
-    const { updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
+    const { updateAssetMaterialProperties: updateEditableMaterialProperties, changeEditableMaterialType } = useSceneObjectsContext();
 
     const { transparent, opacity, flatShading, displayWireframe,
         color, emissive, specular, shininess } = properties;
