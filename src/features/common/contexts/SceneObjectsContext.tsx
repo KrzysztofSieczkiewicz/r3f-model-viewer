@@ -1,11 +1,11 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useMemo } from "react";
 import { ReactNode, createContext, useState } from "react";
 
 import { AssetProperties, AssetWrapper, INIT_ASSET_LIST, getDefaultAsset, Meshes, UnwrappedAssetWrapper, getDefaultUnwrappedAsset } from "../../../models/assets/Asset";
 import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightType, getDefaultLight } from "../../../models/Light";
-import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives } from "../../../models/assets/meshes/Primitive";
+import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives, PrimitiveWrapper } from "../../../models/assets/meshes/Primitive";
 import { CAMERA_TYPES, CameraProperties, CameraType, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../../models/Camera";
-import { DEFAULT_EDITABLE_MATERIALS, EditableMaterialProperties, EditableMaterials } from "../../../models/assets/materials/EditableMaterial";
+import { DEFAULT_EDITABLE_MATERIALS, EditableMaterialProperties, EditableMaterials, EditableMaterialWrapper } from "../../../models/assets/materials/EditableMaterial";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
@@ -37,55 +37,26 @@ export const SceneObjectsContext = createContext<SceneObjectsContextProps | null
 export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.Element => {
 
     const [ assetsList, setAssetsList ] = useState<AssetWrapper[]>(INIT_ASSET_LIST);
+    const [ assetsRecord, setAssetsRecord ] = useState<Record<string, AssetWrapper>>(initializeAssetList());
     const [ lightsList, setLightsList ] = useState<LightWrapper[]>(INIT_LIGHTS_LIST);
     const [ camerasList, setCamerasList ] = useState<CameraWrapper[]>(INIT_CAMERAS_LIST)
 
-    const addDefaultLight = useCallback((type: LightType) => {
-        const newLight = getDefaultLight(type);
-        const extendedLights = [...lightsList, newLight] as LightWrapper[];
-        setLightsList(extendedLights);
-    }, [lightsList]);
 
-    const changeLightType = useCallback((id: string, type: LightType) => {
-        const index = lightsList.findIndex(light => light.id === id);
-        if (index === -1) return;
-
-        let defaultProps = getDefaultLight(type).properties;
-
-        const newLight = { ...lightsList[index], type: type } as LightWrapper;
-        newLight.properties = { ...defaultProps, ...lightsList[index].properties }
-
-        const newLightsList = lightsList.map( (light, i) => i===index ? newLight : light);
-        setLightsList(newLightsList);
-
-    }, [lightsList]);
-
-    const updateLightProperties = useCallback((id: string, change: Partial<LightProperties>) => {
-        const index = lightsList.findIndex(light => light.id === id);
-        if (index === -1) return;
-
-        const newLight = { ...lightsList[index] };
-        newLight.properties = { ...lightsList[index].properties, ...change }
-
-        const newLightsList = lightsList.map( (light, i) => i===index ? newLight : light);
-        setLightsList(newLightsList);
-    }, [lightsList]);
-
-    const deleteLight = useCallback((id: string) => {
-        const index = lightsList.findIndex(light => light.id === id);
-        if (index === -1) return;
-
-        const filteredLights = lightsList.filter( (light) => light.id !== id );
-        setLightsList(filteredLights);
-    }, [lightsList]);
+    const assetsList2 = useMemo(() => {
+        return Object.values(assetsRecord);
+    }, [assetsRecord]);
 
 
-
+    // TODO: REMOVE - REDUNDANT
     const addAsset = () => {
         const extendedAssetsList = [...assetsList, getDefaultAsset()];
         setAssetsList(extendedAssetsList);
     };
 
+
+    const getAsset = useCallback( (id: string) => {
+        return assetsRecord[id];
+    }, [assetsRecord])
 
     const addAssetPrimitive = useCallback((primitiveType: Primitives) => {
         let primitive;
@@ -132,6 +103,28 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsList(newAssetsList);
     }, [assetsList]);
 
+    const updateAssetProperties2 = useCallback( (id: string, change: Partial<AssetProperties>) => {
+        setAssetsRecord( assetsRecord => {
+            const assetToUpdate = assetsRecord[id]
+            if (!assetToUpdate) return assetsRecord;
+
+            const newAssetProperties = {
+                ...assetToUpdate.properties,
+                ...change
+            };
+
+            const updatedAsset = {
+                ...assetToUpdate,
+                properties: newAssetProperties
+            };
+
+            return {
+                ...assetsRecord,
+                [id]: updatedAsset
+            }
+        });
+    }, []);
+
     const updatePrimitiveProperties = useCallback((id: string, change: Partial<PrimitiveProperties>) => {
         const index = assetsList.findIndex(asset => asset.id === id);
         if (index === -1) return;
@@ -155,6 +148,31 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsList(newAssetsList);
     }, [assetsList]);
 
+    const updatePrimitiveProperties2 = useCallback( (id: string, change: Partial<PrimitiveProperties>) => {
+        setAssetsRecord( assetsRecord => {
+            const initialAsset = assetsRecord[id]
+            if (!initialAsset) return assetsRecord;
+
+            const initialMesh = initialAsset.mesh as PrimitiveWrapper;
+
+            const updatedAsset = {
+                ...initialAsset,
+                mesh: {
+                    ...initialMesh,
+                    properties: {
+                        ...initialMesh.properties,
+                        ...change
+                    }
+                }
+            } as AssetWrapper
+
+            return {
+                ...assetsRecord,
+                [id]: updatedAsset
+            };
+        });
+    }, []);
+
     const updateEditableMaterialProperties = useCallback((id: string, change: Partial<EditableMaterialProperties>) => {
         const index = assetsList.findIndex(asset => asset.id === id);
         if (index === -1) return;
@@ -173,10 +191,56 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsList(newAssetsList);
     }, [assetsList]);
 
-    const deleteAsset = (id: string) => {
-        const filteredAssets = assetsList.filter( (asset) => asset.id !== id );
-        setAssetsList(filteredAssets);
-    };
+    const updateAssetMaterialProperties = useCallback( (id: string, change: Partial<EditableMaterialProperties>) => {
+        setAssetsRecord( assetsRecord => {
+            const initialAsset = assetsRecord[id]
+            if (!initialAsset) return assetsRecord;
+
+            const initialMaterial = initialAsset.material as EditableMaterialWrapper;
+
+            const updatedAsset = {
+                ...initialAsset,
+                material: {
+                    ...initialMaterial,
+                    properties: {
+                        ...initialMaterial.properties,
+                        ...change
+                    }
+                }
+            } as AssetWrapper
+
+            return {
+                ...assetsRecord,
+                [id]: updatedAsset
+            }
+        });
+    }, []);
+
+    const updateAssetMaterialType = useCallback( (id: string, newType: EditableMaterials) => {
+        setAssetsRecord( assetsRecord => {
+            const initialAsset = assetsRecord[id]
+            if (!initialAsset) return assetsRecord;
+
+            const initialMaterialProperties = initialAsset.material.properties;
+            const newMaterialProperties = DEFAULT_EDITABLE_MATERIALS[newType].properties;
+
+            const updatedAsset = {
+                ...assetsRecord[id],
+                material: {
+                    type: newType,
+                    properties: {
+                        ...initialMaterialProperties,
+                        ...newMaterialProperties
+                    }
+                }
+            } as AssetWrapper
+
+            return {
+                ...assetsRecord,
+                [id]: updatedAsset
+            }
+        });
+    }, []);
 
     const changeEditableMaterialType = useCallback((id: string, newType: EditableMaterials) => {
         const index = assetsList.findIndex(asset => asset.id === id);
@@ -196,6 +260,57 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         const newAssetsList = assetsList.map( (asset, i) => i===index ? updatedAsset: asset);
         setAssetsList(newAssetsList);
     }, [assetsList]);
+
+    const deleteAsset = (id: string) => {
+        const filteredAssets = assetsList.filter( (asset) => asset.id !== id );
+        setAssetsList(filteredAssets);
+    };
+
+    const deleteAsset2 = useCallback( (id: string) => {
+        setAssetsRecord( assetsRecord => {
+            const { [id]: _, ...newAssetsRecord } = assetsRecord;
+            return newAssetsRecord;
+        });
+    }, []);
+
+    const addDefaultLight = useCallback((type: LightType) => {
+        const newLight = getDefaultLight(type);
+        const extendedLights = [...lightsList, newLight] as LightWrapper[];
+        setLightsList(extendedLights);
+    }, [lightsList]);
+
+    const changeLightType = useCallback((id: string, type: LightType) => {
+        const index = lightsList.findIndex(light => light.id === id);
+        if (index === -1) return;
+
+        let defaultProps = getDefaultLight(type).properties;
+
+        const newLight = { ...lightsList[index], type: type } as LightWrapper;
+        newLight.properties = { ...defaultProps, ...lightsList[index].properties }
+
+        const newLightsList = lightsList.map( (light, i) => i===index ? newLight : light);
+        setLightsList(newLightsList);
+
+    }, [lightsList]);
+
+    const updateLightProperties = useCallback((id: string, change: Partial<LightProperties>) => {
+        const index = lightsList.findIndex(light => light.id === id);
+        if (index === -1) return;
+
+        const newLight = { ...lightsList[index] };
+        newLight.properties = { ...lightsList[index].properties, ...change }
+
+        const newLightsList = lightsList.map( (light, i) => i===index ? newLight : light);
+        setLightsList(newLightsList);
+    }, [lightsList]);
+
+    const deleteLight = useCallback((id: string) => {
+        const index = lightsList.findIndex(light => light.id === id);
+        if (index === -1) return;
+
+        const filteredLights = lightsList.filter( (light) => light.id !== id );
+        setLightsList(filteredLights);
+    }, [lightsList]);
 
 
 
@@ -252,4 +367,8 @@ export const useSceneObjectsContext = (): SceneObjectsContextProps => {
     }
 
     return context;
+}
+
+function initializeAssetList(): Record<string, AssetWrapper> | (() => Record<string, AssetWrapper>) {
+    throw new Error("Function not implemented.");
 }

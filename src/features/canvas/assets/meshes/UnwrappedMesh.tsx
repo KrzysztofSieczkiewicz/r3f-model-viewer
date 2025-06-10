@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { ReactNode } from "react";
 import { AssetWrapper } from "../../../../models/assets/Asset";
@@ -15,12 +15,13 @@ type Props = {
 
 export const UnwrappedMesh = ( {asset, children}: Props ) => {
 
+    const [ props, setProps ] = useState<{geometry?: THREE.BufferGeometry, material?: THREE.Material}>();
+    const meshRef = useRef<THREE.Mesh>(null);
+    const { loadContents } =  useImportGLTF()
+
     const mesh = asset.mesh as UnwrappedWrapper
 
-    const [ props, setProps ] = useState<{geometry?: THREE.BufferGeometry, material?: THREE.Material}>();
-    const { loadContents } =  useImportGLTF() 
-
-    console.log({mesh: mesh}) 
+    console.log("TRIGGERED RERENDER")
 
     useEffect( () => {
         loadContents(mesh.src, mesh.geometries[0], null)
@@ -42,6 +43,7 @@ export const UnwrappedMesh = ( {asset, children}: Props ) => {
     if(!asset.properties.visible) return;
     return (
         <mesh
+            ref={meshRef}
             matrixWorldAutoUpdate={true}
             castShadow={asset.properties.castShadow}
             receiveShadow={asset.properties.receiveShadow}

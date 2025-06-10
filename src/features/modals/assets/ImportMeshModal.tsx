@@ -20,8 +20,7 @@ export const ImportMeshModal = ({src, closeModal}: Props) => {
     const [ selectedMesh, setSelectedMesh ] = useState<ListedMetadataGLTF|null>(null);
     const [ selectedMaterial, setSelectedMaterial ] = useState<MaterialMetadataGLTF|null>(null);
 
-    // TODO: Check why it executes twice
-    const { getContents, loadContents } =  useImportGLTF()
+    const { getContents } =  useImportGLTF()
 
     useEffect( () => {
         setIsLoading(true);

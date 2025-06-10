@@ -82,6 +82,15 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
     }
 ]
 
+const initializeAssetList = (): Record<string, AssetWrapper> => {
+    const assetsRecord = {} as Record<string, AssetWrapper>;
+
+    return INIT_ASSET_LIST.reduce((acc, asset) => {
+        acc[asset.id] = asset;
+        return acc;
+    }, {} as Record<string, AssetWrapper>);
+}
+
 const getDefaultAsset = (): AssetWrapper => {
     return {
         id: generateNewID(),
