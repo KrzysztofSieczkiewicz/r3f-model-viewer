@@ -18,3 +18,20 @@ export const useToggleSelect = (id: string) => {
 
     return toggleSelection;
 }
+
+export const useSelectSceneObject = () => {
+    const [ selectedObjectId, setScene ] = useSceneValue((scene) => scene["selectedObject"])
+
+    const setSelected = (id: string) => {
+        if (id === selectedObjectId) {
+            setScene({ selectedObject: "" });
+        } else {
+            setScene({ selectedObject: id });
+        }
+    }
+
+    return {
+        currentSelected: selectedObjectId,
+        setSelected
+    }
+}

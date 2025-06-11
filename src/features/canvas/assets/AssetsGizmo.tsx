@@ -2,10 +2,11 @@ import { PivotControls } from "@react-three/drei";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Euler, Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
-import { AssetProperties, AssetWrapper } from "../../../models/assets/Asset";
+import { AssetProperties } from "../../../models/assets/Asset";
+import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 
 type Props = {
-    asset: AssetWrapper,
+    assetID: string,
     handleChange: (change: Partial<AssetProperties>) => void
 }
 
@@ -14,12 +15,18 @@ type Transformation = {
     rotation: [number, number, number]
 }
 
-export const AssetsGizmo = ( {asset, handleChange}: Props) => {
+export const AssetsGizmo = ( {assetID, handleChange}: Props) => {
+
+    const { getAsset } = useSceneObjectsContext();
+
+    const controlsRef = useRef<Group<Object3DEventMap>>(null)
+    const asset = getAsset(assetID);
+
     const [ transformation, setTransformation ] = useState<Transformation>({
         position: asset.properties.position, 
         rotation: asset.properties.rotation
     });
-    const controlsRef = useRef<Group<Object3DEventMap>>(null)
+    
 
     // Allign controls to the object on init
     useEffect(() => {
