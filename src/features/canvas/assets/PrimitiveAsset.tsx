@@ -45,6 +45,10 @@ export const PrimitiveAsset = ( {assetID, isHovered, isSelected}: Props ) => {
         }
     }, [mesh] );
 
+    const material = useMemo(() => {
+        return getEditableMaterial(asset.material);
+    }, [asset.material, asset.materialType])
+
     useFrame(() => {
         if (meshRef.current && asset) {
             meshRef.current.position.set(...asset.properties.position);
@@ -53,12 +57,9 @@ export const PrimitiveAsset = ( {assetID, isHovered, isSelected}: Props ) => {
         }
     });
 
-    const material = useMemo(() => {
-        return getEditableMaterial(asset.material);
-    }, [asset.material, asset.materialType])
-
     return (
         <mesh
+            ref={meshRef}
             matrixWorldAutoUpdate={true}
             castShadow={asset.properties.castShadow}
             receiveShadow={asset.properties.receiveShadow}
