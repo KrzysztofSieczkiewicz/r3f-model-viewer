@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 import { useSelectSceneObject } from "../../../hooks/useSelect";
-import { AssetsGizmo } from "./AssetsGizmo";
+import { AssetGizmo } from "./AssetGizmo";
 import { PrimitiveAsset } from "./PrimitiveAsset";
 
 export const Assets = () => {
@@ -19,11 +19,11 @@ export const Assets = () => {
                     onPointerOut={()=>setCurrentHovered(null) }
                     onClick={()=>setSelected(asset.id)} >
 
-                    {/* {asset.id === currentSelected && 
-                        <AssetsGizmo
+                    {asset.id === currentSelected && 
+                        <AssetGizmo
                             assetID={asset.id}
                             handleChange={(change) => updateAssetProperties(asset.id, {...change})} /> 
-                    } */}
+                    }
                     <PrimitiveAsset isSelected={currentSelected===asset.id} isHovered={curentHovered===asset.id} assetID={asset.id} />
                 </group>
             );

@@ -56,6 +56,8 @@ export const PrimitiveAsset = memo(
             }
         });
 
+        console.log({assetID}, {isHovered}, {isSelected})
+
         return (
             <mesh
                 ref={meshRef}

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Euler, Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
 import { AssetProperties } from "../../../models/assets/Asset";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
+import { useFrame } from "@react-three/fiber";
 
 type Props = {
     assetID: string,
@@ -15,12 +16,16 @@ type Transformation = {
     rotation: [number, number, number]
 }
 
-export const AssetsGizmo = ( {assetID, handleChange}: Props) => {
+export const AssetGizmo = ( {assetID, handleChange}: Props) => {
 
     const { getAsset } = useSceneObjectsContext();
+    const asset = getAsset(assetID);
 
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
-    const asset = getAsset(assetID);
+    const assetPropsRef = useRef({
+        position: asset.properties.position,
+        rotation: asset.properties.rotation
+    });
 
     const [ transformation, setTransformation ] = useState<Transformation>({
         position: asset.properties.position, 
@@ -28,15 +33,21 @@ export const AssetsGizmo = ( {assetID, handleChange}: Props) => {
     });
     
 
-    // Allign controls to the object on init
+    // Allign controls to the object on mount
     useEffect(() => {
+        if (!controlsRef.current) return;
+
         const initialMatrix = new Matrix4();
         const initialControlsPosition = new Vector3(...transformation.position);
         const initialControlsRotation = new Quaternion().setFromEuler(new Euler(...transformation.rotation));
 
         initialMatrix.compose(initialControlsPosition, initialControlsRotation, new Vector3(1,1,1))
+        controlsRef.current.applyMatrix4(initialMatrix);
 
-        controlsRef.current?.applyMatrix4(initialMatrix);
+        assetPropsRef.current = {
+            position: transformation.position,
+            rotation: transformation.rotation
+        };
     }, []);
 
     // Handle controls interaction
@@ -62,13 +73,13 @@ export const AssetsGizmo = ( {assetID, handleChange}: Props) => {
     }, [transformation]);
 
     // Update controls when values are changed externally
-    useEffect(() => {
+    useFrame(() => {
         if (!controlsRef.current) return;
 
         controlsRef.current.position.set(...asset.properties.position);
         controlsRef.current.rotation.setFromQuaternion(new Quaternion().setFromEuler(new Euler(...asset.properties.rotation)));
         controlsRef.current.updateMatrix();
-    }, [asset.properties.position, asset.properties.rotation]);
+    });
 
 
     return (

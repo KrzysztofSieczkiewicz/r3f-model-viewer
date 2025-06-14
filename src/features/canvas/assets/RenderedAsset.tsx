@@ -2,7 +2,7 @@ import React, { memo, useMemo } from "react";
 
 import { Outlines } from "@react-three/drei";
 import { useEffect, useState } from "react";
-import { AssetsGizmo } from "./AssetsGizmo";
+import { AssetGizmo } from "./AssetGizmo";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 import { RenderedMesh } from "./meshes/RenderedMesh";
@@ -65,7 +65,7 @@ export const RenderedAsset = memo( ( {assetID}: Props) => {
             onClick={handleSelect} >
 
             {isSelected && 
-                <AssetsGizmo
+                <AssetGizmo
                     assetID={assetID}
                     handleChange={(newAsset) => updateAssetProperties(assetID, {...newAsset})} /> 
             }

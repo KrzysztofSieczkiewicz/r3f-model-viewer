@@ -60,8 +60,6 @@ export const AssetOutline = ( {isSelected, isHovered, parentRef}: Props) => {
             ? 1
             : 1 + (2*T) / (parentSize.z*parentScale.z);
 
-        console.log([x,y,z]);
-
         return [x,y,z] as [number, number, number]
     }, [
         parentRef.current,
