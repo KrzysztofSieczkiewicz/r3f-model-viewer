@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Euler, Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
 import { AssetProperties } from "../../../models/assets/Asset";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
-import { useFrame } from "@react-three/fiber";
 
 type Props = {
     assetID: string,
@@ -17,6 +16,8 @@ type Transformation = {
 }
 
 export const AssetGizmo = memo( ({assetID, handleChange}: Props) => {
+
+    console.log("Gizmo rerendered: ", assetID)
 
     const { getAsset } = useSceneObjectsContext();
     const asset = getAsset(assetID);
@@ -85,12 +86,16 @@ export const AssetGizmo = memo( ({assetID, handleChange}: Props) => {
             rotation: [controlsRotation.x, controlsRotation.y, controlsRotation.z]
         }
         setTransformation(newTransformation);
+
+        handleChange({
+            position: newTransformation.position,
+            rotation: newTransformation.rotation
+        });
     }, [handleChange]);
 
     const handleDragEnd = useCallback( () => {
         isBeingDraggedRef.current = false;
     }, []);
-
 
     return (
         <PivotControls
