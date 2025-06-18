@@ -1,5 +1,5 @@
 import { PivotControls } from "@react-three/drei";
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { useEffect, useRef, useState } from "react";
 import { Euler, Group, Matrix4, Object3DEventMap, Quaternion, Vector3 } from "three";
 import { AssetProperties } from "../../../models/assets/Asset";
@@ -16,16 +16,13 @@ type Transformation = {
     rotation: [number, number, number]
 }
 
-export const AssetGizmo = ( {assetID, handleChange}: Props) => {
+export const AssetGizmo = memo( ({assetID, handleChange}: Props) => {
 
     const { getAsset } = useSceneObjectsContext();
     const asset = getAsset(assetID);
 
+    const isBeingDraggedRef = useRef(false);
     const controlsRef = useRef<Group<Object3DEventMap>>(null)
-    const assetPropsRef = useRef({
-        position: asset.properties.position,
-        rotation: asset.properties.rotation
-    });
 
     const [ transformation, setTransformation ] = useState<Transformation>({
         position: asset.properties.position, 
@@ -34,7 +31,7 @@ export const AssetGizmo = ( {assetID, handleChange}: Props) => {
     
 
     // Allign controls to the object on mount
-    useEffect(() => {
+    useEffect( () => {
         if (!controlsRef.current) return;
 
         const initialMatrix = new Matrix4();
@@ -43,43 +40,56 @@ export const AssetGizmo = ( {assetID, handleChange}: Props) => {
 
         initialMatrix.compose(initialControlsPosition, initialControlsRotation, new Vector3(1,1,1))
         controlsRef.current.applyMatrix4(initialMatrix);
-
-        assetPropsRef.current = {
-            position: transformation.position,
-            rotation: transformation.rotation
-        };
     }, []);
 
-    // Handle controls interaction
-    const handleControlsDrag = (local: Matrix4) => {
+    // Sync transformation with parent asset
+    useEffect( () => {
+        if (isBeingDraggedRef.current) return;
+
+        const currentPos = transformation.position;
+        const currentRot = transformation.rotation;
+        const newPos = asset.properties.position;
+        const newRot = asset.properties.rotation;
+        
+        const posChanged = !currentPos.every( (val, i) => val === newPos[i]);
+        const rotChanged = !currentRot.every( (val, i) => val === newRot[i]);
+
+        if (posChanged || rotChanged) {
+            setTransformation({
+                position: newPos,
+                rotation: newRot,
+            });
+        }
+    }, [asset.properties.position, asset.properties.rotation, transformation, isBeingDraggedRef])
+
+    // Apply transformation to the controls gizmo
+    useEffect( () => {
+        if (!controlsRef.current) return;
+        controlsRef.current.position.set(...transformation.position);
+        controlsRef.current.rotation.setFromQuaternion(new Quaternion().setFromEuler(new Euler(...transformation.rotation)));
+        controlsRef.current.updateMatrix();
+    }, [transformation]);
+
+    const handleDragStart = useCallback( () => {
+        isBeingDraggedRef.current = true;
+    }, []);
+
+    const handleDrag = useCallback( (local: Matrix4) => {
         const controlsPosition = new Vector3();
         const constrolsQuaternion = new Quaternion();
-
         local.decompose(controlsPosition, constrolsQuaternion, new Vector3());
         const controlsRotation = new Euler().setFromQuaternion(constrolsQuaternion);
 
-        setTransformation({
-            position: [controlsPosition.x, controlsPosition.y, controlsPosition.z], 
-            rotation:[controlsRotation.x, controlsRotation.y, controlsRotation.z]
-        });
-    };
+        const newTransformation: Transformation = {
+            position: [controlsPosition.x, controlsPosition.y, controlsPosition.z],
+            rotation: [controlsRotation.x, controlsRotation.y, controlsRotation.z]
+        }
+        setTransformation(newTransformation);
+    }, [handleChange]);
 
-    // Update attached object on local changes
-    useEffect(() => {
-        handleChange({
-            position: transformation.position, 
-            rotation: transformation.rotation
-        });
-    }, [transformation]);
-
-    // Update controls when values are changed externally
-    useFrame(() => {
-        if (!controlsRef.current) return;
-
-        controlsRef.current.position.set(...asset.properties.position);
-        controlsRef.current.rotation.setFromQuaternion(new Quaternion().setFromEuler(new Euler(...asset.properties.rotation)));
-        controlsRef.current.updateMatrix();
-    });
+    const handleDragEnd = useCallback( () => {
+        isBeingDraggedRef.current = false;
+    }, []);
 
 
     return (
@@ -87,7 +97,9 @@ export const AssetGizmo = ( {assetID, handleChange}: Props) => {
             ref={controlsRef}
             fixed={false}
             scale={1}
-            onDrag={ (local) => { handleControlsDrag(local) }}
+            onDragStart={handleDragStart}
+            onDrag={handleDrag}
+            onDragEnd={handleDragEnd}
             depthTest={false} />
     );
-}
+});
