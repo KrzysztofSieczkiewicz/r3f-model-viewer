@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from "react";
+import React, { memo } from "react";
 
 import { Outlines } from "@react-three/drei";
 import { useEffect, useState } from "react";
@@ -6,8 +6,6 @@ import { AssetGizmo } from "./AssetGizmo";
 import { useIsSelected, useToggleSelect } from "../../../hooks/useSelect";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 import { RenderedMesh } from "./meshes/RenderedMesh";
-import { Meshes } from "../../../models/assets/Asset";
-import { PrimitiveMesh } from "./meshes/PrimitiveMesh";
 
 type Props = {
     assetID: string

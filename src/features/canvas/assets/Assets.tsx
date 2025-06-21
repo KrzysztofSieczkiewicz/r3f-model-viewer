@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 import { useSelectSceneObject } from "../../../hooks/useSelect";
 import { AssetGizmo } from "./AssetGizmo";
 import { PrimitiveAsset } from "./PrimitiveAsset";
+import { AssetProperties, AssetWrapper, Meshes } from "../../../models/assets/Asset";
+import { UnwrappedAsset } from "./UnwrappedAsset";
 
 export const Assets = () => {
     const { assetsList, updateAssetProperties } = useSceneObjectsContext();
 
     const [ curentHovered, setCurrentHovered ] = useState<string|null>(null)
     const { currentSelected, setSelected} = useSelectSceneObject();
+
+    const memoizedGizmoUpdate = useCallback( (assetID: string, change: Partial<AssetProperties>) => {
+    updateAssetProperties(assetID, { ...change });
+    }, [updateAssetProperties]);
+
+    const handleAssetType = (asset: AssetWrapper) => {
+        switch(asset.meshType) {
+            case Meshes.Primitive:
+                return <PrimitiveAsset isSelected={currentSelected===asset.id} isHovered={curentHovered===asset.id} assetID={asset.id} />
+            case Meshes.Unwrapped:
+                return <UnwrappedAsset isSelected={currentSelected===asset.id} isHovered={curentHovered===asset.id} assetID={asset.id} />
+        }
+    }
 
     return (
         assetsList.map((asset) => {
@@ -22,9 +37,9 @@ export const Assets = () => {
                     {asset.id === currentSelected && 
                         <AssetGizmo
                             assetID={asset.id}
-                            handleChange={(change) => updateAssetProperties(asset.id, {...change})} /> 
+                            handleChange={(change) => memoizedGizmoUpdate(asset.id, {...change})} /> 
                     }
-                    <PrimitiveAsset isSelected={currentSelected===asset.id} isHovered={curentHovered===asset.id} assetID={asset.id} />
+                    {handleAssetType(asset)}
                 </group>
             );
         })

@@ -56,12 +56,12 @@ export const PrimitiveAsset = memo(
             }
         });
 
-        console.log({assetID}, {isHovered}, {isSelected})
-
+        if (!asset.properties.visible) return;
         return (
             <mesh
                 ref={meshRef}
                 matrixWorldAutoUpdate={true}
+                visible={asset.properties.visible}
                 castShadow={asset.properties.castShadow}
                 receiveShadow={asset.properties.receiveShadow}
                 geometry={geometry}

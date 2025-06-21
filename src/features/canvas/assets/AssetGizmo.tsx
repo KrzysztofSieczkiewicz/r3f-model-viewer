@@ -17,8 +17,6 @@ type Transformation = {
 
 export const AssetGizmo = memo( ({assetID, handleChange}: Props) => {
 
-    console.log("Gizmo rerendered: ", assetID)
-
     const { getAsset } = useSceneObjectsContext();
     const asset = getAsset(assetID);
 

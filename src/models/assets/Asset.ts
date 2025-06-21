@@ -60,11 +60,11 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
         name: "Test",
         meshType: Meshes.Unwrapped,
         mesh: {
-            src: "models/car/scene.gltf",
+            src: "models/pear/Pear2_LOD0.gltf",
             geometries: [
                 {
-                    id: "",
-                    name: "",
+                    id: "node_0",
+                    name: "node",
                     traversalIndex: 0,
                 }
             ],
@@ -93,7 +93,7 @@ const initializeAssetList = (): Record<string, AssetWrapper> => {
 const getDefaultAsset = (): AssetWrapper => {
     return {
         id: generateNewID(),
-        name: "pear",
+        name: "Sphere",
         meshType: Meshes.Primitive,
         mesh: DEFAULT_MESH_SPHERE,
         materialType: Materials.Editable,
