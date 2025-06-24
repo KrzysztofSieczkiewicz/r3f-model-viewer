@@ -35,8 +35,8 @@ export const ModalDropdownSingle = ( {displayName, isOpen, toggleOpen, children,
     return (
         <div className={styles.container} >
             <ButtonLargeRectangle
-                isToggled={isOpen}
-                toggle={toggleOpen}
+                //isToggled={isOpen}
+                onClick={toggleOpen}
                 displayName={displayName}
                 icon={icon}
             />

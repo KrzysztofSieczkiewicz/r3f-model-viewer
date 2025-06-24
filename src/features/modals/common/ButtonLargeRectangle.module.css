@@ -7,7 +7,7 @@
     justify-content: center;
 
     height: 100%;
-    width: 100%;
+    aspect-ratio: 1;
 
     border: none;
     background-color: var(--color-main);
@@ -16,7 +16,7 @@
     transition: var(--transition-duration);
 }
 
-.button.active {
+.button:hover {
     filter: brightness(1.2);
 }
 
@@ -29,22 +29,17 @@
 }
 
 .iconContainer {
+    margin: auto;
     max-width: 100%;
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
-    margin: 0.5rem 0;
+    --margin: 0.5rem 0;
 }
 
 .icon {
     grid-column: 2;
     height: 5rem;
+    aspect-ratio: 1;
     margin: auto;
     align-self: center;
-}
-
-.arrow {
-    grid-column: 3;
-    align-self: center;
-    margin: 0 auto;
-    user-select: none;
 }

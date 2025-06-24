@@ -1,37 +1,33 @@
-import React, { useState } from "react";
-import styles from './AddAssetModal.module.css'
+import React from "react";
+import styles from './AddAssetModal.module.css';
 
-import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
-import { Primitives } from "../../../models/assets/meshes/Primitive";
-import { ModalDropdownSingle } from "../common/ModalDropdownSingle";
-import { ModalListedButton } from "../common/ModalListedButton";
+import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
+import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
+
 import { AssetModalPrimitivesList } from "./AssetModalPrimitivesList";
+import { ButtonLargeRectangle } from "../common/ButtonLargeRectangle";
 
 type Props = {
     closeModal: () => void
 }
 
 export const AddAssetModal = ({closeModal}: Props) => {
-    const { addAssetPrimitive } = useSceneObjectsContext();
-
-    const [ activeDropdown, setActiveNameDropdown ] = useState("");
-
-    const toggleOpenDropdown = (name: string) => {
-        if (activeDropdown === name) {
-            setActiveNameDropdown("");
-        } else {
-            setActiveNameDropdown(name);
-        }
-    };
-
-    const addPrimitiveAndClose = (assetType: Primitives) => {
-        addAssetPrimitive(assetType);
-        closeModal();
-    }
 
     return (
         <div className={styles.modalContents}>
-            <AssetModalPrimitivesList closeModal={closeModal} />
+
+            <ButtonLargeRectangle
+                onClick={ () => {} }
+                displayName="Primitives"
+                icon={<SphereIcon/>}
+            />
+            <ButtonLargeRectangle
+                onClick={ () => {} }
+                displayName="Models"
+                icon={<CubeIcon/>}
+            />
+
+            {/* <AssetModalPrimitivesList closeModal={closeModal} /> */}
 
             {/* 
             <ModalDropdownSingle

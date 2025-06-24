@@ -2,30 +2,21 @@ import React from "react";
 import styles from './ButtonLargeRectangle.module.css';
 
 type Props = {
-    isToggled: boolean,
-    toggle: () => void,
+    onClick: () => void,
 
     displayName: string,
     icon: JSX.Element,
     
 }
 
-export const ButtonLargeRectangle = ({isToggled, toggle, displayName, icon}: Props) => {
+export const ButtonLargeRectangle = ({onClick, displayName, icon}: Props) => {
 
     return (
-        <button
-                className={isToggled 
-                        ? `${styles.button} ${styles.active}` 
-                        : styles.button}
-                onClick={() => toggle() }
-            >
-                <label className={styles.name}>{displayName}</label>
-                <div className={styles.iconContainer}>
+        <button className={styles.button} onClick={() => onClick()}  >
+            <div className={styles.iconContainer}>
                 {React.cloneElement(icon, {className: styles.icon})}
-                    {isToggled
-                        ? <span className={styles.arrow}>&#8657;</span>
-                        : <span className={styles.arrow}>&#8659;</span>}
-                </div>
+            </div>
+            <label className={styles.name}>{displayName}</label>
         </button>
     );
 }

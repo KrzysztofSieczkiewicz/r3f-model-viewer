@@ -1,11 +1,11 @@
 import React from "react"
 import { ModalListedButton } from "../common/ModalListedButton"
+import { Primitives } from "../../../models/assets/meshes/Primitive";
+import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 
 import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
 import { ReactComponent as ConeIcon } from '../../../icons/sidebar/primitives/primitive_cone.svg'
 import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
-import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
-import { Primitives } from "../../../models/assets/meshes/Primitive";
 
 type Props = {
     closeModal: () => void
