@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './ModalDropdownOptionButton.module.css'
+import styles from './ModalListedButton.module.css'
 
 type Props = {
     displayName: string;
@@ -7,7 +7,7 @@ type Props = {
     onClick: () => void;
 }
 
-export const ModalListButton = ( {displayName, icon, onClick}: Props) => {
+export const ModalListedButton = ( {displayName, icon, onClick}: Props) => {
 
     return (
         <button 

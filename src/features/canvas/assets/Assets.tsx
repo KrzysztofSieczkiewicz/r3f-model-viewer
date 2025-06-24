@@ -34,7 +34,7 @@ export const Assets = () => {
                     onPointerOut={()=>setCurrentHovered(null) }
                     onClick={()=>setSelected(asset.id)} >
 
-                    {asset.id === currentSelected && 
+                    {asset.id === currentSelected && asset.properties.visible &&
                         <AssetGizmo
                             assetID={asset.id}
                             handleChange={(change) => memoizedGizmoUpdate(asset.id, {...change})} /> 

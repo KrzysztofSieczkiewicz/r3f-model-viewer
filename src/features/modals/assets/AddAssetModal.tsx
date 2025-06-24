@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import styles from './AddAssetModal.module.css'
 
-import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
-import { ReactComponent as ConeIcon } from '../../../icons/sidebar/primitives/primitive_cone.svg'
-import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
-
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 import { Primitives } from "../../../models/assets/meshes/Primitive";
 import { ModalDropdownSingle } from "../common/ModalDropdownSingle";
-import { ModalListButton } from "../common/ModalDropdownOptionButton";
+import { ModalListedButton } from "../common/ModalListedButton";
+import { AssetModalPrimitivesList } from "./AssetModalPrimitivesList";
 
 type Props = {
     closeModal: () => void
 }
 
-export const AddAssetModal = ({ closeModal }: Props) => {
+export const AddAssetModal = ({closeModal}: Props) => {
     const { addAssetPrimitive } = useSceneObjectsContext();
 
     const [ activeDropdown, setActiveNameDropdown ] = useState("");
@@ -32,9 +29,11 @@ export const AddAssetModal = ({ closeModal }: Props) => {
         closeModal();
     }
 
-
     return (
         <div className={styles.modalContents}>
+            <AssetModalPrimitivesList closeModal={closeModal} />
+
+            {/* 
             <ModalDropdownSingle
                 isOpen={activeDropdown === "Primitives"}
                 toggleOpen={() => toggleOpenDropdown("Primitives")}
@@ -51,7 +50,7 @@ export const AddAssetModal = ({ closeModal }: Props) => {
                     onClick={ () => addPrimitiveAndClose(Primitives.Cone)} />
                 <ModalListButton 
                     displayName="Box" 
-                    icon={<ConeIcon/>}
+                    icon={<CubeIcon/>}
                     onClick={ () => addPrimitiveAndClose(Primitives.Box)}/>
             </ModalDropdownSingle>
             
@@ -93,7 +92,7 @@ export const AddAssetModal = ({ closeModal }: Props) => {
                     displayName="Box" 
                     icon={<ConeIcon/>}
                     onClick={ () => addPrimitiveAndClose(Primitives.Box)}/>
-            </ModalDropdownSingle>
+            </ModalDropdownSingle> */}
         </div>
     );
 }
