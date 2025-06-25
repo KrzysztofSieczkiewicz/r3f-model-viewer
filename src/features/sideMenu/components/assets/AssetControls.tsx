@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { TraitExpandable } from "../common/traits/TraitExpandable";
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { SlidersArray } from "../common/controls/SlidersArray";
-import { useSidebarModal } from "../../../../hooks/useSidebarModal";
 import { ImportMeshModal } from "../../../modals/assets/ImportMeshModal";
 import { UnwrappedWrapper } from "../../../../models/assets/meshes/Unwrapped";
+import { SidebarModal } from "../../../modals/SidebarModal";
 
 
 type Props = {
@@ -22,7 +22,7 @@ export const AssetControls = ({asset}: Props) => {
 
     const mesh = asset.mesh as UnwrappedWrapper
 
-    const { openModal, closeModal, SidebarModal } = useSidebarModal();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <TraitExpandable name="General" expanded={true}>
@@ -48,9 +48,9 @@ export const AssetControls = ({asset}: Props) => {
                     axesLocking />
             </TraitSingle>
 
-            <button onClick={openModal}> TEST LISTING MESH </button>
-            <SidebarModal>
-                <ImportMeshModal src={mesh.src} closeModal={closeModal}/>
+            <button onClick={() => setIsModalOpen(true)}> TEST LISTING MESH </button>
+            <SidebarModal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false)}}>
+                <ImportMeshModal src={mesh.src} closeModal={() => {}}/>
             </SidebarModal>
         </TraitExpandable>
     );

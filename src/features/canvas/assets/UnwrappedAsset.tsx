@@ -23,8 +23,6 @@ export const UnwrappedAsset = memo(
             const asset = getAsset(assetID)
             const mesh = asset.mesh as UnwrappedWrapper
         
-            console.log({asset})
-        
             useEffect( () => {
                 loadContents(mesh.src, mesh.geometries[0], null)
                     .then( (contents) => {

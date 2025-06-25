@@ -14,7 +14,7 @@ type Props = {
 export const AddAssetModal = ({closeModal}: Props) => {
 
     const renderModalContents = () => {
-        
+
     }
 
     const renderButtonsSection = () => {
@@ -26,12 +26,12 @@ export const AddAssetModal = ({closeModal}: Props) => {
 
                 <div className={styles.buttonsContainer}>
                     <ButtonLargeRectangle
-                        onClick={ () => {} }
+                        onClick={ () => {closeModal()} }
                         displayName="Primitives"
                         icon={<SphereIcon/>}
                     />
                     <ButtonLargeRectangle
-                        onClick={ () => {} }
+                        onClick={ () => {closeModal()} }
                         displayName="Models"
                         icon={<CubeIcon/>}
                     />

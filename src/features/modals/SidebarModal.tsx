@@ -33,6 +33,9 @@ export const SidebarModal = ({isOpen, onClose, children}: Props) => {
         if (isOpen && !modal.open) {
             modal.showModal();
         }
+        if (!isOpen && modal.open) {
+            modal.close();
+        }
 
         return () => {
             if (modal && modal.open) {
@@ -57,7 +60,7 @@ export const SidebarModal = ({isOpen, onClose, children}: Props) => {
         };
     }, [onClose]);
 
-    // Handle closing on ::backdrop clicks
+    // Handle closing on backdrop clicks
     useEffect(() => {
         const modal = modalRef.current;
         if (!modal) return;
@@ -72,7 +75,7 @@ export const SidebarModal = ({isOpen, onClose, children}: Props) => {
         return () => {
             modal.removeEventListener('click', handleBackdropClick);
         } 
-    }, []);
+    }, [isOpen]);
 
     // Conditional component rendering
     if (!isOpen || !portalElement) {

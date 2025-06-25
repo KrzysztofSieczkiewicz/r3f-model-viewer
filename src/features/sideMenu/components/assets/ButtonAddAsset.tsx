@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { AddAssetModal } from "../../../modals/assets/AddAssetModal";
-import { useSidebarModal } from "../../../../hooks/useSidebarModal";
 import { ButtonAddObject } from "../common/controls/ButtonAddObject";
+import { SidebarModal } from "../../../modals/SidebarModal";
 
 export const ButtonAddAsset = () => {
-    const { openModal, closeModal, SidebarModal } = useSidebarModal();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <ButtonAddObject buttonName="ADD ASSET" handleClicked={() => openModal() }>
-            <SidebarModal>
-                <AddAssetModal closeModal={closeModal}/>
+        <ButtonAddObject buttonName="ADD ASSET" handleClicked={() => setIsModalOpen(true) }>
+            <SidebarModal isOpen={isModalOpen} onClose={()=> setIsModalOpen(false)}>
+                <AddAssetModal closeModal={() => setIsModalOpen(false)}/>
             </SidebarModal>
         </ButtonAddObject>
     );
