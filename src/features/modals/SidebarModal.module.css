@@ -1,0 +1,24 @@
+@import '../../App.module.css';
+
+.modal {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+
+    min-width: unset;
+    max-width: unset;
+    min-height: unset;
+    max-height: unset;
+}
+
+.modal:focus {
+    outline: none;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+    backdrop-filter: blur(1px)
+}

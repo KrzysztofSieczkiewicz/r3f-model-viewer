@@ -11,6 +11,7 @@ import { Lights } from './features/canvas/lights/Lights';
 import { Assets } from './features/canvas/assets/Assets';
 import { Cameras } from './features/canvas/cameras/Cameras';
 import { Effects } from './features/canvas/effects/Effects';
+import { SidebarModal } from './features/modals/SidebarModal';
 
 export const AssetScene = () => {
   const [ backgroundColor ] = useSceneValue((scene) => scene['backgroundColor']);
@@ -34,6 +35,10 @@ export const AssetScene = () => {
         <Effects />
 
       </Canvas>
+
+      <SidebarModal isOpen={true} onClose={()=>{console.log("triggering close")}}>
+        <div><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+      </SidebarModal>
       
       <Sidebar />
       <div id="sidebar-modal"></div>

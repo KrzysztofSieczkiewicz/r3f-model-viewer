@@ -13,19 +13,50 @@ type Props = {
 
 export const AddAssetModal = ({closeModal}: Props) => {
 
+    const renderModalContents = () => {
+        
+    }
+
+    const renderButtonsSection = () => {
+        return (
+            <section className={styles.pageSection}>
+                <h3 className={styles.sectionTitle}>
+                    Browse models
+                </h3>
+
+                <div className={styles.buttonsContainer}>
+                    <ButtonLargeRectangle
+                        onClick={ () => {} }
+                        displayName="Primitives"
+                        icon={<SphereIcon/>}
+                    />
+                    <ButtonLargeRectangle
+                        onClick={ () => {} }
+                        displayName="Models"
+                        icon={<CubeIcon/>}
+                    />
+                </div>
+            </section>
+        );
+    }
+
+    const renderCustomImportsSection = () => {
+        return (
+            <section className={styles.pageSection}>
+                <h3 className={styles.sectionTitle}>
+                    Import models
+                </h3>
+                <p> Something will be here later </p>
+            </section>
+        )
+    }
+
     return (
         <div className={styles.modalContents}>
 
-            <ButtonLargeRectangle
-                onClick={ () => {} }
-                displayName="Primitives"
-                icon={<SphereIcon/>}
-            />
-            <ButtonLargeRectangle
-                onClick={ () => {} }
-                displayName="Models"
-                icon={<CubeIcon/>}
-            />
+            {renderButtonsSection()}
+
+            {renderCustomImportsSection()}
 
             {/* <AssetModalPrimitivesList closeModal={closeModal} /> */}
 

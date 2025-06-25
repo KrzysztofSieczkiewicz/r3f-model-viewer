@@ -2,8 +2,30 @@
 
 .modalContents {
     display: flex;
+    flex-flow: column nowrap;
     padding: 0.5rem;
     background-color: var(--color-main-weak);
 
     margin: auto 0;
+}
+
+.pageSection {
+    margin: 0.75rem 1rem;
+}
+
+.sectionTitle {
+    margin: 0.2rem 0.5rem;
+}
+
+.buttonsContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 17rem;
+    --height: 10rem;
+    padding: 0.2rem;
+
+    flex-basis: 45%;
 }
