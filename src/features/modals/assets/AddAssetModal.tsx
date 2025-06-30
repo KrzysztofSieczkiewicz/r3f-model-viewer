@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode, useState } from "react";
 import styles from './AddAssetModal.module.css';
 
 import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
@@ -13,12 +13,18 @@ type Props = {
 
 export const AddAssetModal = ({closeModal}: Props) => {
 
-    const renderModalContents = () => {
+    const [currentContent, setCurrentContent] = useState<ReactNode|null>(null);
 
+
+    const renderPrimitivesList = () => {
+        setCurrentContent(
+            <AssetModalPrimitivesList closeModal={closeModal} />
+        );
     }
 
-    const renderButtonsSection = () => {
-        return (
+
+    const renderMainPage = () => {
+        return (<>
             <section className={styles.pageSection}>
                 <h3 className={styles.sectionTitle}>
                     Browse models
@@ -37,26 +43,20 @@ export const AddAssetModal = ({closeModal}: Props) => {
                     />
                 </div>
             </section>
-        );
-    }
-
-    const renderCustomImportsSection = () => {
-        return (
             <section className={styles.pageSection}>
                 <h3 className={styles.sectionTitle}>
                     Import models
                 </h3>
                 <p> Something will be here later </p>
             </section>
-        )
+        </>);
     }
+
 
     return (
         <div className={styles.modalContents}>
 
-            {renderButtonsSection()}
-
-            {renderCustomImportsSection()}
+            {renderMainPage()}
 
             {/* <AssetModalPrimitivesList closeModal={closeModal} /> */}
 
