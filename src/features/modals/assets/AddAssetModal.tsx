@@ -6,6 +6,8 @@ import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
 
 import { AssetModalPrimitivesList } from "./AssetModalPrimitivesList";
 import { ButtonLargeRectangle } from "../common/ButtonLargeRectangle";
+import { ImportMeshModal } from "./ImportMeshModal";
+import { ButtonBackRound } from "../common/ButtonBackRound";
 
 type Props = {
     closeModal: () => void
@@ -16,10 +18,28 @@ export const AddAssetModal = ({closeModal}: Props) => {
     const [currentContent, setCurrentContent] = useState<ReactNode|null>(null);
 
 
-    const renderPrimitivesList = () => {
+    const switchToPrimitivesList = () => {
+        setCurrentContent( renderPrimitivesList() );
+    }
+    
+    const switchToImportDetails = () => {
         setCurrentContent(
+            <ImportMeshModal src={""} closeModal={() => {}}/>
+        )
+    }
+
+    const switchToMainPage = () => {
+        setCurrentContent( renderMainPage() )
+    }
+
+
+    const renderPrimitivesList = () => {
+        return (<>
+            <div id="top-bar">
+                <ButtonBackRound onClick={switchToMainPage}/>
+            </div>
             <AssetModalPrimitivesList closeModal={closeModal} />
-        );
+        </>)
     }
 
 
@@ -32,12 +52,12 @@ export const AddAssetModal = ({closeModal}: Props) => {
 
                 <div className={styles.buttonsContainer}>
                     <ButtonLargeRectangle
-                        onClick={ () => {closeModal()} }
+                        onClick={ () => {switchToPrimitivesList()} }
                         displayName="Primitives"
                         icon={<SphereIcon/>}
                     />
                     <ButtonLargeRectangle
-                        onClick={ () => {closeModal()} }
+                        onClick={ () => {switchToImportDetails()} }
                         displayName="Models"
                         icon={<CubeIcon/>}
                     />
@@ -56,7 +76,7 @@ export const AddAssetModal = ({closeModal}: Props) => {
     return (
         <div className={styles.modalContents}>
 
-            {renderMainPage()}
+            {currentContent || renderMainPage()}
 
             {/* <AssetModalPrimitivesList closeModal={closeModal} /> */}
 

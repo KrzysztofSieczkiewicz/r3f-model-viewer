@@ -17,8 +17,7 @@ export const CameraBillboard = ( {onClick}: Props) => {
 
     // TODO: REPLACE IMAGES WITH 2D MESH, WILL ALLOW TO IMPLEMENT OUTLINES FOR SELECTION AND NEAT DYNAMIC COLOR CHANGING
     // TODO: ADD PROPER ICON
-    const image = cameraBillboard
-    const texture = useTexture(image);
+    const texture = useTexture(cameraBillboard);
 
     useHelper(isHovered && selectionSphere as any, BoxHelper, "white");
 

@@ -1,0 +1,10 @@
+@import '../../../App.module.css';
+
+.button {
+    height: 2rem;
+    aspect-ratio: 1;
+
+    margin: 0.1rem;
+
+    cursor: pointer;
+}
