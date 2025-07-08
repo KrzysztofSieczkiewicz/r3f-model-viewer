@@ -8,6 +8,7 @@ import { AssetModalPrimitivesList } from "./AssetModalPrimitivesList";
 import { ButtonLargeRectangle } from "../common/ButtonLargeRectangle";
 import { ImportMeshModal } from "./ImportMeshModal";
 import { ButtonBackRound } from "../common/ButtonBackRound";
+import { useTransition, animated, easings } from "react-spring";
 
 type Props = {
     closeModal: () => void
@@ -18,30 +19,45 @@ export const AddAssetModal = ({closeModal}: Props) => {
     const [currentContent, setCurrentContent] = useState<ReactNode|null>(null);
 
 
+    // TODO: finish with proper conditions -> experiment with that
+    const transition = useTransition(true, {
+        from: { opacity: 0, maxWidth: '30vw' },
+        enter: { opacity: 1, maxWidth: '60vw' },
+        leave: { opacity: 0, maxWidth: '0vw' },
+        config: { duration: 250, easing: easings.easeInOutQuad },
+    });
+
+
     const switchToPrimitivesList = () => {
         setCurrentContent( renderPrimitivesList() );
     }
-    
+
     const switchToImportDetails = () => {
-        setCurrentContent(
-            <ImportMeshModal src={""} closeModal={() => {}}/>
-        )
+        setCurrentContent( renderImportDetails() )
     }
 
     const switchToMainPage = () => {
-        setCurrentContent( renderMainPage() )
+        setCurrentContent( null )
     }
 
 
     const renderPrimitivesList = () => {
         return (<>
-            <div id="top-bar">
+            <div className={styles.topBar}>
                 <ButtonBackRound onClick={switchToMainPage}/>
             </div>
             <AssetModalPrimitivesList closeModal={closeModal} />
         </>)
     }
 
+    const renderImportDetails = () => {
+        return (<>
+            <div className={styles.topBar}>
+                <ButtonBackRound onClick={switchToMainPage}/>
+            </div>
+            <ImportMeshModal src={""} closeModal={() => {}}/>
+        </>)
+    }
 
     const renderMainPage = () => {
         return (<>
@@ -74,72 +90,17 @@ export const AddAssetModal = ({closeModal}: Props) => {
 
 
     return (
-        <div className={styles.modalContents}>
+        transition( (style, item) => 
+            item 
+                ? <animated.div 
+                    style={style}
+                    className={styles.modalContents} >
+                    
+                    {currentContent || renderMainPage()}
 
-            {currentContent || renderMainPage()}
-
-            {/* <AssetModalPrimitivesList closeModal={closeModal} /> */}
-
-            {/* 
-            <ModalDropdownSingle
-                isOpen={activeDropdown === "Primitives"}
-                toggleOpen={() => toggleOpenDropdown("Primitives")}
-                displayName="Primitives"
-                icon={<CubeIcon/>} 
-            >
-                <ModalListButton 
-                    displayName="Sphere"
-                    icon={<SphereIcon/>}
-                    onClick={ () => addPrimitiveAndClose(Primitives.Sphere)} />
-                <ModalListButton 
-                    displayName="Cone" 
-                    icon={<ConeIcon/>}
-                    onClick={ () => addPrimitiveAndClose(Primitives.Cone)} />
-                <ModalListButton 
-                    displayName="Box" 
-                    icon={<CubeIcon/>}
-                    onClick={ () => addPrimitiveAndClose(Primitives.Box)}/>
-            </ModalDropdownSingle>
-            
-            <ModalDropdownSingle
-                isOpen={activeDropdown === "Scans"}
-                toggleOpen={() => toggleOpenDropdown("Scans")}
-                displayName="Scans"
-                icon={<SphereIcon/>} 
-            >
-                <ModalListButton 
-                    displayName="Sphere"
-                    icon={<SphereIcon/>}
-                    onClick={ () => addPrimitiveAndClose(Primitives.Sphere)} />
-                <ModalListButton 
-                    displayName="Cone" 
-                    icon={<ConeIcon/>}
-                    onClick={ () => addPrimitiveAndClose(Primitives.Cone)} />
-                <ModalListButton 
-                    displayName="Box" 
-                    icon={<ConeIcon/>}
-                    onClick={ () => addPrimitiveAndClose(Primitives.Box)}/>
-            </ModalDropdownSingle>
-
-            <ModalDropdownSingle
-                isOpen={activeDropdown === "Models"}
-                toggleOpen={() => toggleOpenDropdown("Models")}
-                displayName="Models"
-                icon={<ConeIcon/>} 
-            >
-                <ModalListButton 
-                    displayName="Sphere"
-                    icon={<SphereIcon/>}
-                    onClick={ () => addPrimitiveAndClose(Primitives.Sphere)} />
-                <ModalListButton 
-                    displayName="Cone" 
-                    icon={<ConeIcon/>}
-                    onClick={ () => addPrimitiveAndClose(Primitives.Cone)} />
-                <ModalListButton 
-                    displayName="Box" 
-                    icon={<ConeIcon/>}
-                    onClick={ () => addPrimitiveAndClose(Primitives.Box)}/>
-            </ModalDropdownSingle> */}
-        </div>
+                </animated.div>
+                : null
+        )
     );
+
 }

@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import cssStyles from './Submenu.module.css';
-import { useTransition, animated, useSpring, easings } from "react-spring";
+import { useTransition, animated, easings } from "react-spring";
 
 type Props = {
     children: ReactNode,
@@ -17,16 +17,14 @@ export const ListedObjectBody = ( {children, isVisible}: Props) => {
     });
 
     return (
-        <> {
-            transition( (style, item) => 
-                item 
-                    ? <animated.div 
-                        style={style}
-                        className={cssStyles.listedObjectBody} >
-                            {children}
-                    </animated.div>
-                    : null
-            )
-        } </>
+        transition( (style, item) => 
+            item 
+                ? <animated.div 
+                    style={style}
+                    className={cssStyles.listedObjectBody} >
+                        {children}
+                </animated.div>
+                : null
+        )
     );
 }

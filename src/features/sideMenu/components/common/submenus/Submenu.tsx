@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import styles from './Submenu.module.css';
-import { animated, config, easings, useSpring, useTransition } from "react-spring";
+import { animated, easings, useTransition } from "react-spring";
 
 type Props = {
     active: boolean;

@@ -1,7 +1,8 @@
 @import '../../../App.module.css';
 
 .button {
-    height: 2rem;
+    height: 1.75rem;
+    width: 1.75rem;
     aspect-ratio: 1;
 
     margin: 0.1rem;
