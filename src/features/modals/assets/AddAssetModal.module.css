@@ -6,9 +6,10 @@
     flex-flow: column nowrap;
     padding: 0;
     background-color: var(--color-main-weak);
+    overflow: hidden;
 }
 
-.contentsContainerPlaceholder {
+.contentsContainer {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -16,12 +17,6 @@
 
     width: fit-content;
     height: fit-content;
-}
-
-.pageContent {
-    box-sizing: border-box;
-    width: 100%;
-    flex-grow: 1;
 }
 
 .pageSection {
@@ -48,5 +43,6 @@
     display: flex;
     justify-self: start;
 
-    margin: 0.25rem 0 0.75rem 0.5rem;
+    margin: 0.75rem 0 1rem 0.75rem;
+    padding: 0;
 }

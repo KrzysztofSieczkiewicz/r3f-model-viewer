@@ -10,13 +10,14 @@ export const useElementSize = <T extends HTMLElement = HTMLDivElement>(): [React
     const ref = useRef<T>(null);
     const [size, setSize] = useState<ElementSize>({width: 0, height: 0});
 
-
     const updateSize = useCallback(() => {
-        if (!ref.current) return;
+        const element = ref.current;
+        if (!element) return;
+        if (element.offsetWidth === 0 && element.offsetHeight === 0) return;
 
         setSize({
-            width: ref.current.offsetWidth,
-            height: ref.current.offsetHeight
+            width: element.offsetWidth,
+            height: element.offsetHeight
         });
     }, [])
 

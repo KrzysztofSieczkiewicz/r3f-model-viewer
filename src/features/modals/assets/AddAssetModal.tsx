@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from './AddAssetModal.module.css';
 
 import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
@@ -19,59 +19,59 @@ type PageState = 'main' | 'primitives' | 'import';
 
 export const AddAssetModal = ({closeModal}: Props) => {
 
-    const [currentPage, setCurrentPage] = useState<PageState>('main');
+    const [activePage, setActivePage] = useState<PageState>('main');
+    const [prevPageSize, setPrevPageSize] = useState<ElementSize>({width: 0, height: 0});
 
     const [mainPageContentRef, mainPageSize] = useElementSize<HTMLDivElement>();
     const [primitivesContentRef, primitivesPageSize] = useElementSize<HTMLDivElement>();
     const [importDetailsContentRef, importDetailsPageSize] = useElementSize<HTMLDivElement>();
 
-    const previousActivePageSizeRef = useRef<ElementSize>({width: 0, height: 0});
-
     const activePageSize = 
-        currentPage === 'main' ? mainPageSize :
-        currentPage === 'primitives' ? primitivesPageSize :
+        activePage === 'main' ? mainPageSize :
+        activePage === 'primitives' ? primitivesPageSize :
         importDetailsPageSize;
     
     const savePreviousPageSize = () => {
-        previousActivePageSizeRef.current = activePageSize;
+        setPrevPageSize(activePageSize);
     }
 
+    console.log("from: ", prevPageSize.width > 0 ? prevPageSize : activePageSize)
+    console.log("to: ", activePageSize.width > 0 ? activePageSize : prevPageSize)
     const modalSpring = useSpring({
-        from: previousActivePageSizeRef.current,
-        to: activePageSize.width > 0 ? activePageSize : previousActivePageSizeRef.current,
-        width: activePageSize.width,
-        height: activePageSize.height,
-        config: { duration: 150, easing: easings.easeInOutQuad }
+        from: prevPageSize.width > 0 ? prevPageSize : activePageSize,
+        to: activePageSize.width > 0 ? activePageSize : prevPageSize,
+        config: { duration: 100, easing: easings.easeInOutCubic },
     });
     
-    const contentTransition = useTransition(currentPage, {
+    // TODO: override this manually - first mount an invisible page, then useSpring it into existence. 
+    // It'll give You more time to get 'page size' to useSpring container size to.
+    const contentTransition = useTransition(activePage, {
         from: { opacity: 0 },
         enter: { opacity: 1 },
         leave: { opacity: 0 },
-        config: { duration: 150, easing: easings.easeInOutQuad },
+        config: { duration: 200, easing: easings.easeInOutCubic },
         exitBeforeEnter: false,
     });
 
 
     const switchToPrimitivesList = () => {
         savePreviousPageSize()
-        setCurrentPage('primitives');
+        setActivePage('primitives');
     }
 
     const switchToImportDetails = () => {
         savePreviousPageSize()
-        setCurrentPage('import');
+        setActivePage('import');
     }
 
     const switchToMainPage = () => {
         savePreviousPageSize()
-        setCurrentPage('main');
+        setActivePage('main');
     }
-
 
     const renderPrimitivesList = () => {
         return (
-            <div ref={primitivesContentRef} className={styles.contentsContainerPlaceholder}>
+            <div ref={primitivesContentRef} className={styles.contentsContainer}>
                 <div className={styles.topBar}>
                     <ButtonBackRound onClick={switchToMainPage}/>
                 </div>
@@ -82,7 +82,7 @@ export const AddAssetModal = ({closeModal}: Props) => {
 
     const renderImportDetails = () => {
         return (
-            <div ref={importDetailsContentRef} className={styles.contentsContainerPlaceholder}>
+            <div ref={importDetailsContentRef} className={styles.contentsContainer}>
                 <div className={styles.topBar}>
                     <ButtonBackRound onClick={switchToMainPage}/>
                 </div>
@@ -91,7 +91,7 @@ export const AddAssetModal = ({closeModal}: Props) => {
     }
 
     const renderMainPage = () => {
-        return (<div ref={mainPageContentRef} className={styles.contentsContainerPlaceholder}>
+        return (<div ref={mainPageContentRef} className={styles.contentsContainer}>
             <section className={styles.pageSection}>
                 <h3 className={styles.sectionTitle}>
                     Browse models
@@ -132,14 +132,6 @@ export const AddAssetModal = ({closeModal}: Props) => {
                     {item === 'import' && renderImportDetails()}
                 </animated.div>
             ))}
-   
-            {/* {contentTransition((style,item) => (
-                <animated.div style={{ ...style, position: 'absolute', width: '100%', height: '100%' }}>
-                    {item === 'main' && renderMainPage()}
-                    {item === 'primitives' && renderPrimitivesList()}
-                    {item === 'import' && renderImportDetails()}
-                </animated.div>
-            ))} */}
         </animated.div>
     </>);
 
