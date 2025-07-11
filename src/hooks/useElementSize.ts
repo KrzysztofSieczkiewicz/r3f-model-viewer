@@ -1,14 +1,14 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react"
 
 
-type Size = {
+export type ElementSize = {
     width: number,
     height: number,
 }
 
-export const useElementSize = <T extends HTMLElement = HTMLDivElement>(): [React.RefObject<T>, Size ] => {
+export const useElementSize = <T extends HTMLElement = HTMLDivElement>(): [React.RefObject<T>, ElementSize ] => {
     const ref = useRef<T>(null);
-    const [size, setSize] = useState<Size>({width: 0, height: 0});
+    const [size, setSize] = useState<ElementSize>({width: 0, height: 0});
 
 
     const updateSize = useCallback(() => {

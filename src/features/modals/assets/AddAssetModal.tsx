@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from './AddAssetModal.module.css';
 
 import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
@@ -9,7 +9,7 @@ import { ButtonLargeRectangle } from "../common/ButtonLargeRectangle";
 import { ImportMeshModal } from "./ImportMeshModal";
 import { ButtonBackRound } from "../common/ButtonBackRound";
 import { useTransition, animated, easings, useSpring } from "react-spring";
-import { useElementSize } from "../../../hooks/useElementSize";
+import { ElementSize, useElementSize } from "../../../hooks/useElementSize";
 
 type Props = {
     closeModal: () => void
@@ -25,35 +25,46 @@ export const AddAssetModal = ({closeModal}: Props) => {
     const [primitivesContentRef, primitivesPageSize] = useElementSize<HTMLDivElement>();
     const [importDetailsContentRef, importDetailsPageSize] = useElementSize<HTMLDivElement>();
 
+    const previousActivePageSizeRef = useRef<ElementSize>({width: 0, height: 0});
+
     const activePageSize = 
         currentPage === 'main' ? mainPageSize :
         currentPage === 'primitives' ? primitivesPageSize :
         importDetailsPageSize;
     
+    const savePreviousPageSize = () => {
+        previousActivePageSizeRef.current = activePageSize;
+    }
+
     const modalSpring = useSpring({
+        from: previousActivePageSizeRef.current,
+        to: activePageSize.width > 0 ? activePageSize : previousActivePageSizeRef.current,
         width: activePageSize.width,
         height: activePageSize.height,
         config: { duration: 150, easing: easings.easeInOutQuad }
     });
     
     const contentTransition = useTransition(currentPage, {
-        from: { opacity: 0 },    //from: { opacity: 0, transform: 'translateX(100%)' },
-        enter: { opacity: 1 },   //enter: { opacity: 1, transform: 'translateX(0%)' },
-        leave: { opacity: 1 },   //leave: { opacity: 0, transform: 'translateX(-100%)' },
-        config: { duration: 250, easing: easings.easeInOutQuad },
+        from: { opacity: 0 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
+        config: { duration: 150, easing: easings.easeInOutQuad },
         exitBeforeEnter: false,
     });
 
 
     const switchToPrimitivesList = () => {
+        savePreviousPageSize()
         setCurrentPage('primitives');
     }
 
     const switchToImportDetails = () => {
+        savePreviousPageSize()
         setCurrentPage('import');
     }
 
     const switchToMainPage = () => {
+        savePreviousPageSize()
         setCurrentPage('main');
     }
 
