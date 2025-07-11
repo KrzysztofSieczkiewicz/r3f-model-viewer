@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from './AddAssetModal.module.css';
 
 import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
@@ -20,8 +20,6 @@ type PageState = 'main' | 'primitives' | 'import';
 export const AddAssetModal = ({closeModal}: Props) => {
 
     const [currentPage, setCurrentPage] = useState<PageState>('main');
-    const [measuredContainerWidth, setMeasuredContainerWidth] = useState(0);
-    const [measuredContainerHeight, setMeasuredContainerHeight] = useState(0);
 
     const [mainPageContentRef, mainPageSize] = useElementSize<HTMLDivElement>();
     const [primitivesContentRef, primitivesPageSize] = useElementSize<HTMLDivElement>();
@@ -33,15 +31,15 @@ export const AddAssetModal = ({closeModal}: Props) => {
         importDetailsPageSize;
     
     const modalSpring = useSpring({
-        width: '50vw',//ctivePageSize.width,
-        height: '50vh',//activePageSize.height,
-        config: { duration: 250, easing: easings.easeInOutQuad }
+        width: activePageSize.width,
+        height: activePageSize.height,
+        config: { duration: 150, easing: easings.easeInOutQuad }
     });
     
     const contentTransition = useTransition(currentPage, {
         from: { opacity: 0 },    //from: { opacity: 0, transform: 'translateX(100%)' },
         enter: { opacity: 1 },   //enter: { opacity: 1, transform: 'translateX(0%)' },
-        leave: { opacity: 0 },   //leave: { opacity: 0, transform: 'translateX(-100%)' },
+        leave: { opacity: 1 },   //leave: { opacity: 0, transform: 'translateX(-100%)' },
         config: { duration: 250, easing: easings.easeInOutQuad },
         exitBeforeEnter: false,
     });
@@ -62,7 +60,7 @@ export const AddAssetModal = ({closeModal}: Props) => {
 
     const renderPrimitivesList = () => {
         return (
-            <div ref={primitivesContentRef} className={styles.pageContent}>
+            <div ref={primitivesContentRef} className={styles.contentsContainerPlaceholder}>
                 <div className={styles.topBar}>
                     <ButtonBackRound onClick={switchToMainPage}/>
                 </div>
@@ -72,16 +70,17 @@ export const AddAssetModal = ({closeModal}: Props) => {
     }
 
     const renderImportDetails = () => {
-        return (<div ref={importDetailsContentRef} className={styles.pageContent}>
-            <div className={styles.topBar}>
-                <ButtonBackRound onClick={switchToMainPage}/>
-            </div>
-            <ImportMeshModal src={""} closeModal={() => {}}/>
-        </div>)
+        return (
+            <div ref={importDetailsContentRef} className={styles.contentsContainerPlaceholder}>
+                <div className={styles.topBar}>
+                    <ButtonBackRound onClick={switchToMainPage}/>
+                </div>
+                <ImportMeshModal src={""} closeModal={() => {}}/>
+            </div>)
     }
 
     const renderMainPage = () => {
-        return (<div ref={mainPageContentRef} className={styles.pageContent}>
+        return (<div ref={mainPageContentRef} className={styles.contentsContainerPlaceholder}>
             <section className={styles.pageSection}>
                 <h3 className={styles.sectionTitle}>
                     Browse models
@@ -115,7 +114,14 @@ export const AddAssetModal = ({closeModal}: Props) => {
             style={modalSpring}
             className={styles.modalContents}
         >
-            <div className={styles.contentsContainerPlaceholder}  />        
+            {contentTransition((style, item) => (
+                <animated.div style={{ ...style, position: 'absolute', width: '100%', height: '100%' }}>
+                    {item === 'main' && renderMainPage()}
+                    {item === 'primitives' && renderPrimitivesList()}
+                    {item === 'import' && renderImportDetails()}
+                </animated.div>
+            ))}
+   
             {/* {contentTransition((style,item) => (
                 <animated.div style={{ ...style, position: 'absolute', width: '100%', height: '100%' }}>
                     {item === 'main' && renderMainPage()}

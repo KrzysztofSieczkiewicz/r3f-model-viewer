@@ -36,8 +36,9 @@ export const useElementSize = <T extends HTMLElement = HTMLDivElement>(): [React
 
         return () => {
             observer.unobserve(element);
+            observer.disconnect();
         };
-    }, [updateSize]);
+    }, [ref.current, updateSize]);
 
     return [ref, size];
 }

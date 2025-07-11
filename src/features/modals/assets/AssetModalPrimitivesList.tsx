@@ -1,4 +1,6 @@
 import React from "react"
+import styles from './AssetModalPrimitivesList.module.css';
+
 import { ModalListedButton } from "../common/ModalListedButton"
 import { Primitives } from "../../../models/assets/meshes/Primitive";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
@@ -21,7 +23,7 @@ export const AssetModalPrimitivesList = ({closeModal}: Props) => {
     }
 
     return (
-        <div>
+        <div className={styles.pageContainer}>
             <ModalListedButton 
                 displayName="Sphere"
                 icon={<SphereIcon/>}
