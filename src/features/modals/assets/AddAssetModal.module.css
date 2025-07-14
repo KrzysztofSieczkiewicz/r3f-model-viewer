@@ -1,5 +1,7 @@
 @import '../../../App.module.css';
 
+/* Main */
+
 .modalContents {
     position: relative;
     display: flex;
@@ -7,16 +9,6 @@
     padding: 0;
     background-color: var(--color-main-weak);
     overflow: hidden;
-}
-
-.contentsContainer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: fit-content;
-    height: fit-content;
 }
 
 .pageSection {
@@ -33,13 +25,26 @@
     justify-content: space-around;
     align-items: center;
 
-    width: 17rem;
+    width: 25rem;
     padding: 0.2rem;
 
     flex-basis: 45%;
 }
 
-.topBar {
+
+/* PageContainer */
+
+.contentsContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.buttonTopBar {
     display: flex;
     justify-self: start;
 

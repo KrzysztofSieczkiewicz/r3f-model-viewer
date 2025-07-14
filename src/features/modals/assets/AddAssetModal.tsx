@@ -1,8 +1,5 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import styles from './AddAssetModal.module.css';
-
-import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
-import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
 
 import { AssetModalPrimitivesList } from "./AssetModalPrimitivesList";
 import { ButtonLargeRectangle } from "../common/ButtonLargeRectangle";
@@ -11,87 +8,75 @@ import { ButtonBackRound } from "../common/ButtonBackRound";
 import { useTransition, animated, easings, useSpring } from "react-spring";
 import { ElementSize, useElementSize } from "../../../hooks/useElementSize";
 
-type Props = {
-    closeModal: () => void
+import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
+import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
+
+
+type PageContainerProps = {
+    children: ReactNode,
+    showBackButton?: boolean,
+    onBackClick?: () => void,
+    pageRef: React.RefObject<HTMLDivElement>;
 }
+
+const PageContainer = ({children, showBackButton, onBackClick, pageRef}: PageContainerProps) => {
+    return <div ref={pageRef} className={styles.contentsContainer}>
+        {showBackButton && onBackClick &&
+        <div className={styles.buttonTopBar}>
+            <ButtonBackRound onClick={onBackClick}/>
+        </div>}
+        {children}
+    </div>
+}
+
 
 type PageState = 'main' | 'primitives' | 'import';
 
-export const AddAssetModal = ({closeModal}: Props) => {
+type AssetModalProps = {
+    closeModal: () => void
+}
+
+export const AddAssetModal = ({closeModal}: AssetModalProps) => {
 
     const [activePage, setActivePage] = useState<PageState>('main');
     const [prevPageSize, setPrevPageSize] = useState<ElementSize>({width: 0, height: 0});
 
-    const [mainPageContentRef, mainPageSize] = useElementSize<HTMLDivElement>();
-    const [primitivesContentRef, primitivesPageSize] = useElementSize<HTMLDivElement>();
-    const [importDetailsContentRef, importDetailsPageSize] = useElementSize<HTMLDivElement>();
+    const [mainPageRef, mainPageSize] = useElementSize<HTMLDivElement>();
+    const [primitivesPageRef, primitivesPageSize] = useElementSize<HTMLDivElement>();
+    const [importPageRef, importPageSize] = useElementSize<HTMLDivElement>();
 
     const activePageSize = 
         activePage === 'main' ? mainPageSize :
         activePage === 'primitives' ? primitivesPageSize :
-        importDetailsPageSize;
+        importPageSize;
     
-    const savePreviousPageSize = () => {
+    const saveLastPageSize = () => {
         setPrevPageSize(activePageSize);
     }
 
-    console.log("from: ", prevPageSize.width > 0 ? prevPageSize : activePageSize)
-    console.log("to: ", activePageSize.width > 0 ? activePageSize : prevPageSize)
+    const switchToPage = (newPage: PageState) => {
+        saveLastPageSize();
+        setActivePage(newPage);
+    }
+
+
     const modalSpring = useSpring({
         from: prevPageSize.width > 0 ? prevPageSize : activePageSize,
         to: activePageSize.width > 0 ? activePageSize : prevPageSize,
-        config: { duration: 100, easing: easings.easeInOutCubic },
+        config: { duration: 200, easing: easings.easeInOutCubic },
     });
     
-    // TODO: override this manually - first mount an invisible page, then useSpring it into existence. 
-    // It'll give You more time to get 'page size' to useSpring container size to.
     const contentTransition = useTransition(activePage, {
         from: { opacity: 0 },
         enter: { opacity: 1 },
         leave: { opacity: 0 },
         config: { duration: 200, easing: easings.easeInOutCubic },
-        exitBeforeEnter: false,
+        exitBeforeEnter: false
     });
 
 
-    const switchToPrimitivesList = () => {
-        savePreviousPageSize()
-        setActivePage('primitives');
-    }
-
-    const switchToImportDetails = () => {
-        savePreviousPageSize()
-        setActivePage('import');
-    }
-
-    const switchToMainPage = () => {
-        savePreviousPageSize()
-        setActivePage('main');
-    }
-
-    const renderPrimitivesList = () => {
-        return (
-            <div ref={primitivesContentRef} className={styles.contentsContainer}>
-                <div className={styles.topBar}>
-                    <ButtonBackRound onClick={switchToMainPage}/>
-                </div>
-                <AssetModalPrimitivesList closeModal={closeModal} />
-            </div>
-        )
-    }
-
-    const renderImportDetails = () => {
-        return (
-            <div ref={importDetailsContentRef} className={styles.contentsContainer}>
-                <div className={styles.topBar}>
-                    <ButtonBackRound onClick={switchToMainPage}/>
-                </div>
-                <ImportMeshModal src={""} closeModal={() => {}}/>
-            </div>)
-    }
-
-    const renderMainPage = () => {
-        return (<div ref={mainPageContentRef} className={styles.contentsContainer}>
+    const renderMainPageContent = () => {
+        return (<>
             <section className={styles.pageSection}>
                 <h3 className={styles.sectionTitle}>
                     Browse models
@@ -99,13 +84,18 @@ export const AddAssetModal = ({closeModal}: Props) => {
 
                 <div className={styles.buttonsContainer}>
                     <ButtonLargeRectangle
-                        onClick={ () => {switchToPrimitivesList()} }
+                        onClick={ () => {switchToPage('primitives')} }
                         displayName="Primitives"
                         icon={<SphereIcon/>}
                     />
                     <ButtonLargeRectangle
-                        onClick={ () => {switchToImportDetails()} }
+                        onClick={ () => {switchToPage('import')} }
                         displayName="Models"
+                        icon={<CubeIcon/>}
+                    />
+                    <ButtonLargeRectangle
+                        onClick={ () => {} }
+                        displayName="Upload"
                         icon={<CubeIcon/>}
                     />
                 </div>
@@ -116,7 +106,7 @@ export const AddAssetModal = ({closeModal}: Props) => {
                 </h3>
                 <p> Something will be here later </p>
             </section>
-        </div>);
+        </>);
     }
 
 
@@ -127,9 +117,23 @@ export const AddAssetModal = ({closeModal}: Props) => {
         >
             {contentTransition((style, item) => (
                 <animated.div style={{ ...style, position: 'absolute', width: '100%', height: '100%' }}>
-                    {item === 'main' && renderMainPage()}
-                    {item === 'primitives' && renderPrimitivesList()}
-                    {item === 'import' && renderImportDetails()}
+
+                    {item === 'main' && (
+                        <PageContainer pageRef={mainPageRef}>
+                            {renderMainPageContent()}
+                        </PageContainer>
+                    )}
+                    {item === 'primitives' && (
+                        <PageContainer pageRef={primitivesPageRef} showBackButton onBackClick={() => switchToPage('main')}>
+                            <AssetModalPrimitivesList closeModal={closeModal} />
+                        </PageContainer>
+                    )}
+                    {item === 'import' && (
+                        <PageContainer pageRef={importPageRef} showBackButton onBackClick={() => switchToPage('main')}>
+                            <ImportMeshModal src={""} closeModal={() => {}}/>
+                        </PageContainer>
+                    )}
+
                 </animated.div>
             ))}
         </animated.div>
