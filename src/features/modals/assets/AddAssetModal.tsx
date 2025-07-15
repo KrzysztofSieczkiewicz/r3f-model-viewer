@@ -1,15 +1,16 @@
 import React, { ReactNode, useState } from "react";
 import styles from './AddAssetModal.module.css';
 
-import { AssetModalPrimitivesList } from "./AssetModalPrimitivesList";
+import { AssetModalPrimitivesPage } from "./AssetModalPrimitivesPage";
 import { ButtonLargeRectangle } from "../common/ButtonLargeRectangle";
-import { ImportMeshModal } from "./ImportMeshModal";
+import { AssetModalBrowseModelsPage } from "./AssetModalBrowseModelsPage";
 import { ButtonBackRound } from "../common/ButtonBackRound";
 import { useTransition, animated, easings, useSpring } from "react-spring";
 import { ElementSize, useElementSize } from "../../../hooks/useElementSize";
 
 import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
 import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
+import { FileUploader } from "../../common/FileUploader";
 
 
 type PageContainerProps = {
@@ -30,7 +31,7 @@ const PageContainer = ({children, showBackButton, onBackClick, pageRef}: PageCon
 }
 
 
-type PageState = 'main' | 'primitives' | 'import';
+type PageState = 'main' | 'primitives' | 'browse' | 'upload';
 
 type AssetModalProps = {
     closeModal: () => void
@@ -89,12 +90,12 @@ export const AddAssetModal = ({closeModal}: AssetModalProps) => {
                         icon={<SphereIcon/>}
                     />
                     <ButtonLargeRectangle
-                        onClick={ () => {switchToPage('import')} }
+                        onClick={ () => {switchToPage('browse')} }
                         displayName="Models"
                         icon={<CubeIcon/>}
                     />
                     <ButtonLargeRectangle
-                        onClick={ () => {} }
+                        onClick={ () => {switchToPage('upload')} }
                         displayName="Upload"
                         icon={<CubeIcon/>}
                     />
@@ -125,12 +126,17 @@ export const AddAssetModal = ({closeModal}: AssetModalProps) => {
                     )}
                     {item === 'primitives' && (
                         <PageContainer pageRef={primitivesPageRef} showBackButton onBackClick={() => switchToPage('main')}>
-                            <AssetModalPrimitivesList closeModal={closeModal} />
+                            <AssetModalPrimitivesPage closeModal={closeModal} />
                         </PageContainer>
                     )}
-                    {item === 'import' && (
+                    {item === 'browse' && (
                         <PageContainer pageRef={importPageRef} showBackButton onBackClick={() => switchToPage('main')}>
-                            <ImportMeshModal src={""} closeModal={() => {}}/>
+                            <AssetModalBrowseModelsPage src={""} closeModal={closeModal}/>
+                        </PageContainer>
+                    )}
+                    {item === 'upload' && (
+                        <PageContainer pageRef={importPageRef} showBackButton onBackClick={() => switchToPage('main')}>
+                            <FileUploader />
                         </PageContainer>
                     )}
 

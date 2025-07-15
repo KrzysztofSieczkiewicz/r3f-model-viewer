@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import styles from './ImportMeshModal.module.css'
+import styles from './AssetModalBrowseModelsPage.module.css'
 
 import { ListedMetadataGLTF, MaterialMetadataGLTF, useImportGLTF } from "../../sideMenu/hooks/useImportGLTF"
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
@@ -9,7 +9,7 @@ type Props = {
     closeModal: () => void;
 }
 
-export const ImportMeshModal = ({src, closeModal}: Props) => {
+export const AssetModalBrowseModelsPage = ({src, closeModal}: Props) => {
 
     const { addAssetUnwrapped } = useSceneObjectsContext();
 

@@ -5,7 +5,7 @@ import { AssetWrapper } from "../../../../models/assets/Asset";
 import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { SlidersArray } from "../common/controls/SlidersArray";
-import { ImportMeshModal } from "../../../modals/assets/ImportMeshModal";
+import { AssetModalBrowseModelsPage } from "../../../modals/assets/AssetModalBrowseModelsPage";
 import { UnwrappedWrapper } from "../../../../models/assets/meshes/Unwrapped";
 import { SidebarModal } from "../../../modals/SidebarModal";
 
@@ -50,7 +50,7 @@ export const AssetControls = ({asset}: Props) => {
 
             <button onClick={() => setIsModalOpen(true)}> TEST LISTING MESH </button>
             <SidebarModal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false)}}>
-                <ImportMeshModal src={mesh.src} closeModal={() => {}}/>
+                <AssetModalBrowseModelsPage src={mesh.src} closeModal={() => {}}/>
             </SidebarModal>
         </TraitExpandable>
     );

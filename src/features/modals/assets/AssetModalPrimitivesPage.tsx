@@ -1,5 +1,5 @@
 import React from "react"
-import styles from './AssetModalPrimitivesList.module.css';
+import styles from './AssetModalPrimitivesPage.module.css';
 
 import { ModalListedButton } from "../common/ModalListedButton"
 import { Primitives } from "../../../models/assets/meshes/Primitive";
@@ -13,7 +13,7 @@ type Props = {
     closeModal: () => void
 }
 
-export const AssetModalPrimitivesList = ({closeModal}: Props) => {
+export const AssetModalPrimitivesPage = ({closeModal}: Props) => {
 
     const { addAssetPrimitive } = useSceneObjectsContext();
 
