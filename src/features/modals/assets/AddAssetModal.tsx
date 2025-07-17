@@ -10,7 +10,7 @@ import { ElementSize, useElementSize } from "../../../hooks/useElementSize";
 
 import { ReactComponent as SphereIcon } from '../../../icons/sidebar/primitives/primitive_sphere.svg'
 import { ReactComponent as CubeIcon } from '../../../icons/sidebar/cube.svg';
-import { FileUploader } from "../../common/FileUploader";
+import { FileDiskUploader } from "../../common/FileDiskUploader";
 
 
 type PageContainerProps = {
@@ -136,7 +136,7 @@ export const AddAssetModal = ({closeModal}: AssetModalProps) => {
                     )}
                     {item === 'upload' && (
                         <PageContainer pageRef={importPageRef} showBackButton onBackClick={() => switchToPage('main')}>
-                            <FileUploader />
+                            <FileDiskUploader />
                         </PageContainer>
                     )}
 
