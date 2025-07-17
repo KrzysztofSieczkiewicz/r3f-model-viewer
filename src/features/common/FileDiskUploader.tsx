@@ -63,12 +63,12 @@ export const FileDiskUploader = ({
                 reader.readAsDataURL(file);
             });
 
-            const content = await readPromise.toString();
+            const content = await readPromise;
             setStatus('success');
             setError(null);
 
             if (onUploadComplete) { 
-                onUploadComplete(file.name, content);
+                onUploadComplete(file.name, content as string);
             }
 
         } catch (err: any) {
