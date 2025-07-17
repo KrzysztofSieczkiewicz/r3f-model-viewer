@@ -2,16 +2,24 @@ import React, { ChangeEvent, useCallback, useState } from "react";
 
 type UploadStatus = 'idle' | 'reading' | 'uploading' | 'success' | 'error'
 
-export const FileDiskUploader = () => {
+type UploaderProps = {
+    onUploadStart?: (fileName: string) => void,
+    onUploadComplete?: (fileName: string, content: string) => void,
+    onUploadError?: (error: string) => void;
+}
+
+export const FileDiskUploader = ({
+    onUploadStart,
+    onUploadComplete,
+    onUploadError,
+}: UploaderProps) => {
     const [file, setFile] = useState<File|null>(null);
-    const [fileContents, setFileContents] = useState<string|null>(null);
     const [status, setStatus] = useState<UploadStatus>('idle');
     const [error, setError] = useState<string|null>(null);
 
     const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setError(null);
         setStatus('idle');
-        setFileContents(null);
 
         if (e.target.files && e.target.files.length > 0) {
             setFile(e.target.files[0]);
@@ -29,6 +37,10 @@ export const FileDiskUploader = () => {
 
         setStatus('uploading');
         setError(null);
+
+        if (onUploadStart) {
+            onUploadStart(file.name);
+        }
 
         try {
             const reader = new FileReader();
@@ -52,15 +64,21 @@ export const FileDiskUploader = () => {
             });
 
             const content = await readPromise.toString();
-            setFileContents(content);
             setStatus('success');
             setError(null);
+
+            if (onUploadComplete) { 
+                onUploadComplete(file.name, content);
+            }
 
         } catch (err: any) {
             console.error("File reading failed: ", err);
             setError(err.message || 'An error occured during file processing')
-        }
 
+            if (onUploadError) {
+                onUploadError(err.message || "An unknown error occured");
+            }
+        }
     }
 
 
@@ -82,7 +100,7 @@ export const FileDiskUploader = () => {
         <p>Upload successful</p>}
 
         {status === 'error' &&
-        <p>Upload failed</p>}
+        <p>Upload failed: {error}</p>}
         
     </div>
 }

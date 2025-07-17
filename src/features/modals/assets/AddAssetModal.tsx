@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { act, ReactNode, useState } from "react";
 import styles from './AddAssetModal.module.css';
 
 import { AssetModalPrimitivesPage } from "./AssetModalPrimitivesPage";
@@ -45,11 +45,13 @@ export const AddAssetModal = ({closeModal}: AssetModalProps) => {
     const [mainPageRef, mainPageSize] = useElementSize<HTMLDivElement>();
     const [primitivesPageRef, primitivesPageSize] = useElementSize<HTMLDivElement>();
     const [importPageRef, importPageSize] = useElementSize<HTMLDivElement>();
+    const [uploadPageRef, uploadPageSize] = useElementSize<HTMLDivElement>();
 
     const activePageSize = 
         activePage === 'main' ? mainPageSize :
         activePage === 'primitives' ? primitivesPageSize :
-        importPageSize;
+        activePage === 'browse' ? importPageSize :
+        uploadPageSize;
     
     const saveLastPageSize = () => {
         setPrevPageSize(activePageSize);
@@ -64,14 +66,14 @@ export const AddAssetModal = ({closeModal}: AssetModalProps) => {
     const modalSpring = useSpring({
         from: prevPageSize.width > 0 ? prevPageSize : activePageSize,
         to: activePageSize.width > 0 ? activePageSize : prevPageSize,
-        config: { duration: 200, easing: easings.easeInOutCubic },
+        config: { duration: 200, easing: easings.easeInQuad },
     });
     
     const contentTransition = useTransition(activePage, {
         from: { opacity: 0 },
         enter: { opacity: 1 },
         leave: { opacity: 0 },
-        config: { duration: 200, easing: easings.easeInOutCubic },
+        config: { duration: 200, easing: easings.easeInQuad },
         exitBeforeEnter: false
     });
 
@@ -135,7 +137,7 @@ export const AddAssetModal = ({closeModal}: AssetModalProps) => {
                         </PageContainer>
                     )}
                     {item === 'upload' && (
-                        <PageContainer pageRef={importPageRef} showBackButton onBackClick={() => switchToPage('main')}>
+                        <PageContainer pageRef={uploadPageRef} showBackButton onBackClick={() => switchToPage('main')}>
                             <FileDiskUploader />
                         </PageContainer>
                     )}
