@@ -132,11 +132,11 @@ export const AddAssetModal = ({closeModal}: AssetModalProps) => {
                             <AssetModalPrimitivesPage closeModal={closeModal} />
                         </PageContainer>
                     )}
-                    {item === 'browse' && (
+                    {/* {item === 'browse' && (
                         <PageContainer pageRef={importPageRef} showBackButton onBackClick={() => switchToPage('main')}>
-                            <AssetModalBrowseModelsPage src={""} closeModal={closeModal}/>
+                            <AssetModalBrowseModelsPage src={} closeModal={closeModal}/>
                         </PageContainer>
-                    )}
+                    )} */}
                     {item === 'upload' && (
                         <PageContainer pageRef={uploadPageRef} showBackButton onBackClick={() => switchToPage('main')}>
                             <AssetModalUploadPage />

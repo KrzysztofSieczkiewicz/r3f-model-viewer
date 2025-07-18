@@ -1,9 +1,9 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { GeometryMetadataGLTF } from "../../../models/assets/meshes/Unwrapped";
+import { GeometryMetadata } from "../../../models/assets/meshes/Unwrapped";
 
 export type ListedMetadataGLTF = {
-    mesh: GeometryMetadataGLTF,
+    mesh: GeometryMetadata,
     materials: MaterialMetadataGLTF[]
 }
 
@@ -14,11 +14,11 @@ export type MaterialMetadataGLTF = {
     traversalIndex: number,
 }
 
-type MetadataListingResultGLTF = {
+export type MetadataListingResultGLTF = {
     meshes: ListedMetadataGLTF[];
 }
 
-type LoadingRestultGLTF = {
+export type LoadingRestultGLTF = {
     geometry: THREE.BufferGeometry;
     material: THREE.Material | null;
 }
@@ -79,7 +79,7 @@ export const useImportGLTF = () => {
         });
     };
 
-    const loadGeometry = (src: string, required: GeometryMetadataGLTF) => {
+    const loadGeometry = (src: string, required: GeometryMetadata) => {
         return new Promise( (resolve, reject) => {
             const loader = new GLTFLoader();
 
@@ -119,66 +119,63 @@ export const useImportGLTF = () => {
         })
     }
 
-    const loadContents = (src: string, requiredMesh: GeometryMetadataGLTF, requiredMaterial: MaterialMetadataGLTF | null): Promise<LoadingRestultGLTF> => {
+    const loadContents = (src: string, requiredMesh: GeometryMetadata, requiredMaterial: MaterialMetadataGLTF | null): Promise<LoadingRestultGLTF> => {
         return new Promise( (resolve, reject) => {
             const loader = new GLTFLoader();
 
-            loader.load(
-                src,
-                (gltf) => {
-                    const meshNamesCounts: {[name: string]: number} = {};
-                    let foundGeometry: THREE.BufferGeometry | null = null;
-                    let foundMaterial: THREE.Material | null = null;
-                    let isFound = false;
+            loader.load(src, (gltf) => {
+                const meshNamesCounts: {[name: string]: number} = {};
+                let foundGeometry: THREE.BufferGeometry | null = null;
+                let foundMaterial: THREE.Material | null = null;
+                let isFound = false;
 
-                    gltf.scene.traverse( (object) => {
-                        if (isFound) return;
-                        if (!(object instanceof THREE.Mesh)) return;
+                gltf.scene.traverse( (object) => {
+                    if (isFound) return;
+                    if (!(object instanceof THREE.Mesh)) return;
 
-                        const meshName = object.name;
-                        const meshTraversalIndex = meshNamesCounts[meshName] | 0;
-                        const materialNamesCounts: {[name: string]: number} = {};
+                    const meshName = object.name;
+                    const meshTraversalIndex = meshNamesCounts[meshName] | 0;
+                    const materialNamesCounts: {[name: string]: number} = {};
 
-                        if (object.name !== requiredMesh.name || meshTraversalIndex !== requiredMesh.traversalIndex) {
-                            meshNamesCounts[meshName] = meshTraversalIndex + 1;
-                            return;
-                        }
-                        foundGeometry = object.geometry;
-                        isFound = true;
+                    if (object.name !== requiredMesh.name || meshTraversalIndex !== requiredMesh.traversalIndex) {
+                        meshNamesCounts[meshName] = meshTraversalIndex + 1;
+                        return;
+                    }
+                    foundGeometry = object.geometry;
+                    isFound = true;
 
-                        if (requiredMaterial) {
-                            const materials = Array.isArray(object.material) 
-                            ? object.material 
-                            : [object.material].filter(Boolean);
-                            
-                            foundMaterial = materials.find( (material) => {
-                                const materialTraversalIndex = materialNamesCounts[material.name] | 0;
-                                materialNamesCounts[material.name] = materialTraversalIndex + 1;
-                                return (material.name === requiredMaterial.name && materialTraversalIndex === requiredMaterial.traversalIndex)
-                            })
-                        }
-                            
+                    if (requiredMaterial) {
+                        const materials = Array.isArray(object.material) 
+                        ? object.material 
+                        : [object.material].filter(Boolean);
                         
-                    });
+                        foundMaterial = materials.find( (material) => {
+                            const materialTraversalIndex = materialNamesCounts[material.name] | 0;
+                            materialNamesCounts[material.name] = materialTraversalIndex + 1;
+                            return (material.name === requiredMaterial.name && materialTraversalIndex === requiredMaterial.traversalIndex)
+                        })
+                    }
+                        
+                    
+                });
 
-                    if(requiredMaterial && !foundMaterial) {
-                        console.error(`Failed to load material from the file: ${src}, for mesh: ${requiredMesh.id}`);
-                    }
-                    if (foundGeometry) {
-                        resolve({
-                            geometry: foundGeometry,
-                            material: foundMaterial});
-                    } else {
-                        console.error(`Failed to load contents from the file: ${src}, and mesh: ${requiredMesh.id}`);
-                        reject(new Error("Failed to load contents from the file"));
-                    }
-                },
-                undefined,
-                (error) => {
-                    console.error(`Failed to load contents from the file: ${src}, and mesh: ${requiredMesh.id}`, error);
-                    reject(error);
+                if(requiredMaterial && !foundMaterial) {
+                    console.error(`Failed to load material from the file: ${src}, for mesh: ${requiredMesh.id}`);
                 }
-            );
+                if (foundGeometry) {
+                    resolve({
+                        geometry: foundGeometry,
+                        material: foundMaterial});
+                } else {
+                    console.error(`Failed to load contents from the file: ${src}, and mesh: ${requiredMesh.id}`);
+                    reject(new Error("Failed to load contents from the file"));
+                }
+            },
+            undefined,
+            (error) => {
+                console.error(`Failed to load contents from the file: ${src}, and mesh: ${requiredMesh.id}`, error);
+                reject(error);
+            });
         });
     }
 

@@ -60,7 +60,7 @@ export const FileDiskUploader = ({
                     reject(new Error("File reading was aborted"));
                 };
 
-                reader.readAsDataURL(file);
+                reader.readAsText(file);
             });
 
             const content = await readPromise;

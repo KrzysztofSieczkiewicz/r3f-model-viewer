@@ -10,12 +10,6 @@ export const AssetModalUploadPage = () => {
     const [fileName, setFileName] = useState<string|null>(null);
     const [fileContents, setFileContents] = useState<string|null>(null);
 
-    // Debugging only
-    useEffect(() => {
-        console.log({fileName});
-        console.log({fileContents});
-    }, [fileName, fileContents])
-
     const handleFileUpload = (name: string, contents: string) => {
         setFileName(name);
         setFileContents(contents);

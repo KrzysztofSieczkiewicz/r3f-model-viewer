@@ -1,11 +1,10 @@
-export type GeometryMetadataGLTF = {
+export type GeometryMetadata = {
     id: string,
     name: string,
     traversalIndex: number,
 }
 
-
 export type UnwrappedWrapper = {
     src: string,
-    geometries: GeometryMetadataGLTF[],
+    geometries: GeometryMetadata[],
 }

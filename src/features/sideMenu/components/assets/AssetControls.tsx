@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { TraitExpandable } from "../common/traits/TraitExpandable";
 import { AssetWrapper } from "../../../../models/assets/Asset";
 import { useSceneObjectsContext } from "../../../common/contexts/SceneObjectsContext";
 import { TraitSingle } from "../common/traits/TraitSingle";
 import { SlidersArray } from "../common/controls/SlidersArray";
-import { AssetModalBrowseModelsPage } from "../../../modals/assets/AssetModalBrowseModelsPage";
 import { UnwrappedWrapper } from "../../../../models/assets/meshes/Unwrapped";
-import { SidebarModal } from "../../../modals/SidebarModal";
 
 
 type Props = {
@@ -21,8 +19,6 @@ export const AssetControls = ({asset}: Props) => {
     const assetId = asset.id;
 
     const mesh = asset.mesh as UnwrappedWrapper
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <TraitExpandable name="General" expanded={true}>
@@ -47,11 +43,6 @@ export const AssetControls = ({asset}: Props) => {
                     handleChange={(val) => updateAssetProperties(assetId, {scale: val})}
                     axesLocking />
             </TraitSingle>
-
-            <button onClick={() => setIsModalOpen(true)}> TEST LISTING MESH </button>
-            <SidebarModal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false)}}>
-                <AssetModalBrowseModelsPage src={mesh.src} closeModal={() => {}}/>
-            </SidebarModal>
         </TraitExpandable>
     );
 

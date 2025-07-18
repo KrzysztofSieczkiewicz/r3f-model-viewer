@@ -3,7 +3,7 @@ import styles from './AssetModalBrowseModelsPage.module.css'
 
 import { ListedMetadataGLTF, MaterialMetadataGLTF, useImportGLTF } from "../../sideMenu/hooks/useImportGLTF"
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
-import { useListContentsFromGLTFData } from "../../sideMenu/hooks/useListContentsFromGLTFData";
+import { useParseGLTF } from "../../sideMenu/hooks/useParseGLTF";
 
 type Props = {
     src: string;
@@ -22,13 +22,13 @@ export const AssetModalBrowseModelsPage = ({src, closeModal}: Props) => {
     const [ selectedMaterial, setSelectedMaterial ] = useState<MaterialMetadataGLTF|null>(null);
 
     //const { getContents } =  useImportGLTF();
-    const { getContents } = useListContentsFromGLTFData();
+    const { parseGLTF } = useParseGLTF();
 
     useEffect( () => {
         setIsLoading(true);
         setError(null);
 
-        getContents(src)
+        parseGLTF(src)
             .then( (loadedMeshes) => {
                 setMeshes(loadedMeshes.meshes);
                 setIsLoading(false);
@@ -44,6 +44,7 @@ export const AssetModalBrowseModelsPage = ({src, closeModal}: Props) => {
         if (selected.mesh.id !== selectedMesh?.mesh.id) {
             setSelectedMesh(selected)
             setSelectedMaterial(selected.materials[0])
+            console.log({selected})
         } else {
             setSelectedMesh(null)
             setSelectedMaterial(null)
