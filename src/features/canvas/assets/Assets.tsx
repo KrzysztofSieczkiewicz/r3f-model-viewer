@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 import { useSelectSceneObject } from "../../../hooks/useSelect";
 import { AssetGizmo } from "./AssetGizmo";
-import { PrimitiveAsset } from "./PrimitiveAsset";
+import { PrimitiveAsset } from "./primitive/PrimitiveAsset";
 import { AssetProperties, AssetWrapper, Meshes } from "../../../models/assets/Asset";
 import { UnwrappedAsset } from "./UnwrappedAsset";
 
