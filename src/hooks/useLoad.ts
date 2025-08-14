@@ -82,109 +82,76 @@ export const useFileLoad = () => {
                 return;
             } else if (!(object instanceof THREE.Mesh)) return;
             
-            const meshName = object.name;
-            const meshTraversalIndex = meshNamesCounts[meshName] | 0;
-
-            requiredMeshes?.forEach( (requiredMesh) => {
-                if (object.name === requiredMesh.name && meshTraversalIndex === requiredMesh.traversalIndex) {
-                    foundGeometries.push(object.geometry);
-                    
-                    if (requiredMaterials && requiredMaterials.length > 0) {
-                        const materialNamesCounts: {[name: string]: number} = {};
-                        const meshMaterials = Array.isArray(object.material)
-                            ? object.material
-                            : [object.material].filter(Boolean);
-
-                        requiredMaterials.forEach( (requiredMatMetadata) => {
-                            const foundMat = meshMaterials.find( (material) => {
-                                const materialTraversalIndex = materialNamesCounts[material.name] || 0;
-                                materialNamesCounts[material.name] = materialTraversalIndex + 1;
-
-                                return (
-                                    material.name === requiredMatMetadata.name &&
-                                    materialTraversalIndex === requiredMatMetadata.traversalIndex
-                                );
-                            });
-
-                            if (foundMat) {
-                                foundMaterials.push(foundMat);
-                            } else {
-                                console.warn(`Required material "${requiredMatMetadata.name}" (traversal index ${requiredMatMetadata.traversalIndex}) not found for mesh "${requiredMesh.name}".`);
-                            }
-                        });
-                    } else if (!requiredMaterials) {
-                        if (Array.isArray(object.material)) {
-                            foundMaterials = [...object.material];
-                        } else if (object.material) {
-                            foundMaterials.push(object.material);
-                        }
-                    }
-                } else {
-                    meshNamesCounts[meshName] = meshTraversalIndex + 1;
-                    return;
-                }
-            });
-
-            if (requiredMeshes && requiredMeshes?.length > 0) {
-                if (foundGeometries.length === 0) {
-                    console.error(`Failed to load contents from the file. No requested meshes found.`);
-                } else if (foundGeometries.length !== requiredMeshes.length) {
-                    console.warn(`Failed to load some of the geometries from the file.`);
-                }
-            } else if (requiredMaterials && requiredMaterials?.length > 0) {
-                if (foundMaterials.length === 0) {
-                    console.error(`Failed to load contents from the file. No requested materials found.`);
-                } else if (foundMaterials.length !== requiredMaterials.length) {
-                    console.warn(`Failed to load some of the materials from the file.`);
-                }
-            } 
 
         });
     }
  
     // Find matching mesh given the requiredMeshes[] and current gltf node
-    const checkMeshGLTF = (
+    const findMeshGeometryGLTF = (
         node: THREE.Mesh, 
         meshesToFind: GeometryMetadata[],
-        meshNamesCounts: {[name: string]: number}) => {
+        meshNamesCounts: {[name: string]: number}
+    ): { geometry?: THREE.BufferGeometry; remainingMeshes: GeometryMetadata[] } => {
 
         const meshName = node.name;
-        const meshTraversalIndex = meshNamesCounts[meshName] | 0;
+        const currentTraversalIndex = meshNamesCounts[meshName] ?? 0;
 
-        const matchedMeshIndex = meshesToFind.findIndex( (checkedMesh) => {
-            return meshName === checkedMesh.name && meshTraversalIndex === checkedMesh.traversalIndex
+        const matchedMeshIndex = meshesToFind.findIndex( (searchedMesh) => {
+            return meshName === searchedMesh.name && currentTraversalIndex === searchedMesh.traversalIndex;
         });
 
+        meshNamesCounts[meshName] = currentTraversalIndex + 1;
+
         if (matchedMeshIndex !== -1) {
-            return meshesToFind.splice(matchedMeshIndex, 1)[0];
+            const remainingMeshes = meshesToFind.filter((_, index) => index !== matchedMeshIndex);
+            return {
+                geometry: node.geometry,
+                remainingMeshes: remainingMeshes
+            };
         }
+        return {
+            remainingMeshes: meshesToFind
+        };
     }
 
     // Find all matching materials given the requiredMaterials[] and current gltf node
     const findMaterialsGLTF = (
         node: THREE.Mesh,
         materialsToFind: MaterialMetadataGLTF[],
-        materialNamesCounts: {[name: string]: number}) => {
+        materialNamesCounts: {[name: string]: number}
+    ): { materials?: THREE.Material[]; remainingMaterials: MaterialMetadataGLTF[] } => {
 
-        const materialsFound: MaterialMetadataGLTF[] = [];
+        const materialsFound: THREE.Material[] = [];
+        const indicesFound = new Set<number>();
         
         const meshMaterials = Array.isArray(node.material)
                             ? node.material
                             : [node.material].filter(Boolean);
 
         meshMaterials.forEach( (meshMaterial) => {
-            const matchedMaterialIndex = materialsToFind.findIndex( (searchedMaterial) => {
-                const meshMaterialName = meshMaterial.name;
-                const meshMaterialIndex = materialNamesCounts[meshMaterialName] | 0;
+            const meshMaterialName = meshMaterial.name;
+            const meshMaterialIndex = materialNamesCounts[meshMaterialName] ?? 0;
+
+            const matchedMaterialIndex = materialsToFind.findIndex( (searchedMaterial) => {    
                 return meshMaterialName === searchedMaterial.name && meshMaterialIndex === searchedMaterial.traversalIndex
             });
 
-            if(matchedMaterialIndex !== -1) {
-                const materialFound = materialsToFind.splice(matchedMaterialIndex, 1)[0];
-                materialsFound.push(materialFound);
+            materialNamesCounts[meshMaterialName] = meshMaterialIndex + 1;
+
+            if (matchedMaterialIndex !== -1) {
+                materialsFound.push(meshMaterial);
+                indicesFound.add(matchedMaterialIndex);
             }
         });
 
-        return materialsFound;
+        const remainingMaterials = materialsToFind.filter((_, index) => !indicesFound.has(index));
+
+        if (materialsFound.length > 0) {
+            return {
+                materials: materialsFound,
+                remainingMaterials: remainingMaterials
+            };
+        }
+        return { remainingMaterials: materialsToFind }
     }
 }
