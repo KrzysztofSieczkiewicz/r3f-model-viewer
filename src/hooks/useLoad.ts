@@ -11,6 +11,11 @@ export type ListedMetadataGLTF = {
     materials: MaterialMetadataGLTF[]
 }
 
+export type MeshMetadataGLTF = {
+    geometry: GeometryMetadata,
+    materials?: MaterialMetadataGLTF[]
+}
+
 export type MaterialMetadataGLTF = {
     id: string,
     name: string,
@@ -18,7 +23,7 @@ export type MaterialMetadataGLTF = {
     traversalIndex: number,
 }
 
-export type LoadingRestultGLTF = {
+export type LoadingResultGLTF = {
     geometry: THREE.BufferGeometry;
     materials?: THREE.Material[];
 }
@@ -61,65 +66,71 @@ export const useFileLoad = () => {
         return loadedFile;
     }
 
-    // TODO: replace requiredMeshes and requiredMaterials with required: ListedMetadataGLTF
-
-    const loadGLTFContents = (data: GLTF, requiredMeshes?: GeometryMetadata[], requiredMaterials?: MaterialMetadataGLTF[]) => { // : LoadingRestultGLTF
+    const loadGLTFContents = (data: GLTF, required: MeshMetadataGLTF): LoadingResultGLTF | undefined => {
         if (!data.scene) {
             console.error("Unable to process file data, provided data is not a valid GLTF or GLB file");
+            return undefined;
         }
 
-        const meshesToFind = [...(requiredMeshes || [])];
-        const materialsToFind = [...(requiredMaterials || [])];
-
-        let foundGeometries: THREE.BufferGeometry[] = [];
+        let foundGeometry: THREE.BufferGeometry | undefined;
         let foundMaterials: THREE.Material[] = [];
 
-        const meshNamesCounts: {[name: string]: number} = {};
+        const geometryNamesCounts: { [name: string]: number } = {};
+        const materialNamesCounts: { [name: string]: number } = {};
 
-        data.scene.traverse( (object) => {
-            if (foundMaterials.length === requiredMaterials?.length &&
-                foundGeometries.length === requiredMeshes?.length) {
-                return;
-            } else if (!(object instanceof THREE.Mesh)) return;
-            
+        if (required.geometry) {
+            data.scene.traverse((node) => {
+                if (foundGeometry) {
+                    return;
+                }
 
-        });
-    }
+                if (node instanceof THREE.Mesh) {
+                    const geometryFound = findMeshGeometryGLTF(node, required.geometry, geometryNamesCounts);
+
+                    if (geometryFound) {
+                        foundGeometry = geometryFound;
+
+                        if (required.materials && required.materials.length > 0) {
+                            foundMaterials = findMaterialsGLTF(node, required.materials, materialNamesCounts);
+                        }
+                    }
+                }
+            });
+        }
+
+        if (foundGeometry) {
+            return {
+                geometry: foundGeometry,
+                materials: foundMaterials.length > 0 ? foundMaterials : undefined
+            };
+        }
+
+        return undefined;
+    };
  
-    // Find matching mesh given the requiredMeshes[] and current gltf node
     const findMeshGeometryGLTF = (
         node: THREE.Mesh, 
-        meshesToFind: GeometryMetadata[],
+        meshToFind: GeometryMetadata,
         meshNamesCounts: {[name: string]: number}
-    ): { geometry?: THREE.BufferGeometry; remainingMeshes: GeometryMetadata[] } => {
+    ): THREE.BufferGeometry | null => {
 
         const meshName = node.name;
         const currentTraversalIndex = meshNamesCounts[meshName] ?? 0;
 
-        const matchedMeshIndex = meshesToFind.findIndex( (searchedMesh) => {
-            return meshName === searchedMesh.name && currentTraversalIndex === searchedMesh.traversalIndex;
-        });
-
-        meshNamesCounts[meshName] = currentTraversalIndex + 1;
-
-        if (matchedMeshIndex !== -1) {
-            const remainingMeshes = meshesToFind.filter((_, index) => index !== matchedMeshIndex);
-            return {
-                geometry: node.geometry,
-                remainingMeshes: remainingMeshes
-            };
+        if (meshName === meshToFind.name && currentTraversalIndex === meshToFind.traversalIndex) {
+            meshNamesCounts[meshName] = currentTraversalIndex + 1;
+            return node.geometry;
+        } else {
+            meshNamesCounts[meshName] = currentTraversalIndex + 1;
+            return null;
         }
-        return {
-            remainingMeshes: meshesToFind
-        };
     }
 
-    // Find all matching materials given the requiredMaterials[] and current gltf node
     const findMaterialsGLTF = (
         node: THREE.Mesh,
         materialsToFind: MaterialMetadataGLTF[],
         materialNamesCounts: {[name: string]: number}
-    ): { materials?: THREE.Material[]; remainingMaterials: MaterialMetadataGLTF[] } => {
+    ): THREE.Material[] => {
 
         const materialsFound: THREE.Material[] = [];
         const indicesFound = new Set<number>();
@@ -144,14 +155,9 @@ export const useFileLoad = () => {
             }
         });
 
-        const remainingMaterials = materialsToFind.filter((_, index) => !indicesFound.has(index));
-
         if (materialsFound.length > 0) {
-            return {
-                materials: materialsFound,
-                remainingMaterials: remainingMaterials
-            };
+            return materialsFound;
         }
-        return { remainingMaterials: materialsToFind }
+        return [];
     }
 }
