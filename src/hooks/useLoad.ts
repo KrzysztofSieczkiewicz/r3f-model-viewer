@@ -5,6 +5,7 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import { LoaderProto, useLoader } from "@react-three/fiber";
 import { GeometryMetadata } from "../models/assets/meshes/Unwrapped";
+import { useEffect, useMemo, useState } from "react";
 
 export type ListedMetadataGLTF = {
     mesh: GeometryMetadata,
@@ -46,25 +47,36 @@ const getFileLoaderClass = (fileName: string) => {
             return STLLoader;
         default:
             console.error('Failed to recognize the file format for file: ', fileName);
-            return null;
+            return GLTFLoader;
     }
 }
 
 
-export const useFileLoad = () => {
+export const useFileLoad = (url: string, required: MeshMetadataGLTF) => {
+    const LoaderClass = getFileLoaderClass(url);
+    const loadedFile = useLoader(LoaderClass as LoaderProto<any>, url);
 
-    const load = (url: string) => {
-        const LoaderClass = getFileLoaderClass(url);
+    const [loadingResult, setLoadingResult] = useState<LoadingResultGLTF | null>(null);
 
-        if (!LoaderClass) {
-            console.error("No loader found for URL: ", url);
-            return null;
+    useEffect(() => {
+        if (!loadedFile) {
+            setLoadingResult(null);
+            return;
         }
 
-        const loadedFile = useLoader(LoaderClass as LoaderProto<any>, url);
+        
+        switch(LoaderClass) {
+            case GLTFLoader:
+                const gltfResult = loadGLTFContents(loadedFile, required);
+                setLoadingResult(gltfResult || null);
+                break;
+            default:
+                console.warn("Attempt to load unsupported file type");
+                setLoadingResult(null);
+                break;
+        }
+    }, [loadedFile, required]);
 
-        return loadedFile;
-    }
 
     const loadGLTFContents = (data: GLTF, required: MeshMetadataGLTF): LoadingResultGLTF | undefined => {
         if (!data.scene) {
@@ -160,4 +172,6 @@ export const useFileLoad = () => {
         }
         return [];
     }
+
+    return loadingResult;
 }

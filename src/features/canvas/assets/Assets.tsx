@@ -13,7 +13,7 @@ export const Assets = () => {
     const { currentSelected, setSelected} = useSelectSceneObject();
 
     const memoizedGizmoUpdate = useCallback( (assetID: string, change: Partial<AssetProperties>) => {
-    updateAssetProperties(assetID, { ...change });
+        updateAssetProperties(assetID, { ...change });
     }, [updateAssetProperties]);
 
     const handleAssetType = (asset: AssetWrapper) => {
