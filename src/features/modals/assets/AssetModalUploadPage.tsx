@@ -14,6 +14,8 @@ export const AssetModalUploadPage = () => {
         setFileName(name);
         setFileContents(contents);
 
+        console.log({name})
+
         setPageState('detailsSelect');
     }
     

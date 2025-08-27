@@ -8,6 +8,9 @@ type UploaderProps = {
     onUploadError?: (error: string) => void;
 }
 
+// TODO: use URL.createObjectURL() and URL.createObjectURL() to return blob instead of file contents
+
+
 export const FileDiskUploader = ({
     onUploadStart,
     onUploadComplete,

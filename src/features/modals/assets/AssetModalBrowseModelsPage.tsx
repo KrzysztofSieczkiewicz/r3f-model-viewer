@@ -62,13 +62,13 @@ export const AssetModalBrowseModelsPage = ({src, closeModal}: Props) => {
     const handleImportTrigger = () => {
         if (!selectedMesh) return;
 
-        const change = {
+        const newAsset = {
             mesh: {
                 src: src,
                 geometries: [selectedMesh.mesh]
             }
         }
-        addAssetUnwrapped(change);
+        addAssetUnwrapped(newAsset);
     }
 
     const renderMeshTable = (available: ListedMetadataGLTF[]) => {

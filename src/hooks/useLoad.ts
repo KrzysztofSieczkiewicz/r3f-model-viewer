@@ -5,7 +5,7 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import { LoaderProto, useLoader } from "@react-three/fiber";
 import { GeometryMetadata } from "../models/assets/meshes/Unwrapped";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 export type ListedMetadataGLTF = {
     mesh: GeometryMetadata,
@@ -53,6 +53,7 @@ const getFileLoaderClass = (fileName: string) => {
 
 
 export const useFileLoad = (url: string, required: MeshMetadataGLTF) => {
+    console.log({url});
     const LoaderClass = getFileLoaderClass(url);
     const loadedFile = useLoader(LoaderClass as LoaderProto<any>, url);
 
@@ -75,7 +76,7 @@ export const useFileLoad = (url: string, required: MeshMetadataGLTF) => {
                 setLoadingResult(null);
                 break;
         }
-    }, [loadedFile, required]);
+    }, [loadedFile, required, LoaderClass]);
 
 
     const loadGLTFContents = (data: GLTF, required: MeshMetadataGLTF): LoadingResultGLTF | undefined => {
