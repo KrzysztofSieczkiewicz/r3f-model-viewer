@@ -8,24 +8,31 @@ type PageState = 'fileSelect' | "detailsSelect";
 export const AssetModalUploadPage = () => {
     const [pageState, setPageState] = useState<PageState>('fileSelect');
     const [fileName, setFileName] = useState<string|null>(null);
-    const [fileContents, setFileContents] = useState<string|null>(null);
+    const [blobUrl, setBlobUrl] = useState<string|null>(null);
 
-    const handleFileUpload = (name: string, contents: string) => {
+    const handleFileUpload = (name: string, blobUrl: string) => {
         setFileName(name);
-        setFileContents(contents);
-
-        console.log({name})
+        setBlobUrl(blobUrl);
 
         setPageState('detailsSelect');
     }
+
+    // TODO: Consider better blobURL management - at this moment the blobURL is revoked 
+    // by FileDiskUploader - when another file is selected
+    // and by this function when the AssetUploadPage is unmounted
+    useEffect(() => {
+        return () => {
+            if (blobUrl)
+                URL.revokeObjectURL(blobUrl);
+        };
+    }, [blobUrl]);
     
     return (<>
         {pageState === 'fileSelect' &&
             <FileDiskUploader onUploadComplete={handleFileUpload} />
         }
-        {pageState === 'detailsSelect' && fileContents &&
-            <AssetModalBrowseModelsPage src={fileContents} closeModal={()=>{}}/>
+        {pageState === 'detailsSelect' && fileName && blobUrl &&
+            <AssetModalBrowseModelsPage fileName={fileName} blobUrl={blobUrl} closeModal={()=>{}}/>
         }
-        
     </>)
 }

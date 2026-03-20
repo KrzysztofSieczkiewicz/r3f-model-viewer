@@ -6,11 +6,12 @@ import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContex
 import { useParseGLTF } from "../../sideMenu/hooks/useParseGLTF";
 
 type Props = {
-    src: string;
+    fileName: string;
+    blobUrl: string
     closeModal: () => void;
 }
 
-export const AssetModalBrowseModelsPage = ({src, closeModal}: Props) => {
+export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Props) => {
 
     const { addAssetUnwrapped } = useSceneObjectsContext();
 
@@ -28,8 +29,9 @@ export const AssetModalBrowseModelsPage = ({src, closeModal}: Props) => {
         setIsLoading(true);
         setError(null);
 
-        parseGLTF(src)
+        parseGLTF(blobUrl)
             .then( (loadedMeshes) => {
+                console.log({loadedMeshes})
                 setMeshes(loadedMeshes.meshes);
                 setIsLoading(false);
             })
@@ -38,7 +40,7 @@ export const AssetModalBrowseModelsPage = ({src, closeModal}: Props) => {
                 setError("Failed to read contents of the file.")
                 setIsLoading(false);
             });
-    }, [src])
+    }, [blobUrl])
 
     const handleMeshSelection = (selected: ListedMetadataGLTF) => {
         if (selected.mesh.id !== selectedMesh?.mesh.id) {
@@ -62,13 +64,14 @@ export const AssetModalBrowseModelsPage = ({src, closeModal}: Props) => {
     const handleImportTrigger = () => {
         if (!selectedMesh) return;
 
-        const newAsset = {
-            mesh: {
-                src: src,
-                geometries: [selectedMesh.mesh]
-            }
-        }
-        addAssetUnwrapped(newAsset);
+        // TODO: YOUR HOOK NOW RETURNS MESH - find out how to make it work with fileLoader
+        // const newAsset = {
+        //     mesh: {
+        //         src: src,
+        //         geometries: [selectedMesh.mesh]
+        //     }
+        // }
+        // addAssetUnwrapped(newAsset);
     }
 
     const renderMeshTable = (available: ListedMetadataGLTF[]) => {

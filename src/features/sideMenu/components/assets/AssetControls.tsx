@@ -18,8 +18,6 @@ export const AssetControls = ({asset}: Props) => {
     const { scale, rotation, position } = asset.properties;
     const assetId = asset.id;
 
-    const mesh = asset.mesh as UnwrappedWrapper
-
     return (
         <TraitExpandable name="General" expanded={true}>
             <TraitSingle name="Position">

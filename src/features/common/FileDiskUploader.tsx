@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import React, { ChangeEvent, useCallback, useRef, useState } from "react";
 
 type UploadStatus = 'idle' | 'reading' | 'uploading' | 'success' | 'error'
 
@@ -7,8 +7,6 @@ type UploaderProps = {
     onUploadComplete?: (fileName: string, content: string) => void,
     onUploadError?: (error: string) => void;
 }
-
-// TODO: use URL.createObjectURL() and URL.createObjectURL() to return blob instead of file contents
 
 
 export const FileDiskUploader = ({
@@ -20,11 +18,13 @@ export const FileDiskUploader = ({
     const [status, setStatus] = useState<UploadStatus>('idle');
     const [error, setError] = useState<string|null>(null);
 
+    const lastUrlRef = useRef<string | null>(null);
+
     const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setError(null);
         setStatus('idle');
 
-        if (e.target.files && e.target.files.length > 0) {
+        if (e.target.files && e.target.files[0]) {
             setFile(e.target.files[0]);
         } else {
             setFile(null);
@@ -38,41 +38,23 @@ export const FileDiskUploader = ({
             return;
         }
 
+        if (lastUrlRef.current) { // Revoke last URL if exists
+            URL.revokeObjectURL(lastUrlRef.current);
+        }
+
         setStatus('uploading');
         setError(null);
 
-        if (onUploadStart) {
-            onUploadStart(file.name);
-        }
+        onUploadStart?.(file.name);
 
         try {
-            const reader = new FileReader();
+            const blobUrl = URL.createObjectURL(file);
+            lastUrlRef.current = blobUrl;
 
-            const readPromise = new Promise<string|ArrayBuffer>((resolve, reject) => {
-                reader.onload = () => {
-                    if (reader.result) {
-                        resolve(reader.result);
-                    } else {
-                        reject(new Error("FileReader result is null"));
-                    }
-                };
-                reader.onerror = () => {
-                    reject(new Error("Error occured while reading the file"));
-                };
-                reader.onabort = () => {
-                    reject(new Error("File reading was aborted"));
-                };
-
-                reader.readAsText(file);
-            });
-
-            const content = await readPromise;
             setStatus('success');
             setError(null);
 
-            if (onUploadComplete) { 
-                onUploadComplete(file.name, content as string);
-            }
+            onUploadComplete?.(file.name, blobUrl);
 
         } catch (err: any) {
             console.error("File reading failed: ", err);
