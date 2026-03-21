@@ -23,7 +23,7 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
     const [ selectedMaterial, setSelectedMaterial ] = useState<MaterialMetadataGLTF|null>(null);
 
     //const { getContents } =  useImportGLTF();
-    const { parseGLTF } = useParseGLTF();
+    const { parseGLTF, loadGLTF } = useParseGLTF();
 
     useEffect( () => {
         setIsLoading(true);
@@ -64,6 +64,16 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
     const handleImportTrigger = () => {
         if (!selectedMesh) return;
 
+        // TODO: this works - now unify all classes because everything is returning or expecting something different
+        // first of all - differentiate mesh and geometry
+        // TODO: next step - export these geometry/material data into separate blobUrl that will be lighter
+        // TODO: first step - remove useImportGLTF
+        // TODO: second step - consider -  if user selects entire file - skip that loading/uploading
+        var testResult = loadGLTF(blobUrl, selectedMesh.mesh, selectedMesh.materials)
+        .then( loaded => {
+            console.log({geometry: loaded.geometry})
+            console.log({materials: loaded.materials})
+        });
         // TODO: YOUR HOOK NOW RETURNS MESH - find out how to make it work with fileLoader
         // const newAsset = {
         //     mesh: {
