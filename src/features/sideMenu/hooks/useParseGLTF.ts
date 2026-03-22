@@ -2,8 +2,8 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { GeometryMetadata } from "../../../models/assets/meshes/Unwrapped";
 
-export type ListedMetadataGLTF = {
-    mesh: GeometryMetadata,
+export type ListedMeshMetadataGLTF = {
+    geometry: GeometryMetadata,
     materials: MaterialMetadataGLTF[]
 }
 
@@ -14,10 +14,6 @@ export type MaterialMetadataGLTF = {
     traversalIndex: number,
 }
 
-export type MetadataListingResultGLTF = {
-    meshes: ListedMetadataGLTF[];
-}
-
 export type LoadingRestultGLTF = {
     geometry: THREE.BufferGeometry;
     materials?: THREE.Material[];
@@ -26,12 +22,12 @@ export type LoadingRestultGLTF = {
 
 export const useParseGLTF = () => {
 
-    const parseGLTF = (blobUrl: string): Promise<MetadataListingResultGLTF> => {
+    const parseGLTF = (blobUrl: string): Promise<ListedMeshMetadataGLTF[]> => {
         return new Promise((resolve, reject) => {
             const loader = new GLTFLoader();
 
             loader.load(blobUrl, (gltf) => {
-                const meshes: ListedMetadataGLTF[] = [];
+                const meshes: ListedMeshMetadataGLTF[] = [];
                 const meshNamesCounts: { [name: string]: number} = {}; 
 
                 gltf.scene.traverse( (object) => {
@@ -60,13 +56,13 @@ export const useParseGLTF = () => {
                         });
 
                         meshes.push({
-                            mesh: { id: `${meshName}_${currentMeshNameCount}`, name: meshName, traversalIndex: currentMeshNameCount },
+                            geometry: { id: `${meshName}_${currentMeshNameCount}`, name: meshName, traversalIndex: currentMeshNameCount },
                             materials
                         })
                         meshNamesCounts[meshName] = currentMeshNameCount + 1;
                     }
                 });
-                resolve({ meshes });
+                resolve(meshes);
             },
             undefined,
             (error) => {

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import styles from './AssetModalBrowseModelsPage.module.css'
 
-import { ListedMetadataGLTF, MaterialMetadataGLTF, useImportGLTF } from "../../sideMenu/hooks/useImportGLTF"
+import { MaterialMetadataGLTF } from "../../sideMenu/hooks/useImportGLTF"
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
-import { useParseGLTF } from "../../sideMenu/hooks/useParseGLTF";
+import { ListedMeshMetadataGLTF, useParseGLTF } from "../../sideMenu/hooks/useParseGLTF";
+import { ListedMetadataGLTF } from "../../../hooks/useLoad";
 
 type Props = {
     fileName: string;
@@ -15,11 +16,11 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
 
     const { addAssetUnwrapped } = useSceneObjectsContext();
 
-    const [meshes, setMeshes] = useState<ListedMetadataGLTF[]>([]);
+    const [meshes, setMeshes] = useState<ListedMeshMetadataGLTF[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const [ selectedMesh, setSelectedMesh ] = useState<ListedMetadataGLTF|null>(null);
+    const [ selectedMesh, setSelectedMesh ] = useState<ListedMeshMetadataGLTF|null>(null);
     const [ selectedMaterial, setSelectedMaterial ] = useState<MaterialMetadataGLTF|null>(null);
 
     //const { getContents } =  useImportGLTF();
@@ -32,7 +33,7 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
         parseGLTF(blobUrl)
             .then( (loadedMeshes) => {
                 console.log({loadedMeshes})
-                setMeshes(loadedMeshes.meshes);
+                setMeshes(loadedMeshes);
                 setIsLoading(false);
             })
             .catch( err => {
@@ -42,8 +43,8 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
             });
     }, [blobUrl])
 
-    const handleMeshSelection = (selected: ListedMetadataGLTF) => {
-        if (selected.mesh.id !== selectedMesh?.mesh.id) {
+    const handleMeshSelection = (selected: ListedMeshMetadataGLTF) => {
+        if (selected.geometry.id !== selectedMesh?.geometry.id) {
             setSelectedMesh(selected)
             setSelectedMaterial(selected.materials[0])
             console.log({selected})
@@ -67,9 +68,9 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
         // TODO: this works - now unify all classes because everything is returning or expecting something different
         // first of all - differentiate mesh and geometry
         // TODO: next step - export these geometry/material data into separate blobUrl that will be lighter
-        // TODO: first step - remove useImportGLTF
-        // TODO: second step - consider -  if user selects entire file - skip that loading/uploading
-        var testResult = loadGLTF(blobUrl, selectedMesh.mesh, selectedMesh.materials)
+        // TODO: next step - remove useImportGLTF
+        // TODO: next step - consider -  if user selects entire file - skip that loading/uploading
+        var testResult = loadGLTF(blobUrl, selectedMesh.geometry, selectedMesh.materials)
         .then( loaded => {
             console.log({geometry: loaded.geometry})
             console.log({materials: loaded.materials})
@@ -84,12 +85,12 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
         // addAssetUnwrapped(newAsset);
     }
 
-    const renderMeshTable = (available: ListedMetadataGLTF[]) => {
+    const renderMeshTable = (available: ListedMeshMetadataGLTF[]) => {
         return (
             available.map( (entry, index) => {
-                const mesh = entry.mesh;
+                const mesh = entry.geometry;
                 const isOdd = index%2 === 1
-                const isSelected = mesh.id === selectedMesh?.mesh.id
+                const isSelected = mesh.id === selectedMesh?.geometry.id
 
                 return (<tr key={mesh.id} onClick={() => handleMeshSelection(entry)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
                     <td className={styles.tableCell}>{mesh.name}</td>
@@ -98,7 +99,7 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
         );
     }
 
-    const renderMaterialsTable = (selected: ListedMetadataGLTF | null) => {
+    const renderMaterialsTable = (selected: ListedMeshMetadataGLTF | null) => {
         return (
             selected?.materials.map( (material, index) => {
                 const isOdd = index%2 === 1

@@ -1,11 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { GeometryMetadata } from "../../../models/assets/meshes/Unwrapped";
-
-export type ListedMetadataGLTF = {
-    mesh: GeometryMetadata,
-    materials: MaterialMetadataGLTF[]
-}
+import { ListedMeshMetadataGLTF } from "./useParseGLTF";
 
 export type MaterialMetadataGLTF = {
     id: string,
@@ -15,7 +11,7 @@ export type MaterialMetadataGLTF = {
 }
 
 export type MetadataListingResultGLTF = {
-    meshes: ListedMetadataGLTF[];
+    meshes: ListedMeshMetadataGLTF[];
 }
 
 export type LoadingRestultGLTF = {
@@ -32,7 +28,7 @@ export const useImportGLTF = () => {
             loader.load(
                 src, 
                 (gltf) => {
-                    const meshes: ListedMetadataGLTF[] = [];
+                    const meshes: ListedMeshMetadataGLTF[] = [];
                     const meshNamesCounts: {[name: string]: number} = {};
 
                     gltf.scene.traverse( (object) => {
@@ -61,7 +57,7 @@ export const useImportGLTF = () => {
                             });
 
                             meshes.push({
-                                mesh: { id: `${meshName}_${currentMeshNameCount}`, name: meshName, traversalIndex: currentMeshNameCount },
+                                geometry: { id: `${meshName}_${currentMeshNameCount}`, name: meshName, traversalIndex: currentMeshNameCount },
                                 materials
                             })
                             meshNamesCounts[meshName] = currentMeshNameCount + 1;
