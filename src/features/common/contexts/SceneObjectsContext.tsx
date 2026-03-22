@@ -6,6 +6,7 @@ import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightType, getDefaultL
 import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives, PrimitiveWrapper } from "../../../models/assets/meshes/Primitive";
 import { CAMERA_TYPES, CameraProperties, CameraType, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../../models/Camera";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterialProperties, EditableMaterials, EditableMaterialWrapper } from "../../../models/assets/materials/EditableMaterial";
+import { BufferGeometry } from "three";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 
@@ -18,7 +19,8 @@ type SceneObjectsContextProps = {
     changeEditableMaterialType: (id: string, newType: EditableMaterials) => void,
     deleteAsset: (id: string) => void,
     addAssetPrimitive: (primitiveType: Primitives) => void,
-    addAssetUnwrapped: (change?: Partial<UnwrappedAssetWrapper>) => void,
+    addAssetUnwrapped: (geometry: BufferGeometry) => void,
+    //addAssetUnwrapped: (change?: Partial<UnwrappedAssetWrapper>) => void,
 
     lightsList: LightWrapper[],
     changeLightType: (id: string, type: LightType) => void,
@@ -74,7 +76,29 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         })
     }, []);
 
-    const addAssetUnwrapped = useCallback( (change?: Partial<UnwrappedAssetWrapper>) => {
+
+    // TODO: move this to separate context handling blobURLs
+    const createPersistentBlobUrl = (data: any): string => {
+        const jsonString = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        return URL.createObjectURL(blob);
+    }
+
+    const addAssetUnwrapped = useCallback( (geometry: BufferGeometry) => {
+        let newUrl = createPersistentBlobUrl(geometry);
+        let newAsset = getDefaultUnwrappedAsset();
+
+        newAsset.meshUrl = newUrl;
+
+        setAssetsRecord( assetsRecord => {
+            return {
+                ...assetsRecord,
+                [newAsset.id]: newAsset
+            }
+        });
+    }, []);
+
+    const addAssetUnwrapped_old = useCallback( (change?: Partial<UnwrappedAssetWrapper>) => {
         let newAsset = getDefaultUnwrappedAsset();
 
         if(change) {

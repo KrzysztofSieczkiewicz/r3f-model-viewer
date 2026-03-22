@@ -70,13 +70,8 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
         .then( loaded => {
             console.log({geometry: loaded.geometry})
             console.log({materials: loaded.materials})
-            // TODO: export geometry to the blobURL here
-            // TODO: decide how to handle materials here
 
-            // TODO: create new asset with meshURL here:
-            const newAsset = { meshUrl: "BlobURLHere"} as Partial<UnwrappedAssetWrapper>
-
-            addAssetUnwrapped(newAsset);
+            addAssetUnwrapped(loaded.geometry);
         });
     }
 

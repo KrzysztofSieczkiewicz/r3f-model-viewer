@@ -35,7 +35,7 @@ type CommonAssetWrapper = { id: string, name: string, properties: AssetPropertie
 
 export type PrimitiveAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Primitive, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper};
 // TODO: add support for multimaterial - replace current material props with an array of different material types and props - pairs
-export type UnwrappedAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Unwrapped, meshUrl: String, materialType: Materials.Editable, material: EditableMaterialWrapper};
+export type UnwrappedAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Unwrapped, meshUrl: string, materialType: Materials.Editable, material: EditableMaterialWrapper};
 export type ScanAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Scan, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper};
 
 export type AssetWrapper = 
