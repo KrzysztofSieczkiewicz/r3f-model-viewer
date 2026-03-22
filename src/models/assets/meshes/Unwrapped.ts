@@ -1,8 +1,4 @@
-export type GeometryMetadata = {
-    id: string,
-    name: string,
-    traversalIndex: number,
-}
+import { GeometryMetadata } from "../../../features/sideMenu/hooks/useParseGLTF";
 
 export type UnwrappedWrapper = {
     src: string,

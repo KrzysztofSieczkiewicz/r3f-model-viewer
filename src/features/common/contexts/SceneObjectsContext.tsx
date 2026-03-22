@@ -115,6 +115,7 @@ export const SceneObjectsContextProvider = (props: {children: ReactNode}): JSX.E
         setAssetsRecord( assetsRecord => {
             const initialAsset = assetsRecord[id]
             if (!initialAsset) return assetsRecord;
+            if (initialAsset.meshType !== Meshes.Primitive) return assetsRecord;
 
             const initialMesh = initialAsset.mesh as PrimitiveWrapper;
 

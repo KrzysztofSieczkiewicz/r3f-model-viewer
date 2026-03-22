@@ -29,8 +29,13 @@ export type AssetProperties = {
 // and adjust the application not to require that shit
 // TODO: CONSIDER HANDLING ASSET WRAPPER WITH WILDCARD TO ALLOW COMPONENTS USING AssetWrapper TO ALREADY KNOW WHAT MESH TYPE IS INSIDE?
 // OR JUST MAKE THEM LOOK INSIDE AND ACT BASED ON TYPES
+
+// TODO: use this to handle common properties
+type CommpnAssetWrapper = { id: string, name: string, properties: AssetProperties}
+
 export type PrimitiveAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Primitive, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper};
-export type UnwrappedAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Unwrapped, mesh: UnwrappedWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper};
+// TODO: add support for multimaterial - replace current material props with an array of different material types and props - pairs
+export type UnwrappedAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Unwrapped, meshUrl: String, materialType: Materials.Editable, material: EditableMaterialWrapper};
 export type ScanAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Scan, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper};
 
 export type AssetWrapper = 
@@ -59,16 +64,7 @@ const INIT_ASSET_LIST: AssetWrapper[] = [
         id: generateNewID(),
         name: "Test",
         meshType: Meshes.Unwrapped,
-        mesh: {
-            src: "models/pear/Pear2_LOD0.gltf",
-            geometries: [
-                {
-                    id: "node_0",
-                    name: "node",
-                    traversalIndex: 0,
-                }
-            ],
-        },
+        meshUrl: "",
         materialType: Materials.Editable,
         material: DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Physical],
         properties: {
@@ -114,16 +110,7 @@ const getDefaultUnwrappedAsset = (): UnwrappedAssetWrapper => {
         id: generateNewID(),
         name: "unwrapped",
         meshType: Meshes.Unwrapped,
-        mesh: {
-            src: "",
-            geometries: [
-                {
-                    id: "",
-                    name: "",
-                    traversalIndex: 0,
-                }
-            ],
-        },
+        meshUrl: "PlaceholderURL",
         materialType: Materials.Editable,
         material: DEFAULT_EDITABLE_MATERIALS[EditableMaterials.Standard],
         properties: {

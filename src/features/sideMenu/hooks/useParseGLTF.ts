@@ -1,10 +1,15 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { GeometryMetadata } from "../../../models/assets/meshes/Unwrapped";
 
 export type ListedMeshMetadataGLTF = {
     geometry: GeometryMetadata,
     materials: MaterialMetadataGLTF[]
+}
+
+export type GeometryMetadata = {
+    id: string,
+    name: string,
+    traversalIndex: number,
 }
 
 export type MaterialMetadataGLTF = {
@@ -72,6 +77,8 @@ export const useParseGLTF = () => {
         });
     }
 
+    // TODO: due to how multimaterial meshes work - load ALL of the materials assigned to the mesh,
+    // and only then replace the unwanted ones with some "default"
     const loadGLTF = async (
         blobUrl: string, 
         requiredMesh: GeometryMetadata, 

@@ -4,6 +4,7 @@ import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContex
 import { UnwrappedWrapper } from "../../../models/assets/meshes/Unwrapped";
 import { AssetOutline } from "./AssetOutline";
 import { useFileLoad } from "../../../hooks/useLoad";
+import { Meshes } from "../../../models/assets/Asset";
 
 type Props = {
     assetID: string,
@@ -18,15 +19,17 @@ export const UnwrappedAsset = memo(
         const meshRef = useRef<THREE.Mesh>(null);
     
         const asset = getAsset(assetID)
-        const mesh = asset.mesh as UnwrappedWrapper
 
-        const requiredMesh = useMemo(() => {
-            return { geometry: mesh.geometries[0] };
-        }, [mesh.geometries]);
+        if (asset.meshType !== Meshes.Unwrapped) return;
+        const mesh = asset.meshUrl
 
-        const loadedFile = useFileLoad(mesh.src, requiredMesh);
+        // const requiredMesh = useMemo(() => {
+        //     return { geometry: mesh.geometries[0] };
+        // }, [mesh.geometries]);
 
-        const geometry = loadedFile?.geometry;
+        // const loadedFile = useFileLoad(mesh.src, requiredMesh);
+
+        // const geometry = loadedFile?.geometry;
     
         if (!asset.properties.visible) return;
         return (
@@ -37,7 +40,7 @@ export const UnwrappedAsset = memo(
                 receiveShadow={asset.properties.receiveShadow}
                 visible={asset.properties.visible}
                 // {...props}
-                geometry={geometry}
+                // geometry={geometry}
                 position={asset.properties.position}
                 rotation={asset.properties.rotation}
                 scale={asset.properties.scale}

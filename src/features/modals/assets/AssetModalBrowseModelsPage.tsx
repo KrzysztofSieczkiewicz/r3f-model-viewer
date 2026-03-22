@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react"
 import styles from './AssetModalBrowseModelsPage.module.css'
 
-import { MaterialMetadataGLTF } from "../../sideMenu/hooks/useImportGLTF"
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
-import { ListedMeshMetadataGLTF, useParseGLTF } from "../../sideMenu/hooks/useParseGLTF";
-import { ListedMetadataGLTF } from "../../../hooks/useLoad";
+import { ListedMeshMetadataGLTF, MaterialMetadataGLTF, useParseGLTF } from "../../sideMenu/hooks/useParseGLTF";
 
 type Props = {
     fileName: string;
@@ -23,7 +21,6 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
     const [ selectedMesh, setSelectedMesh ] = useState<ListedMeshMetadataGLTF|null>(null);
     const [ selectedMaterial, setSelectedMaterial ] = useState<MaterialMetadataGLTF|null>(null);
 
-    //const { getContents } =  useImportGLTF();
     const { parseGLTF, loadGLTF } = useParseGLTF();
 
     useEffect( () => {
@@ -65,17 +62,14 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
     const handleImportTrigger = () => {
         if (!selectedMesh) return;
 
-        // TODO: this works - now unify all classes because everything is returning or expecting something different
-        // first of all - differentiate mesh and geometry
         // TODO: next step - export these geometry/material data into separate blobUrl that will be lighter
-        // TODO: next step - remove useImportGLTF
         // TODO: next step - consider -  if user selects entire file - skip that loading/uploading
         var testResult = loadGLTF(blobUrl, selectedMesh.geometry, selectedMesh.materials)
         .then( loaded => {
             console.log({geometry: loaded.geometry})
             console.log({materials: loaded.materials})
         });
-        // TODO: YOUR HOOK NOW RETURNS MESH - find out how to make it work with fileLoader
+
         // const newAsset = {
         //     mesh: {
         //         src: src,

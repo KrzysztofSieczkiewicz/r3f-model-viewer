@@ -4,8 +4,8 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import { LoaderProto, useLoader } from "@react-three/fiber";
-import { GeometryMetadata } from "../models/assets/meshes/Unwrapped";
 import { useEffect, useState } from "react";
+import { GeometryMetadata } from "../features/sideMenu/hooks/useParseGLTF";
 
 export type ListedMetadataGLTF = {
     mesh: GeometryMetadata,

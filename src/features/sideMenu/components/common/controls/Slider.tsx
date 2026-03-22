@@ -131,7 +131,7 @@ export const Slider = ({
         }
 
         let displayedTrackElement = null;
-        if (min!=Infinity && max !=Infinity) {
+        if (min!==Infinity && max !==Infinity) {
             const trackWidth = value / (max-min) * 100;
 
             displayedTrackElement = (
