@@ -3,6 +3,8 @@ import styles from './AssetModalBrowseModelsPage.module.css'
 
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 import { ListedMeshMetadataGLTF, MaterialMetadataGLTF, useParseGLTF } from "../../sideMenu/hooks/useParseGLTF";
+import { UnwrappedWrapper } from "../../../models/assets/meshes/Unwrapped";
+import { UnwrappedAssetWrapper } from "../../../models/assets/Asset";
 
 type Props = {
     fileName: string;
@@ -68,15 +70,14 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
         .then( loaded => {
             console.log({geometry: loaded.geometry})
             console.log({materials: loaded.materials})
-        });
+            // TODO: export geometry to the blobURL here
+            // TODO: decide how to handle materials here
 
-        // const newAsset = {
-        //     mesh: {
-        //         src: src,
-        //         geometries: [selectedMesh.mesh]
-        //     }
-        // }
-        // addAssetUnwrapped(newAsset);
+            // TODO: create new asset with meshURL here:
+            const newAsset = { meshUrl: "BlobURLHere"} as Partial<UnwrappedAssetWrapper>
+
+            addAssetUnwrapped(newAsset);
+        });
     }
 
     const renderMeshTable = (available: ListedMeshMetadataGLTF[]) => {

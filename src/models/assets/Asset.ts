@@ -31,7 +31,7 @@ export type AssetProperties = {
 // OR JUST MAKE THEM LOOK INSIDE AND ACT BASED ON TYPES
 
 // TODO: use this to handle common properties
-type CommpnAssetWrapper = { id: string, name: string, properties: AssetProperties}
+type CommonAssetWrapper = { id: string, name: string, properties: AssetProperties}
 
 export type PrimitiveAssetWrapper = { id: string, name: string, properties: AssetProperties, meshType: Meshes.Primitive, mesh: PrimitiveWrapper, materialType: Materials.Editable, material: EditableMaterialWrapper};
 // TODO: add support for multimaterial - replace current material props with an array of different material types and props - pairs
