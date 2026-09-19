@@ -63,7 +63,9 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
         if (!selectedMesh) return;
 
         // TODO: next step - export these geometry/material data into separate blobUrl that will be lighter
+        // check if already done via SceneObjectsContext.addAssetUnwrapped (it's calling createPersistentBlobUrl for geometry)
         // TODO: next step - consider -  if user selects entire file - skip that loading/uploading
+        // TODO: reinstate error messaging, proper waiting, loading and buffering info and icons
         var testResult = loadGLTF(blobUrl, selectedMesh.geometry, selectedMesh.materials)
         .then( loaded => {
             console.log({geometry: loaded.geometry})
