@@ -6,7 +6,7 @@ import { LightWrapper, INIT_LIGHTS_LIST, LightProperties, LightType, getDefaultL
 import { DEFAULT_MESH_BOX, DEFAULT_MESH_CONE, DEFAULT_MESH_SPHERE, PrimitiveProperties, Primitives, PrimitiveWrapper } from "../../../models/assets/meshes/Primitive";
 import { CAMERA_TYPES, CameraProperties, CameraType, CameraWrapper, DEFAULT_ORTOGRAPHIC_CAMERA, DEFAULT_PERSPECTIVE_CAMERA, INIT_CAMERAS_LIST } from "../../../models/Camera";
 import { DEFAULT_EDITABLE_MATERIALS, EditableMaterialProperties, EditableMaterials, EditableMaterialWrapper } from "../../../models/assets/materials/EditableMaterial";
-import { BufferGeometry } from "three";
+import { BufferGeometry, MeshStandardMaterial } from "three";
 
 export type EditableWrapper = AssetWrapper | LightWrapper
 

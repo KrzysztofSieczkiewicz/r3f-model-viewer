@@ -62,6 +62,18 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
     const handleImportTrigger = () => {
         if (!selectedMesh) return;
 
+        // TODO FIRST: rework DTOs into more reusable chunks and combinations, 
+        // regarding meshes AND materials -> there is a lot of nesting with type/properties - flatten or make reusable
+        // regarding materials -> all of them are "editable" - importing hook is safely parsing them and returning THREE.Material (you can access .type safely to determine wchich type of THREE.Material it is)
+        // so you can safely just add material and depending on material type - present different properties and maps
+        // double check if you cannot treat props as array of key-value pairs instead of typing each as variable (though this is also acceptable)
+
+        // TODO SECOND: determine how to store materials for future upload to BE (Mesh is straightforward with single blobUrl, though you might double check the security of allowing that kind of upload)
+        // Materials might be more tricky as these contain multiple maps (so probably array of id/blobURL pairs instead)
+        
+        // TODO: THIRD: clean up unused method and classes, it's getting crowded and unclear
+
+        // TODO: the rest
         // TODO: next step - export these geometry/material data into separate blobUrl that will be lighter
         // check if already done via SceneObjectsContext.addAssetUnwrapped (it's calling createPersistentBlobUrl for geometry)
         // TODO: next step - consider -  if user selects entire file - skip that loading/uploading
@@ -70,6 +82,12 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
         .then( loaded => {
             console.log({geometry: loaded.geometry})
             console.log({materials: loaded.materials})
+
+            if (loaded.materials) {
+                var test = loaded.materials[0].type
+                console.log({loadedMaterialType: test})
+            }
+                
 
             addAssetUnwrapped(loaded.geometry);
         });

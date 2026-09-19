@@ -23,6 +23,7 @@ export const UnwrappedAsset = memo(
         const asset = getAsset(assetID)
 
         const material = useMemo(() => {
+                console.log({renderedMaterial: asset.material})
                 return getEditableMaterial(asset.material);
             }, [asset.material, asset.materialType])
 
