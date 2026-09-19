@@ -1,8 +1,9 @@
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext"
 import { AssetOutline } from "./AssetOutline";
 import { Meshes } from "../../../models/assets/Asset";
+import { getEditableMaterial } from "./materials/EditableMaterial";
 
 type Props = {
     assetID: string,
@@ -21,11 +22,15 @@ export const UnwrappedAsset = memo(
     
         const asset = getAsset(assetID)
 
+        const material = useMemo(() => {
+                return getEditableMaterial(asset.material);
+            }, [asset.material, asset.materialType])
+
         var blobUrl: string;
         if (asset.meshType !== Meshes.Unwrapped) 
             blobUrl = "";
         else 
-            blobUrl = asset.meshUrl
+            blobUrl = asset.meshUrl;
 
         // TODO: replace this after fixing blobURL logic in SceneObjectsContext and AssetModalBrowseModelPage
         useEffect(() => {
@@ -49,7 +54,7 @@ export const UnwrappedAsset = memo(
                 setError("Could not load geometry.");
             });
 
-            // We don't revoke the URL here because your app needs it to stay alive!
+            // Don't revoke the URL here
         }, [blobUrl]);
     
         if (!asset.properties.visible) return;
@@ -61,6 +66,7 @@ export const UnwrappedAsset = memo(
                 castShadow={asset.properties.castShadow}
                 receiveShadow={asset.properties.receiveShadow}
                 visible={asset.properties.visible}
+                material={material}
                 // {...props}
                 geometry={geometry}
                 position={asset.properties.position}

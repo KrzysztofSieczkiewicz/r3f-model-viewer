@@ -3,8 +3,6 @@ import styles from './AssetModalBrowseModelsPage.module.css'
 
 import { useSceneObjectsContext } from "../../common/contexts/SceneObjectsContext";
 import { ListedMeshMetadataGLTF, MaterialMetadataGLTF, useParseGLTF } from "../../sideMenu/hooks/useParseGLTF";
-import { UnwrappedWrapper } from "../../../models/assets/meshes/Unwrapped";
-import { UnwrappedAssetWrapper } from "../../../models/assets/Asset";
 
 type Props = {
     fileName: string;
@@ -77,28 +75,41 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
 
     const renderMeshTable = (available: ListedMeshMetadataGLTF[]) => {
         return (
-            available.map( (entry, index) => {
-                const mesh = entry.geometry;
-                const isOdd = index%2 === 1
-                const isSelected = mesh.id === selectedMesh?.geometry.id
-
-                return (<tr key={mesh.id} onClick={() => handleMeshSelection(entry)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
-                    <td className={styles.tableCell}>{mesh.name}</td>
-                </tr>);
-            })
+            <table className={styles.table}>
+                <thead><td><b>Mesh</b></td></thead>
+                <tbody className={styles.tableBody}>
+                    {available.map( (entry, index) => {
+                        const mesh = entry.geometry;
+                        const isOdd = index%2 === 1
+                        const isSelected = mesh.id === selectedMesh?.geometry.id
+                        return (
+                            <tr key={mesh.id} onClick={() => handleMeshSelection(entry)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
+                                <td className={styles.tableCell}>{mesh.name}</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
         );
     }
 
     const renderMaterialsTable = (selected: ListedMeshMetadataGLTF | null) => {
         return (
-            selected?.materials.map( (material, index) => {
-                const isOdd = index%2 === 1
-                const isSelected = material.id === selectedMaterial?.id
-                return (<tr key={material.id} onClick={() => handleMaterialSelection(material)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
-                    <td className={styles.tableCell}>{material.name}</td>
-                    <td className={styles.tableCell}>{material.type}</td>
-                </tr>);
-            })
+            <table className={styles.table}>
+                <thead><td><b>Material</b></td><td><b>Type</b></td></thead>
+                <tbody className={styles.tableBody}>
+                    {selected?.materials.map( (material, index) => {
+                        const isOdd = index%2 === 1
+                        const isSelected = material.id === selectedMaterial?.id
+                        return (
+                            <tr key={material.id} onClick={() => handleMaterialSelection(material)} className={`${styles.tableRow} ${isOdd ? styles.odd : ''} ${isSelected ? styles.selected : ''}`}>
+                                <td className={styles.tableCell}>{material.name}</td>
+                                <td className={styles.tableCell}>{material.type}</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
         )
     }
 
@@ -108,21 +119,11 @@ export const AssetModalBrowseModelsPage = ({fileName, blobUrl, closeModal}: Prop
         <div className={styles.tablesContainer}>
 
             <div className={styles.tableContainer}>
-                <table className={styles.table}>
-                    <thead><td><b>Mesh</b></td></thead>
-                    <tbody className={styles.tableBody}>
-                        {renderMeshTable(meshes)}
-                    </tbody>
-                </table>
+                {renderMeshTable(meshes)}
             </div>
 
             <div className={styles.tableContainer}>
-                <table className={styles.table}>
-                    <thead><td><b>Material</b></td><td><b>Type</b></td></thead>
-                    <tbody className={styles.tableBody}>
-                        {renderMaterialsTable(selectedMesh)}
-                    </tbody>
-                </table>
+                {renderMaterialsTable(selectedMesh)}
             </div>
 
         </div>
